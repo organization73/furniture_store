@@ -6,6 +6,7 @@ const path = require("path");
 const { createHandler } = require("graphql-http/lib/use/express");
 const playground = require("graphql-playground-middleware-express").default;
 const cors = require("cors");
+const ejs = require("ejs");
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
@@ -40,6 +41,12 @@ const fileFilter = (req, file, cb) => {
 };
 
 const app = express();
+
+//seting the view engine
+app.set("view engine", "ejs");
+app.set("views", "views");
+app.use(express.static(path.join(__dirname, "public")));
+
 
 app.use((req, res, next) => {
   console.log("----------------------------");
@@ -108,7 +115,7 @@ mongoose
   .then((result) => {
     console.log("Connected to the database");
     // Start the server
-    app.listen(3000, "169.254.88.122", () => {
+    app.listen(3000, () => {
       console.log("Server is running on port 3000");
     });
   })
