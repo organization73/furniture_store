@@ -82,7 +82,7 @@ exports.creatUser = async (req, res, next) => {
   } catch (error) {
     return throwError(422, error.message, error.path, next);
   }
-
+  console.log("data validated:", email)
   //Check if user's email and username already exists
   try {
     const existingUser = await User.findOne({
@@ -113,6 +113,7 @@ exports.creatUser = async (req, res, next) => {
     if (!err.statusCode) err.statusCode = 500;
     next(err);
   }
+  console.log("password hashed:", email)
   //creating the token
   let token;
   try {
@@ -144,8 +145,10 @@ exports.creatUser = async (req, res, next) => {
     console.log("Message sent: %s", info.messageId);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
-    next(err);
+    return next(err);
   }
+  console.log("email was send to:", email)
+
   //creating the user
   const user = new User({
     firstName,
@@ -160,6 +163,8 @@ exports.creatUser = async (req, res, next) => {
   //saving the user into the database
   try {
     const saveUser = await user.save();
+    console.log("email was saved to:", email)
+
     return res
       .status(200)
       .json({ message: "User created successfully", email: saveUser.email });
