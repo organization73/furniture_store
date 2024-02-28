@@ -122,30 +122,30 @@ exports.creatUser = async (req, res, next) => {
     return next(error);
   }
   //sending the confirmation email
-  // try {
-  //   const info = await transporter.sendMail({
-  //     from: `"furnature-app🛋️" <${from}>`,
-  //     to: email,
-  //     subject: "Signup Confirmation ✔",
-  //     text: "Hello world?",
-  //     html: `<h2>Dear ${firstName}</h2>
+  try {
+    const info = await transporter.sendMail({
+      from: `"furnature-app🛋️" <${from}>`,
+      to: email,
+      subject: "Signup Confirmation ✔",
+      text: "Hello world?",
+      html: `<h2>Dear ${firstName}</h2>
 
-  //       <p>Thank you for signing up for our platform! </p>
-  //       <p>To ensure that you have provided a valid email address</p>
-  //       <p> please click on the link below to verify your account: <a href='${domain(
-  //         req
-  //       )}/auth/verify/${token}'> Verify </a> </p>
-  //       <p>If you did not sign up for our platform, please ignore this email.</p>
-  //       <p>Thank you for your cooperation.</p>
-  //       <p>Best regards,</p>
-  //       <p>College Team</p>
-  //       `,
-  //   });
-  //   console.log("Message sent: %s", info.messageId);
-  // } catch (err) {
-  //   if (!err.statusCode) err.statusCode = 500;
-  //   next(err);
-  // }
+        <p>Thank you for signing up for our platform! </p>
+        <p>To ensure that you have provided a valid email address</p>
+        <p> please click on the link below to verify your account: <a href='${domain(
+          req
+        )}/auth/verify/${token}'> Verify </a> </p>
+        <p>If you did not sign up for our platform, please ignore this email.</p>
+        <p>Thank you for your cooperation.</p>
+        <p>Best regards,</p>
+        <p>College Team</p>
+        `,
+    });
+    console.log("Message sent: %s", info.messageId);
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
   //creating the user
   const user = new User({
     firstName,
@@ -272,28 +272,28 @@ exports.reVerifyEmail = async (req, res, next) => {
     return next(error);
   }
   //sending the confirmation email
-  // try {
-  //   const info = await transporter.sendMail({
-  //     from: `"furnature-app🛋️" <${from}>`,
-  //     to: email,
-  //     subject: "Re-Signup Confirmation ✔",
-  //     text: "Hello world?",
-  //     html: `<h2>Dear ${user.firstName}</h2>
+  try {
+    const info = await transporter.sendMail({
+      from: `"furnature-app🛋️" <${from}>`,
+      to: email,
+      subject: "Re-Signup Confirmation ✔",
+      text: "Hello world?",
+      html: `<h2>Dear ${user.firstName}</h2>
 
-  //       <p>Thank you for using our platform! </p>
-  //       <p>To ensure that you have provided a valid email address</p>
-  //       <p> please click on the link below to reset your password:
-  //       <a href='${domain(req)}/auth/verify/${token}'> Reset </a> </p>
-  //       <p>Thank you for your cooperation.</p>
-  //       <p>Best regards,</p>
-  //       <p>College Team</p>
-  //       `,
-  //   });
-  //   console.log("Message sent: %s", info.messageId);
-  // } catch (err) {
-  //   if (!err.statusCode) err.statusCode = 500;
-  //   next(err);
-  // }
+        <p>Thank you for using our platform! </p>
+        <p>To ensure that you have provided a valid email address</p>
+        <p> please click on the link below to reset your password:
+        <a href='${domain(req)}/auth/verify/${token}'> Reset </a> </p>
+        <p>Thank you for your cooperation.</p>
+        <p>Best regards,</p>
+        <p>College Team</p>
+        `,
+    });
+    console.log("Message sent: %s", info.messageId);
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
   //Editser's token the user
   user.resetToken = token;
   user.resetTokenExpiration = Date.now() + TOKEN_VALID_MIN * 60 * 1000;
