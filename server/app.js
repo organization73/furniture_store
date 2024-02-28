@@ -15,8 +15,9 @@ const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
-const MONGODB_URL = "mongodb://localhost:27017/furnature-shop";
-// "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+const MONGODB_URL = 
+// "mongodb://localhost:27017/furnature-shop";
+"mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -46,7 +47,6 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
-
 
 app.use((req, res, next) => {
   console.log("----------------------------");
@@ -122,3 +122,12 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+//todo
+/*
+websocket
+cors options
+image processing to make it smaller
+image storage with firebase
+connect with ml model.
+  */
