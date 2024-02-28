@@ -1,0 +1,81 @@
+name: furniture_store
+description: "Our furniture store."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #--------------- PACKAGES ------------------#
+  intl: ^0.18.1
+
+  # Icons
+  iconsax: ^0.0.8
+  cupertino_icons: ^1.0.6
+
+  flutter_native_splash: ^2.3.10
+  flutter_screenutil: ^5.9.0
+  url_launcher: ^6.2.4
+  flutter_svg: ^2.0.9
+  carousel_slider: ^4.2.1
+  image_picker: ^1.0.7
+  image_picker_android: ^0.8.9+3
+  http: ^1.2.0
+  lottie: ^3.0.0
+  permission_handler: ^11.3.0
+  connectivity_plus: ^5.0.2
+  cached_network_image: ^3.3.1
+  fast_color_picker: ^0.1.1
+  stability_image_generation: ^0.0.4
+  path_provider: ^2.1.2
+
+  # State Management
+  get: ^4.6.6
+  get_storage: ^2.1.1
+
+  readmore: ^2.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+
+  #--------------- LOCAL ASSETS ------------------#
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/images/onboarding/
+    - assets/images/banners/
+    - assets/images/categories/
+    - assets/images/content/
+    - assets/images/login/
+    - assets/images/products/
+    - assets/logos/
+    - assets/animations/
+
+  #--------------- LOCAL FONTS ------------------#
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 800
