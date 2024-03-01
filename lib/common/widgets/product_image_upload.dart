@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:furniture_store/common/widgets/dialog_box.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -72,26 +71,27 @@ class _BuildProductImageUploadState extends State<BuildProductImageUpload> {
       }
     } else {
       // If permissions are not granted, show a dialog to request them
-      // ignore: use_build_context_synchronously
-      showPermissionDialog(context);
+      showAlertDialog();
     }
   }
 
-  Future<void> showPermissionDialog(BuildContext context) async {
+  void showAlertDialog() async {
     bool isGranted = await Permission.camera.request().isGranted;
     if (!isGranted) {
-      // ignore: use_build_context_synchronously
-      await showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return const BuildAlertDialog(
-            title: 'Pemission Needed',
-            content: 'Camera permission is needed',
-            actionText: 'Open settings',
-            onpress: openAppSettings,
-          );
-        },
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Pemission Needed'),
+          content: const Text('Camera permission is needed'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Open settings'),
+              onPressed: () {
+                openAppSettings();
+                // Get.back();
+              },
+            ),
+          ],
+        ),
       );
     }
   }
