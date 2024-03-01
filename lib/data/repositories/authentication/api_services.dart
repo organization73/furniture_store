@@ -18,9 +18,9 @@ class HttpService extends GetxService {
     });
   }
 
-  Future<Map<String, dynamic>> signUpUser(String firstName, String lastName,
+  Future<void> signUpUser(String firstName, String lastName,
       String username, String phoneNum, String email, String password) async {
-    return THttpHelper.put('auth/signup', {
+     THttpHelper.put('auth/signup', {
       "firstName": firstName,
       "lastName": lastName,
       "username": username,

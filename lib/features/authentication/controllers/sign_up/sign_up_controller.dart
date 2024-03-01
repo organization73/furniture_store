@@ -35,7 +35,7 @@ class SignUpController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'No Internet', message: 'No internet connection!');
         return;
       }
 
@@ -56,7 +56,7 @@ class SignUpController extends GetxController {
         return;
       }
 
-     await AuthenticatorRepoTest.instance.registerWithEmailAndPassword(
+      await AuthenticatorRepoTest.instance.registerWithEmailAndPassword(
         firstNameController.text,
         lastNameController.text,
         userNameController.text,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:furniture_store/data/repositories/authentication/api_services.dart';
 import 'package:furniture_store/features/authentication/screens/login/login_screen.dart';
@@ -6,6 +8,7 @@ import 'package:furniture_store/features/home/screens/home_screen.dart';
 import 'package:furniture_store/features/onboarding/screens/onboarding_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 
 class AuthenticatorRepoTest extends GetxController {
   static AuthenticatorRepoTest get instance => Get.find();
@@ -23,6 +26,8 @@ class AuthenticatorRepoTest extends GetxController {
     // For example, you might check a token stored in deviceStorage
     final token = deviceStorage.read('token');
     final isConfirmed = deviceStorage.read('isConfirmed');
+    print("is confirmed $isConfirmed");
+    print("token $token");
 
     if (token != null) {
       // User is logged in, navigate to the home screen
@@ -71,19 +76,33 @@ class AuthenticatorRepoTest extends GetxController {
     }
   }
 
-  Future<Map<String, dynamic>> registerWithEmailAndPassword(
-      String firstName,
-      String lastName,
-      String username,
-      String phoneNum,
-      String email,
-      String password) async {
+  Future<void> registerWithEmailAndPassword(String firstName, String lastName,
+      String username, String phoneNum, String email, String password) async {
     try {
-      return await HttpService.instance
-          .signUpUser(firstName, lastName, username, phoneNum, email, password);
-      // Assuming the response contains a token
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
+      const uri1 = 'https://furniture-store-4qhc.onrender.com/auth/signup';
+      final response = await http.put(
+        Uri.parse(uri1),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "firstName": firstName,
+          "lastName": lastName,
+          "username": username,
+          "email": email,
+          "password": password,
+          "confirmPassword": phoneNum
+        }),
+      );
+      print('Response body: ${response.body}');
+      // print('Request succeeded');
+      if (response.statusCode == 200) {
+        print('Request succeeded');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
+      }
+    } catch (err) {
+      print('Error sending request: $err');
+      rethrow;
     }
   }
 

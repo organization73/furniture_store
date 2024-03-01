@@ -20,9 +20,6 @@ class VerifyEmailController extends GetxController {
 
   sendEmailVerification() async {
     try {
-      // await AuthenticatorRepoTest.instance.sendEmailVerification(
-      //     SignUpController.instance.emailController.text);
-
       TLoaders.successSnackBar(
           title: 'changeYourEmailTitle'.tr,
           message: 'changeYourEmailSubTitle'.tr);
@@ -59,7 +56,6 @@ class VerifyEmailController extends GetxController {
   checkEmailVerificationStatus() async {
     final currentUser = await AuthenticatorRepoTest.instance
         .checkIsConfirmed(SignUpController.instance.emailController.text);
-
     if (currentUser['isConfirmed'] != null && currentUser['isConfirmed']) {
       Get.off(
         () => ActionConfirmPage(
@@ -74,6 +70,10 @@ class VerifyEmailController extends GetxController {
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
+    } else {
+      TLoaders.warningSnackBar(
+          title: 'Verify your email',
+          message: 'Please check your email and verify your account');
     }
   }
 }

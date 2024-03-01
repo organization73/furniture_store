@@ -23,7 +23,7 @@ class ForgetPasswordController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'No Internet', message: 'No internet connection!');
         return;
       }
 
@@ -63,7 +63,7 @@ class ForgetPasswordController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'No Internet', message: 'No internet connection!');
         return;
       }
 
