@@ -1,31 +1,23 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/services.dart';
-// import 'package:furniture_store/features/personalization/models/user_model.dart';
-// import 'package:furniture_store/utils/exceptions/firebase_auth_exceptions.dart';
-// import 'package:furniture_store/utils/exceptions/firebase_exceptions.dart';
-// import 'package:furniture_store/utils/exceptions/format_exceptions.dart';
-// import 'package:furniture_store/utils/exceptions/platform_exceptions.dart';
-// import 'package:get/get.dart';
+import 'package:furniture_store/features/personalization/models/user_model.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-// class UserRepo extends GetxController {
-//   static UserRepo get instance => Get.find();
+class UserRepo extends GetxController {
+  static UserRepo get instance => Get.find();
 
-//   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  Future<void> saveUserRecord(UserModel user) async {
+    try {
+      GetStorage().write('user_data', user.toJson());
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
 
-//   Future<void> saveuserRecord(UserModel user) async {
-//     try {
-//       await _db.collection('Users').doc(user.id).set(user.toJson());
-//     } on FirebaseAuthException catch (e) {
-//       throw TFirebaseAuthException(e.code).message;
-//     } on FirebaseException catch (e) {
-//       throw TFirebaseException(e.code).message;
-//     } on FormatException catch (_) {
-//       throw const TFormatException();
-//     } on PlatformException catch (e) {
-//       throw TPlatformException(e.code).message;
-//     } catch (e) {
-//       throw 'Something went wrong, Please try again';
-//     }
-//   }
-// }
+  Future<UserModel?> getUserData() async {
+    final userData = GetStorage().read('user_data');
+    if (userData != null) {
+      return UserModel.fromJson(userData);
+    }
+    return null;
+  }
+}

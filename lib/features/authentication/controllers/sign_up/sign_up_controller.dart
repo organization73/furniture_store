@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
+import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/verify_sign_up_email.dart';
 import 'package:furniture_store/features/personalization/models/user_model.dart';
 
@@ -74,8 +75,8 @@ class SignUpController extends GetxController {
           phoneNumber: phoneNumController.text.trim(),
           avatar: '');
 
-      // final userRepesotory = Get.put(UserRepo());
-      // await userRepesotory.saveuserRecord(newUser);
+      final userRepesotory = Get.put(UserRepo());
+      await userRepesotory.saveUserRecord(newUser);
 
       FullScreenLoader.stopLoading();
 

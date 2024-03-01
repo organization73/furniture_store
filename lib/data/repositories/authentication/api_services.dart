@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:furniture_store/features/personalization/models/user_model.dart';
 import 'package:furniture_store/utils/http/http_client.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class HttpService extends GetxService {
   static HttpService get instance => Get.find();
@@ -18,16 +22,33 @@ class HttpService extends GetxService {
     });
   }
 
-  Future<void> signUpUser(String firstName, String lastName,
-      String username, String phoneNum, String email, String password) async {
-     THttpHelper.put('auth/signup', {
-      "firstName": firstName,
-      "lastName": lastName,
-      "username": username,
-      "confirmPassword": phoneNum,
-      "email": email,
-      "password": password
-    });
+  Future<void> signUpUser(String firstName, String lastName, String username,
+      String phoneNum, String email, String password) async {
+    try {
+      const uri = 'https://furniture-store-4qhc.onrender.com/auth/signup';
+      final response = await http.put(
+        Uri.parse(uri),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "firstName": firstName,
+          "lastName": lastName,
+          "username": username,
+          "email": email,
+          "password": password,
+          "confirmPassword": phoneNum
+        }),
+      );
+      print('Response body: ${response.body}');
+      if (response.statusCode == 200) {
+        print('Request succeeded');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
+      }
+    } catch (err) {
+      print('Error sending request: $err');
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> senEmailVerification(String email) async {

@@ -15,7 +15,9 @@ class VerifyEmailController extends GetxController {
 
   @override
   void onInit() {
-    sendEmailVerification();
+    TLoaders.successSnackBar(
+        title: 'changeYourEmailTitle'.tr,
+        message: 'changeYourEmailSubTitle'.tr);
     setTimerForAutoRedirect();
     super.onInit();
   }
@@ -29,6 +31,8 @@ class VerifyEmailController extends GetxController {
 
   sendEmailVerification() async {
     try {
+      await AuthenticatorRepoTest.instance.sendEmailVerification(
+          SignUpController.instance.emailController.text);
       TLoaders.successSnackBar(
           title: 'changeYourEmailTitle'.tr,
           message: 'changeYourEmailSubTitle'.tr);
