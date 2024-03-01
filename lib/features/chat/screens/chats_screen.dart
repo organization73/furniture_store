@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/data/repositories/chat/chats.dart';
 import 'package:furniture_store/data/repositories/chat/chats_fake_json.dart';
 import 'package:furniture_store/features/chat/screens/chat_detailes.dart';
-import 'package:furniture_store/routes/routes.dart';
 import 'package:get/get.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -106,14 +105,14 @@ class ChatScreen extends StatelessWidget {
                     ),
                 ],
               ),
-              onTap: () {
-                Navigator.of(context).push(createRoute(
-                  ChatDetailScreen(
-                    chat: chat,
-                    profileImage: imageUrl,
-                  ),
-                ));
-              },
+              onTap: () => Get.to(
+                () => ChatDetailScreen(
+                  chat: chat,
+                  profileImage: imageUrl,
+                ),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              ),
             );
           },
         ),

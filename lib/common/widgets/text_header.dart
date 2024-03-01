@@ -7,6 +7,7 @@ class BuildTopText extends StatelessWidget {
   final String subTitle;
   final IconData? iconName;
   final CrossAxisAlignment alignment;
+  final double size;
 
   const BuildTopText({
     super.key,
@@ -14,6 +15,7 @@ class BuildTopText extends StatelessWidget {
     required this.subTitle,
     this.iconName,
     this.alignment = CrossAxisAlignment.start,
+    this.size = 45,
   });
 
   @override
@@ -24,7 +26,7 @@ class BuildTopText extends StatelessWidget {
         if (iconName != null)
           Icon(
             iconName,
-            size: 50,
+            size: size,
             color: TColors.grey,
           ),
         SizedBox(

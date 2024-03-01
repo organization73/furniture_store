@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
-import 'package:furniture_store/routes/routes.dart';
+import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CodeVerificationScreen extends StatefulWidget {
   final String phoneNumber;
-  final dynamic routeNamed;
-  const CodeVerificationScreen(
-      {super.key, required this.phoneNumber, required this.routeNamed});
+  const CodeVerificationScreen({
+    super.key,
+    required this.phoneNumber,
+  });
   @override
   CodeVerificationScreenState createState() => CodeVerificationScreenState();
 }
@@ -110,7 +111,11 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
           _controllers.map((controller) => controller.text).join();
       // print('Verifying Code: $enteredCode');
       if (enteredCode == '55555') {
-        Navigator.of(context).pushReplacement(createRoute(widget.routeNamed));
+        Get.off(
+          () => GallerySelection(),
+          duration: const Duration(milliseconds: 300),
+          transition: Transition.rightToLeft,
+        );
       } else {
         showDialog(
           context: context,

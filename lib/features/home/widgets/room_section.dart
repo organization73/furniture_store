@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:furniture_store/common/widgets/section_description.dart';
 import 'package:furniture_store/features/home/screens/categories_screen.dart';
-import 'package:furniture_store/routes/routes.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
 
@@ -34,12 +33,14 @@ class BuildRoomsSection extends StatelessWidget {
               var image = entry.value;
 
               return InkWell(
-                onTap: () {
-                  Navigator.of(context).push(createRoute(CategoriesPage(
+                onTap: () => Get.to(
+                  () => CategoriesPage(
                       categoryName: lang == 'ar'
                           ? 'غرف $sectionName'
-                          : '$sectionName Room')));
-                },
+                          : '$sectionName Room'),
+                  duration: const Duration(milliseconds: 300),
+                  transition: Transition.rightToLeft,
+                ),
                 child: Container(
                   width: 130,
                   height: 195,

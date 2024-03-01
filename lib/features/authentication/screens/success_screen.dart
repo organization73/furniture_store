@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:furniture_store/routes/routes.dart';
 import 'package:get/get.dart';
 
 class SuccessScreen extends StatefulWidget {
@@ -19,7 +18,11 @@ class _SuccessScreenState extends State<SuccessScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 1), () {
       // Use the 'sc' field to create the route
-      Navigator.of(context).pushReplacement(createRoute(widget.screen));
+      Get.to(
+        () => widget.screen,
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
     });
   }
 

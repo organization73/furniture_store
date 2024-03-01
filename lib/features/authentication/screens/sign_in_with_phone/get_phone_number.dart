@@ -37,9 +37,10 @@ class PhoneNumberScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   BuildTopText(
-                      title: 'continueWithPhoneTitle'.tr,
-                      subTitle: 'continueWithPhoneSubTitle'.tr,
-                      iconName: Iconsax.call_calling),
+                    title: 'continueWithPhoneTitle'.tr,
+                    subTitle: 'continueWithPhoneSubTitle'.tr,
+                    iconName: Iconsax.call5,
+                  ),
                   SizedBox(height: 20.h),
                   RoundedTextField(
                       'phoneNo'.tr,

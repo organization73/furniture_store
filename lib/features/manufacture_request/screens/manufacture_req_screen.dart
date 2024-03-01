@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/features/manufacture_request/screens/add_new_request/screens/add_new_request.dart';
 import 'package:furniture_store/features/personalization/models/user_model.dart';
-import 'package:furniture_store/routes/routes.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 // TODO Translate this page
 
 class ManufactureRequestsPage extends StatelessWidget {
@@ -15,9 +15,11 @@ class ManufactureRequestsPage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add a request',
-        onPressed: () {
-          Navigator.of(context).push(createRoute(const AddManRequestPage()));
-        },
+        onPressed: () => Get.to(
+          () => const AddManRequestPage(),
+          duration: const Duration(milliseconds: 300),
+          transition: Transition.rightToLeft,
+        ),
         heroTag: 'addFAB',
         child: const Icon(Icons.add),
       ),
