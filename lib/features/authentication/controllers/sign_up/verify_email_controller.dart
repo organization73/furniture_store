@@ -4,7 +4,7 @@ import 'package:furniture_store/common/widgets/action_confirmation/action_confir
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
 import 'package:furniture_store/features/authentication/controllers/sign_up/sign_up_controller.dart';
-import 'package:furniture_store/features/authentication/screens/gallery_selection.dart';
+import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_selection.dart';
 
 import 'package:get/get.dart';
 
@@ -52,7 +52,7 @@ class VerifyEmailController extends GetxController {
             subTitle: 'yourAccountCreatedSubTitle'.tr,
             title: 'yourAccountCreatedTitle'.tr,
             onPressed: () => Get.off(
-              () => const GallerySelection(),
+              () =>  GallerySelection(),
               duration: const Duration(milliseconds: 300),
               transition: Transition.rightToLeft,
             ),
@@ -73,7 +73,7 @@ class VerifyEmailController extends GetxController {
           subTitle: 'yourAccountCreatedSubTitle'.tr,
           title: 'yourAccountCreatedTitle'.tr,
           onPressed: () => Get.off(
-            () => const GallerySelection(),
+            () =>  GallerySelection(),
             duration: const Duration(milliseconds: 300),
             transition: Transition.rightToLeft,
           ),

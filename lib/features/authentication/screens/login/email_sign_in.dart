@@ -30,14 +30,14 @@ class EmailSignInScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Form(
             key: controller.loginFormKey,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                   BuildTopText(
+                  BuildTopText(
                       title: 'loginTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
                       iconName: 'email'),
