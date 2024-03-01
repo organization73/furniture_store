@@ -11,11 +11,20 @@ import 'package:get/get.dart';
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
 
+  Timer? _timer; // Declare a Timer variable
+
   @override
   void onInit() {
     sendEmailVerification();
     setTimerForAutoRedirect();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    // Cancel the timer when the controller is closed
+    _timer?.cancel();
+    super.onClose();
   }
 
   sendEmailVerification() async {
@@ -29,11 +38,9 @@ class VerifyEmailController extends GetxController {
   }
 
   setTimerForAutoRedirect() {
-    Timer.periodic(const Duration(seconds: 5), (timer) async {
-      // await FirebaseAuth.instance.currentUser?.reload();
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
       final currentUser = await AuthenticatorRepoTest.instance
           .checkIsConfirmed(SignUpController.instance.emailController.text);
-      // final user = FirebaseAuth.instance.currentUser;
       if (currentUser['isConfirmed'] ?? false) {
         timer.cancel();
         Get.off(
