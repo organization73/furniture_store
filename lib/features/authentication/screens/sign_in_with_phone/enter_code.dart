@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/routes/routes.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';

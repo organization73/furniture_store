@@ -3,42 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/build_user_input_field.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/common/widgets/text_header.dart';
-import 'package:furniture_store/features/authentication/screens/sign_in_with_phone/enter_code.dart';
-import 'package:furniture_store/routes/routes.dart';
-import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:furniture_store/features/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 import 'package:furniture_store/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class PhoneNumberScreen extends StatefulWidget {
+class PhoneNumberScreen extends StatelessWidget {
   const PhoneNumberScreen({super.key});
-  @override
-  PhoneNumberScreenState createState() => PhoneNumberScreenState();
-}
-
-class PhoneNumberScreenState extends State<PhoneNumberScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _phoneController = TextEditingController();
-
-  @override
-  void dispose() {
-    // Dispose the TextEditingController when the form is disposed.
-    _phoneController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(PhoneSingInController());
+
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
           height: 68,
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
             text: 'tContinue'.tr,
-            onPressed: _codeVerify,
+            onPressed: controller.phonedSignIn,
           )),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(),
@@ -46,7 +31,7 @@ class PhoneNumberScreenState extends State<PhoneNumberScreen> {
         child: Padding(
           padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Form(
-            key: _formKey,
+            key: controller.phoneFormKey,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,7 +43,7 @@ class PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   SizedBox(height: 20.h),
                   RoundedTextField(
                       'phoneNo'.tr,
-                      _phoneController,
+                      controller.phoneNumController,
                       prefixIcon: Iconsax.call,
                       TValidator.validatePhoneNumber,
                       keyboardType: TextInputType.phone),
@@ -69,14 +54,5 @@ class PhoneNumberScreenState extends State<PhoneNumberScreen> {
         ),
       ),
     );
-  }
-
-  void _codeVerify() {
-    if (_formKey.currentState?.validate() ?? false) {
-      Navigator.of(context).pushReplacement(createRoute(CodeVerificationScreen(
-        phoneNumber: _phoneController.text,
-        routeNamed: GallerySelection(),
-      )));
-    }
   }
 }
