@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furniture_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
+import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:furniture_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:furniture_store/data/repositories/authentication/api_services.dart';
 import 'package:furniture_store/features/authentication/controllers/log_in/log_in_controller.dart';
 import 'package:furniture_store/features/authentication/screens/login/email_sign_in.dart';
 import 'package:furniture_store/features/authentication/screens/sign_in_with_phone/get_phone_number.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/signup.dart';
+import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
@@ -24,13 +28,21 @@ class LoginSignUpScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
-          SizedBox(
-            width: 1.sw,
-            child: Image.asset(
-              TImages.appBackgroung,
-              fit: BoxFit.fitWidth,
+          PrimaryHeaderContainer(
+              child: SafeArea(
+            child: Column(
+              children: [
+                const CustomAppBar(),
+                SizedBox(
+                  height: TSizes.spaceBtwSections,
+                ),
+                SvgPicture.asset(
+                  'assets/logos/logo.svg',
+                  width: 200.r,
+                ),
+              ],
             ),
-          ),
+          )),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -39,7 +51,7 @@ class LoginSignUpScreen extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(20.r),
                   )),
-              height: 415.h,
+              height: 420.h,
               child: Padding(
                 padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                 child: Column(
@@ -48,13 +60,13 @@ class LoginSignUpScreen extends StatelessWidget {
                   children: [
                     Text('loginHeader'.tr,
                         style: Theme.of(context).textTheme.headlineMedium),
-                    SizedBox(height: 5.0.h),
+                    SizedBox(height: TSizes.spaceBtwSections),
                     Text(
                       'loginSubHeader'.tr,
                       style: Theme.of(context).textTheme.labelSmall,
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 5.0.h),
+                    SizedBox(height: TSizes.spaceBtwSections / 2),
                     BuildCTAButton(
                       text: 'continueWithEmail'.tr,
                       onPressed: () => Get.to(
@@ -63,7 +75,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         transition: Transition.rightToLeft,
                       ),
                     ),
-                    SizedBox(height: 8.0.h),
+                    SizedBox(height: TSizes.spaceBtwItems / 2),
                     BuildCTAButton(
                       text: 'continueWithPhone'.tr,
                       onPressed: () => Get.to(
@@ -72,12 +84,15 @@ class LoginSignUpScreen extends StatelessWidget {
                         transition: Transition.rightToLeft,
                       ),
                     ),
-                    SizedBox(height: 8.0.h),
+                    SizedBox(height: TSizes.spaceBtwItems / 2),
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton.icon(
                         onPressed: () => controller.googleSignIn(),
                         style: FilledButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: TSizes.buttonHeight - 3,
+                              horizontal: 10),
                           backgroundColor:
                               Theme.of(context).colorScheme.surfaceVariant,
                           shape: RoundedRectangleBorder(
@@ -91,7 +106,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 8.0.h),
+                    SizedBox(height: TSizes.spaceBtwItems / 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
