@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Form(
             key: controller.formKey,
             child: SingleChildScrollView(

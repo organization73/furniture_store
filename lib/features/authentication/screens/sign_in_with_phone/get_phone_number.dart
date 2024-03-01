@@ -6,6 +6,7 @@ import 'package:furniture_store/common/widgets/text_header.dart';
 import 'package:furniture_store/features/authentication/screens/sign_in_with_phone/enter_code.dart';
 import 'package:furniture_store/routes/routes.dart';
 import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:furniture_store/utils/constants/sizes.dart';
 
 import 'package:furniture_store/utils/validators/validation.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,7 @@ class PhoneNumberScreenState extends State<PhoneNumberScreen> {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(

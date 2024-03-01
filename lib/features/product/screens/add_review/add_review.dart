@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/ratings_widget.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
 
@@ -31,7 +32,7 @@ class _AddReviewState extends State<AddReview> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Column(
             children: [
               AddRatingWidget(rating: 0),

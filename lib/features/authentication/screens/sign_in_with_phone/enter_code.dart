@@ -8,6 +8,7 @@ import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/routes/routes.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class CodeVerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -42,15 +43,25 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: BottomAppBar(
+        height: 68,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: BuildCTAButton(
+          text: 'verify'.tr,
+          onPressed: _verifyCode,
+        ),
+      ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset('assets/icons/code_auth.svg'),
+              const Icon(
+                Iconsax.verify,
+                size: 45,
+              ),
               SizedBox(height: 10.h),
               Text(
                 'enterCode'.tr,
@@ -71,12 +82,7 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
                 controllers: _controllers,
                 onCodeVerified: _verifyCode,
               ),
-              SizedBox(height: 60.h),
-              BuildCTAButton(
-                text: 'verify'.tr,
-                onPressed: _verifyCode,
-              ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               TextButton(
                 onPressed: isResendButtonEnabled ? _resendCode : null,
                 child: Text('codeResend'.tr,
