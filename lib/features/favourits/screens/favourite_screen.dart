@@ -18,7 +18,7 @@ class FavouritsPage extends StatelessWidget {
         final favList = controller.getFavorites();
         return Scaffold(
           appBar: AppBar(
-            title:  Text(
+            title: Text(
               'favourites'.tr,
             ),
           ),
@@ -43,8 +43,8 @@ class FavouritsPage extends StatelessWidget {
                   )
                 : SingleChildScrollView(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: TSizes.pagePaddingSpace),
                       child: Column(
                         children: [
                           GridLayout(

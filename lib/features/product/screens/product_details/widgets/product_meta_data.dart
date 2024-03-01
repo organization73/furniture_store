@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
-import 'package:furniture_store/common/widgets/review_container.dart';
 import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:furniture_store/common/widgets/texts/product_price_text.dart';
 import 'package:furniture_store/common/widgets/texts/product_title_text.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
-import 'package:furniture_store/features/product/screens/add_review/reviews_screen.dart';
+import 'package:furniture_store/features/product/screens/product_reviews/product_review_screen.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_specs.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_status_checkboxes.dart';
+import 'package:furniture_store/features/product/screens/product_reviews/widgets/user_review_card.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/enums.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
@@ -156,13 +156,13 @@ class ProductMetaData extends StatelessWidget {
         SectionHeading(
           title: 'Reviews',
           onPress: () => Get.to(
-            () => Reviews(product: product),
+            () => ProductReviewsScreen(product: product),
             duration: const Duration(milliseconds: 300),
             transition: Transition.rightToLeft,
           ),
         ),
 
-        ReviewContainer(
+        UserReviewCard(
           review: product.rates[0],
           profileImgUrl: 'https://picsum.photos/id/1062/80/80',
         ),

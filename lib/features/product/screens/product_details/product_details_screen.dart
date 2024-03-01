@@ -16,7 +16,7 @@ class ProductDetails extends StatelessWidget {
         height: 68,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(
-          child:  Text(
+          child: Text(
             'contactSeller'.tr,
           ),
           onPressed: () {},
@@ -27,10 +27,10 @@ class ProductDetails extends StatelessWidget {
           children: [
             const ProductImageSlider(),
             Padding(
-              padding: EdgeInsets.only(
-                  right: TSizes.defaultSpace,
-                  left: TSizes.defaultSpace,
-                  bottom: TSizes.defaultSpace),
+              padding: const EdgeInsets.only(
+                  right: TSizes.pagePaddingSpace,
+                  left: TSizes.pagePaddingSpace,
+                  bottom: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
                   const RatingWidget(),

@@ -99,7 +99,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             )),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
                   SectionHeading(

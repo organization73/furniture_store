@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
-import 'package:furniture_store/features/product/screens/add_review/reviews_screen.dart';
+import 'package:furniture_store/features/product/screens/product_reviews/product_review_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -58,7 +58,7 @@ class OverlappingCircularAvatar extends StatelessWidget {
         // this circle avatar we created add icon
         InkWell(
           onTap: () => Get.to(
-            () => Reviews(
+            () => ProductReviewsScreen(
               product: product,
             ),
             duration: const Duration(milliseconds: 300),
