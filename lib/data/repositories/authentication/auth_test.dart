@@ -19,8 +19,6 @@ class AuthenticatorRepoTest extends GetxController {
   }
 
   screenRedirect() async {
-    // Implement logic to check if the user is logged in using your API service
-    // For example, you might check a token stored in deviceStorage
     final token = deviceStorage.read('token');
     final isConfirmed = deviceStorage.read('isConfirmed');
     print("is confirmed $isConfirmed");
@@ -64,7 +62,6 @@ class AuthenticatorRepoTest extends GetxController {
       String email, String password) async {
     try {
       final response = await Get.find<HttpService>().loginUser(email, password);
-      // Assuming the response contains a token
       final token = response['token'];
       deviceStorage.write('token', token);
       return response;
@@ -86,7 +83,6 @@ class AuthenticatorRepoTest extends GetxController {
   Future<void> sendEmailVerification(String email) async {
     try {
       await HttpService.instance.senEmailVerification(email);
-      // Assuming the response contains a token
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }
@@ -98,8 +94,6 @@ class AuthenticatorRepoTest extends GetxController {
       final isConfirmed = response['isConfirmed'];
       deviceStorage.write('isConfirmed', isConfirmed);
       return response;
-
-      // Assuming the response contains a token
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }
@@ -112,6 +106,4 @@ class AuthenticatorRepoTest extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
-
-  // Implement other methods similarly
 }

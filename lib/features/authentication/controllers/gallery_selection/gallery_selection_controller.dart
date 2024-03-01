@@ -1,11 +1,8 @@
-// gallery_selection_controller.dart
+import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
 import 'package:furniture_store/features/authentication/model/gallery_selection/gallery_selection_model.dart';
-import 'package:furniture_store/features/authentication/screens/gallery_info.dart';
-import 'package:furniture_store/features/authentication/screens/login/login_screen.dart';
-import 'package:furniture_store/features/authentication/screens/success_screen.dart';
+import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:get/get.dart';
 
-// gallery_selection_controller.dart
 class GallerySelectionController extends GetxController {
   final GallerySelectionModel model;
 
@@ -17,16 +14,10 @@ class GallerySelectionController extends GetxController {
 
   void navigateToNextScreen() {
     if (model.selectedOption.value == 0) {
-      Get.off(
-        () => const SuccessScreen(
-          screen: LoginSignUpScreen(),
-        ),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
-      );
+      AuthenticatorRepoTest.instance.screenRedirect();
     } else {
-      Get.off(
-        () => const GalleryInformationScreen(),
+      Get.to(
+        () => GalleryInformationScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );

@@ -51,11 +51,16 @@ class VerifyEmailController extends GetxController {
           () => ActionConfirmPage(
             subTitle: 'yourAccountCreatedSubTitle'.tr,
             title: 'yourAccountCreatedTitle'.tr,
-            onPressed: () => Get.off(
-              () =>  GallerySelection(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            ),
+            onPressed: () async {
+              await AuthenticatorRepoTest.instance.loginWithEmailAndPassword(
+                  SignUpController.instance.emailController.text,
+                  SignUpController.instance.passwordController.text);
+              Get.off(
+                () => GallerySelection(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              );
+            },
           ),
           duration: const Duration(milliseconds: 300),
           transition: Transition.rightToLeft,
@@ -70,14 +75,18 @@ class VerifyEmailController extends GetxController {
     if (currentUser['isConfirmed'] != null && currentUser['isConfirmed']) {
       Get.off(
         () => ActionConfirmPage(
-          subTitle: 'yourAccountCreatedSubTitle'.tr,
-          title: 'yourAccountCreatedTitle'.tr,
-          onPressed: () => Get.off(
-            () =>  GallerySelection(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          ),
-        ),
+            subTitle: 'yourAccountCreatedSubTitle'.tr,
+            title: 'yourAccountCreatedTitle'.tr,
+            onPressed: () async {
+              await AuthenticatorRepoTest.instance.loginWithEmailAndPassword(
+                  SignUpController.instance.emailController.text,
+                  SignUpController.instance.passwordController.text);
+              Get.off(
+                () => GallerySelection(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              );
+            }),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
