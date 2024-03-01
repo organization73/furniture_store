@@ -7,6 +7,7 @@ import 'package:furniture_store/features/authentication/controllers/gallery_sele
 import 'package:furniture_store/features/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class GallerySelection extends StatelessWidget {
   final GallerySelectionModel model = Get.put(GallerySelectionModel());
@@ -40,7 +41,7 @@ class GallerySelection extends StatelessWidget {
                 BuildTopText(
                     title: 'gallarySelect'.tr,
                     subTitle: 'gallarySelectDesc'.tr,
-                    iconName: 'gallery_survey'),
+                    iconName: Iconsax.ram),
                 SizedBox(height: 20.h),
                 Obx(() => Container(
                       decoration: BoxDecoration(

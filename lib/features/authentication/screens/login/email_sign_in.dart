@@ -37,10 +37,11 @@ class EmailSignInScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                
                   BuildTopText(
                       title: 'loginTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
-                      iconName: 'email'),
+                      iconName: Iconsax.link_circle),
                   SizedBox(height: 20.h),
                   RoundedTextField(
                       prefixIcon: Iconsax.direct_right,

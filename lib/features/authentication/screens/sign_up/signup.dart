@@ -41,7 +41,7 @@ class SignUpScreen extends StatelessWidget {
                   BuildTopText(
                       title: 'signupTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
-                      iconName: 'email'),
+                      iconName: Iconsax.personalcard),
                   SizedBox(height: 5.h),
                   Row(
                     children: [

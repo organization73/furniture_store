@@ -54,7 +54,7 @@ class PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   BuildTopText(
                       title: 'continueWithPhoneTitle'.tr,
                       subTitle: 'continueWithPhoneSubTitle'.tr,
-                      iconName: 'phone'),
+                      iconName: Iconsax.call_calling),
                   SizedBox(height: 20.h),
                   RoundedTextField(
                       'phoneNo'.tr,

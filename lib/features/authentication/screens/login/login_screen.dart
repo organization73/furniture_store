@@ -4,13 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:furniture_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:furniture_store/data/repositories/authentication/api_services.dart';
 import 'package:furniture_store/features/authentication/controllers/log_in/log_in_controller.dart';
 import 'package:furniture_store/features/authentication/screens/login/email_sign_in.dart';
 import 'package:furniture_store/features/authentication/screens/sign_in_with_phone/get_phone_number.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/signup.dart';
-import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 

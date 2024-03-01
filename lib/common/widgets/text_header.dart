@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furniture_store/utils/constants/colors.dart';
+import 'package:iconsax/iconsax.dart';
 
 class BuildTopText extends StatelessWidget {
   final String title;
   final String subTitle;
-  final String? iconName;
+  final IconData? iconName;
   final CrossAxisAlignment alignment;
 
   const BuildTopText({
@@ -21,7 +22,12 @@ class BuildTopText extends StatelessWidget {
     return Column(
       crossAxisAlignment: alignment,
       children: [
-        if (iconName != null) SvgPicture.asset('assets/icons/$iconName.svg'),
+        if (iconName != null)
+          Icon(
+            iconName,
+            size: 50,
+            color: TColors.grey,
+          ),
         SizedBox(
           height: 20.h,
         ),

@@ -52,7 +52,7 @@ class GalleryInformationScreen extends StatelessWidget {
                   BuildTopText(
                       title: 'gallaryTitle'.tr,
                       subTitle: 'gallaryTitleDesc'.tr,
-                      iconName: 'email'),
+                      iconName: Iconsax.shop),
                   SizedBox(height: 20.h),
                   RoundedTextField(
                     'galleryName'.tr,
