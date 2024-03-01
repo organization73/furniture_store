@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
-import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/verify_sign_up_email.dart';
 import 'package:furniture_store/features/personalization/models/user_model.dart';
 
@@ -94,20 +93,3 @@ class SignUpController extends GetxController {
     }
   }
 }
-
-// UserModel user = UserModel(
-//   accountType: AccountType.VENDOR,
-//   authorities: [SimpleGrantedAuthority(authority: 'ROLE_ADMIN')],
-//   avatar: 'https://example.com/avatar.jpg',
-//   firstName: 'John',
-//   lastName: 'Doe',
-//   email: 'john.doe@example.com',
-//   id: '12345',
-//   password: 'password123',
-//   confirmCode: '123456',
-//   state: AccountState.ACTIVE,
-//   createdDate: '2023-04-01',
-//   kcyAddress: '123 Main St',
-//   verified: true,
-//   roles: Roles.ADMIN,
-// );

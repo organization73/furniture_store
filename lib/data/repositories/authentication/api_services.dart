@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:furniture_store/features/personalization/models/user_model.dart';
 import 'package:furniture_store/utils/http/http_client.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
