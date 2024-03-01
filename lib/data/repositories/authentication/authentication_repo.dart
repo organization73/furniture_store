@@ -30,7 +30,7 @@
 //     if (user != null) {
 //       if (user.emailVerified) {
 //         Get.offAll(
-//           () => const HomePage(initialPageIndex: 0),
+//           () => const NavMenu(),
 //           duration: const Duration(milliseconds: 300),
 //           transition: Transition.fade,
 //         );

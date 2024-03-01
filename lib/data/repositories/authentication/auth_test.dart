@@ -2,7 +2,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:furniture_store/data/repositories/authentication/api_services.dart';
 import 'package:furniture_store/features/authentication/screens/login/login_screen.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/verify_sign_up_email.dart';
-import 'package:furniture_store/features/home/screens/home_screen.dart';
+import 'package:furniture_store/features/home/screens/nav_menu.dart';
 import 'package:furniture_store/features/onboarding/screens/onboarding_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -28,7 +28,7 @@ class AuthenticatorRepoTest extends GetxController {
       // User is logged in, navigate to the home screen
       if (isConfirmed == true) {
         Get.offAll(
-          () => const HomePage(initialPageIndex: 0),
+          () => const NavMenu(),
           duration: const Duration(milliseconds: 300),
           transition: Transition.fade,
         );
