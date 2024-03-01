@@ -7,6 +7,7 @@ class ProductReviewsController extends GetxController {
   RxList<Review> reviews = RxList<Review>();
   final TextEditingController reviewController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  RxInt selectedRating = 0.obs; // Observable for the selected rating
 
   ProductReviewsController({required this.product}) {
     reviews.value = product.rates.cast<Review>();
@@ -14,9 +15,12 @@ class ProductReviewsController extends GetxController {
 
   @override
   void onClose() {
-    // Cancel the timer when the controller is closed
     reviewController.clear();
     super.onClose();
+  }
+
+  void updateSelectedRating(int rating) {
+    selectedRating.value = rating;
   }
 
   void addReview(Review review) {
@@ -24,13 +28,8 @@ class ProductReviewsController extends GetxController {
       return;
     }
 
-    // Add the review to the controller's reviews list
     reviews.add(review);
-    // Update the product's rates list
-    // product.rates.add(review);
-    // Update the product's rating based on the new review
     product.updateRates();
-    // Notify listeners to rebuild the UI
     update();
 
     Get.back();

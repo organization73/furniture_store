@@ -3,15 +3,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AddReview extends StatelessWidget {
   final Product product;
-  AddReview({super.key, required this.product});
-
-  int _selectedRating = 0; // Variable to store the selected rating
+  const AddReview({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +39,7 @@ class AddReview extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 onRatingUpdate: (rating) {
-                  _selectedRating = rating.toInt();
+                  controller.updateSelectedRating(rating.toInt());
                 },
               ),
               TextFormField(
@@ -69,12 +66,13 @@ class AddReview extends StatelessWidget {
             onPressed: () {
               controller.addReview(Review(
                 reviewerName: "UserClass",
-                rating: _selectedRating,
+                rating: controller.selectedRating
+                    .value, // Use the selected rating from the controller
                 comment: controller.reviewController.text,
                 timestamp: DateTime.now().toString(),
               ));
             },
-            child: Text('tContinue'.tr)),
+            child: const Text('Continue')),
       ),
     );
   }
