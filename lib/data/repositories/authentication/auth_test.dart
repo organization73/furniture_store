@@ -35,7 +35,7 @@ class AuthenticatorRepoTest extends GetxController {
       } else {
         Get.offAll(
           () => const VerifySignUpEmail(
-            email: '_auth.currentUser?.email',
+            email: 'nopsasarke@gufum.com',
           ),
           duration: const Duration(milliseconds: 300),
           transition: Transition.fade,
@@ -61,12 +61,13 @@ class AuthenticatorRepoTest extends GetxController {
   Future<Map<String, dynamic>> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      final response = await Get.find<HttpService>().loginUser(email, password);
+      final response = await HttpService.instance.loginUser(email, password);
       final token = response['token'];
       deviceStorage.write('token', token);
+      deviceStorage.write('isConfirmed', true);
       return response;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 
@@ -75,6 +76,7 @@ class AuthenticatorRepoTest extends GetxController {
     try {
       await HttpService.instance
           .signUpUser(firstName, lastName, username, phoneNum, email, password);
+      deviceStorage.write('token', '');
     } catch (e) {
       rethrow;
     }
@@ -84,7 +86,7 @@ class AuthenticatorRepoTest extends GetxController {
     try {
       await HttpService.instance.senEmailVerification(email);
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 
@@ -95,7 +97,7 @@ class AuthenticatorRepoTest extends GetxController {
       deviceStorage.write('isConfirmed', isConfirmed);
       return response;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 
@@ -103,7 +105,7 @@ class AuthenticatorRepoTest extends GetxController {
     try {
       await HttpService.instance.sendPasswordResetEmail(email);
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 }

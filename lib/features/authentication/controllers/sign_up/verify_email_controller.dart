@@ -32,7 +32,7 @@ class VerifyEmailController extends GetxController {
   sendEmailVerification() async {
     try {
       await AuthenticatorRepoTest.instance.sendEmailVerification(
-          SignUpController.instance.emailController.text);
+          Get.find<SignUpController>().emailController.text);
       TLoaders.successSnackBar(
           title: 'changeYourEmailTitle'.tr,
           message: 'changeYourEmailSubTitle'.tr);
@@ -43,8 +43,10 @@ class VerifyEmailController extends GetxController {
 
   setTimerForAutoRedirect() {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+      print(
+          'email is ................${SignUpController.instance.emailController.text}');
       final currentUser = await AuthenticatorRepoTest.instance
-          .checkIsConfirmed(SignUpController.instance.emailController.text);
+          .checkIsConfirmed(Get.find<SignUpController>().emailController.text);
       if (currentUser['isConfirmed'] ?? false) {
         timer.cancel();
         Get.off(
@@ -53,8 +55,8 @@ class VerifyEmailController extends GetxController {
             title: 'yourAccountCreatedTitle'.tr,
             onPressed: () async {
               await AuthenticatorRepoTest.instance.loginWithEmailAndPassword(
-                  SignUpController.instance.emailController.text,
-                  SignUpController.instance.passwordController.text);
+                  Get.find<SignUpController>().emailController.text,
+                  Get.find<SignUpController>().passwordController.text);
               Get.off(
                 () => GallerySelection(),
                 duration: const Duration(milliseconds: 300),
@@ -71,7 +73,7 @@ class VerifyEmailController extends GetxController {
 
   checkEmailVerificationStatus() async {
     final currentUser = await AuthenticatorRepoTest.instance
-        .checkIsConfirmed(SignUpController.instance.emailController.text);
+        .checkIsConfirmed(Get.find<SignUpController>().emailController.text);
     if (currentUser['isConfirmed'] != null && currentUser['isConfirmed']) {
       Get.off(
         () => ActionConfirmPage(
@@ -79,8 +81,8 @@ class VerifyEmailController extends GetxController {
             title: 'yourAccountCreatedTitle'.tr,
             onPressed: () async {
               await AuthenticatorRepoTest.instance.loginWithEmailAndPassword(
-                  SignUpController.instance.emailController.text,
-                  SignUpController.instance.passwordController.text);
+                  Get.find<SignUpController>().emailController.text,
+                  Get.find<SignUpController>().passwordController.text);
               Get.off(
                 () => GallerySelection(),
                 duration: const Duration(milliseconds: 300),

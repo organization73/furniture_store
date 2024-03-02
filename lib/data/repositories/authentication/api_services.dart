@@ -8,17 +8,25 @@ class HttpService extends GetxService {
   static HttpService get instance => Get.find();
 
   Future<Map<String, dynamic>> loginUser(String email, String password) async {
-    return THttpHelper.post('auth/login', {
-      "email": email,
-      "password": password,
-    });
+    try {
+      return THttpHelper.post('auth/login', {
+        "email": email,
+        "password": password,
+      });
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future getProduct(String email, String password) async {
-    return THttpHelper.post('graphql', {
-      "query":
-          "query { product(id: \"65d88dce88520bc98eef2974\") { _id  images{imageurl} rate details { wood cloth condition color delevary negotiable modefiable } } }"
-    });
+    try {
+      return THttpHelper.post('graphql', {
+        "query":
+            "query { product(id: \"65d88dce88520bc98eef2974\") { _id  images{imageurl} rate details { wood cloth condition color delevary negotiable modefiable } } }"
+      });
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> signUpUser(String firstName, String lastName, String username,
@@ -51,15 +59,27 @@ class HttpService extends GetxService {
   }
 
   Future<Map<String, dynamic>> senEmailVerification(String email) async {
-    return THttpHelper.post('auth/re-verify-email', {"email": email});
+    try {
+      return THttpHelper.post('auth/re-verify-email', {"email": email});
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> checkIsConfirmed(String email) async {
-    return THttpHelper.post('auth/is-confirmed', {"email": email});
+    try {
+      return THttpHelper.post('auth/is-confirmed', {"email": email});
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> sendPasswordResetEmail(String email) async {
-    return THttpHelper.post('auth/reset-password-email', {"email": email});
+    try {
+      return THttpHelper.post('auth/reset-password-email', {"email": email});
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 
