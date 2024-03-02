@@ -11,9 +11,12 @@ const authMiddleware = async (req, res, next) => {
     }
     console.log("token:", token);
   } catch (error) {
-    return res.status(404).json({ message: "Unable to decode token" });
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
   }
-  
+
   try {
     // Verify and decode the token
     console.log("start decoding");
@@ -25,14 +28,14 @@ const authMiddleware = async (req, res, next) => {
     }
     //checking confirmation startus
     //if yes home
-    //no verify 
+    //no verify
     // Attach the user object to the request for further use
     req.user = user;
     // console.log("req.user:", user);
     // Call the next middleware or route handler
     next();
   } catch (error) {
-    if (!error.statusCode ) {
+    if (!error.statusCode) {
       error.statusCode = 500;
     }
     next(error);

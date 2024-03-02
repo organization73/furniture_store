@@ -11,13 +11,16 @@ const ejs = require("ejs");
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
 
+const adminAuthRoutes = require("./adminRouter/auth")
+const adminShopRoutes = require("./adminRouter/shop")
+
 const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
 const MONGODB_URL = 
-// "mongodb://localhost:27017/furnature-shop";
-"mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+"mongodb://localhost:27017/furnature-shop";
+// "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -84,6 +87,10 @@ app.use((req, res, next) => {
 //   res.send("Ok");
 // });
 
+app.use("/admin/auth", adminAuthRoutes);
+
+// app.use("/admin/shop", adminShopRoutes);
+
 app.use("/auth", authRoutes);
 
 app.use("/product", isAuth, productRoutes);
@@ -103,7 +110,7 @@ app.use(
 
 app.use((error, req, res, next) => {
   console.log("app.js Error:", error.message);
-  console.log("-------------------------------------");
+  console.log("end+++++++++++++++++++++++");
   const status = error.statusCode || 500;
   const message = error.message;
   res.status(status).json({ message: message, path: error.path });
@@ -127,9 +134,9 @@ mongoose
 /*
 websocket
 cors options
-image processing to make it smaller
-image storage with firebase
 connect with ml model.
 admin panel
+image processing to make it smaller
+image storage with firebase
 multer to upload multiple images
   */
