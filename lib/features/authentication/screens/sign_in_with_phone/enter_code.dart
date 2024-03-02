@@ -45,7 +45,7 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomAppBar(
-        height: 68,
+        height: 70,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'verify'.tr,

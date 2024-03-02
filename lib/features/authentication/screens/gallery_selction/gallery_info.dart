@@ -29,7 +29,7 @@ class GalleryInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 68,
+        height: 70,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'cont'.tr,

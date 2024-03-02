@@ -18,7 +18,7 @@ class PhoneNumberScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-          height: 68,
+          height: 70,
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
             text: 'tContinue'.tr,

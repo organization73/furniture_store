@@ -19,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
-        height: 68,
+        height: 70,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'signUp'.tr,
