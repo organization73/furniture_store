@@ -131,4 +131,5 @@ image processing to make it smaller
 image storage with firebase
 connect with ml model.
 admin panel
+multer to upload multiple images
   */
