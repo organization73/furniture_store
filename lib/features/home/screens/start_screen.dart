@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
@@ -56,7 +57,7 @@ class _FadeAppBarTutorialState extends State<StartPage> {
                   children: [
                     PrimaryHeaderContainer(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 100),
+                        padding: EdgeInsets.only(top: 100.h),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: TSizes.pagePaddingSpace),

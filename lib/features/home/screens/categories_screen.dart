@@ -5,17 +5,12 @@ import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
 import 'package:furniture_store/features/home/widgets/search_bar.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
-import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
-class CategoriesPage extends StatefulWidget {
+class CategoriesPage extends StatelessWidget {
   final String categoryName;
   const CategoriesPage({super.key, required this.categoryName});
 
-  @override
-  State<CategoriesPage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,24 +23,19 @@ class _HomePageState extends State<CategoriesPage> {
             pinned: true,
             snap: false,
             title: Text(
-              'categories'.tr,
+              categoryName,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             bottom: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              toolbarHeight: 130.h,
+              toolbarHeight: 120.h,
               title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.categoryName,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
                   Row(
                     children: [
                       FilledButton.icon(
-                        icon: Icon(Icons.filter_list,
+                        icon: Icon(Iconsax.filter,
                             color:
                                 Theme.of(context).textTheme.labelSmall?.color,
                             size: TSizes.md),
@@ -81,9 +71,13 @@ class _HomePageState extends State<CategoriesPage> {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              GridLayout(
-                  itemCount: 4,
-                  itemBuilder: (_, index) => const ProductCardVerical()),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+                child: GridLayout(
+                    itemCount: 4,
+                    itemBuilder: (_, index) => const ProductCardVerical()),
+              ),
             ]),
           ),
         ],
