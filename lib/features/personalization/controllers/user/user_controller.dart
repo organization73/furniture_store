@@ -3,6 +3,7 @@ import 'package:furniture_store/features/personalization/models/user_model.dart'
 import 'package:get_storage/get_storage.dart';
 
 class UserController extends GetxController {
+  static UserController get instance => Get.find();
   final GetStorage _storage = GetStorage();
   final Rx<UserModel?> _user = Rx<UserModel?>(null);
 
@@ -18,6 +19,8 @@ class UserController extends GetxController {
     final userData = _storage.read('user_data');
     if (userData != null) {
       _user.value = UserModel.fromJson(userData);
+    } else {
+      print('null da');
     }
   }
 
@@ -25,6 +28,10 @@ class UserController extends GetxController {
     _user.value = user;
     _storage.write('user_data', user.toJson());
   }
+
+   void saveUserData(UserModel user) {
+    _storage.write('user_data', user.toJson());
+ }
 }
 
 // class UserController extends GetxController {

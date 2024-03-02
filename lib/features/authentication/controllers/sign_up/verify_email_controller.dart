@@ -52,7 +52,7 @@ class VerifyEmailController extends GetxController {
       TLoaders.errorSnackBar(title: 'Oh Snap!!', message: e.toString());
     }
   }
-
+//TODO : remove the login after cinfirm check
   setTimerForAutoRedirect() {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
       final user = userController.user;
@@ -84,8 +84,10 @@ class VerifyEmailController extends GetxController {
   }
 
   checkEmailVerificationStatus() async {
-    final currentUser = await AuthenticatorRepoTest.instance
-        .checkIsConfirmed(Get.find<SignUpController>().emailController.text);
+    final user = userController.user;
+
+    final currentUser = await AuthenticatorRepoTest.instance.checkIsConfirmed(
+        user?.email ?? Get.find<SignUpController>().emailController.text);
     if (currentUser['isConfirmed'] != null && currentUser['isConfirmed']) {
       Get.off(
         () => ActionConfirmPage(

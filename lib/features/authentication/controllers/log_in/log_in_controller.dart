@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
+import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
+import 'package:furniture_store/features/personalization/models/user_model.dart';
 import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
@@ -53,6 +55,14 @@ class LoginController extends GetxController {
 
       await AuthenticatorRepoTest.instance.loginWithEmailAndPassword(
           emailController.text.trim(), passwordController.text.trim());
+
+      final newUser = UserModel(
+        id: ' 0',
+        email: emailController.text.trim(),
+      );
+
+      final userController = Get.find<UserController>();
+      userController.saveUserData(newUser);
 
       FullScreenLoader.stopLoading();
 

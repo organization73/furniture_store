@@ -67,7 +67,7 @@ class SignUpController extends GetxController {
       );
 
       final newUser = UserModel(
-          id: ' userCred.user!.uid',
+          id: '1',
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           userName: userNameController.text.trim(),
