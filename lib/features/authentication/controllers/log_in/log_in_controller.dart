@@ -16,7 +16,6 @@ class LoginController extends GetxController {
   // TextEditingController for each input field
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final userController = Get.put(UserController());
 
   @override
   void onInit() {

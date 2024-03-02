@@ -20,4 +20,14 @@ class UserRepo extends GetxController {
     }
     return null;
   }
+
+ Future<void> updateUserRecord(UserModel user) async {
+    try {
+      GetStorage().write('user_data', user.toJson());
+    } catch (e) {
+      throw 'Failed to update user data: $e';
+    }
+ }
 }
+
+

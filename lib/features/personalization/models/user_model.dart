@@ -56,6 +56,44 @@ class UserModel {
     return '$firstName$lastName';
   }
 
+  UserModel copyWith({
+    AccountType? accountType,
+    List<SimpleGrantedAuthority>? authorities,
+    String? avatar,
+    String? firstName,
+    String? lastName,
+    String? confirmCode,
+    String? createdDate,
+    String? email,
+    String? id,
+    String? kcyAddress,
+    bool? verified,
+    AccountState? state,
+    String? password,
+    Roles? roles,
+    String? phoneNumber,
+    String? userName,
+  }) {
+    return UserModel(
+      accountType: accountType ?? this.accountType,
+      authorities: authorities ?? this.authorities,
+      avatar: avatar ?? this.avatar,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      confirmCode: confirmCode ?? this.confirmCode,
+      createdDate: createdDate ?? this.createdDate,
+      email: email ?? this.email,
+      id: id ?? this.id,
+      kcyAddress: kcyAddress ?? this.kcyAddress,
+      verified: verified ?? this.verified,
+      state: state ?? this.state,
+      password: password ?? this.password,
+      roles: roles ?? this.roles,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      userName: userName ?? this.userName,
+    );
+  }
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       accountType:

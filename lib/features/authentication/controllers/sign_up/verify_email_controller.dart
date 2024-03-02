@@ -5,6 +5,7 @@ import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
 import 'package:furniture_store/features/authentication/controllers/sign_up/sign_up_controller.dart';
 import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 
 import 'package:get/get.dart';
 
@@ -12,14 +13,23 @@ class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
 
   Timer? _timer; // Declare a Timer variable
+  final userController = Get.find<UserController>();
 
   @override
   void onInit() {
+    // TLoaders.successSnackBar(
+    //     title: 'changeYourEmailTitle'.tr,
+    //     message: 'changeYourEmailSubTitle'.tr);
+    setTimerForAutoRedirect();
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
     TLoaders.successSnackBar(
         title: 'changeYourEmailTitle'.tr,
         message: 'changeYourEmailSubTitle'.tr);
-    setTimerForAutoRedirect();
-    super.onInit();
+    super.onReady();
   }
 
   @override
@@ -30,9 +40,11 @@ class VerifyEmailController extends GetxController {
   }
 
   sendEmailVerification() async {
+    final user = userController.user;
+
     try {
       await AuthenticatorRepoTest.instance.sendEmailVerification(
-          Get.find<SignUpController>().emailController.text);
+          user?.email ?? Get.find<SignUpController>().emailController.text);
       TLoaders.successSnackBar(
           title: 'changeYourEmailTitle'.tr,
           message: 'changeYourEmailSubTitle'.tr);
@@ -43,10 +55,10 @@ class VerifyEmailController extends GetxController {
 
   setTimerForAutoRedirect() {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
-      print(
-          'email is ................${SignUpController.instance.emailController.text}');
-      final currentUser = await AuthenticatorRepoTest.instance
-          .checkIsConfirmed(Get.find<SignUpController>().emailController.text);
+      final user = userController.user;
+
+      final currentUser = await AuthenticatorRepoTest.instance.checkIsConfirmed(
+          user?.email ?? Get.find<SignUpController>().emailController.text);
       if (currentUser['isConfirmed'] ?? false) {
         timer.cancel();
         Get.off(
