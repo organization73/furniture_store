@@ -28,7 +28,7 @@ class SentEmailPasswordReset extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Form(
             key: controller.forgotPassFormKey,
             child: SingleChildScrollView(

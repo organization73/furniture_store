@@ -17,7 +17,7 @@ class RatingWidget extends StatelessWidget {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return Container(
-        height: 70.h,
+        height: 68.h,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: isDark ? TColors.darkerGrey : TColors.light,

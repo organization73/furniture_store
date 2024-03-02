@@ -45,7 +45,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
       children: [
         SizedBox(
           width: 70.w,
-          height: 70.h,
+          height: 68.h,
           child: ClipOval(
             child: _pickedImagePath != null
                 ? Image.file(

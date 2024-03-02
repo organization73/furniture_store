@@ -32,7 +32,7 @@ class ProductReviewsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: GetBuilder<ProductReviewsController>(
             init: ProductReviewsController(product: product),
             builder: (controller) => controller.reviews.isNotEmpty

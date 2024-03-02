@@ -58,7 +58,7 @@ class _FadeAppBarTutorialState extends State<StartPage> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 100),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                               horizontal: TSizes.pagePaddingSpace),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class _FadeAppBarTutorialState extends State<StartPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
                       child: Column(
                         children: [
@@ -132,11 +132,11 @@ class FadeAppBar extends StatelessWidget {
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
-      child: const SafeArea(
+      child: SafeArea(
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-            child: BuildSearchBar(),
+            child: const BuildSearchBar(),
           ),
         ),
       ),

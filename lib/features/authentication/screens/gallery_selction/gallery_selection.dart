@@ -27,13 +27,10 @@ class GallerySelection extends StatelessWidget {
           onPressed: controller.navigateToNextScreen,
         ),
       ),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-      ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.all(TSizes.pagePaddingSpace),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,10 +39,9 @@ class GallerySelection extends StatelessWidget {
                     title: 'gallarySelect'.tr,
                     subTitle: 'gallarySelectDesc'.tr,
                     iconName: Iconsax.ram),
-                SizedBox(height: 20.h),
                 Obx(() => Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(12.0.r),
                         border: Border.all(
                           color: model.selectedOption.value == 1
                               ? Theme.of(context).colorScheme.primary
@@ -56,7 +52,7 @@ class GallerySelection extends StatelessWidget {
                         onTap: () => controller.model.selectOption(1),
                         child: ListTile(
                           title: Text('yesMes'.tr,
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style: Theme.of(context).textTheme.titleMedium),
                           leading: Radio(
                             value: 1,
                             groupValue: model.selectedOption.value,
@@ -66,10 +62,10 @@ class GallerySelection extends StatelessWidget {
                         ),
                       ),
                     )),
-                SizedBox(height: 12.h),
+                SizedBox(height: TSizes.spaceBtwInputFields),
                 Obx(() => Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(12.0.r),
                         border: Border.all(
                           color: model.selectedOption.value == 0
                               ? Theme.of(context).colorScheme.primary
@@ -80,7 +76,7 @@ class GallerySelection extends StatelessWidget {
                         onTap: () => controller.model.selectOption(0),
                         child: ListTile(
                           title: Text('noMes'.tr,
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style: Theme.of(context).textTheme.titleMedium),
                           leading: Radio(
                             value: 0,
                             groupValue: model.selectedOption.value,
@@ -90,9 +86,12 @@ class GallerySelection extends StatelessWidget {
                         ),
                       ),
                     )),
-                SizedBox(height: 20.0.h),
+                SizedBox(height: TSizes.spaceBtwSections),
                 Center(
-                  child: SvgPicture.asset('assets/icons/gallery_loc.svg'),
+                  child: SvgPicture.asset(
+                    'assets/icons/gallery_loc.svg',
+                    width: 160.r,
+                  ),
                 ),
               ],
             ),

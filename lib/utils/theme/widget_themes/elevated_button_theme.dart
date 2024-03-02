@@ -19,7 +19,7 @@ class TElevatedButtonTheme {
       padding: const EdgeInsets.symmetric(
           vertical: TSizes.buttonHeight, horizontal: 10),
       textStyle: TextStyle(
-          fontSize: 13.sp,
+          fontSize: 12.sp,
           color: TColors.textWhite,
           fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(
@@ -38,7 +38,7 @@ class TElevatedButtonTheme {
       side: const BorderSide(color: TColors.primary),
       padding: const EdgeInsets.symmetric(vertical: TSizes.buttonHeight),
       textStyle: TextStyle(
-          fontSize: 13.sp,
+          fontSize: 12.sp,
           color: TColors.textWhite,
           fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(

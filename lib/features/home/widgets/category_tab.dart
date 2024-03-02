@@ -16,8 +16,7 @@ class CategoryTab extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             children: [
               const GelleryShowCase(

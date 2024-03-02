@@ -35,7 +35,7 @@ class TSizes {
   static double defaultSpace = 24.0.h;
   static double spaceBtwItems = 15.0.h;
   static double spaceBtwSections = 17.0.h;
-  static const double pagePaddingSpace = 16.0;
+  static  double pagePaddingSpace = 16.0.w;
 
   // Border radius
   static double borderRadiusSm = 4.0.r;

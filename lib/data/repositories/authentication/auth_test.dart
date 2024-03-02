@@ -1,12 +1,10 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:furniture_store/data/repositories/authentication/api_services.dart';
-import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/authentication/screens/login/login_screen.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/verify_sign_up_email.dart';
 import 'package:furniture_store/features/home/screens/nav_menu.dart';
 import 'package:furniture_store/features/onboarding/screens/onboarding_screen.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
-import 'package:furniture_store/features/personalization/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

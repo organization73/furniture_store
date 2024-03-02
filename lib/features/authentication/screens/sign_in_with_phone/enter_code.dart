@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
+import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -53,16 +54,17 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Iconsax.verify,
                 size: 45,
+                color: Theme.of(context).colorScheme.surfaceVariant,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: TSizes.spaceBtwSections),
               Text(
                 'enterCode'.tr,
                 style: Theme.of(context).textTheme.headlineMedium,
@@ -77,18 +79,16 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
                 widget.phoneNumber,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              SizedBox(height: TSizes.spaceBtwInputFields),
+              SizedBox(height: TSizes.spaceBtwSections),
               CodeInputWidget(
                 controllers: _controllers,
                 onCodeVerified: _verifyCode,
               ),
-              SizedBox(height: 20.h),
               TextButton(
                 onPressed: isResendButtonEnabled ? _resendCode : null,
                 child: Text('codeResend'.tr,
                     style: Theme.of(context).textTheme.labelSmall),
               ),
-              SizedBox(height: 8.h),
               if (_resendTimer != null)
                 CountdownTimer(
                   duration: const Duration(seconds: 30),
@@ -109,7 +109,6 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
     if (_controllers.every((controller) => controller.text.isNotEmpty)) {
       String enteredCode =
           _controllers.map((controller) => controller.text).join();
-      // print('Verifying Code: $enteredCode');
       if (enteredCode == '55555') {
         Get.off(
           () => GallerySelection(),
@@ -117,35 +116,15 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
           transition: Transition.rightToLeft,
         );
       } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text('errorMes'.tr),
-              content: Text('wrongCodeMes'.tr),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('okMes'.tr),
-                ),
-              ],
-            );
-          },
-        );
+        TLoaders.errorSnackBar(
+            title: 'errorMes'.tr, message: 'wrongCodeMes'.tr);
       }
     } else {
       // Show error message
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('wrongCodeMes'.tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.onError)),
-          backgroundColor: Theme.of(context).colorScheme.error,
-          duration: const Duration(seconds: 3),
-        ),
-      );
+      TLoaders.warningSnackBar(
+          title: 'Enter The OTP Code',
+          message:
+              'Please enter the OTP code recieved in the messege on your phone');
     }
   }
 

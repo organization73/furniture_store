@@ -27,7 +27,7 @@ class ProductDetails extends StatelessWidget {
           children: [
             const ProductImageSlider(),
             Padding(
-              padding: const EdgeInsets.only(
+              padding: EdgeInsets.only(
                   right: TSizes.pagePaddingSpace,
                   left: TSizes.pagePaddingSpace,
                   bottom: TSizes.pagePaddingSpace),

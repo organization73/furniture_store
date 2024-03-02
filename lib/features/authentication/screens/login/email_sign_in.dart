@@ -30,19 +30,17 @@ class EmailSignInScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Form(
             key: controller.loginFormKey,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                
                   BuildTopText(
                       title: 'loginTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
                       iconName: Iconsax.link_circle),
-                  SizedBox(height: 20.h),
                   RoundedTextField(
                       prefixIcon: Iconsax.direct_right,
                       'email'.tr,
@@ -74,8 +72,8 @@ class EmailSignInScreen extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: 30,
-                            height: 40,
+                            width: 30.r,
+                            height: 30.r,
                             child: Obx(() => Checkbox(
                                 value: controller.rememberMe.value,
                                 onChanged: (value) {

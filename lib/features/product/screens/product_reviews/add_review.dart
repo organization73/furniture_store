@@ -24,7 +24,7 @@ class AddReview extends StatelessWidget {
       body: Form(
         key: controller.formKey,
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             children: [
               RatingBar.builder(

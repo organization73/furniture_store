@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
+import 'package:furniture_store/utils/constants/sizes.dart';
 
 class BuildTopText extends StatelessWidget {
   final String title;
@@ -15,7 +16,7 @@ class BuildTopText extends StatelessWidget {
     required this.subTitle,
     this.iconName,
     this.alignment = CrossAxisAlignment.start,
-    this.size = 45,
+    this.size = 40,
   });
 
   @override
@@ -29,9 +30,7 @@ class BuildTopText extends StatelessWidget {
             size: size,
             color: TColors.grey,
           ),
-        SizedBox(
-          height: 20.h,
-        ),
+        SizedBox(height: TSizes.spaceBtwSections),
         Text(
           title,
           style: Theme.of(context).textTheme.headlineLarge,
@@ -41,7 +40,7 @@ class BuildTopText extends StatelessWidget {
           subTitle,
           style: Theme.of(context).textTheme.labelMedium,
         ),
-        SizedBox(height: 20.h),
+        SizedBox(height: TSizes.spaceBtwSections * 2),
       ],
     );
   }

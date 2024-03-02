@@ -1,7 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/build_user_input_field.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/common/widgets/text_header.dart';
@@ -13,9 +11,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GalleryInformationScreen extends StatelessWidget {
- final GalleryInformationModel model = Get.put(GalleryInformationModel());
- final GalleryInformationController controller = GalleryInformationController.getInstance();
-
+  final GalleryInformationModel model = Get.put(GalleryInformationModel());
+  final GalleryInformationController controller =
+      GalleryInformationController.getInstance();
 
   GalleryInformationScreen({super.key});
 
@@ -45,7 +43,8 @@ class GalleryInformationScreen extends StatelessWidget {
           child: Form(
             key: controller.formKey,
             child: Padding(
-              padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+              padding:
+                  EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -53,7 +52,6 @@ class GalleryInformationScreen extends StatelessWidget {
                       title: 'gallaryTitle'.tr,
                       subTitle: 'gallaryTitleDesc'.tr,
                       iconName: Iconsax.shop),
-                  SizedBox(height: 20.h),
                   RoundedTextField(
                     'galleryName'.tr,
                     controller.galleryNameController,
@@ -75,26 +73,13 @@ class GalleryInformationScreen extends StatelessWidget {
                             ? 'galleryAddressVal'.tr
                             : null,
                   ),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
-                  InkWell(
-                    onTap: _pickImage,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: ListTile(
-                        leading: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Icon(Icons.attachment_rounded),
-                        ),
-                        title: Text(
-                          'uploadGalleryID'.tr,
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
+                  SizedBox(height: TSizes.spaceBtwSections),
+                  OutlinedButton.icon(
+                    onPressed: _pickImage,
+                    icon: const Icon(Iconsax.additem),
+                    label: Text(
+                      'uploadGalleryID'.tr,
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
                   Obx(() => model.selectedImage.value != null

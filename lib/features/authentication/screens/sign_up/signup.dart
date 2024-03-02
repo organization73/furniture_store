@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/build_user_input_field.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/common/widgets/text_header.dart';
@@ -31,7 +30,7 @@ class SignUpScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Form(
             key: controller.formKey,
             child: SingleChildScrollView(
@@ -42,7 +41,6 @@ class SignUpScreen extends StatelessWidget {
                       title: 'signupTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
                       iconName: Iconsax.personalcard),
-                  SizedBox(height: 5.h),
                   Row(
                     children: [
                       Expanded(
@@ -53,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
                             keyboardType: TextInputType.name,
                             TValidator.validateUserInput),
                       ),
-                      SizedBox(width: 10.h),
+                      const SizedBox(width: TSizes.sm),
                       Expanded(
                         child: RoundedTextField(
                             prefixIcon: Iconsax.user,
@@ -157,7 +155,6 @@ class SignUpScreen extends StatelessWidget {
                       ]))
                     ],
                   ),
-                  SizedBox(height: 60.h),
                 ],
               ),
             ),

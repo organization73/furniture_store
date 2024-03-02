@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/build_user_input_field.dart';
 import 'package:furniture_store/common/widgets/cta_button.dart';
 import 'package:furniture_store/common/widgets/text_header.dart';
@@ -29,7 +28,7 @@ class PhoneNumberScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Form(
             key: controller.phoneFormKey,
             child: SingleChildScrollView(
@@ -41,7 +40,6 @@ class PhoneNumberScreen extends StatelessWidget {
                     subTitle: 'continueWithPhoneSubTitle'.tr,
                     iconName: Iconsax.call5,
                   ),
-                  SizedBox(height: 20.h),
                   RoundedTextField(
                       'phoneNo'.tr,
                       controller.phoneNumController,

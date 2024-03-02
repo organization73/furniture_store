@@ -29,7 +29,7 @@ class TLoaders {
         backgroundColor: TColors.warning,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(16),
         icon: const Icon(
           Icons.warning_amber_rounded,
           color: TColors.white,
@@ -44,7 +44,7 @@ class TLoaders {
         backgroundColor: TColors.error,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(16),
         icon: const Icon(
           Icons.warning_amber_rounded,
           color: TColors.white,

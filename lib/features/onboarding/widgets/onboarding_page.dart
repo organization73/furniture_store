@@ -38,7 +38,7 @@ class OnBoardingView extends StatelessWidget {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.all(TSizes.pagePaddingSpace),
+                                   EdgeInsets.all(TSizes.pagePaddingSpace),
                               child: Text(
                                 item.title,
                                 style:
@@ -89,7 +89,7 @@ class OnBoardingView extends StatelessWidget {
                 )),
             // Bottom buttons
             Padding(
-              padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+              padding:  EdgeInsets.all(TSizes.pagePaddingSpace),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
