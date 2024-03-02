@@ -24,8 +24,8 @@ class BuildCategoriesSection extends StatelessWidget {
         transition: Transition.rightToLeft,
       ),
       child: Container(
-        width: 125,
-        height: 56,
+        width: 125.w,
+        height: 56.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
           image: DecorationImage(
