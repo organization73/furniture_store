@@ -12,7 +12,7 @@
             <%= errorMessage %>
           </div>
           <% } %>
-            <form class="login-form" action="/signup" method="POST">
+            <form class="login-form" action="/admin/signup" method="POST" enctype="application/json">
               <div class="form-control">
                 <label for="email">E-Mail</label>
                 <input class="<%=validationErrors.find(e=>e.path === 'email')? 'invalid':'' %>" type="email"

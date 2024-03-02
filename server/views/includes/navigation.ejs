@@ -6,25 +6,15 @@
       <li class="main-header__item">
         <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
       </li>
-      <li class="main-header__item">
-        <a class="<%= path === '/products' ? 'active' : '' %>" href="/products"
-          >Products</a
-        >
-      </li>
       <% if (isAuthenticated) { %>
       <li class="main-header__item">
         <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Wish List</a>
       </li>
       <li class="main-header__item">
-        <a
-          class="<%= path === '/admin/add-product' ? 'active' : '' %>"
-          href="/gallory/add-product"
-          >Add Product
-        </a>
       </li>
       <li class="main-header__item">
         <a
-          class="<%= path === '/admin/products' ? 'active' : '' %>"
+          class="<%= path === '/products' ? 'active' : '' %>"
           href="/gallory/products"
           >Admin Products
         </a>
@@ -34,12 +24,12 @@
     <ul class="main-header__item-list">
       <% if (!isAuthenticated) { %>
       <li class="main-header__item">
-        <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+        <a class="<%= path === '/login' ? 'active' : '' %>" href="/admin/login"
           >Login</a
         >
       </li>
       <li class="main-header__item">
-        <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+        <a class="<%= path === '/signup' ? 'active' : '' %>" href="/admin/signup"
           >Signup</a
         >
       </li>

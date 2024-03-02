@@ -8,7 +8,7 @@ const sendgridTransport = require("nodemailer-sendgrid-transport");
 //get all the validation errors might have been thrown
 const { validationResult } = require("express-validator");
 
-const User = require("../models/user");
+const Admin = require("../models/admin");
 
 const API_KEY =
   "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";
@@ -52,56 +52,6 @@ exports.getSignup = (req, res, next) => {
   });
 };
 
-exports.getProfile = (req, res, next) => {
-  res.render("user/profile", {
-    path: "/profile",
-    pageTitle: "Profile",
-    isAuthenticated: false,
-    errorMessage: null,
-  });
-};
-
-exports.postLogin = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).render("auth/login", {
-      path: "/login",
-      pageTitle: "login-PR",
-      isAuthenticated: false,
-      errorMessage: errors.array()[0].msg,
-      oldInput: {
-        email: email,
-        password: password,
-      },
-      validationErrors: errors.array(),
-    });
-  }
-
-  User.findOne({ email: email, isConfirmed: true })
-    .then((user) => {
-      if (!user) {
-        // req.flash("error", "Invalid email or password.");
-        return res.redirect("/login");
-      }
-      bcrypt.compare(password, user.password).then((doMatch) => {
-        if (doMatch) {
-          req.session.isLoggedIn = true;
-          req.session.user = user;
-          req.session.save((err) => {
-            console.log(err);
-            res.redirect("/");
-          });
-        } else {
-          return res.redirect("/login");
-        }
-      });
-    })
-    .catch((err) => console.log(err));
-};
-
 exports.postSignup = (req, res, next) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -133,7 +83,7 @@ exports.postSignup = (req, res, next) => {
     bcrypt
       .hash(password, 12)
       .then((hashedPassword) => {
-        const user = new User({
+        const admin = new Admin({
           name: name || "temp",
           email: email,
           password: hashedPassword,
@@ -142,23 +92,73 @@ exports.postSignup = (req, res, next) => {
           confirmTokenExpiration: Date.now() + 60000 * 120, //120min
           cart: { items: [] },
         });
-        return user.save();
+        return admin.save();
       })
       .then((result) => {
-        res.redirect("/login");
-        return transporter
-          .sendMail({
-            to: email,
-            from: SINGLE_SENDER,
-            subject: "Signup successfully!",
-            html: `<h1>hi from us. </h1>
-              <p> To confirm you email <a href='http://localhost:3000/reset/${token}'> Click here </a> 
-            `,
-          })
-          .catch((err) => console.log(err));
+        return res.redirect("/login");
+        // return transporter
+        //   .sendMail({
+        //     to: email,
+        //     from: SINGLE_SENDER,
+        //     subject: "Signup successfully!",
+        //     html: `<h1>hi from us. </h1>
+        //       <p> To confirm you email <a href='http://localhost:3000/reset/${token}'> Click here </a> 
+        //     `,
+        //   })
+        //   .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   });
+};
+
+exports.getProfile = (req, res, next) => {
+  res.render("user/profile", {
+    path: "/profile",
+    pageTitle: "Profile",
+    isAuthenticated: false,
+    errorMessage: null,
+  });
+};
+
+exports.postLogin = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).render("auth/login", {
+      path: "/login",
+      pageTitle: "login-PR",
+      isAuthenticated: false,
+      errorMessage: errors.array()[0].msg,
+      oldInput: {
+        email: email,
+        password: password,
+      },
+      validationErrors: errors.array(),
+    });
+  }
+
+  Admin.findOne({ email: email, isConfirmed: true })
+    .then((user) => {
+      if (!user) {
+        // req.flash("error", "Invalid email or password.");
+        return res.redirect("/login");
+      }
+      bcrypt.compare(password, user.password).then((doMatch) => {
+        if (doMatch) {
+          req.session.isLoggedIn = true;
+          req.session.user = user;
+          req.session.save((err) => {
+            console.log(err);
+            res.redirect("/");
+          });
+        } else {
+          return res.redirect("/login");
+        }
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.postLogout = (req, res, next) => {
@@ -171,7 +171,7 @@ exports.postLogout = (req, res, next) => {
 exports.getConfirmSignup = (req, res, next) => {
   const token = req.params.token;
   console.log(token);
-  User.findOne({
+  Admin.findOne({
     confirmToken: token,
     confirmTokenExpiration: { $gt: Date.now() },
   }).then((user) => {

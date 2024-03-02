@@ -11,15 +11,14 @@ const ejs = require("ejs");
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
 
-const adminAuthRoutes = require("./adminRouter/auth")
-const adminShopRoutes = require("./adminRouter/shop")
+const adminAuthRoutes = require("./adminRouter/auth");
+const adminShopRoutes = require("./adminRouter/shop");
 
 const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
-const MONGODB_URL = 
-"mongodb://localhost:27017/furnature-shop";
+const MONGODB_URL = "mongodb://localhost:27017/furniture-shop";
 // "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -61,6 +60,8 @@ app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).array("images", 2)
 );
 
+app.use(body_parser.urlencoded({ extended: false }));
+
 app.use(body_parser.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
@@ -87,7 +88,7 @@ app.use((req, res, next) => {
 //   res.send("Ok");
 // });
 
-app.use("/admin/auth", adminAuthRoutes);
+app.use("/admin", adminAuthRoutes);
 
 // app.use("/admin/shop", adminShopRoutes);
 

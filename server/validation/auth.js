@@ -9,6 +9,7 @@ module.exports.signup = [
     .normalizeEmail({ gmail_remove_dots: false })
     .trim()
     .custom((value, { req }) => {
+      console.log(value, "value")
       // if (value === "abdo") {
       //   console.log("value", value, value === "abdo");
       //   throw new Error("this email is forbidden");
