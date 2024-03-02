@@ -14,6 +14,7 @@ class ManufactureRequestsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         tooltip: 'Add a request',
         onPressed: () => Get.to(
           () => const AddManRequestPage(),

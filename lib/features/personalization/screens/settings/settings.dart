@@ -108,12 +108,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     showActionButton: false,
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.safe_home,
-                    title: 'myAdresses'.tr,
-                    subTitle: 'myAdressesDesc'.tr,
-                    onTap: () {},
-                  ),
-                  SettingsMenuTile(
                     icon: Iconsax.designtools,
                     title: 'manefactureReq'.tr,
                     subTitle: 'manefactureReqDesc'.tr,
