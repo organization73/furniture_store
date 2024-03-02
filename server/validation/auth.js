@@ -1,6 +1,6 @@
 const { check, body } = require("express-validator");
 
-const User = require("../models/user");
+const Admin = require("../models/admin");
 
 module.exports.signup = [
   check("email")
@@ -15,8 +15,8 @@ module.exports.signup = [
       //   throw new Error("this email is forbidden");
       // }
       //if we return a promise express validator will wait for it to be fullfield.
-      return User.findOne({ email: value }).then((userDoc) => {
-        if (userDoc) {
+      return Admin.findOne({ email: value }).then((adminDoc) => {
+        if (adminDoc) {
           console.log("Email already exists.");
           //this reject will be stored as an error message.
           return Promise.reject("Email already exists.");
@@ -39,15 +39,14 @@ module.exports.login = [
   check("email", "Envalid  email.")
     .isEmail()
     .custom((value, { req }) => {
-      return User.findOne({ email: value ,isConfirmed: true }).then((user) => {
-        if (!user) {
-          return Promise.reject("this email dosen't exists");
+      return Admin.findOne({ email: value }).then((admin) => {
+        if (!admin) {
+          return Promise.reject("this email dosen't exists.");
         }
       });
     })
     .normalizeEmail({ gmail_remove_dots: false })
     .trim(),
-  check("password", "password must be at least 5 characters")
-    .isAlphanumeric()
+  check("password", "password must be at least 5 characters.")
     .isLength({ min: 5 }),
 ];

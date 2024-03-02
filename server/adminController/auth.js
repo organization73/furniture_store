@@ -1,6 +1,6 @@
 //todo
 //flash an error 1 in failed to signup with reasons
-
+const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
@@ -120,7 +120,7 @@ exports.getProfile = (req, res, next) => {
   });
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin =  (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -139,22 +139,26 @@ exports.postLogin = (req, res, next) => {
     });
   }
 
-  Admin.findOne({ email: email, isConfirmed: true })
-    .then((user) => {
-      if (!user) {
+  Admin.findOne({ email: email})
+    .then((admin) => {
+      if (!admin) {
         // req.flash("error", "Invalid email or password.");
-        return res.redirect("/login");
+        return res.redirect("/admin/login");
       }
-      bcrypt.compare(password, user.password).then((doMatch) => {
+      bcrypt.compare(password, admin.password).then((doMatch) => {
         if (doMatch) {
-          req.session.isLoggedIn = true;
-          req.session.user = user;
-          req.session.save((err) => {
-            console.log(err);
-            res.redirect("/");
-          });
+          console.log(process.env.JWT_SECRET);
+          const token = jwt.sign({adminId: admin._id, email:admin.email}, process.env.JWT_SECRET, {expiresIn: "1h"});
+          res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 }); // 7 days
+          res.redirect("/");
+          // req.session.isLoggedIn = true;
+          // req.session.admin = admin;
+          // req.session.save((err) => {
+          //   console.log(err);
+          //   res.redirect("/");
+          // });
         } else {
-          return res.redirect("/login");
+          return res.redirect("/admin/login");
         }
       });
     })
