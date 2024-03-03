@@ -8,8 +8,13 @@ const authMiddleware = async (req, res, next) => {
     // token = req.headers.authorization.split(" ")[1];
     token = req.cookies.token;
     if (!token) {
-      return res.render("auth/login",{
+      return res.status(403).render("auth/login",{
         errorMessage: "No token provided",
+        pageTitle: "Login",
+        isAuthenticated: false,
+        path: "/login",
+        validationErrors: [],
+        oldInput:{}
       })
     }
   } catch (error) {
@@ -21,11 +26,7 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     // Verify and decode the token
-    console.log("start decoding", process.env.JWT_SECRET);
-    console.log("token:", token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("end decoding");
-
     // Check if the admin exists in the database
     const admin = await Admin.findById(decoded.adminId);
     if (!admin) {

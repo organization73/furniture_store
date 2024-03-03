@@ -83,6 +83,13 @@
       color: white;
       border: none;
     }
+    #contact-dropdown {
+  height: 30px;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  }
   </style>
 </head>
 
@@ -91,6 +98,12 @@
     <div id="contact-list">
         <h2>Contact List</h2>
         <input type="text" id="contact-input" placeholder="Enter user ID" />
+        <select id="contact-dropdown">
+          <option value="1">user id</option>
+          <option value="2">use name</option>
+          <option value="3">phone number</option> 
+          <option value="4">eamil</option>
+        </select>
         <button onclick="addContact()">Add</button>
         <ul id="contact-list-items"></ul>
       </div>
@@ -119,8 +132,7 @@
             contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
           }
         }
-  
-        // Function to select a contact and send a GET request to the API
+
         // Function to select a contact and send a GET request to the API
         function selectContact(contactId) {
           // Remove the "selected" class from any previously selected contact

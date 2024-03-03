@@ -160,7 +160,7 @@ exports.postLogin = (req, res, next) => {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 2,
           }); // 2h
-          res.redirect("/admin/shop");
+          res.redirect("/admin");
         } else {
           return res.redirect("/admin/login");
         }

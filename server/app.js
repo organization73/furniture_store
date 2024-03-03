@@ -1,8 +1,9 @@
+const path = require("path");
+
 const express = require("express");
 const body_parser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const path = require("path");
 const { createHandler } = require("graphql-http/lib/use/express");
 const playground = require("graphql-playground-middleware-express").default;
 const cors = require("cors");
@@ -14,6 +15,8 @@ const productRoutes = require("./routes/product");
 
 const adminAuthRoutes = require("./adminRouter/auth");
 const adminShopRoutes = require("./adminRouter/shop");
+
+const chatRoutes = require("./routes/chat");
 
 const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
@@ -99,6 +102,8 @@ app.use("/auth", authRoutes);
 
 app.use("/product", isAuth, productRoutes);
 
+app.use("/chat",chatRoutes);
+
 app.get("/playground", playground({ endpoint: "/graphql" }));
 
 app.use(
@@ -143,4 +148,5 @@ admin panel
 image processing to make it smaller
 image storage with firebase
 multer to upload multiple images
-  */
+make the db find with select of what came from graphql query.
+*/
