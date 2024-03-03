@@ -5,6 +5,7 @@ import 'package:furniture_store/features/authentication/screens/sign_up/verify_s
 import 'package:furniture_store/features/home/screens/nav_menu.dart';
 import 'package:furniture_store/features/onboarding/screens/onboarding_screen.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
+import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -23,15 +24,12 @@ class AuthenticatorRepoTest extends GetxController {
   screenRedirect() async {
     final token = deviceStorage.read('token');
     final isConfirmed = deviceStorage.read('isConfirmed');
-    print("is confirmed $isConfirmed");
-    print("token $token");
-
     final user = userController.user;
     if (user != null) {
-      print("User ID: ${user.email}");
+      LoggerHelper.info("User ID: ${user.email}");
       // Access other user properties as needed
     } else {
-      print("No user data found in storage.");
+      LoggerHelper.error("No user data found in storage.");
     }
 
     if (token != null) {
@@ -71,8 +69,6 @@ class AuthenticatorRepoTest extends GetxController {
   Future<Map<String, dynamic>> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      print(email);
-      print(password);
       final response = await HttpService.instance.loginUser(email, password);
       final token = response['token'];
       deviceStorage.write('token', token);
@@ -113,7 +109,7 @@ class AuthenticatorRepoTest extends GetxController {
       // Update the user data in the UserController and save it to local storage
       userController.updateUser(updatedUser);
     } else {
-      print("No user data found.");
+      LoggerHelper.error("No user data found.");
     }
   }
 

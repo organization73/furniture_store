@@ -1,3 +1,4 @@
+import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:furniture_store/features/personalization/models/user_model.dart';
 import 'package:get_storage/get_storage.dart';
@@ -20,7 +21,7 @@ class UserController extends GetxController {
     if (userData != null) {
       _user.value = UserModel.fromJson(userData);
     } else {
-      print('null da');
+      LoggerHelper.warning('No user data saved');
     }
   }
 

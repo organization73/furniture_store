@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:furniture_store/utils/http/http_client.dart';
+import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,15 +46,15 @@ class HttpService extends GetxService {
           "confirmPassword": phoneNum
         }),
       );
-      print('Response body: ${response.body}');
+      LoggerHelper.info('Response body: ${response.body}');
       if (response.statusCode == 200) {
-        print('Request succeeded');
+        LoggerHelper.info('Request succeeded');
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        LoggerHelper.error('Request failed with status: ${response.statusCode}');
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (err) {
-      print('Error sending request: $err');
+      LoggerHelper.error('Error sending request: $err');
       rethrow;
     }
   }

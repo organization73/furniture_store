@@ -11,20 +11,22 @@ dependencies:
     sdk: flutter
 
   #--------------- PACKAGES ------------------#
-  intl: ^0.18.1
-
   # Icons
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.6
+  lottie: ^3.0.0
+  flutter_svg: ^2.0.9
 
+  # Logging
+  logger: ^2.0.2+1
+
+  # Utility Packages
   flutter_native_splash: ^2.3.10
   flutter_screenutil: ^5.9.0
-  flutter_svg: ^2.0.9
   carousel_slider: ^4.2.1
   image_picker: ^1.0.7
   image_picker_android: ^0.8.9+3
   http: ^1.2.0
-  lottie: ^3.0.0
   permission_handler: ^11.3.0
   connectivity_plus: ^5.0.2
   cached_network_image: ^3.3.1
@@ -36,8 +38,10 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
 
+  # Misc
   readmore: ^2.2.0
   flutter_rating_bar: ^4.0.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

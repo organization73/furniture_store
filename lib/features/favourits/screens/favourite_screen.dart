@@ -43,7 +43,7 @@ class FavouritsPage extends StatelessWidget {
                   )
                 : SingleChildScrollView(
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
                       child: Column(
                         children: [
