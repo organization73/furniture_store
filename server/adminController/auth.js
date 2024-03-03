@@ -95,14 +95,14 @@ exports.postSignup = (req, res, next) => {
         return admin.save();
       })
       .then((result) => {
-        return res.redirect("/login");
+        return res.redirect("/admin/login");
         // return transporter
         //   .sendMail({
         //     to: email,
         //     from: SINGLE_SENDER,
         //     subject: "Signup successfully!",
         //     html: `<h1>hi from us. </h1>
-        //       <p> To confirm you email <a href='http://localhost:3000/reset/${token}'> Click here </a> 
+        //       <p> To confirm you email <a href='http://localhost:3000/reset/${token}'> Click here </a>
         //     `,
         //   })
         //   .catch((err) => console.log(err));
@@ -120,13 +120,13 @@ exports.getProfile = (req, res, next) => {
   });
 };
 
-exports.postLogin =  (req, res, next) => {
+exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).render("auth/login", {
+    return res.status(422).render("admin/login", {
       path: "/login",
       pageTitle: "login-PR",
       isAuthenticated: false,
@@ -139,7 +139,7 @@ exports.postLogin =  (req, res, next) => {
     });
   }
 
-  Admin.findOne({ email: email})
+  Admin.findOne({ email: email })
     .then((admin) => {
       if (!admin) {
         // req.flash("error", "Invalid email or password.");
@@ -148,15 +148,19 @@ exports.postLogin =  (req, res, next) => {
       bcrypt.compare(password, admin.password).then((doMatch) => {
         if (doMatch) {
           console.log(process.env.JWT_SECRET);
-          const token = jwt.sign({adminId: admin._id, email:admin.email}, process.env.JWT_SECRET, {expiresIn: "1h"});
-          res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 }); // 7 days
-          res.redirect("/");
-          // req.session.isLoggedIn = true;
-          // req.session.admin = admin;
-          // req.session.save((err) => {
-          //   console.log(err);
-          //   res.redirect("/");
-          // });
+          const token = jwt.sign(
+            { adminId: admin._id, email: admin.email },
+            process.env.JWT_SECRET,
+            { expiresIn: "2h" }
+          );
+          console.log('encdoe: ',token);
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+          console.log(decoded);
+          res.cookie("token", token, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 2,
+          }); // 2h
+          res.redirect("/admin/shop");
         } else {
           return res.redirect("/admin/login");
         }
@@ -166,10 +170,7 @@ exports.postLogin =  (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-  req.session.destroy((err) => {
-    console.log(err);
-    res.redirect("/");
-  });
+  res.redirect("/admin/login");
 };
 
 exports.getConfirmSignup = (req, res, next) => {

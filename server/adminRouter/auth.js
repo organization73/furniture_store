@@ -2,6 +2,7 @@ const express = require("express");
 
 const authController = require("../adminController/auth");
 const authValidator = require("../validation/auth");
+const isAuth = require("../middleware/admin-auth");
 const router = express.Router();
 
 router.get("/signup", authController.getSignup);
@@ -12,7 +13,7 @@ router.get("/login", authController.getLogin);
 
 router.post("/login", authValidator.login, authController.postLogin);
 
-router.get("/profile", authController.getProfile);
+router.get("/profile", isAuth, authController.getProfile);
 
 router.post("/logout", authController.postLogout);
 

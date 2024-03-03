@@ -5,11 +5,13 @@ const authMiddleware = async (req, res, next) => {
   // Get the token from the request headers
   let token;
   try {
-    token = req.headers.authorization.split(" ")[1];
+    // token = req.headers.authorization.split(" ")[1];
+    token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+      return res.render("auth/login",{
+        errorMessage: "No token provided",
+      })
     }
-    console.log("token:", token);
   } catch (error) {
     if (!error.statusCode) {
       error.statusCode = 500;
@@ -19,20 +21,21 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     // Verify and decode the token
-    console.log("start decoding");
+    console.log("start decoding", process.env.JWT_SECRET);
+    console.log("token:", token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("end decoding");
+
     // Check if the admin exists in the database
     const admin = await Admin.findById(decoded.adminId);
     if (!admin) {
-      return res.status(401).json({ message: "Invalid token1" });
+      const error = new Error("No admin found");
+      error.statusCode = 401;
+      throw error;
+      // return res.status(401).json({ message: "Invalid token1" });
     }
-    //checking confirmation startus
-    //if yes home
-    //no verify
-    // Attach the admin object to the request for further use
     req.admin = admin;
-    // console.log("req.admin:", admin);
-    // Call the next middleware or route handler
+    req.isAuthenticated = true;
     next();
   } catch (error) {
     if (!error.statusCode) {

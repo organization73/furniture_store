@@ -7,6 +7,7 @@ const { createHandler } = require("graphql-http/lib/use/express");
 const playground = require("graphql-playground-middleware-express").default;
 const cors = require("cors");
 const ejs = require("ejs");
+const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
@@ -64,6 +65,8 @@ app.use(body_parser.urlencoded({ extended: false }));
 
 app.use(body_parser.json());
 
+app.use(cookieParser());
+
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // app.use(cors());
@@ -90,7 +93,7 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminAuthRoutes);
 
-// app.use("/admin/shop", adminShopRoutes);
+app.use("/admin", adminShopRoutes);
 
 app.use("/auth", authRoutes);
 
