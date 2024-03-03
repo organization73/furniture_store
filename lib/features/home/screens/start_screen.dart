@@ -4,6 +4,7 @@ import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
+import 'package:furniture_store/features/home/controllers/home_page_controller.dart';
 import 'package:furniture_store/features/home/screens/store_screen.dart';
 import 'package:furniture_store/features/home/widgets/banners_slider.dart';
 import 'package:furniture_store/features/home/widgets/categories_section.dart';
@@ -11,114 +12,86 @@ import 'package:furniture_store/features/home/widgets/home_appbar.dart';
 import 'package:furniture_store/features/home/widgets/room_section.dart';
 import 'package:furniture_store/features/home/widgets/search_bar.dart';
 import 'package:furniture_store/features/home/widgets/top_gallaries_section.dart';
-import 'package:furniture_store/features/favourits/controllers/favorite_controller.dart';
 import 'package:furniture_store/features/notifications/controllers/notifications_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
-class StartPage extends StatefulWidget {
+class StartPage extends StatelessWidget {
   const StartPage({super.key});
 
   @override
-  State<StartPage> createState() => _FadeAppBarTutorialState();
-}
-
-class _FadeAppBarTutorialState extends State<StartPage> {
-  late ScrollController _scrollController;
-  double _scrollControllerOffset = 0.0;
-
-  _scrollListener() {
-    setState(() {
-      _scrollControllerOffset = _scrollController.offset;
-    });
-  }
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(_scrollListener);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NotificationsController());
-    Get.put(FavoriteController());
-
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Stack(
-        children: [
-          CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    PrimaryHeaderContainer(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 100.h),
-                        child: Padding(
+    return GetBuilder<StartPageController>(
+      init: StartPageController(),
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          body: Stack(
+            children: [
+              CustomScrollView(
+                controller: controller.scrollController,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        PrimaryHeaderContainer(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 100.h),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: TSizes.pagePaddingSpace),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  HomeAppBar(
+                                      controller:
+                                          Get.find<NotificationsController>()),
+                                  const BuildCategoriesSection(),
+                                  SizedBox(
+                                    height: TSizes.spaceBtwSections,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: TSizes.pagePaddingSpace),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              HomeAppBar(controller: controller),
-                              const BuildCategoriesSection(),
+                              const ImageSlider(),
+                              SectionHeading(
+                                title: 'popularProducts'.tr,
+                                onPress: () => Get.to(
+                                  () => const StoreScreen(),
+                                  duration: const Duration(milliseconds: 300),
+                                  transition: Transition.rightToLeft,
+                                ),
+                              ),
                               SizedBox(
-                                height: TSizes.spaceBtwSections,
-                              )
+                                height: TSizes.spaceBtwItems,
+                              ),
+                              GridLayout(
+                                  itemCount: 4,
+                                  itemBuilder: (_, index) =>
+                                      const ProductCardVerical()),
+                              const BuildTopGalleriesSection(),
+                              const BuildRoomsSection(),
                             ],
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: TSizes.pagePaddingSpace),
-                      child: Column(
-                        children: [
-                          const ImageSlider(),
-                          SectionHeading(
-                            title: 'popularProducts'.tr,
-                            onPress: () => Get.to(
-                              () => const StoreScreen(),
-                              duration: const Duration(milliseconds: 300),
-                              transition: Transition.rightToLeft,
-                            ),
-                          ),
-                          SizedBox(
-                            height: TSizes.spaceBtwItems,
-                          ),
-                          GridLayout(
-                              itemCount: 4,
-                              itemBuilder: (_, index) =>
-                                  const ProductCardVerical()),
-                          // const ProductGrid(),
-                          const BuildTopGalleriesSection(),
-                          const BuildRoomsSection(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              FadeAppBar(scrollOffset: controller.scrollControllerOffset),
             ],
           ),
-          PreferredSize(
-            preferredSize: Size(MediaQuery.of(context).size.width, 16.0),
-            child: FadeAppBar(scrollOffset: _scrollControllerOffset),
-          ),
-        ],
-      ),
+        );
+      },
     );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }
 

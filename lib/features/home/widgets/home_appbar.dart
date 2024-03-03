@@ -49,9 +49,8 @@ class HomeAppBar extends StatelessWidget {
                     Theme.of(context).colorScheme.onPrimaryContainer,
                 label: Text('${controller.notiList.length}'),
                 child: (controller.notiList.isEmpty)
-                    ? Icon(
+                    ? const Icon(
                         Iconsax.notification,
-                        color: Theme.of(context).disabledColor,
                       )
                     : const Icon(
                         Iconsax.notification5,
