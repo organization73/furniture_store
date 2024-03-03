@@ -6,13 +6,12 @@ const Message = require("../models/message");
 
 exports.createChatRoom = async (req, res, next) => {
   let primaryUser;
-  console.log("req.admin:", req.body);
   if (req.admin) {
     primaryUser = req.admin;
   } else {
     primaryUser = req.user;
   }
-  
+
   const seondaryUserId = req.body.seondaryUserId;
   if (!seondaryUserId) {
     const error = new Error("No seondaryUserId provided");
@@ -28,8 +27,6 @@ exports.createChatRoom = async (req, res, next) => {
       const error = new Error("No secondaryUser found");
       throwError("No secondaryUser found", 404, "secondaryUser");
     }
-    console.log("seondaryUserId:", secondaryUser);
-    console.log("prima:", primaryUser);
     //check if chat room already exists
     const chatRoom = await ChatRoom.findOne({
       users: { $all: [primaryUser._id, secondaryUser._id] },
@@ -51,7 +48,31 @@ exports.createChatRoom = async (req, res, next) => {
     await newChatRoom.save();
     res
       .status(201)
-      .json({ message: "Chat room created", chatRoom: newChatRoom, fullName: secondaryUser.firstName + " " + secondaryUser.lastName });
+      .json({
+        message: "Chat room created",
+        chatRoom: newChatRoom,
+        fullName: secondaryUser.firstName + " " + secondaryUser.lastName,
+      });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.getChatRooms = async (req, res, next) => {
+  let user;
+  if (req.admin) {
+    user = req.admin;
+  } else {
+    user = req.user;
+  }
+  try {
+    const chatRooms = await ChatRoom.find({ users: { $in: [user._id] } })
+      .populate("users")
+      .populate("latestMessage");
+    res.status(200).json({ chatRooms });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
