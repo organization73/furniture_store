@@ -5,7 +5,7 @@ import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
 import 'package:furniture_store/features/home/screens/store_screen.dart';
-import 'package:furniture_store/features/home/widgets/ads_banner.dart';
+import 'package:furniture_store/features/home/widgets/banners_slider.dart';
 import 'package:furniture_store/features/home/widgets/categories_section.dart';
 import 'package:furniture_store/features/home/widgets/home_appbar.dart';
 import 'package:furniture_store/features/home/widgets/room_section.dart';
@@ -79,7 +79,7 @@ class _FadeAppBarTutorialState extends State<StartPage> {
                           horizontal: TSizes.pagePaddingSpace),
                       child: Column(
                         children: [
-                          const CarouselSliderPage(),
+                          const ImageSlider(),
                           SectionHeading(
                             title: 'popularProducts'.tr,
                             onPress: () => Get.to(
