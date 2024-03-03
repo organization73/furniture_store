@@ -17,6 +17,7 @@ const chatRoomSchema = new Schema(
         },
       },
     ],
+    type: { type: String },
     latestMessage: { type: Schema.Types.ObjectId, ref: "Message" },
   },
   { timestamps: true }
