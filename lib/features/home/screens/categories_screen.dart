@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
-import 'package:furniture_store/features/home/widgets/search_bar.dart';
+import 'package:furniture_store/features/home/screens/filters/filters.dart';
+import 'package:furniture_store/features/home/screens/filters/widgets/input_widget.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -29,42 +31,32 @@ class CategoriesPage extends StatelessWidget {
             bottom: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              toolbarHeight: 120.h,
-              title: Column(
+              toolbarHeight: 55.h,
+              title: Row(
                 children: [
-                  Row(
-                    children: [
-                      FilledButton.icon(
-                        icon: Icon(Iconsax.filter,
-                            color:
-                                Theme.of(context).textTheme.labelSmall?.color,
-                            size: TSizes.md),
-                        label: Text('Filters',
-                            style: Theme.of(context).textTheme.labelSmall),
-                        onPressed: () {},
-                        style: FilledButton.styleFrom(
-                            surfaceTintColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            foregroundColor: Colors.black,
-                            backgroundColor: Colors.transparent),
-                      ),
-                      FilledButton.icon(
-                        icon: Icon(Icons.compare_arrows,
-                            color:
-                                Theme.of(context).textTheme.labelSmall?.color,
-                            size: TSizes.md),
-                        label: Text('Price: lowest to high',
-                            style: Theme.of(context).textTheme.labelSmall),
-                        onPressed: () {},
-                        style: FilledButton.styleFrom(
-                            surfaceTintColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            foregroundColor: Colors.black,
-                            backgroundColor: Colors.transparent),
-                      )
-                    ],
+                  const Expanded(
+                    child: InputWidget(
+                      height: 40.0,
+                      hintText: "Search",
+                      prefixIcon: Iconsax.search_normal,
+                    ),
                   ),
-                  const BuildSearchBar()
+                  SizedBox(
+                    height: 40,
+                    child: OutlinedButton.icon(
+                      onPressed: () => Get.to(
+                        () => const Filters(),
+                        duration: const Duration(milliseconds: 300),
+                        transition: Transition.downToUp,
+                      ),
+                      icon: const Icon(Iconsax.sort),
+                      label: const Text('Filter'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 10),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -72,10 +64,9 @@ class CategoriesPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate([
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+                padding: EdgeInsets.all(TSizes.pagePaddingSpace),
                 child: GridLayout(
-                    itemCount: 4,
+                    itemCount: 8,
                     itemBuilder: (_, index) => const ProductCardVerical()),
               ),
             ]),

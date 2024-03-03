@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:furniture_store/features/home/screens/all_galleries_screen.dart';
+import 'package:furniture_store/features/gallery/screens/all_galleries/all_galleries_screen.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
