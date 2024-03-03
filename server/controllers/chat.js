@@ -95,6 +95,7 @@ exports.getChatRooms = async (req, res, next) => {
   }
 };
 
+
 function throwError(message, statusCode, path) {
   const error = new Error(message);
   error.statusCode = statusCode;

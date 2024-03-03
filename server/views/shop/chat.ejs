@@ -124,7 +124,7 @@
         const contactDropdown = document.getElementById("contact-dropdown");
 
         //fetching data from server
-        fetch('/chat/get-chat-rooms')
+        fetch('/chat/rooms')
         .then(res => {
           return res.json();
         })
@@ -133,9 +133,9 @@
         console.log(typeof data.chatRooms);
         data.chatRooms.forEach(chatRoom => {
           const listItem = document.createElement("li");
-          console.log(chatRoom);
+          listItem.addEventListener("click",selectContact);
           listItem.textContent = chatRoom.fullName;
-          listItem.dataset.userId = chatRoom._id; // Add a data-contact-id attribute to the list item
+          listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
           contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
         });
         }).catch(err => {
@@ -211,7 +211,9 @@
         }
 
         // Function to select a contact and send a GET request to the API
-        function selectContact(contactId) {
+        function selectContact() {
+          console.log(this.dataset.id)
+          const contactId = this.dataset.id;
           // Remove the "selected" class from any previously selected contact
           const previouslySelectedContact = document.querySelector(
             "#contact-list li.selected"
@@ -219,44 +221,50 @@
           if (previouslySelectedContact) {
             previouslySelectedContact.classList.remove("selected");
           }
-  
           // Add the "selected" class to the newly selected contact
           const newSelectedContact = document.querySelector(
-            `#contact-list li[data-contact-id="${contactId}"]`
+            `#contact-list li[data-id="${contactId}"]`
           );
           if (newSelectedContact) {
             newSelectedContact.classList.add("selected");
           }
-  
           // Send a GET request to the API to retrieve messages for the selected contact
-          fetch(`/api/messages/${contactId}`)
-            .then((response) => response.json())
-            .then((messages) => {
-              // Clear any existing messages
-              const messagesDiv = document.getElementById("messages");
-              messagesDiv.innerHTML = "";
-  
-              // Add the new messages to the messages div
-              messages.forEach((message) => {
-                const messageElement = document.createElement("p");
-                messageElement.textContent = `${message.sender}: ${message.text}`;
-                messagesDiv.appendChild(messageElement);
-              });
-            })
-            .catch((error) => {
-              console.error("Error retrieving messages:", error);
-            });
+          // fetch(`/chat/room/${contactId}`)
+          //   .then((response) => response.json())
+          //   .then((messages) => {
+          //     // Clear any existing messages
+          //     const messagesDiv = document.getElementById("messages");
+          //     messagesDiv.innerHTML = "";
+          //     // Add the new messages to the messages div
+          //     messages.forEach((message) => {
+          //       const messageElement = document.createElement("p");
+          //       messageElement.textContent = `${message.sender}: ${message.text}`;
+          //       messagesDiv.appendChild(messageElement);
+          //     });
+          //   })
+          //   .catch((error) => {
+          //     console.error("Error retrieving messages:", error);
+          //   });
         }
   
         // Function to send a new message to the selected contact
         // Function to send a message to the currently selected contact
-        function sendMessage() {
+        async function sendMessage() {
           const message = document.getElementById("message-input").value;
           if (message) {
-            const selectedContact = contacts[0]; // For simplicity, we'll always send the message to the first contact in the list
+            const selectedContact = document.querySelector(
+              "#contact-list li.selected"
+            );
             const messagesDiv = document.getElementById("messages-list");
+            const data = await fetch(`/chat/message/${selectedContact.dataset.id}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ message }),
+            });
             const messageElement = document.createElement("li");
-            messageElement.textContent = `${selectedContact}: ${message}`;
+            messageElement.textContent = `${selectedContact.textContent.split(" ")[0]}: ${message}`;
             messagesDiv.appendChild(messageElement);
             document.getElementById("message-input").value = "";
           }
