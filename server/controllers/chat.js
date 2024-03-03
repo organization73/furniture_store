@@ -45,14 +45,12 @@ exports.createChatRoom = async (req, res, next) => {
     } else {
       newChatRoom.type = "client-client";
     }
-    await newChatRoom.save();
-    res
-      .status(201)
-      .json({
-        message: "Chat room created",
-        chatRoom: newChatRoom,
-        fullName: secondaryUser.firstName + " " + secondaryUser.lastName,
-      });
+    const savedChatRoom = await newChatRoom.save();
+    res.status(201).json({
+      message: "Chat room created",
+      chatRoom: savedChatRoom,
+      fullName: secondaryUser.firstName + " " + secondaryUser.lastName,
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -70,9 +68,25 @@ exports.getChatRooms = async (req, res, next) => {
   }
   try {
     const chatRooms = await ChatRoom.find({ users: { $in: [user._id] } })
-      .populate("users")
+      .populate({
+        path: "users",
+        model: "Admin", // Use 'Admin' model instead of 'User' model
+      })
       .populate("latestMessage");
-    res.status(200).json({ chatRooms });
+
+    // console.log("chatRooms:", chatRooms[0].users[0]);
+    const updatedChatRooms = chatRooms.map((chatRoom) => {
+      chatRoom.users.map((u) => {
+        if (u._id.toString() !== user._id.toString()) {
+          chatRoom.fullName = u.firstName + " " + u.lastName;
+          console.log("chatRoom:", chatRoom.fullName);
+        }
+      });
+      console.log("out:", chatRoom.fullName);
+
+      return chatRoom;
+    });
+    res.status(200).json({ chatRooms: updatedChatRooms });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

@@ -110,16 +110,37 @@
   
       <div id="chat-room">
         <h2>Chat Room</h2>
-        <div id="messages"></div>
+        <div id="messages">
+          <ul id="messages-list"></ul>
+        </div>
         <input type="text" id="message-input" placeholder="Enter message" />
         <button onclick="sendMessage()">Send</button>
       </div>
   
-      <script>
+      <script>   
         // Initialize an empty contact list
         const contactListItems = document.getElementById("contact-list-items");
         const addContactButton = document.getElementById("open-contact");
         const contactDropdown = document.getElementById("contact-dropdown");
+
+        //fetching data from server
+        fetch('/chat/get-chat-rooms')
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+        console.log(data);
+        console.log(typeof data.chatRooms);
+        data.chatRooms.forEach(chatRoom => {
+          const listItem = document.createElement("li");
+          console.log(chatRoom);
+          listItem.textContent = chatRoom.fullName;
+          listItem.dataset.userId = chatRoom._id; // Add a data-contact-id attribute to the list item
+          contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
+        });
+        }).catch(err => {
+          console.log(err);
+        });
         
         const contacts = [];
         const protocol = window.location.protocol;
@@ -176,7 +197,6 @@
               console.log('eee',err);
               return;
             }
-            console.log('response',response);
             if (response.status !== 201) {
               console.log("Error creating chat room");
               return;
@@ -185,7 +205,7 @@
             contacts.unshift(contactId); // Add the new contact to the beginning of the list
             const listItem = document.createElement("li");
             listItem.textContent = data.fullName;
-            listItem.dataset.userId = contactId; // Add a data-contact-id attribute to the list item
+            listItem.dataset.userId = data.chatRoom._id; // Add a data-contact-id attribute to the list item
             contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
           }
         }
@@ -234,8 +254,8 @@
           const message = document.getElementById("message-input").value;
           if (message) {
             const selectedContact = contacts[0]; // For simplicity, we'll always send the message to the first contact in the list
-            const messagesDiv = document.getElementById("messages");
-            const messageElement = document.createElement("p");
+            const messagesDiv = document.getElementById("messages-list");
+            const messageElement = document.createElement("li");
             messageElement.textContent = `${selectedContact}: ${message}`;
             messagesDiv.appendChild(messageElement);
             document.getElementById("message-input").value = "";

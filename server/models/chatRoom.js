@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const chatRoomSchema = new Schema(
   {
-    name: { type: String },
+    fullName: { type: String },
     // Require at least two users
     users: [
       {
