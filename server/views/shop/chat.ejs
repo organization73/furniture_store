@@ -104,7 +104,7 @@
           <option value="3">phone number</option> 
           <option value="4">eamil</option>
         </select>
-        <button onclick="addContact()">Add</button>
+        <button id="open-contact">Add</button>
         <ul id="contact-list-items"></ul>
       </div>
   
@@ -118,17 +118,74 @@
       <script>
         // Initialize an empty contact list
         const contactListItems = document.getElementById("contact-list-items");
+        const addContactButton = document.getElementById("open-contact");
+        const contactDropdown = document.getElementById("contact-dropdown");
+        
         const contacts = [];
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        const port = window.location.port;
+        const url = `${protocol}://${hostname}:${port}`;
   
         // Function to add a new contact to the list
-        function addContact() {
+        addContactButton.addEventListener("click", addContact);
+        async function addContact() {
+          //input field
           const contactId = document.getElementById("contact-input").value;
+          // Get the selected value
+          const selectedValue = contactDropdown.value;
+          let reqBody;
+          switch (selectedValue) {
+            case "1":
+              console.log("User selected User ID");
+              // Perform some action based on user selecting User ID
+              reqBody = {
+                seondaryUserId: contactId,
+              };
+              break;
+            case "2":
+              console.log("User selected User name");
+              // Perform some action based on user selecting User name
+              break;
+            case "3":
+              console.log("User selected Phone number");
+              // Perform some action based on user selecting Phone number
+              break;
+            case "4":
+              console.log("User selected Email");
+              // Perform some action based on user selecting Email
+              break;
+            default:
+              console.log("Invalid selection");
+              // Perform some action if the selected value is not a valid option
+          }
           if (contactId && !contacts.includes(contactId)) {
+            //sending requist.
+            let response;
+            try{
+              const creatRoomUrl = `${url}/chat/create-chat-room`;
+               response = await fetch("/chat/create-chat-room", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(reqBody),
+              })
+              console.log("req end")
+            }catch(err){
+              console.log('eee',err);
+              return;
+            }
+            console.log('response',response);
+            if (response.status !== 201) {
+              console.log("Error creating chat room");
+              return;
+            }
+           const data = await response.json();
             contacts.unshift(contactId); // Add the new contact to the beginning of the list
             const listItem = document.createElement("li");
-            listItem.textContent = contactId;
-            listItem.dataset.contactId = contactId; // Add a data-contact-id attribute to the list item
-            listItem.onclick = () => selectContact(contactId); // Set the onclick event handler to select the contact
+            listItem.textContent = data.fullName;
+            listItem.dataset.userId = contactId; // Add a data-contact-id attribute to the list item
             contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
           }
         }
