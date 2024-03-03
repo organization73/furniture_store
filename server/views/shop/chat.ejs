@@ -256,13 +256,22 @@
               "#contact-list li.selected"
             );
             const messagesDiv = document.getElementById("messages-list");
-            const data = await fetch(`/chat/message/${selectedContact.dataset.id}`, {
+           try{
+            const data = await fetch(`/chat/message`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ message }),
+              body: JSON.stringify({ message, roomId: selectedContact.dataset.id}),
             });
+            if (data.status !== 201) {
+              // console.log("Error sending message");
+              throw new Error("Error sending message");
+            }
+           }catch(error){
+             return console.log(error);
+            }
+            
             const messageElement = document.createElement("li");
             messageElement.textContent = `${selectedContact.textContent.split(" ")[0]}: ${message}`;
             messagesDiv.appendChild(messageElement);

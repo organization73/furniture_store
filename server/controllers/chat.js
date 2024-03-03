@@ -60,12 +60,8 @@ exports.createChatRoom = async (req, res, next) => {
 };
 
 exports.getChatRooms = async (req, res, next) => {
-  let user;
-  if (req.admin) {
-    user = req.admin;
-  } else {
-    user = req.user;
-  }
+  const user = req.admin || req.user;
+
   try {
     const chatRooms = await ChatRoom.find({ users: { $in: [user._id] } })
       .populate({
@@ -94,7 +90,45 @@ exports.getChatRooms = async (req, res, next) => {
     next(err);
   }
 };
-
+exports.sendMessage = async (req, res, next) => {
+  const user = req.admin || req.user;
+  const { roomId, message } = req.body;
+  try {
+    //validate input
+    if (!roomId) {
+      throwError("No roomId provided", 400, "roomId");
+    }
+    if (!message) {
+      throwError("No message provided", 400, "message");
+    }
+    //check if chat room exists
+    const chatRoom = await ChatRoom.findById(roomId);
+    if (!chatRoom) {
+      throwError("No chatRoom found", 404, "chatRoom");
+    }
+    //check if user is authorized to send message
+    if (!chatRoom.users.includes(user._id)) {
+      throwError("User not authorized", 403, "user");
+    }
+    //create message
+    const newMessage = new Message({
+      chatRoom: roomId,
+      sender: user._id,
+      content: message,
+      type: "text",
+    });
+    const savedMessage = await newMessage.save();
+    //update chat room
+    chatRoom.latestMessage = savedMessage._id;
+    await chatRoom.save();
+    res.status(201).json({ message: "Message sent", message: savedMessage });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
 
 function throwError(message, statusCode, path) {
   const error = new Error(message);

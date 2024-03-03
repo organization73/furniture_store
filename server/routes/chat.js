@@ -10,7 +10,7 @@ router.get("/rooms", adminAuth, chatController.getChatRooms);
 
 // router.get("/room/:roomId", adminAuth, chatController.getChatRoom);
 
-// router.post("/message", adminAuth, chatController.sendMessage);
+router.post("/message", adminAuth, chatController.sendMessage);
 
 router.post("/create-chat-room", adminAuth,chatController.createChatRoom);
 
