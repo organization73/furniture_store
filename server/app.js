@@ -146,8 +146,7 @@ mongoose
     io.on("connection", (socket) => {
       console.log(`Client: ${socket.id} connected`);
       const socketHelper = require("./socketio/socketHelper");
-      
-      socketHelper.signin(socket, onlineUsers); 
+      socketHelper.actionListeners(socket, onlineUsers); 
     });
   })
   .catch((err) => {

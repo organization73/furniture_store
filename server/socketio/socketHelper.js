@@ -1,29 +1,37 @@
 const io = require("./socket").getIO();
+const jwt = require("jsonwebtoken");
+const Admin = require("../models/admin");
+const User = require("../models/user");
 
-module.exports.signin = (socket, onlineUsers) => {
+
+module.exports.actionListeners =(socket, onlineUsers) => {
   let userType = "user";
-  socket.on("signin", (token) => {
+  socket.on("signin", async (token) => {
     if (!token) {
       //check if token is in the cookie (admin)
-      const token = socket.handshake.headers.cookie.split("=")[1];
+      token = socket.handshake.headers.cookie.split("=")[1];
       userType = "admin";
-      console.log("token:", token);
     }
     if (!token) {
       return socket.emit("authError", { message: "No token provided" });
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
     try {
+      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+      if (!decoded) {
+        return socket.emit("authError", { message: "Invalid token" });
+      }
+      const userId = decoded.userId || decoded.adminId;
       let user;
       if (userType === "admin") {
-        user = Admin.findById(userId);
+        user = await Admin.findById(userId);
       } else {
-        user = User.findById(userId);
+        user = await User.findById(userId);
       }
+
       if (!user) {
-        return socket.emit("authError", { message: "Invalid token}" });
+        return socket.emit("authError", { message: "Invalid token2" });
       }
+
       let userObj = { userID: user._id, userType, socketId: socket.id };
       onlineUsers.push(userObj);
       console.log("onlineUsers:", onlineUsers);

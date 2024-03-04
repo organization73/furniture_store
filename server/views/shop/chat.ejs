@@ -118,14 +118,13 @@
       </div>
 
       <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>      
-      <script>
-        const socket = io();
-      </script>
+
   
       <script>   
-
+        const socket = io();
       
         // Initialize an empty contact list
+        socket.emit('signin');
         const contactListItems = document.getElementById("contact-list-items");
         const addContactButton = document.getElementById("open-contact");
         const contactDropdown = document.getElementById("contact-dropdown");
