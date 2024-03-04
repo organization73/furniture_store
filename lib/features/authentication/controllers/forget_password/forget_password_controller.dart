@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
-import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/authentication/screens/reset_password/reset_password_screen.dart';
 import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
@@ -23,7 +23,7 @@ class ForgetPasswordController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'No Internet', message: 'No internet connection!');
+            title: 'Internet', message: 'No internet connection!');
         return;
       }
 
@@ -33,7 +33,7 @@ class ForgetPasswordController extends GetxController {
         return;
       }
 
-      await AuthenticatorRepoTest.instance
+      await AuthenticatorRepo.instance
           .sendPasswordResetEmail(emailController.text.trim());
 
       FullScreenLoader.stopLoading();
@@ -63,11 +63,11 @@ class ForgetPasswordController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'No Internet', message: 'No internet connection!');
+            title: 'Internet', message: 'No internet connection!');
         return;
       }
 
-      // await AuthenticatorRepo.instance.sendPasswordResetEmail(email);
+      await AuthenticatorRepo.instance.sendPasswordResetEmail(email);
 
       FullScreenLoader.stopLoading();
       TLoaders.successSnackBar(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
-import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/verify_sign_up_email.dart';
 import 'package:furniture_store/features/personalization/models/user_model.dart';
-
 import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
@@ -36,7 +35,7 @@ class SignUpController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'No Internet', message: 'No internet connection!');
+            title: 'Internet', message: 'No internet connection!');
         return;
       }
 
@@ -57,17 +56,12 @@ class SignUpController extends GetxController {
         return;
       }
 
-      await AuthenticatorRepoTest.instance.registerWithEmailAndPassword(
-        firstNameController.text,
-        lastNameController.text,
-        userNameController.text,
-        phoneNumController.text,
-        emailController.text,
-        passwordController.text,
-      );
+      final userCred = await AuthenticatorRepo.instance
+          .registerWithEmailAndPassword(
+              emailController.text.trim(), passwordController.text.trim());
 
       final newUser = UserModel(
-          id: '1',
+          id: userCred.user!.uid,
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           userName: userNameController.text.trim(),
@@ -76,7 +70,7 @@ class SignUpController extends GetxController {
           avatar: '');
 
       final userRepesotory = Get.put(UserRepo());
-      await userRepesotory.saveUserRecord(newUser);
+      await userRepesotory.saveuserRecord(newUser);
 
       FullScreenLoader.stopLoading();
 
@@ -94,3 +88,20 @@ class SignUpController extends GetxController {
     }
   }
 }
+
+ // UserModel user = UserModel(
+      //   accountType: AccountType.VENDOR,
+      //   authorities: [SimpleGrantedAuthority(authority: 'ROLE_ADMIN')],
+      //   avatar: 'https://example.com/avatar.jpg',
+      //   firstName: 'John',
+      //   lastName: 'Doe',
+      //   email: 'john.doe@example.com',
+      //   id: '12345',
+      //   password: 'password123',
+      //   confirmCode: '123456',
+      //   state: AccountState.ACTIVE,
+      //   createdDate: '2023-04-01',
+      //   kcyAddress: '123 Main St',
+      //   verified: true,
+      //   roles: Roles.ADMIN,
+      // );

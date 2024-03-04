@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
-import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
-import 'package:furniture_store/data/repositories/user/user_repo.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
-import 'package:furniture_store/features/personalization/models/user_model.dart';
 import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
@@ -18,6 +16,7 @@ class LoginController extends GetxController {
   // TextEditingController for each input field
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final userController = Get.put(UserController());
 
   @override
   void onInit() {
@@ -37,7 +36,7 @@ class LoginController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'No Internet', message: 'No internet connection!');
+            title: 'Internet', message: 'No internet connection!');
         return;
       }
 
@@ -53,20 +52,12 @@ class LoginController extends GetxController {
             'REMEMBER_ME_PASSWORD', passwordController.text.trim());
       }
 
-      await AuthenticatorRepoTest.instance.loginWithEmailAndPassword(
+      await AuthenticatorRepo.instance.loginWithEmailAndPassword(
           emailController.text.trim(), passwordController.text.trim());
-
-      final newUser = UserModel(
-        id: ' 0',
-        email: emailController.text.trim(),
-      );
-
-      final userController = Get.find<UserController>();
-      userController.saveUserData(newUser);
 
       FullScreenLoader.stopLoading();
 
-      AuthenticatorRepoTest.instance.screenRedirect();
+      AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       FullScreenLoader.stopLoading();
 
@@ -84,16 +75,16 @@ class LoginController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'No Internet', message: 'No internet connection!');
+            title: 'Internet', message: 'No internet connection!');
         return;
       }
 
-      // final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
+      final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
-      // await userController.saveUserRecord(userCred);
-      // FullScreenLoader.stopLoading();
+      await userController.saveUserRecord(userCred);
+      FullScreenLoader.stopLoading();
 
-      // AuthenticatorRepo.instance.screenRedirect();
+      AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       FullScreenLoader.stopLoading();
 

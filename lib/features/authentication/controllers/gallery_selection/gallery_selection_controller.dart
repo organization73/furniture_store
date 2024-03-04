@@ -1,4 +1,4 @@
-import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:furniture_store/features/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ class GallerySelectionController extends GetxController {
 
   void navigateToNextScreen() {
     if (model.selectedOption.value == 0) {
-      AuthenticatorRepoTest.instance.screenRedirect();
+      AuthenticatorRepo.instance.screenRedirect();
     } else {
       Get.to(
         () => GalleryInformationScreen(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
-import 'package:furniture_store/data/repositories/authentication/auth_test.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/authentication/model/gallery_info/gallery_information_model.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +32,7 @@ class GalleryInformationController extends GetxController {
     }
 
     // Proceed with submission logic
-    AuthenticatorRepoTest.instance.screenRedirect();
+    AuthenticatorRepo.instance.screenRedirect();
     // Get.off(
     //   () => const SuccessScreen(
     //     screen: LoginSignUpScreen(),
