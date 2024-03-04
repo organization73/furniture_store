@@ -22,6 +22,7 @@ const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
+const PORT = process.env.PORT || 3000;
 const MONGODB_URL = "mongodb://localhost:27017/furniture-shop";
 // "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
 const fileStorage = multer.diskStorage({
@@ -102,7 +103,7 @@ app.use("/auth", authRoutes);
 
 app.use("/product", isAuth, productRoutes);
 
-app.use("/chat",chatRoutes);
+app.use("/chat", chatRoutes);
 
 app.get("/playground", playground({ endpoint: "/graphql" }));
 
@@ -131,9 +132,18 @@ mongoose
   .then((result) => {
     console.log("Connected to the database");
     // Start the server
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    const server = app.listen(PORT, () => {
+      console.log(`Server is running on port 3000${PORT}`);
     });
+    const io = require("./socket").init(server, {
+      cors: {
+        origin: "*",
+      },
+    });
+    io.on("connection", (socket) => {
+      console.log(`Client: ${socket.id} connected`);
+    });
+    
   })
   .catch((err) => {
     console.log(err);
