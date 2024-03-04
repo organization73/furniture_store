@@ -48,6 +48,8 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+const onlineUsers = [];
+
 const app = express();
 
 //seting the view engine
@@ -129,21 +131,24 @@ app.use((error, req, res, next) => {
 // Connect to the database
 mongoose
   .connect(MONGODB_URL)
-  .then((result) => {
+  .then(async (result) => {
     console.log("Connected to the database");
     // Start the server
-    const server = app.listen(PORT, () => {
-      console.log(`Server is running on port 3000${PORT}`);
+    const server = await app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
-    const io = require("./socket").init(server, {
+    //seting up the websocket
+    const io = require("./socketio/socket").init(server, {
       cors: {
         origin: "*",
       },
     });
     io.on("connection", (socket) => {
       console.log(`Client: ${socket.id} connected`);
+      const socketHelper = require("./socketio/socketHelper");
+      
+      socketHelper.signin(socket, onlineUsers); 
     });
-    
   })
   .catch((err) => {
     console.log(err);

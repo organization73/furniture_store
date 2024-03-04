@@ -116,8 +116,15 @@
         <input type="text" id="message-input" placeholder="Enter message" />
         <button onclick="sendMessage()">Send</button>
       </div>
+
+      <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>      
+      <script>
+        const socket = io();
+      </script>
   
       <script>   
+
+      
         // Initialize an empty contact list
         const contactListItems = document.getElementById("contact-list-items");
         const addContactButton = document.getElementById("open-contact");
