@@ -25,7 +25,7 @@ class NetworkManager extends GetxController {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
       TLoaders.warningSnackBar(
-          title: 'No Internet', message: 'No internet connection!');
+            title: 'internet'.tr, message: 'noInternet'.tr);
     }
   }
 

@@ -37,7 +37,7 @@ class OnBoardingController extends GetxController {
     Get.offAll(
       () => const LoginSignUpScreen(),
       duration: const Duration(milliseconds: 300),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     );
   }
 

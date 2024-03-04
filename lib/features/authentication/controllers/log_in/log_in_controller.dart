@@ -29,14 +29,14 @@ class LoginController extends GetxController {
   Future<void> emailAndPasswordSignIn() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'Logging you in...', 'assets/animations/animation-of-docer.json');
+          'loggingInLoadingTitle'.tr, 'assets/animations/animation-of-docer.json');
 
       final isConnected = await NetworkManager.instance.isConnected();
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'internet'.tr, message: 'noInternet'.tr);
         return;
       }
 
@@ -61,21 +61,21 @@ class LoginController extends GetxController {
     } catch (e) {
       FullScreenLoader.stopLoading();
 
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      TLoaders.errorSnackBar(title:'ohSnap'.tr, message: e.toString());
     }
   }
 
   Future<void> googleSignIn() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'Logging you in...', 'assets/animations/animation-of-docer.json');
+         'loggingInLoadingTitle'.tr, 'assets/animations/animation-of-docer.json');
 
       final isConnected = await NetworkManager.instance.isConnected();
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'internet'.tr, message: 'noInternet'.tr);
         return;
       }
 
@@ -88,7 +88,7 @@ class LoginController extends GetxController {
     } catch (e) {
       FullScreenLoader.stopLoading();
 
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 }

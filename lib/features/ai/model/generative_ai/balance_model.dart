@@ -1,6 +1,7 @@
 // model/balance_model.dart
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/utils/constants/api_constants.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -21,7 +22,7 @@ class BalanceModel {
       }
     } catch (e) {
       TLoaders.errorSnackBar(
-          title: 'Oh Snap!', message: 'Something went wrong');
+          title: 'ohSnap'.tr, message: 'Something went wrong');
       rethrow;
     }
   }

@@ -32,7 +32,7 @@ class AuthenticatorRepo extends GetxController {
         Get.offAll(
           () => const NavMenu(),
           duration: const Duration(milliseconds: 300),
-          transition: Transition.fade,
+          transition: Transition.rightToLeft,
         );
       } else {
         Get.offAll(
@@ -40,7 +40,7 @@ class AuthenticatorRepo extends GetxController {
             email: _auth.currentUser?.email,
           ),
           duration: const Duration(milliseconds: 300),
-          transition: Transition.fade,
+          transition: Transition.rightToLeft,
         );
       }
     } else {
@@ -49,12 +49,12 @@ class AuthenticatorRepo extends GetxController {
           ? Get.offAll(
               () => const LoginSignUpScreen(),
               duration: const Duration(milliseconds: 300),
-              transition: Transition.fade,
+              transition: Transition.rightToLeft,
             )
           : Get.offAll(
               () => const OnBoardingScreen(),
               duration: const Duration(milliseconds: 300),
-              transition: Transition.fade,
+              transition: Transition.rightToLeft,
             );
     }
   }

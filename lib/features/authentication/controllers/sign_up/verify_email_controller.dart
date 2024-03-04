@@ -23,7 +23,7 @@ class VerifyEmailController extends GetxController {
           title: 'changeYourEmailTitle'.tr,
           message: 'changeYourEmailSubTitle'.tr);
     } catch (e) {
-      TLoaders.errorSnackBar(title: 'Oh Snap!!', message: e.toString());
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 
@@ -35,8 +35,8 @@ class VerifyEmailController extends GetxController {
         timer.cancel();
         Get.off(
           () => ActionConfirmPage(
-            subTitle:'yourAccountCreatedSubTitle'.tr,
-               title: 'yourAccountCreatedTitle'.tr,
+            subTitle: 'yourAccountCreatedSubTitle'.tr,
+            title: 'yourAccountCreatedTitle'.tr,
             onPressed: () => AuthenticatorRepo.instance.screenRedirect(),
           ),
           duration: const Duration(milliseconds: 300),
@@ -51,8 +51,8 @@ class VerifyEmailController extends GetxController {
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
         () => ActionConfirmPage(
-            subTitle:'yourAccountCreatedSubTitle'.tr,
-               title: 'yourAccountCreatedTitle'.tr,
+          subTitle: 'yourAccountCreatedSubTitle'.tr,
+          title: 'yourAccountCreatedTitle'.tr,
           onPressed: () => AuthenticatorRepo.instance.screenRedirect(),
         ),
         duration: const Duration(milliseconds: 300),

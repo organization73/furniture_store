@@ -14,14 +14,14 @@ class PhoneSingInController extends GetxController {
   Future<void> phonedSignIn() async {
     try {
       // FullScreenLoader.openLoadingDialog(
-      //     'Logging you in...', 'assets/animations/animation-of-docer.json');
+      //     'loggingInLoadingTitle'.tr, 'assets/animations/animation-of-docer.json');
 
       // final isConnected = await NetworkManager.instance.isConnected();
 
       // if (!isConnected) {
       //   FullScreenLoader.stopLoading();
       //   TLoaders.warningSnackBar(
-      //       title: 'No Internet', message: 'No internet connection!');
+            // title: 'internet'.tr, message: 'noInternet'.tr);
       //   return;
       // }
 
@@ -40,7 +40,7 @@ class PhoneSingInController extends GetxController {
     } catch (e) {
       FullScreenLoader.stopLoading();
 
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 }

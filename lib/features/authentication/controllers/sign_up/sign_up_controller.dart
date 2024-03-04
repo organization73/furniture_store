@@ -28,14 +28,13 @@ class SignUpController extends GetxController {
   void signup() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'We are processing your information...',
-          'assets/animations/animation-of-docer.json');
+          'processingLoading'.tr, 'assets/animations/animation-of-docer.json');
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'internet'.tr, message: 'noInternet'.tr);
         return;
       }
 
@@ -49,9 +48,7 @@ class SignUpController extends GetxController {
         FullScreenLoader.stopLoading();
 
         TLoaders.warningSnackBar(
-            title: 'Accept Privacy Policy',
-            message:
-                'In order to create an account you must accept the privacy policy and terms of use.');
+            title: 'policyAndTerms'.tr, message: 'policyAndTermsDesc'.tr);
 
         return;
       }
@@ -84,7 +81,7 @@ class SignUpController extends GetxController {
     } catch (e) {
       FullScreenLoader.stopLoading();
 
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 }

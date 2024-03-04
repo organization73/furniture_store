@@ -23,7 +23,7 @@ class ForgetPasswordController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'internet'.tr, message: 'noInternet'.tr);
         return;
       }
 
@@ -50,7 +50,7 @@ class ForgetPasswordController extends GetxController {
       );
     } catch (e) {
       FullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 
@@ -63,7 +63,7 @@ class ForgetPasswordController extends GetxController {
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'Internet', message: 'No internet connection!');
+            title: 'internet'.tr, message: 'noInternet'.tr);
         return;
       }
 
@@ -75,7 +75,7 @@ class ForgetPasswordController extends GetxController {
           message: 'Email link has been sent to reset your password');
     } catch (e) {
       FullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 }
