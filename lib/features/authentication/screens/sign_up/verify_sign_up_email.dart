@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:furniture_store/common/widgets/text_header.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/authentication/controllers/sign_up/verify_email_controller.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
-// TODO Translate this page
 
 class VerifySignUpEmail extends StatelessWidget {
   final String? email;
@@ -30,7 +29,7 @@ class VerifySignUpEmail extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () {}, //=> AuthenticatorRepo.instance.logOut(),
+              onPressed: () => AuthenticatorRepo.instance.logOut(),
               icon: const Icon(Icons.clear))
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:furniture_store/common/widgets/list_tiles/user_profile_tile.dart';
+import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/manufacture_request/screens/manufacture_req_screen.dart';
 import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
@@ -99,8 +100,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             )),
             Padding(
-              padding:  EdgeInsets.symmetric(
-                  horizontal: TSizes.pagePaddingSpace),
+              padding:
+                  EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
                   SectionHeading(
@@ -152,8 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed:
-                            () {}, //=> AuthenticatorRepo.instance.logOut(),
+                        onPressed: () => AuthenticatorRepo.instance.logOut(),
                         child: Text('logout'.tr)),
                   )
                 ],

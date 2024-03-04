@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:furniture_store/utils/constants/enums.dart';
 
 class UserModel {
@@ -137,6 +138,33 @@ class UserModel {
       'password': password,
       'roles': roles.toString().split('.').last,
     };
+  }
+
+  factory UserModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+    return UserModel(
+      accountType:
+          EnumUtil.fromStringEnum(AccountType.values, data['accountType']),
+      authorities: (data['authorities'] as List)
+          .map<SimpleGrantedAuthority>(
+              (item) => SimpleGrantedAuthority.fromJson(item))
+          .toList(),
+      avatar: data['avatar'],
+      firstName: data['firstName'],
+      lastName: data['lastName'],
+      confirmCode: data['confirmCode'],
+      email: data['email'],
+      password: data['password'],
+      verified: data['verified'],
+      id: snapshot.id, // Use the document ID as the user ID
+      kcyAddress: data['kcyAddress'],
+      state: EnumUtil.fromStringEnum(AccountState.values, data['state']),
+      roles: EnumUtil.fromStringEnum(Roles.values, data['roles']),
+      createdDate: data['createdDate'],
+      phoneNumber: data[
+          'phoneNumber'], // Assuming the phone number is stored in the document
+    );
   }
 }
 
