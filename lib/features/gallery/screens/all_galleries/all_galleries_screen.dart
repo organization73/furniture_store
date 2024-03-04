@@ -43,7 +43,7 @@ class AllGalleriesPage extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return GalleryCard(
-                      property: StaticData.sampleProperties[index],
+                      gallery: StaticData.sampleProperties[index],
                     );
                   },
                 )
