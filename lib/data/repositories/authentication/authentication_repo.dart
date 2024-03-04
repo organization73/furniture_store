@@ -19,6 +19,8 @@ class AuthenticatorRepo extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  User? get authUser => _auth.currentUser;
+
   @override
   void onReady() {
     FlutterNativeSplash.remove();

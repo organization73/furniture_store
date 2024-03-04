@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/features/home/screens/filters/widgets/og_tab.dart';
 import 'package:furniture_store/features/home/screens/filters/widgets/og_tab_item.dart';
 import 'package:furniture_store/features/home/screens/filters/widgets/button_group_spaced.dart';
-import 'package:furniture_store/features/home/screens/filters/widgets/input_widget.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';

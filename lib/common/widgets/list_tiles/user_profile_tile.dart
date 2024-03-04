@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/images/circular_image.dart';
+import 'package:furniture_store/common/widgets/loaders/shimmerLoader.dart';
+import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileTile extends StatelessWidget {
@@ -11,6 +14,8 @@ class ProfileTile extends StatelessWidget {
   final VoidCallback onPress;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
+
     return ListTile(
       leading: const CircularImage(
         imageUrl: TImages.user,
@@ -18,14 +23,32 @@ class ProfileTile extends StatelessWidget {
         height: 50,
         padding: 0,
       ),
-      title: Text(
-        'data',
-        style: Theme.of(context).textTheme.headlineSmall,
-      ),
-      subtitle: Text(
-        'data@gmail.com',
-        style: Theme.of(context).textTheme.bodyMedium,
-      ),
+      title: Obx(() {
+        if (controller.profileLoading.value) {
+          return const ShimmerLoaderEffect(
+            height: 15,
+            width: 80,
+          );
+        } else {
+          return Text(
+            controller.user.value.fullName,
+            style: Theme.of(context).textTheme.headlineSmall,
+          );
+        }
+      }),
+      subtitle: Obx(() {
+        if (controller.profileLoading.value) {
+          return const ShimmerLoaderEffect(
+            height: 15,
+            width: 80,
+          );
+        } else {
+          return Text(
+            controller.user.value.email,
+            style: Theme.of(context).textTheme.bodyMedium,
+          );
+        }
+      }),
       trailing: IconButton(onPressed: onPress, icon: const Icon(Iconsax.edit)),
     );
   }

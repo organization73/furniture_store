@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/user_profile/profile_widget.dart';
+import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
+import 'package:furniture_store/features/personalization/screens/profile/change_name_screen.dart';
 import 'package:furniture_store/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -38,12 +42,16 @@ class ProfileScreen extends StatelessWidget {
               ),
               ProfileMenu(
                 title: 'Name',
-                value: 'Coding',
-                onPress: () {},
+                value: controller.user.value.fullName,
+                onPress: ()=>Get.to(
+                      () => const ChangeNameScreen(),
+                      duration: const Duration(milliseconds: 300),
+                      transition: Transition.downToUp,
+                    ),
               ),
               ProfileMenu(
                 title: 'Username',
-                value: 'eee',
+                value: controller.user.value.userName,
                 onPress: () {},
               ),
               SizedBox(
@@ -62,12 +70,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               ProfileMenu(
                 title: 'E-mail',
-                value: 'Coding@gmail.com',
+                value: controller.user.value.email,
                 onPress: () {},
               ),
               ProfileMenu(
                 title: 'Phone Number',
-                value: '01022336699',
+                value: controller.user.value.phoneNumber,
                 onPress: () {},
               ),
               SizedBox(

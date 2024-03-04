@@ -140,31 +140,55 @@ class UserModel {
     };
   }
 
+  static UserModel empty() {
+    return UserModel(
+      accountType: AccountType.regular, // Default value
+      phoneNumber: '', // Default value for the phone number
+      authorities: const [], // Default value
+      avatar: '', // Default value
+      firstName: '', // Default value
+      lastName: '', // Default value
+      email: '', // Default value
+      id: '', // Default value
+      password: '', // Default value
+      confirmCode: '', // Default value
+      state: AccountState.active, // Default value
+      createdDate: '', // Default value
+      kcyAddress: '', // Default value
+      verified: false, // Default value
+      roles: Roles.user, // Default value
+      userName: '',
+    );
+  }
+
   factory UserModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-
-    return UserModel(
-      accountType:
-          EnumUtil.fromStringEnum(AccountType.values, data['accountType']),
-      authorities: (data['authorities'] as List)
-          .map<SimpleGrantedAuthority>(
-              (item) => SimpleGrantedAuthority.fromJson(item))
-          .toList(),
-      avatar: data['avatar'],
-      firstName: data['firstName'],
-      lastName: data['lastName'],
-      confirmCode: data['confirmCode'],
-      email: data['email'],
-      password: data['password'],
-      verified: data['verified'],
-      id: snapshot.id, // Use the document ID as the user ID
-      kcyAddress: data['kcyAddress'],
-      state: EnumUtil.fromStringEnum(AccountState.values, data['state']),
-      roles: EnumUtil.fromStringEnum(Roles.values, data['roles']),
-      createdDate: data['createdDate'],
-      phoneNumber: data[
-          'phoneNumber'], // Assuming the phone number is stored in the document
-    );
+    if (snapshot.data() != null) {
+      return UserModel(
+        accountType:
+            EnumUtil.fromStringEnum(AccountType.values, data['accountType']),
+        authorities: (data['authorities'] as List)
+            .map<SimpleGrantedAuthority>(
+                (item) => SimpleGrantedAuthority.fromJson(item))
+            .toList(),
+        avatar: data['avatar'],
+        firstName: data['firstName'],
+        lastName: data['lastName'],
+        confirmCode: data['confirmCode'],
+        email: data['email'],
+        password: data['password'],
+        verified: data['verified'],
+        id: snapshot.id, // Use the document ID as the user ID
+        kcyAddress: data['kcyAddress'],
+        state: EnumUtil.fromStringEnum(AccountState.values, data['state']),
+        roles: EnumUtil.fromStringEnum(Roles.values, data['roles']),
+        createdDate: data['createdDate'],
+        phoneNumber: data[
+            'phoneNumber'], // Assuming the phone number is stored in the document
+      );
+    } else {
+      return UserModel.empty();
+    }
   }
 }
 
