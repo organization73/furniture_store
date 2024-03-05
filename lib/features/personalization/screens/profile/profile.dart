@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/user_profile/profile_widget.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
-import 'package:furniture_store/features/personalization/screens/profile/change_name_screen.dart';
+import 'package:furniture_store/features/personalization/screens/profile/widgets/change_name.dart';
 import 'package:furniture_store/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -86,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                 height: TSizes.spaceBtwItems,
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: ()=> controller.deleteAccountWarningPopup(),
                   child: const Text(
                     'Close Account',
                     style: TextStyle(color: Colors.red),
