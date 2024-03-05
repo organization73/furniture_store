@@ -17,10 +17,10 @@ class ProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onPress,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtwItems / 1.5),
+        padding: EdgeInsets.all(TSizes.spaceBtwItems / 1.5),
         child: Row(
           children: [
             Expanded(

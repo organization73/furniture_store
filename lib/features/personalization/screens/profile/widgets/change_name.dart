@@ -24,7 +24,6 @@ class ChangeNameScreen extends StatelessWidget {
             text: 'tContinue'.tr,
             onPressed: () {
               controller.updateUserName();
-              Get.back();
             }),
       ),
       body: Padding(

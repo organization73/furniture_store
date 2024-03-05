@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
+import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
 import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
@@ -56,16 +57,18 @@ class UpdateNameController extends GetxController {
       userController.user.value.firstName = firstNameController.text.trim();
       userController.user.value.lastName = lastNameController.text.trim();
 
+      userController.user.refresh();
+
       FullScreenLoader.stopLoading();
 
       TLoaders.successSnackBar(
           title: 'Done', message: 'Your name has been updated');
 
-      // Get.off(
-      //   () => const ProfileScreen(),
-      //   duration: const Duration(milliseconds: 300),
-      //   transition: Transition.downToUp,
-      // );
+      Get.off(
+        () => const ProfileScreen(),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.downToUp,
+      );
     } catch (e) {
       FullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
