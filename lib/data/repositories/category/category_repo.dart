@@ -5,6 +5,7 @@ import 'package:furniture_store/data/services/cloud_storage/firebase_storage_ser
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:furniture_store/utils/exceptions/platform_exceptions.dart';
+import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
 
 class CategoryRepo extends GetxController {
@@ -32,6 +33,8 @@ class CategoryRepo extends GetxController {
 
   Future<void> uploadDummyData(List<CategoryModel> categories) async {
     try {
+      FullScreenLoader.openLoadingDialog(
+          'Uploading Data...', 'assets/animations/animation-of-docer.json');
       final storage = Get.put(FirebaseStorageServices());
 
       for (var category in categories) {
@@ -44,9 +47,11 @@ class CategoryRepo extends GetxController {
             .doc(category.id)
             .set(category.toJson());
       }
+      FullScreenLoader.stopLoading();
 
       TLoaders.successSnackBar(
-          title: 'Loading Completed', message: 'Loading Completed');
+          title: 'Uploading Completed',
+          message: 'All categories data has been uploaded to firestore');
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
