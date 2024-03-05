@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/user/user_repo.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
-import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
 import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
@@ -61,7 +60,6 @@ class UpdateNameController extends GetxController {
 
       TLoaders.successSnackBar(
           title: 'Done', message: 'Your name has been updated');
-
 
       // Get.off(
       //   () => const ProfileScreen(),

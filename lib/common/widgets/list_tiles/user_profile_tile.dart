@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/images/circular_image.dart';
 import 'package:furniture_store/common/widgets/loaders/shimmerLoader.dart';
+import 'package:furniture_store/common/widgets/user_profile/profile_widget.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
@@ -17,12 +18,25 @@ class ProfileTile extends StatelessWidget {
     final controller = UserController.instance;
 
     return ListTile(
-      leading: const CircularImage(
-        imageUrl: TImages.user,
-        width: 50,
-        height: 50,
-        padding: 0,
-      ),
+      leading: Obx(() {
+        final networkImage = controller.user.value.avatar;
+        final image = networkImage.isNotEmpty ? networkImage : TImages.user;
+        if (controller.profileLoading.value) {
+          return const ShimmerLoaderEffect(
+            width: 50,
+            height: 50,
+            raduis: 50,
+          );
+        } else {
+          return CircularImage(
+            width: 50,
+            height: 50,
+            imageUrl: image,
+            padding: 0,
+            isNetworkImage: networkImage.isNotEmpty,
+          );
+        }
+      }),
       title: Obx(() {
         if (controller.profileLoading.value) {
           return const ShimmerLoaderEffect(

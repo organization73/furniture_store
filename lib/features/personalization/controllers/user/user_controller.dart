@@ -11,11 +11,13 @@ import 'package:furniture_store/utils/helpers/network_manager.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
   final profileLoading = false.obs;
+  final imageLoading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
 
   final hidePassword = true.obs;
@@ -45,21 +47,27 @@ class UserController extends GetxController {
 
   Future<void> saveUserRecord(UserCredential? userCred) async {
     try {
-      if (userCred != null) {
-        final namePart = UserModel.nameParts(userCred.user!.displayName ?? '');
-        final userName = UserModel.generateUsernameFromFullName(
-            userCred.user!.displayName ?? '');
+      /// refresh user record
+      await fetchUserRecord();
+      if (user.value.id.isEmpty) {
+        if (userCred != null) {
+          final namePart =
+              UserModel.nameParts(userCred.user!.displayName ?? '');
+          final userName = UserModel.generateUsernameFromFullName(
+              userCred.user!.displayName ?? '');
 
-        final user = UserModel(
-            id: userCred.user!.uid,
-            firstName: namePart[0],
-            lastName: namePart.length > 1 ? namePart.sublist(1).join(' ') : '',
-            userName: userName,
-            email: userCred.user!.email ?? '',
-            phoneNumber: userCred.user!.phoneNumber ?? '',
-            avatar: userCred.user!.photoURL ?? '');
+          final user = UserModel(
+              id: userCred.user!.uid,
+              firstName: namePart[0],
+              lastName:
+                  namePart.length > 1 ? namePart.sublist(1).join(' ') : '',
+              userName: userName,
+              email: userCred.user!.email ?? '',
+              phoneNumber: userCred.user!.phoneNumber ?? '',
+              avatar: userCred.user!.photoURL ?? '');
 
-        await userRepository.saveuserRecord(user);
+          await userRepository.saveuserRecord(user);
+        }
       }
     } catch (e) {
       TLoaders.warningSnackBar(
@@ -152,6 +160,34 @@ class UserController extends GetxController {
       FullScreenLoader.stopLoading();
 
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+    }
+  }
+
+  uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+      if (image != null) {
+        imageLoading.value = true;
+
+        final imageUrl =
+            await userRepository.uploadImage('Users/Images/Profile/', image);
+
+        Map<String, dynamic> json = {"avatar": imageUrl};
+        await userRepository.updateSingleField(json);
+        user.value.avatar = imageUrl;
+        user.refresh();
+
+        TLoaders.successSnackBar(
+            title: 'Done'.tr, message: 'Profile image has been updated');
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+    } finally {
+      imageLoading.value = false;
     }
   }
 }

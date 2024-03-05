@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
+import 'package:furniture_store/common/widgets/loaders/shimmerLoader.dart';
 import 'package:furniture_store/common/widgets/user_profile/profile_widget.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/features/personalization/screens/profile/widgets/change_name.dart';
 import 'package:furniture_store/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -22,10 +24,24 @@ class ProfileScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             children: [
-              ProfileWidget(
-                imagePath: '',
-                onClicked: () {},
-              ),
+              Obx(() {
+                final networkImage = controller.user.value.avatar;
+                final image =
+                    networkImage.isNotEmpty ? networkImage : TImages.user;
+                if (controller.imageLoading.value) {
+                  return const ShimmerLoaderEffect(
+                    width: 100,
+                    height: 100,
+                    raduis: 50,
+                  );
+                } else {
+                  return ProfileWidget(
+                    isNetworkImage: networkImage.isNotEmpty,
+                    imagePath: image,
+                    onClicked: () => controller.uploadUserProfilePicture(),
+                  );
+                }
+              }),
               SizedBox(
                 height: TSizes.spaceBtwItems / 2,
               ),
@@ -86,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                 height: TSizes.spaceBtwItems,
               ),
               TextButton(
-                  onPressed: ()=> controller.deleteAccountWarningPopup(),
+                  onPressed: () => controller.deleteAccountWarningPopup(),
                   child: const Text(
                     'Close Account',
                     style: TextStyle(color: Colors.red),

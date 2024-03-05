@@ -25,7 +25,6 @@ dependencies:
   flutter_screenutil: ^5.9.0
   carousel_slider: ^4.2.1
   image_picker: ^1.0.7
-  image_picker_android: ^0.8.9+3
   http: ^1.2.0
   permission_handler: ^11.3.0
   connectivity_plus: ^5.0.2

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_store/common/widgets/loaders/shimmerLoader.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:furniture_store/utils/helpers/helper_functions.dart';
@@ -34,12 +36,30 @@ class CircularImage extends StatelessWidget {
                 : TColors.white),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Center(
-        child: Image(
-          fit: fit,
-          image: isNetworkImage
-              ? NetworkImage(imageUrl)
-              : AssetImage(imageUrl) as ImageProvider,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Center(
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      ShimmerLoaderEffect(
+                    width: width,
+                    height: height,
+                    raduis: 55,
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    size: TSizes.iconLg,
+                  ),
+                )
+              : Image(
+                  fit: fit,
+                  image: isNetworkImage
+                      ? NetworkImage(imageUrl)
+                      : AssetImage(imageUrl) as ImageProvider,
+                ),
         ),
       ),
     );

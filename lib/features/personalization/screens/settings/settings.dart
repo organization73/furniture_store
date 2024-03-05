@@ -14,17 +14,12 @@ import 'package:furniture_store/utils/theme/theme.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
   void _showLanguageModel() {
     showModalBottomSheet<void>(
-      context: context,
+      context: Get.overlayContext!,
       builder: (BuildContext context) {
         return SizedBox(
           height: 200,

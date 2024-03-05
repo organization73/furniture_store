@@ -1,10 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:furniture_store/utils/constants/sizes.dart';
+import 'package:furniture_store/common/widgets/images/circular_image.dart';
+import 'package:furniture_store/common/widgets/images/rounded_image.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
   final bool isEdit;
+  final bool isNetworkImage;
   final VoidCallback onClicked;
 
   const ProfileWidget({
@@ -12,6 +13,7 @@ class ProfileWidget extends StatelessWidget {
     required this.imagePath,
     this.isEdit = false,
     required this.onClicked,
+    this.isNetworkImage = false,
   });
 
   @override
@@ -21,7 +23,13 @@ class ProfileWidget extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
-          buildImage(),
+          CircularImage(
+            imageUrl: imagePath,
+            width: 100,
+            height: 100,
+            isNetworkImage: isNetworkImage,
+            padding: 0,
+          ),
           Positioned(
             bottom: 0,
             right: 4,
@@ -30,28 +38,6 @@ class ProfileWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget buildImage() {
-    final image = CachedNetworkImage(
-      imageUrl: 'https://picsum.photos/id/1062/80/80',
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => const CircularProgressIndicator(),
-      errorWidget: (context, url, error) => const Icon(
-        Icons.person_2_rounded,
-        size: TSizes.iconLg,
-      ),
-    );
-
-    return CircleAvatar(radius: 50, child: image);
   }
 
   Widget buildEditIcon(Color color) => buildCircle(
