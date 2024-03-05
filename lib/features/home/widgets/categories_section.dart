@@ -17,39 +17,51 @@ class BuildCategoriesSection extends StatelessWidget {
 
   Widget _buildItem(CategoryModel item, BuildContext context) {
     return GestureDetector(
-        onTap: () => Get.to(
-              () => CategoriesPage(categoryName: item.name),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
+      onTap: () => Get.to(
+        () => CategoriesPage(categoryName: item.name),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      ),
+      child: Container(
+        width: 125,
+        height: 56,
+        margin: EdgeInsets.only(right: TSizes.spaceBtwItems),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0), border: Border.all()),
+        child: Stack(
+          children: [
+            Center(
+              child: CachedNetworkImage(
+                imageUrl: item.image,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
-        child: CircularImage(
-          imageUrl: item.image,
-          width: 125,
-          height: 56,
-        )
-
-        // Container(
-        //   width: 125,
-        //   height: 56,
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(8.0),
-        //     image: DecorationImage(
-        //       image: CachedNetworkImageProvider(
-        //         item.image,
-        //       ),
-        //       fit: BoxFit.cover,
-        //     ),
-        //   ),
-        //   padding: const EdgeInsets.all(8.0),
-        //   margin: const EdgeInsets.only(right: 10),
-        //   child: Text(item.name,
-        //       textAlign: TextAlign.left,
-        //       style: Theme.of(context)
-        //           .textTheme
-        //           .bodyMedium
-        //           ?.copyWith(color: Colors.black)),
-        // ),
-        );
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  item.name,
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.black),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
