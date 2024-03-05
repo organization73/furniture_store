@@ -4,6 +4,8 @@ const User = require("../models/user");
 const ChatRoom = require("../models/chatRoom");
 const Message = require("../models/message");
 
+// const io = require("../socketio/socket").getIO();
+
 exports.createChatRoom = async (req, res, next) => {
   let primaryUser;
   if (req.admin) {
@@ -118,6 +120,12 @@ exports.sendMessage = async (req, res, next) => {
       type: "text",
     });
     const savedMessage = await newMessage.save();
+    //send message to socket
+    io.to(roomId).emit("message", {
+      message: savedMessage,
+      sender: user._id,
+      chatRoom: roomId,
+    });
     //update chat room
     chatRoom.latestMessage = savedMessage._id;
     await chatRoom.save();

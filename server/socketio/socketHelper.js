@@ -3,10 +3,14 @@ const jwt = require("jsonwebtoken");
 const Admin = require("../models/admin");
 const User = require("../models/user");
 
-
-module.exports.actionListeners =(socket, onlineUsers) => {
+module.exports.actionListeners = (socket, onlineUsers) => {
   let userType = "user";
-  socket.on("signin", async (token) => {
+  socket.on("signin", async (data) => {
+    console.log("join-room data:", data);
+    const { roomId, token } = data;
+    if (!roomId) {
+      return socket.emit("authError", { message: "No roomId provided" });
+    }
     if (!token) {
       //check if token is in the cookie (admin)
       token = socket.handshake.headers.cookie.split("=")[1];
@@ -27,13 +31,25 @@ module.exports.actionListeners =(socket, onlineUsers) => {
       } else {
         user = await User.findById(userId);
       }
-
       if (!user) {
         return socket.emit("authError", { message: "Invalid token2" });
       }
-
-      let userObj = { userID: user._id, userType, socketId: socket.id };
-      onlineUsers.push(userObj);
+      //check if user is already online
+      const userIndex = onlineUsers.findIndex((user) => user.userID === userId);
+      if (userIndex !== -1) {
+        //update the socketId
+        onlineUsers[userIndex].socketId = socket.id;
+      } else {
+        //add user to online users
+        let userObj = {
+          userID: user._id.toString(),
+          userType,
+          socketId: socket.id,
+        };
+        onlineUsers.push(userObj);
+      }
+      // //join the room
+      // socket.join(roomId);
       console.log("onlineUsers:", onlineUsers);
       socket.emit("authSuccess", { message: "Auth success" });
     } catch (error) {
@@ -41,4 +57,17 @@ module.exports.actionListeners =(socket, onlineUsers) => {
       socket.emit("authError", { message: "Invalid token" });
     }
   });
+
+  socket.on("disconnect", () => {
+    console.log("Client: " + socket.id + " disconnected");
+    //remove user from online users
+    const userIndex = onlineUsers.findIndex(
+      (user) => user.socketId === socket.id
+    );
+    if (userIndex !== -1) {
+      onlineUsers.splice(userIndex, 1);
+    }
+    console.log("onlineUsers:", onlineUsers);
+  });
+
 };

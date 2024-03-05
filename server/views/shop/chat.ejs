@@ -121,10 +121,12 @@
 
   
       <script>   
+        //signin
         const socket = io();
+        socket.emit('signin',{contactId});
+        
       
         // Initialize an empty contact list
-        socket.emit('signin');
         const contactListItems = document.getElementById("contact-list-items");
         const addContactButton = document.getElementById("open-contact");
         const contactDropdown = document.getElementById("contact-dropdown");
@@ -218,7 +220,6 @@
 
         // Function to select a contact and send a GET request to the API
         function selectContact() {
-          console.log(this.dataset.id)
           const contactId = this.dataset.id;
           // Remove the "selected" class from any previously selected contact
           const previouslySelectedContact = document.querySelector(
@@ -234,6 +235,12 @@
           if (newSelectedContact) {
             newSelectedContact.classList.add("selected");
           }
+          // Clear any existing messages
+          const messagesDiv = document.getElementById("messages-list");
+          messagesDiv.innerHTML = "";
+          
+          console.log('join room',contactId);
+
           // Send a GET request to the API to retrieve messages for the selected contact
           // fetch(`/chat/room/${contactId}`)
           //   .then((response) => response.json())
