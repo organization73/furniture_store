@@ -85,20 +85,3 @@ class SignUpController extends GetxController {
     }
   }
 }
-
- // UserModel user = UserModel(
-      //   accountType: AccountType.VENDOR,
-      //   authorities: [SimpleGrantedAuthority(authority: 'ROLE_ADMIN')],
-      //   avatar: 'https://example.com/avatar.jpg',
-      //   firstName: 'John',
-      //   lastName: 'Doe',
-      //   email: 'john.doe@example.com',
-      //   id: '12345',
-      //   password: 'password123',
-      //   confirmCode: '123456',
-      //   state: AccountState.ACTIVE,
-      //   createdDate: '2023-04-01',
-      //   kcyAddress: '123 Main St',
-      //   verified: true,
-      //   roles: Roles.ADMIN,
-      // );

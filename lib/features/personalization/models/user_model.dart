@@ -116,6 +116,7 @@ class UserModel {
       roles: EnumUtil.fromStringEnum(Roles.values, json['roles']),
       createdDate: json['createdDate'],
       phoneNumber: json['phoneNumber'] ?? '',
+      userName: json['userName'] ?? '',
     );
   }
 
@@ -127,6 +128,7 @@ class UserModel {
       'avatar': avatar,
       'firstName': firstName,
       'lastName': lastName,
+      'userName': userName,
       'confirmCode': confirmCode,
       'createdDate': createdDate,
       'email': email,
@@ -174,6 +176,7 @@ class UserModel {
         avatar: data['avatar'],
         firstName: data['firstName'],
         lastName: data['lastName'],
+        userName: data['userName'],
         confirmCode: data['confirmCode'],
         email: data['email'],
         password: data['password'],
