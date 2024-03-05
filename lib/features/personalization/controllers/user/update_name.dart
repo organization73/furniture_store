@@ -30,8 +30,8 @@ class UpdateNameController extends GetxController {
 
   Future<void> updateUserName() async {
     try {
-      FullScreenLoader.openLoadingDialog('loggingInLoadingTitle'.tr,
-          'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog(
+          'updatingInfo'.tr, 'assets/animations/animation-of-docer.json');
 
       final isConnected = await NetworkManager.instance.isConnected();
 
@@ -62,11 +62,12 @@ class UpdateNameController extends GetxController {
       TLoaders.successSnackBar(
           title: 'Done', message: 'Your name has been updated');
 
-      Get.off(
-        () => const ProfileScreen(),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.downToUp,
-      );
+
+      // Get.off(
+      //   () => const ProfileScreen(),
+      //   duration: const Duration(milliseconds: 300),
+      //   transition: Transition.downToUp,
+      // );
     } catch (e) {
       FullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());

@@ -14,7 +14,7 @@ class ProfileTile extends StatelessWidget {
   final VoidCallback onPress;
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(UserController());
+    final controller = UserController.instance;
 
     return ListTile(
       leading: const CircularImage(

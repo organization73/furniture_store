@@ -244,6 +244,7 @@ class Language extends Translations {
           "noInternet": "No internet connection!",
           "policyAndTerms": "Accept Privacy Policy",
           "ohSnap": "Oh Snap!",
+          "updatingInfo": "We are updating your indormation...",
           "policyAndTermsDesc":
               "In order to create an account you must accept the privacy policy and terms of use.",
         },
@@ -251,6 +252,7 @@ class Language extends Translations {
           "language": "العربية",
           "internet": "انترنت",
           "ohSnap": "حدث خطأ!",
+          "updatingInfo": "جاري تحديث بياناتك",
           "policyAndTermsDesc":
               "لإنشاء حساب، يجب عليك قبول سياسة الخصوصية وشروط الاستخدام.",
           "policyAndTerms": "الموافقة علي شروط الاستخدام",

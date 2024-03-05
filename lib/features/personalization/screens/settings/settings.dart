@@ -6,6 +6,7 @@ import 'package:furniture_store/common/widgets/list_tiles/settings_menu_tile.dar
 import 'package:furniture_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/features/manufacture_request/screens/manufacture_req_screen.dart';
+import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
@@ -21,7 +22,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-
   void _showLanguageModel() {
     showModalBottomSheet<void>(
       context: context,
@@ -73,6 +73,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(UserController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

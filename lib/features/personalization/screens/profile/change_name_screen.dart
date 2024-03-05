@@ -21,7 +21,11 @@ class ChangeNameScreen extends StatelessWidget {
         height: 70,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
-            text: 'tContinue'.tr, onPressed: () => controller.updateUserName()),
+            text: 'tContinue'.tr,
+            onPressed: () {
+              controller.updateUserName();
+              Get.back();
+            }),
       ),
       body: Padding(
         padding: EdgeInsets.all(TSizes.pagePaddingSpace),

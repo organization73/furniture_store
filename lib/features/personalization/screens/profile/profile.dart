@@ -43,11 +43,11 @@ class ProfileScreen extends StatelessWidget {
               ProfileMenu(
                 title: 'Name',
                 value: controller.user.value.fullName,
-                onPress: ()=>Get.to(
-                      () => const ChangeNameScreen(),
-                      duration: const Duration(milliseconds: 300),
-                      transition: Transition.downToUp,
-                    ),
+                onPress: () => Get.to(
+                  () => const ChangeNameScreen(),
+                  duration: const Duration(milliseconds: 300),
+                  transition: Transition.downToUp,
+                ),
               ),
               ProfileMenu(
                 title: 'Username',
