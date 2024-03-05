@@ -61,16 +61,124 @@ exports.createChatRoom = async (req, res, next) => {
   }
 };
 
-exports.getChatRooms = async (req, res, next) => {
+/* /chat/rooms?search=abdo => GET request */
+exports.allUsers = async (req, res, next) => {
+  console.log("req.query.search:", req.query.search);
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { username: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
   const user = req.admin || req.user;
-
   try {
-    const chatRooms = await ChatRoom.find({ users: { $in: [user._id] } })
+    console.log("keyword:", keyword);
+    const conditions = { ...keyword, _id: { $ne: user._id } };
+    const users = await Admin.find(keyword);
+    console.log("users:", users);
+    res.status(200).json({ users });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+/* /chat/access-room?roomId=123 => POST request */
+exports.accessChatRoom = async (req, res, next) => {
+  const { userId } = req.body;
+  const primaryUser = req.admin || req.user;
+  try {
+    //validate input
+    if (!userId) {
+      throwError("No userId provided", 400, "userId");
+    }
+    //check if user exists
+    const secondaryUser = await Admin.findById(userId);
+    if (!secondaryUser) {
+      throwError("No secondaryUser found", 404, "secondaryUser");
+    }
+    //check if chat room already exists
+    const chatRoom = await ChatRoom.findOne({
+      users: { $all: [primaryUser._id, secondaryUser._id] },
+      isGroupChat: false,
+    })
       .populate({
         path: "users",
         model: "Admin", // Use 'Admin' model instead of 'User' model
+        select: "-password",
       })
-      .populate("latestMessage");
+      .populate({
+        path: "latestMessage",
+        populate: {
+          path: "sender",
+          model: "Admin", // Use the appropriate model for 'sender'
+          select: "-password",
+        },
+      });
+    // .populate("latestMessage");
+    //if chat room exists, return it
+    if (chatRoom) {
+      return res.status(200).json({ chatRoom });
+    } else {
+      //create chat room
+      const newChatRoom = new ChatRoom({
+        fullName: "sender",
+        isGroupChat: false,
+        users: [primaryUser._id, secondaryUser._id],
+      });
+      newChatRoom.type = req.admin ? "admin-client" : "client-client";
+
+      const savedChatRoom = await newChatRoom.save();
+      return res.status(201).json({
+        message: "Chat room created",
+        chatRoom: savedChatRoom,
+        fullName: secondaryUser.firstName + " " + secondaryUser.lastName,
+      });
+    }
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};
+
+/* /chat/message => POST request */
+exports.fetchChatRooms = async (req, res, next) => {
+  const user = req.admin || req.user;
+
+  try {
+    const chatRooms = await ChatRoom.find({
+      users: {
+        $elemMatch: {
+          $eq: user._id,
+          // Additional criteria for matching users array elements
+        },
+      },
+    })
+      .populate({
+        path: "users",
+        model: "Admin", // Use 'Admin' model instead of 'User' model
+        select: "-password",
+      })
+      .populate({
+        path: "admin",
+        model: "Admin", // Use the appropriate model for 'sender'
+        select: "-password",
+      })
+      .populate({
+        path: "latestMessage",
+        populate: {
+          path: "sender",
+          model: "Admin", // Use the appropriate model for 'sender'
+          select: "-password",
+        },
+      })
+      .sort({ updatedAt: -1 });
 
     // console.log("chatRooms:", chatRooms[0].users[0]);
     const updatedChatRooms = chatRooms.map((chatRoom) => {
@@ -80,8 +188,6 @@ exports.getChatRooms = async (req, res, next) => {
           console.log("chatRoom:", chatRoom.fullName);
         }
       });
-      console.log("out:", chatRoom.fullName);
-
       return chatRoom;
     });
     res.status(200).json({ chatRooms: updatedChatRooms });

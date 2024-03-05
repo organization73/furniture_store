@@ -5,13 +5,15 @@ const Schema = mongoose.Schema;
 const chatRoomSchema = new Schema(
   {
     fullName: { type: String },
+    isGroupChat: { type: Boolean, default: false },
+    admin: { type: Schema.Types.ObjectId, ref: "User" },
     // Require at least two users
     users: [
       {
         type: Schema.Types.ObjectId,
         ref: "User",
         validate: {
-          validator: (arr) => arr.length =2,
+          validator: (arr) => (arr.length = 2),
           message: "Chat room must have at least 2 users",
         },
       },

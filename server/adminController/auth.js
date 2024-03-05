@@ -120,13 +120,14 @@ exports.getProfile = (req, res, next) => {
   });
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log(email, password);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).render("admin/login", {
+    return res.status(422).render("auth/login", {
       path: "/login",
       pageTitle: "login-PR",
       isAuthenticated: false,
@@ -139,34 +140,50 @@ exports.postLogin = (req, res, next) => {
     });
   }
 
-  Admin.findOne({ email: email })
-    .then((admin) => {
-      if (!admin) {
-        // req.flash("error", "Invalid email or password.");
-        return res.redirect("/admin/login");
-      }
-      bcrypt.compare(password, admin.password).then((doMatch) => {
-        if (doMatch) {
-          console.log(process.env.JWT_SECRET);
-          const token = jwt.sign(
-            { adminId: admin._id, email: admin.email },
-            process.env.JWT_SECRET,
-            { expiresIn: "2h" }
-          );
-          console.log('encdoe: ',token);
-          const decoded = jwt.verify(token, process.env.JWT_SECRET);
-          console.log(decoded);
-          res.cookie("token", token, {
-            httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 2,
-          }); // 2h
-          res.redirect("/admin");
-        } else {
-          return res.redirect("/admin/login");
-        }
-      });
-    })
-    .catch((err) => console.log(err));
+  try {
+    const admin = await Admin.findOne({ email: email });
+    if (!admin) {
+      const error = new Error("Invalid email or password.");
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const doMatch = await bcrypt.compare(password, admin.password);
+    if (doMatch) {
+      console.log(process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { adminId: admin._id, email: admin.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "2h" }
+      );
+      console.log("encdoe: ", token);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decoded);
+      res.cookie("token", token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24* 7,
+      }); // 2h
+      console.log("logged in");
+      res.redirect("/admin");
+    } else {
+      const error = new Error("Invalid email or password.");
+      error.statusCode = 401;
+      throw error;
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(422).render("auth/login", {
+      path: "/login",
+      pageTitle: "login-PR",
+      isAuthenticated: false,
+      errorMessage: err.message,
+      oldInput: {
+        email: email,
+        password: password,
+      },
+      validationErrors: errors.array(),
+    });
+  }
 };
 
 exports.postLogout = (req, res, next) => {
