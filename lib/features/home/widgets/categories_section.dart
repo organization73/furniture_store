@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:furniture_store/common/widgets/images/circular_image.dart';
 import 'package:furniture_store/common/widgets/shimmer/category_shimmer.dart';
 import 'package:furniture_store/common/widgets/shimmer/shimmerLoader.dart';
 import 'package:furniture_store/features/home/controllers/category_controller.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/features/home/screens/categories_screen.dart';
-import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
@@ -27,7 +25,8 @@ class BuildCategoriesSection extends StatelessWidget {
         height: 56,
         margin: EdgeInsets.only(right: TSizes.spaceBtwItems),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0), border: Border.all()),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
         child: Stack(
           children: [
             Center(
@@ -41,6 +40,8 @@ class BuildCategoriesSection extends StatelessWidget {
                     ),
                   ),
                 ),
+                progressIndicatorBuilder: (context, url, progress) =>
+                    const ShimmerLoaderEffect(width: 125, height: 56),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -86,7 +87,7 @@ class BuildCategoriesSection extends StatelessWidget {
             return const CategoryShimmer();
           }
           if (categoryController.featuredCatedories.isEmpty) {
-            return const Text('no date found');
+            return const Text('No Categories Found');
           }
           return SizedBox(
             height: 56,

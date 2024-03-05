@@ -4,6 +4,7 @@ import 'package:furniture_store/common/widgets/appbar/tabbar.dart';
 import 'package:furniture_store/common/widgets/galleries/featured_gallery_card.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
+import 'package:furniture_store/features/home/controllers/category_controller.dart';
 import 'package:furniture_store/features/home/widgets/category_tab.dart';
 import 'package:furniture_store/features/home/widgets/search_bar.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
@@ -15,8 +16,10 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCatedories;
     return DefaultTabController(
-      length: 4,
+      length: categories.length,
+      
       child: Scaffold(
         body: NestedScrollView(
             headerSliverBuilder: (_, innerBoxIsScrollable) {
@@ -58,30 +61,16 @@ class StoreScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    bottom: const CustomTabBar(tabs: [
-                      Tab(
-                        child: Text('Chairs'),
-                      ),
-                      Tab(
-                        child: Text('Sofas'),
-                      ),
-                      Tab(
-                        child: Text('Beds'),
-                      ),
-                      Tab(
-                        child: Text('Lambs'),
-                      ),
-                    ]))
+                    bottom: CustomTabBar(
+                        tabs: categories
+                            .map((category) => Tab(child: Text(category.name)))
+                            .toList()))
               ];
             },
-            body: const TabBarView(
-              children: [
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-              ],
-            )),
+            body: TabBarView(
+                children: categories
+                    .map((category) => CategoryTab(category: category))
+                    .toList())),
       ),
     );
   }

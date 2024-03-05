@@ -1,7 +1,7 @@
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/category/category_repo.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
-import 'package:furniture_store/utils/popups/full_screen_loader.dart';
+import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
