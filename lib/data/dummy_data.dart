@@ -12,6 +12,7 @@ class DummyData {
       categoryId: '1',
       sku: 'AE55',
       productPrice: 200,
+      isFeatured: false,
       rates: [
         Review(
           reviewerName: 'John Doe',

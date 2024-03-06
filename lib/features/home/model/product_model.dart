@@ -16,6 +16,7 @@ class ProductModel {
   List<dynamic> rates = [];
   double productRating = 0;
   int productNumOfRating = 0;
+  bool? isFeatured;
 
   ProductModel({
     required this.productName,
@@ -26,6 +27,7 @@ class ProductModel {
     required this.onSale,
     required this.productDetails,
     this.rates = const [],
+    this.isFeatured=false,
     required this.sku,
     String id = '',
   }) : id = id.isEmpty ? const Uuid().v4() : id {
@@ -52,6 +54,7 @@ class ProductModel {
         'sku': sku,
         'productImage': productImage,
         'onSale': onSale,
+        'isFeatured': isFeatured,
         'rates': rates.map((rate) => rate.toJson()).toList(),
         'ProductDetails': productDetails.toJson(),
       };
@@ -71,6 +74,7 @@ class ProductModel {
         productSalePrice: data['productSalePrice']?.toDouble() ?? 0.0,
         productImage: data['productImage'] ?? '',
         onSale: data['onSale'] ?? false,
+        isFeatured: data['isFeatured'] ?? false,
         rates: data['rates'],
         productDetails: ProductDetails.fromJson(data['ProductDetails'] ?? {}),
       );
@@ -84,6 +88,7 @@ class ProductModel {
         productSalePrice: 0,
         productImage: '',
         onSale: false,
+        isFeatured: false,
         rates: [],
         productDetails: ProductDetails(
           condition: '',
@@ -126,8 +131,8 @@ class ProductDetails {
     required this.productDesc,
     required this.productStats,
     required this.productSeller,
-    this.date,
-  });
+    DateTime? date,
+  }) : date = date ?? DateTime.now();
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) {
     return ProductDetails(
