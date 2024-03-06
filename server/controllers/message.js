@@ -56,18 +56,30 @@ const charRoom = require("../models/chatRoom");
 const User = require("../models/user");
 const Admin = require("../models/admin");
 const ChatRoom = require("../models/chatRoom");
-// exports.allMessages = async (req, res) => {
-//   const user = req.admin || req.user;
-//   try {
-//     const messages = await Message.find({ chat: req.params.chatId })
-//       .populate("sender", "name pic email")
-//       .populate("chat");
-//     res.json(messages);
-//   } catch (error) {
-//     res.status(400);
-//     throw new Error(error.message);
-//   }
-// };
+
+exports.FetchMessages = async (req, res, next) => {
+  const user = req.admin || req.user;
+  const { roomId } = req.params;
+  try {
+    if (!roomId) {
+      throwError("No roomId provided", 400, "roomId");
+    }
+    const messages = await Message.find({ chatRoom: roomId })
+      .populate({
+        path: "sender",
+        model: "Admin",
+        select: "username",
+      })
+      .populate("chatRoom");
+    res.status(200).json(messages);
+  } catch (error) {
+    res.status(400);
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};
 
 exports.sendMessage = async (req, res, next) => {
   const user = req.admin || req.user;
@@ -84,8 +96,8 @@ exports.sendMessage = async (req, res, next) => {
     chatRoom: roomId,
     type: "text",
   };
-  console.log("newMessage:",newMessage);
-  console.log("user._id:",user._id);
+  console.log("newMessage:", newMessage);
+  console.log("user._id:", user._id);
 
   try {
     var message = await Message.create(newMessage);
@@ -94,7 +106,7 @@ exports.sendMessage = async (req, res, next) => {
       path: "sender",
       model: "Admin",
       select: "username email",
-    })
+    });
 
     message = await message.populate("chatRoom");
     message = await Admin.populate(message, {

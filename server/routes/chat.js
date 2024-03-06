@@ -32,7 +32,7 @@ router.put(
   chatController.removeUserFromGroupChatRoom
 );
  
-// router.get("/room/:roomId", adminAuth, chatController.getChatRoom);
+router.get("/room/:roomId", adminAuth, messageController.FetchMessages);
 //send message
 router.post("/message", adminAuth, messageController.sendMessage);
 
