@@ -42,7 +42,10 @@ class ProductModel {
       productPrice: json['productPrice']?.toDouble() ?? 0.0,
       productImage: json['productImage'] ?? '',
       onSale: json['onSale'] ?? false,
-      rates: List<dynamic>.from(json['rates'] ?? []),
+      // Ensure rates are correctly deserialized into a list of Review objects
+      rates: List<dynamic>.from(json['rates'] ?? [])
+          .map((rate) => Review.fromJson(rate))
+          .toList(),
       productDetails: ProductDetails.fromJson(json['ProductDetails'] ?? {}),
     );
   }
@@ -60,16 +63,23 @@ class ProductModel {
   factory ProductModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     if (snapshot.exists) {
+      // Ensure rates are correctly deserialized into a list of Review objects
+      data['rates'] = List<dynamic>.from(data['rates'] ?? [])
+          .map((rate) => Review.fromJson(rate))
+          .toList();
       return ProductModel(
         id: snapshot.id,
         productName: data['productName'] ?? '',
         productPrice: data['productPrice']?.toDouble() ?? 0.0,
         productImage: data['productImage'] ?? '',
         onSale: data['onSale'] ?? false,
-        rates: data['rates'] ?? [],
+        rates: data[
+            'rates'], // Now correctly deserialized as a list of Review objects
         productDetails: ProductDetails.fromJson(data['ProductDetails'] ?? {}),
       );
     } else {
+      // Handle the case where the document does not exist
+      // This is just a placeholder. You might want to return a default ProductModel or handle it differently.
       return ProductModel(
         id: '',
         productName: '',
