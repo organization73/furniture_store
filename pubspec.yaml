@@ -32,6 +32,8 @@ dependencies:
   fast_color_picker: ^0.1.1
   stability_image_generation: ^0.0.4
   path_provider: ^2.1.2
+  uuid: ^3.0.5
+
 
   # State Management
   get: ^4.6.6
@@ -69,6 +71,7 @@ flutter:
     - assets/images/content/
     - assets/images/products/
     - assets/images/galleries/
+    - assets/images/reviews/
     - assets/logos/
     - assets/animations/
 

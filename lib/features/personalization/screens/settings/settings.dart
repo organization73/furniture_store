@@ -7,6 +7,7 @@ import 'package:furniture_store/common/widgets/list_tiles/user_profile_tile.dart
 import 'package:furniture_store/data/dummy_data.dart';
 import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/data/repositories/category/category_repo.dart';
+import 'package:furniture_store/data/repositories/product/product_repo.dart';
 import 'package:furniture_store/features/manufacture_request/screens/manufacture_req_screen.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
@@ -149,11 +150,20 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   SettingsMenuTile(
                     icon: Iconsax.arrow_up_1,
-                    title: 'Upload categories',
+                    title: 'Upload Categories',
                     subTitle: 'Upload all catedories data to firebase',
                     onTap: () {
                       CategoryRepo.instance
                           .uploadDummyData(DummyData.categories);
+                    },
+                  ),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1,
+                    title: 'Upload Products',
+                    subTitle: 'Upload all products data to firebase',
+                    onTap: () {
+                      ProductRepo.instance
+                          .uploadProductsToFirestore(DummyData.products);
                     },
                   ),
                   SizedBox(

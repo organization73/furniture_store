@@ -1,8 +1,68 @@
 import 'package:furniture_store/features/home/model/banners_model.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 
 class DummyData {
+  static final List<ProductModel> products = [
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      productPrice: 200,
+      rates: [
+        Review(
+          reviewerName: 'John Doe',
+          rating: 4,
+          comment:
+              'Great product! It exceeded my expectations. Highly recommended.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Alice Smith',
+          rating: 3,
+          comment:
+              'The product is good, but it could use some improvements. The packaging was damaged.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Eva Johnson',
+          rating: 5,
+          comment:
+              'Absolutely love it! The quality is excellent, and delivery was super fast.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+      ],
+      productImage: TImages.productImage1,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage1,
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: ProductSeller(
+          name: 'ahmed',
+          location: 'Damieta',
+        ),
+      ),
+    ),
+  ];
+
   static final List<BannersModel> banners = [
     BannersModel(
         image:

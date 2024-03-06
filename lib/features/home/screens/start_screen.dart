@@ -5,6 +5,7 @@ import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
 import 'package:furniture_store/features/home/controllers/home_page_controller.dart';
+import 'package:furniture_store/features/home/controllers/product_controller.dart';
 import 'package:furniture_store/features/home/screens/store_screen.dart';
 import 'package:furniture_store/features/home/widgets/banners_slider.dart';
 import 'package:furniture_store/features/home/widgets/categories_section.dart';
@@ -21,6 +22,7 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {

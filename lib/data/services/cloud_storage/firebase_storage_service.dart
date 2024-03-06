@@ -13,6 +13,7 @@ class FirebaseStorageServices extends GetxController {
   Future<Uint8List> getImageDatafromAssets(String path) async {
     try {
       final byteData = await rootBundle.load(path);
+
       final imageData = byteData.buffer
           .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
       return imageData;
