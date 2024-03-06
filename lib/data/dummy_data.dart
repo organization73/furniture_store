@@ -1,12 +1,16 @@
 import 'package:furniture_store/features/home/model/banners_model.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
+import 'package:furniture_store/features/home/model/vendor_model.dart';
+import 'package:furniture_store/utils/constants/enums.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 
 class DummyData {
   static final List<ProductModel> products = [
     ProductModel(
       productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE55',
       productPrice: 200,
       rates: [
         Review(
@@ -34,6 +38,7 @@ class DummyData {
       productImage: TImages.productImage1,
       onSale: false,
       productDetails: ProductDetails(
+      
         condition: 'used',
         color: 'red',
         productListImages: [
@@ -51,15 +56,23 @@ class DummyData {
         productDesc:
             'A big red bed with unrivaled comfort and a striking visual experience.',
         productStats: ProductStats(
+
           delivery: true,
           negotiable: false,
           modifiable: true,
         ),
-        productSeller: ProductSeller(
-          name: 'ahmed',
-          location: 'Damieta',
-        ),
+        productSeller: VendorModel(
+            name: 'ahmed',
+            location: 'Damietta',
+            id: '1',
+
+            image:
+                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            isFeatured: false,
+            productsCount: 0,
+            accountType: AccountType.regular),
       ),
+      productSalePrice: 100,
     ),
   ];
 

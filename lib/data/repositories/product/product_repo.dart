@@ -78,4 +78,43 @@ class ProductRepo extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
+
+  Future<void> addProduct(ProductModel product) async {
+    try {
+      FullScreenLoader.openLoadingDialog(
+          'Uploading Data...', 'assets/animations/animation-of-docer.json');
+
+      final CollectionReference products = _db.collection('Products');
+
+      // Check if a product with the same ID already exists
+      final DocumentSnapshot existingProduct =
+          await products.doc(product.id).get();
+
+      if (existingProduct.exists) {
+        // Display a message if the product already exists
+        FullScreenLoader.stopLoading();
+
+        TLoaders.warningSnackBar(
+            title: 'Product Exist',
+            message: 'A product with the same ID exits');
+        return;
+      } else {
+        // Add the new product if it's unique
+        await products.doc(product.id).set(product.toJson());
+      }
+
+      FullScreenLoader.stopLoading();
+
+      TLoaders.successSnackBar(
+          title: 'Uploading Completed',
+          message: 'All categories data has been uploaded to firestore');
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      LoggerHelper.error('error', e);
+      throw 'Something went wrong, Please try again';
+    }
+  }
 }

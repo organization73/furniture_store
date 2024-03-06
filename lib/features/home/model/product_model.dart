@@ -1,24 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:furniture_store/features/home/model/vendor_model.dart';
+import 'package:furniture_store/utils/constants/enums.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductModel {
-  final String id;
-  late String productName;
-  late double productPrice;
-  late String productImage;
-  late bool onSale;
-  late ProductDetails productDetails;
+  String id;
+  String sku;
+  String productName;
+  String categoryId;
+  double productPrice;
+  double productSalePrice;
+  String productImage;
+  bool onSale;
+  ProductDetails productDetails;
   List<dynamic> rates = [];
   double productRating = 0;
   int productNumOfRating = 0;
 
   ProductModel({
     required this.productName,
+    required this.categoryId,
     required this.productPrice,
+    required this.productSalePrice,
     required this.productImage,
     required this.onSale,
     required this.productDetails,
     this.rates = const [],
+    required this.sku,
     String id = '',
   }) : id = id.isEmpty ? const Uuid().v4() : id {
     updateRates();
@@ -35,25 +43,13 @@ class ProductModel {
     }
   }
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id: json['id'] ?? '',
-      productName: json['productName'] ?? '',
-      productPrice: json['productPrice']?.toDouble() ?? 0.0,
-      productImage: json['productImage'] ?? '',
-      onSale: json['onSale'] ?? false,
-      // Ensure rates are correctly deserialized into a list of Review objects
-      rates: List<dynamic>.from(json['rates'] ?? [])
-          .map((rate) => Review.fromJson(rate))
-          .toList(),
-      productDetails: ProductDetails.fromJson(json['ProductDetails'] ?? {}),
-    );
-  }
-
   Map<String, dynamic> toJson() => {
         'id': id,
         'productName': productName,
+        'categoryId': categoryId,
         'productPrice': productPrice,
+        'productSalePrice': productSalePrice,
+        'sku': sku,
         'productImage': productImage,
         'onSale': onSale,
         'rates': rates.map((rate) => rate.toJson()).toList(),
@@ -63,27 +59,29 @@ class ProductModel {
   factory ProductModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     if (snapshot.exists) {
-      // Ensure rates are correctly deserialized into a list of Review objects
       data['rates'] = List<dynamic>.from(data['rates'] ?? [])
           .map((rate) => Review.fromJson(rate))
           .toList();
       return ProductModel(
         id: snapshot.id,
         productName: data['productName'] ?? '',
+        sku: data['sku'] ?? '',
+        categoryId: data['categoryId'] ?? '',
         productPrice: data['productPrice']?.toDouble() ?? 0.0,
+        productSalePrice: data['productSalePrice']?.toDouble() ?? 0.0,
         productImage: data['productImage'] ?? '',
         onSale: data['onSale'] ?? false,
-        rates: data[
-            'rates'], // Now correctly deserialized as a list of Review objects
+        rates: data['rates'],
         productDetails: ProductDetails.fromJson(data['ProductDetails'] ?? {}),
       );
     } else {
-      // Handle the case where the document does not exist
-      // This is just a placeholder. You might want to return a default ProductModel or handle it differently.
       return ProductModel(
         id: '',
         productName: '',
+        categoryId: '',
+        sku: '',
         productPrice: 0.0,
+        productSalePrice: 0,
         productImage: '',
         onSale: false,
         rates: [],
@@ -93,32 +91,20 @@ class ProductModel {
           productListImages: [],
           productSpecs: {},
           productDesc: '',
+          date: DateTime.now(),
           productStats: ProductStats(
               delivery: false, negotiable: false, modifiable: false),
-          productSeller: ProductSeller(name: '', location: ''),
+          productSeller: VendorModel(
+              name: '',
+              location: '',
+              id: '',
+              image: '',
+              isFeatured: false,
+              productsCount: 0,
+              accountType: AccountType.regular),
         ),
       );
     }
-  }
-
-  ProductModel copyWith({
-    String? id,
-    String? productName,
-    double? productPrice,
-    String? productImage,
-    bool? onSale,
-    List<dynamic>? rates,
-    ProductDetails? productDetails,
-  }) {
-    return ProductModel(
-      id: id ?? this.id,
-      productName: productName ?? this.productName,
-      productPrice: productPrice ?? this.productPrice,
-      productImage: productImage ?? this.productImage,
-      onSale: onSale ?? this.onSale,
-      rates: rates ?? this.rates,
-      productDetails: productDetails ?? this.productDetails,
-    );
   }
 }
 
@@ -129,7 +115,8 @@ class ProductDetails {
   Map<String, String> productSpecs;
   String productDesc;
   ProductStats productStats;
-  ProductSeller productSeller;
+  VendorModel productSeller;
+  DateTime? date;
 
   ProductDetails({
     required this.condition,
@@ -139,6 +126,7 @@ class ProductDetails {
     required this.productDesc,
     required this.productStats,
     required this.productSeller,
+    this.date,
   });
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) {
@@ -149,7 +137,8 @@ class ProductDetails {
       productSpecs: Map<String, String>.from(json['productSpecs'] ?? {}),
       productDesc: json['productDesc'] ?? '',
       productStats: ProductStats.fromJson(json['productStats'] ?? {}),
-      productSeller: ProductSeller.fromJson(json['productSeller'] ?? {}),
+      productSeller: VendorModel.fromJson(json['productSeller'] ?? {}),
+      date: json['date'] as DateTime? ?? DateTime.now(),
     );
   }
 
@@ -161,6 +150,7 @@ class ProductDetails {
         'productDesc': productDesc,
         'productStats': productStats.toJson(),
         'productSeller': productSeller.toJson(),
+        'date': date,
       };
 }
 
@@ -187,28 +177,6 @@ class ProductStats {
         'Delivery': delivery,
         'Negotiable': negotiable,
         'Modifiable': modifiable,
-      };
-}
-
-class ProductSeller {
-  String name;
-  String location;
-
-  ProductSeller({
-    required this.name,
-    required this.location,
-  });
-
-  factory ProductSeller.fromJson(Map<String, dynamic> json) {
-    return ProductSeller(
-      name: json['name'] ?? '',
-      location: json['location'] ?? '',
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'location': location,
       };
 }
 
