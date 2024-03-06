@@ -67,7 +67,9 @@ class CategoriesPage extends StatelessWidget {
                 padding: EdgeInsets.all(TSizes.pagePaddingSpace),
                 child: GridLayout(
                     itemCount: 8,
-                    itemBuilder: (_, index) => const ProductCardVerical()),
+                    itemBuilder: (_, index) => Text('data') //const ProductCardVerical()
+                    
+                    ),
               ),
             ]),
           ),

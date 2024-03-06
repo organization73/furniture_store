@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_image_slider.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_meta_data.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_rating_container.dart';
@@ -6,8 +7,9 @@ import 'package:furniture_store/global/global_variables.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
-class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+class ProductDetailsScreen extends StatelessWidget {
+  const ProductDetailsScreen({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

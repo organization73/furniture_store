@@ -6,6 +6,7 @@ import 'package:furniture_store/common/widgets/images/rounded_image.dart';
 import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:furniture_store/common/widgets/texts/product_price_text.dart';
 import 'package:furniture_store/common/widgets/texts/product_title_text.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_details/product_details_screen.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
@@ -15,14 +16,15 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductCardVerical extends StatelessWidget {
-  const ProductCardVerical({super.key});
+  const ProductCardVerical({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: () => Get.to(
-        () => const ProductDetails(),
+        () =>  ProductDetailsScreen(product:product ,),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       ),
@@ -43,11 +45,12 @@ class ProductCardVerical extends StatelessWidget {
               backgroundColor: dark ? TColors.black : TColors.light,
               child: Stack(
                 children: [
-                  const Align(
+                   Align(
                     alignment: Alignment.center,
                     child: RoundedImage(
-                      imageUrl: TImages.productImage1,
+                      imageUrl: product.productImage,
                       applyImageRaduis: true,
+                      isNetworkImage: true,
                     ),
                   ),
                   Positioned(
@@ -85,23 +88,23 @@ class ProductCardVerical extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: Directionality(
-                  textDirection: TextDirection.ltr, // Force LTR directionality
+                  textDirection: TextDirection.ltr,
 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ProductTitleText(
-                        title: 'Bed with red sheets and wodden frame',
+                       ProductTitleText(
+                        title: product.productName,
                         smallSize: true,
                       ),
                       SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                      const Row(
+                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           BrandTitleTextWithVerifiedIcon(
-                            title: 'Sameh',
+                            title: product.productDetails.productSeller.name,
                           ),
                         ],
                       ),
@@ -116,7 +119,7 @@ class ProductCardVerical extends StatelessWidget {
               child: Row(
                 children: [
                   ProductPriceText(
-                    price: 22.toStringAsFixed(1),
+                    price: product.productPrice.toStringAsFixed(1),
                   ),
                   const Spacer(),
                   const Icon(

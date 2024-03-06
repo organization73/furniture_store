@@ -4,6 +4,7 @@ import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
+import 'package:furniture_store/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/home_page_controller.dart';
 import 'package:furniture_store/features/home/controllers/product_controller.dart';
 import 'package:furniture_store/features/home/screens/store_screen.dart';
@@ -22,7 +23,7 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProductController());
+    final productsController = Get.put(ProductController());
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {
@@ -74,10 +75,22 @@ class StartPage extends StatelessWidget {
                               SizedBox(
                                 height: TSizes.spaceBtwItems,
                               ),
-                              GridLayout(
-                                  itemCount: 4,
-                                  itemBuilder: (_, index) =>
-                                      const ProductCardVerical()),
+                              Obx(() {
+                                if (productsController.isLoading.value) {
+                                  return const VerticalProductShimmer();
+                                }
+                                if (productsController
+                                    .featuredProducts.isEmpty) {
+                                  return const Center(
+                                      child: Text('No Products Found'));
+                                }
+                                return GridLayout(
+                                    itemCount: productsController
+                                    .featuredProducts.length,
+                                    itemBuilder: (_, index) =>
+                                         ProductCardVerical(product: productsController
+                                    .featuredProducts[index],));
+                              }),
                               const BuildTopGalleriesSection(),
                               const BuildRoomsSection(),
                             ],

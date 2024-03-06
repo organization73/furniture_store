@@ -50,7 +50,9 @@ class FavouritsPage extends StatelessWidget {
                           GridLayout(
                               itemCount: favList.length,
                               itemBuilder: (_, index) {
-                                return const ProductCardVerical();
+                                return Text('data');
+
+                                //const ProductCardVerical();
                               }),
                         ],
                       ),

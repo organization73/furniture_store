@@ -28,7 +28,29 @@ class ProductRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      LoggerHelper.error('errrrrrrrrrrr', e);
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> fetchFeaturedProducts() async {
+    try {
+      final snapshot = await _db
+          .collection('Products')
+          .where('isFeatured', isEqualTo: true)
+          .limit(4)
+          .get();
+
+      final list = snapshot.docs
+          .map((document) => ProductModel.fromFirebaseDocument(document))
+          .toList();
+
+      return list;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+            LoggerHelper.error('err', e);
 
       throw 'Something went wrong, Please try again';
     }

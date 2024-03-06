@@ -12,7 +12,7 @@ class DummyData {
       categoryId: '1',
       sku: 'AE55',
       productPrice: 200,
-      isFeatured: false,
+      isFeatured: true,
       rates: [
         Review(
           reviewerName: 'John Doe',
@@ -39,7 +39,6 @@ class DummyData {
       productImage: TImages.productImage1,
       onSale: false,
       productDetails: ProductDetails(
-      
         condition: 'used',
         color: 'red',
         productListImages: [
@@ -57,7 +56,6 @@ class DummyData {
         productDesc:
             'A big red bed with unrivaled comfort and a striking visual experience.',
         productStats: ProductStats(
-
           delivery: true,
           negotiable: false,
           modifiable: true,
@@ -66,7 +64,266 @@ class DummyData {
             name: 'ahmed',
             location: 'Damietta',
             id: '1',
-
+            image:
+                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            isFeatured: false,
+            productsCount: 0,
+            accountType: AccountType.regular),
+      ),
+      productSalePrice: 100,
+    ),
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE55',
+      productPrice: 200,
+      isFeatured: true,
+      rates: [
+        Review(
+          reviewerName: 'John Doe',
+          rating: 4,
+          comment:
+              'Great product! It exceeded my expectations. Highly recommended.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Alice Smith',
+          rating: 3,
+          comment:
+              'The product is good, but it could use some improvements. The packaging was damaged.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Eva Johnson',
+          rating: 5,
+          comment:
+              'Absolutely love it! The quality is excellent, and delivery was super fast.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+      ],
+      productImage: TImages.productImage1,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage1,
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'ahmed',
+            location: 'Damietta',
+            id: '1',
+            image:
+                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            isFeatured: false,
+            productsCount: 0,
+            accountType: AccountType.regular),
+      ),
+      productSalePrice: 100,
+    ),
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE55',
+      productPrice: 200,
+      isFeatured: true,
+      rates: [
+        Review(
+          reviewerName: 'John Doe',
+          rating: 4,
+          comment:
+              'Great product! It exceeded my expectations. Highly recommended.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Alice Smith',
+          rating: 3,
+          comment:
+              'The product is good, but it could use some improvements. The packaging was damaged.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Eva Johnson',
+          rating: 5,
+          comment:
+              'Absolutely love it! The quality is excellent, and delivery was super fast.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+      ],
+      productImage: TImages.productImage1,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage1,
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'ahmed',
+            location: 'Damietta',
+            id: '1',
+            image:
+                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            isFeatured: false,
+            productsCount: 0,
+            accountType: AccountType.regular),
+      ),
+      productSalePrice: 100,
+    ),
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE55',
+      productPrice: 200,
+      isFeatured: true,
+      rates: [
+        Review(
+          reviewerName: 'John Doe',
+          rating: 4,
+          comment:
+              'Great product! It exceeded my expectations. Highly recommended.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Alice Smith',
+          rating: 3,
+          comment:
+              'The product is good, but it could use some improvements. The packaging was damaged.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Eva Johnson',
+          rating: 5,
+          comment:
+              'Absolutely love it! The quality is excellent, and delivery was super fast.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+      ],
+      productImage: TImages.productImage1,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage1,
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'ahmed',
+            location: 'Damietta',
+            id: '1',
+            image:
+                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            isFeatured: false,
+            productsCount: 0,
+            accountType: AccountType.regular),
+      ),
+      productSalePrice: 100,
+    ),
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE55',
+      productPrice: 200,
+      isFeatured: true,
+      rates: [
+        Review(
+          reviewerName: 'John Doe',
+          rating: 4,
+          comment:
+              'Great product! It exceeded my expectations. Highly recommended.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Alice Smith',
+          rating: 3,
+          comment:
+              'The product is good, but it could use some improvements. The packaging was damaged.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+        Review(
+          reviewerName: 'Eva Johnson',
+          rating: 5,
+          comment:
+              'Absolutely love it! The quality is excellent, and delivery was super fast.',
+          timestamp: "2023-12-15/2:25 AM",
+        ),
+      ],
+      productImage: TImages.productImage1,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage1,
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'ahmed',
+            location: 'Damietta',
+            id: '1',
             image:
                 'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
             isFeatured: false,

@@ -27,7 +27,7 @@ class ProductModel {
     required this.onSale,
     required this.productDetails,
     this.rates = const [],
-    this.isFeatured=false,
+    this.isFeatured = false,
     required this.sku,
     String id = '',
   }) : id = id.isEmpty ? const Uuid().v4() : id {
@@ -143,7 +143,7 @@ class ProductDetails {
       productDesc: json['productDesc'] ?? '',
       productStats: ProductStats.fromJson(json['productStats'] ?? {}),
       productSeller: VendorModel.fromJson(json['productSeller'] ?? {}),
-      date: json['date'] as DateTime? ?? DateTime.now(),
+      date: (json['date'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
@@ -155,7 +155,7 @@ class ProductDetails {
         'productDesc': productDesc,
         'productStats': productStats.toJson(),
         'productSeller': productSeller.toJson(),
-        'date': date,
+        'date': Timestamp.fromDate(date ?? DateTime.now()),
       };
 }
 
