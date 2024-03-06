@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const Admin = require("../models/admin");
 const User = require("../models/user");
 
@@ -198,6 +200,56 @@ exports.fetchChatRooms = async (req, res, next) => {
     next(err);
   }
 };
+
+/* /chat/group => POST request */
+exports.createGroupChatRoom = async (req, res, next) => {
+  const user = req.admin || req.user;
+  const name = req.body.name;
+  if (!req.body.users || !req.body.name) {
+    return res.status(400).send({ message: "Please Fill all the feilds" });
+  }
+
+  // Split the comma-separated user IDs and convert them to ObjectId
+  
+  const users = JSON.parse(req.body.users)
+    .map((userId) => new mongoose.Types.ObjectId(userId.trim()));
+
+  if (users.length < 2) {
+    return res
+      .status(400)
+      .send("More than 2 users are required to form a group chat");
+  }
+
+  users.push(user._id);
+
+  try {
+    console.log(name, users, user);
+    const chatRoom = new ChatRoom({
+      fullName: name,
+      users: users,
+      isGroupChat: true,
+      admin: user._id,
+    });
+    console.log("here");
+    const savedChatRoom = await chatRoom.save();
+    const populatedChatRoom = await ChatRoom.findById(savedChatRoom._id)
+      .populate({
+        path: "users",
+        model: "Admin",
+        select: "-password",
+      })
+    console.log("here3");
+    res
+      .status(201)
+      .json({ message: "Group chat room created", populatedChatRoom });
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};
+
 exports.sendMessage = async (req, res, next) => {
   const user = req.admin || req.user;
   const { roomId, message } = req.body;

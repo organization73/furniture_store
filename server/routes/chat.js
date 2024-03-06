@@ -14,7 +14,7 @@ router.get("/users", adminAuth, chatController.allUsers);
 //access or create chat room
 router.post("/access-room", adminAuth, chatController.accessChatRoom);
 
-// router.post("/group", adminAuth, chatController.createGroupChatRoom);
+router.post("/group", adminAuth, chatController.createGroupChatRoom);
 
 // router.put("/rename-group", adminAuth, chatController.renameGroupChatRoom);
 
