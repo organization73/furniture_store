@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/images/circular_image.dart';
-import 'package:furniture_store/common/widgets/shimmer/shimmerLoader.dart';
-import 'package:furniture_store/common/widgets/user_profile/profile_widget.dart';
+import 'package:furniture_store/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:get/get.dart';

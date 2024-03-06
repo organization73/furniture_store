@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_store/common/widgets/shimmer/shimmerLoader.dart';
+import 'package:furniture_store/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 class CategoryShimmer extends StatelessWidget {

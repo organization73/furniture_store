@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/images/circular_image.dart';
-import 'package:furniture_store/common/widgets/images/rounded_image.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;

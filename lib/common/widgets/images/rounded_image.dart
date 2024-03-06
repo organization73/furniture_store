@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_store/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 class RoundedImage extends StatelessWidget {
@@ -43,11 +45,27 @@ class RoundedImage extends StatelessWidget {
           borderRadius: applyImageRaduis
               ? BorderRadius.circular(borderRaduis)
               : BorderRadius.zero,
-          child: Image(
-              fit: fit,
-              image: isNetworkImage
-                  ? NetworkImage(imageUrl)
-                  : AssetImage(imageUrl) as ImageProvider),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      ShimmerLoaderEffect(
+                    width: width ?? double.infinity,
+                    height: height ?? 150,
+                    raduis: borderRaduis,
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    size: TSizes.iconLg,
+                  ),
+                )
+              : Image(
+                  fit: fit,
+                  image: isNetworkImage
+                      ? NetworkImage(imageUrl)
+                      : AssetImage(imageUrl) as ImageProvider,
+                ),
         ),
       ),
     );
