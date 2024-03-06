@@ -11,7 +11,9 @@ socket.emit("signin");
 const contactListItems = document.getElementById("contact-list-items");
 const addContactButton = document.getElementById("open-contact");
 const contactDropdown = document.getElementById("contact-dropdown");
+//send message
 const messageContainer = document.getElementById("message-input");
+const sendBtn = document.getElementById("send-message-btn");
 //search contact
 const input = document.getElementById("contact-input");
 const suggestions = document.getElementById("contact-suggestions");
@@ -154,13 +156,14 @@ function selectContact() {
 }
 
 // Function to send a message to the currently selected contact
+sendBtn.addEventListener("click", sendMessage);
 async function sendMessage() {
   const message = messageContainer.value;
   if (message) {
     const selectedContact = document.querySelector("#contact-list li.selected");
     const messagesList = document.getElementById("messages-list");
     try {
-      const data = await fetch(`/chat/message`, {
+      const response = await fetch(`/chat/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -170,10 +173,12 @@ async function sendMessage() {
           roomId: selectedContact.dataset.id,
         }),
       });
-      if (data.status !== 201) {
+      if (response.status !== 201 && response.status !== 200) {
         // console.log("Error sending message");
         throw new Error("Error sending message");
       }
+      const newMessage = await response.json();
+
     } catch (error) {
       return console.log(error);
     }

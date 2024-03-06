@@ -145,11 +145,11 @@
       <ul id="messages-list"></ul>
     </div>
     <input type="text" id="message-input" placeholder="Enter message" disabled/>
-    <button onclick="sendMessage()">Send</button>
+    <button id="send-message-btn">Send</button>
   </div>
 
   <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
-  <script src="/js/chat-room.js"></script>
+  <script defer src="/js/chat-room.js"></script>
 
   <%- include('../includes/end.ejs') %>
 </body>
