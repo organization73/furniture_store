@@ -1,334 +1,378 @@
 <%- include('../includes/head.ejs') %>
 <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    #contact-list {
-      width: 200px;
-      height: 100vh;
-      float: left;
-      border-right: 1px solid black;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #contact-list h2 {
-      margin: 0;
-      padding: 10px;
-      background-color: #eee;
-    }
-
-    #contact-list input[type="text"] {
-      margin: 10px;
-      padding: 5px;
-    }
-
-    #contact-list button {
-      margin: 10px;
-      padding: 5px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-    }
-
-    #contact-list ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      overflow-y: scroll;
-      flex: 1;
-    }
-
-    #contact-list li {
-      padding: 10px;
-      background-color: #f5f5f5;
-      cursor: pointer;
-    }
-
-    #contact-list li.selected {
-      background-color: #ddd;
-    }
-
-    #chat-room {
-      margin-left: 200px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #chat-room h2 {
-      margin: 0;
-      padding: 10px;
-      background-color: #eee;
-    }
-
-    #messages {
-      height: 400px;
-      overflow-y: scroll;
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-
-    #message-input {
-      margin-bottom: 10px;
-    }
-
-    button {
-      padding: 5px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-    }
-    #contact-dropdown {
-  height: 30px;
-  margin: 10px;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
   }
-  </style>
+
+  #contact-list {
+    width: 200px;
+    height: 100vh;
+    float: left;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #contact-list h2 {
+    margin: 0;
+    padding: 10px;
+    background-color: #eee;
+  }
+
+  #contact-list input[type="text"] {
+    margin: 10px;
+    padding: 5px;
+  }
+
+  #contact-list button {
+    margin: 10px;
+    padding: 5px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+
+  #contact-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    flex: 1;
+  }
+
+  #contact-list li {
+    padding: 10px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+
+  #contact-list li.selected {
+    background-color: #ddd;
+  }
+
+  #chat-room {
+    margin-left: 200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #chat-room h2 {
+    margin: 0;
+    padding: 10px;
+    background-color: #eee;
+  }
+
+  #messages {
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #message-input {
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 5px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+
+  #contact-dropdown {
+    height: 30px;
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  /* xv */
+  #contact-suggestions {
+  background-color: #f1f1f1;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 10;
+  display: none;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#contact-suggestions p {
+  padding: 5px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+  #contact-suggestions p:hover {
+    background-color: #f0f0f0;
+  }
+</style>
 </head>
 
 <body>
-    <%- include('../includes/navigation.ejs') %>
-    <div id="contact-list">
-        <h2>Contact List</h2>
-        <input type="text" id="contact-input" placeholder="Enter user ID" />
-        <select id="contact-dropdown">
-          <option value="1">user id</option>
-          <option value="2">use name</option>
-          <option value="3">phone number</option> 
-          <option value="4">eamil</option>
-        </select>
-        <button id="open-contact">Add</button>
-        <ul id="contact-list-items"></ul>
-      </div>
-  
-      <div id="chat-room">
-        <h2>Chat Room</h2>
-        <div id="messages">
-          <ul id="messages-list"></ul>
-        </div>
-        <input type="text" id="message-input" placeholder="Enter message" />
-        <button onclick="sendMessage()">Send</button>
-      </div>
+  <%- include('../includes/navigation.ejs') %>
+  <div id="contact-list">
+    <h2>Contact List</h2>
+    <input type="text" id="contact-input" placeholder="Enter user ID">
+    <div id="contact-suggestions"></div>
+    <select id="contact-dropdown">
+      <option value="1">user id</option>
+      <option value="2">use name</option>
+      <option value="3">phone number</option>
+      <option value="4">eamil</option>
+    </select>
+    <button id="open-contact">Add</button>
+    <ul id="contact-list-items"></ul>
+  </div>
 
-      <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>      
+  <div id="chat-room">
+    <h2>Chat Room</h2>
+    <div id="messages">
+      <ul id="messages-list"></ul>
+    </div>
+    <input type="text" id="message-input" placeholder="Enter message" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
 
-  
-      <script>   
-        //signin
-        const socket = io();
-        socket.emit('signin',{contactId});
-        
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+  <script>
+    //db
+    const currentUser = '<%= currentUserId %>';
+    const currentUserId = currentUser._id;
+    let currentRoomId={};
+  </script>
+
+  <script>
+    //signin
+    const socket = io();
+    socket.emit('signin');
+
+    // Initialize an empty contact list
+    const contactListItems = document.getElementById("contact-list-items");
+    const addContactButton = document.getElementById("open-contact");
+    const contactDropdown = document.getElementById("contact-dropdown");
+    //search contact
+    const input = document.getElementById('contact-input');
+    const suggestions = document.getElementById('contact-suggestions');
+
+    input.addEventListener('input',async () => {
+      const value = input.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (value.length === 0) {
+        return;
+      }
+      let response = await fetch(`/chat/users?search=${value.trim()}`);
+      response = await response.json();
+      const contacts = response.users;
+      console.log('value', value);
       
-        // Initialize an empty contact list
-        const contactListItems = document.getElementById("contact-list-items");
-        const addContactButton = document.getElementById("open-contact");
-        const contactDropdown = document.getElementById("contact-dropdown");
+      // const filteredContacts = contacts.filter(contact => {
+      //   console.log('contact:', contact);
+      //   return contact.username.toLowerCase().includes(value)
+      // });
+      // console.log('contacts:', filteredContacts);
+      // if (filteredContacts.length === 0) {
+      //   return;
+      // }
+      filteredContacts = contacts;
 
-        //fetching data from server
-        fetch('/chat/rooms')
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
+      filteredContacts.forEach(contact => {
+        const p = document.createElement('p');
+        p.textContent = contact.username;
+        p.contact = contact;
+        p.addEventListener('click', () => {
+          input.value = contact.username;
+          input.dataset.id = contact._id;
+          suggestions.style.display = 'none';
+        });
+        suggestions.appendChild(p);
+      });      
+      suggestions.style.display = 'block';
+    });
+
+    //selecting a search contact
+    document.addEventListener('click', (event) => {
+      if (!event.target.matches('#contact-input')) {
+        suggestions.style.display = 'none';
+      }
+    });
+
+    //fetching data from server
+    fetch('/chat/rooms')
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
         console.log(data);
         console.log(typeof data.chatRooms);
         data.chatRooms.forEach(chatRoom => {
           const listItem = document.createElement("li");
-          listItem.addEventListener("click",selectContact);
+          listItem.addEventListener("click", selectContact);
           listItem.textContent = chatRoom.fullName;
           listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
           contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
         });
-        }).catch(err => {
-          console.log(err);
-        });
-        
-        const contacts = [];
-        const protocol = window.location.protocol;
-        const hostname = window.location.hostname;
-        const port = window.location.port;
-        const url = `${protocol}://${hostname}:${port}`;
-  
-        // Function to add a new contact to the list
-        addContactButton.addEventListener("click", addContact);
-        async function addContact() {
-          //input field
-          const contactId = document.getElementById("contact-input").value;
-          // Get the selected value
-          const selectedValue = contactDropdown.value;
-          let reqBody;
-          switch (selectedValue) {
-            case "1":
-              console.log("User selected User ID");
-              // Perform some action based on user selecting User ID
-              reqBody = {
-                seondaryUserId: contactId,
-              };
-              break;
-            case "2":
-              console.log("User selected User name");
-              // Perform some action based on user selecting User name
-              break;
-            case "3":
-              console.log("User selected Phone number");
-              // Perform some action based on user selecting Phone number
-              break;
-            case "4":
-              console.log("User selected Email");
-              // Perform some action based on user selecting Email
-              break;
-            default:
-              console.log("Invalid selection");
-              // Perform some action if the selected value is not a valid option
+      }).catch(err => {
+        console.log(err);
+      });
+
+    const contacts = [];
+    const protocol = window.location.protocol;
+    const hostname = window.location.hostname;
+    const port = window.location.port;
+    const url = `${protocol}://${hostname}:${port}`;
+
+    // Function to add a new contact to the list
+    addContactButton.addEventListener("click", addContact);
+    async function addContact() {
+      
+      //add new contact in the db on server
+      try{
+        const 
+      }catch(err){
+        return console.log(err);
+      }
+      
+
+      const listItem = document.createElement("li");
+      listItem.textContent = input.value;
+      listItem.dataset.userId = input.dataset.id; // Add a data-contact-id attribute to the list item
+      //clean the input field
+      input.value = '';
+      input.dataset.id = '';
+      contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
+      
+    }
+
+    // Function to select a contact and send a GET request to the API
+    function selectContact() {
+      const contactId = this.dataset.id;
+      // Remove the "selected" class from any previously selected contact
+      const previouslySelectedContact = document.querySelector(
+        "#contact-list li.selected"
+      );
+      if (previouslySelectedContact) {
+        previouslySelectedContact.classList.remove("selected");
+      }
+      // Add the "selected" class to the newly selected contact
+      const newSelectedContact = document.querySelector(
+        `#contact-list li[data-id="${contactId}"]`
+      );
+      if (newSelectedContact) {
+        newSelectedContact.classList.add("selected");
+      }
+      // Clear any existing messages
+      const messagesDiv = document.getElementById("messages-list");
+      messagesDiv.innerHTML = "";
+
+      console.log('join room', contactId);
+
+      // Send a GET request to the API to retrieve messages for the selected contact
+      // fetch(`/chat/room/${contactId}`)
+      //   .then((response) => response.json())
+      //   .then((messages) => {
+      //     // Clear any existing messages
+      //     const messagesDiv = document.getElementById("messages");
+      //     messagesDiv.innerHTML = "";
+      //     // Add the new messages to the messages div
+      //     messages.forEach((message) => {
+      //       const messageElement = document.createElement("p");
+      //       messageElement.textContent = `${message.sender}: ${message.text}`;
+      //       messagesDiv.appendChild(messageElement);
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error retrieving messages:", error);
+      //   });
+    }
+
+    // Function to send a new message to the selected contact
+    // Function to send a message to the currently selected contact
+    async function sendMessage() {
+      const message = document.getElementById("message-input").value;
+      if (message) {
+        const selectedContact = document.querySelector(
+          "#contact-list li.selected"
+        );
+        const messagesDiv = document.getElementById("messages-list");
+        try {
+          const data = await fetch(`/chat/message`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message,
+              roomId: selectedContact.dataset.id
+            }),
+          });
+          if (data.status !== 201) {
+            // console.log("Error sending message");
+            throw new Error("Error sending message");
           }
-          if (contactId && !contacts.includes(contactId)) {
-            //sending requist.
-            let response;
-            try{
-              const creatRoomUrl = `${url}/chat/create-chat-room`;
-               response = await fetch("/chat/create-chat-room", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(reqBody),
-              })
-              console.log("req end")
-            }catch(err){
-              console.log('eee',err);
-              return;
-            }
-            if (response.status !== 201) {
-              console.log("Error creating chat room");
-              return;
-            }
-           const data = await response.json();
-            contacts.unshift(contactId); // Add the new contact to the beginning of the list
-            const listItem = document.createElement("li");
-            listItem.textContent = data.fullName;
-            listItem.dataset.userId = data.chatRoom._id; // Add a data-contact-id attribute to the list item
-            contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
-          }
+        } catch (error) {
+          return console.log(error);
         }
 
-        // Function to select a contact and send a GET request to the API
-        function selectContact() {
-          const contactId = this.dataset.id;
-          // Remove the "selected" class from any previously selected contact
-          const previouslySelectedContact = document.querySelector(
-            "#contact-list li.selected"
-          );
-          if (previouslySelectedContact) {
-            previouslySelectedContact.classList.remove("selected");
-          }
-          // Add the "selected" class to the newly selected contact
-          const newSelectedContact = document.querySelector(
-            `#contact-list li[data-id="${contactId}"]`
-          );
-          if (newSelectedContact) {
-            newSelectedContact.classList.add("selected");
-          }
-          // Clear any existing messages
-          const messagesDiv = document.getElementById("messages-list");
-          messagesDiv.innerHTML = "";
-          
-          console.log('join room',contactId);
+        const messageElement = document.createElement("li");
+        messageElement.textContent = `${selectedContact.textContent.split(" ")[0]}: ${message}`;
+        messagesDiv.appendChild(messageElement);
+        document.getElementById("message-input").value = "";
+      }
+    }
+    // function sendMessage() {
+    //   const messageInput = document.getElementById("message-input");
+    //   const messageText = messageInput.value;
+    //   // if (messageText && contacts.length > 0) {
+    //   if (messageText) {
+    //     const selectedContact = document.querySelector(
+    //       "#contact-list li.selected"
+    //     );
+    //     if (selectedContact) {
+    //       const contactId = selectedContact.dataset.contactId;
+    //       const message = {
+    //         sender: "You",
+    //         text: messageText,
+    //       };
+    //       fetch(`/api/messages/${contactId}`, {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(message),
+    //       })
+    //         .then((response) => response.json())
+    //         .then((newMessage) => {
+    //           // Add the new message to the messages div
+    //           const messagesDiv = document.getElementById("messages");
+    //           const messageElement = document.createElement("p");
+    //           messageElement.textContent = `${newMessage.sender}: ${newMessage.text}`;
+    //           messagesDiv.appendChild(messageElement);
 
-          // Send a GET request to the API to retrieve messages for the selected contact
-          // fetch(`/chat/room/${contactId}`)
-          //   .then((response) => response.json())
-          //   .then((messages) => {
-          //     // Clear any existing messages
-          //     const messagesDiv = document.getElementById("messages");
-          //     messagesDiv.innerHTML = "";
-          //     // Add the new messages to the messages div
-          //     messages.forEach((message) => {
-          //       const messageElement = document.createElement("p");
-          //       messageElement.textContent = `${message.sender}: ${message.text}`;
-          //       messagesDiv.appendChild(messageElement);
-          //     });
-          //   })
-          //   .catch((error) => {
-          //     console.error("Error retrieving messages:", error);
-          //   });
-        }
-  
-        // Function to send a new message to the selected contact
-        // Function to send a message to the currently selected contact
-        async function sendMessage() {
-          const message = document.getElementById("message-input").value;
-          if (message) {
-            const selectedContact = document.querySelector(
-              "#contact-list li.selected"
-            );
-            const messagesDiv = document.getElementById("messages-list");
-           try{
-            const data = await fetch(`/chat/message`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ message, roomId: selectedContact.dataset.id}),
-            });
-            if (data.status !== 201) {
-              // console.log("Error sending message");
-              throw new Error("Error sending message");
-            }
-           }catch(error){
-             return console.log(error);
-            }
-            
-            const messageElement = document.createElement("li");
-            messageElement.textContent = `${selectedContact.textContent.split(" ")[0]}: ${message}`;
-            messagesDiv.appendChild(messageElement);
-            document.getElementById("message-input").value = "";
-          }
-        }
-        // function sendMessage() {
-        //   const messageInput = document.getElementById("message-input");
-        //   const messageText = messageInput.value;
-        //   // if (messageText && contacts.length > 0) {
-        //   if (messageText) {
-        //     const selectedContact = document.querySelector(
-        //       "#contact-list li.selected"
-        //     );
-        //     if (selectedContact) {
-        //       const contactId = selectedContact.dataset.contactId;
-        //       const message = {
-        //         sender: "You",
-        //         text: messageText,
-        //       };
-        //       fetch(`/api/messages/${contactId}`, {
-        //         method: "POST",
-        //         headers: {
-        //           "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(message),
-        //       })
-        //         .then((response) => response.json())
-        //         .then((newMessage) => {
-        //           // Add the new message to the messages div
-        //           const messagesDiv = document.getElementById("messages");
-        //           const messageElement = document.createElement("p");
-        //           messageElement.textContent = `${newMessage.sender}: ${newMessage.text}`;
-        //           messagesDiv.appendChild(messageElement);
-  
-        //           // Clear the message input field
-        //           messageInput.value = "";
-        //         })
-        //         .catch((error) => {
-        //           console.error("Error sending message:", error);
-        //         });
-        //     }
-        //   }
-        // }
-      </script>
+    //           // Clear the message input field
+    //           messageInput.value = "";
+    //         })
+    //         .catch((error) => {
+    //           console.error("Error sending message:", error);
+    //         });
+    //     }
+    //   }
+    // }
+  </script>
 
-<%- include('../includes/end.ejs') %></body>
+  <%- include('../includes/end.ejs') %>
+</body>

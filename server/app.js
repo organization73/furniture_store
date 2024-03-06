@@ -139,6 +139,7 @@ mongoose
     });
     //seting up the websocket
     const io = require("./socketio/socket").init(server, {
+      pingTimeout: 60000,
       cors: {
         origin: "*",
       },

@@ -66,7 +66,6 @@ exports.createChatRoom = async (req, res, next) => {
 
 /* /chat/rooms?search=abdo => GET request */
 exports.allUsers = async (req, res, next) => {
-  console.log("req.query.search:", req.query.search);
   const keyword = req.query.search
     ? {
         $or: [
@@ -77,10 +76,9 @@ exports.allUsers = async (req, res, next) => {
     : {};
   const user = req.admin || req.user;
   try {
-    console.log("keyword:", keyword);
     const conditions = { ...keyword, _id: { $ne: user._id } };
-    const users = await Admin.find(keyword);
-    console.log("users:", users);
+    const users = await Admin.find(keyword).select("-password");
+    // console.log("users:", users);
     res.status(200).json({ users });
   } catch (err) {
     if (!err.statusCode) {
