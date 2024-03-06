@@ -74,10 +74,16 @@ exports.allUsers = async (req, res, next) => {
         ],
       }
     : {};
+
   const user = req.admin || req.user;
   try {
-    const conditions = { ...keyword, _id: { $ne: user._id } };
-    const users = await Admin.find(keyword).select("-password");
+    const conditions = {
+      ...keyword,
+      _id: { $ne: user._id },
+    };
+    console.log(conditions);
+    const users = await Admin.find(conditions).select("-password");
+    console.log("users:", users);
     // console.log("users:", users);
     res.status(200).json({ users });
   } catch (err) {
@@ -123,6 +129,7 @@ exports.accessChatRoom = async (req, res, next) => {
     // .populate("latestMessage");
     //if chat room exists, return it
     if (chatRoom) {
+      console.log("chatRoom:", chatRoom);
       return res.status(200).json({ chatRoom });
     } else {
       //create chat room
