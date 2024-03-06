@@ -5,6 +5,7 @@ const User = require("../models/user");
 
 const ChatRoom = require("../models/chatRoom");
 const Message = require("../models/message");
+const chatRoom = require("../models/chatRoom");
 
 // const io = require("../socketio/socket").getIO();
 
@@ -269,18 +270,96 @@ exports.renameGroupChatRoom = async (req, res, next) => {
       { new: true }
     )
       .populate({
-        model: users,
-        path: "Admin",
+        path: "users",
+        model: "Admin", // Use 'Admin' model instead of 'User' model
         select: "-password",
       })
       .populate({
-        model: admin,
-        path: "Admin",
+        path: "admin",
+        model: "Admin",
+        select: "-password",
+      });
+
+    if (updatedRoom) {
+      res.status(200).json({
+        message: `updated name successfully to ${newName}`,
+        updatedRoom,
+      });
+    } else {
+      throwError("updating room name whent wrong", 400, "new name");
+    }
+  } catch (error) {
+    if (!error.statusCode) error.statusCode = 500;
+    next(error);
+  }
+};
+/* /add-user-to-group => put request */
+exports.addUserToGroupChatRoom = async (req, res, next) => {
+  const { roomId, userId } = req.body;
+
+  if (!roomId || !userId) {
+    const error = new Error("Failed to fetch input data.");
+    error.statusCode = 400;
+    next(error);
+  }
+  try {
+    const updatedRoom = await ChatRoom.findByIdAndUpdate(
+      roomId,
+      { $push: { users: userId } },
+      { new: true }
+    )
+      .populate({
+        path: "users",
+        model: "Admin",
+        select: "-password",
+      })
+      .populate({
+        path: "admin",
+        model: "Admin",
         select: "-password",
       });
     if (updatedRoom) {
       res.status(200).json({
-        message: `updated name successfully to ${newName}`,
+        message: `user with id ${userId} was added to group ${updatedRoom.fullName}.`,
+        updatedRoom,
+      });
+    } else {
+      throwError("updating room name whent wrong", 400, "new name");
+    }
+  } catch (error) {
+    if (!error.statusCode) error.statusCode = 500;
+    next(error);
+  }
+};
+
+/* /remove-user-from-group => put request */
+exports.removeUserFromGroupChatRoom = async (req, res, next) => {
+  const { roomId, userId } = req.body;
+
+  if (!roomId || !userId) {
+    const error = new Error("Failed to fetch input data.");
+    error.statusCode = 400;
+    next(error);
+  }
+  try {
+    const updatedRoom = await ChatRoom.findByIdAndUpdate(
+      roomId,
+      { $pull: { users: userId } },
+      { new: true }
+    )
+      .populate({
+        path: "users",
+        model: "Admin",
+        select: "-password",
+      })
+      .populate({
+        path: "admin",
+        model: "Admin",
+        select: "-password",
+      });
+    if (updatedRoom) {
+      res.status(200).json({
+        message: `user with id ${userId} was removed from group ${updatedRoom.fullName}.`,
         updatedRoom,
       });
     } else {

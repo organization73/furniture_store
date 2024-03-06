@@ -154,14 +154,14 @@ exports.postLogin = async (req, res, next) => {
       const token = jwt.sign(
         { adminId: admin._id, email: admin.email },
         process.env.JWT_SECRET,
-        { expiresIn: "2h" }
+        { expiresIn: "2d" }
       );
       console.log("encdoe: ", token);
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decoded);
       res.cookie("token", token, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24* 7,
+        maxAge: 1000 * 60 * 60 * 24* 2,
       }); // 2h
       console.log("logged in");
       res.redirect("/admin");
