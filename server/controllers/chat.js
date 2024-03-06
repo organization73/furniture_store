@@ -210,9 +210,10 @@ exports.createGroupChatRoom = async (req, res, next) => {
   }
 
   // Split the comma-separated user IDs and convert them to ObjectId
-  
-  const users = JSON.parse(req.body.users)
-    .map((userId) => new mongoose.Types.ObjectId(userId.trim()));
+
+  const users = JSON.parse(req.body.users).map(
+    (userId) => new mongoose.Types.ObjectId(userId.trim())
+  );
 
   if (users.length < 2) {
     return res
@@ -232,12 +233,13 @@ exports.createGroupChatRoom = async (req, res, next) => {
     });
     console.log("here");
     const savedChatRoom = await chatRoom.save();
-    const populatedChatRoom = await ChatRoom.findById(savedChatRoom._id)
-      .populate({
-        path: "users",
-        model: "Admin",
-        select: "-password",
-      })
+    const populatedChatRoom = await ChatRoom.findById(
+      savedChatRoom._id
+    ).populate({
+      path: "users",
+      model: "Admin",
+      select: "-password",
+    });
     console.log("here3");
     res
       .status(201)
@@ -246,6 +248,46 @@ exports.createGroupChatRoom = async (req, res, next) => {
     if (!error.statusCode) {
       error.statusCode = 500;
     }
+    next(error);
+  }
+};
+
+/* /chat/rename-group => PUT request */
+
+exports.renameGroupChatRoom = async (req, res, next) => {
+  const { roomId, newName } = req.body;
+
+  if (!roomId || !newName || newName.length > 25) {
+    const error = new Error("Failed to fetch input data.");
+    error.statusCode = 400;
+    next(error);
+  }
+  try {
+    const updatedRoom = await ChatRoom.findByIdAndUpdate(
+      roomId,
+      { fullName: newName },
+      { new: true }
+    )
+      .populate({
+        model: users,
+        path: "Admin",
+        select: "-password",
+      })
+      .populate({
+        model: admin,
+        path: "Admin",
+        select: "-password",
+      });
+    if (updatedRoom) {
+      res.status(200).json({
+        message: `updated name successfully to ${newName}`,
+        updatedRoom,
+      });
+    } else {
+      throwError("updating room name whent wrong", 400, "new name");
+    }
+  } catch (error) {
+    if (!error.statusCode) error.statusCode = 500;
     next(error);
   }
 };
