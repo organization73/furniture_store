@@ -20,7 +20,13 @@ class CategoryShimmer extends StatelessWidget {
         itemBuilder: (_, __) {
           return const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ShimmerLoaderEffect(width: 125, height: 56)],
+            children: [
+              ShimmerLoaderEffect(
+                width: 125,
+                height: 56,
+                raduis: 8,
+              )
+            ],
           );
         },
       ),

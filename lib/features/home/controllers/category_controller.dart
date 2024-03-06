@@ -1,7 +1,6 @@
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/category/category_repo.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
-import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
@@ -26,7 +25,6 @@ class CategoryController extends GetxController {
 
       featuredCatedories.assignAll(allCatedories
           .where((category) => category.isFeatured && category.parentId.isEmpty)
-          .take(3)
           .toList());
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());

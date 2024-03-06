@@ -41,7 +41,11 @@ class BuildCategoriesSection extends StatelessWidget {
                   ),
                 ),
                 progressIndicatorBuilder: (context, url, progress) =>
-                    const ShimmerLoaderEffect(width: 125, height: 56),
+                    const ShimmerLoaderEffect(
+                  width: 125,
+                  height: 56,
+                  raduis: 8,
+                ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -84,7 +88,9 @@ class BuildCategoriesSection extends StatelessWidget {
         ),
         Obx(() {
           if (categoryController.isLoading.value) {
-            return const CategoryShimmer();
+            return CategoryShimmer(
+              itemCount: categoryController.featuredCatedories.length,
+            );
           }
           if (categoryController.featuredCatedories.isEmpty) {
             return const Text('No Categories Found');
