@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:furniture_store/utils/constants/enums.dart';
 import 'package:uuid/uuid.dart';
 
@@ -58,5 +59,22 @@ class VendorModel {
         accountType: AccountType
             .values[data['accountType'] ?? AccountType.regular.index],
         productsCount: data['productsCount'] ?? 0);
+  }
+  factory VendorModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    if (snapshot.exists) {
+      return VendorModel(
+          id: snapshot.id,
+          image: data['image'] ?? '',
+          name: data['name'] ?? '',
+          location: data['location'] ?? '',
+          isFeatured: data['isFeatured'] ?? false,
+          isVerified: data['isVerified'] ?? false,
+          accountType: AccountType
+              .values[data['accountType'] ?? AccountType.regular.index],
+          productsCount: data['productsCount'] ?? 0);
+    } else {
+      return VendorModel.empty();
+    }
   }
 }

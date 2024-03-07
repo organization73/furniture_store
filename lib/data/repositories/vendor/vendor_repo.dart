@@ -13,7 +13,23 @@ class VendorRepo extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
+  Future<List<VendorModel>> fetchAllVendors() async {
+    try {
+      final snapshot = await _db.collection('Vendors').get();
 
+      final list = snapshot.docs
+          .map((document) => VendorModel.fromFirebaseDocument(document))
+          .toList();
+
+      return list;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
 
   Future<void> uploadDummyData(List<VendorModel> vendors) async {
     try {
@@ -26,10 +42,7 @@ class VendorRepo extends GetxController {
         final url =
             await storage.uploadImageData('Vendors', file, vendor.image);
         vendor.image = url;
-        await _db
-            .collection('Vendors')
-            .doc(vendor.id)
-            .set(vendor.toJson());
+        await _db.collection('Vendors').doc(vendor.id).set(vendor.toJson());
       }
       FullScreenLoader.stopLoading();
 

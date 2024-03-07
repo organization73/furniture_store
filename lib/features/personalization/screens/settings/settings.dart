@@ -8,7 +8,7 @@ import 'package:furniture_store/data/dummy_data.dart';
 import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
 import 'package:furniture_store/data/repositories/category/category_repo.dart';
 import 'package:furniture_store/data/repositories/product/product_repo.dart';
-import 'package:furniture_store/data/repositories/vendor/vendor_model.dart';
+import 'package:furniture_store/data/repositories/vendor/vendor_repo.dart';
 import 'package:furniture_store/features/manufacture_request/screens/manufacture_req_screen.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
 import 'package:furniture_store/features/personalization/screens/profile/profile.dart';
@@ -73,7 +73,6 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(UserController());
-    Get.put(VendorRepo());
 
     return Scaffold(
       body: SingleChildScrollView(
