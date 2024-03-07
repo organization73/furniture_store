@@ -81,9 +81,7 @@ exports.allUsers = async (req, res, next) => {
       ...keyword,
       _id: { $ne: user._id },
     };
-    console.log(conditions);
-    const users = await Admin.find(conditions).select("-password");
-    console.log("users:", users);
+    const users = await Admin.find(conditions).select("-password").limit(3);
     // console.log("users:", users);
     res.status(200).json({ users });
   } catch (err) {

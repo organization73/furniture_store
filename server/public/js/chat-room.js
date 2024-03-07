@@ -25,7 +25,12 @@ let typingTimeoutID = null;
 let typingElement = document.createElement("p");
 
 /*send typing event*/
-messageContainer.addEventListener("input", () => {
+messageContainer.addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {
+    event.preventDefault(); // Prevent the default behavior of the Enter key
+    sendMessage(); // Call the sendMessage function
+  }
+
   const currentRoomElement = document.querySelector(
     "#contact-list li.selected"
   );
@@ -52,12 +57,11 @@ socket.on("recieve-typing", (senderUsername) => {
     }, 3000);
     return;
   }
-  console.log("recieve-typing");
-  console.log("recieve-typing", senderUsername);
   // const typingElement = document.createElement("p");
   typingElement.id = "typing";
   typingElement.textContent = `${senderUsername}: typing...`;
   messagesList.appendChild(typingElement);
+  messagesList.scrollTop = messagesList.scrollHeight;
 
   // Clear the old timeout if it exists
   if (typingTimeoutID) {
@@ -88,6 +92,13 @@ fetch("/chat/rooms")
       listItem.dataset.chatRoom = JSON.stringify(chatRoom); // Add a data-chat-room attribute to the list item
       listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
       listItem.addEventListener("click", selectContact);
+      const lastMessage = document.createElement("h6");
+      lastMessage.textContent =
+        `${chatRoom.latestMessage.sender.username.split(".")[0]} :${
+          chatRoom.latestMessage.content
+        }` || "No messages yet";
+      listItemDiv.append(lastMessage);
+
       contactListItems.appendChild(listItem); // Add the new list item to the beginning of the list
     });
   })
@@ -138,7 +149,7 @@ const hostname = window.location.hostname;
 const port = window.location.port;
 const url = `${protocol}://${hostname}:${port}`;
 
-// Function to add a new contact to the list
+//Function to add a new contact to the list
 addContactButton.addEventListener("click", addContact);
 async function addContact() {
   //add new contact in the db on server
@@ -164,19 +175,22 @@ async function addContact() {
 
   const listItem = document.createElement("li");
   const listItemDiv = document.createElement("div");
-  const listItemDivP = document.createElement("p");
-  listItemDiv.append(listItemDivP);
-  listItem.append(listItemDiv);
+  const listItemDivP = document.createElement("h5");
+  const lastMessage = document.createElement("h6");
+  lastMessage.textContent = chatRoom.lastMessage.content || "No messages yet";
   listItemDivP.textContent = input.value;
   listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
   //clean the input field
   input.value = "";
   input.dataset.id = "";
   listItem.addEventListener("click", selectContact);
+  listItemDiv.append(listItemDivP);
+  listItemDiv.append(lastMessage);
+  listItem.append(listItemDiv);
   contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
 }
 
-// Function to select a contact and send a GET request to the API
+//select a contact and send a GET request to the API
 function selectContact() {
   const contactId = this.dataset.id;
 
@@ -221,6 +235,7 @@ function selectContact() {
         }: ${message.content}`;
         messagesList.appendChild(messageElement);
       });
+      messagesList.scrollTop = messagesList.scrollHeight;
     })
     .catch((error) => {
       console.error("Error retrieving messages:", error);
@@ -229,20 +244,23 @@ function selectContact() {
   socket.emit("join-room", contactId);
 }
 
-//receive message
+/*receive message*/
 socket.on("recieve-message", (newMessage) => {
-  console.log("recieved message:", newMessage);
-  console.log("currentRoomId", currentRoomId);
+  //delete typing element
+  if (document.getElementById("typing")) {
+    typingElement.remove();
+  }
   if (newMessage.chatRoom._id === currentRoomId) {
     const messageElement = document.createElement("p");
     messageElement.textContent = `${
       newMessage.sender.username.split(" ")[0]
     }: ${newMessage.content}`;
     messagesList.appendChild(messageElement);
+    messagesList.scrollTop = messagesList.scrollHeight;
   }
 });
 
-// Function to send a message to the currently selected contact
+//send a message to the currently selected contact
 sendBtn.addEventListener("click", sendMessage);
 async function sendMessage() {
   const message = messageContainer.value;
@@ -270,10 +288,13 @@ async function sendMessage() {
       return console.log(error);
     }
     const messageElement = document.createElement("p");
-    messageElement.textContent = `${
-      currentUser.username.split(" ")[0]
-    }: ${message}`;
+    messageElement.textContent = `${currentUser.username}: ${message}`;
     messagesList.appendChild(messageElement);
+    messagesList.scrollTop = messagesList.scrollHeight;
+    //update the latest message in the contact list
+    selectedContact.querySelector("h6").textContent = `${
+      currentUser.username.split(".")[0]
+    }: ${message}`;
     document.getElementById("message-input").value = "";
   }
 }
