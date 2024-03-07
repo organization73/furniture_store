@@ -7,6 +7,7 @@ import 'package:furniture_store/common/widgets/products/product_card_vertical.da
 import 'package:furniture_store/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/home_page_controller.dart';
 import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
+import 'package:furniture_store/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:furniture_store/features/home/screens/store_screen.dart';
 import 'package:furniture_store/features/home/widgets/banners_slider.dart';
 import 'package:furniture_store/features/home/widgets/categories_section.dart';
