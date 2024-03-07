@@ -20,29 +20,18 @@ class ImageController extends GetxController {
     Get.to(
         fullscreenDialog: true,
         () => Dialog.fullscreen(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: TSizes.defaultSpace * 2,
-                        horizontal: TSizes.defaultSpace),
-                    child: CachedNetworkImage(imageUrl: image),
-                  ),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 150,
-                      child: OutlinedButton(
-                          onPressed: () => Get.back(),
-                          child: const Text('Close')),
+                  CachedNetworkImage(imageUrl: image),
+                  Positioned(
+                    right: 10,
+                    top: 10,
+                    child: IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Get.back(),
                     ),
-                  )
+                  ),
                 ],
               ),
             ));
