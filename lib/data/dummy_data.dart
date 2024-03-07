@@ -1,6 +1,7 @@
 import 'package:furniture_store/features/home/model/banners_model.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
+import 'package:furniture_store/features/home/model/review_model.dart';
 import 'package:furniture_store/features/home/model/vendor_model.dart';
 import 'package:furniture_store/utils/constants/enums.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
@@ -12,37 +13,34 @@ class DummyData {
       categoryId: '1',
       sku: 'AE55',
       productPrice: 200,
+      productSalePrice: 100,
       isFeatured: true,
       rates: [
         Review(
-          reviewerName: 'John Doe',
-          rating: 4,
-          comment:
-              'Great product! It exceeded my expectations. Highly recommended.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
         Review(
-          reviewerName: 'Alice Smith',
-          rating: 3,
-          comment:
-              'The product is good, but it could use some improvements. The packaging was damaged.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'Alice Smith',
+            rating: 3,
+            comment:
+                'The product is good, but it could use some improvements. The packaging was damaged.',
+            reviewerImage: 'https://picsum.photos/id/1062/80/80'),
         Review(
-          reviewerName: 'Eva Johnson',
-          rating: 5,
-          comment:
-              'Absolutely love it! The quality is excellent, and delivery was super fast.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'Eva Johnson',
+            rating: 5,
+            comment:
+                'Absolutely love it! The quality is excellent, and delivery was super fast.',
+            reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
       productImage: TImages.productImage1,
       onSale: false,
       productDetails: ProductDetails(
-        condition: 'used',
+        condition: 'new',
         color: 'red',
         productListImages: [
-          TImages.productImage1,
           TImages.productImage2,
           TImages.productImage3,
           TImages.productImage4,
@@ -61,53 +59,44 @@ class DummyData {
           modifiable: true,
         ),
         productSeller: VendorModel(
-            name: 'ahmed',
+            name: 'Ahmed',
             location: 'Damietta',
             id: '1',
-            image:
-                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: false,
-            productsCount: 0,
+            productsCount: 1,
             accountType: AccountType.regular),
       ),
-      productSalePrice: 100,
     ),
+  
     ProductModel(
-      productName: 'Bedroom Red Bed',
-      categoryId: '1',
+      productName: 'White comfy Chair',
+      categoryId: '2',
       sku: 'AE55',
-      productPrice: 200,
+      productPrice: 350,
+      productSalePrice: 300,
       isFeatured: true,
       rates: [
         Review(
-          reviewerName: 'John Doe',
-          rating: 4,
-          comment:
-              'Great product! It exceeded my expectations. Highly recommended.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
         Review(
-          reviewerName: 'Alice Smith',
-          rating: 3,
-          comment:
-              'The product is good, but it could use some improvements. The packaging was damaged.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
-        Review(
-          reviewerName: 'Eva Johnson',
-          rating: 5,
-          comment:
-              'Absolutely love it! The quality is excellent, and delivery was super fast.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'Alice Smith',
+            rating: 3,
+            comment:
+                'The product is good, but it could use some improvements. The packaging was damaged.',
+            reviewerImage: 'https://picsum.photos/id/1062/80/80'),
+        
       ],
-      productImage: TImages.productImage1,
+      productImage: TImages.productImage3,
       onSale: false,
       productDetails: ProductDetails(
-        condition: 'used',
-        color: 'red',
+        condition: 'new',
+        color: 'White',
         productListImages: [
-          TImages.productImage1,
           TImages.productImage2,
           TImages.productImage3,
           TImages.productImage4,
@@ -119,60 +108,51 @@ class DummyData {
           'wood type': 'Abs',
         },
         productDesc:
-            'A big red bed with unrivaled comfort and a striking visual experience.',
+            'Comey chair with unrivaled comfort and a striking visual experience.',
         productStats: ProductStats(
           delivery: true,
           negotiable: false,
           modifiable: true,
         ),
         productSeller: VendorModel(
-            name: 'ahmed',
-            location: 'Damietta',
-            id: '1',
-            image:
-                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
-            isFeatured: false,
-            productsCount: 0,
-            accountType: AccountType.regular),
+            name: 'Ali',
+            location: 'Mansoura',
+            id: '2',
+            image: 'https://picsum.photos/id/1062/80/80',
+            isFeatured: true,
+            productsCount: 2,
+            accountType: AccountType.vendor),
       ),
-      productSalePrice: 100,
     ),
+  
     ProductModel(
-      productName: 'Bedroom Red Bed',
+      productName: 'Bedroom Black Bed',
       categoryId: '1',
-      sku: 'AE55',
-      productPrice: 200,
+      sku: 'AE5445',
+      productPrice: 600,
+      productSalePrice: 520,
       isFeatured: true,
       rates: [
         Review(
-          reviewerName: 'John Doe',
-          rating: 4,
-          comment:
-              'Great product! It exceeded my expectations. Highly recommended.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
+      
         Review(
-          reviewerName: 'Alice Smith',
-          rating: 3,
-          comment:
-              'The product is good, but it could use some improvements. The packaging was damaged.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
-        Review(
-          reviewerName: 'Eva Johnson',
-          rating: 5,
-          comment:
-              'Absolutely love it! The quality is excellent, and delivery was super fast.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'Eva Johnson',
+            rating: 5,
+            comment:
+                'Absolutely love it! The quality is excellent, and delivery was super fast.',
+            reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage1,
+      productImage: TImages.productImage12,
       onSale: false,
       productDetails: ProductDetails(
-        condition: 'used',
+        condition: 'new',
         color: 'red',
         productListImages: [
-          TImages.productImage1,
           TImages.productImage2,
           TImages.productImage3,
           TImages.productImage4,
@@ -191,53 +171,49 @@ class DummyData {
           modifiable: true,
         ),
         productSeller: VendorModel(
-            name: 'ahmed',
-            location: 'Damietta',
-            id: '1',
-            image:
-                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            name: 'Kahled',
+            location: 'Cairo',
+            id: '4',
+            image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: false,
-            productsCount: 0,
-            accountType: AccountType.regular),
+            productsCount: 1,
+            accountType: AccountType.vendor),
       ),
-      productSalePrice: 100,
     ),
+  
     ProductModel(
-      productName: 'Bedroom Red Bed',
-      categoryId: '1',
-      sku: 'AE55',
-      productPrice: 200,
+      productName: 'Kitchen Dining Table',
+      categoryId: '3',
+      sku: 'AE5885',
+      productPrice: 1000,
+      productSalePrice: 800,
       isFeatured: true,
       rates: [
         Review(
-          reviewerName: 'John Doe',
-          rating: 4,
-          comment:
-              'Great product! It exceeded my expectations. Highly recommended.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
         Review(
-          reviewerName: 'Alice Smith',
-          rating: 3,
-          comment:
-              'The product is good, but it could use some improvements. The packaging was damaged.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'Alice Smith',
+            rating: 3,
+            comment:
+                'The product is good, but it could use some improvements. The packaging was damaged.',
+            reviewerImage: 'https://picsum.photos/id/1062/80/80'),
         Review(
-          reviewerName: 'Eva Johnson',
-          rating: 5,
-          comment:
-              'Absolutely love it! The quality is excellent, and delivery was super fast.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
+            reviewerName: 'Eva Johnson',
+            rating: 5,
+            comment:
+                'Absolutely love it! The quality is excellent, and delivery was super fast.',
+            reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage1,
+      productImage: TImages.productImage6,
       onSale: false,
       productDetails: ProductDetails(
-        condition: 'used',
+        condition: 'new',
         color: 'red',
         productListImages: [
-          TImages.productImage1,
           TImages.productImage2,
           TImages.productImage3,
           TImages.productImage4,
@@ -256,82 +232,17 @@ class DummyData {
           modifiable: true,
         ),
         productSeller: VendorModel(
-            name: 'ahmed',
+            name: 'Ali',
             location: 'Damietta',
-            id: '1',
-            image:
-                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
+            id: '11',
+            image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: false,
-            productsCount: 0,
+            productsCount: 1,
             accountType: AccountType.regular),
       ),
-      productSalePrice: 100,
     ),
-    ProductModel(
-      productName: 'Bedroom Red Bed',
-      categoryId: '1',
-      sku: 'AE55',
-      productPrice: 200,
-      isFeatured: true,
-      rates: [
-        Review(
-          reviewerName: 'John Doe',
-          rating: 4,
-          comment:
-              'Great product! It exceeded my expectations. Highly recommended.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
-        Review(
-          reviewerName: 'Alice Smith',
-          rating: 3,
-          comment:
-              'The product is good, but it could use some improvements. The packaging was damaged.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
-        Review(
-          reviewerName: 'Eva Johnson',
-          rating: 5,
-          comment:
-              'Absolutely love it! The quality is excellent, and delivery was super fast.',
-          timestamp: "2023-12-15/2:25 AM",
-        ),
-      ],
-      productImage: TImages.productImage1,
-      onSale: false,
-      productDetails: ProductDetails(
-        condition: 'used',
-        color: 'red',
-        productListImages: [
-          TImages.productImage1,
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
-        ],
-        productSpecs: {
-          'ablakash': 'mdf',
-          'fabric type': 'gg',
-          'fabric density': 'fg',
-          'wood type': 'Abs',
-        },
-        productDesc:
-            'A big red bed with unrivaled comfort and a striking visual experience.',
-        productStats: ProductStats(
-          delivery: true,
-          negotiable: false,
-          modifiable: true,
-        ),
-        productSeller: VendorModel(
-            name: 'ahmed',
-            location: 'Damietta',
-            id: '1',
-            image:
-                'https://lh3.googleusercontent.com/-75PEaiU9U3s/VOIS2XRjj1I/AAAAAAAAA8g/hrSIcbRe89s/s2048/cool-and-stylish-profile-pictures-for-facebook-for-girls-2015-cool-and-stylish-profile-pictures-for-facebook-for-girls-2014-1931-AZ.jpg',
-            isFeatured: false,
-            productsCount: 0,
-            accountType: AccountType.regular),
-      ),
-      productSalePrice: 100,
-    ),
+  
+  
   ];
 
   static final List<BannersModel> banners = [

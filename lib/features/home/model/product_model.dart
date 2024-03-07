@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:furniture_store/features/home/model/review_model.dart';
 import 'package:furniture_store/features/home/model/vendor_model.dart';
 import 'package:furniture_store/utils/constants/enums.dart';
 import 'package:uuid/uuid.dart';
@@ -178,35 +179,5 @@ class ProductStats {
         'Delivery': delivery,
         'Negotiable': negotiable,
         'Modifiable': modifiable,
-      };
-}
-
-class Review {
-  String reviewerName;
-  int rating;
-  String comment;
-  String timestamp;
-
-  Review({
-    required this.reviewerName,
-    required this.rating,
-    required this.comment,
-    required this.timestamp,
-  });
-
-  factory Review.fromJson(Map<String, dynamic> json) {
-    return Review(
-      reviewerName: json['reviewer_name'] ?? '',
-      rating: json['rating'] ?? 0,
-      comment: json['comment'] ?? '',
-      timestamp: json['timestamp'] ?? '',
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        'reviewer_name': reviewerName,
-        'rating': rating,
-        'comment': comment,
-        'timestamp': timestamp,
       };
 }

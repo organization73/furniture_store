@@ -35,7 +35,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   bottom: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
-                  const RatingWidget(),
+                   RatingWidget(product: product,),
                   SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),

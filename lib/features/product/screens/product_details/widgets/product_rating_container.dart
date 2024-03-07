@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/overlapping_cicular_avatar.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/global/global_variables.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
@@ -10,7 +11,9 @@ import 'package:iconsax/iconsax.dart';
 class RatingWidget extends StatelessWidget {
   const RatingWidget({
     super.key,
+    required this.product,
   });
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class RatingWidget extends StatelessWidget {
                               SizedBox(
                                 width: TSizes.spaceBtwItems / 2,
                               ),
-                              Text('5.0',
+                              Text(product.productRating.toStringAsFixed(1),
                                   style: Theme.of(context).textTheme.bodyLarge),
                             ],
                           ),
@@ -51,7 +54,7 @@ class RatingWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${22} reviews',
+                      '${product.productNumOfRating} reviews',
                       style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ]),
