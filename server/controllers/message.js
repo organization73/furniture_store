@@ -96,9 +96,6 @@ exports.sendMessage = async (req, res, next) => {
     chatRoom: roomId,
     type: "text",
   };
-  console.log("newMessage:", newMessage);
-  console.log("user._id:", user._id);
-
   try {
     var message = await Message.create(newMessage);
 

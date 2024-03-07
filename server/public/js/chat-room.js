@@ -9,6 +9,7 @@ const socket = io();
 socket.emit("setup", currentUser);
 socket.on("connected", () => {
   isConnected = true;
+  console.log("connected");
 });
 
 // Initialize an empty contact list
@@ -16,8 +17,10 @@ const contactListItems = document.getElementById("contact-list-items");
 const addContactButton = document.getElementById("open-contact");
 const contactDropdown = document.getElementById("contact-dropdown");
 //send message
+const messagesList = document.getElementById("messages");
 const messageContainer = document.getElementById("message-input");
 const sendBtn = document.getElementById("send-message-btn");
+
 //search contact
 const input = document.getElementById("contact-input");
 const suggestions = document.getElementById("contact-suggestions");
@@ -150,7 +153,6 @@ function selectContact() {
     newSelectedContact.classList.add("selected");
   }
   // Clear any existing messages
-  const messagesList = document.getElementById("messages");
   messagesList.innerHTML = "";
 
   console.log("join room", contactId);
@@ -165,7 +167,7 @@ function selectContact() {
       // Add the new messages to the messages div
       messages.forEach((message) => {
         const messageElement = document.createElement("p");
-        messageElement.textContent = `${message.sender.username}: ${message.content}`;
+        messageElement.textContent = `${message.sender.username.split(" ")[0]}: ${message.content}`;
         messagesList.appendChild(messageElement);
       });
     })
@@ -175,6 +177,17 @@ function selectContact() {
   //join room
   socket.emit("join-room", contactId);
 }
+
+//receive message
+socket.on("recieve-message", (newMessage) => {
+  console.log("recieved message:", newMessage);
+  console.log("currentRoomId",currentRoomId)
+  if (newMessage.chatRoom._id === currentRoomId) {
+    const messageElement = document.createElement("p");
+    messageElement.textContent = `${newMessage.sender.username.split(" ")[0]}: ${newMessage.content}`;
+    messagesList.appendChild(messageElement);
+  }
+});
 
 // Function to send a message to the currently selected contact
 sendBtn.addEventListener("click", sendMessage);
@@ -198,53 +211,16 @@ async function sendMessage() {
         throw new Error("Error sending message");
       }
       const newMessage = await response.json();
-      socket.emit("new-message", newMessage);
+      console.log("new message:", newMessage);
+      socket.emit("new-message", newMessage );
     } catch (error) {
       return console.log(error);
     }
     const messageElement = document.createElement("p");
     messageElement.textContent = `${
-      selectedContact.textContent.split(" ")[0]
+      currentUser.username.split(" ")[0]
     }: ${message}`;
     messagesList.appendChild(messageElement);
     document.getElementById("message-input").value = "";
   }
 }
-// function sendMessage() {
-//   const messageInput = document.getElementById("message-input");
-//   const messageText = messageInput.value;
-//   // if (messageText && contacts.length > 0) {
-//   if (messageText) {
-//     const selectedContact = document.querySelector(
-//       "#contact-list li.selected"
-//     );
-//     if (selectedContact) {
-//       const contactId = selectedContact.dataset.contactId;
-//       const message = {
-//         sender: "You",
-//         text: messageText,
-//       };
-//       fetch(`/api/messages/${contactId}`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(message),
-//       })
-//         .then((response) => response.json())
-//         .then((newMessage) => {
-//           // Add the new message to the messages div
-//           const messagesDiv = document.getElementById("messages");
-//           const messageElement = document.createElement("p");
-//           messageElement.textContent = `${newMessage.sender}: ${newMessage.text}`;
-//           messagesDiv.appendChild(messageElement);
-
-//           // Clear the message input field
-//           messageInput.value = "";
-//         })
-//         .catch((error) => {
-//           console.error("Error sending message:", error);
-//         });
-//     }
-//   }
-// }

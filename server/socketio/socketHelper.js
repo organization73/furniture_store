@@ -2,6 +2,7 @@ const io = require("./socket").getIO();
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/admin");
 const User = require("../models/user");
+const chatRoom = require("../models/chatRoom");
 
 const onlineUsers = require("./socket").onlineUsers;
 
@@ -10,6 +11,7 @@ module.exports.actionListeners = (socket) => {
   //sending notificatoins //can be made on connection
   socket.on("setup", (userData) => {
     socket.join(userData._id);
+    console.log("join room", userData._id);
     //check if the user already exists in the online users
     const userIndex = onlineUsers.findIndex(
       (user) => user.userId === userData._id
@@ -44,9 +46,21 @@ module.exports.actionListeners = (socket) => {
 
   //sending messages.
   socket.on("new-message", (newMessage) => {
+    const chatRoom = newMessage.chatRoom;
+    if (!chatRoom.users) {
+      return console.log("no users in the chat room");
+    }
+    chatRoom.users.forEach(user => {
+      if (user._id.toString() !== newMessage.sender._id.toString()) {
+        console.log("sending message to room:", user._id);
+        socket.in(user._id).emit("recieve-message", newMessage);
+      }
+    });
+
     // socket.to()
   });
 
+  //disconnecting
   socket.on("disconnect", () => {
     console.log("disconnecting user...", socket.id);
     console.log("onlineUsers before remove:", onlineUsers);
