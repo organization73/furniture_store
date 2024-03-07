@@ -9,7 +9,7 @@ import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verif
 import 'package:furniture_store/common/widgets/texts/product_price_text.dart';
 import 'package:furniture_store/common/widgets/texts/product_title_text.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
-import 'package:furniture_store/features/home/controllers/product_controller.dart';
+import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_details/product_details_screen.dart';
 import 'package:furniture_store/utils/constants/colors.dart';

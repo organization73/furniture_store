@@ -27,7 +27,7 @@ class ProductDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const ProductImageSlider(),
+             ProductImageSlider(product: product,),
             Padding(
               padding: EdgeInsets.only(
                   right: TSizes.pagePaddingSpace,

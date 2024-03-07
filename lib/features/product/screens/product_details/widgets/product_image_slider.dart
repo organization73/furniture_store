@@ -1,23 +1,30 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:furniture_store/common/widgets/icons/circular_icon.dart';
 import 'package:furniture_store/common/widgets/images/rounded_image.dart';
+import 'package:furniture_store/features/home/controllers/product/images_controller.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:furniture_store/utils/helpers/helper_functions.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductImageSlider extends StatelessWidget {
   const ProductImageSlider({
     super.key,
+    required this.product,
   });
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
-
+    final controller = Get.put(ImageController());
+    final images = controller.getAllProductImages(product);
     return CurvedEdgesWidget(
       child: Container(
         color: isDark ? TColors.darkerGrey : TColors.light,
@@ -27,8 +34,21 @@ class ProductImageSlider extends StatelessWidget {
                 height: 400,
                 child: Padding(
                   padding: EdgeInsets.all(TSizes.productImageRadius * 2),
-                  child: const Center(
-                    child: Image(image: AssetImage(TImages.productImage1)),
+                  child: Center(
+                    child: Obx(() {
+                      final image = controller.selectedProductImage.value;
+                      return GestureDetector(
+                        onTap: () => controller.showEnlargedImage(image),
+                        child: CachedNetworkImage(
+                          imageUrl: image,
+                          progressIndicatorBuilder: (_, __, progress) =>
+                              CircularProgressIndicator(
+                            value: progress.progress,
+                            color: TColors.primary,
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                 )),
             Positioned(
@@ -38,16 +58,30 @@ class ProductImageSlider extends StatelessWidget {
               child: SizedBox(
                 height: 80,
                 child: ListView.separated(
-                  itemBuilder: (_, index) => RoundedImage(
-                      width: 80,
-                      border: Border.all(color: TColors.primary),
-                      padding: const EdgeInsets.all(TSizes.sm),
-                      backgroundColor: isDark ? TColors.dark : TColors.white,
-                      imageUrl: TImages.productImage1),
+                  itemBuilder: (_, index) => Obx(
+                    () {
+                      final imageSelected =
+                          controller.selectedProductImage.value ==
+                              images[index];
+                      return RoundedImage(
+                          width: 80,
+                          onPress: () => controller.selectedProductImage.value =
+                              images[index],
+                          isNetworkImage: true,
+                          border: Border.all(
+                              color: imageSelected
+                                  ? TColors.primary
+                                  : Colors.transparent),
+                          padding: const EdgeInsets.all(TSizes.sm),
+                          backgroundColor:
+                              isDark ? TColors.dark : TColors.white,
+                          imageUrl: images[index]);
+                    },
+                  ),
                   separatorBuilder: (_, __) => SizedBox(
                     width: TSizes.spaceBtwItems,
                   ),
-                  itemCount: 10,
+                  itemCount: images.length,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: const AlwaysScrollableScrollPhysics(),
