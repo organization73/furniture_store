@@ -131,28 +131,28 @@ function selectContact() {
     newSelectedContact.classList.add("selected");
   }
   // Clear any existing messages
-  const messagesDiv = document.getElementById("messages-list");
-  messagesDiv.innerHTML = "";
+  const messagesList = document.getElementById("messages");
+  messagesList.innerHTML = "";
 
   console.log("join room", contactId);
 
   // Send a GET request to the API to retrieve messages for the selected contact
-  // fetch(`/chat/room/${contactId}`)
-  //   .then((response) => response.json())
-  //   .then((messages) => {
-  //     // Clear any existing messages
-  //     const messagesDiv = document.getElementById("messages");
-  //     messagesDiv.innerHTML = "";
-  //     // Add the new messages to the messages div
-  //     messages.forEach((message) => {
-  //       const messageElement = document.createElement("p");
-  //       messageElement.textContent = `${message.sender}: ${message.text}`;
-  //       messagesDiv.appendChild(messageElement);
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error retrieving messages:", error);
-  //   });
+  fetch(`/chat/room/${contactId}`)
+    .then((response) => response.json())
+    .then((messages) => {
+      // Clear any existing messages
+      const messagesList = document.getElementById("messages");
+      messagesList.innerHTML = "";
+      // Add the new messages to the messages div
+      messages.forEach((message) => {
+        const messageElement = document.createElement("p");
+        messageElement.textContent = `${message.sender.username}: ${message.content}`;
+        messagesList.appendChild(messageElement);
+      });
+    })
+    .catch((error) => {
+      console.error("Error retrieving messages:", error);
+    });
 }
 
 // Function to send a message to the currently selected contact
@@ -161,7 +161,7 @@ async function sendMessage() {
   const message = messageContainer.value;
   if (message) {
     const selectedContact = document.querySelector("#contact-list li.selected");
-    const messagesList = document.getElementById("messages-list");
+    const messagesList = document.getElementById("messages");
     try {
       const response = await fetch(`/chat/message`, {
         method: "POST",
@@ -183,7 +183,7 @@ async function sendMessage() {
       return console.log(error);
     }
 
-    const messageElement = document.createElement("li");
+    const messageElement = document.createElement("p");
     messageElement.textContent = `${
       selectedContact.textContent.split(" ")[0]
     }: ${message}`;
