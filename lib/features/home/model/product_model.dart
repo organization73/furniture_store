@@ -36,6 +36,7 @@ class ProductModel {
   }
   static ProductModel empty() => ProductModel(
         productName: '',
+        id: '',
         categoryId: '',
         productPrice: 0.0,
         productSalePrice: 0.0,

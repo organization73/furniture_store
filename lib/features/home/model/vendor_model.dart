@@ -1,4 +1,5 @@
 import 'package:furniture_store/utils/constants/enums.dart';
+import 'package:uuid/uuid.dart';
 
 class VendorModel {
   String id;
@@ -10,14 +11,14 @@ class VendorModel {
   AccountType? accountType;
 
   VendorModel({
-    required this.id,
+    String id = '',
     required this.image,
     required this.location,
     required this.name,
     this.isFeatured,
     this.accountType = AccountType.regular,
     this.productsCount,
-  });
+  }) : id = id.isEmpty ? const Uuid().v4() : id;
 
   static VendorModel empty() => VendorModel(
       id: '',
@@ -34,7 +35,7 @@ class VendorModel {
       'isFeatured': isFeatured,
       'productsCount': productsCount,
       'location': location,
-      'accountType': accountType?.index, // Assuming AccountType is an enum
+      'accountType': accountType?.index,
     };
   }
 
@@ -47,8 +48,8 @@ class VendorModel {
         name: data['name'] ?? '',
         location: data['location'] ?? '',
         isFeatured: data['isFeatured'] ?? false,
-        accountType: AccountType.values[data['accountType'] ??
-            AccountType.regular.index], // Convert index back to enum
+        accountType: AccountType
+            .values[data['accountType'] ?? AccountType.regular.index],
         productsCount: data['productsCount'] ?? 0);
   }
 }

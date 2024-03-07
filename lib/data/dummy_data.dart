@@ -36,9 +36,9 @@ class DummyData {
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
       productImage: TImages.productImage1,
-      onSale: false,
+      onSale: true,
       productDetails: ProductDetails(
-        condition: 'new',
+        condition: 'used',
         color: 'red',
         productListImages: [
           TImages.productImage2,
@@ -61,14 +61,12 @@ class DummyData {
         productSeller: VendorModel(
             name: 'Ahmed',
             location: 'Damietta',
-            id: '1',
             image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: false,
             productsCount: 1,
             accountType: AccountType.regular),
       ),
     ),
-  
     ProductModel(
       productName: 'White comfy Chair',
       categoryId: '2',
@@ -89,10 +87,9 @@ class DummyData {
             comment:
                 'The product is good, but it could use some improvements. The packaging was damaged.',
             reviewerImage: 'https://picsum.photos/id/1062/80/80'),
-        
       ],
       productImage: TImages.productImage3,
-      onSale: false,
+      onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
         color: 'White',
@@ -117,14 +114,12 @@ class DummyData {
         productSeller: VendorModel(
             name: 'Ali',
             location: 'Mansoura',
-            id: '2',
             image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: true,
             productsCount: 2,
             accountType: AccountType.vendor),
       ),
     ),
-  
     ProductModel(
       productName: 'Bedroom Black Bed',
       categoryId: '1',
@@ -139,7 +134,6 @@ class DummyData {
             comment:
                 'Great product! It exceeded my expectations. Highly recommended.',
             reviewerImage: 'https://picsum.photos/id/1066/80/80'),
-      
         Review(
             reviewerName: 'Eva Johnson',
             rating: 5,
@@ -148,7 +142,7 @@ class DummyData {
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
       productImage: TImages.productImage12,
-      onSale: false,
+      onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
         color: 'red',
@@ -173,14 +167,12 @@ class DummyData {
         productSeller: VendorModel(
             name: 'Kahled',
             location: 'Cairo',
-            id: '4',
             image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: false,
             productsCount: 1,
             accountType: AccountType.vendor),
       ),
     ),
-  
     ProductModel(
       productName: 'Kitchen Dining Table',
       categoryId: '3',
@@ -209,7 +201,7 @@ class DummyData {
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
       productImage: TImages.productImage6,
-      onSale: false,
+      onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
         color: 'red',
@@ -232,17 +224,76 @@ class DummyData {
           modifiable: true,
         ),
         productSeller: VendorModel(
-            name: 'Ali',
-            location: 'Damietta',
-            id: '11',
+            name: 'Mohamed',
+            location: 'Louxor',
             image: 'https://picsum.photos/id/1062/80/80',
             isFeatured: false,
             productsCount: 1,
             accountType: AccountType.regular),
       ),
     ),
-  
-  
+    /////////////////////////////
+
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE525',
+      productPrice: 200,
+      productSalePrice: 100,
+      isFeatured: true,
+      rates: [
+        Review(
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
+        Review(
+            reviewerName: 'Alice Smith',
+            rating: 3,
+            comment:
+                'The product is good, but it could use some improvements. The packaging was damaged.',
+            reviewerImage: 'https://picsum.photos/id/1062/80/80'),
+        Review(
+            reviewerName: 'Eva Johnson',
+            rating: 5,
+            comment:
+                'Absolutely love it! The quality is excellent, and delivery was super fast.',
+            reviewerImage: 'https://picsum.photos/id/80/80/80'),
+      ],
+      productImage: TImages.productImage5,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'Ahmed',
+            location: 'Damietta',
+            image: 'https://picsum.photos/id/1062/80/80',
+            isFeatured: false,
+            productsCount: 1,
+            accountType: AccountType.regular),
+      ),
+    ),
+   
   ];
 
   static final List<BannersModel> banners = [
