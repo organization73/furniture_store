@@ -293,7 +293,126 @@ class DummyData {
             accountType: AccountType.regular),
       ),
     ),
-   
+
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE525',
+      productPrice: 200,
+      productSalePrice: 100,
+      isFeatured: true,
+      rates: [
+        Review(
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
+        Review(
+            reviewerName: 'Alice Smith',
+            rating: 3,
+            comment:
+                'The product is good, but it could use some improvements. The packaging was damaged.',
+            reviewerImage: 'https://picsum.photos/id/1062/80/80'),
+        Review(
+            reviewerName: 'Eva Johnson',
+            rating: 5,
+            comment:
+                'Absolutely love it! The quality is excellent, and delivery was super fast.',
+            reviewerImage: 'https://picsum.photos/id/80/80/80'),
+      ],
+      productImage: TImages.productImage5,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'Ahmed',
+            location: 'Damietta',
+            image: 'https://picsum.photos/id/1062/80/80',
+            isFeatured: false,
+            productsCount: 1,
+            accountType: AccountType.regular),
+      ),
+    ),
+
+    ProductModel(
+      productName: 'Bedroom Red Bed',
+      categoryId: '1',
+      sku: 'AE525',
+      productPrice: 200,
+      productSalePrice: 100,
+      isFeatured: true,
+      rates: [
+        Review(
+            reviewerName: 'John Doe',
+            rating: 4,
+            comment:
+                'Great product! It exceeded my expectations. Highly recommended.',
+            reviewerImage: 'https://picsum.photos/id/1066/80/80'),
+        Review(
+            reviewerName: 'Alice Smith',
+            rating: 3,
+            comment:
+                'The product is good, but it could use some improvements. The packaging was damaged.',
+            reviewerImage: 'https://picsum.photos/id/1062/80/80'),
+        Review(
+            reviewerName: 'Eva Johnson',
+            rating: 5,
+            comment:
+                'Absolutely love it! The quality is excellent, and delivery was super fast.',
+            reviewerImage: 'https://picsum.photos/id/80/80/80'),
+      ],
+      productImage: TImages.productImage5,
+      onSale: false,
+      productDetails: ProductDetails(
+        condition: 'used',
+        color: 'red',
+        productListImages: [
+          TImages.productImage2,
+          TImages.productImage3,
+          TImages.productImage4,
+        ],
+        productSpecs: {
+          'ablakash': 'mdf',
+          'fabric type': 'gg',
+          'fabric density': 'fg',
+          'wood type': 'Abs',
+        },
+        productDesc:
+            'A big red bed with unrivaled comfort and a striking visual experience.',
+        productStats: ProductStats(
+          delivery: true,
+          negotiable: false,
+          modifiable: true,
+        ),
+        productSeller: VendorModel(
+            name: 'Ahmed',
+            location: 'Damietta',
+            image: 'https://picsum.photos/id/1062/80/80',
+            isFeatured: false,
+            productsCount: 1,
+            accountType: AccountType.regular),
+      ),
+    ),
   ];
 
   static final List<BannersModel> banners = [
@@ -329,5 +448,56 @@ class DummyData {
         name: 'Sofas',
         isFeatured: false,
         parentId: '1'),
+  ];
+
+  static final List<VendorModel> vendors = [
+    VendorModel(
+        image: TImages.user,
+        location: 'Damietta',
+        name: 'Ali',
+        accountType: AccountType.regular,
+        isFeatured: true,
+        productsCount: 2,
+        isVerified: true),
+    VendorModel(
+        image: TImages.user,
+        location: 'Cairo',
+        name: 'Mohamed',
+        accountType: AccountType.vendor,
+        isFeatured: true,
+        productsCount: 20,
+        isVerified: false),
+    VendorModel(
+        image: TImages.user,
+        location: 'Louxor',
+        name: 'Khaled',
+        accountType: AccountType.regular,
+        isFeatured: false,
+        productsCount: 5,
+        isVerified: false),
+    VendorModel(
+        image: TImages.user,
+        location: 'Aswan',
+        name: 'Samy',
+        accountType: AccountType.vendor,
+        isFeatured: false,
+        productsCount: 10,
+        isVerified: true),
+    VendorModel(
+        image: TImages.user,
+        location: 'Alexendaria',
+        name: 'Ahmed',
+        accountType: AccountType.vendor,
+        isFeatured: false,
+        productsCount: 8,
+        isVerified: true),
+    VendorModel(
+        image: TImages.user,
+        location: 'Port Said',
+        name: 'Youssef',
+        accountType: AccountType.vendor,
+        isFeatured: true,
+        productsCount: 2,
+        isVerified: false),
   ];
 }

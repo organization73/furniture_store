@@ -24,6 +24,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsController = Get.put(ProductController());
+    
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {

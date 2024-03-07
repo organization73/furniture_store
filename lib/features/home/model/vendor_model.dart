@@ -7,6 +7,7 @@ class VendorModel {
   String location;
   String image;
   bool? isFeatured;
+  bool? isVerified;
   int? productsCount;
   AccountType? accountType;
 
@@ -15,7 +16,8 @@ class VendorModel {
     required this.image,
     required this.location,
     required this.name,
-    this.isFeatured,
+    this.isFeatured = false,
+    this.isVerified = false,
     this.accountType = AccountType.regular,
     this.productsCount,
   }) : id = id.isEmpty ? const Uuid().v4() : id;
@@ -25,6 +27,9 @@ class VendorModel {
       image: '',
       name: '',
       location: '',
+      isFeatured: false,
+      isVerified: false,
+      productsCount: 0,
       accountType: AccountType.regular);
 
   Map<String, dynamic> toJson() {
@@ -33,6 +38,7 @@ class VendorModel {
       'name': name,
       'image': image,
       'isFeatured': isFeatured,
+      'isVerified': isVerified,
       'productsCount': productsCount,
       'location': location,
       'accountType': accountType?.index,
@@ -48,6 +54,7 @@ class VendorModel {
         name: data['name'] ?? '',
         location: data['location'] ?? '',
         isFeatured: data['isFeatured'] ?? false,
+        isVerified: data['isVerified'] ?? false,
         accountType: AccountType
             .values[data['accountType'] ?? AccountType.regular.index],
         productsCount: data['productsCount'] ?? 0);

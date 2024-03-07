@@ -4,12 +4,14 @@ import 'package:furniture_store/common/widgets/appbar/tabbar.dart';
 import 'package:furniture_store/common/widgets/galleries/featured_gallery_card.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
+import 'package:furniture_store/features/gallery/screens/all_galleries/all_galleries_screen.dart';
 import 'package:furniture_store/features/home/controllers/category_controller.dart';
 import 'package:furniture_store/features/home/widgets/category_tab.dart';
 import 'package:furniture_store/features/home/widgets/search_bar.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:furniture_store/utils/helpers/helper_functions.dart';
+import 'package:get/get.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -19,7 +21,6 @@ class StoreScreen extends StatelessWidget {
     final categories = CategoryController.instance.featuredCatedories;
     return DefaultTabController(
       length: categories.length,
-      
       child: Scaffold(
         body: NestedScrollView(
             headerSliverBuilder: (_, innerBoxIsScrollable) {
@@ -48,7 +49,11 @@ class StoreScreen extends StatelessWidget {
                           ),
                           SectionHeading(
                             title: 'Featured Galleries',
-                            onPress: () {},
+                            onPress: () => Get.to(
+                              () => const AllGalleriesPage(),
+                              duration: const Duration(milliseconds: 300),
+                              transition: Transition.rightToLeft,
+                            ),
                           ),
                           GridLayout(
                               itemCount: 4,
