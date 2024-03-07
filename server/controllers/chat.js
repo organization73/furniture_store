@@ -188,12 +188,10 @@ exports.fetchChatRooms = async (req, res, next) => {
       })
       .sort({ updatedAt: -1 });
 
-    // console.log("chatRooms:", chatRooms[0].users[0]);
     const updatedChatRooms = chatRooms.map((chatRoom) => {
       chatRoom.users.map((u) => {
         if (u._id.toString() !== user._id.toString()) {
           chatRoom.fullName = u.firstName + " " + u.lastName;
-          console.log("chatRoom:", chatRoom.fullName);
         }
       });
       return chatRoom;

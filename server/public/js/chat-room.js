@@ -65,9 +65,14 @@ fetch("/chat/rooms")
     console.log(typeof data.chatRooms);
     data.chatRooms.forEach((chatRoom) => {
       const listItem = document.createElement("li");
-      listItem.addEventListener("click", selectContact);
-      listItem.textContent = chatRoom.fullName;
+      listItem.className = "contact-item";
+      const listItemDiv = document.createElement("div");
+      const listItemDivP = document.createElement("p");
+      listItemDiv.append(listItemDivP);
+      listItem.append(listItemDiv);
+      listItemDivP.textContent = chatRoom.fullName;
       listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
+      listItem.addEventListener("click", selectContact);
       contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
     });
   })
@@ -87,7 +92,7 @@ async function addContact() {
   //add new contact in the db on server
   let chatRoom;
   try {
-    const response = await fetch("/chat/access-room", {
+    let response = await fetch("/chat/access-room", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,23 +104,30 @@ async function addContact() {
     if (response.status !== 201 && response.status !== 200) {
       throw new Error("Error adding contact");
     }
-    chatRoom = await response.json();
+    response = await response.json();
+    chatRoom = response.chatRoom;
   } catch (err) {
     return console.log(err);
   }
 
   const listItem = document.createElement("li");
-  listItem.textContent = input.value;
-  listItem.dataset.userId = chatRoom._id; // Add a data-contact-id attribute to the list item
+  const listItemDiv = document.createElement("div");
+  const listItemDivP = document.createElement("p");
+  listItemDiv.append(listItemDivP);
+  listItem.append(listItemDiv);
+  listItemDivP.textContent = input.value;
+  listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
   //clean the input field
   input.value = "";
   input.dataset.id = "";
+  listItem.addEventListener("click", selectContact);
   contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
 }
 
 // Function to select a contact and send a GET request to the API
 function selectContact() {
   const contactId = this.dataset.id;
+
   messageContainer.disabled = false;
   messageContainer.autofocus = true;
 
@@ -186,6 +198,7 @@ async function sendMessage() {
         throw new Error("Error sending message");
       }
       const newMessage = await response.json();
+      socket.emit("new-message", newMessage);
     } catch (error) {
       return console.log(error);
     }

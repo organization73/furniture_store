@@ -48,7 +48,6 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const onlineUsers = [];
 
 const app = express();
 
@@ -146,7 +145,7 @@ mongoose
     });
     io.on("connection", (socket) => {
       const socketHelper = require("./socketio/socketHelper");
-      socketHelper.actionListeners(socket, onlineUsers); 
+      socketHelper.actionListeners(socket);
     });
   })
   .catch((err) => {
