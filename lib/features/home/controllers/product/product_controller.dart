@@ -1,7 +1,6 @@
 import 'package:furniture_store/common/widgets/loaders/loaders.dart';
 import 'package:furniture_store/data/repositories/product/product_repo.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
-import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {

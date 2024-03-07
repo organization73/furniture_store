@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:furniture_store/common/styles/shadows.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/icons/circular_icon.dart';
@@ -123,8 +125,10 @@ class ProductCardVerical extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.sm),
               child: Row(
                 children: [
-                  Flexible(
+                  Expanded(
+                    flex: 4,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (product.onSale)
                           ProductPriceText(
