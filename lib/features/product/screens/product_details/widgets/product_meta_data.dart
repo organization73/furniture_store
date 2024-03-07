@@ -4,6 +4,7 @@ import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:furniture_store/common/widgets/texts/product_price_text.dart';
 import 'package:furniture_store/common/widgets/texts/product_title_text.dart';
+import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/product_review_screen.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_specs.dart';
@@ -23,6 +24,10 @@ class ProductMetaData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsController = ProductController.instance;
+    final salePercentage = productsController.calculateSalePercnetage(
+        product.productPrice, product.productSalePrice);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +39,7 @@ class ProductMetaData extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.sm, vertical: TSizes.xs),
               child: Text(
-                '25%',
+                '$salePercentage%',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!
@@ -44,18 +49,18 @@ class ProductMetaData extends StatelessWidget {
             SizedBox(
               width: TSizes.spaceBtwItems,
             ),
-            Text(
-              '250 LE',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .apply(decoration: TextDecoration.lineThrough),
-            ),
+            if (product.onSale)
+              ProductPriceText(
+                price: product.productPrice.toStringAsFixed(1),
+                lineThrough: true,
+              ),
             SizedBox(
               width: TSizes.spaceBtwItems,
             ),
-            const ProductPriceText(
-              price: '185',
+            ProductPriceText(
+              price: productsController
+                  .getProductPrice(product)
+                  .toStringAsFixed(1),
               isLarge: true,
             ),
           ],
@@ -63,12 +68,12 @@ class ProductMetaData extends StatelessWidget {
         SizedBox(
           height: TSizes.spaceBtwItems,
         ),
-        const ProductTitleText(title: 'Red bed with wooden pillers'),
+        ProductTitleText(title: product.productName),
         SizedBox(
           height: TSizes.spaceBtwItems,
         ),
-        const BrandTitleTextWithVerifiedIcon(
-          title: 'Ali',
+        BrandTitleTextWithVerifiedIcon(
+          title: product.productDetails.productSeller.name,
           beandtextSize: TextSizes.medium,
         ),
         Row(
@@ -83,7 +88,7 @@ class ProductMetaData extends StatelessWidget {
               width: TSizes.xs,
             ),
             Text(
-              'Damietta',
+              product.productDetails.productSeller.location,
               style: Theme.of(context).textTheme.labelMedium,
             )
           ],
@@ -163,10 +168,8 @@ class ProductMetaData extends StatelessWidget {
         ),
 
         UserReviewCard(
-         product: product,
+          product: product,
         ),
-
-        //TODO: Add similar products if needed
 
         // const BuildSectionDescription(
         //   sectionName: ' smProducts',

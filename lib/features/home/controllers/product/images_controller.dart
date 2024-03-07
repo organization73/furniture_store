@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
-import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class ImageController extends GetxController {
@@ -20,19 +19,21 @@ class ImageController extends GetxController {
     Get.to(
         fullscreenDialog: true,
         () => Dialog.fullscreen(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  CachedNetworkImage(imageUrl: image),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () => Get.back(),
+              child: SafeArea(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CachedNetworkImage(imageUrl: image),
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Get.back(),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ));
   }

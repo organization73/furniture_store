@@ -3,9 +3,7 @@ import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_image_slider.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_meta_data.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_rating_container.dart';
-import 'package:furniture_store/global/global_variables.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
-import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
