@@ -52,7 +52,6 @@ module.exports.actionListeners = (socket) => {
     }
     chatRoom.users.forEach(user => {
       if (user._id.toString() !== newMessage.sender._id.toString()) {
-        console.log("sending message to room:", user._id);
         socket.in(user._id).emit("recieve-message", newMessage);
       }
     });
@@ -62,19 +61,13 @@ module.exports.actionListeners = (socket) => {
 
   //disconnecting
   socket.on("disconnect", () => {
-    console.log("disconnecting user...", socket.id);
-    console.log("onlineUsers before remove:", onlineUsers);
     //remove user from online users
     const userIndex = onlineUsers.findIndex(
       (user) => user.socketId === socket.id
     );
-    console.log("user index:", userIndex);
     if (userIndex !== -1) {
-      console.log("disconnecting user...", onlineUsers[userIndex]);
-      console.log("disconnecting usre index:", userIndex);
       socket.leave(onlineUsers[userIndex].userId);
       onlineUsers.splice(userIndex, 1);
-      console.log("onlineUsers after remove:", onlineUsers);
     }
   });
 };
