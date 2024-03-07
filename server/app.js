@@ -137,7 +137,7 @@ mongoose
   .then(async (result) => {
     console.log("Connected to the database");
     // Start the server
-    const server = await app.listen(PORT,"192.168.1.9", () => {
+    const server = await app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
     //seting up the websocket
