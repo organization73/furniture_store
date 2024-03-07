@@ -1,7 +1,7 @@
 //db
 
 const currentUserId = currentUser._id;
-let currentRoomId = {};
+let currentRoomId;
 let isConnected = false;
 
 //signin
@@ -20,6 +20,80 @@ const contactDropdown = document.getElementById("contact-dropdown");
 const messagesList = document.getElementById("messages");
 const messageContainer = document.getElementById("message-input");
 const sendBtn = document.getElementById("send-message-btn");
+
+let typingTimeoutID = null;
+let typingElement = document.createElement("p");
+
+/*send typing event*/
+messageContainer.addEventListener("input", () => {
+  const currentRoomElement = document.querySelector(
+    "#contact-list li.selected"
+  );
+  const currentRoomData = JSON.parse(currentRoomElement.dataset.chatRoom);
+  const reciever = currentRoomData.users.find(
+    (user) => user._id !== currentUser._id
+  );
+  socket.emit("typing", {
+    recieverId: reciever._id,
+    recieverUsername: reciever.username,
+  });
+});
+
+/*recieve typing event*/
+socket.on("recieve-typing", (senderUsername) => {
+  if (document.getElementById("typing")) {
+    // Clear the old timeout if it exists
+    if (typingTimeoutID) {
+      clearTimeout(typingTimeoutID);
+    }
+    // Create a new timeout
+    typingTimeoutID = setTimeout(() => {
+      typingElement.remove();
+    }, 3000);
+    return;
+  }
+  console.log("recieve-typing");
+  console.log("recieve-typing", senderUsername);
+  // const typingElement = document.createElement("p");
+  typingElement.id = "typing";
+  typingElement.textContent = `${senderUsername}: typing...`;
+  messagesList.appendChild(typingElement);
+
+  // Clear the old timeout if it exists
+  if (typingTimeoutID) {
+    clearTimeout(typingTimeoutID);
+  }
+  // Create a new timeout
+  typingTimeoutID = setTimeout(() => {
+    typingElement.remove();
+  }, 3000);
+});
+
+//fetching Users contacts
+fetch("/chat/rooms")
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    console.log(data);
+    console.log(typeof data.chatRooms);
+    data.chatRooms.forEach((chatRoom) => {
+      const listItem = document.createElement("li");
+      listItem.className = "contact-item";
+      const listItemDiv = document.createElement("div");
+      const listItemDivP = document.createElement("p");
+      listItemDiv.append(listItemDivP);
+      listItem.append(listItemDiv);
+      listItemDivP.textContent = chatRoom.fullName;
+      listItem.dataset.chatRoom = JSON.stringify(chatRoom); // Add a data-chat-room attribute to the list item
+      listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
+      listItem.addEventListener("click", selectContact);
+      contactListItems.appendChild(listItem); // Add the new list item to the beginning of the list
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //search contact
 const input = document.getElementById("contact-input");
@@ -57,31 +131,6 @@ document.addEventListener("click", (event) => {
     suggestions.style.display = "none";
   }
 });
-
-//fetching Users contacts
-fetch("/chat/rooms")
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    console.log(data);
-    console.log(typeof data.chatRooms);
-    data.chatRooms.forEach((chatRoom) => {
-      const listItem = document.createElement("li");
-      listItem.className = "contact-item";
-      const listItemDiv = document.createElement("div");
-      const listItemDivP = document.createElement("p");
-      listItemDiv.append(listItemDivP);
-      listItem.append(listItemDiv);
-      listItemDivP.textContent = chatRoom.fullName;
-      listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
-      listItem.addEventListener("click", selectContact);
-      contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 const contacts = [];
 const protocol = window.location.protocol;
@@ -167,7 +216,9 @@ function selectContact() {
       // Add the new messages to the messages div
       messages.forEach((message) => {
         const messageElement = document.createElement("p");
-        messageElement.textContent = `${message.sender.username.split(" ")[0]}: ${message.content}`;
+        messageElement.textContent = `${
+          message.sender.username.split(" ")[0]
+        }: ${message.content}`;
         messagesList.appendChild(messageElement);
       });
     })
@@ -181,10 +232,12 @@ function selectContact() {
 //receive message
 socket.on("recieve-message", (newMessage) => {
   console.log("recieved message:", newMessage);
-  console.log("currentRoomId",currentRoomId)
+  console.log("currentRoomId", currentRoomId);
   if (newMessage.chatRoom._id === currentRoomId) {
     const messageElement = document.createElement("p");
-    messageElement.textContent = `${newMessage.sender.username.split(" ")[0]}: ${newMessage.content}`;
+    messageElement.textContent = `${
+      newMessage.sender.username.split(" ")[0]
+    }: ${newMessage.content}`;
     messagesList.appendChild(messageElement);
   }
 });
@@ -212,7 +265,7 @@ async function sendMessage() {
       }
       const newMessage = await response.json();
       console.log("new message:", newMessage);
-      socket.emit("new-message", newMessage );
+      socket.emit("new-message", newMessage);
     } catch (error) {
       return console.log(error);
     }

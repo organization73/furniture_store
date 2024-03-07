@@ -44,13 +44,18 @@ module.exports.actionListeners = (socket) => {
     socket.leave(roomId);
   });
 
+  //typing
+  socket.on("typing", ({ recieverId, recieverUsername }) => {
+    socket.in(recieverId).emit("recieve-typing", recieverUsername);
+  });
+
   //sending messages.
   socket.on("new-message", (newMessage) => {
     const chatRoom = newMessage.chatRoom;
     if (!chatRoom.users) {
       return console.log("no users in the chat room");
     }
-    chatRoom.users.forEach(user => {
+    chatRoom.users.forEach((user) => {
       if (user._id.toString() !== newMessage.sender._id.toString()) {
         socket.in(user._id).emit("recieve-message", newMessage);
       }

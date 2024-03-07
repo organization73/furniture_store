@@ -53,10 +53,13 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
-  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
   const confirmPassword = req.body.password;
+  const username = email.split("@")[0];
+  const firstName = username.split(".")[0];
+  const lastName = username.split(".")[1];
+  
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -84,7 +87,9 @@ exports.postSignup = (req, res, next) => {
       .hash(password, 12)
       .then((hashedPassword) => {
         const admin = new Admin({
-          name: name || "temp",
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
           email: email,
           password: hashedPassword,
           isConfirmed: false,
