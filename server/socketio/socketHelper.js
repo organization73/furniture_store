@@ -59,18 +59,42 @@ module.exports.actionListeners = (socket, onlineUsers) => {
   //   }
   // });
 
-  
+  //sending notificatoins //can be made on connection
+  socket.on("setup",(userData=>{
+    socket.join(userData._id);
+    console.log("Client: " + userData.email + " connected");
+    onlineUsers.push({socketId:socket.id,userId:userData._id});
+    socket.emit("connected");
+  }))
+  //leaving the chat page.
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
+  });
+
+  //joining room
+  socket.on("join-room", (roomId) => {
+    console.log("join room", roomId);
+    socket.join(roomId);
+  });
+  socket.on("leave-room", (roomId) => {
+    console.log("leave room", roomId);
+    socket.leave(roomId);
+  });
 
   socket.on("disconnect", () => {
     console.log("Client: " + socket.id + " disconnected");
     //remove user from online users
+    console.log(onlineUsers)
     const userIndex = onlineUsers.findIndex(
       (user) => user.socketId === socket.id
     );
     if (userIndex !== -1) {
       onlineUsers.splice(userIndex, 1);
+      socket.leave(onlineUsers[userIndex].userId);
     }
     console.log("onlineUsers:", onlineUsers);
   });
 
 };
+//if user close the page while he is inside a page.

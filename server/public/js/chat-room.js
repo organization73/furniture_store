@@ -1,11 +1,15 @@
 //db
-const currentUser = "<%= currentUserId %>";
+
 const currentUserId = currentUser._id;
 let currentRoomId = {};
+let isConnected = false;
 
 //signin
 const socket = io();
-socket.emit("signin");
+socket.emit("setup", currentUser);
+socket.on("connected", () => {
+  isConnected = true;
+});
 
 // Initialize an empty contact list
 const contactListItems = document.getElementById("contact-list-items");
@@ -19,7 +23,6 @@ const input = document.getElementById("contact-input");
 const suggestions = document.getElementById("contact-suggestions");
 
 input.addEventListener("input", async () => {
-  console.log("asdfafds");
   const value = input.value.toLowerCase();
   suggestions.innerHTML = "";
   if (value.length === 0) {
@@ -120,7 +123,11 @@ function selectContact() {
   const previouslySelectedContact = document.querySelector(
     "#contact-list li.selected"
   );
+  currentRoomId = contactId;
   if (previouslySelectedContact) {
+    //leave old room.
+    console.log("leave room", previouslySelectedContact.dataset.id);
+    socket.emit("leave-room", previouslySelectedContact.dataset.id);
     previouslySelectedContact.classList.remove("selected");
   }
   // Add the "selected" class to the newly selected contact
@@ -153,6 +160,8 @@ function selectContact() {
     .catch((error) => {
       console.error("Error retrieving messages:", error);
     });
+  //join room
+  socket.emit("join-room", contactId);
 }
 
 // Function to send a message to the currently selected contact
@@ -169,20 +178,17 @@ async function sendMessage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          content:message,
+          content: message,
           roomId: selectedContact.dataset.id,
         }),
       });
       if (response.status !== 201 && response.status !== 200) {
-        // console.log("Error sending message");
         throw new Error("Error sending message");
       }
       const newMessage = await response.json();
-
     } catch (error) {
       return console.log(error);
     }
-
     const messageElement = document.createElement("p");
     messageElement.textContent = `${
       selectedContact.textContent.split(" ")[0]

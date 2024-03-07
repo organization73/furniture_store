@@ -145,7 +145,6 @@ mongoose
       },
     });
     io.on("connection", (socket) => {
-      console.log(`Client: ${socket.id} connected`);
       const socketHelper = require("./socketio/socketHelper");
       socketHelper.actionListeners(socket, onlineUsers); 
     });

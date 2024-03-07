@@ -3,7 +3,6 @@ const Admin = require("../models/admin"); // Assuming you have a User model
 
 const authMiddleware = async (req, res, next) => {
   // Get the token from the request headers
-  console.log("req.cookies.token:", req.cookies.token);
   let token;
   try {
     // token = req.headers.authorization.split(" ")[1];
