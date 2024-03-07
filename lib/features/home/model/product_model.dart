@@ -33,6 +33,31 @@ class ProductModel {
   }) : id = id.isEmpty ? const Uuid().v4() : id {
     updateRates();
   }
+  static ProductModel empty() => ProductModel(
+        productName: '',
+        categoryId: '',
+        productPrice: 0.0,
+        productSalePrice: 0.0,
+        productImage: '',
+        onSale: false,
+        productDetails: ProductDetails(
+            condition: '',
+            color: '',
+            productListImages: [],
+            productSpecs: {},
+            productDesc: '',
+            productStats: ProductStats(
+                delivery: false, negotiable: false, modifiable: false),
+            productSeller: VendorModel(
+                name: '',
+                location: '',
+                id: '',
+                image: '',
+                isFeatured: false,
+                productsCount: 0,
+                accountType: AccountType.regular)),
+        sku: '',
+      );
 
   void updateRates() {
     if (rates.isEmpty) {
@@ -79,36 +104,7 @@ class ProductModel {
         productDetails: ProductDetails.fromJson(data['ProductDetails'] ?? {}),
       );
     } else {
-      return ProductModel(
-        id: '',
-        productName: '',
-        categoryId: '',
-        sku: '',
-        productPrice: 0.0,
-        productSalePrice: 0,
-        productImage: '',
-        onSale: false,
-        isFeatured: false,
-        rates: [],
-        productDetails: ProductDetails(
-          condition: '',
-          color: '',
-          productListImages: [],
-          productSpecs: {},
-          productDesc: '',
-          date: DateTime.now(),
-          productStats: ProductStats(
-              delivery: false, negotiable: false, modifiable: false),
-          productSeller: VendorModel(
-              name: '',
-              location: '',
-              id: '',
-              image: '',
-              isFeatured: false,
-              productsCount: 0,
-              accountType: AccountType.regular),
-        ),
-      );
+      return ProductModel.empty();
     }
   }
 }

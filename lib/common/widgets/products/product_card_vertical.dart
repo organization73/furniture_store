@@ -1,4 +1,6 @@
+import 'package:fast_color_picker/fast_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:furniture_store/common/styles/shadows.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/icons/circular_icon.dart';
@@ -6,6 +8,7 @@ import 'package:furniture_store/common/widgets/images/rounded_image.dart';
 import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:furniture_store/common/widgets/texts/product_price_text.dart';
 import 'package:furniture_store/common/widgets/texts/product_title_text.dart';
+import 'package:furniture_store/features/home/controllers/product_controller.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_details/product_details_screen.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
@@ -22,9 +25,15 @@ class ProductCardVerical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    final productsController = ProductController.instance;
+    final salePercentage = productsController.calculateSalePercnetage(
+        product.productPrice, product.productSalePrice);
+
     return GestureDetector(
       onTap: () => Get.to(
-        () =>  ProductDetailsScreen(product:product ,),
+        () => ProductDetailsScreen(
+          product: product,
+        ),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       ),
@@ -45,7 +54,7 @@ class ProductCardVerical extends StatelessWidget {
               backgroundColor: dark ? TColors.black : TColors.light,
               child: Stack(
                 children: [
-                   Align(
+                  Align(
                     alignment: Alignment.center,
                     child: RoundedImage(
                       imageUrl: product.productImage,
@@ -61,7 +70,7 @@ class ProductCardVerical extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
-                        '25%',
+                        '$salePercentage%',
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -89,18 +98,17 @@ class ProductCardVerical extends StatelessWidget {
                 width: double.infinity,
                 child: Directionality(
                   textDirection: TextDirection.ltr,
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       ProductTitleText(
+                      ProductTitleText(
                         title: product.productName,
                         smallSize: true,
                       ),
                       SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                       Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           BrandTitleTextWithVerifiedIcon(
@@ -118,8 +126,21 @@ class ProductCardVerical extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.sm),
               child: Row(
                 children: [
-                  ProductPriceText(
-                    price: product.productPrice.toStringAsFixed(1),
+                  Flexible(
+                    child: Column(
+                      children: [
+                        if (product.onSale)
+                          ProductPriceText(
+                            price: product.productPrice.toStringAsFixed(1),
+                            lineThrough: true,
+                          ),
+                        ProductPriceText(
+                          price: productsController
+                              .getProductPrice(product)
+                              .toStringAsFixed(1),
+                        ),
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   const Icon(

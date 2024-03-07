@@ -31,4 +31,16 @@ class ProductController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  double getProductPrice(ProductModel product) {
+    return (product.onSale ? product.productSalePrice : product.productPrice);
+  }
+
+  String? calculateSalePercnetage(double originalPrice, double? salePrice) {
+    if (salePrice == null || salePrice <= 0.0) return null;
+    if (originalPrice <= 0) return null;
+
+    double precnetage = ((originalPrice - salePrice) / originalPrice) * 100;
+    return precnetage.toStringAsFixed(0);
+  }
 }
