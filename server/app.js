@@ -24,8 +24,9 @@ const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URL = "mongodb://localhost:27017/furniture-shop";
-// "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+const MONGODB_URL = 
+"mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+// "mongodb://localhost:27017/furniture-shop";
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
