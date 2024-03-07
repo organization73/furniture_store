@@ -82,6 +82,8 @@ fetch("/chat/rooms")
     console.log(data);
     console.log(typeof data.chatRooms);
     data.chatRooms.forEach((chatRoom) => {
+      console.log("chatRoom");
+      console.log(chatRoom);
       const listItem = document.createElement("li");
       listItem.className = "contact-item";
       const listItemDiv = document.createElement("div");
@@ -93,12 +95,15 @@ fetch("/chat/rooms")
       listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
       listItem.addEventListener("click", selectContact);
       const lastMessage = document.createElement("h6");
-      lastMessage.textContent =
-        `${chatRoom.latestMessage.sender.username.split(".")[0]} :${
-          chatRoom.latestMessage.content
-        }` || "No messages yet";
-      listItemDiv.append(lastMessage);
+      if (chatRoom.latestMessage) {
+        lastMessage.textContent = `${
+          chatRoom.latestMessage.sender.username.split(".")[0]
+        } :${chatRoom.latestMessage.content}`;
+      } else {
+        lastMessage.textContent = "No messages yet";
+      }
 
+      listItemDiv.append(lastMessage);
       contactListItems.appendChild(listItem); // Add the new list item to the beginning of the list
     });
   })
@@ -169,25 +174,30 @@ async function addContact() {
     }
     response = await response.json();
     chatRoom = response.chatRoom;
+    console.log(chatRoom);
   } catch (err) {
     return console.log(err);
   }
 
   const listItem = document.createElement("li");
   const listItemDiv = document.createElement("div");
-  const listItemDivP = document.createElement("h5");
+  const listItemDivP = document.createElement("p");
   const lastMessage = document.createElement("h6");
-  lastMessage.textContent = chatRoom.lastMessage.content || "No messages yet";
-  listItemDivP.textContent = input.value;
   listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
+  listItem.addEventListener("click", selectContact);
+  listItemDiv.append(listItemDivP);
+  if (chatRoom.lastMessage) {
+    lastMessage.textContent = chatRoom.lastMessage.content || "No messages yet";
+  } else {
+    lastMessage.textContent = "No messages yet";
+  }
+  listItemDiv.append(lastMessage);
+  listItemDivP.textContent = input.value;
+  listItem.append(listItemDiv);
+  contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
   //clean the input field
   input.value = "";
   input.dataset.id = "";
-  listItem.addEventListener("click", selectContact);
-  listItemDiv.append(listItemDivP);
-  listItemDiv.append(lastMessage);
-  listItem.append(listItemDiv);
-  contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
 }
 
 //select a contact and send a GET request to the API
