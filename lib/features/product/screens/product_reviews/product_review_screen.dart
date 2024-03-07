@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/add_review.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/widgets/user_review_card.dart';
@@ -9,7 +10,7 @@ import 'package:get/get.dart';
 
 class ProductReviewsScreen extends StatelessWidget {
   const ProductReviewsScreen({super.key, required this.product});
-  final Product product;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,10 @@ class ProductReviewsScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          UserReviewCard(
-                            review: controller.reviews[index],
-                          ),
+                          // TODO: Fix this
+                          // UserReviewCard(
+                          //   review: controller.reviews[index],
+                          // ),
                           SizedBox(height: TSizes.spaceBtwItems),
                         ],
                       );

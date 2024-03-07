@@ -4,7 +4,7 @@ import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:furniture_store/common/widgets/texts/product_price_text.dart';
 import 'package:furniture_store/common/widgets/texts/product_title_text.dart';
-import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/product_review_screen.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_specs.dart';
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_status_checkboxes.dart';
@@ -19,7 +19,7 @@ import 'package:readmore/readmore.dart';
 
 class ProductMetaData extends StatelessWidget {
   const ProductMetaData({super.key, required this.product});
-  final Product product;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +150,7 @@ class ProductMetaData extends StatelessWidget {
         ),
 
         ProductStatsCheckboxes(
-          productStats: product.productDetails.productStats,
+          product: product,
         ),
 
         SectionHeading(
@@ -163,8 +163,7 @@ class ProductMetaData extends StatelessWidget {
         ),
 
         UserReviewCard(
-          review: product.rates[0],
-          profileImgUrl: 'https://picsum.photos/id/1062/80/80',
+         product: product,
         ),
 
         //TODO: Add similar products if needed

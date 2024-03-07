@@ -1,19 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/product_review_screen.dart';
+import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class OverlappingCircularAvatar extends StatelessWidget {
-  final Product product;
-  final List randomImages = [
-    'https://picsum.photos/id/1062/80/80',
-    'https://picsum.photos/id/1066/80/80',
-    'https://picsum.photos/id/1072/80/80',
-    'https://picsum.photos/id/80/80/80'
-  ];
-  OverlappingCircularAvatar({super.key, required this.product});
+  final ProductModel product;
+
+  const OverlappingCircularAvatar({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class OverlappingCircularAvatar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            for (int i = 0; i < randomImages.length; i++)
+            for (int i = 0; i < product.rates.length; i++)
               Align(
                 widthFactor: 0.5,
                 // parent circle avatar.
@@ -34,7 +31,7 @@ class OverlappingCircularAvatar extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 10,
                     child: CachedNetworkImage(
-                      imageUrl: randomImages[i],
+                      imageUrl: product.rates[i].reviewerImage,
                       imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,

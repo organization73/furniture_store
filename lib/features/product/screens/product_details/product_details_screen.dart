@@ -5,6 +5,7 @@ import 'package:furniture_store/features/product/screens/product_details/widgets
 import 'package:furniture_store/features/product/screens/product_details/widgets/product_rating_container.dart';
 import 'package:furniture_store/global/global_variables.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
+import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -21,13 +22,16 @@ class ProductDetailsScreen extends StatelessWidget {
           child: Text(
             'contactSeller'.tr,
           ),
-          onPressed: () {},
+          onPressed: () {
+          },
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-             ProductImageSlider(product: product,),
+            ProductImageSlider(
+              product: product,
+            ),
             Padding(
               padding: EdgeInsets.only(
                   right: TSizes.pagePaddingSpace,
@@ -35,12 +39,14 @@ class ProductDetailsScreen extends StatelessWidget {
                   bottom: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
-                   RatingWidget(product: product,),
+                  RatingWidget(
+                    product: product,
+                  ),
                   SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   ProductMetaData(
-                    product: allProductsList[1],
+                    product: product,
                   )
                 ],
               ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 
 class ProductStatsCheckboxes extends StatelessWidget {
-  final ProductStats productStats;
+  final ProductModel product;
 
-  const ProductStatsCheckboxes({super.key, required this.productStats});
+  const ProductStatsCheckboxes({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ProductStatsCheckboxes extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: const BorderRadius.all(Radius.circular(5))),
               child: Icon(
-                productStats.delivery ? Icons.check : Icons.clear,
+                product.productDetails.productStats.delivery ? Icons.check : Icons.clear,
                 color: Colors.white,
               )),
         ),
@@ -35,7 +36,7 @@ class ProductStatsCheckboxes extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: const BorderRadius.all(Radius.circular(5))),
               child: Icon(
-                productStats.negotiable ? Icons.check : Icons.clear,
+                product.productDetails.productStats.negotiable ? Icons.check : Icons.clear,
                 color: Colors.white,
               )),
         ),
@@ -49,7 +50,7 @@ class ProductStatsCheckboxes extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: const BorderRadius.all(Radius.circular(5))),
               child: Icon(
-                productStats.modifiable ? Icons.check : Icons.clear,
+                product.productDetails.productStats.modifiable ? Icons.check : Icons.clear,
                 color: Colors.white,
               )),
         )

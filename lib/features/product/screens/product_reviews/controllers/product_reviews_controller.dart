@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:get/get.dart';
 
 class ProductReviewsController extends GetxController {
-  final Product product;
+  final ProductModel product;
   RxList<Review> reviews = RxList<Review>();
   final TextEditingController reviewController = TextEditingController();
   final formKey = GlobalKey<FormState>();

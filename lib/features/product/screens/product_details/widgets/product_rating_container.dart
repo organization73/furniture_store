@@ -62,7 +62,7 @@ class RatingWidget extends StatelessWidget {
             Expanded(
               flex: 1,
               child: OverlappingCircularAvatar(
-                product: allProductsList[1],
+                product: product,
               ),
             ),
           ],

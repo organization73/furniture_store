@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:furniture_store/data/repositories/product/product.dart';
+import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AddReview extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
   const AddReview({super.key, required this.product});
 
   @override
