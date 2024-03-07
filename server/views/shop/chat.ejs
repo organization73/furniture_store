@@ -129,14 +129,14 @@
   <%- include('../includes/navigation.ejs') %>
   <div id="contact-list">
     <h2>Contact List</h2>
-    <input type="text" id="contact-input" placeholder="Enter user ID">
+    <input type="text" id="contact-input" placeholder="search by email or username">
     <div id="contact-suggestions"></div>
-    <select id="contact-dropdown">
+    <!-- <select id="contact-dropdown">
       <option value="1">user id</option>
       <option value="2">use name</option>
       <option value="3">phone number</option>
       <option value="4">eamil</option>
-    </select>
+    </select> -->
     <button id="open-contact">Add</button>
     <ul id="contact-list-items"></ul>
   </div>
@@ -150,28 +150,7 @@
     <button id="send-message-btn">Send</button>
   </div>
   <script>
-    function getTokenCookie() {
-      const cookieName = "token=";
-      const cookies = document.cookie.split(';');
-
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-
-        if (cookie.indexOf(cookieName) === 0) {
-          return cookie.substring(cookieName.length);
-        }
-      }
-
-      return null;
-    }
-
-    const tokenCookieValue = getTokenCookie();
-    if (tokenCookieValue) {
-      // Use the tokenCookieValue
-      console.log("Token cookie value:", tokenCookieValue);
-    } else {
-      console.warn("Token cookie not found.");
-    }
+    
   </script>
 
   <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
