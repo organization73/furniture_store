@@ -7,7 +7,6 @@ class ProductController extends GetxController {
   static ProductController get instance => Get.find();
   final isLoading = false.obs;
   final _productRepo = Get.put(ProductRepo());
-  RxList<ProductModel> allProducts = <ProductModel>[].obs;
   RxList<ProductModel> featuredProducts = <ProductModel>[].obs;
 
   @override
@@ -19,15 +18,23 @@ class ProductController extends GetxController {
   Future<void> fetchFeaturedProducts() async {
     try {
       isLoading.value = true;
-      // final products = await _productRepo.fetchProducts();
       final featuredProducts = await _productRepo.fetchFeaturedProducts();
 
-      // allProducts.assignAll(products);
       this.featuredProducts.assignAll(featuredProducts);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final products = await _productRepo.fetchFeaturedProducts();
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      return [];
     }
   }
 

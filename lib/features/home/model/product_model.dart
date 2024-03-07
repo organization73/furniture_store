@@ -101,7 +101,7 @@ class ProductModel {
         productImage: data['productImage'] ?? '',
         onSale: data['onSale'] ?? false,
         isFeatured: data['isFeatured'] ?? false,
-        rates: data['rates'],
+        rates: data['rates']?? [],
         productDetails: ProductDetails.fromJson(data['ProductDetails'] ?? {}),
       );
     } else {

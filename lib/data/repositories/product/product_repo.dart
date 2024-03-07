@@ -50,8 +50,43 @@ class ProductRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-            LoggerHelper.error('err', e);
+      throw 'Something went wrong, Please try again';
+    }
+  }
 
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final snapshot = await _db
+          .collection('Products')
+          .where('isFeatured', isEqualTo: true)
+          .get();
+
+      final list = snapshot.docs
+          .map((document) => ProductModel.fromFirebaseDocument(document))
+          .toList();
+
+      return list;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
+    try {
+      final querySnapshot = await query.get();
+      final List<ProductModel> productList = querySnapshot.docs
+          .map((doc) => ProductModel.fromFirebaseDocument(doc))
+          .toList();
+      return productList;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
       throw 'Something went wrong, Please try again';
     }
   }
@@ -96,7 +131,6 @@ class ProductRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      LoggerHelper.error('error', e);
       throw 'Something went wrong, Please try again';
     }
   }
@@ -135,7 +169,6 @@ class ProductRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      LoggerHelper.error('error', e);
       throw 'Something went wrong, Please try again';
     }
   }
