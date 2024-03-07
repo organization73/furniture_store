@@ -13,8 +13,6 @@ router.get("/login", authController.getLogin);
 
 router.post("/login", authValidator.login, authController.postLogin);
 
-router.get("/profile", isAuth, authController.getProfile);
-
 router.post("/logout", authController.postLogout);
 
 router.get("/reset/:token", authController.getConfirmSignup);

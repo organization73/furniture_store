@@ -15,6 +15,7 @@ const productRoutes = require("./routes/product");
 
 const adminAuthRoutes = require("./adminRouter/auth");
 const adminShopRoutes = require("./adminRouter/shop");
+const adminRouter = require("./adminRouter/admin");
 
 const chatRoutes = require("./routes/chat");
 
@@ -99,6 +100,8 @@ app.use((req, res, next) => {
 app.use("/admin", adminAuthRoutes);
 
 app.use("/admin", adminShopRoutes);
+
+app.use("/admin", adminRouter);
 
 app.use("/auth", authRoutes);
 
