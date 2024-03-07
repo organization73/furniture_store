@@ -150,20 +150,16 @@ exports.postLogin = async (req, res, next) => {
 
     const doMatch = await bcrypt.compare(password, admin.password);
     if (doMatch) {
-      console.log(process.env.JWT_SECRET);
       const token = jwt.sign(
         { adminId: admin._id, email: admin.email },
         process.env.JWT_SECRET,
         { expiresIn: "2d" }
       );
-      console.log("encdoe: ", token);
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log(decoded);
       res.cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24* 2,
-      }); // 2h
-      console.log("logged in");
+      });
       res.redirect("/admin");
     } else {
       const error = new Error("Invalid email or password.");
@@ -187,6 +183,7 @@ exports.postLogin = async (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
+  res.cookie("token", "", { maxAge: 1 });
   res.redirect("/admin/login");
 };
 

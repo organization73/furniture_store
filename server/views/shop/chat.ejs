@@ -149,6 +149,30 @@
     <input type="text" id="message-input" placeholder="Enter message" disabled/>
     <button id="send-message-btn">Send</button>
   </div>
+  <script>
+    function getTokenCookie() {
+      const cookieName = "token=";
+      const cookies = document.cookie.split(';');
+
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+
+        if (cookie.indexOf(cookieName) === 0) {
+          return cookie.substring(cookieName.length);
+        }
+      }
+
+      return null;
+    }
+
+    const tokenCookieValue = getTokenCookie();
+    if (tokenCookieValue) {
+      // Use the tokenCookieValue
+      console.log("Token cookie value:", tokenCookieValue);
+    } else {
+      console.warn("Token cookie not found.");
+    }
+  </script>
 
   <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
   <script >
