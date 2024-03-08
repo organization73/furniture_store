@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/features/favourits/controllers/favorite_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
@@ -47,6 +48,7 @@ class FavouritsPage extends StatelessWidget {
                       child: Column(
                         children: [
                           GridLayout(
+                              mainAxisExtent: 270.h,
                               itemCount: favList.length,
                               itemBuilder: (_, index) {
                                 return const Text('data');

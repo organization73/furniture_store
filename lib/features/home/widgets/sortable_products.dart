@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
 import 'package:furniture_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:furniture_store/features/home/controllers/product/all_products_controller.dart';
@@ -36,6 +37,7 @@ class SortableProducts extends StatelessWidget {
           height: TSizes.spaceBtwSections,
         ),
         Obx(() => GridLayout(
+            mainAxisExtent: 270.h,
             itemCount: controller.products.length,
             itemBuilder: (__, index) =>
                 ProductCardVerical(product: controller.products[index])))

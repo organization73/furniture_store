@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/galleries/gallery_showcase.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
@@ -24,11 +25,11 @@ class CategoryTab extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          padding:
+              const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             children: [
               const GelleryShowCase(
-                
                 images: [
                   TImages.productImage1,
                   TImages.productImage1,
@@ -47,6 +48,7 @@ class CategoryTab extends StatelessWidget {
                 ),
               ),
               GridLayout(
+                  mainAxisExtent: 270.h,
                   itemCount: 4,
                   itemBuilder: (_, index) {
                     return ProductCardVerical(
