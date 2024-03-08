@@ -23,11 +23,11 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsController = Get.put(ProductController());
-    
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {
+        final productsController = ProductController.instance;
+
         return Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Stack(
@@ -49,7 +49,10 @@ class StartPage extends StatelessWidget {
                                 children: [
                                   HomeAppBar(
                                       controller:
-                                          Get.find<NotificationsController>()),
+                                          NotificationsController.instance),
+                                  SizedBox(
+                                    height: TSizes.spaceBtwSections,
+                                  ),
                                   const BuildCategoriesSection(),
                                   SizedBox(
                                     height: TSizes.spaceBtwSections,
@@ -86,11 +89,14 @@ class StartPage extends StatelessWidget {
                                       child: Text('No Products Found'));
                                 }
                                 return GridLayout(
+                                    mainAxisExtent: 270.h,
                                     itemCount: productsController
-                                    .featuredProducts.length,
+                                        .featuredProducts.length,
                                     itemBuilder: (_, index) =>
-                                         ProductCardVerical(product: productsController
-                                    .featuredProducts[index],));
+                                        ProductCardVerical(
+                                          product: productsController
+                                              .featuredProducts[index],
+                                        ));
                               }),
                               const BuildTopGalleriesSection(),
                               const BuildRoomsSection(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
+import 'package:furniture_store/utils/constants/colors.dart';
+import 'package:furniture_store/utils/helpers/helper_functions.dart';
 
 class PrimaryHeaderContainer extends StatelessWidget {
   const PrimaryHeaderContainer({
@@ -13,7 +15,9 @@ class PrimaryHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return CurvedEdgesWidget(
       child: Container(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: THelperFunctions.isDarkMode(context)
+            ? TColors.black
+            : TColors.lightContainer,
         padding: const EdgeInsets.all(0),
         child: Stack(
           children: [
@@ -21,24 +25,27 @@ class PrimaryHeaderContainer extends StatelessWidget {
               top: -150,
               right: -250,
               child: CircularContainer(
-                backgroungColor:
-                    Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                backgroungColor: THelperFunctions.isDarkMode(context)
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
+                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
               ),
             ),
             Positioned(
               top: 50,
               right: -300,
               child: CircularContainer(
-                backgroungColor:
-                    Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                backgroungColor: THelperFunctions.isDarkMode(context)
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
+                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
               ),
             ),
             Positioned(
               top: 50,
               right: 300,
               child: CircularContainer(
-                backgroungColor:
-                    Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                backgroungColor: THelperFunctions.isDarkMode(context)
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
+                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
               ),
             ),
             child

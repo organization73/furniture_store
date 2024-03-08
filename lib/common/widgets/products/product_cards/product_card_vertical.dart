@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/styles/shadows.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/icons/circular_icon.dart';
@@ -35,7 +36,6 @@ class ProductCardVerical extends StatelessWidget {
         transition: Transition.rightToLeft,
       ),
       child: Container(
-        width: 180,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           boxShadow: [ShadowStyle.verticalProductShadow],
@@ -45,7 +45,7 @@ class ProductCardVerical extends StatelessWidget {
         child: Column(
           children: [
             RoundedContainer(
-              hight: 170,
+              hight: 135.h,
               width: double.infinity,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.black : TColors.light,
@@ -55,13 +55,12 @@ class ProductCardVerical extends StatelessWidget {
                     alignment: Alignment.center,
                     child: RoundedImage(
                       imageUrl: product.productImage,
-                      applyImageRaduis: true,
                       isNetworkImage: true,
                     ),
                   ),
                   if (product.onSale)
                     Positioned(
-                      top: 12,
+                      top: 10,
                       child: RoundedContainer(
                         raduis: TSizes.sm,
                         backgroundColor: TColors.secondary.withOpacity(0.8),
@@ -71,7 +70,7 @@ class ProductCardVerical extends StatelessWidget {
                           '$salePercentage%',
                           style: Theme.of(context)
                               .textTheme
-                              .labelLarge!
+                              .labelMedium!
                               .apply(color: TColors.black),
                         ),
                       ),

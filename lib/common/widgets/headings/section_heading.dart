@@ -17,12 +17,11 @@ class SectionHeading extends StatelessWidget {
   final bool showActionButton;
   final String title;
   final String?
-      buttonTitle; // Make this nullable to avoid using .tr in the constructor
+      buttonTitle;
   final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
-    // Use .tr here in the build method
     final localizedButtonTitle = buttonTitle?.tr ?? 'viewAll'.tr;
 
     return Row(
@@ -41,7 +40,7 @@ class SectionHeading extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  localizedButtonTitle, // Use the localized title here
+                  localizedButtonTitle,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 const SizedBox(

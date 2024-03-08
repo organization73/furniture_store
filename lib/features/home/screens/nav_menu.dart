@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/features/ai/screens/ai_design_screen.dart';
 import 'package:furniture_store/features/chat/screens/chats_screen.dart';
 import 'package:furniture_store/features/home/screens/start_screen.dart';
+import 'package:furniture_store/features/home/screens/store_screen.dart';
 import 'package:furniture_store/features/personalization/screens/settings/settings.dart';
 import 'package:furniture_store/features/product/screens/add_product/add_product_screen.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,14 @@ class NavMenu extends StatelessWidget {
                 ),
                 icon: const Icon(Iconsax.home),
                 label: 'Home',
+              ),
+              NavigationDestination(
+                selectedIcon: Icon(
+                  Iconsax.shop,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                icon: const Icon(Iconsax.shop),
+                label: 'Store',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
@@ -74,6 +83,7 @@ class NavigationController extends GetxController {
   final RxInt selectedIndex = 0.obs;
   final screens = [
     const StartPage(),
+    const StoreScreen(),
     const ChatScreen(),
     const AddProductPage(),
     const AiPage(),

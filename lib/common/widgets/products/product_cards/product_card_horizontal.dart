@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:furniture_store/common/styles/shadows.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/icons/circular_icon.dart';
 import 'package:furniture_store/common/widgets/images/rounded_image.dart';
@@ -35,7 +34,7 @@ class ProductCardHorizontal extends StatelessWidget {
         transition: Transition.rightToLeft,
       ),
       child: Container(
-        width: 400.w,
+        width: 320.w,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
@@ -44,7 +43,7 @@ class ProductCardHorizontal extends StatelessWidget {
         child: Row(
           children: [
             RoundedContainer(
-              hight: 120.h,
+              hight: 125.h,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.black : TColors.light,
               child: Stack(
@@ -62,7 +61,7 @@ class ProductCardHorizontal extends StatelessWidget {
                   ),
                   if (product.onSale)
                     Positioned(
-                      top: 12,
+                      top: 10,
                       child: RoundedContainer(
                         raduis: TSizes.sm,
                         backgroundColor: TColors.secondary.withOpacity(0.8),
@@ -72,7 +71,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           '$salePercentage%',
                           style: Theme.of(context)
                               .textTheme
-                              .labelLarge!
+                              .labelMedium!
                               .apply(color: TColors.black),
                         ),
                       ),
@@ -89,7 +88,7 @@ class ProductCardHorizontal extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 172,
+              width: 180.w,
               child: Column(
                 children: [
                   Padding(
@@ -99,7 +98,7 @@ class ProductCardHorizontal extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProductTitleText(
-                          title: product.productName * 2,
+                          title: product.productName,
                           smallSize: true,
                         ),
                         SizedBox(

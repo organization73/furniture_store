@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/images/rounded_image.dart';
 import 'package:furniture_store/common/widgets/shimmer/shimmer_loader.dart';
