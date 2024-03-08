@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_store/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:furniture_store/features/gallery/screens/all_galleries/widgets/gallery_card.dart';
-import 'package:furniture_store/features/gallery/model/static_data.dart';
+import 'package:furniture_store/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 
 class AllGalleriesPage extends StatelessWidget {
   const AllGalleriesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final vendorController = VendorController.instance;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -32,21 +35,33 @@ class AllGalleriesPage extends StatelessWidget {
                 SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
-                ListView.separated(
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: TSizes.spaceBtwItems,
+                Obx(() {
+                  if (vendorController.isLoading.value) {
+                    return const ShimmerLoaderEffect(
+                      width: double.infinity,
+                      height: 250,
+                      raduis: 10,
                     );
-                  },
-                  itemCount: StaticData.sampleProperties.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GalleryCard(
-                      gallery: StaticData.sampleProperties[index],
-                    );
-                  },
-                )
+                  }
+                  if (vendorController.allVendors.isEmpty) {
+                    return const Center(child: Text('No Data Found'));
+                  }
+                  return ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: TSizes.spaceBtwItems,
+                      );
+                    },
+                    itemCount: vendorController.allVendors.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GalleryCard(
+                        vendor: vendorController.allVendors[index],
+                      );
+                    },
+                  );
+                })
               ],
             ),
           ),

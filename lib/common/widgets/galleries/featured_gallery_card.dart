@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/images/circular_image.dart';
 import 'package:furniture_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
+import 'package:furniture_store/features/home/model/vendor_model.dart';
 import 'package:furniture_store/utils/constants/enums.dart';
-import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 class FeaturedGalleryCard extends StatelessWidget {
@@ -11,10 +11,12 @@ class FeaturedGalleryCard extends StatelessWidget {
     super.key,
     required this.showBorder,
     this.onTap,
+    required this.vendor,
   });
 
   final bool showBorder;
   final void Function()? onTap;
+  final VendorModel vendor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,10 @@ class FeaturedGalleryCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Flexible(
+            Flexible(
               child: CircularImage(
-                isNetworkImage: false,
-                imageUrl: TImages.user,
+                isNetworkImage: true,
+                imageUrl: vendor.image,
                 backgroundColor: Colors.transparent,
               ),
             ),
@@ -42,12 +44,12 @@ class FeaturedGalleryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const BrandTitleTextWithVerifiedIcon(
-                    title: 'Ali',
+                  BrandTitleTextWithVerifiedIcon(
+                    title: vendor.name,
                     beandtextSize: TextSizes.medium,
                   ),
                   Text(
-                    '24 Products',
+                    '${vendor.productsCount ?? 0} Products',
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelSmall,
                   )

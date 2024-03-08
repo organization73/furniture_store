@@ -4,8 +4,11 @@ import 'package:furniture_store/common/widgets/appbar/tabbar.dart';
 import 'package:furniture_store/common/widgets/galleries/featured_gallery_card.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
+import 'package:furniture_store/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:furniture_store/features/gallery/screens/all_galleries/all_galleries_screen.dart';
+import 'package:furniture_store/features/gallery/screens/vendor_products/vendor_products.dart';
 import 'package:furniture_store/features/home/controllers/category_controller.dart';
+import 'package:furniture_store/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:furniture_store/features/home/widgets/category_tab.dart';
 import 'package:furniture_store/features/home/widgets/search_bar.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
@@ -19,6 +22,7 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = CategoryController.instance.featuredCatedories;
+    final vendorsController = VendorController.instance;
     return DefaultTabController(
       length: categories.length,
       child: Scaffold(
@@ -55,14 +59,38 @@ class StoreScreen extends StatelessWidget {
                               transition: Transition.rightToLeft,
                             ),
                           ),
-                          GridLayout(
-                              itemCount: 4,
-                              mainAxisExtent: 80.h,
-                              itemBuilder: (_, index) {
-                                return const FeaturedGalleryCard(
-                                  showBorder: true,
-                                );
-                              })
+                          Obx(() {
+                            if (vendorsController.isLoading.value) {
+                              return const ShimmerLoaderEffect(
+                                width: 80,
+                                height: 80,
+                                raduis: 10,
+                              );
+                            }
+                            if (vendorsController.featuredVendors.isEmpty) {
+                              return const Center(child: Text('No Data Found'));
+                            }
+                            return GridLayout(
+                                itemCount:
+                                    vendorsController.featuredVendors.length,
+                                mainAxisExtent: 80.h,
+                                itemBuilder: (_, index) {
+                                  final vendor =
+                                      vendorsController.featuredVendors[index];
+                                  return FeaturedGalleryCard(
+                                    onTap: () => Get.to(
+                                      () => VendorProductsScreen(
+                                        vendor: vendor,
+                                      ),
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      transition: Transition.rightToLeft,
+                                    ),
+                                    vendor: vendor,
+                                    showBorder: true,
+                                  );
+                                });
+                          })
                         ],
                       ),
                     ),

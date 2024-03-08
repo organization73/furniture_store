@@ -91,6 +91,33 @@ class ProductRepo extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> getProductsForVendor(
+      {required String vendorId, int limit = -1}) async {
+    try {
+      final qureySnapshot = limit == -1
+          ? await _db
+              .collection('Products')
+              .where('ProductDetails.productSeller.id', isEqualTo: vendorId)
+              .get()
+          : await _db
+              .collection('Products')
+              .where('ProductDetails.productSeller.id', isEqualTo: vendorId)
+              .limit(limit)
+              .get();
+
+      final products = qureySnapshot.docs
+          .map((doc) => ProductModel.fromFirebaseDocument(doc))
+          .toList();
+      return products;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
   Future<void> uploadProductsToFirestore(List<ProductModel> products) async {
     try {
       FullScreenLoader.openLoadingDialog(

@@ -61,22 +61,23 @@ class ProductCardVerical extends StatelessWidget {
                       isNetworkImage: true,
                     ),
                   ),
-                  Positioned(
-                    top: 12,
-                    child: RoundedContainer(
-                      raduis: TSizes.sm,
-                      backgroundColor: TColors.secondary.withOpacity(0.8),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: TSizes.sm, vertical: TSizes.xs),
-                      child: Text(
-                        '$salePercentage%',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .apply(color: TColors.black),
+                  if (product.onSale)
+                    Positioned(
+                      top: 12,
+                      child: RoundedContainer(
+                        raduis: TSizes.sm,
+                        backgroundColor: TColors.secondary.withOpacity(0.8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: TSizes.sm, vertical: TSizes.xs),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .apply(color: TColors.black),
+                        ),
                       ),
                     ),
-                  ),
                   const Positioned(
                     top: 0,
                     right: 0,

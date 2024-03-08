@@ -2,15 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/styles/shadows.dart';
-import 'package:furniture_store/features/gallery/model/property.dart';
+import 'package:furniture_store/common/widgets/images/circular_image.dart';
+import 'package:furniture_store/features/home/model/vendor_model.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:furniture_store/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 
 class GalleryCard extends StatelessWidget {
-  final Gallery gallery;
-  const GalleryCard({super.key, required this.gallery});
+  const GalleryCard({super.key, required this.vendor});
+  final VendorModel vendor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,10 +33,10 @@ class GalleryCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.circular(TSizes.productImageRadius),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        gallery.imagePath,
+                        'assets/images/galleries/property-1.png',
                       ),
                     ),
                   ),
@@ -43,24 +44,9 @@ class GalleryCard extends StatelessWidget {
                 Positioned(
                     bottom: -15.0,
                     left: 10.0,
-                    child: CircleAvatar(
-                      radius: 30,
-                      child: CachedNetworkImage(
-                        imageUrl: 'https://picsum.photos/id/80/80/80',
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.person),
-                      ),
+                    child: CircularImage(
+                      imageUrl: vendor.image,
+                      isNetworkImage: true,
                     ))
               ],
             ),
@@ -74,7 +60,7 @@ class GalleryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text(gallery.name,
+                      child: Text(vendor.name,
                           style: Theme.of(context).textTheme.titleMedium),
                     ),
                   ],
@@ -82,7 +68,7 @@ class GalleryCard extends StatelessWidget {
                 const SizedBox(
                   height: 8.0,
                 ),
-                Text(gallery.description,
+                Text('vendor.description',
                     style: Theme.of(context).textTheme.titleSmall),
                 const SizedBox(
                   height: 8.0,
@@ -98,7 +84,7 @@ class GalleryCard extends StatelessWidget {
                       width: 8.0,
                     ),
                     Text(
-                      gallery.address,
+                      vendor.location,
                     ),
                   ],
                 ),
