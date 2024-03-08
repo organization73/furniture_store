@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +18,13 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(AuthenticatorRepo()));
+  );
+
+  await FirebaseAppCheck.instance
+      .activate(
+        androidProvider: AndroidProvider.debug,
+        appleProvider: AppleProvider.appAttest,
+      )
+      .then((value) => Get.put(AuthenticatorRepo()));
   runApp(const MyApp());
 }
