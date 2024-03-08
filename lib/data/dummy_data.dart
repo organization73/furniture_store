@@ -432,22 +432,92 @@ class DummyData {
 
   static final List<CategoryModel> categories = [
     CategoryModel(
-        id: '1',
-        image: TImages.chairsCategory,
-        name: 'Chairs',
+        id: '1', image: TImages.sportIcon, name: 'Sports', isFeatured: true),
+    CategoryModel(
+        id: '5',
+        image: TImages.furnitureIcon,
+        name: 'Funraniture',
         isFeatured: true),
     CategoryModel(
-        id: '2', image: TImages.desksCategory, name: 'Desks', isFeatured: true),
+        id: '2',
+        image: TImages.electronicsIcon,
+        name: 'Electronics',
+        isFeatured: true),
     CategoryModel(
-        id: '3', image: TImages.sofasCategory, name: 'Sofas', isFeatured: true),
+        id: '3', image: TImages.clothIcon, name: 'Cloth', isFeatured: true),
+    CategoryModel(
+        id: '4', image: TImages.animalIcon, name: 'Animals', isFeatured: true),
+    CategoryModel(
+        id: '6', image: TImages.shoeIcon, name: 'Shoes', isFeatured: true),
+    CategoryModel(
+        id: '7',
+        image: TImages.cosmeticsIcon,
+        name: 'Cosmitics',
+        isFeatured: true),
+    CategoryModel(
+        id: '14',
+        image: TImages.jeweleryIcon,
+        name: 'Jewerly',
+        isFeatured: true),
 
-    //////////////////
+    /// Sub Categories
     CategoryModel(
         id: '8',
-        image: TImages.productImage1,
-        name: 'Sofas',
+        image: TImages.sportIcon,
+        name: 'Sports Shoes',
         isFeatured: false,
         parentId: '1'),
+    CategoryModel(
+        id: '9',
+        image: TImages.sportIcon,
+        name: 'Track Suits',
+        isFeatured: false,
+        parentId: '1'),
+    CategoryModel(
+        id: '10',
+        image: TImages.sportIcon,
+        name: 'Sports Equipment',
+        isFeatured: false,
+        parentId: '1'),
+
+    CategoryModel(
+        id: '11',
+        image: TImages.furnitureIcon,
+        name: 'Bedroom Furniture',
+        isFeatured: false,
+        parentId: '5'),
+    CategoryModel(
+        id: '12',
+        image: TImages.furnitureIcon,
+        name: 'Kitchen Furniture',
+        isFeatured: false,
+        parentId: '5'),
+    CategoryModel(
+        id: '13',
+        image: TImages.furnitureIcon,
+        name: 'Office',
+        isFeatured: false,
+        parentId: '5'),
+
+    CategoryModel(
+        id: '14',
+        image: TImages.electronicsIcon,
+        name: 'Laptop',
+        isFeatured: false,
+        parentId: '2'),
+    CategoryModel(
+        id: '15',
+        image: TImages.electronicsIcon,
+        name: 'Mobile',
+        isFeatured: false,
+        parentId: '2'),
+
+    CategoryModel(
+        id: '16',
+        image: TImages.clothIcon,
+        name: 'Shirts',
+        isFeatured: false,
+        parentId: '3'),
   ];
 
   static final List<VendorModel> vendors = [

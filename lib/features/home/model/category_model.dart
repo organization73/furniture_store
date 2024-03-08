@@ -20,16 +20,17 @@ class CategoryModel {
         image: '',
         isFeatured: false,
         name: '',
+        parentId: '',
       );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'image': image,
-      'parentId': parentId,
-      'isFeatured': isFeatured,
-    };
-  }
+Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'image': image,
+        'parentId': parentId,
+        'isFeatured': isFeatured,
+      };
+
 
   factory CategoryModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;

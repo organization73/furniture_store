@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/features/favourits/controllers/favorite_controller.dart';
-import 'package:furniture_store/features/home/controllers/category_controller.dart';
 import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
 import 'package:furniture_store/features/notifications/controllers/notifications_controller.dart';
 import 'package:get/get.dart';
@@ -16,7 +15,6 @@ class StartPageController extends GetxController {
     scrollController.addListener(_scrollListener);
     Get.put(NotificationsController());
     Get.put(FavoriteController());
-    Get.put(CategoryController());
     Get.put(ProductController());
     super.onInit();
   }

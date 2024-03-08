@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_store/features/ai/screens/ai_design_screen.dart';
 import 'package:furniture_store/features/chat/screens/chats_screen.dart';
 import 'package:furniture_store/features/home/screens/start_screen.dart';
-import 'package:furniture_store/features/home/screens/store_screen.dart';
+import 'package:furniture_store/features/store/screens/store_screen.dart';
 import 'package:furniture_store/features/personalization/screens/settings/settings.dart';
 import 'package:furniture_store/features/product/screens/add_product/add_product_screen.dart';
 import 'package:get/get.dart';
