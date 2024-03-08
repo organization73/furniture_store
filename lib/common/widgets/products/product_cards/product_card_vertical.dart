@@ -61,6 +61,7 @@ class ProductCardVerical extends StatelessWidget {
                   if (product.onSale)
                     Positioned(
                       top: 10,
+                      left: 0,
                       child: RoundedContainer(
                         raduis: TSizes.sm,
                         backgroundColor: TColors.secondary.withOpacity(0.8),
@@ -90,31 +91,28 @@ class ProductCardVerical extends StatelessWidget {
               height: TSizes.spaceBtwItems / 2,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: TSizes.sm),
+              padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
               child: SizedBox(
                 width: double.infinity,
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ProductTitleText(
-                        title: product.productName,
-                        smallSize: true,
-                      ),
-                      SizedBox(
-                        height: TSizes.spaceBtwItems / 2,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          BrandTitleTextWithVerifiedIcon(
-                            title: product.productDetails.productSeller.name,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProductTitleText(
+                      title: product.productName,
+                      smallSize: true,
+                    ),
+                    SizedBox(
+                      height: TSizes.spaceBtwItems / 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        BrandTitleTextWithVerifiedIcon(
+                          title: product.productDetails.productSeller.name,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

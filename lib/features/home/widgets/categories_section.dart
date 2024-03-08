@@ -8,6 +8,7 @@ import 'package:furniture_store/common/widgets/shimmer/category_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/category_controller.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/features/home/screens/sub_category/sub_category.dart';
+import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
@@ -26,7 +27,7 @@ class BuildCategoriesSection extends StatelessWidget {
         child: RoundedContainer(
           width: 125.w,
           hight: 56.h,
-          backgroundColor: const Color(0xFFD5D5D5).withOpacity(0.8),
+          backgroundColor: TColors.grey.withOpacity(0.7),
           child: Stack(
             children: [
               const Align(

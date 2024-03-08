@@ -16,44 +16,50 @@ class SectionHeading extends StatelessWidget {
   final Color? textColor;
   final bool showActionButton;
   final String title;
-  final String?
-      buttonTitle;
+  final String? buttonTitle;
   final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
     final localizedButtonTitle = buttonTitle?.tr ?? 'viewAll'.tr;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style:
-              Theme.of(context).textTheme.titleLarge!.apply(color: textColor),
-        ),
-        if (showActionButton)
-          TextButton(
-            onPressed: onPress,
-            child: Row(
-              children: [
-                Text(
-                  localizedButtonTitle,
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-                const SizedBox(
-                  width: TSizes.sm,
-                ),
-                const Icon(
-                  Iconsax.arrow_right_1,
-                  size: TSizes.iconSm,
-                ),
-              ],
-            ),
-          )
-      ],
+    final textDirection = Directionality.of(context);
+
+    return Directionality(
+      textDirection: textDirection,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style:
+                Theme.of(context).textTheme.titleLarge!.apply(color: textColor),
+          ),
+          if (showActionButton)
+            TextButton(
+              onPressed: onPress,
+              child: Row(
+                children: [
+                  Text(
+                    localizedButtonTitle,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  const SizedBox(
+                    width: TSizes.sm,
+                  ),
+                  Icon(
+                    textDirection == TextDirection.ltr
+                        ? Iconsax.arrow_right_1
+                        : Iconsax.arrow_left,
+                    size: TSizes.iconSm,
+                  ),
+                ],
+              ),
+            )
+        ],
+      ),
     );
   }
 }

@@ -62,6 +62,7 @@ class ProductCardHorizontal extends StatelessWidget {
                   if (product.onSale)
                     Positioned(
                       top: 10,
+                      left: 0,
                       child: RoundedContainer(
                         raduis: TSizes.sm,
                         backgroundColor: TColors.secondary.withOpacity(0.8),
@@ -92,8 +93,11 @@ class ProductCardHorizontal extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: TSizes.sm, left: TSizes.sm),
+                    padding: const EdgeInsets.only(
+                      top: TSizes.sm,
+                      left: TSizes.sm,
+                      right: TSizes.sm,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

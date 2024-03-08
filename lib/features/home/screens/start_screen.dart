@@ -7,7 +7,7 @@ import 'package:furniture_store/common/widgets/products/product_cards/product_ca
 import 'package:furniture_store/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/home_page_controller.dart';
 import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
-import 'package:furniture_store/features/home/screens/store_screen.dart';
+import 'package:furniture_store/features/home/screens/all_products/all_products_screen.dart';
 import 'package:furniture_store/features/home/widgets/banners_slider.dart';
 import 'package:furniture_store/features/home/widgets/categories_section.dart';
 import 'package:furniture_store/features/home/widgets/home_appbar.dart';
@@ -71,7 +71,11 @@ class StartPage extends StatelessWidget {
                               SectionHeading(
                                 title: 'popularProducts'.tr,
                                 onPress: () => Get.to(
-                                  () => const StoreScreen(),
+                                  () => AllProductsScreen(
+                                    title: 'popularProducts'.tr,
+                                    futureMethod: productsController
+                                        .fetchAllFeaturedProducts(),
+                                  ),
                                   duration: const Duration(milliseconds: 300),
                                   transition: Transition.rightToLeft,
                                 ),

@@ -4,13 +4,15 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar(
-      {super.key,
-      this.title,
-      this.showBackArrow = false,
-      this.leadinIcon,
-      this.actions,
-      this.leadingOnPress});
+  const CustomAppBar({
+    super.key,
+    this.title,
+    this.showBackArrow = false,
+    this.leadinIcon,
+    this.actions,
+    this.leadingOnPress,
+  });
+
   final Widget? title;
   final bool showBackArrow;
   final IconData? leadinIcon;
@@ -19,6 +21,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textDirection = Directionality.of(context);
+
     return AppBar(
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
@@ -26,9 +30,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       leading: showBackArrow
           ? IconButton(
-              onPressed: () => Get.back(), icon: const Icon(Iconsax.arrow_left))
+              onPressed: () => Get.back(),
+              icon: Icon(textDirection == TextDirection.ltr
+                  ? Iconsax.arrow_left
+                  : Iconsax.arrow_right_1),
+            )
           : leadinIcon != null
-              ? IconButton(onPressed: leadingOnPress, icon: Icon(leadinIcon))
+              ? IconButton(
+                  onPressed: leadingOnPress,
+                  icon: Icon(leadinIcon),
+                )
               : null,
     );
   }
