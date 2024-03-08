@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:furniture_store/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:furniture_store/features/home/model/vendor_model.dart';
@@ -19,7 +18,7 @@ class VendorProductsScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Column(
             children: [
               FutureBuilder(

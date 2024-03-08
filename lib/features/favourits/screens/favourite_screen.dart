@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
-import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
 import 'package:furniture_store/features/favourits/controllers/favorite_controller.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
@@ -43,14 +42,14 @@ class FavouritsPage extends StatelessWidget {
                   )
                 : SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
                       child: Column(
                         children: [
                           GridLayout(
                               itemCount: favList.length,
                               itemBuilder: (_, index) {
-                                return Text('data');
+                                return const Text('data');
 
                                 //const ProductCardVerical();
                               }),

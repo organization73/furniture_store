@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/products/rattings/rating_indicator.dart';
-import 'package:furniture_store/data/repositories/product/product.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 
 class UserReviewCard extends StatelessWidget {

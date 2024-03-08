@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
-import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
+import 'package:furniture_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/home/screens/filters/filters.dart';
 import 'package:furniture_store/features/home/screens/filters/widgets/input_widget.dart';
@@ -65,7 +65,7 @@ class CategoriesPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate([
               Padding(
-                padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+                padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                 child: GridLayout(
                     itemCount: 8,
                     itemBuilder: (_, index) => ProductCardVerical(

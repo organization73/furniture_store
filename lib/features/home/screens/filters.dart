@@ -21,7 +21,7 @@ class Filters extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Column(
             children: [
               OgTab(

@@ -49,7 +49,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     )),
                 height: 420.h,
                 child: Padding(
-                  padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+                  padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

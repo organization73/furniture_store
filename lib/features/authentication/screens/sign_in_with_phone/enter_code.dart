@@ -53,7 +53,7 @@ class CodeVerificationScreenState extends State<CodeVerificationScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

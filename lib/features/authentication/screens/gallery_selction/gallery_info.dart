@@ -44,7 +44,7 @@ class GalleryInformationScreen extends StatelessWidget {
             key: controller.formKey,
             child: Padding(
               padding:
-                  EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+                  const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[

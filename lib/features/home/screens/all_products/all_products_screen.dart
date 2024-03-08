@@ -24,7 +24,7 @@ class AllProductsScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: FutureBuilder(
               future: futureMethod ?? controller.fetchProductsByQuery(query),
               builder: (context, snapshot) {

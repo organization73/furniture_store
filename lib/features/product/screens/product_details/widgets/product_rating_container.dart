@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/overlapping_cicular_avatar.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
-import 'package:furniture_store/global/global_variables.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:furniture_store/utils/helpers/helper_functions.dart';

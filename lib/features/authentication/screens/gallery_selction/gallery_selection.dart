@@ -30,7 +30,7 @@ class GallerySelection extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

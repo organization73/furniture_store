@@ -16,7 +16,7 @@ class AllGalleriesPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+            padding: const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

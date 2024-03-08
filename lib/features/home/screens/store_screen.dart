@@ -38,7 +38,7 @@ class StoreScreen extends StatelessWidget {
                         : TColors.white,
                     expandedHeight: 365.h,
                     flexibleSpace: Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
                       child: ListView(
                         shrinkWrap: true,

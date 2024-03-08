@@ -27,7 +27,7 @@ class ChangeNameScreen extends StatelessWidget {
             }),
       ),
       body: Padding(
-        padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+        padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -5,7 +5,6 @@ import 'package:furniture_store/data/services/cloud_storage/firebase_storage_ser
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:furniture_store/utils/exceptions/platform_exceptions.dart';
-import 'package:furniture_store/utils/logging/logger.dart';
 import 'package:furniture_store/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
 

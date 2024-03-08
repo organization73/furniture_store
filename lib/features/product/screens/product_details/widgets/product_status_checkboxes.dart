@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_store/data/repositories/product/product.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 
 class ProductStatsCheckboxes extends StatelessWidget {

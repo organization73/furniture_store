@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:furniture_store/data/repositories/product/product.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/add_review.dart';
 import 'package:furniture_store/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
-import 'package:furniture_store/features/product/screens/product_reviews/widgets/user_review_card.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +31,7 @@ class ProductReviewsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: GetBuilder<ProductReviewsController>(
             init: ProductReviewsController(product: product),
             builder: (controller) => controller.reviews.isNotEmpty

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
-import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
+import 'package:furniture_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:furniture_store/features/home/controllers/product/all_products_controller.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';

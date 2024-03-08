@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/styles/shadows.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:furniture_store/common/widgets/icons/circular_icon.dart';
@@ -17,8 +16,8 @@ import 'package:furniture_store/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ProductCardVerical extends StatelessWidget {
-  const ProductCardVerical({super.key, required this.product});
+class ProductCardHorizontal extends StatelessWidget {
+  const ProductCardHorizontal({super.key, required this.product});
   final ProductModel product;
 
   @override
@@ -27,7 +26,6 @@ class ProductCardVerical extends StatelessWidget {
     final productsController = ProductController.instance;
     final salePercentage = productsController.calculateSalePercnetage(
         product.productPrice, product.productSalePrice);
-
     return GestureDetector(
       onTap: () => Get.to(
         () => ProductDetailsScreen(
@@ -37,28 +35,29 @@ class ProductCardVerical extends StatelessWidget {
         transition: Transition.rightToLeft,
       ),
       child: Container(
-        width: 180,
+        width: 400.w,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          boxShadow: [ShadowStyle.verticalProductShadow],
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-          color: dark ? TColors.darkerGrey : TColors.white,
+          color: dark ? TColors.darkerGrey : TColors.lightContainer,
         ),
-        child: Column(
+        child: Row(
           children: [
             RoundedContainer(
-              hight: 170,
-              width: double.infinity,
+              hight: 120.h,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.black : TColors.light,
               child: Stack(
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: RoundedImage(
-                      imageUrl: product.productImage,
-                      applyImageRaduis: true,
-                      isNetworkImage: true,
+                    child: SizedBox(
+                      height: 120.r,
+                      width: 120.r,
+                      child: RoundedImage(
+                        imageUrl: product.productImage,
+                        isNetworkImage: true,
+                      ),
                     ),
                   ),
                   if (product.onSale)
@@ -90,71 +89,71 @@ class ProductCardVerical extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: TSizes.spaceBtwItems / 2,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: TSizes.sm),
-              child: SizedBox(
-                width: double.infinity,
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ProductTitleText(
-                        title: product.productName,
-                        smallSize: true,
-                      ),
-                      SizedBox(
-                        height: TSizes.spaceBtwItems / 2,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          BrandTitleTextWithVerifiedIcon(
-                            title: product.productDetails.productSeller.name,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(TSizes.sm),
-              child: Row(
+              width: 172,
+              child: Column(
                 children: [
-                  Expanded(
-                    flex: 4,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: TSizes.sm, left: TSizes.sm),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (product.onSale)
-                          ProductPriceText(
-                            price: product.productPrice.toStringAsFixed(1),
-                            lineThrough: true,
-                          ),
-                        ProductPriceText(
-                          price: productsController
-                              .getProductPrice(product)
-                              .toStringAsFixed(1),
+                        ProductTitleText(
+                          title: product.productName * 2,
+                          smallSize: true,
+                        ),
+                        SizedBox(
+                          height: TSizes.spaceBtwItems / 2,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            BrandTitleTextWithVerifiedIcon(
+                              title: product.productDetails.productSeller.name,
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                   const Spacer(),
-                  const Icon(
-                    Iconsax.star1,
-                    color: Colors.amber,
-                    size: TSizes.iconSm,
-                  ),
-                  const SizedBox(
-                    width: TSizes.xs,
-                  ),
-                  Text(
-                    product.productRating.toStringAsFixed(1),
+                  Padding(
+                    padding: const EdgeInsets.all(TSizes.sm),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (product.onSale)
+                                ProductPriceText(
+                                  price:
+                                      product.productPrice.toStringAsFixed(1),
+                                  lineThrough: true,
+                                ),
+                              ProductPriceText(
+                                price: productsController
+                                    .getProductPrice(product)
+                                    .toStringAsFixed(1),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Iconsax.star1,
+                          color: Colors.amber,
+                          size: TSizes.iconSm,
+                        ),
+                        const SizedBox(
+                          width: TSizes.xs,
+                        ),
+                        Text(
+                          product.productRating.toStringAsFixed(1),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

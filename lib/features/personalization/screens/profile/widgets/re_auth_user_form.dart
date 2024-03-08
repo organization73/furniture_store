@@ -29,7 +29,7 @@ class ReAuthLoginForm extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
           child: Form(
               key: controller.reAuthFormKey,
               child: Column(

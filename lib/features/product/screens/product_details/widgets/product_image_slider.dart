@@ -7,7 +7,6 @@ import 'package:furniture_store/common/widgets/images/rounded_image.dart';
 import 'package:furniture_store/features/home/controllers/product/images_controller.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
 import 'package:furniture_store/utils/constants/colors.dart';
-import 'package:furniture_store/utils/constants/image_strings.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 import 'package:furniture_store/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';

@@ -31,7 +31,7 @@ class ProductDetailsScreen extends StatelessWidget {
               product: product,
             ),
             Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                   right: TSizes.pagePaddingSpace,
                   left: TSizes.pagePaddingSpace,
                   bottom: TSizes.pagePaddingSpace),

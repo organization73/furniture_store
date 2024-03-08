@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:furniture_store/common/widgets/galleries/gallery_showcase.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
-import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
+import 'package:furniture_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/features/home/model/product_model.dart';
@@ -25,7 +24,7 @@ class CategoryTab extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Column(
             children: [
               const GelleryShowCase(

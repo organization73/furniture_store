@@ -5,6 +5,7 @@ import 'package:furniture_store/common/widgets/shimmer/category_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/category_controller.dart';
 import 'package:furniture_store/features/home/model/category_model.dart';
 import 'package:furniture_store/features/home/screens/categories_screen.dart';
+import 'package:furniture_store/features/home/screens/sub_category/sub_category.dart';
 import 'package:furniture_store/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class BuildCategoriesSection extends StatelessWidget {
   Widget _buildItem(CategoryModel item, BuildContext context) {
     return GestureDetector(
       onTap: () => Get.to(
-        () => CategoriesPage(categoryName: item.name),
+        () => SubCategoryScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       ),

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:furniture_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:furniture_store/common/widgets/headings/section_heading.dart';
 import 'package:furniture_store/common/widgets/layouts/grid_layout.dart';
-import 'package:furniture_store/common/widgets/products/product_card_vertical.dart';
+import 'package:furniture_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:furniture_store/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:furniture_store/features/home/controllers/home_page_controller.dart';
 import 'package:furniture_store/features/home/controllers/product/product_controller.dart';
@@ -42,7 +42,7 @@ class StartPage extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(top: 100.h),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +60,7 @@ class StartPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: TSizes.pagePaddingSpace),
                           child: Column(
                             children: [
@@ -122,11 +122,11 @@ class FadeAppBar extends StatelessWidget {
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
-      child: SafeArea(
+      child: const SafeArea(
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-            child: const BuildSearchBar(),
+            child: BuildSearchBar(),
           ),
         ),
       ),

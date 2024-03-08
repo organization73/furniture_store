@@ -103,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
             )),
             Padding(
               padding:
-                  EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+                  const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
                   SectionHeading(

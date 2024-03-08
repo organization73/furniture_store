@@ -28,7 +28,7 @@ class PhoneNumberScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: Form(
             key: controller.phoneFormKey,
             child: SingleChildScrollView(

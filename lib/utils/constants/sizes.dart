@@ -26,7 +26,7 @@ class TSizes {
   static const double buttonElevation = 4.0;
 
   // AppBar height
-  static double appBarHeight = 56.0.h;
+  static const double appBarHeight = 56.0;
 
   // Image sizes
   static const double imageThumbSize = 80.0;
@@ -35,7 +35,7 @@ class TSizes {
   static const double defaultSpace = 24.0;
   static double spaceBtwItems = 15.0.h;
   static double spaceBtwSections = 17.0.h;
-  static  double pagePaddingSpace = 16.0.w;
+  static  const double pagePaddingSpace = 16.0;
 
   // Border radius
   static double borderRadiusSm = 4.0.r;
@@ -43,7 +43,7 @@ class TSizes {
   static double borderRadiusLg = 12.0.r;
 
   // Divider height
-  static double dividerHeight = 1.0.h;
+  static const double dividerHeight = 1.0;
 
   // Product item dimensions
   static const double productImageSize = 120.0;
@@ -65,7 +65,7 @@ class TSizes {
   static double imageCarouselHeight = 200.0.h;
 
   // Image text input height
-  static double inputFieldHeight = 50;
+  static const double inputFieldHeight = 50;
 
   // Loading indicator size
   static const double loadingIndicatorSize = 36.0;
