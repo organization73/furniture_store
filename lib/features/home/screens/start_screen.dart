@@ -40,7 +40,7 @@ class StartPage extends StatelessWidget {
                       children: [
                         PrimaryHeaderContainer(
                           child: Padding(
-                            padding: EdgeInsets.only(top: 100.h),
+                            padding: EdgeInsets.only(top: 95.h),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -128,7 +128,7 @@ class FadeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
+      height: 90.h,
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),

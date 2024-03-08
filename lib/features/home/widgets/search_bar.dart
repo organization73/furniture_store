@@ -11,14 +11,17 @@ class BuildSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
-    return RoundedTextField(
-        prefixIcon: Iconsax.search_normal,
-        'homeSearchBarHint'.tr,
-        keyboardType: TextInputType.text,
-        showLabel: false,
-        isFilled: true,
-        fillColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-        controller,
-        TValidator.validateUserInput);
+    return SizedBox(
+      height: 42,
+      child: RoundedTextField(
+          prefixIcon: Iconsax.search_normal,
+          'homeSearchBarHint'.tr,
+          keyboardType: TextInputType.text,
+          showLabel: false,
+          isFilled: true,
+          fillColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
+          controller,
+          TValidator.validateUserInput),
+    );
   }
 }
