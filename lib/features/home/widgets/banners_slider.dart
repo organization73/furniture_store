@@ -24,25 +24,21 @@ class ImageSlider extends StatelessWidget {
       }
       return Column(
         children: [
-          CarouselSlider(
+          CarouselSlider.builder(
             options: CarouselOptions(
               aspectRatio: 3 / 1.5,
-              autoPlay: true,
               viewportFraction: 1,
-              autoPlayInterval: const Duration(seconds: 5),
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index),
             ),
-            items: controller.banners.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return RoundedImage(
-                    imageUrl: item.image,
-                    isNetworkImage: true,
-                  );
-                },
-              );
-            }).toList(),
+            itemCount: controller.banners.length,
+            itemBuilder:
+                (BuildContext context, int itemIndex, int pageViewIndex) =>
+                    RoundedImage(
+              imageUrl: controller.banners[itemIndex].image,
+              isNetworkImage: true,
+              width: ScreenUtil().screenWidth,
+            ),
           ),
           SizedBox(
             height: TSizes.spaceBtwSections,

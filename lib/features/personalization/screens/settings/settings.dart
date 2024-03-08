@@ -6,6 +6,7 @@ import 'package:furniture_store/common/widgets/list_tiles/settings_menu_tile.dar
 import 'package:furniture_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:furniture_store/data/dummy_data.dart';
 import 'package:furniture_store/data/repositories/authentication/authentication_repo.dart';
+import 'package:furniture_store/data/repositories/banners/banners_repo.dart';
 import 'package:furniture_store/data/repositories/category/category_repo.dart';
 import 'package:furniture_store/data/repositories/product/product_repo.dart';
 import 'package:furniture_store/data/repositories/vendor/vendor_repo.dart';
@@ -102,8 +103,8 @@ class SettingsScreen extends StatelessWidget {
               ),
             )),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
                   SectionHeading(
@@ -160,6 +161,14 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   SettingsMenuTile(
                     icon: Iconsax.arrow_up_1,
+                    title: 'Upload Banners',
+                    subTitle: 'Upload all banners data to firebase',
+                    onTap: () {
+                      BannersRepo.instance.uploadDummyData(DummyData.banners);
+                    },
+                  ),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1,
                     title: 'Upload Products',
                     subTitle: 'Upload all products data to firebase',
                     onTap: () {
@@ -172,8 +181,7 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Upload Vendors',
                     subTitle: 'Upload all vendors data to firebase',
                     onTap: () {
-                      VendorRepo.instance
-                          .uploadDummyData(DummyData.vendors);
+                      VendorRepo.instance.uploadDummyData(DummyData.vendors);
                     },
                   ),
                   SizedBox(

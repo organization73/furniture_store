@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BannersModel {
-  final String image;
-  final bool active;
+  String image;
+  bool active;
 
   BannersModel({
     required this.image,
