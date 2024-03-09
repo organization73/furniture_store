@@ -23,7 +23,6 @@ Future<void> main() async {
   await FirebaseAppCheck.instance
       .activate(
         androidProvider: AndroidProvider.debug,
-        appleProvider: AppleProvider.appAttest,
       )
       .then((value) => Get.put(AuthenticatorRepo()));
   runApp(const MyApp());
