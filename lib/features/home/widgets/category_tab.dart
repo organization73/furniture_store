@@ -8,7 +8,6 @@ import 'package:decordash/features/home/controllers/product/product_controller.d
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/features/home/model/product_model.dart';
 import 'package:decordash/features/home/screens/all_products/all_products_screen.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -31,9 +30,9 @@ class CategoryTab extends StatelessWidget {
             children: [
               const GelleryShowCase(
                 images: [
-                  TImages.productImage1,
-                  TImages.productImage1,
-                  TImages.productImage1
+                  'TImages.productImage1',
+                  'TImages.productImage1',
+                  'TImages.productImage1'
                 ],
               ),
               SectionHeading(

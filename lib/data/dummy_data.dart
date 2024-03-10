@@ -36,15 +36,15 @@ class DummyData {
                 'Absolutely love it! The quality is excellent, and delivery was super fast.',
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage1,
+      productImage: 'TImages.productImage1',
       onSale: true,
       productDetails: ProductDetails(
         condition: 'used',
         color: 'red',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
@@ -89,15 +89,15 @@ class DummyData {
                 'The product is good, but it could use some improvements. The packaging was damaged.',
             reviewerImage: 'https://picsum.photos/id/1062/80/80'),
       ],
-      productImage: TImages.productImage3,
+      productImage: 'TImages.productImage3',
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
         color: 'White',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
@@ -142,15 +142,15 @@ class DummyData {
                 'Absolutely love it! The quality is excellent, and delivery was super fast.',
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage12,
+      productImage: 'TImages.productImage12',
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
         color: 'red',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
@@ -201,15 +201,15 @@ class DummyData {
                 'Absolutely love it! The quality is excellent, and delivery was super fast.',
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage6,
+      productImage: 'TImages.productImage6',
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
         color: 'red',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
@@ -262,15 +262,15 @@ class DummyData {
                 'Absolutely love it! The quality is excellent, and delivery was super fast.',
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage5,
+      productImage: 'TImages.productImage5',
       onSale: false,
       productDetails: ProductDetails(
         condition: 'used',
         color: 'red',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
@@ -322,15 +322,15 @@ class DummyData {
                 'Absolutely love it! The quality is excellent, and delivery was super fast.',
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage5,
+      productImage: 'TImages.productImage5',
       onSale: false,
       productDetails: ProductDetails(
         condition: 'used',
         color: 'red',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
@@ -382,15 +382,15 @@ class DummyData {
                 'Absolutely love it! The quality is excellent, and delivery was super fast.',
             reviewerImage: 'https://picsum.photos/id/80/80/80'),
       ],
-      productImage: TImages.productImage5,
+      productImage: 'TImages.productImage5',
       onSale: false,
       productDetails: ProductDetails(
         condition: 'used',
         color: 'red',
         productListImages: [
-          TImages.productImage2,
-          TImages.productImage3,
-          TImages.productImage4,
+          'TImages.productImage2',
+          'TImages.productImage3',
+          'TImages.productImage4',
         ],
         productSpecs: {
           'ablakash': 'mdf',
