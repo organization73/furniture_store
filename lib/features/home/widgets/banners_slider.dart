@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordash/common/widgets/images/rounded_image.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
@@ -24,21 +23,23 @@ class ImageSlider extends StatelessWidget {
       }
       return Column(
         children: [
-          CarouselSlider.builder(
+          CarouselSlider(
             options: CarouselOptions(
               aspectRatio: 3 / 1.5,
               viewportFraction: 1,
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index),
             ),
-            itemCount: controller.banners.length,
-            itemBuilder:
-                (BuildContext context, int itemIndex, int pageViewIndex) =>
-                    RoundedImage(
-              imageUrl: controller.banners[itemIndex].image,
-              isNetworkImage: true,
-              width: ScreenUtil().screenWidth,
-            ),
+            items: controller.banners.map((item) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return RoundedImage(
+                    imageUrl: item.image,
+                    isNetworkImage: true,
+                  );
+                },
+              );
+            }).toList(),
           ),
           SizedBox(
             height: TSizes.spaceBtwSections,
