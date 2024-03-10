@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/build_user_input_field.dart';
 import 'package:decordash/common/widgets/cta_button.dart';
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/sign_up/sign_up_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 
@@ -38,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  BuildTopText(
+                  PageHeader(
                       title: 'signupTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
                       iconName: Iconsax.personalcard),

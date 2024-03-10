@@ -130,7 +130,6 @@ class ProductMetaData extends StatelessWidget {
         SizedBox(
           height: TSizes.spaceBtwItems / 2,
         ),
-
         ReadMoreText(
           product.productDetails.productDesc * 7,
           trimLines: 3,
@@ -149,15 +148,12 @@ class ProductMetaData extends StatelessWidget {
         SizedBox(
           height: TSizes.spaceBtwSections,
         ),
-
         ProductSpecs(
           productSpecs: product.productDetails.productSpecs,
         ),
-
         ProductStatsCheckboxes(
           product: product,
         ),
-
         SectionHeading(
           title: 'Reviews',
           onPress: () => Get.to(
@@ -166,15 +162,9 @@ class ProductMetaData extends StatelessWidget {
             transition: Transition.rightToLeft,
           ),
         ),
-
         UserReviewCard(
           product: product,
         ),
-
-        // const BuildSectionDescription(
-        //   sectionName: ' smProducts',
-        //   sectionDesc: ' smProductsDesc',
-        // ),
       ],
     );
   }

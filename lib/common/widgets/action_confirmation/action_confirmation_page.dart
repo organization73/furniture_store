@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -39,7 +39,7 @@ class ActionConfirmPage extends StatelessWidget {
             SizedBox(
               height: TSizes.spaceBtwItems,
             ),
-            BuildTopText(
+            PageHeader(
               title: title,
               subTitle: '',
               alignment: CrossAxisAlignment.center,

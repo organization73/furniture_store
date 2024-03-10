@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordash/features/authentication/controllers/sign_up/verify_email_controller.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
@@ -48,7 +48,7 @@ class VerifySignUpEmail extends StatelessWidget {
                   SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
-                  BuildTopText(
+                  PageHeader(
                     title: 'confirmEmail'.tr,
                     subTitle: email ?? '',
                     alignment: CrossAxisAlignment.center,

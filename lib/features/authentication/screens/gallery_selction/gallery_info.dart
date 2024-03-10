@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/build_user_input_field.dart';
 import 'package:decordash/common/widgets/cta_button.dart';
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/gallery_info/gallery_information_controller.dart';
 import 'package:decordash/features/authentication/model/gallery_info/gallery_information_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';
@@ -48,7 +48,7 @@ class GalleryInformationScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  BuildTopText(
+                  PageHeader(
                       title: 'gallaryTitle'.tr,
                       subTitle: 'gallaryTitleDesc'.tr,
                       iconName: Iconsax.shop),

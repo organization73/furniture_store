@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordash/common/widgets/cta_button.dart';
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/gallery_selection/gallery_selection_controller.dart';
 import 'package:decordash/features/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';
@@ -35,7 +35,7 @@ class GallerySelection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                BuildTopText(
+                PageHeader(
                     title: 'gallarySelect'.tr,
                     subTitle: 'gallarySelectDesc'.tr,
                     iconName: Iconsax.ram),

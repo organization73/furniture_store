@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/cta_button.dart';
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:decordash/features/authentication/screens/login/login_screen.dart';
 import 'package:decordash/utils/constants/sizes.dart';
@@ -45,7 +45,7 @@ class ResetPasswordScreen extends StatelessWidget {
                   SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
-                  BuildTopText(
+                  PageHeader(
                     title: 'Password reset email sent',
                     subTitle: email,
                     alignment: CrossAxisAlignment.center,

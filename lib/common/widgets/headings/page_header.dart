@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 
-class BuildTopText extends StatelessWidget {
+class PageHeader extends StatelessWidget {
   final String title;
   final String subTitle;
   final IconData? iconName;
   final CrossAxisAlignment alignment;
   final double size;
 
-  const BuildTopText({
+  const PageHeader({
     super.key,
     required this.title,
     required this.subTitle,

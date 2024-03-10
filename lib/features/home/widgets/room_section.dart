@@ -1,6 +1,6 @@
+import 'package:decordash/common/widgets/headings/section_heading.dart';
 import 'package:flutter/material.dart';
 
-import 'package:decordash/common/widgets/section_description.dart';
 import 'package:decordash/features/home/screens/categories_screen.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
@@ -20,8 +20,12 @@ class BuildRoomsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        BuildSectionDescription(
-            sectionName: 'roomsSec'.tr, sectionDesc: 'roomsSecDesc'.tr),
+        SectionHeading(
+          title: 'roomsSec'.tr,
+          subTitle: 'roomsSecDesc'.tr,
+          showSubTitle: true,
+          showActionButton: false,
+        ),
         SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
             vertical: 10,

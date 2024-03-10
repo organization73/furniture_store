@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/build_user_input_field.dart';
 import 'package:decordash/common/widgets/cta_button.dart';
-import 'package:decordash/common/widgets/text_header.dart';
+import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/log_in/log_in_controller.dart';
 import 'package:decordash/features/authentication/screens/reset_password/send_reset_password.dart';
 import 'package:decordash/utils/constants/sizes.dart';
@@ -38,7 +38,7 @@ class EmailSignInScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BuildTopText(
+                  PageHeader(
                       title: 'loginTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
                       iconName: Iconsax.link_circle),
