@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/build_user_input_field.dart';
-import 'package:decordash/common/widgets/cta_button.dart';
+import 'package:decordash/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/gallery_info/gallery_information_controller.dart';
 import 'package:decordash/features/authentication/model/gallery_info/gallery_information_model.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/build_user_input_field.dart';
-import 'package:decordash/common/widgets/color_selection.dart';
-import 'package:decordash/common/widgets/drop_down_menu.dart';
+import 'package:decordash/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordash/features/product/screens/add_product/widgets/color_selection.dart';
+import 'package:decordash/common/widgets/drop_down_menu/drop_down_menu.dart';
 import 'package:decordash/features/product/screens/add_product/widgets/product_condition_selection.dart';
 import 'package:decordash/features/product/screens/add_product/widgets/product_image_upload.dart';
 import 'package:decordash/features/product/screens/add_product/widgets/product_stats_checkboxs.dart';

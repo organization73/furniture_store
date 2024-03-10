@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
-import 'package:decordash/common/widgets/cta_button.dart';
+import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/features/ai/controllers/generative_ai/generative_ai_controller.dart';
 import 'package:decordash/utils/constants/api_constants.dart';
 import 'package:decordash/utils/constants/sizes.dart';

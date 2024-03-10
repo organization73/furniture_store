@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
-import 'package:decordash/common/widgets/cta_button.dart';
+import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/features/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:decordash/utils/constants/sizes.dart';

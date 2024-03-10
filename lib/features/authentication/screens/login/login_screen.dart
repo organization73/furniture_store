@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:decordash/common/widgets/cta_button.dart';
+import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordash/features/authentication/controllers/log_in/log_in_controller.dart';
 import 'package:decordash/features/authentication/screens/login/email_sign_in.dart';

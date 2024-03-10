@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/ai_banner.dart';
-import 'package:decordash/common/widgets/drop_down_menu.dart';
+import 'package:decordash/features/ai/widgets/ai_banner.dart';
+import 'package:decordash/common/widgets/drop_down_menu/drop_down_menu.dart';
 import 'package:decordash/features/ai/controllers/generative_ai/generative_ai_controller.dart';
 import 'package:decordash/features/ai/widgets/generative_image.dart';
 import 'package:decordash/features/ai/model/generative_ai/balance_model.dart';

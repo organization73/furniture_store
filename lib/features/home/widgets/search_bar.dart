@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/build_user_input_field.dart';
+import 'package:decordash/common/widgets/input_fields/build_user_input_field.dart';
 
 import 'package:decordash/utils/validators/validation.dart';
 import 'package:get/get.dart';
