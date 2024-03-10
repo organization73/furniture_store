@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/overlapping_cicular_avatar.dart';
+import 'package:decordash/features/product/screens/product_details/widgets/overlapping_cicular_avatar.dart';
 import 'package:decordash/features/home/model/product_model.dart';
 import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';
