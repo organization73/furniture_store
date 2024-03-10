@@ -45,6 +45,8 @@ dependencies:
   readmore: ^2.2.0
   flutter_rating_bar: ^4.0.1
   intl: ^0.19.0
+  logger: ^2.1.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
