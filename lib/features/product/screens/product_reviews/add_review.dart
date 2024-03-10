@@ -5,7 +5,6 @@ import 'package:decordash/features/home/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class AddReview extends StatelessWidget {
   final ProductModel product;

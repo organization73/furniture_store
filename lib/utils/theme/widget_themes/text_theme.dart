@@ -9,7 +9,7 @@ class TTextTheme {
   /// Customizable Light Text Theme
   static TextTheme lightTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
-        fontSize: 17.0.sp, fontWeight: FontWeight.bold, color: TColors.dark),
+        fontSize: 17.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
     headlineMedium: const TextStyle().copyWith(
         fontSize: 15.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
     headlineSmall: const TextStyle().copyWith(
@@ -43,7 +43,7 @@ class TTextTheme {
   /// Customizable Dark Text Theme
   static TextTheme darkTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
-        fontSize: 17.0.sp, fontWeight: FontWeight.bold, color: TColors.light),
+        fontSize: 17.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
     headlineMedium: const TextStyle().copyWith(
         fontSize: 15.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
     headlineSmall: const TextStyle().copyWith(

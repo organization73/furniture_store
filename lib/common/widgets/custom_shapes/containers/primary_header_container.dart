@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:decordash/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import 'package:decordash/utils/constants/colors.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 
 class PrimaryHeaderContainer extends StatelessWidget {
   const PrimaryHeaderContainer({
