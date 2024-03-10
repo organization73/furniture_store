@@ -112,7 +112,7 @@ class SettingsScreen extends StatelessWidget {
                     showActionButton: false,
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.designtools,
+                    icon: Iconsax.designtools_copy,
                     title: 'manefactureReq'.tr,
                     subTitle: 'manefactureReqDesc'.tr,
                     onTap: () => Get.to(
@@ -122,7 +122,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.buy_crypto,
+                    icon: Iconsax.buy_crypto_copy,
                     title: 'buyPoints'.tr,
                     subTitle: 'buyPointsDesc'.tr,
                     onTap: () {},
@@ -135,13 +135,13 @@ class SettingsScreen extends StatelessWidget {
                     showActionButton: false,
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.language_circle,
+                    icon: Iconsax.language_square_copy,
                     title: 'language'.tr,
                     subTitle: 'languageDesc'.tr,
                     onTap: () => _showLanguageModel(),
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.moon,
+                    icon: Iconsax.moon_copy,
                     title: 'darkMode'.tr,
                     subTitle: 'darkModeDesc'.tr,
                     onTap: () {
@@ -151,7 +151,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.arrow_up_1,
+                    icon: Iconsax.arrow_up_1_copy,
                     title: 'Upload Categories',
                     subTitle: 'Upload all catedories data to firebase',
                     onTap: () {
@@ -160,7 +160,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.arrow_up_1,
+                    icon: Iconsax.arrow_up_1_copy,
                     title: 'Upload Banners',
                     subTitle: 'Upload all banners data to firebase',
                     onTap: () {
@@ -168,7 +168,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.arrow_up_1,
+                    icon: Iconsax.arrow_up_1_copy,
                     title: 'Upload Products',
                     subTitle: 'Upload all products data to firebase',
                     onTap: () {
@@ -177,7 +177,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   SettingsMenuTile(
-                    icon: Iconsax.arrow_up_1,
+                    icon: Iconsax.arrow_up_1_copy,
                     title: 'Upload Vendors',
                     subTitle: 'Upload all vendors data to firebase',
                     onTap: () {

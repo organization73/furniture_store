@@ -15,8 +15,8 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
       color: dark ? TColors.black : TColors.white,
       child: TabBar(
         tabs: tabs,
-        // isScrollable: true,
-        // tabAlignment: TabAlignment.start,
+        isScrollable: true,
+        tabAlignment: TabAlignment.start,
         indicatorColor: TColors.primary,
         unselectedLabelColor: TColors.darkGrey,
         labelStyle: Theme.of(context).textTheme.titleMedium,

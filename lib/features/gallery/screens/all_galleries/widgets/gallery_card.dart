@@ -1,3 +1,4 @@
+import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/styles/shadows.dart';
@@ -35,7 +36,7 @@ class GalleryCard extends StatelessWidget {
                     image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'assets/images/galleries/property-1.png',
+                        TImages.bedRoom,
                       ),
                     ),
                   ),

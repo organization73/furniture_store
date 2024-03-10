@@ -21,8 +21,9 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vendorsController = Get.put(VendorController());
+
     final categories = CategoryController.instance.featuredCatedories;
-    final vendorsController = VendorController.instance;
     return DefaultTabController(
       length: categories.length,
       child: Scaffold(

@@ -23,8 +23,7 @@ class ColorSelectionState extends State<ColorSelection> {
         setState(() {
           _color = color;
         });
-        widget
-            .onColorSelected(color); // Pass the selected color to the callback
+        widget.onColorSelected(color);
       },
     );
   }

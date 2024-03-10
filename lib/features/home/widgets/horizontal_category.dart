@@ -16,6 +16,7 @@ class HorizontalCategory extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: RoundedContainer(
+          gradient: true,
           width: 125.w,
           hight: 56.h,
           backgroundColor: TColors.grey.withOpacity(0.7),

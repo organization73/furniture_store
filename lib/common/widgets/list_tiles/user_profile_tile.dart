@@ -3,6 +3,7 @@ import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -21,26 +22,26 @@ class ProfileTile extends StatelessWidget {
         final networkImage = controller.user.value.avatar;
         final image = networkImage.isNotEmpty ? networkImage : TImages.user;
         if (controller.profileLoading.value) {
-          return const ShimmerLoaderEffect(
-            width: 50,
-            height: 50,
-            raduis: 50,
+          return ShimmerLoaderEffect(
+            width: 50.w,
+            height: 50.h,
+            raduis: 50.r,
           );
         } else {
           return CircularImage(
-            width: 50,
-            height: 50,
+            width: 50.r,
+            height: 50.r,
             imageUrl: image,
-            padding: 0,
+            padding: 2,
             isNetworkImage: networkImage.isNotEmpty,
           );
         }
       }),
       title: Obx(() {
         if (controller.profileLoading.value) {
-          return const ShimmerLoaderEffect(
-            height: 15,
-            width: 80,
+          return ShimmerLoaderEffect(
+            height: 15.h,
+            width: 80.w,
           );
         } else {
           return Text(
@@ -51,9 +52,9 @@ class ProfileTile extends StatelessWidget {
       }),
       subtitle: Obx(() {
         if (controller.profileLoading.value) {
-          return const ShimmerLoaderEffect(
-            height: 15,
-            width: 80,
+          return ShimmerLoaderEffect(
+            height: 15.h,
+            width: 80.w,
           );
         } else {
           return Text(
@@ -62,7 +63,8 @@ class ProfileTile extends StatelessWidget {
           );
         }
       }),
-      trailing: IconButton(onPressed: onPress, icon: const Icon(Iconsax.edit)),
+      trailing:
+          IconButton(onPressed: onPress, icon: const Icon(Iconsax.edit_copy)),
     );
   }
 }

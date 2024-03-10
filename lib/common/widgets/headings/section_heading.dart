@@ -77,8 +77,8 @@ class SectionHeading extends StatelessWidget {
                   ),
                   Icon(
                     textDirection == TextDirection.ltr
-                        ? Iconsax.arrow_right_1
-                        : Iconsax.arrow_left,
+                        ? Iconsax.arrow_right_3_copy
+                        : Iconsax.arrow_left_2_copy,
                     size: TSizes.iconSm,
                   ),
                 ],

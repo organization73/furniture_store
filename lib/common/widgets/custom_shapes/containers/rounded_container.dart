@@ -11,6 +11,7 @@ class RoundedContainer extends StatelessWidget {
       this.child,
       this.showBorder = false,
       this.borderColor = TColors.borderPrimary,
+      this.gradient = false,
       this.backgroundColor = TColors.white,
       this.padding,
       this.margin});
@@ -20,6 +21,7 @@ class RoundedContainer extends StatelessWidget {
   final double raduis;
   final Widget? child;
   final bool showBorder;
+  final bool gradient;
   final Color borderColor;
   final Color backgroundColor;
   final EdgeInsetsGeometry? padding;
@@ -33,7 +35,13 @@ class RoundedContainer extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-          color: backgroundColor,
+          gradient: gradient
+              ? RadialGradient(colors: [
+                  TColors.grey.withOpacity(0.7),
+                  TColors.light.withOpacity(0.7)
+                ], radius: 2)
+              : null,
+          color: !gradient ? backgroundColor : null,
           borderRadius: BorderRadius.circular(raduis),
           border: showBorder ? Border.all(color: borderColor) : null),
       child: child,

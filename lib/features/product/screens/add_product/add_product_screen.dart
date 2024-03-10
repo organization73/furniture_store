@@ -201,7 +201,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   height: 15.h,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(left: 10),
                   child: ColorSelection(
                     onColorSelected: (Color selectedColor) {
                       // Handle the selected color here

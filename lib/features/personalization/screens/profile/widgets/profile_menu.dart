@@ -5,7 +5,7 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 class ProfileMenu extends StatelessWidget {
   const ProfileMenu({
     super.key,
-    this.icon = Iconsax.arrow_right,
+    this.icon = Iconsax.arrow_right_3_copy,
     required this.onPress,
     required this.title,
     required this.value,

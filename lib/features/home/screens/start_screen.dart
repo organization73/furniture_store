@@ -13,7 +13,6 @@ import 'package:decordash/features/home/widgets/categories_section.dart';
 import 'package:decordash/features/home/widgets/home_appbar.dart';
 import 'package:decordash/features/home/widgets/room_section.dart';
 import 'package:decordash/features/home/widgets/search_bar.dart';
-import 'package:decordash/features/home/widgets/top_gallaries_section.dart';
 import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -102,7 +101,9 @@ class StartPage extends StatelessWidget {
                                               .featuredProducts[index],
                                         ));
                               }),
-                              const BuildTopGalleriesSection(),
+                              SizedBox(
+                                height: TSizes.spaceBtwSections,
+                              ),
                               const BuildRoomsSection(),
                             ],
                           ),

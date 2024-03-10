@@ -35,7 +35,7 @@ class HomeAppBar extends StatelessWidget {
                   transition: Transition.downToUp,
                 ),
             icon: const Icon(
-              Iconsax.heart,
+              Iconsax.heart_copy,
             )),
         Obx(
           () => IconButton(
@@ -50,7 +50,7 @@ class HomeAppBar extends StatelessWidget {
                 label: Text('${controller.notiList.length}'),
                 child: (controller.notiList.isEmpty)
                     ? const Icon(
-                        Iconsax.notification,
+                        Iconsax.notification_copy,
                       )
                     : const Icon(
                         Iconsax.notification,

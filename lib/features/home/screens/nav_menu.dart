@@ -26,42 +26,42 @@ class NavMenu extends StatelessWidget {
             destinations: [
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.home,
+                  Iconsax.home_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.home),
+                icon: const Icon(Iconsax.home_copy),
                 label: 'Home',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.shop,
+                  Iconsax.bag_2_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.shop),
+                icon: const Icon(Iconsax.bag_2_copy),
                 label: 'Store',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.message,
+                  Iconsax.message_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.message),
+                icon: const Icon(Iconsax.message_copy),
                 label: 'Chat',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.add_square,
+                  Iconsax.add_square_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.add_square),
+                icon: const Icon(Iconsax.add_square_copy),
                 label: 'Add',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.sound,
+                  Iconsax.d_cube_scan_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.sound),
+                icon: const Icon(Iconsax.d_cube_scan_copy),
                 label: 'AI',
               ),
               NavigationDestination(

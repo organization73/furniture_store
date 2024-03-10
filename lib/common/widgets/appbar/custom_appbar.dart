@@ -32,8 +32,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? IconButton(
               onPressed: () => Get.back(),
               icon: Icon(textDirection == TextDirection.ltr
-                  ? Iconsax.arrow_left
-                  : Iconsax.arrow_right_1),
+                  ? Iconsax.arrow_left_copy
+                  : Iconsax.arrow_right_1_copy),
             )
           : leadinIcon != null
               ? IconButton(

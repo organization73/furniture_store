@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/images/circular_image.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
@@ -24,8 +26,8 @@ class ProfileWidget extends StatelessWidget {
         children: [
           CircularImage(
             imageUrl: imagePath,
-            width: 100,
-            height: 100,
+            width: 100.w,
+            height: 100.h,
             isNetworkImage: isNetworkImage,
             padding: 0,
           ),
@@ -46,9 +48,9 @@ class ProfileWidget extends StatelessWidget {
           color: color,
           all: 5,
           child: Icon(
-            isEdit ? Icons.add_a_photo : Icons.edit,
+            isEdit ? Icons.add_a_photo : Iconsax.edit_2,
             color: Colors.white,
-            size: 20,
+            size: 20.r,
           ),
         ),
       );

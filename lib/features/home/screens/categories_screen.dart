@@ -39,7 +39,7 @@ class CategoriesPage extends StatelessWidget {
                     child: InputWidget(
                       height: 40.0,
                       hintText: "Search",
-                      prefixIcon: Iconsax.search_normal,
+                      prefixIcon: Iconsax.search_normal_copy,
                     ),
                   ),
                   SizedBox(

@@ -1,3 +1,4 @@
+import 'package:decordash/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/headings/section_heading.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
@@ -7,6 +8,7 @@ import 'package:decordash/features/personalization/screens/profile/widgets/chang
 import 'package:decordash/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/constants/sizes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -30,10 +32,10 @@ class ProfileScreen extends StatelessWidget {
                 final image =
                     networkImage.isNotEmpty ? networkImage : TImages.user;
                 if (controller.imageLoading.value) {
-                  return const ShimmerLoaderEffect(
-                    width: 100,
-                    height: 100,
-                    raduis: 50,
+                  return ShimmerLoaderEffect(
+                    width: 100.w,
+                    height: 100.h,
+                    raduis: 50.r,
                   );
                 } else {
                   return ProfileWidget(
@@ -106,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
                   onPressed: () => controller.deleteAccountWarningPopup(),
                   child: const Text(
                     'Close Account',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: TColors.error),
                   ))
             ],
           ),
