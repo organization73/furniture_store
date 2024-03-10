@@ -417,101 +417,101 @@ class DummyData {
   ];
 
   static final List<BannersModel> banners = [
-    BannersModel(image: TImages.banner1, active: false),
-    BannersModel(image: TImages.banner2, active: true),
-    BannersModel(image: TImages.banner3, active: true),
-    BannersModel(image: TImages.banner4, active: true),
-    BannersModel(image: TImages.banner5, active: true),
-    BannersModel(image: TImages.banner6, active: true),
-    BannersModel(image: TImages.banner7, active: true),
-    BannersModel(image: TImages.banner8, active: false),
+    BannersModel(image: 'TImages.banner1', active: false),
+    BannersModel(image: 'TImages.banner2', active: true),
+    BannersModel(image: 'TImages.banner3', active: true),
+    BannersModel(image: 'TImages.banner4', active: true),
+    BannersModel(image: 'TImages.banner5', active: true),
+    BannersModel(image: 'TImages.banner6', active: true),
+    BannersModel(image: 'TImages.banner7', active: true),
+    BannersModel(image: 'TImages.banner8', active: false),
   ];
 
   static final List<CategoryModel> categories = [
     CategoryModel(
-        id: '1', image: TImages.sportIcon, name: 'Sports', isFeatured: true),
+        id: '1', image: 'TImages.sportIcon', name: 'Sports', isFeatured: true),
     CategoryModel(
         id: '5',
-        image: TImages.furnitureIcon,
+        image: 'TImages.furnitureIcon',
         name: 'Funraniture',
         isFeatured: true),
     CategoryModel(
         id: '2',
-        image: TImages.electronicsIcon,
+        image: 'TImages.electronicsIcon',
         name: 'Electronics',
         isFeatured: true),
     CategoryModel(
-        id: '3', image: TImages.clothIcon, name: 'Cloth', isFeatured: true),
+        id: '3', image: 'TImages.clothIcon', name: 'Cloth', isFeatured: true),
     CategoryModel(
-        id: '4', image: TImages.animalIcon, name: 'Animals', isFeatured: true),
+        id: '4', image: 'TImages.animalIcon', name: 'Animals', isFeatured: true),
     CategoryModel(
-        id: '6', image: TImages.shoeIcon, name: 'Shoes', isFeatured: true),
+        id: '6', image: 'TImages.shoeIcon', name: 'Shoes', isFeatured: true),
     CategoryModel(
         id: '7',
-        image: TImages.cosmeticsIcon,
+        image: 'TImages.cosmeticsIcon',
         name: 'Cosmitics',
         isFeatured: true),
     CategoryModel(
         id: '14',
-        image: TImages.jeweleryIcon,
+        image: 'TImages.jeweleryIcon',
         name: 'Jewerly',
         isFeatured: true),
 
     /// Sub Categories
     CategoryModel(
         id: '8',
-        image: TImages.sportIcon,
+        image: 'TImages.sportIcon',
         name: 'Sports Shoes',
         isFeatured: false,
         parentId: '1'),
     CategoryModel(
         id: '9',
-        image: TImages.sportIcon,
+        image: 'TImages.sportIcon',
         name: 'Track Suits',
         isFeatured: false,
         parentId: '1'),
     CategoryModel(
         id: '10',
-        image: TImages.sportIcon,
+        image: 'TImages.sportIcon',
         name: 'Sports Equipment',
         isFeatured: false,
         parentId: '1'),
 
     CategoryModel(
         id: '11',
-        image: TImages.furnitureIcon,
+        image: 'TImages.furnitureIcon',
         name: 'Bedroom Furniture',
         isFeatured: false,
         parentId: '5'),
     CategoryModel(
         id: '12',
-        image: TImages.furnitureIcon,
+        image: 'TImages.furnitureIcon',
         name: 'Kitchen Furniture',
         isFeatured: false,
         parentId: '5'),
     CategoryModel(
         id: '13',
-        image: TImages.furnitureIcon,
+        image: 'TImages.furnitureIcon',
         name: 'Office',
         isFeatured: false,
         parentId: '5'),
 
     CategoryModel(
         id: '14',
-        image: TImages.electronicsIcon,
+        image: 'TImages.electronicsIcon',
         name: 'Laptop',
         isFeatured: false,
         parentId: '2'),
     CategoryModel(
         id: '15',
-        image: TImages.electronicsIcon,
+        image: 'TImages.electronicsIcon',
         name: 'Mobile',
         isFeatured: false,
         parentId: '2'),
 
     CategoryModel(
         id: '16',
-        image: TImages.clothIcon,
+        image: 'TImages.clothIcon',
         name: 'Shirts',
         isFeatured: false,
         parentId: '3'),

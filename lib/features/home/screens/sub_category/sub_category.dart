@@ -25,7 +25,7 @@ class SubCategoryScreen extends StatelessWidget {
               RoundedImage(
                 width: double.infinity,
                 height: 170.h,
-                imageUrl: TImages.promoBanner1,
+                imageUrl: TImages.livingRoom,
               ),
               SizedBox(
                 height: TSizes.spaceBtwSections,
