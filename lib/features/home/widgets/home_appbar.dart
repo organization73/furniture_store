@@ -19,14 +19,10 @@ class HomeAppBar extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Text(
-            'homeAppbarTitle'.tr,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-          ),
+          child: Text('homeAppbarTitle'.tr,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.headlineLarge),
         ),
         IconButton(
             onPressed: () => Get.to(

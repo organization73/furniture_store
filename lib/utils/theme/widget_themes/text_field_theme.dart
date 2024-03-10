@@ -11,11 +11,14 @@ class TTextFormFieldTheme {
     suffixIconColor: TColors.darkGrey,
     // constraints: BoxConstraints.expand(height: TSizes.inputFieldHeight),
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-    labelStyle: const TextStyle()
-        .copyWith(fontSize: TSizes.fontSizeMd, color: TColors.black),
-    hintStyle: const TextStyle()
-        .copyWith(fontSize: TSizes.fontSizeSm, color: TColors.black),
-    errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
+
+    labelStyle: const TextStyle().copyWith(
+      fontSize: TSizes.fontSizeSm,
+    ),
+    hintStyle: const TextStyle().copyWith(
+      fontSize: TSizes.fontSizeSm,
+    ),
+    errorStyle: const TextStyle().copyWith(fontSize: TSizes.fontSizeSm),
     floatingLabelStyle:
         const TextStyle().copyWith(color: TColors.black.withOpacity(0.8)),
     border: const OutlineInputBorder().copyWith(
@@ -46,10 +49,12 @@ class TTextFormFieldTheme {
     suffixIconColor: TColors.darkGrey,
     // constraints: BoxConstraints.expand(height: TSizes.inputFieldHeight),
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-    labelStyle: const TextStyle()
-        .copyWith(fontSize: TSizes.fontSizeMd, color: TColors.white),
-    hintStyle: const TextStyle()
-        .copyWith(fontSize: TSizes.fontSizeSm, color: TColors.white),
+    labelStyle: const TextStyle().copyWith(fontSize: TSizes.fontSizeSm),
+    hintStyle: const TextStyle().copyWith(
+      fontSize: TSizes.fontSizeSm,
+    ),
+    errorStyle: const TextStyle().copyWith(fontSize: TSizes.fontSizeSm),
+
     floatingLabelStyle:
         const TextStyle().copyWith(color: TColors.white.withOpacity(0.8)),
     border: const OutlineInputBorder().copyWith(

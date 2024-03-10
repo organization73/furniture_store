@@ -15,9 +15,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return CurvedEdgesWidget(
       child: Container(
-        color: THelperFunctions.isDarkMode(context)
-            ? TColors.black
-            : TColors.lightContainer,
+        color: Theme.of(context).scaffoldBackgroundColor,
         padding: const EdgeInsets.all(0),
         child: Stack(
           children: [
@@ -25,27 +23,24 @@ class PrimaryHeaderContainer extends StatelessWidget {
               top: -150,
               right: -250,
               child: CircularContainer(
-                backgroungColor: THelperFunctions.isDarkMode(context)
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                backgroungColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.2),
               ),
             ),
             Positioned(
               top: 50,
               right: -300,
               child: CircularContainer(
-                backgroungColor: THelperFunctions.isDarkMode(context)
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                backgroungColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.2),
               ),
             ),
             Positioned(
               top: 50,
               right: 300,
               child: CircularContainer(
-                backgroungColor: THelperFunctions.isDarkMode(context)
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                backgroungColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.2),
               ),
             ),
             child

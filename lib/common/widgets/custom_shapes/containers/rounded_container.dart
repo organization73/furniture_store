@@ -37,8 +37,8 @@ class RoundedContainer extends StatelessWidget {
       decoration: BoxDecoration(
           gradient: gradient
               ? RadialGradient(colors: [
-                  TColors.grey.withOpacity(0.7),
-                  TColors.light.withOpacity(0.7)
+                  TColors.lightContainer.withOpacity(0.7),
+                  TColors.softGrey.withOpacity(0.7)
                 ], radius: 2)
               : null,
           color: !gradient ? backgroundColor : null,
