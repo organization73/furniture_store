@@ -1,3 +1,5 @@
+import 'package:decordash/data/dummy_data.dart';
+import 'package:decordash/features/product/screens/product_reviews/widgets/user_review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/features/home/model/product_model.dart';
@@ -41,10 +43,9 @@ class ProductReviewsScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          // TODO: Fix this
-                          // UserReviewCard(
-                          //   review: controller.reviews[index],
-                          // ),
+                          UserReviewCard(
+                            product: product,
+                          ),
                           SizedBox(height: TSizes.spaceBtwItems),
                         ],
                       );

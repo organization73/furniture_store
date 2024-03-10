@@ -15,7 +15,7 @@ class TAppBarTheme {
     actionsIconTheme:
         const IconThemeData(color: TColors.black, size: TSizes.iconMd),
     titleTextStyle: TextStyle(
-        fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: TColors.black),
+        fontSize: 14.0.sp, fontWeight: FontWeight.w500, color: TColors.black),
   );
   static final darkAppBarTheme = AppBarTheme(
     elevation: 0,
@@ -26,6 +26,6 @@ class TAppBarTheme {
     actionsIconTheme:
         const IconThemeData(color: TColors.white, size: TSizes.iconMd),
     titleTextStyle: TextStyle(
-        fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: TColors.white),
+        fontSize: 14.0.sp, fontWeight: FontWeight.w500, color: TColors.white),
   );
 }

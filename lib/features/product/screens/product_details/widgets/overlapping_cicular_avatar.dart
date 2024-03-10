@@ -61,7 +61,7 @@ class OverlappingCircularAvatar extends StatelessWidget {
           ),
           child: const CircleAvatar(
             radius: 15,
-            child: Icon(Iconsax.add),
+            child: Icon(Iconsax.add_copy),
           ),
         )
       ],

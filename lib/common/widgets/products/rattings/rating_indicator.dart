@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class CustomRatingBarIndicator extends StatelessWidget {
   const CustomRatingBarIndicator({
@@ -15,7 +14,7 @@ class CustomRatingBarIndicator extends StatelessWidget {
         rating: rating,
         itemSize: 20,
         itemBuilder: (_, __) => Icon(
-              Iconsax.star,
+              Icons.star_rate_rounded,
               color: Theme.of(context).colorScheme.primary,
             ));
   }

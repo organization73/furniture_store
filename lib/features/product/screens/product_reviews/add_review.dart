@@ -32,17 +32,21 @@ class AddReview extends StatelessWidget {
               RatingBar.builder(
                 initialRating: 0,
                 minRating: 0,
+                glow: false,
                 direction: Axis.horizontal,
-                allowHalfRating: true,
+                allowHalfRating: false,
                 itemCount: 5,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemPadding: const EdgeInsets.all(4.0),
                 itemBuilder: (context, _) => Icon(
-                  Iconsax.star,
+                  Icons.star_rate_rounded,
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 onRatingUpdate: (rating) {
                   controller.updateSelectedRating(rating.toInt());
                 },
+              ),
+              SizedBox(
+                height: TSizes.spaceBtwSections,
               ),
               TextFormField(
                 controller: controller.reviewController,
