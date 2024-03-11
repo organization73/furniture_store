@@ -274,6 +274,7 @@ socket.on("recieve-message", (newMessage) => {
 sendBtn.addEventListener("click", sendMessage);
 async function sendMessage() {
   const message = messageContainer.value;
+  document.getElementById("message-input").value = "";
   if (message) {
     const selectedContact = document.querySelector("#contact-list li.selected");
     const messagesList = document.getElementById("messages");
@@ -292,7 +293,6 @@ async function sendMessage() {
         throw new Error("Error sending message");
       }
       const newMessage = await response.json();
-      console.log("new message:", newMessage);
       socket.emit("new-message", newMessage);
     } catch (error) {
       return console.log(error);
@@ -305,6 +305,5 @@ async function sendMessage() {
     selectedContact.querySelector("h6").textContent = `${
       currentUser.username.split(".")[0]
     }: ${message}`;
-    document.getElementById("message-input").value = "";
   }
 }
