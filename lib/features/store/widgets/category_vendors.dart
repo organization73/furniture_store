@@ -1,8 +1,6 @@
 import 'package:decordash/common/widgets/shimmer/boxes_shimmer.dart';
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordash/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:decordash/common/widgets/vendors/vendor_showcase.dart';
-import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';

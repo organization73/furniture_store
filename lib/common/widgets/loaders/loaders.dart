@@ -13,16 +13,17 @@ class TLoaders {
       duration: const Duration(seconds: 3),
       backgroundColor: Colors.transparent,
       content: Container(
-        padding: const EdgeInsets.all(12),
-        margin: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.all(8),
+        // margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(15),
             color: THelperFunctions.isDarkMode(Get.context!)
                 ? TColors.darkerGrey.withOpacity(0.9)
                 : TColors.grey.withOpacity(0.9)),
         child: Text(
           messege,
-          style: Theme.of(Get.context!).textTheme.labelMedium,
+          style: Theme.of(Get.context!).textTheme.titleSmall,
+          textAlign: TextAlign.center,
         ),
       ),
     ));

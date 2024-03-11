@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:decordash/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordash/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import 'package:decordash/common/widgets/icons/circular_icon.dart';
 import 'package:decordash/common/widgets/images/rounded_image.dart';
 import 'package:decordash/features/home/controllers/product/images_controller.dart';
 import 'package:decordash/features/home/model/product_model.dart';
@@ -10,7 +10,6 @@ import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProductImageSlider extends StatelessWidget {
   const ProductImageSlider({
@@ -32,7 +31,7 @@ class ProductImageSlider extends StatelessWidget {
             SizedBox(
                 height: 400,
                 child: Padding(
-                  padding: EdgeInsets.all(TSizes.productImageRadius * 2),
+                  padding: const EdgeInsets.all(TSizes.productImageRadius * 2),
                   child: Center(
                     child: Obx(() {
                       final image = controller.selectedProductImage.value;
@@ -87,14 +86,13 @@ class ProductImageSlider extends StatelessWidget {
                 ),
               ),
             ),
-            const CustomAppBar(
+            CustomAppBar(
               showBackArrow: true,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: TSizes.sm),
-                  child: CicularIcon(
-                    icon: Iconsax.heart,
-                    color: Colors.red,
+                  padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
+                  child: FavouriteIcon(
+                    productId: product.id,
                   ),
                 )
               ],

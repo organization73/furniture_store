@@ -1,3 +1,4 @@
+import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -32,6 +33,8 @@ class AuthenticatorRepo extends GetxController {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
+        await TLocalStorage.init(user.uid);
+
         Get.offAll(
           () => const NavMenu(),
           duration: const Duration(milliseconds: 300),

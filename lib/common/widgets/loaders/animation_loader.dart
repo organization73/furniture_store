@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:lottie/lottie.dart';
 
@@ -38,20 +37,10 @@ class AnimationLoaderWidget extends StatelessWidget {
             height: TSizes.defaultSpace,
           ),
           showAction
-              ? SizedBox(
-                  width: 250,
-                  child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          backgroundColor: TColors.dark),
-                      onPressed: onActionpress,
-                      child: Text(
-                        actionText!,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .apply(color: TColors.light),
-                      )),
-                )
+              ? OutlinedButton(
+                  onPressed: onActionpress,
+                  child: Text(actionText!,
+                      style: Theme.of(context).textTheme.titleSmall))
               : const SizedBox()
         ],
       ),

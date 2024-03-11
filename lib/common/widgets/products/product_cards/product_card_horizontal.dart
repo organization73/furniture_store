@@ -1,7 +1,7 @@
+import 'package:decordash/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:decordash/common/widgets/icons/circular_icon.dart';
 import 'package:decordash/common/widgets/images/rounded_image.dart';
 import 'package:decordash/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:decordash/common/widgets/texts/product_price_text.dart';
@@ -77,12 +77,11 @@ class ProductCardHorizontal extends StatelessWidget {
                         ),
                       ),
                     ),
-                  const Positioned(
+                  Positioned(
                     top: 0,
                     right: 0,
-                    child: CicularIcon(
-                      icon: Iconsax.heart,
-                      color: Colors.red,
+                    child: FavouriteIcon(
+                      productId: product.id,
                     ),
                   )
                 ],

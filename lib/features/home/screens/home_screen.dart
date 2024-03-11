@@ -17,8 +17,8 @@ import 'package:decordash/features/notifications/controllers/notifications_contr
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
-class StartPage extends StatelessWidget {
-  const StartPage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

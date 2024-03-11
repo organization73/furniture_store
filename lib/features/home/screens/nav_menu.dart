@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordash/features/ai/screens/ai_design_screen.dart';
 import 'package:decordash/features/chat/screens/chats_screen.dart';
-import 'package:decordash/features/home/screens/start_screen.dart';
+import 'package:decordash/features/home/screens/home_screen.dart';
 import 'package:decordash/features/store/screens/store_screen.dart';
 import 'package:decordash/features/personalization/screens/settings/settings.dart';
 import 'package:decordash/features/product/screens/add_product/add_product_screen.dart';
@@ -82,7 +82,7 @@ class NavMenu extends StatelessWidget {
 class NavigationController extends GetxController {
   final RxInt selectedIndex = 0.obs;
   final screens = [
-    const StartPage(),
+    const HomeScreen(),
     const StoreScreen(),
     const ChatScreen(),
     const AddProductPage(),
