@@ -33,8 +33,10 @@ class CategoryRepo extends GetxController {
     }
   }
 
-  Future<void> uploadDummyData(List<CategoryModel> categories,
-      List<ProductCategoryModel> relations,List<VendorCategoryModel> vendorsCategory) async {
+  Future<void> uploadDummyData(
+      List<CategoryModel> categories,
+      List<ProductCategoryModel> relations,
+      List<VendorCategoryModel> vendorsCategory) async {
     try {
       FullScreenLoader.openLoadingDialog(
           'Uploading Data...', 'assets/animations/animation-of-docer.json');
@@ -51,10 +53,10 @@ class CategoryRepo extends GetxController {
             .set(category.toJson());
       }
       for (var relation in relations) {
-        await _db.collection('ProductCategory').doc(relation.categoryId).set(relation.toJson());
+        await _db.collection('ProductCategory').add(relation.toJson());
       }
       for (var relation in vendorsCategory) {
-        await _db.collection('VendorCategory').doc(relation.categoryId).set(relation.toJson());
+        await _db.collection('VendorCategory').add(relation.toJson());
       }
       FullScreenLoader.stopLoading();
 
