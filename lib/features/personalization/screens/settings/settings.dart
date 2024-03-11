@@ -150,21 +150,16 @@ class SettingsScreen extends StatelessWidget {
                           : TAppTheme.darkTheme);
                     },
                   ),
+                  const Divider(),
                   SettingsMenuTile(
                     icon: Iconsax.arrow_up_1_copy,
                     title: 'Upload Categories',
                     subTitle: 'Upload all catedories data to firebase',
                     onTap: () {
-                      CategoryRepo.instance
-                          .uploadDummyData(DummyData.categories);
-                    },
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.arrow_up_1_copy,
-                    title: 'Upload Banners',
-                    subTitle: 'Upload all banners data to firebase',
-                    onTap: () {
-                      BannersRepo.instance.uploadDummyData(DummyData.banners);
+                      CategoryRepo.instance.uploadDummyData(
+                          DummyData.categories,
+                          DummyData.productCategories,
+                          DummyData.vendorsCategory);
                     },
                   ),
                   SettingsMenuTile(
@@ -172,8 +167,16 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Upload Products',
                     subTitle: 'Upload all products data to firebase',
                     onTap: () {
-                      ProductRepo.instance
-                          .uploadProductsToFirestore(DummyData.products);
+                      ProductRepo.instance.uploadDummyData(DummyData.products);
+                    },
+                  ),
+                  const Divider(),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1_copy,
+                    title: 'Upload Banners',
+                    subTitle: 'Upload all banners data to firebase',
+                    onTap: () {
+                      BannersRepo.instance.uploadDummyData(DummyData.banners);
                     },
                   ),
                   SettingsMenuTile(

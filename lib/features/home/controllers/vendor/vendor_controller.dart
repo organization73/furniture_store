@@ -34,10 +34,22 @@ class VendorController extends GetxController {
     }
   }
 
-  Future<List<ProductModel>> getVendorProducts(String vendorId) async {
+  Future<List<VendorModel>> getVendorsForCategory(String categoryId) async {
     try {
-      final products =
-          await ProductRepo.instance.getProductsForVendor(vendorId: vendorId);
+      final vendors =
+          await VendorRepo.instance.getVendorsForCategory(categoryId);
+      return vendors;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      return [];
+    }
+  }
+
+  Future<List<ProductModel>> getVendorProducts(
+      {required String vendorId, int limit = -1}) async {
+    try {
+      final products = await ProductRepo.instance
+          .getProductsForVendor(vendorId: vendorId, limit: limit);
       return products;
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());

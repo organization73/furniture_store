@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,8 @@ class FirebaseStorageServices extends GetxController {
           .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
       return imageData;
     } catch (e) {
+      LoggerHelper.error('error', e);
+
       throw 'Error loading image data';
     }
   }

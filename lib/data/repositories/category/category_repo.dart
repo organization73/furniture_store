@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/features/home/model/product_category_model.dart';
+import 'package:decordash/features/home/model/vendor_category_model.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/services/cloud_storage/firebase_storage_service.dart';
@@ -31,7 +33,8 @@ class CategoryRepo extends GetxController {
     }
   }
 
-  Future<void> uploadDummyData(List<CategoryModel> categories) async {
+  Future<void> uploadDummyData(List<CategoryModel> categories,
+      List<ProductCategoryModel> relations,List<VendorCategoryModel> vendorsCategory) async {
     try {
       FullScreenLoader.openLoadingDialog(
           'Uploading Data...', 'assets/animations/animation-of-docer.json');
@@ -46,6 +49,12 @@ class CategoryRepo extends GetxController {
             .collection('Categories')
             .doc(category.id)
             .set(category.toJson());
+      }
+      for (var relation in relations) {
+        await _db.collection('ProductCategory').doc(relation.categoryId).set(relation.toJson());
+      }
+      for (var relation in vendorsCategory) {
+        await _db.collection('VendorCategory').doc(relation.categoryId).set(relation.toJson());
       }
       FullScreenLoader.stopLoading();
 

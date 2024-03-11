@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/appbar/tabbar.dart';
-import 'package:decordash/common/widgets/galleries/featured_gallery_card.dart';
+import 'package:decordash/common/widgets/vendors/featured_gallery_card.dart';
 import 'package:decordash/common/widgets/headings/section_heading.dart';
 import 'package:decordash/common/widgets/layouts/grid_layout.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
@@ -9,7 +9,7 @@ import 'package:decordash/features/gallery/screens/all_galleries/all_galleries_s
 import 'package:decordash/features/gallery/screens/vendor_products/vendor_products.dart';
 import 'package:decordash/features/home/controllers/category_controller.dart';
 import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
-import 'package:decordash/features/home/widgets/category_tab.dart';
+import 'package:decordash/features/store/widgets/category_tab.dart';
 import 'package:decordash/features/home/widgets/search_bar.dart';
 import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';

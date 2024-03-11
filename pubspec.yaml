@@ -66,6 +66,10 @@ flutter:
     - assets/images/content/
     - assets/logos/
     - assets/animations/
+    - assets/images/products/beds/
+    - assets/images/products/chairs/
+    - assets/images/products/sofas/
+    - assets/images/products/tables/
 
   #--------------- LOCAL FONTS ------------------#
   fonts:

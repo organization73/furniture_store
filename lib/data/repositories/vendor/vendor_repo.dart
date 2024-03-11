@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/services/cloud_storage/firebase_storage_service.dart';
@@ -31,6 +32,35 @@ class VendorRepo extends GetxController {
     }
   }
 
+  Future<List<VendorModel>> getVendorsForCategory(categoryId) async {
+    try {
+      QuerySnapshot vendorCategoryQuery = await _db
+          .collection('VendorCategory')
+          .where('categoryId', isEqualTo: categoryId)
+          .get();
+
+      List<String> vendorIds = vendorCategoryQuery.docs
+          .map((doc) => doc['vendorId'] as String)
+          .toList();
+      final vendorsQuery = await _db
+          .collection('Vendors')
+          .where(FieldPath.documentId, whereIn: vendorIds)
+          .limit(1)
+          .get();
+
+      List<VendorModel> vendors = vendorsQuery.docs
+          .map((doc) => VendorModel.fromFirebaseDocument(doc))
+          .toList();
+      return vendors;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
   Future<void> uploadDummyData(List<VendorModel> vendors) async {
     try {
       FullScreenLoader.openLoadingDialog(
@@ -54,6 +84,7 @@ class VendorRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
+      LoggerHelper.error('error', e);
       throw 'Something went wrong, Please try again';
     }
   }

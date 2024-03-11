@@ -22,7 +22,7 @@ class VendorProductsScreen extends StatelessWidget {
           child: Column(
             children: [
               FutureBuilder(
-                  future: controller.getVendorProducts(vendor.id),
+                  future: controller.getVendorProducts(vendorId: vendor.id),
                   builder: (context, snapshot) {
                     const loader = VerticalProductShimmer();
                     final widget = TCloudHelperFunctions.checkMultiRecordState(

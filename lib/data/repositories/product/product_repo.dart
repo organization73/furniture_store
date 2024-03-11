@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/services/cloud_storage/firebase_storage_service.dart';
@@ -117,7 +118,43 @@ class ProductRepo extends GetxController {
     }
   }
 
-  Future<void> uploadProductsToFirestore(List<ProductModel> products) async {
+  Future<List<ProductModel>> getProductsForCategory(
+      {required String categoryId, int limit = -1}) async {
+    try {
+      final productCategoryQuery = limit == -1
+          ? await _db
+              .collection('ProductCategory')
+              .where('categoryId', isEqualTo: categoryId)
+              .get()
+          : await _db
+              .collection('ProductCategory')
+              .where('categoryId', isEqualTo: categoryId)
+              .limit(limit)
+              .get();
+
+      final productsIds = productCategoryQuery.docs
+          .map((doc) => doc['productId'] as String)
+          .toList();
+      final productsQuery = await _db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productsIds)
+          .get();
+
+      List<ProductModel> products = productsQuery.docs
+          .map((doc) => ProductModel.fromFirebaseDocument(doc))
+          .toList();
+
+      return products;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
       FullScreenLoader.openLoadingDialog(
           'Uploading Data...', 'assets/animations/animation-of-docer.json');
@@ -125,28 +162,27 @@ class ProductRepo extends GetxController {
       final storage = Get.put(FirebaseStorageServices());
 
       for (var product in products) {
-        // Upload main product image
         final mainImageFile =
             await storage.getImageDatafromAssets(product.productImage);
+
         final mainImageUrl = await storage.uploadImageData(
             'Products', mainImageFile, product.productImage);
         product.productImage = mainImageUrl;
 
-        // Upload product list images
         for (var imagePath in product.productDetails.productListImages) {
           final imageFile = await storage.getImageDatafromAssets(imagePath);
           final imageUrl =
               await storage.uploadImageData('Products', imageFile, imagePath);
-          // Update the product list images with the new URLs
+
           product.productDetails.productListImages = product
               .productDetails.productListImages
               .map((path) => path == imagePath ? imageUrl : path)
               .toList();
         }
 
-        // Update Firestore document with the new image URLs
         await _db.collection('Products').doc(product.id).set(product.toJson());
       }
+
       FullScreenLoader.stopLoading();
 
       TLoaders.successSnackBar(
@@ -157,6 +193,7 @@ class ProductRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
+      LoggerHelper.error('error', e);
       throw 'Something went wrong, Please try again';
     }
   }

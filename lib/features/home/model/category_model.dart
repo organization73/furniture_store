@@ -6,6 +6,7 @@ class CategoryModel {
   String image;
   String parentId;
   bool isFeatured;
+  bool isRoom;
 
   CategoryModel({
     required this.id,
@@ -13,12 +14,14 @@ class CategoryModel {
     required this.image,
     required this.isFeatured,
     this.parentId = '',
+    this.isRoom = false,
   });
 
   static CategoryModel empty() => CategoryModel(
         id: '',
         image: '',
         isFeatured: false,
+        isRoom: false,
         name: '',
         parentId: '',
       );
@@ -29,6 +32,7 @@ class CategoryModel {
         'image': image,
         'parentId': parentId,
         'isFeatured': isFeatured,
+        'isRoom': isRoom,
       };
 
   factory CategoryModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
@@ -40,6 +44,7 @@ class CategoryModel {
         image: data['image'] ?? '',
         parentId: data['parentId'] ?? '',
         isFeatured: data['isFeatured'] ?? false,
+        isRoom: data['isRoom'] ?? false,
       );
     } else {
       return CategoryModel.empty();
