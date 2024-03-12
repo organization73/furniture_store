@@ -15,9 +15,9 @@ class TTextTheme {
     headlineSmall: const TextStyle().copyWith(
         fontSize: 11.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
     titleLarge: const TextStyle().copyWith(
-        fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
+        fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
     titleMedium: const TextStyle().copyWith(
-        fontSize: 12.0.sp, fontWeight: FontWeight.w500, color: TColors.dark),
+        fontSize: 11.0.sp, fontWeight: FontWeight.w500, color: TColors.dark),
     titleSmall: const TextStyle().copyWith(
         fontSize: 10.0.sp, fontWeight: FontWeight.w400, color: TColors.dark),
     bodyLarge: const TextStyle().copyWith(
@@ -49,9 +49,9 @@ class TTextTheme {
     headlineSmall: const TextStyle().copyWith(
         fontSize: 11.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
     titleLarge: const TextStyle().copyWith(
-        fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
+        fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
     titleMedium: const TextStyle().copyWith(
-        fontSize: 12.0.sp, fontWeight: FontWeight.w500, color: TColors.light),
+        fontSize: 11.0.sp, fontWeight: FontWeight.w500, color: TColors.light),
     titleSmall: const TextStyle().copyWith(
         fontSize: 10.0.sp, fontWeight: FontWeight.w400, color: TColors.light),
     bodyLarge: const TextStyle().copyWith(

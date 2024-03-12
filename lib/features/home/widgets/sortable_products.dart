@@ -38,7 +38,7 @@ class SortableProducts extends StatelessWidget {
           height: TSizes.spaceBtwSections,
         ),
         Obx(() => GridLayout(
-            mainAxisExtent: 270.h,
+            mainAxisExtent: 265.r,
             itemCount: controller.products.length,
             itemBuilder: (__, index) =>
                 ProductCardVerical(product: controller.products[index])))

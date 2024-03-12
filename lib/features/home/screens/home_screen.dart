@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                                       child: Text('No Products Found'));
                                 }
                                 return GridLayout(
-                                    mainAxisExtent: 270.h,
+                                    mainAxisExtent: 265.r,
                                     itemCount: productsController
                                         .featuredProducts.length,
                                     itemBuilder: (_, index) =>

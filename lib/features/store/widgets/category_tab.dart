@@ -59,7 +59,7 @@ class CategoryTab extends StatelessWidget {
                           ),
                         ),
                         GridLayout(
-                            mainAxisExtent: 270.h,
+                            mainAxisExtent: 265.r,
                             itemCount: products.length,
                             itemBuilder: (_, index) {
                               return ProductCardVerical(

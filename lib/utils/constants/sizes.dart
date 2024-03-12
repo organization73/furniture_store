@@ -33,8 +33,8 @@ class TSizes {
 
   // Default spacing between sections
   static const double defaultSpace = 24.0;
-  static double spaceBtwItems = 13.0.h;
-  static double spaceBtwSections = 15.0.h;
+  static double spaceBtwItems = 13.0.r;
+  static double spaceBtwSections = 15.0.r;
   static const double pagePaddingSpace = 16.0;
 
   // Border radius

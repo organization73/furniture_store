@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/layouts/grid_layout.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordash/utils/constants/sizes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerticalProductShimmer extends StatelessWidget {
   const VerticalProductShimmer({super.key, this.itemCount = 4});
@@ -11,21 +12,19 @@ class VerticalProductShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridLayout(
         itemCount: itemCount,
-        itemBuilder: (_, __) => SizedBox(
-              width: 100,
-              child: Column(
-                children: [
-                  const ShimmerLoaderEffect(width: 180, height: 180),
-                  SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
-                  const ShimmerLoaderEffect(width: 160, height: 15),
-                  SizedBox(
-                    height: TSizes.spaceBtwItems / 2,
-                  ),
-                  const ShimmerLoaderEffect(width: 110, height: 15),
-                ],
-              ),
+        itemBuilder: (_, __) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ShimmerLoaderEffect(width: 180.w, height: 150.h),
+                SizedBox(
+                  height: TSizes.spaceBtwItems,
+                ),
+                ShimmerLoaderEffect(width: 160.w, height: 15.h),
+                SizedBox(
+                  height: TSizes.spaceBtwItems / 2,
+                ),
+                ShimmerLoaderEffect(width: 110.w, height: 15.h),
+              ],
             ));
   }
 }

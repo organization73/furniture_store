@@ -103,13 +103,8 @@ class ProductCardVerical extends StatelessWidget {
                     SizedBox(
                       height: TSizes.spaceBtwItems / 2,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        BrandTitleTextWithVerifiedIcon(
-                          title: product.productDetails.productSeller.name,
-                        ),
-                      ],
+                    BrandTitleTextWithVerifiedIcon(
+                      title: product.productDetails.productSeller.name,
                     ),
                   ],
                 ),

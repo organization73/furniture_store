@@ -22,7 +22,7 @@ class BrandTitleText extends StatelessWidget {
         maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
         style: brandtextSize == TextSizes.small
-            ? Theme.of(context).textTheme.labelMedium!.apply(color: color)
+            ? Theme.of(context).textTheme.labelSmall!.apply(color: color)
             : brandtextSize == TextSizes.medium
                 ? Theme.of(context).textTheme.bodyLarge!.apply(color: color)
                 : brandtextSize == TextSizes.large
