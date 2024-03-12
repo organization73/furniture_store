@@ -35,7 +35,7 @@ class BuildCategoriesSection extends StatelessWidget {
             return const Center(child: Text('No Categories Found'));
           } else {
             return SizedBox(
-              height: 56.h,
+              height: 50.h,
               child: ListView.separated(
                 shrinkWrap: true,
                 separatorBuilder: (_, __) => SizedBox(

@@ -10,7 +10,7 @@ class CategoryShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56.h,
+      height: 55.h,
       child: ListView.separated(
         shrinkWrap: true,
         itemCount: itemCount,
@@ -23,8 +23,8 @@ class CategoryShimmer extends StatelessWidget {
             children: [
               ShimmerLoaderEffect(
                 width: 125.w,
-                height: 56.h,
-                raduis: 8,
+                height: 55.h,
+                raduis: 8.r,
               ),
             ],
           );

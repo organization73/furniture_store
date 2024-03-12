@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         PrimaryHeaderContainer(
                           child: Padding(
-                            padding: EdgeInsets.only(top: 95.h),
+                            padding: EdgeInsets.only(top: 80.h),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -129,7 +129,7 @@ class FadeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90.h,
+      height: 80.h,
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),

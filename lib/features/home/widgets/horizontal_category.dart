@@ -18,9 +18,8 @@ class HorizontalCategory extends StatelessWidget {
         child: RoundedContainer(
           gradient: true,
           width: 125.w,
-          hight: 56.h,
           backgroundColor: TColors.grey.withOpacity(0.7),
-          raduis: 8,
+          raduis: 8.r,
           child: Stack(
             children: [
               Positioned(
@@ -40,14 +39,14 @@ class HorizontalCategory extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0).r,
                   child: Text(
                     category.name,
                     textAlign: TextAlign.left,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: Colors.black),
+                        .bodyMedium!
+                        .apply(color: TColors.black),
                   ),
                 ),
               ),

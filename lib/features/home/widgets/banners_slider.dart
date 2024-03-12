@@ -5,6 +5,7 @@ import 'package:decordash/common/widgets/images/rounded_image.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordash/features/home/controllers/carousel_slider_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ImageSlider extends StatelessWidget {
@@ -16,7 +17,7 @@ class ImageSlider extends StatelessWidget {
 
     return Obx(() {
       if (controller.isLoading.value) {
-        return const ShimmerLoaderEffect(width: double.infinity, height: 150);
+        return ShimmerLoaderEffect(width: double.infinity, height: 150.h);
       }
       if (controller.banners.isEmpty) {
         return const Center(child: Text('No Data Found'));
@@ -25,7 +26,7 @@ class ImageSlider extends StatelessWidget {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 3 / 1.5,
+              height: 150.h,
               viewportFraction: 1,
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index),
@@ -42,20 +43,20 @@ class ImageSlider extends StatelessWidget {
             }).toList(),
           ),
           SizedBox(
-            height: TSizes.spaceBtwSections,
+            height: TSizes.spaceBtwSections / 2,
           ),
           Obx(() => Row(
                 mainAxisSize: MainAxisSize.min,
                 children: controller.banners.map((item) {
                   int index = controller.banners.indexOf(item);
                   return RoundedContainer(
-                    hight: 5,
-                    width: 5,
+                    hight: 4.r,
+                    width: 4.r,
                     backgroundColor:
                         controller.carouselCurrentIndex.value == index
                             ? Theme.of(context).colorScheme.primary
                             : Colors.grey,
-                    margin: const EdgeInsets.only(right: 10),
+                    margin: const EdgeInsets.only(right: 10).w,
                   );
                 }).toList(),
               ))
