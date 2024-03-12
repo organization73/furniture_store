@@ -20,7 +20,7 @@ class GallerySelection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: 73,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'cont'.tr,

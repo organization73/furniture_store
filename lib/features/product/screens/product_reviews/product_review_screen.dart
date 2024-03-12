@@ -20,7 +20,7 @@ class ProductReviewsScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: 73,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(
             onPressed: () => Get.to(

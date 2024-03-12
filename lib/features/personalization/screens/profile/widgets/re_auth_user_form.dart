@@ -19,7 +19,7 @@ class ReAuthLoginForm extends StatelessWidget {
           title: const Text('Re-Authenticate User'),
         ),
         bottomNavigationBar: BottomAppBar(
-          height: 70,
+          height: 73,
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
             text: 'Delete',

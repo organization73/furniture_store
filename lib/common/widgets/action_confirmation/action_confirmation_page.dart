@@ -24,7 +24,7 @@ class ActionConfirmPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: 73,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(onPressed: onPressed, child: Text('cont'.tr)),
       ),
