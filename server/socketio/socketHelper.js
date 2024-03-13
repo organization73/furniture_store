@@ -10,6 +10,7 @@ module.exports.actionListeners = (socket) => {
   let userType = "user";
   //sending notificatoins //can be made on connection
   socket.on("setup", (userData) => {
+    console.log(`user ${userData._id} connected`);
     socket.join(userData._id);
     console.log("join room", userData._id);
     //check if the user already exists in the online users
@@ -51,6 +52,9 @@ module.exports.actionListeners = (socket) => {
 
   //sending messages.
   socket.on("new-message", (newMessage) => {
+    console.log(
+      `new message from ${newMessage.sender.username} content: ${newMessage.content}`
+    );
     const chatRoom = newMessage.chatRoom;
     if (!chatRoom.users) {
       return console.log("no users in the chat room");
