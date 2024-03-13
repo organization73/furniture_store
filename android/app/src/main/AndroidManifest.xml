@@ -46,7 +46,8 @@ xmlns:tools="http://schemas.android.com/tools"
         android:requestLegacyExternalStorage="true"
         android:name="androidx.multidex.MultiDexApplication"
         android:label="Furniture Store"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic= "true">
         
     
         <activity

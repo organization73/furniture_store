@@ -1,5 +1,5 @@
 class Chat {
-  final int id;
+  final String id;
   final List<Map<String, dynamic>> participants;
   final List<Message> messages;
 

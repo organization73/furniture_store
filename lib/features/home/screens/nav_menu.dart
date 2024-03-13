@@ -74,7 +74,7 @@ class NavigationController extends GetxController {
   final RxInt selectedIndex = 0.obs;
   final screens = [
     const StartPage(),
-    const ChatScreen(),
+    ChatScreen(),
     const AddProductPage(),
     const AiPage(),
     const SettingsScreen(),

@@ -2,6 +2,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:furniture_store/data/repositories/authentication/api_services.dart';
 import 'package:furniture_store/features/authentication/screens/login/login_screen.dart';
 import 'package:furniture_store/features/authentication/screens/sign_up/verify_sign_up_email.dart';
+import 'package:furniture_store/features/chat/screens/chats_screen.dart';
 import 'package:furniture_store/features/home/screens/nav_menu.dart';
 import 'package:furniture_store/features/onboarding/screens/onboarding_screen.dart';
 import 'package:furniture_store/features/personalization/controllers/user/user_controller.dart';
@@ -44,9 +45,7 @@ class AuthenticatorRepoTest extends GetxController {
         );
       } else {
         Get.offAll(
-          () => VerifySignUpEmail(
-            email: user!.email,
-          ),
+          () =>  ChatScreen(),
           duration: const Duration(milliseconds: 300),
           transition: Transition.fade,
         );
