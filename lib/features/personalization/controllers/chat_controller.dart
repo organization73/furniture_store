@@ -11,6 +11,6 @@ class ChatController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await socketService.createSocketConnection();
-    socketService.setupUser(UserController.instance.user!.id);
+    socketService.setupUser('5555');
   }
 }

@@ -103,7 +103,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen> {
                       ElevatedButton(
                           onPressed: () {
                             ChatController.instance.socketService
-                                .setupUser("100");
+                                .setupUser("5555");
                           },
                           child: const Text("set user")),
                       ElevatedButton(
