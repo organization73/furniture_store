@@ -1,8 +1,9 @@
+const path = require("path");
+
 const express = require("express");
 const body_parser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const path = require("path");
 const { createHandler } = require("graphql-http/lib/use/express");
 const playground = require("graphql-playground-middleware-express").default;
 const cors = require("cors");
@@ -14,13 +15,18 @@ const productRoutes = require("./routes/product");
 
 const adminAuthRoutes = require("./adminRouter/auth");
 const adminShopRoutes = require("./adminRouter/shop");
+const adminRouter = require("./adminRouter/admin");
+
+const chatRoutes = require("./routes/chat");
 
 const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
-const MONGODB_URL = "mongodb://localhost:27017/furniture-shop";
-// "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+const PORT = process.env.PORT || 3000;
+const MONGODB_URL = 
+"mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+// "mongodb://localhost:27017/furniture-shop";
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -43,6 +49,7 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
+
 
 const app = express();
 
@@ -95,9 +102,13 @@ app.use("/admin", adminAuthRoutes);
 
 app.use("/admin", adminShopRoutes);
 
+app.use("/admin", adminRouter);
+
 app.use("/auth", authRoutes);
 
 app.use("/product", isAuth, productRoutes);
+
+app.use("/chat", chatRoutes);
 
 app.get("/playground", playground({ endpoint: "/graphql" }));
 
@@ -123,11 +134,23 @@ app.use((error, req, res, next) => {
 // Connect to the database
 mongoose
   .connect(MONGODB_URL)
-  .then((result) => {
+  .then(async (result) => {
     console.log("Connected to the database");
     // Start the server
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    const server = await app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+    //seting up the websocket
+    const io = require("./socketio/socket").init(server, {
+      pingTimeout: 60000,
+      cors: {
+        origin: "*",
+      },
+    });
+    io.on("connection", (socket) => {
+      console.log(socket.id.substring(0, 5), "connected");
+      const socketHelper = require("./socketio/socketHelper");
+      socketHelper.actionListeners(socket);
     });
   })
   .catch((err) => {
@@ -143,4 +166,5 @@ admin panel
 image processing to make it smaller
 image storage with firebase
 multer to upload multiple images
-  */
+make the db find with select of what came from graphql query.
+*/

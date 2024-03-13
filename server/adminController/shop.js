@@ -13,5 +13,6 @@ module.exports.getChat = (req, res, next) => {
     pageTitle: "chat",
     errorMessage: null, // Pass the stored flash message to the view
     isAuthenticated: req.admin ? true : false,
+    currentUser:req.admin,
   });
 };
