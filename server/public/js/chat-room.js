@@ -25,7 +25,7 @@ let typingTimeoutID = null;
 let typingElement = document.createElement("p");
 
 /*send typing event*/
-messageContainer.addEventListener("keypress", (event) => {
+messageContainer.addEventListener("input", (event) => {
   if (event.keyCode === 13) {
     event.preventDefault(); // Prevent the default behavior of the Enter key
     sendMessage(); // Call the sendMessage function
