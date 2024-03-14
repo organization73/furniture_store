@@ -20,7 +20,7 @@ class TSizes {
   static double fontSizeLg = 12.0.sp;
 
   // Button sizes
-  static const double buttonHeight = 10.0;
+  static const double buttonHeight = 15.0;
   static double buttonRadius = 10.0.r;
   static const double buttonWidth = 120.0;
   static const double buttonElevation = 4.0;
