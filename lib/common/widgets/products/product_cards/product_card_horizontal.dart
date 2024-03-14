@@ -34,7 +34,7 @@ class ProductCardHorizontal extends StatelessWidget {
         transition: Transition.rightToLeft,
       ),
       child: Container(
-        width: 320.w,
+        width: 310.w,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
@@ -50,13 +50,11 @@ class ProductCardHorizontal extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: SizedBox(
-                      height: 120.r,
-                      width: 120.r,
-                      child: RoundedImage(
-                        imageUrl: product.productImage,
-                        isNetworkImage: true,
-                      ),
+                    child: RoundedImage(
+                      imageUrl: product.productImage,
+                      isNetworkImage: true,
+                      height: 110.r,
+                      width: 110.r,
                     ),
                   ),
                   if (product.onSale)

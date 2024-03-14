@@ -2,6 +2,7 @@ import 'package:decordash/common/widgets/icons/circular_icon.dart';
 import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -13,6 +14,8 @@ class FavouriteIcon extends StatelessWidget {
     final controller = Get.put(FavoriteController());
 
     return Obx(() => CicularIcon(
+          width: 35.r,
+          height: 35.r,
           icon: controller.isFavourite(productId)
               ? Iconsax.heart
               : Iconsax.heart_copy,

@@ -11,7 +11,7 @@ class HorizontalProductShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: TSizes.spaceBtwSections),
-      height: 125.h,
+      height: 115.r,
       child: ListView.separated(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
