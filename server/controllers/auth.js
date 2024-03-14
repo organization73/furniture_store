@@ -249,7 +249,7 @@ exports.login = async (req, res, next) => {
     },
     "thisisaverylong"
   );
-  res.status(200).json({ token: token, userId: user._id.toString() });
+  res.status(200).json({ token: token, userId: user._id.toString() ,username: user.username, email: user.email, firstName: user.firstName, lastName: user.lastName, isConfirmed: user.isConfirmed,});
 };
 
 exports.reVerifyEmail = async (req, res, next) => {
