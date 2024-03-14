@@ -1,5 +1,5 @@
+import 'package:decordash/utils/constants/enums.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordash/data/repositories/user/user_repo.dart';
@@ -9,6 +9,7 @@ import 'package:decordash/features/personalization/screens/profile/widgets/re_au
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/network_manager.dart';
 import 'package:decordash/utils/popups/full_screen_loader.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -188,6 +189,19 @@ class UserController extends GetxController {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     } finally {
       imageLoading.value = false;
+    }
+  }
+
+  updateAccountType(int value) async {
+    try {
+      if (value == 1) {
+        Map<String, dynamic> json = {"accountType": 'vendor'};
+        await userRepository.updateSingleField(json);
+        user.value.accountType = AccountType.vendor;
+        user.refresh();
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/utils/constants/enums.dart';
 
 class UserModel {
-  final AccountType accountType;
+  AccountType accountType;
   String avatar;
   String firstName;
   String lastName;

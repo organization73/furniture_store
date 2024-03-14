@@ -27,10 +27,14 @@ class GallerySelection extends StatelessWidget {
           onPressed: controller.navigateToNextScreen,
         ),
       ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+          padding:
+              const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,7 +42,7 @@ class GallerySelection extends StatelessWidget {
                 PageHeader(
                     title: 'gallarySelect'.tr,
                     subTitle: 'gallarySelectDesc'.tr,
-                    iconName: Iconsax.ram),
+                    iconName: Iconsax.building),
                 Obx(() => Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0.r),

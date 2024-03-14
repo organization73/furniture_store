@@ -51,11 +51,11 @@ class GalleryInformationScreen extends StatelessWidget {
                   PageHeader(
                       title: 'gallaryTitle'.tr,
                       subTitle: 'gallaryTitleDesc'.tr,
-                      iconName: Iconsax.shop),
+                      iconName: Iconsax.buildings),
                   RoundedTextField(
                     'galleryName'.tr,
                     controller.galleryNameController,
-                    prefixIcon: Iconsax.user_octagon,
+                    prefixIcon: Iconsax.user_octagon_copy,
                     keyboardType: TextInputType.name,
                     (value) =>
                         value == null || value.isEmpty || value.length <= 4
@@ -66,7 +66,7 @@ class GalleryInformationScreen extends StatelessWidget {
                   RoundedTextField(
                     'galleryAddress'.tr,
                     controller.galleryAddressController,
-                    prefixIcon: Iconsax.location,
+                    prefixIcon: Iconsax.location_copy,
                     keyboardType: TextInputType.name,
                     (value) =>
                         value == null || value.isEmpty || value.length <= 6
@@ -76,7 +76,7 @@ class GalleryInformationScreen extends StatelessWidget {
                   SizedBox(height: TSizes.spaceBtwSections),
                   OutlinedButton.icon(
                     onPressed: _pickImage,
-                    icon: const Icon(Iconsax.additem),
+                    icon: const Icon(Iconsax.additem_copy),
                     label: Text(
                       'uploadGalleryID'.tr,
                       style: Theme.of(context).textTheme.labelSmall,

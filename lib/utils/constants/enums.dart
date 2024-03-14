@@ -12,6 +12,3 @@ enum TextSizes { small, medium, large }
 
 enum AccountType { regular, vendor }
 
-enum Roles { user, vendor, admin }
-
-enum AccountState { active, block }
