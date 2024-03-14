@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:decordash/features/home/controllers/product/all_products_controller.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/home/widgets/sortable_products.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';

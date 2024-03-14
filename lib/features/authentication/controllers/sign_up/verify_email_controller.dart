@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:decordash/features/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decordash/common/widgets/action_confirmation/action_confirmation_page.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -37,7 +38,11 @@ class VerifyEmailController extends GetxController {
           () => ActionConfirmPage(
             subTitle: 'yourAccountCreatedSubTitle'.tr,
             title: 'yourAccountCreatedTitle'.tr,
-            onPressed: () => AuthenticatorRepo.instance.screenRedirect(),
+            onPressed: () => Get.off(
+              () => GallerySelection(),
+              duration: const Duration(milliseconds: 300),
+              transition: Transition.rightToLeft,
+            ),
           ),
           duration: const Duration(milliseconds: 300),
           transition: Transition.rightToLeft,
@@ -53,7 +58,11 @@ class VerifyEmailController extends GetxController {
         () => ActionConfirmPage(
           subTitle: 'yourAccountCreatedSubTitle'.tr,
           title: 'yourAccountCreatedTitle'.tr,
-          onPressed: () => AuthenticatorRepo.instance.screenRedirect(),
+          onPressed: () => Get.off(
+            () => GallerySelection(),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          ),
         ),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,

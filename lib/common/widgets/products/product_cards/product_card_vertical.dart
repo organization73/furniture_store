@@ -8,7 +8,7 @@ import 'package:decordash/common/widgets/texts/brand_title_text_with_verified_ic
 import 'package:decordash/common/widgets/texts/product_price_text.dart';
 import 'package:decordash/common/widgets/texts/product_title_text.dart';
 import 'package:decordash/features/home/controllers/product/product_controller.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_details/product_details_screen.dart';
 import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';

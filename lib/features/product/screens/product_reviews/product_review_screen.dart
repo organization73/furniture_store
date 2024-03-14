@@ -1,7 +1,7 @@
 import 'package:decordash/features/product/screens/product_reviews/widgets/user_review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_reviews/add_review.dart';
 import 'package:decordash/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';

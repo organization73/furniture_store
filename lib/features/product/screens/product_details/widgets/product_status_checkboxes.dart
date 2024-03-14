@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 
 class ProductStatsCheckboxes extends StatelessWidget {
   final ProductModel product;

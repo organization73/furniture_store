@@ -5,7 +5,7 @@ import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordash/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:decordash/common/widgets/images/rounded_image.dart';
 import 'package:decordash/features/home/controllers/product/images_controller.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/constants/colors.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/helper_functions.dart';

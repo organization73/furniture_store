@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/layouts/grid_layout.dart';
 import 'package:decordash/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/home/screens/filters/filters.dart';
 import 'package:decordash/features/home/screens/filters/widgets/input_widget.dart';
 import 'package:decordash/utils/constants/sizes.dart';

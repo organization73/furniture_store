@@ -1,7 +1,7 @@
 import 'package:decordash/features/home/model/banners_model.dart';
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/features/home/model/product_category_model.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/home/model/review_model.dart';
 import 'package:decordash/features/home/model/vendor_category_model.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';

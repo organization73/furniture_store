@@ -3,7 +3,7 @@ import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordash/utils/exceptions/platform_exceptions.dart';
 import 'package:decordash/utils/popups/full_screen_loader.dart';

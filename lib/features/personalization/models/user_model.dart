@@ -3,47 +3,32 @@ import 'package:decordash/utils/constants/enums.dart';
 
 class UserModel {
   final AccountType accountType;
-  final List<SimpleGrantedAuthority> authorities;
   String avatar;
   String firstName;
   String lastName;
-  final String confirmCode;
-  final String createdDate;
   final String email;
   final String id;
-  final String kcyAddress;
-  final bool verified;
-  final AccountState state;
-  final String password;
-  final Roles roles;
-  String phoneNumber;
+  final String phoneNumber;
   final String userName;
+  DateTime? createdDate;
 
   UserModel({
-    this.accountType = AccountType.regular, // Default value
-    this.phoneNumber = '', // Default value for the phone number
-    this.authorities = const [], // Default value
-    this.avatar = '', // Default value
-    this.firstName = '', // Default value
-    this.lastName = '', // Default value
-    this.email = '', // Default value
-    this.id = '', // Default value
-    this.password = '', // Default value
-    this.confirmCode = '', // Default value
-    this.state = AccountState.active, // Default value
-    this.createdDate = '', // Default value
-    this.kcyAddress = '', // Default value
-    this.verified = false, // Default value
-    this.roles = Roles.user, // Default value
+    this.accountType = AccountType.regular,
+    this.phoneNumber = '',
+    this.avatar = '',
+    this.firstName = '',
+    this.lastName = '',
+    this.email = '',
+    this.id = '',
     this.userName = '',
-  });
+    DateTime? createdDate,
+  }) : createdDate = createdDate ?? DateTime.now();
   String get fullName {
     return '$firstName $lastName';
   }
 
   String get formattedPhoneNumber {
-    return phoneNumber.replaceAll(
-        RegExp(r'\D'), ''); // Remove non-numeric characters
+    return phoneNumber.replaceAll(RegExp(r'\D'), '');
   }
 
   static List<String> nameParts(fullName) => fullName.split(' ');
@@ -59,155 +44,92 @@ class UserModel {
 
   UserModel copyWith({
     AccountType? accountType,
-    List<SimpleGrantedAuthority>? authorities,
     String? avatar,
     String? firstName,
     String? lastName,
-    String? confirmCode,
-    String? createdDate,
     String? email,
     String? id,
-    String? kcyAddress,
-    bool? verified,
-    AccountState? state,
-    String? password,
-    Roles? roles,
     String? phoneNumber,
     String? userName,
+    DateTime? createdDate,
   }) {
     return UserModel(
       accountType: accountType ?? this.accountType,
-      authorities: authorities ?? this.authorities,
       avatar: avatar ?? this.avatar,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      confirmCode: confirmCode ?? this.confirmCode,
-      createdDate: createdDate ?? this.createdDate,
       email: email ?? this.email,
       id: id ?? this.id,
-      kcyAddress: kcyAddress ?? this.kcyAddress,
-      verified: verified ?? this.verified,
-      state: state ?? this.state,
-      password: password ?? this.password,
-      roles: roles ?? this.roles,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       userName: userName ?? this.userName,
+      createdDate: createdDate ?? this.createdDate,
     );
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  static UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
       accountType:
           EnumUtil.fromStringEnum(AccountType.values, json['accountType']),
-      authorities: json['authorities']
-          .map<SimpleGrantedAuthority>(
-              (item) => SimpleGrantedAuthority.fromJson(item))
-          .toList(),
-      avatar: json['avatar'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      confirmCode: json['confirmCode'],
-      email: json['email'],
-      password: json['password'],
-      verified: json['verified'] ?? false,
-      id: json['id'],
-      kcyAddress: json['kcyAddress'],
-      state: EnumUtil.fromStringEnum(AccountState.values, json['state']),
-      roles: EnumUtil.fromStringEnum(Roles.values, json['roles']),
-      createdDate: json['createdDate'],
+      avatar: json['avatar'] ?? '',
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
+      email: json['email'] ?? '',
+      id: json['id'] ?? '',
       phoneNumber: json['phoneNumber'] ?? '',
       userName: json['userName'] ?? '',
+      createdDate: json['createdDate'] != null
+          ? (json['createdDate'] as Timestamp).toDate()
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'accountType': accountType.toString().split('.').last,
-      'authorities':
-          authorities.map((authority) => authority.toJson()).toList(),
       'avatar': avatar,
       'firstName': firstName,
       'lastName': lastName,
       'userName': userName,
-      'confirmCode': confirmCode,
-      'createdDate': createdDate,
+      'createdDate': Timestamp.fromDate(createdDate ?? DateTime.now()),
       'email': email,
       'phoneNumber': phoneNumber,
       'id': id,
-      'kcyAddress': kcyAddress,
-      'verified': verified,
-      'state': state.toString().split('.').last,
-      'password': password,
-      'roles': roles.toString().split('.').last,
     };
   }
 
   static UserModel empty() {
     return UserModel(
-      accountType: AccountType.regular, // Default value
-      phoneNumber: '', // Default value for the phone number
-      authorities: const [], // Default value
-      avatar: '', // Default value
-      firstName: '', // Default value
-      lastName: '', // Default value
-      email: '', // Default value
-      id: '', // Default value
-      password: '', // Default value
-      confirmCode: '', // Default value
-      state: AccountState.active, // Default value
-      createdDate: '', // Default value
-      kcyAddress: '', // Default value
-      verified: false, // Default value
-      roles: Roles.user, // Default value
+      accountType: AccountType.regular,
+      phoneNumber: '',
+      avatar: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      id: '',
       userName: '',
+      createdDate: DateTime.now(),
     );
   }
 
-  factory UserModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
+  static UserModel fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     if (snapshot.data() != null) {
       return UserModel(
-        accountType:
-            EnumUtil.fromStringEnum(AccountType.values, data['accountType']),
-        authorities: (data['authorities'] as List)
-            .map<SimpleGrantedAuthority>(
-                (item) => SimpleGrantedAuthority.fromJson(item))
-            .toList(),
-        avatar: data['avatar'],
-        firstName: data['firstName'],
-        lastName: data['lastName'],
-        userName: data['userName'],
-        confirmCode: data['confirmCode'],
-        email: data['email'],
-        password: data['password'],
-        verified: data['verified'],
-        id: snapshot.id, // Use the document ID as the user ID
-        kcyAddress: data['kcyAddress'],
-        state: EnumUtil.fromStringEnum(AccountState.values, data['state']),
-        roles: EnumUtil.fromStringEnum(Roles.values, data['roles']),
-        createdDate: data['createdDate'],
-        phoneNumber: data[
-            'phoneNumber'], // Assuming the phone number is stored in the document
+        id: snapshot.id,
+        accountType: EnumUtil.fromStringEnum(
+            AccountType.values, data['accountType'] ?? ''),
+        avatar: data['avatar'] ?? '',
+        firstName: data['firstName'] ?? '',
+        lastName: data['lastName'] ?? '',
+        email: data['email'] ?? '',
+        phoneNumber: data['phoneNumber'] ?? '',
+        userName: data['userName'] ?? '',
+        createdDate: data['createdDate'] != null
+            ? (data['createdDate'] as Timestamp).toDate()
+            : null,
       );
     } else {
       return UserModel.empty();
     }
-  }
-}
-
-class SimpleGrantedAuthority {
-  final String authority;
-
-  SimpleGrantedAuthority({required this.authority});
-
-  factory SimpleGrantedAuthority.fromJson(Map<String, dynamic> json) {
-    return SimpleGrantedAuthority(
-      authority: json['authority'],
-    );
-  }
-  Map<String, dynamic> toJson() {
-    return {
-      'authority': authority,
-    };
   }
 }

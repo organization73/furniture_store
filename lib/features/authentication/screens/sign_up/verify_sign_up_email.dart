@@ -36,14 +36,15 @@ class VerifySignUpEmail extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding:
+                const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Lottie.asset(
                     TImages.emailDelivery,
-                    width: 150,
+                    width: 150.r,
                   ),
                   SizedBox(
                     height: TSizes.spaceBtwItems,

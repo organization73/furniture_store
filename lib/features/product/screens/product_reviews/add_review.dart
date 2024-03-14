@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:decordash/data/repositories/product/product.dart';
-import 'package:decordash/features/home/model/product_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
