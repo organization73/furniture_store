@@ -25,4 +25,3 @@ Future<void> main() async {
       .then((value) => Get.put(AuthenticatorRepo()));
   runApp(const MyApp());
 }
-//

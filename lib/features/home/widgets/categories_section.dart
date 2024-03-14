@@ -47,7 +47,9 @@ class BuildCategoriesSection extends StatelessWidget {
                   final category = categoryController.featuredCatedories[index];
                   return HorizontalCategory(
                       onTap: () => Get.to(
-                            () => const SubCategoryScreen(),
+                            () => SubCategoryScreen(
+                              category: category,
+                            ),
                             duration: const Duration(milliseconds: 300),
                             transition: Transition.rightToLeft,
                           ),
