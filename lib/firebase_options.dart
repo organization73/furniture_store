@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '129714025607',
     projectId: 'decordash-6e368',
     storageBucket: 'decordash-6e368.appspot.com',
-    androidClientId: '129714025607-34ja8tfcd8lfrb3a6t9lc7hka03cj79l.apps.googleusercontent.com',
+    androidClientId: '129714025607-18n1o24fg2u6agj5qi7mm03kh61d7sb7.apps.googleusercontent.com',
     iosClientId: '129714025607-pvjjnjq5l0bp18vlc83pohv85llhuhiu.apps.googleusercontent.com',
     iosBundleId: 'com.decordash.decordash',
   );
