@@ -1,3 +1,4 @@
+import 'package:decordash/common/widgets/icons/circular_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,55 +20,26 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
-
     return Center(
       child: Stack(
         children: [
           CircularImage(
             imageUrl: imagePath,
-            width: 100.w,
-            height: 100.h,
+            width: 100.r,
+            height: 100.r,
             isNetworkImage: isNetworkImage,
-            padding: 0,
           ),
           Positioned(
             bottom: 0,
-            right: 4,
-            child: buildEditIcon(color),
+            right: 2,
+            child: CicularIcon(
+              icon: Iconsax.edit_2,
+              height: 35.r,
+              width: 35.r,
+            ),
           ),
         ],
       ),
     );
   }
-
-  Widget buildEditIcon(Color color) => buildCircle(
-        color: Colors.white,
-        all: 3,
-        child: buildCircle(
-          color: color,
-          all: 5,
-          child: Icon(
-            isEdit ? Icons.add_a_photo : Iconsax.edit_2,
-            color: Colors.white,
-            size: 20.r,
-          ),
-        ),
-      );
-
-  Widget buildCircle({
-    required Widget child,
-    required double all,
-    required Color color,
-  }) =>
-      ClipOval(
-        child: GestureDetector(
-          onTap: onClicked,
-          child: Container(
-            padding: EdgeInsets.all(all),
-            color: color,
-            child: child,
-          ),
-        ),
-      );
 }

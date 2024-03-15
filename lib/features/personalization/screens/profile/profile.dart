@@ -1,5 +1,4 @@
 import 'package:decordash/utils/constants/colors.dart';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/headings/section_heading.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
@@ -18,7 +17,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
-    LoggerHelper.info(controller.user.value.accountType.toString());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
