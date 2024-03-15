@@ -12,6 +12,11 @@ class UserModel {
   final String userName;
   DateTime? createdDate;
 
+  // Additional fields for Vendor
+  String galleryName;
+  String galleryAddress;
+  String galleryCertificate ;
+
   UserModel({
     this.accountType = AccountType.regular,
     this.phoneNumber = '',
@@ -22,6 +27,9 @@ class UserModel {
     this.id = '',
     this.userName = '',
     DateTime? createdDate,
+    this.galleryName = '',
+    this.galleryAddress = '',
+    this.galleryCertificate = '',
   }) : createdDate = createdDate ?? DateTime.now();
   String get fullName {
     return '$firstName $lastName';
@@ -52,6 +60,9 @@ class UserModel {
     String? phoneNumber,
     String? userName,
     DateTime? createdDate,
+    String? galleryName,
+    String? galleryAddress,
+    String? galleryCertificate,
   }) {
     return UserModel(
       accountType: accountType ?? this.accountType,
@@ -63,6 +74,9 @@ class UserModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       userName: userName ?? this.userName,
       createdDate: createdDate ?? this.createdDate,
+      galleryName: galleryName ?? this.galleryName,
+      galleryAddress: galleryAddress ?? this.galleryAddress,
+      galleryCertificate: galleryCertificate ?? this.galleryCertificate,
     );
   }
 
@@ -80,6 +94,9 @@ class UserModel {
       createdDate: json['createdDate'] != null
           ? (json['createdDate'] as Timestamp).toDate()
           : null,
+      galleryName: json['galleryName'] ?? '',
+      galleryAddress: json['galleryAddress'] ?? '',
+      galleryCertificate: json['galleryCertificate'] ?? '',
     );
   }
 
@@ -94,6 +111,9 @@ class UserModel {
       'email': email,
       'phoneNumber': phoneNumber,
       'id': id,
+      'galleryName': galleryName,
+      'galleryAddress': galleryAddress,
+      'galleryCertificate': galleryCertificate,
     };
   }
 
@@ -108,6 +128,9 @@ class UserModel {
       id: '',
       userName: '',
       createdDate: DateTime.now(),
+      galleryName: '',
+      galleryAddress: '',
+      galleryCertificate: '',
     );
   }
 
@@ -127,6 +150,9 @@ class UserModel {
         createdDate: data['createdDate'] != null
             ? (data['createdDate'] as Timestamp).toDate()
             : null,
+        galleryName: data['galleryName'] ?? '',
+        galleryAddress: data['galleryAddress'] ?? '',
+        galleryCertificate: data['galleryCertificate'] ?? '',
       );
     } else {
       return UserModel.empty();

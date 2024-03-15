@@ -164,7 +164,7 @@ class UserController extends GetxController {
     }
   }
 
-  uploadUserProfilePicture() async {
+  Future<void> uploadUserProfilePicture() async {
     try {
       final image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
@@ -190,6 +190,31 @@ class UserController extends GetxController {
     } finally {
       imageLoading.value = false;
     }
+  }
+
+    Future<void> uploadGalleryCertificate() async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+      if (image != null) {
+
+        final imageUrl =
+            await userRepository.uploadImage('Users/Images/Certificate/', image);
+
+        Map<String, dynamic> json = {"galleryCertificate": imageUrl};
+        await userRepository.updateSingleField(json);
+        user.value.galleryCertificate = imageUrl;
+        user.refresh();
+
+        TLoaders.successSnackBar(
+            title: 'Done'.tr, message: 'Your gallery certificate is uploaded and waiting verification');
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+    } 
   }
 
   updateAccountType(int value) async {
