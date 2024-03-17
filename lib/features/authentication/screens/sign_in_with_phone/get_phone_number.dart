@@ -45,7 +45,7 @@ class PhoneNumberScreen extends StatelessWidget {
                       'phoneNo'.tr,
                       controller.phoneNumController,
                       prefixIcon: Iconsax.call_copy,
-                      TValidator.validatePhoneNumber,
+                      TValidator.validateUserInput,
                       keyboardType: TextInputType.phone),
                 ],
               ),

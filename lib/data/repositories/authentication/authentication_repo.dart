@@ -1,4 +1,5 @@
 import 'package:decordash/utils/local_storage/storage_utility.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -22,7 +23,7 @@ class AuthenticatorRepo extends GetxController {
   final _auth = FirebaseAuth.instance;
 
   User? get authUser => _auth.currentUser;
-
+  RxString verificationId = ''.obs;
   @override
   void onReady() {
     FlutterNativeSplash.remove();
@@ -82,6 +83,46 @@ class AuthenticatorRepo extends GetxController {
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }
+  }
+
+  Future<void> loginWithPhone(
+    String phoneNum,
+  ) async {
+    try {
+      return await _auth.verifyPhoneNumber(
+          phoneNumber: phoneNum,
+          verificationCompleted: (credentials) async {
+            await _auth.signInWithCredential(credentials);
+          },
+          verificationFailed: (e) {
+            LoggerHelper.error('error', e);
+            LoggerHelper.error('error', e.code);
+            throw 'Something went wrong, Please try again';
+          },
+          codeSent: (verificationId, resendToken) {
+            this.verificationId.value = verificationId;
+          },
+          codeAutoRetrievalTimeout: (verificationId) {
+            this.verificationId.value = verificationId;
+          });
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<bool> verifyOTP(String otp) async {
+    UserCredential credentials = await _auth.signInWithCredential(
+        PhoneAuthProvider.credential(
+            verificationId: verificationId.value, smsCode: otp));
+    return credentials.user != null ? true : false;
   }
 
   /// Email registeration
