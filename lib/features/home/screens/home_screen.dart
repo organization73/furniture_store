@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                                         ));
                               }),
                               SizedBox(
-                                height: TSizes.spaceBtwSections,
+                                height: TSizes.spaceBtwSections * 2,
                               ),
                               const BuildRoomsSection(),
                             ],

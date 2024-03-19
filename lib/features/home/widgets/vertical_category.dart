@@ -5,8 +5,8 @@ import 'package:decordash/common/widgets/custom_shapes/containers/rounded_contai
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/utils/constants/colors.dart';
 
-class HorizontalCategory extends StatelessWidget {
-  const HorizontalCategory(
+class VerticalCategory extends StatelessWidget {
+  const VerticalCategory(
       {super.key, required this.onTap, required this.category});
   final VoidCallback onTap;
   final CategoryModel category;
@@ -17,22 +17,18 @@ class HorizontalCategory extends StatelessWidget {
         onTap: onTap,
         child: RoundedContainer(
           gradient: true,
-          width: 115.w,
+          width: 110.w,
           backgroundColor: TColors.grey.withOpacity(0.7),
           raduis: 8.r,
           child: Stack(
+            alignment: Alignment.center,
             children: [
               Align(
-                  alignment: Alignment.bottomRight,
                   child: RoundedImage(
-                    width: 50.r,
-                    height: 50.r,
-                    imageUrl: category.image,
-                    isNetworkImage: true,
-                    fit: BoxFit.cover,
-                    applyImageRaduis: false,
-                    padding: const EdgeInsets.all(5).r,
-                  )),
+                imageUrl: category.image,
+                isNetworkImage: true,
+                applyImageRaduis: false,
+              )),
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(

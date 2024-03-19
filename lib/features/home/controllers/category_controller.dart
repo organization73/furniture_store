@@ -11,6 +11,7 @@ class CategoryController extends GetxController {
   final _categoryRepo = Get.put(CategoryRepo());
   RxList<CategoryModel> allCatedories = <CategoryModel>[].obs;
   RxList<CategoryModel> featuredCatedories = <CategoryModel>[].obs;
+  RxList<CategoryModel> roomsCatedories = <CategoryModel>[].obs;
 
   @override
   void onInit() {
@@ -27,6 +28,9 @@ class CategoryController extends GetxController {
 
       featuredCatedories.assignAll(allCatedories
           .where((category) => category.isFeatured && category.parentId.isEmpty)
+          .toList());
+      roomsCatedories.assignAll(allCatedories
+          .where((category) => category.isRoom && category.parentId.isEmpty)
           .toList());
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
