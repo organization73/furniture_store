@@ -52,6 +52,7 @@ dependencies:
   path_provider: any
   uuid: any
   flutter_otp_text_field: ^1.1.2+1
+  intl_phone_number_input: ^0.7.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

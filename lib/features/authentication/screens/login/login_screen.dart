@@ -75,7 +75,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       BuildCTAButton(
                         text: 'continueWithPhone'.tr,
                         onPressed: () => Get.to(
-                          () => const PhoneNumberScreen(),
+                          () => PhoneNumberScreen(),
                           duration: const Duration(milliseconds: 300),
                           transition: Transition.rightToLeft,
                         ),

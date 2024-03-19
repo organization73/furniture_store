@@ -1,21 +1,44 @@
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordash/data/repositories/user/user_repo.dart';
+import 'package:decordash/features/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
 import 'package:decordash/features/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class OTPController extends GetxController {
   static OTPController get instance => Get.find();
-
+  final phoneController = PhoneSingInController.instance;
   void verifyOTP(String otp) async {
     if (otp.isNotEmpty) {
-      var isVerified = await AuthenticatorRepo.instance.verifyOTP(otp);
-      if (isVerified) {
-        Get.off(
-          () => GallerySelection(),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
-      } else {
+      try {
+        var userCred = await AuthenticatorRepo.instance.verifyOTP(otp);
+        var isVerified = userCred.user != null ? true : false;
+        if (isVerified) {
+          final newUser = UserModel(
+            id: userCred.user!.uid,
+            firstName: phoneController.firstNameController.text.trim(),
+            lastName: phoneController.lastNameController.text.trim(),
+            userName: phoneController.userNameController.text.trim(),
+            phoneNumber: phoneController.phoneNumController.text.trim(),
+          );
+
+          final userRepesotory = Get.put(UserRepo());
+          await userRepesotory.saveuserRecord(newUser);
+          TLoaders.successSnackBar(
+              title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
+          LoggerHelper.info(userCred.toString());
+          Get.off(
+            () => GallerySelection(),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
+        } else {
+          TLoaders.errorSnackBar(
+              title: 'errorMes'.tr, message: 'wrongCodeMes'.tr);
+        }
+      } catch (e) {
         TLoaders.errorSnackBar(
             title: 'errorMes'.tr, message: 'wrongCodeMes'.tr);
       }

@@ -115,9 +115,16 @@ class UserController extends GetxController {
           );
         } else if (provider == 'password') {
           FullScreenLoader.stopLoading();
-
           Get.to(
             () => const ReAuthLoginForm(),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
+        } else if (provider == 'phone') {
+          await auth.deleteAccount();
+          FullScreenLoader.stopLoading();
+          Get.offAll(
+            () => const LoginSignUpScreen(),
             duration: const Duration(milliseconds: 300),
             transition: Transition.rightToLeft,
           );
@@ -192,7 +199,7 @@ class UserController extends GetxController {
     }
   }
 
-    Future<void> uploadGalleryCertificate() async {
+  Future<void> uploadGalleryCertificate() async {
     try {
       final image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
@@ -200,9 +207,8 @@ class UserController extends GetxController {
           maxHeight: 512,
           maxWidth: 512);
       if (image != null) {
-
-        final imageUrl =
-            await userRepository.uploadImage('Users/Images/Certificate/', image);
+        final imageUrl = await userRepository.uploadImage(
+            'Users/Images/Certificate/', image);
 
         Map<String, dynamic> json = {"galleryCertificate": imageUrl};
         await userRepository.updateSingleField(json);
@@ -210,11 +216,13 @@ class UserController extends GetxController {
         user.refresh();
 
         TLoaders.successSnackBar(
-            title: 'Done'.tr, message: 'Your gallery certificate is uploaded and waiting verification');
+            title: 'Done'.tr,
+            message:
+                'Your gallery certificate is uploaded and waiting verification');
       }
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
-    } 
+    }
   }
 
   updateAccountType(int value) async {

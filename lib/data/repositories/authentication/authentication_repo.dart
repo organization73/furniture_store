@@ -1,3 +1,4 @@
+import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,8 @@ class AuthenticatorRepo extends GetxController {
   screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
-      if (user.emailVerified) {
+      LoggerHelper.info(user.toString());
+      if (user.emailVerified || user.phoneNumber != null) {
         await TLocalStorage.init(user.uid);
 
         Get.offAll(
@@ -85,26 +87,24 @@ class AuthenticatorRepo extends GetxController {
     }
   }
 
-  Future<void> loginWithPhone(
-    String phoneNum,
-  ) async {
+  Future<void> loginWithPhone(String phoneNum) async {
     try {
-      return await _auth.verifyPhoneNumber(
-          phoneNumber: phoneNum,
-          verificationCompleted: (credentials) async {
-            await _auth.signInWithCredential(credentials);
-          },
-          verificationFailed: (e) {
-            LoggerHelper.error('error', e);
-            LoggerHelper.error('error', e.code);
-            throw 'Something went wrong, Please try again';
-          },
-          codeSent: (verificationId, resendToken) {
-            this.verificationId.value = verificationId;
-          },
-          codeAutoRetrievalTimeout: (verificationId) {
-            this.verificationId.value = verificationId;
-          });
+      await _auth.verifyPhoneNumber(
+        phoneNumber: phoneNum,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          LoggerHelper.error('Error verifying phone number', e);
+          throw TFirebaseAuthException(e.code).message;
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          this.verificationId.value = verificationId;
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          this.verificationId.value = verificationId;
+        },
+      );
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -118,11 +118,16 @@ class AuthenticatorRepo extends GetxController {
     }
   }
 
-  Future<bool> verifyOTP(String otp) async {
-    UserCredential credentials = await _auth.signInWithCredential(
-        PhoneAuthProvider.credential(
-            verificationId: verificationId.value, smsCode: otp));
-    return credentials.user != null ? true : false;
+  Future<UserCredential> verifyOTP(String otp) async {
+    try {
+      UserCredential credentials = await _auth.signInWithCredential(
+          PhoneAuthProvider.credential(
+              verificationId: verificationId.value, smsCode: otp));
+      return credentials;
+    } catch (e) {
+      LoggerHelper.error('err', e);
+      throw 'Something went wrong, Please try again';
+    }
   }
 
   /// Email registeration

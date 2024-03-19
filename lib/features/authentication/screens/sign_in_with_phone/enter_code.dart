@@ -67,7 +67,7 @@ class CodeVerificationScreen extends StatelessWidget {
                 },
                 onSubmit: (String verificationCode) {
                   otp = verificationCode;
-                  controller.verifyOTP(verificationCode);
+                  controller.verifyOTP(otp);
                 },
               ),
             ],

@@ -93,6 +93,8 @@ class TFirebaseAuthException implements Exception {
         return 'Invalid login credentials.';
       case 'too-many-requests':
         return 'You have exceeded the number of allowed requests. Please try again later.';
+      case 'invalid-phone-number':
+        return 'The format of the phone number provided is incorrect. Please enter the phone number in a format that can be parsed';
       default:
         return 'An unexpected authentication error occurred. Please try again.';
     }
