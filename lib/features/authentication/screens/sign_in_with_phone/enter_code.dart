@@ -33,44 +33,47 @@ class CodeVerificationScreen extends StatelessWidget {
         child: Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Iconsax.verify,
-                size: 45.r,
-                color: Theme.of(context).colorScheme.surfaceVariant,
-              ),
-              SizedBox(height: TSizes.spaceBtwSections),
-              Text(
-                'enterCode'.tr,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              SizedBox(height: TSizes.spaceBtwInputFields),
-              Text(
-                'codeDesc'.tr,
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-              SizedBox(height: TSizes.spaceBtwInputFields),
-              Text(
-                phoneNumber,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              SizedBox(height: TSizes.spaceBtwSections),
-              OtpTextField(
-                numberOfFields: 6,
-                borderColor: Theme.of(context).primaryColor,
-                showFieldAsBox: true,
-                onCodeChanged: (String code) {
-                  //handle validation or checks here
-                },
-                onSubmit: (String verificationCode) {
-                  otp = verificationCode;
-                  controller.verifyOTP(otp);
-                },
-              ),
-            ],
+          child: PopScope(
+            canPop: false,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Iconsax.verify,
+                  size: 45.r,
+                  color: Theme.of(context).colorScheme.surfaceVariant,
+                ),
+                SizedBox(height: TSizes.spaceBtwSections),
+                Text(
+                  'enterCode'.tr,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                SizedBox(height: TSizes.spaceBtwInputFields),
+                Text(
+                  'codeDesc'.tr,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                SizedBox(height: TSizes.spaceBtwInputFields),
+                Text(
+                  phoneNumber,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                SizedBox(height: TSizes.spaceBtwSections),
+                OtpTextField(
+                  numberOfFields: 6,
+                  borderColor: Theme.of(context).primaryColor,
+                  showFieldAsBox: true,
+                  onCodeChanged: (String code) {
+                    //handle validation or checks here
+                  },
+                  onSubmit: (String verificationCode) {
+                    otp = verificationCode;
+                    controller.verifyOTP(otp);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

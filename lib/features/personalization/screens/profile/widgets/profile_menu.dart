@@ -9,9 +9,11 @@ class ProfileMenu extends StatelessWidget {
     required this.onPress,
     required this.title,
     required this.value,
+    this.showIcon = false,
   });
 
   final IconData icon;
+  final bool showIcon;
   final VoidCallback onPress;
   final String title, value;
 
@@ -40,10 +42,12 @@ class ProfileMenu extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Icon(
-                icon,
-                size: TSizes.iconSm,
-              ),
+              child: showIcon
+                  ? Icon(
+                      icon,
+                      size: TSizes.iconSm,
+                    )
+                  : const SizedBox(),
             )
           ],
         ),

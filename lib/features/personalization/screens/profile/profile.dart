@@ -61,6 +61,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               ProfileMenu(
                 title: 'Name',
+                showIcon: true,
                 value: controller.user.value.fullName,
                 onPress: () => Get.off(
                   () => const ChangeNameScreen(),
@@ -87,16 +88,20 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              ProfileMenu(
-                title: 'E-mail',
-                value: controller.user.value.email,
-                onPress: () {},
-              ),
-              ProfileMenu(
-                title: 'Phone Number',
-                value: controller.user.value.phoneNumber,
-                onPress: () {},
-              ),
+              (controller.user.value.email.isNotEmpty)
+                  ? ProfileMenu(
+                      title: 'E-mail',
+                      value: controller.user.value.email,
+                      onPress: () {},
+                    )
+                  : const SizedBox(),
+              (controller.user.value.phoneNumber.isNotEmpty)
+                  ? ProfileMenu(
+                      title: 'Phone Number',
+                      value: controller.user.value.phoneNumber,
+                      onPress: () {},
+                    )
+                  : const SizedBox(),
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),

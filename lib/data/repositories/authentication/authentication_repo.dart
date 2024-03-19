@@ -1,4 +1,5 @@
-import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordash/common/widgets/loaders/loaders.dart';
+import 'package:decordash/features/authentication/screens/sign_in_with_phone/enter_code.dart';
 import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +35,6 @@ class AuthenticatorRepo extends GetxController {
   screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
-      LoggerHelper.info(user.toString());
       if (user.emailVerified || user.phoneNumber != null) {
         await TLocalStorage.init(user.uid);
 
@@ -93,13 +93,31 @@ class AuthenticatorRepo extends GetxController {
         phoneNumber: phoneNum,
         verificationCompleted: (PhoneAuthCredential credential) async {
           await _auth.signInWithCredential(credential);
+          Get.to(
+            () => CodeVerificationScreen(
+              phoneNumber: phoneNum,
+            ),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
         },
         verificationFailed: (FirebaseAuthException e) {
           LoggerHelper.error('Error verifying phone number', e);
+          TLoaders.errorSnackBar(
+              title: 'ohSnap'.tr,
+              message: TFirebaseAuthException(e.code).message);
+
           throw TFirebaseAuthException(e.code).message;
         },
         codeSent: (String verificationId, int? resendToken) {
           this.verificationId.value = verificationId;
+          Get.to(
+            () => CodeVerificationScreen(
+              phoneNumber: phoneNum,
+            ),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           this.verificationId.value = verificationId;
@@ -114,18 +132,18 @@ class AuthenticatorRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 
-  Future<UserCredential> verifyOTP(String otp) async {
+  Future<UserCredential> getPhoneUserSigninCredentials(String otp) async {
     try {
       UserCredential credentials = await _auth.signInWithCredential(
           PhoneAuthProvider.credential(
               verificationId: verificationId.value, smsCode: otp));
       return credentials;
     } catch (e) {
-      LoggerHelper.error('err', e);
+      LoggerHelper.error('error', e);
       throw 'Something went wrong, Please try again';
     }
   }

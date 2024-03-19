@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/features/ai/screens/ai_design_screen.dart';
 import 'package:decordash/features/chat/screens/chats_screen.dart';
 import 'package:decordash/features/home/screens/home_screen.dart';
 import 'package:decordash/features/store/screens/store_screen.dart';
@@ -42,14 +41,6 @@ class NavMenu extends StatelessWidget {
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.message_copy,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                icon: const Icon(Iconsax.message_copy),
-                label: 'Chat',
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(
                   Iconsax.add_square_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -58,11 +49,11 @@ class NavMenu extends StatelessWidget {
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.d_cube_scan_copy,
+                  Iconsax.message_copy,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.d_cube_scan_copy),
-                label: 'AI',
+                icon: const Icon(Iconsax.message_copy),
+                label: 'Chat',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
@@ -84,9 +75,8 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     const StoreScreen(),
-    const ChatScreen(),
     const AddProductPage(),
-    const AiPage(),
+    const ChatScreen(),
     const SettingsScreen(),
   ];
 }

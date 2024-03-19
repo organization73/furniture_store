@@ -1,3 +1,4 @@
+import 'package:decordash/features/ai/screens/ai_design_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -126,6 +127,16 @@ class SettingsScreen extends StatelessWidget {
                     title: 'buyPoints'.tr,
                     subTitle: 'buyPointsDesc'.tr,
                     onTap: () {},
+                  ),
+                  SettingsMenuTile(
+                    icon: Iconsax.d_cube_scan_copy,
+                    title: 'AI Designs',
+                    subTitle: 'buyPointsDesc'.tr,
+                    onTap: () => Get.to(
+                      () => const AiPage(),
+                      duration: const Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
+                    ),
                   ),
                   SizedBox(
                     height: TSizes.spaceBtwSections,

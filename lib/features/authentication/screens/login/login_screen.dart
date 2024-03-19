@@ -5,7 +5,7 @@ import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordash/features/authentication/controllers/log_in/log_in_controller.dart';
 import 'package:decordash/features/authentication/screens/login/email_sign_in.dart';
-import 'package:decordash/features/authentication/screens/sign_in_with_phone/get_phone_number.dart';
+import 'package:decordash/features/authentication/screens/sign_in_with_phone/phone_sign_in_screen.dart';
 import 'package:decordash/features/authentication/screens/sign_up/signup.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/constants/sizes.dart';
