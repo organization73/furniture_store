@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "129714025607-18n1o24fg2u6agj5qi7mm03kh61d7sb7.apps.googleusercontent.com",
+          "client_id": "129714025607-qu5f0ek8sak5klgfo6scpvn3cpgqee3i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.decordash.decordash",
-            "certificate_hash": "b2b8ecec7c06a2fbefdf3aecccbd9cbbfeeba6ee"
+            "certificate_hash": "6aed370e9cf81fcadbb05a413cb18b06703f55b2"
           }
         },
         {
