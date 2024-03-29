@@ -24,8 +24,8 @@ const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URL = 
-"mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
+const MONGODB_URL =
+  "mongodb+srv://abdomake73:xlsgzIvu2CYeOTrg@cluster0.vclsggt.mongodb.net/furniture?retryWrites=true&w=majority";
 // "mongodb://localhost:27017/furniture-shop";
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -49,7 +49,6 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-
 
 const app = express();
 
@@ -120,6 +119,17 @@ app.use(
     rootValue: resolvers,
     graphiql: true,
     context: (req) => ({ req }),
+    formatError(err) {
+      console.log("graphqlerr:", err);
+      if (!err.originalError) {
+        return err;
+      }
+      const data = err.originalError.data;
+      const message = err.message || "An error occured.";
+      const code = err.originalError.code || 500;
+      console.log(err);
+      return { message: message, status: code, data: data };
+    },
   })
 );
 
