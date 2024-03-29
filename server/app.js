@@ -120,15 +120,14 @@ app.use(
     graphiql: true,
     context: (req) => ({ req }),
     formatError(err) {
-      console.log("graphqlerr:", err);
       if (!err.originalError) {
         return err;
       }
-      const data = err.originalError.data;
+      console.log("graphqlerr:", err.locations);
+      console.log("errorPath:", err.path);
       const message = err.message || "An error occured.";
-      const code = err.originalError.code || 500;
-      console.log(err);
-      return { message: message, status: code, data: data };
+      const code = err.originalError.statusCode || 500;
+      return { message: message, status: code, path: err.path, locations: err.locations};
     },
   })
 );

@@ -9,15 +9,12 @@ const root = {
     let products;
     try {
       products = await Product.find()
-        .populate("creator")
+        .populate("creator", "-password")
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
         .sort({ createdAt: -1 }); //can be make on client side
     } catch (error) {
-      if (error.statusCode) {
-        error.statusCode = 500;
-      }
-      next(error);
+      throw error;
     }
 
     return {
@@ -27,7 +24,7 @@ const root = {
           _id: p._id.toString(),
           creator: p.creator._id.toString(),
           ImageUrl: p.imageUrl,
-          // creator: {_id: p.creator._id.toString() },
+          creator: p.creator,
           createdAt: p.createdAt.toISOString(),
           updatedAt: p.updatedAt.toISOString(),
         };
@@ -39,18 +36,18 @@ const root = {
     //fetching data
     let product;
     try {
-      product = await Product.findById(id).populate("creator");
+      product = await Product.findById(id).populate("creator", '-password');
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;
       }
-      next(error);
+      throw error;
     }
     //validating data existance
     if (!product) {
       const error = new Error("Could not find product.");
       error.statusCode = 404;
-      next(error);
+      throw error;
     }
     //returning data
     return {
@@ -77,20 +74,20 @@ const root = {
     //fetching user's data
     let user;
     try {
-      user = await User.findById(id);
+      user = await User.findById(id).select("-password");
       console.log("user:", user);
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;
       }
-      // next(error);
+      // throw error;
       throw error;
     }
     //validate user exist.
     if (!user) {
       const error = new Error("User not found.");
       error.statusCode = 404;
-      // next(error);
+      // throw error;
       throw error;
     }
     return {

@@ -19,7 +19,6 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     // Verify and decode the token
-    console.log("start decoding");
     const decoded = jwt.verify(token, "thisisaverylong");
     // Check if the user exists in the database
     const user = await User.findById(decoded.userId);
