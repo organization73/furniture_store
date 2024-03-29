@@ -12,7 +12,7 @@ router.get("/products", isAuth, shopController.getProducts);
 
 // router.post("/edit-product", isAuth, shopController.postEditProduct);
 
-// router.delete("/product/:productId", isAuth, adminController.deleteProduct);
+router.delete("/product/:productId", isAuth, shopController.deleteProduct);
 
 // router.get("/chat", isAuth, shopController.getChat);
 

@@ -27,17 +27,27 @@ module.exports.getProducts = async (req, res, next) => {
     const products = await Product.find()
       .skip(PRODUCTS_PER_PAGE * (page - 1))
       .limit(PRODUCTS_PER_PAGE);
-
-      res.render("admin/products", {
-        path: "/products",
-        pageTitle: "Products",
-        errorMessage: null, // Pass the stored flash message to the view
-        isAuthenticated: req.admin ? true : false,
-        products:products,
-      });
+    res.render("admin/products", {
+      path: "/products",
+      pageTitle: "Products",
+      errorMessage: null, // Pass the stored flash message to the view
+      isAuthenticated: req.admin ? true : false,
+      products: products,
+    });
   } catch (err) {
     next(err);
   }
+};
 
-  
+module.exports.deleteProduct = async (req, res, next) => {
+  const productId = req.params.productId;
+  console.log("productId", productId);
+  try {
+    await Product.findByIdAndDelete(productId);
+    res
+      .status(200)
+      .json({ message: "Product was deleted successfullySuccess" });
+  } catch (err) {
+    next(err);
+  }
 };
