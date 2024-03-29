@@ -1,13 +1,10 @@
-async function deleteProduct(product) {
+async function deleteProduct(product, id) {
   const product_grid = document.querySelector(".grid");
   const nextSibling = product.nextElementSibling;
   const previousSibling = product.previousElementSibling;
   console.log(nextSibling);
   console.log(previousSibling);
-  const id = document
-    .querySelector("article")
-    .querySelector(".card__actions")
-    .querySelector("input").value;
+
   const articleCopy = product.cloneNode(true);
   try {
     product.remove();

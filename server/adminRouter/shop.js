@@ -14,6 +14,6 @@ router.get("/products", isAuth, shopController.getProducts);
 
 router.delete("/product/:productId", isAuth, shopController.deleteProduct);
 
-// router.get("/chat", isAuth, shopController.getChat);
+router.get("/chat", isAuth, shopController.getChat);
 
 module.exports = router;

@@ -43,10 +43,10 @@ module.exports.deleteProduct = async (req, res, next) => {
   const productId = req.params.productId;
   console.log("productId", productId);
   try {
-    await Product.findByIdAndDelete(productId);
+    const product = await Product.findByIdAndDelete(productId);
     res
       .status(200)
-      .json({ message: "Product was deleted successfullySuccess" });
+      .json({ message: "Product was deleted successfullySuccess", product });
   } catch (err) {
     next(err);
   }
