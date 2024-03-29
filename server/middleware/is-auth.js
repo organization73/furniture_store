@@ -2,12 +2,16 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user"); // Assuming you have a User model
 
 const authMiddleware = async (req, res, next) => {
+  // Check if the Authorization header is set
+  if (!req.headers.authorization) {
+    return res.status(401).json({ message: "No token provided" });
+  }
   // Get the token from the request headers
   let token;
   try {
     token = req.headers.authorization.split(" ")[1];
     if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+      return res.status(401).json({ message: "Decoding when wrong." });
     }
     console.log("token:", token);
   } catch (error) {
