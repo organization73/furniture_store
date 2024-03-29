@@ -12,7 +12,7 @@ const productSchema = new Schema(
     description: String,
     images: [
       {
-        imageurl: {
+        imageUrl: {
           // _id: false, // Add this line to remove the _id from the subdocument
           type: String,
           required: true,

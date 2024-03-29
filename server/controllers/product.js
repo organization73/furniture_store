@@ -29,15 +29,17 @@ exports.createProduct = async (req, res, next) => {
   try {
     productSchema.validateSync({ title, price, description, details });
   } catch (error) {
-    throwError(422, error.message, error.path, next);
+    return throwError(422, error.message, error.path, next);
   }
   //validationg images
-  if (!req.files) {
+  console.log(req.files.length);
+  if (!req.files.length) {
     // errorsList.push({ message: "No image provided", path: "images" });
-    throwError(422, "No image provided", "images", next);
+    return throwError(422, "No image provided", "images", next);
   }
+
   const images = req.files.map((file) => {
-    return { imageurl: file.path };
+    return { imageUrl: file.path };
   });
   console.log("images:", images);
 
@@ -55,15 +57,15 @@ exports.createProduct = async (req, res, next) => {
   try {
     await product.save();
   } catch (error) {
-    error.codeStatus = 401
-    next(error)
+    error.codeStatus = 401;
+    next(error);
   }
   //add the product to the user's products array
   try {
     req.user.products.push(product);
     await req.user.save();
   } catch (error) {
-    throwError(500, "Adding product to user failed");
+    return throwError(500, "Adding product to user failed");
   }
 
   res.status(201).json({ message: "Product created" });

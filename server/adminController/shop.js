@@ -1,5 +1,5 @@
 const Product = require("../models/product");
-
+const deleteFile = require("../utils/file").deleteFile;
 const PRODUCTS_PER_PAGE = 4;
 
 module.exports.getIndex = (req, res, next) => {
@@ -28,13 +28,6 @@ module.exports.getProducts = async (req, res, next) => {
     const products = await Product.find()
       .skip(PRODUCTS_PER_PAGE * (page - 1))
       .limit(PRODUCTS_PER_PAGE);
-
-      console.log("currentPage", page);
-      console.log("hasNextPage", PRODUCTS_PER_PAGE * page < totalItems);
-      console.log("hasPreviousPage", page > 1);
-      console.log("nextPage", page + 1);
-      console.log("previousPage", page - 1);
-      console.log("lastPage", Math.ceil(totalItems / PRODUCTS_PER_PAGE));
     res.render("admin/products", {
       path: "/products",
       pageTitle: "Products",
@@ -58,6 +51,16 @@ module.exports.deleteProduct = async (req, res, next) => {
   console.log("productId", productId);
   try {
     const product = await Product.findByIdAndDelete(productId);
+    if (!product) {
+      const error = new Error("Product not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+    console.log("product.images",product.images);
+    product.images.forEach(image => {
+      console.log("image.imageUrl", image.imageUrl);
+      deleteFile(image.imageUrl);
+    });
     res
       .status(200)
       .json({ message: "Product was deleted successfullySuccess", product });
