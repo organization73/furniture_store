@@ -6,7 +6,6 @@ const User = require("../models/user");
 const ChatRoom = require("../models/chatRoom");
 const Message = require("../models/message");
 const chatRoom = require("../models/chatRoom");
-const io = require("../socketio/socket").getIO();
 
 // const io = require("../socketio/socket").getIO();
 
@@ -373,7 +372,7 @@ exports.removeUserFromGroupChatRoom = async (req, res, next) => {
     next(error);
   }
 };
-
+/*
 exports.sendMessage = async (req, res, next) => {
   const user = req.admin || req.user;
   const { roomId, message } = req.body;
@@ -411,6 +410,13 @@ exports.sendMessage = async (req, res, next) => {
     //update chat room
     chatRoom.latestMessage = savedMessage._id;
     await chatRoom.save();
+    //
+    chatRoom.users.forEach((user) => {
+      if (user._id.toString() !== newMessage.sender._id.toString()) {
+        socket.in(user._id).emit("recieve-message", newMessage);
+      }
+    });
+    //
     res.status(201).json({ message: "Message sent", message: savedMessage });
   } catch (err) {
     if (!err.statusCode) {
@@ -419,7 +425,7 @@ exports.sendMessage = async (req, res, next) => {
     next(err);
   }
 };
-
+*/
 function throwError(message, statusCode, path) {
   const error = new Error(message);
   error.statusCode = statusCode;

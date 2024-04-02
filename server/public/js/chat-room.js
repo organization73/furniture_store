@@ -202,6 +202,7 @@ async function addContact() {
 
 //select a contact and send a GET request to the API
 function selectContact() {
+  console.log("user", currentUserId);
   const contactId = this.dataset.id;
 
   messageContainer.disabled = false;
@@ -256,6 +257,7 @@ function selectContact() {
 
 /*receive message*/
 socket.on("recieve-message", (newMessage) => {
+  console.log("new message", newMessage);
   //delete typing element
   if (document.getElementById("typing")) {
     typingElement.remove();
@@ -294,7 +296,7 @@ async function sendMessage() {
         throw new Error("Error sending message");
       }
       const newMessage = await response.json();
-      socket.emit("new-message", newMessage);
+      // socket.emit("new-message", newMessage);
     } catch (error) {
       return console.log(error);
     }

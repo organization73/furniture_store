@@ -3,6 +3,7 @@ const charRoom = require("../models/chatRoom");
 const User = require("../models/user");
 const Admin = require("../models/admin");
 const ChatRoom = require("../models/chatRoom");
+const io = require("../socketio/socket");
 
 
 exports.FetchMessages = async (req, res, next) => {
@@ -59,9 +60,22 @@ exports.sendMessage = async (req, res, next) => {
       select: "username email",
     });
 
-    await ChatRoom.findByIdAndUpdate(roomId, {
+    const chatRoom = await ChatRoom.findByIdAndUpdate(roomId, {
       latestMessage: message,
     });
+    console.log("chat room", chatRoom);
+    //
+    if (!chatRoom.users) {
+      return console.log("no users in the chat room");
+    }
+    console.log("message", message);
+    chatRoom.users.forEach((user) => {
+      if (user._id.toString() !== message.sender._id.toString()) {
+        console.log("sending message to", user._id.toString());
+        io.getIO().in(user._id.toString()).emit("recieve-message",message);
+      }
+    });
+    //
 
     res.status(200).json(message);
   } catch (error) {

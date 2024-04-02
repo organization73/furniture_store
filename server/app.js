@@ -128,12 +128,18 @@ app.use(
       console.log("errorPath:", err.path);
       const message = err.message || "An error occured.";
       const code = err.originalError.statusCode || 500;
-      return { message: message, status: code, path: err.path, locations: err.locations};
+      return {
+        message: message,
+        status: code,
+        path: err.path,
+        locations: err.locations,
+      };
     },
   })
 );
 
 app.use((error, req, res, next) => {
+  console.log(error);
   console.log("app.js Error:", error.message);
   console.log("end+++++++++++++++++++++++");
   const status = error.statusCode || 500;
