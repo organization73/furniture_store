@@ -168,12 +168,16 @@ mongoose
 
 //todo
 /*
-websocket
 cors options
 connect with ml model.
-admin panel
 image processing to make it smaller
 image storage with firebase
 multer to upload multiple images
 make the db find with select of what came from graphql query.
 */
+
+//done
+/*
+websocket
+admin panel
+ */
