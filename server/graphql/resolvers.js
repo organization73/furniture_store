@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 const root = {
   products: async function ({ page }, { req }, info) {
-    // Get requested fields for the `products` field
+    //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
     );
@@ -13,14 +13,17 @@ const root = {
     );
     cleanedFields.push("updatedAt");
     // Extract the paths that include the 'creator' field
-    const [creatorProperties, arrayCreatorProperties] = extractCreatorProperties(cleanedFields);
-    cleanedFields = cleanedFields.filter(field =>!arrayCreatorProperties.includes(field));
+    const [creatorProperties, arrayCreatorProperties] =
+      extractCreatorProperties(cleanedFields);
+    cleanedFields = cleanedFields.filter(
+      (field) => !arrayCreatorProperties.includes(field)
+    );
     //validating data
     if (!page) page = 1;
     let products;
     try {
       products = await Product.find()
-        .populate("creator") // Populate the 'creator' path without selecting any fields
+        .populate("creator", creatorProperties) // Populate the 'creator' path without selecting any fields
         .select(cleanedFields)
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
@@ -46,11 +49,28 @@ const root = {
     return return_values;
   },
 
-  product: async function ({ id }, { req }) {
+  product: async function ({ id }, { req }, info) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    cleanedFields.push("updatedAt");
+    // Extract the paths that include the 'creator' field
+    const [creatorProperties, arrayCreatorProperties] =
+      extractCreatorProperties(cleanedFields);
+    cleanedFields = cleanedFields.filter(
+      (field) => !arrayCreatorProperties.includes(field)
+    );
     //fetching data
     let product;
     try {
-      product = await Product.findById(id).populate("creator", "-password");
+      product = await Product.findById(id)
+        .populate("creator", creatorProperties)
+        .select(cleanedFields);
+      console.log("product:", product);
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;
@@ -77,7 +97,15 @@ const root = {
     console.log(context);
     return "Hello world!";
   },
-  user: async function ({ id }, { req }) {
+  user: async function ({ id }, { req }, info) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    cleanedFields.push("updatedAt");
     //validate Id
     console.log("id:", id);
     if (!id) {
@@ -88,7 +116,7 @@ const root = {
     //fetching user's data
     let user;
     try {
-      user = await User.findById(id).select("-password");
+      user = await User.findById(id).select(cleanedFields);
       console.log("user:", user);
     } catch (error) {
       if (error.statusCode) {
@@ -134,7 +162,7 @@ function getRequestedFields(fieldNode, path = "") {
 }
 
 function extractCreatorProperties(propertyPaths) {
-  let creatorProperties = '';
+  let creatorProperties = "";
   let arrayCreatorProperties = [];
 
   for (const path of propertyPaths) {

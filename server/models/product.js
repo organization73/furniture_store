@@ -19,7 +19,10 @@ const productSchema = new Schema(
         },
       },
     ],
-    rate: Number,
+    rate: {
+      type: Number,
+      default: 0,
+    },
     details: {
       wood: String,
       abalakach: String,
