@@ -3,7 +3,11 @@ const PRODUCTS_PER_PAGE = 2;
 const User = require("../models/user");
 
 const root = {
-  products: async function ({ page }, { req }) {
+  products: async function ({ page }, { req }, context, info) {
+    // Get requested fields for the `products` field
+    console.log("context:", context);
+    console.log("info:", info)
+    console.log("info:", info.fieldNodes[0].arguments[0].loc.source.body)
     //validating data
     if (!page) page = 1;
     let products;
@@ -12,12 +16,13 @@ const root = {
         .populate("creator", "-password")
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
-        .sort({ createdAt: -1 }); //can be make on client side
+        .sort({ createdAt: -1 }).select("_id "); //can be make on client side
+        console.log("products:", products);
     } catch (error) {
       throw error;
     }
 
-    return {
+    const return_values = {
       products: products.map((p) => {
         return {
           ...p._doc,
@@ -30,13 +35,14 @@ const root = {
         };
       }),
     };
+    return return_values;
   },
 
   product: async function ({ id }, { req }) {
     //fetching data
     let product;
     try {
-      product = await Product.findById(id).populate("creator", '-password');
+      product = await Product.findById(id).populate("creator", "-password");
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;

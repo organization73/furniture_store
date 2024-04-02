@@ -14,7 +14,7 @@ const schema = buildSchema(`
     }
 
     type Image {
-        imageurl: String!
+        imageUrl: String!
       }      
 
     type User {
