@@ -275,6 +275,7 @@ sendBtn.addEventListener("click", sendMessage);
 async function sendMessage() {
   const message = messageContainer.value;
   document.getElementById("message-input").value = "";
+  //condition to check if the message is not empty.
   if (message) {
     const selectedContact = document.querySelector("#contact-list li.selected");
     const messagesList = document.getElementById("messages");

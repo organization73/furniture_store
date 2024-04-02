@@ -1,6 +1,4 @@
 const io = require("./socket").getIO();
-const jwt = require("jsonwebtoken");
-const Admin = require("../models/admin");
 const User = require("../models/user");
 const chatRoom = require("../models/chatRoom");
 
@@ -64,7 +62,6 @@ module.exports.actionListeners = (socket) => {
         socket.in(user._id).emit("recieve-message", newMessage);
       }
     });
-
     // socket.to()
   });
 

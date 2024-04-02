@@ -6,6 +6,7 @@ const User = require("../models/user");
 const ChatRoom = require("../models/chatRoom");
 const Message = require("../models/message");
 const chatRoom = require("../models/chatRoom");
+const io = require("../socketio/socket").getIO();
 
 // const io = require("../socketio/socket").getIO();
 
@@ -96,13 +97,14 @@ exports.allUsers = async (req, res, next) => {
 exports.accessChatRoom = async (req, res, next) => {
   const { userId } = req.body;
   const primaryUser = req.admin || req.user;
+  let userDb = req.admin ? Admin : User;
   try {
     //validate input
     if (!userId) {
       throwError("No userId provided", 400, "userId");
     }
     //check if user exists
-    const secondaryUser = await Admin.findById(userId);
+    const secondaryUser = await userDb.findById(userId);
     if (!secondaryUser) {
       throwError("No secondaryUser found", 404, "secondaryUser");
     }
@@ -113,14 +115,14 @@ exports.accessChatRoom = async (req, res, next) => {
     })
       .populate({
         path: "users",
-        model: "Admin", // Use 'Admin' model instead of 'User' model
+        model: req.admin ? "Admin" : "User", // Use 'Admin' model instead of 'User' model
         select: "-password",
       })
       .populate({
         path: "latestMessage",
         populate: {
           path: "sender",
-          model: "Admin", // Use the appropriate model for 'sender'
+          model: req.admin ? "Admin" : "User", // Use the appropriate model for 'sender'
           select: "-password",
         },
       });
