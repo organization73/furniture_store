@@ -3,21 +3,30 @@ const PRODUCTS_PER_PAGE = 2;
 const User = require("../models/user");
 
 const root = {
-  products: async function ({ page }, { req }, context, info) {
+  products: async function ({ page }, { req }, info) {
     // Get requested fields for the `products` field
-    console.log("context:", context);
-    console.log("info:", info)
-    console.log("info:", info.fieldNodes[0].arguments[0].loc.source.body)
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    cleanedFields.push("updatedAt");
+    // Extract the paths that include the 'creator' field
+    const [creatorProperties, arrayCreatorProperties] = extractCreatorProperties(cleanedFields);
+    cleanedFields = cleanedFields.filter(field =>!arrayCreatorProperties.includes(field));
     //validating data
     if (!page) page = 1;
     let products;
     try {
       products = await Product.find()
-        .populate("creator", "-password")
+        .populate("creator") // Populate the 'creator' path without selecting any fields
+        .select(cleanedFields)
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
-        .sort({ createdAt: -1 }).select("_id "); //can be make on client side
-        console.log("products:", products);
+        .sort({ createdAt: -1 });
+
+      // console.log("products:", products);
     } catch (error) {
       throw error;
     }
@@ -27,8 +36,7 @@ const root = {
         return {
           ...p._doc,
           _id: p._id.toString(),
-          creator: p.creator._id.toString(),
-          ImageUrl: p.imageUrl,
+          // imageUrl: p.imageUrl,
           creator: p.creator,
           createdAt: p.createdAt.toISOString(),
           updatedAt: p.updatedAt.toISOString(),
@@ -104,3 +112,39 @@ const root = {
 };
 
 module.exports = root;
+
+function getRequestedFields(fieldNode, path = "") {
+  if (!fieldNode.selectionSet) {
+    return [path];
+  }
+
+  return fieldNode.selectionSet.selections.flatMap((selection) => {
+    if (selection.kind === "Field") {
+      return getRequestedFields(
+        selection,
+        path ? `${path}.${selection.name.value}` : selection.name.value
+      );
+    } else if (
+      selection.kind === "InlineFragment" ||
+      selection.kind === "FragmentSpread"
+    ) {
+      return getRequestedFields(selection, path);
+    }
+  });
+}
+
+function extractCreatorProperties(propertyPaths) {
+  let creatorProperties = '';
+  let arrayCreatorProperties = [];
+
+  for (const path of propertyPaths) {
+    const properties = path.split(".");
+
+    if (properties[0] === "creator") {
+      creatorProperties += properties[1] + " ";
+      arrayCreatorProperties.push(path);
+    }
+  }
+
+  return [creatorProperties, arrayCreatorProperties];
+}

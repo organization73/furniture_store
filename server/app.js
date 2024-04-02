@@ -123,6 +123,7 @@ app.use(
       if (!err.originalError) {
         return err;
       }
+      console.log("err:", err.originalError);
       console.log("graphqlerr:", err.locations);
       console.log("errorPath:", err.path);
       const message = err.message || "An error occured.";

@@ -18,7 +18,7 @@ const schema = buildSchema(`
       }      
 
     type User {
-    _id: ID
+    _id: ID!
     email: String
     firstName: String
     lastName: String
