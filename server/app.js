@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 });
 
 app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).array("images", 2)
+  multer({ storage: fileStorage, fileFilter: fileFilter }).array("images", 10)
 );
 
 app.use(body_parser.urlencoded({ extended: false }));
@@ -180,11 +180,11 @@ connect with ml model.
 image processing to make it smaller
 image storage with firebase
 multer to upload multiple images
-make the db find with select of what came from graphql query.
 */
 
 //done
 /*
 websocket
 admin panel
+make the db find with select of what came from graphql query.
  */
