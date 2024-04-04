@@ -137,6 +137,54 @@ const root = {
       _id: user._id.toString(),
     };
   },
+  usersProducts: async function ({ id }, { req }, info) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    cleanedFields.push("updatedAt");
+    // Extract the paths that include the 'creator' field
+    const [creatorProperties, arrayCreatorProperties] =
+      extractCreatorProperties(cleanedFields);
+    cleanedFields = cleanedFields.filter(
+      (field) => !arrayCreatorProperties.includes(field)
+    );
+    //fetching user's products
+    let products;
+    try {
+      products = await Product.find({ creator: id })
+        .populate("creator", creatorProperties)
+        .select(cleanedFields)
+        .sort({ createdAt: -1 });
+      console.log("products:", products);
+    } catch (error) {
+      if (error.statusCode) {
+        error.statusCode = 500;
+      }
+      throw error;
+    }
+    //validating data existance
+    if (!products) {
+      const error = new Error("Could not find products.");
+      error.statusCode = 404;
+      throw error;
+    }
+    //returning data
+    return {
+      products: products.map((p) => {
+        return {
+          ...p._doc,
+          _id: p._id.toString(),
+          creator: p.creator,
+          createdAt: p.createdAt.toISOString(),
+          updatedAt: p.updatedAt.toISOString(),
+        };
+      }),
+    };
+  },
 };
 
 module.exports = root;

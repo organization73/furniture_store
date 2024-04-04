@@ -49,6 +49,7 @@ const schema = buildSchema(`
     product(id: ID!): Product!
     hello: String
     user(id:ID!): User!
+    usersProducts(id:ID!): productData!
     }
 
     schema {
