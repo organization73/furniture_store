@@ -153,13 +153,15 @@ const root = {
       (field) => !arrayCreatorProperties.includes(field)
     );
     //fetching user's products
+
+    id = id || req.raw.user._id;
+    console.log("id:", id);
     let products;
     try {
       products = await Product.find({ creator: id })
         .populate("creator", creatorProperties)
         .select(cleanedFields)
         .sort({ createdAt: -1 });
-      console.log("products:", products);
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;
