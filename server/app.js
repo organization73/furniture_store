@@ -12,6 +12,7 @@ const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
+const userRouters = require("./routes/user");
 
 const adminAuthRoutes = require("./adminRouter/auth");
 const adminShopRoutes = require("./adminRouter/shop");
@@ -22,6 +23,7 @@ const chatRoutes = require("./routes/chat");
 const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/is-auth");
+
 
 const PORT = process.env.PORT || 3000;
 const MONGODB_URL =
@@ -104,6 +106,8 @@ app.use("/admin", adminShopRoutes);
 app.use("/admin", adminRouter);
 
 app.use("/auth", authRoutes);
+
+app.use("/user", isAuth, userRouters);
 
 app.use("/product", isAuth, productRoutes);
 

@@ -9,6 +9,7 @@ const userSchema = new Schema(
     username: { type: String, required: true },
     type: { type: String, default: "client" },
     email: { type: String, required: true },
+    imageUrl: { type: String },
     password: { type: String, required: true },
     isConfirmed: { type: Boolean },
     confirmToken: String,
