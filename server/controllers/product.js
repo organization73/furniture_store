@@ -48,18 +48,18 @@ exports.createProduct = async (req, res, next) => {
   // });
   // console.log("images:", images);
 
-  //Create the product
-  const product = new Product({
-    creator: req.user._id, //why id required?
-    title: title,
-    price: price,
-    description: description,
-    images: imagesObjests,
-    details: details,
-  });
-  console.log("product:", product);
-  // Save the product
   try {
+    //Create the product
+    const product = new Product({
+      creator: req.user._id, //why id required?
+      title: title,
+      price: price,
+      description: description,
+      images: imagesObjests,
+      details: details,
+    });
+    console.log("product:", product);
+    // Save the product
     await product.save();
   } catch (error) {
     error.codeStatus = 401;
