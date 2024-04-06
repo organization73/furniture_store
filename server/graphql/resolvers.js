@@ -38,11 +38,10 @@ const root = {
       products: products.map((p) => {
         return {
           ...p._doc,
-          _id: p._id.toString(),
-          // imageUrl: p.imageUrl,
+          _id: p._id ? p._id.toString() : null,
           creator: p.creator,
-          createdAt: p.createdAt.toISOString(),
-          updatedAt: p.updatedAt.toISOString(),
+          createdAt: p.createdAt ? p.createdAt.toISOString() : null,
+          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : null,
         };
       }),
     };
@@ -86,11 +85,11 @@ const root = {
     //returning data
     return {
       ...product._doc,
-      _id: product._id.toString(),
+      _id: product._id ? product._id.toString() : null,
       creator: product.creator,
-      createdAt: product.createdAt.toISOString(),
+      createdAt: product.createdAt ? product.createdAt.toISOString() : null,
       ImageUrl: product.imageUrl,
-      updatedAt: product.updatedAt.toISOString(),
+      updatedAt: product.updatedAt ? product.updatedAt.toISOString() : null,
     };
   },
   hello: (parent, args, context, info) => {
@@ -134,7 +133,7 @@ const root = {
     }
     return {
       ...user._doc,
-      _id: user._id.toString(),
+      _id: user._id ? user._id.toString() : null,
     };
   },
   usersProducts: async function ({ id }, { req }, info) {
@@ -145,7 +144,7 @@ const root = {
     let cleanedFields = requestedFields.map((field) =>
       field.replace("products.", "")
     );
-    cleanedFields.push("updatedAt");
+    // cleanedFields.push("updatedAt");
     // Extract the paths that include the 'creator' field
     const [creatorProperties, arrayCreatorProperties] =
       extractCreatorProperties(cleanedFields);
@@ -179,10 +178,10 @@ const root = {
       products: products.map((p) => {
         return {
           ...p._doc,
-          _id: p._id.toString(),
+          _id: p._id ? p._id.toString() : null,
           creator: p.creator,
-          createdAt: p.createdAt.toISOString(),
-          updatedAt: p.updatedAt.toISOString(),
+          createdAt: p.createdAt ? p.createdAt.toISOString() : null,
+          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : null,
         };
       }),
     };
