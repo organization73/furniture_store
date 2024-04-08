@@ -186,6 +186,46 @@ const root = {
       }),
     };
   },
+  //getuser by id
+  user: async function ({ id }, { req }, info) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    //validate Id
+    console.log("id:", id);
+    if (!id) {
+      id = req.raw.user._id;
+    }
+    //fetching user's data
+    let user;
+    try {
+      user = await User.findById(id).select(cleanedFields);
+      console.log("user:", user);
+    } catch (error) {
+      if (error.statusCode) {
+        error.statusCode = 500;
+      }
+      // throw error;
+      throw error;
+    }
+    //validate user exist.
+    if (!user) {
+      const error = new Error("User not found.");
+      error.statusCode = 404;
+      // throw error;
+      throw error;
+    }
+    return {
+      ...user._doc,
+      _id: user._id ? user._id.toString() : null,
+      createdAt: user.createdAt ? user.createdAt.toISOString() : null,
+      updatedAt: user.updatedAt ? user.updatedAt.toISOString() : null,
+    };
+  },
 };
 
 module.exports = root;
