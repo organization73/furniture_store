@@ -1,5 +1,5 @@
 const Product = require("../models/product");
-const PRODUCTS_PER_PAGE = 2;
+const PRODUCTS_PER_PAGE = 6;
 const User = require("../models/user");
 
 const root = {
