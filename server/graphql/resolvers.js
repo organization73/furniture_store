@@ -1,6 +1,7 @@
 const Product = require("../models/product");
-const PRODUCTS_PER_PAGE = 6;
 const User = require("../models/user");
+const PRODUCTS_PER_PAGE = 6;
+const USERS_PER_PAGE = 6;
 
 const root = {
   products: async function ({ page }, { req }, info) {
@@ -38,10 +39,10 @@ const root = {
       products: products.map((p) => {
         return {
           ...p._doc,
-          _id: p._id ? p._id.toString() : null,
+          _id: p._id ? p._id.toString() : undefined,
           creator: p.creator,
-          createdAt: p.createdAt ? p.createdAt.toISOString() : null,
-          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : null,
+          createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
+          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
         };
       }),
     };
@@ -85,11 +86,15 @@ const root = {
     //returning data
     return {
       ...product._doc,
-      _id: product._id ? product._id.toString() : null,
+      _id: product._id ? product._id.toString() : undefined,
       creator: product.creator,
-      createdAt: product.createdAt ? product.createdAt.toISOString() : null,
+      createdAt: product.createdAt
+        ? product.createdAt.toISOString()
+        : undefined,
       ImageUrl: product.imageUrl,
-      updatedAt: product.updatedAt ? product.updatedAt.toISOString() : null,
+      updatedAt: product.updatedAt
+        ? product.updatedAt.toISOString()
+        : undefined,
     };
   },
   hello: (parent, args, context, info) => {
@@ -133,7 +138,7 @@ const root = {
     }
     return {
       ...user._doc,
-      _id: user._id ? user._id.toString() : null,
+      _id: user._id ? user._id.toString() : undefined,
     };
   },
   usersProducts: async function ({ id }, { req }, info) {
@@ -178,10 +183,10 @@ const root = {
       products: products.map((p) => {
         return {
           ...p._doc,
-          _id: p._id ? p._id.toString() : null,
+          _id: p._id ? p._id.toString() : undefined,
           creator: p.creator,
-          createdAt: p.createdAt ? p.createdAt.toISOString() : null,
-          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : null,
+          createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
+          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
         };
       }),
     };
@@ -221,10 +226,53 @@ const root = {
     }
     return {
       ...user._doc,
-      _id: user._id ? user._id.toString() : null,
-      createdAt: user.createdAt ? user.createdAt.toISOString() : null,
-      updatedAt: user.updatedAt ? user.updatedAt.toISOString() : null,
+      _id: user._id ? user._id.toString() : undefined,
+      createdAt: user.createdAt ? user.createdAt.toISOString() : undefined,
+      updatedAt: user.updatedAt ? user.updatedAt.toISOString() : undefined,
     };
+  },
+  //get all users
+  users: async function ({ page }, { req }, info) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    //fetching users
+    let users;
+    try {
+      users = await User.find()
+        .select(cleanedFields)
+        .skip((page - 1) * USERS_PER_PAGE)
+        .limit(USERS_PER_PAGE)
+        .sort({ createdAt: -1 });
+      console.log("users:", users);
+    } catch (error) {
+      if (error.statusCode) {
+        error.statusCode = 500;
+      }
+      throw error;
+    }
+    //validating data existance
+    if (!users) {
+      const error = new Error("Could not find users.");
+      error.statusCode = 404;
+      throw error;
+    }
+    //returning data
+    console.log("HEREEE");
+    const result = users.map((u) => {
+      return {
+        ...u._doc,
+        _id: u._id ? u._id.toString() : undefined,
+        createdAt: u.createdAt ? u.createdAt.toISOString() : undefined,
+        updatedAt: u.updatedAt ? u.updatedAt.toISOString() : undefined,
+      };
+    });
+    console.log("result:", result);
+    return result;
   },
 };
 

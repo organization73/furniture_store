@@ -50,6 +50,7 @@ const schema = buildSchema(`
     hello: String
     user(id:ID!): User!
     usersProducts(id:ID): productData!
+    users(page: Int): [User!]!
     }
 
     schema {
