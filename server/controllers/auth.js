@@ -25,17 +25,17 @@ const transporter = nodemailer.createTransport({
 const userSchema = yup.object().shape({
   firstName: yup
     .string()
-    .notOneOf([null], 'Field cannot be null')
+    .notOneOf([null], "Field cannot be null")
     .min(3, "first name from 3 to 12 characters")
     .max(12, "first name from 3 to 12 characters"),
   lastName: yup
     .string()
-    .notOneOf([null], 'Field cannot be null')
+    .notOneOf([null], "Field cannot be null")
     .min(3, "last name from 3 to 12 characters")
     .max(12, "last name from 3 to 12 characters"),
   username: yup
     .string()
-    .notOneOf([null], 'Field cannot be null')
+    .notOneOf([null], "Field cannot be null")
     .min(3, "user name from 3 to 25 characters")
     .max(25, "first name from 3 to 25 characters"),
   email: yup
@@ -44,7 +44,7 @@ const userSchema = yup.object().shape({
     .required("Email is required"),
   password: yup
     .string()
-    .notOneOf([null], 'Field cannot be null')
+    .notOneOf([null], "Field cannot be null")
     .min(6)
     .max(20)
     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
@@ -61,7 +61,7 @@ const userSchema = yup.object().shape({
     //   console.log(value === this.parent.password);
     //   return value === this.parent.password;
     // })
-    .notOneOf([null], 'Field cannot be null'),
+    .notOneOf([null], "Field cannot be null"),
 });
 
 exports.creatUser = async (req, res, next) => {
@@ -82,7 +82,7 @@ exports.creatUser = async (req, res, next) => {
   } catch (error) {
     return throwError(422, error.message, error.path, next);
   }
-  console.log("data validated:", email)
+  console.log("data validated:", email);
   //Check if user's email and username already exists
   try {
     const existingUser = await User.findOne({
@@ -113,7 +113,7 @@ exports.creatUser = async (req, res, next) => {
     if (!err.statusCode) err.statusCode = 500;
     next(err);
   }
-  console.log("password hashed:", email)
+  console.log("password hashed:", email);
   //creating the token
   let token;
   try {
@@ -147,7 +147,7 @@ exports.creatUser = async (req, res, next) => {
     if (!err.statusCode) err.statusCode = 500;
     return next(err);
   }
-  console.log("email was send to:", email)
+  console.log("email was send to:", email);
 
   //creating the user
   const user = new User({
@@ -163,7 +163,7 @@ exports.creatUser = async (req, res, next) => {
   //saving the user into the database
   try {
     const saveUser = await user.save();
-    console.log("email was saved to:", email)
+    console.log("email was saved to:", email);
 
     return res
       .status(200)
@@ -212,7 +212,7 @@ exports.login = async (req, res, next) => {
           .required("Email is required"),
         password: yup
           .string()
-          .notOneOf([null], 'Field cannot be null')
+          .notOneOf([null], "Field cannot be null")
           .min(6)
           .max(20)
           .matches(
@@ -250,7 +250,7 @@ exports.login = async (req, res, next) => {
     "thisisaverylong"
   );
   // res.status(200).json({ token: token, userId: user._id.toString() ,username: user.username, email: user.email, firstName: user.firstName, lastName: user.lastName, isConfirmed: user.isConfirmed,});
-  res.status(200).json({ token: token});
+  res.status(200).json({ token: token, user: user });
 };
 
 exports.reVerifyEmail = async (req, res, next) => {
@@ -441,8 +441,7 @@ exports.resetPassword = async (req, res, next) => {
     if (!user) {
       throwErrorInfo(404, "user not found!", "id");
     }
-    user
-
+    user;
   } catch (error) {
     if (!error.statusCode) error.statuscode = 500;
     throwError(error.statuscode, error.message, error.path, next);
