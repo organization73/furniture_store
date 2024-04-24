@@ -8,13 +8,15 @@ const messageController = require("../controllers/message");
 
 const adminAuth = require("../middleware/admin-auth");
 
+const auth = require("../middleware/is-auth");
+
 router.get("/rooms", adminAuth, chatController.fetchChatRooms);
 
 //search for users
 router.get("/users", adminAuth, chatController.allUsers);
 
 //access or create chat room
-router.post("/access-room", adminAuth, chatController.accessChatRoom);
+router.post("/access-room", auth, chatController.accessChatRoom);
 
 router.post("/group", adminAuth, chatController.createGroupChatRoom);
 
@@ -33,7 +35,7 @@ router.put(
 );
  
 //send message
-router.post("/message", adminAuth, messageController.sendMessage);
+router.post("/message", auth, messageController.sendMessage);
 
 router.get("/room/:roomId", adminAuth, messageController.FetchMessages);
 

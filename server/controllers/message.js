@@ -33,6 +33,7 @@ exports.FetchMessages = async (req, res, next) => {
 exports.sendMessage = async (req, res, next) => {
   const user = req.admin || req.user;
   const { content, roomId } = req.body;
+  console.log("req.body", req.body);
 
   if (!content || !roomId) {
     console.log("Invalid data passed into request");
@@ -54,11 +55,11 @@ exports.sendMessage = async (req, res, next) => {
     });
 
     message = await message.populate("chatRoom");
-    message = await Admin.populate(message, {
-      path: "chatRoom.users",
-      model: req.admin ? "Admin" : "User",
-      select: "username email",
-    });
+    // message = await Admin.populate(message, {
+    //   path: "chatRoom.users",
+    //   model: req.admin ? "Admin" : "User",
+    //   select: "username email",
+    // });
 
     const chatRoom = await ChatRoom.findByIdAndUpdate(roomId, {
       latestMessage: message,
@@ -75,7 +76,6 @@ exports.sendMessage = async (req, res, next) => {
         io.getIO().in(user._id.toString()).emit("recieve-message",message);
       }
     });
-    //
 
     res.status(200).json(message);
   } catch (error) {

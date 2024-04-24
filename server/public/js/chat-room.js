@@ -200,6 +200,29 @@ async function addContact() {
   input.dataset.id = "";
 }
 
+//recieve new contact(room)
+socket.on("recieve-new-room", (chatRoom) => {
+  const listItem = document.createElement("li");
+  const listItemDiv = document.createElement("div");
+  const listItemDivP = document.createElement("p");
+  const lastMessage = document.createElement("h6");
+  listItem.dataset.id = chatRoom._id; // Add a data-contact-id attribute to the list item
+  listItem.addEventListener("click", selectContact);
+  listItemDiv.append(listItemDivP);
+  if (chatRoom.lastMessage) {
+    lastMessage.textContent = chatRoom.lastMessage.content || "No messages yet";
+  } else {
+    lastMessage.textContent = "No messages yet";
+  }
+  listItemDiv.append(lastMessage);
+  listItemDivP.textContent = input.value;
+  listItem.append(listItemDiv);
+  contactListItems.prepend(listItem); // Add the new list item to the beginning of the list
+  //clean the input field
+  input.value = "";
+  input.dataset.id = "";
+})
+
 //select a contact and send a GET request to the API
 function selectContact() {
   console.log("user", currentUserId);
@@ -213,10 +236,11 @@ function selectContact() {
     "#contact-list li.selected"
   );
   currentRoomId = contactId;
+  //for speaking in a group.
   if (previouslySelectedContact) {
     //leave old room.
     console.log("leave room", previouslySelectedContact.dataset.id);
-    socket.emit("leave-room", previouslySelectedContact.dataset.id);
+    socket.emit("leave-room", previouslySelectedContact.dataset.id);//
     previouslySelectedContact.classList.remove("selected");
   }
   // Add the "selected" class to the newly selected contact

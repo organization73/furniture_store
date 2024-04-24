@@ -156,7 +156,7 @@ mongoose
   .then(async (result) => {
     console.log("Connected to the database");
     // Start the server
-    const server = await app.listen(PORT, () => {
+    const server = await app.listen(PORT,"192.168.1.12", () => {
       console.log(`Server is running on port ${PORT}`);
     });
     //seting up the websocket
@@ -178,11 +178,10 @@ mongoose
 
 //todo
 /*
+filter if user has gallary
+bed-sofa-chair-table-seivelchair
+passport
 cors options
-connect with ml model.
-image processing to make it smaller
-image storage with firebase
-multer to upload multiple images
 */
 
 //done
@@ -190,4 +189,8 @@ multer to upload multiple images
 websocket
 admin panel
 make the db find with select of what came from graphql query.
- */
+connect with ml model.
+image processing to make it smaller
+image storage with firebase
+multer to upload multiple images
+*/

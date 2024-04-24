@@ -5,6 +5,7 @@ const USERS_PER_PAGE = 6;
 
 const root = {
   products: async function ({ page }, { req }, info) {
+    console.log("graphql Users");
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
@@ -233,6 +234,7 @@ const root = {
   },
   //get all users
   users: async function ({ page }, { req }, info) {
+    console.log("graphql Users");
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
@@ -248,7 +250,6 @@ const root = {
         .skip((page - 1) * USERS_PER_PAGE)
         .limit(USERS_PER_PAGE)
         .sort({ createdAt: -1 });
-      console.log("users:", users);
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;
@@ -262,7 +263,6 @@ const root = {
       throw error;
     }
     //returning data
-    console.log("HEREEE");
     const result = users.map((u) => {
       return {
         ...u._doc,
@@ -271,7 +271,7 @@ const root = {
         updatedAt: u.updatedAt ? u.updatedAt.toISOString() : undefined,
       };
     });
-    console.log("result:", result);
+    // console.log("users:", result);
     return result;
   },
 };

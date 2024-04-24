@@ -8,6 +8,7 @@ module.exports.actionListeners = (socket) => {
   let userType = "user";
   //sending notificatoins //can be made on connection
   socket.on("setup", (userData) => {
+    console.log("datahere", userData);
     console.log(`user ${userData._id} connected`);
     socket.join(userData._id);
     console.log("join room", userData._id);
