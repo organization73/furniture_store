@@ -9,6 +9,8 @@ const playground = require("graphql-playground-middleware-express").default;
 const cors = require("cors");
 const ejs = require("ejs");
 const cookieParser = require("cookie-parser");
+const useragent = require("express-useragent");
+const morgan = require("morgan");
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
@@ -58,11 +60,17 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(useragent.express());
+
 app.use((req, res, next) => {
   console.log("----------------------------");
-  console.log("Incoming request:", req.method, req.url);
+  const source = req.useragent.isDesktop ? 'website' : 'mobile';
+  console.log(`Request from: ${source}`);
+  // console.log("Incoming request:", req.method, req.url);
   next();
 });
+
+app.use(morgan("dev"));
 
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).array("images", 10)
@@ -74,6 +82,9 @@ app.use(body_parser.json());
 
 app.use(cookieParser());
 
+
+
+ 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // app.use(cors());
@@ -156,7 +167,7 @@ mongoose
   .then(async (result) => {
     console.log("Connected to the database");
     // Start the server
-    const server = await app.listen(PORT,"192.168.1.12", () => {
+    const server = await app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
     //seting up the websocket

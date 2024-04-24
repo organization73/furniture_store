@@ -2,6 +2,11 @@ const jwt = require("jsonwebtoken");
 const Admin = require("../models/admin"); // Assuming you have a User model
 
 const authMiddleware = async (req, res, next) => {
+  //if request isn't from website, skip this middleware
+  const source = req.useragent.isDesktop ? 'website' : 'mobile';
+  if (source !== 'website') {
+    next();
+  }
   // Get the token from the request headers
   let token;
   try {
@@ -9,23 +14,15 @@ const authMiddleware = async (req, res, next) => {
     // console.log("req.cookies",req.cookies)
     token = req.cookies.token;
     if (!token) {
-      return res.status(403).render("auth/login",{
+      return res.status(403).render("auth/login", {
         errorMessage: "No token provided",
         pageTitle: "Login",
         isAuthenticated: false,
         path: "/login",
         validationErrors: [],
-        oldInput:{}
-      })
+        oldInput: {},
+      });
     }
-  } catch (error) {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    next(error);
-  }
-
-  try {
     // Verify and decode the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     // Check if the admin exists in the database
