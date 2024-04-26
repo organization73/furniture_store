@@ -10,6 +10,10 @@ app = FastAPI()
 
 # Specify the model save path within 'saved_model' directory
 model_path = os.path.join('saved_model', 'my_model.keras')
+# model_path = os.path.join(os.getcwd(), 'saved_model', 'my_model.keras')
+
+print("hehehe")
+print(model_path)
 
 model = tf.keras.models.load_model(model_path)
 
