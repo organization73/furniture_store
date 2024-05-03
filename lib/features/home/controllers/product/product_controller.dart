@@ -13,7 +13,6 @@ class ProductController extends GetxController {
   @override
   void onInit() {
     fetchFeaturedProducts();
-    fetchSearchProducts();
     super.onInit();
   }
 
@@ -30,11 +29,11 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<void> fetchSearchProducts() async {
+  Future<void> fetchSearchProducts(String searchText) async {
     try {
       isLoading.value = true;
       final searchProducts =
-          await _productRepo.searchProducts('chair');
+          await _productRepo.searchProducts('searchText');
 
       this.searchProducts.assignAll(searchProducts);
     } catch (e) {

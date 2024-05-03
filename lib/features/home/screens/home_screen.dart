@@ -1,3 +1,4 @@
+import 'package:decordash/features/home/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -163,7 +164,11 @@ class FadeAppBar extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
             child: BuildSearchBar(
-              onPressedPrefixIcon: () => print(666),
+              onPressedPrefixIcon: () => Get.to(
+                () => const SearchScreen(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              ),
             ),
           ),
         ),

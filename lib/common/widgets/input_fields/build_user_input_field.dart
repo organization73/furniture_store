@@ -35,6 +35,8 @@ class RoundedTextField extends StatelessWidget {
       keyboardType: keyboardType,
       controller: controller,
       obscureText: isPassword,
+      onChanged: (value) => print(value),
+      onTap: () => print(8888888888),
       decoration: InputDecoration(
         hintText: hintText,
         filled: isFilled,
