@@ -67,4 +67,5 @@ class DefaultFirebaseOptions {
     iosClientId: '129714025607-pvjjnjq5l0bp18vlc83pohv85llhuhiu.apps.googleusercontent.com',
     iosBundleId: 'com.decordash.decordash',
   );
+
 }
