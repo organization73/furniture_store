@@ -32,6 +32,29 @@ class ProductRepo extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> searchProducts(String query) async {
+    try {
+      // Fetch a larger set of documents
+      final snapshot = await _db.collection('Products').get();
+
+      // Filter documents on the client side
+      final list = snapshot.docs
+          .where((document) => document['productName']
+              .toLowerCase()
+              .contains(query.toLowerCase()))
+          .map((document) => ProductModel.fromFirebaseDocument(document))
+          .toList();
+
+      return list;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
   Future<List<ProductModel>> fetchFeaturedProducts() async {
     try {
       final snapshot = await _db

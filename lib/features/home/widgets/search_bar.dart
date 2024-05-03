@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class BuildSearchBar extends StatelessWidget {
-  const BuildSearchBar({super.key});
+  final Function() onPressedPrefixIcon;
+
+  const BuildSearchBar({super.key, required this.onPressedPrefixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +17,7 @@ class BuildSearchBar extends StatelessWidget {
       height: 42,
       child: RoundedTextField(
           prefixIcon: Iconsax.search_normal_copy,
+          onPressedPrefixIcon: onPressedPrefixIcon,
           'homeSearchBarHint'.tr,
           keyboardType: TextInputType.text,
           showLabel: false,

@@ -12,6 +12,7 @@ class RoundedTextField extends StatelessWidget {
   final bool showLabel;
   final bool isFilled;
   final Color? fillColor;
+  final Function()? onPressedPrefixIcon;
 
   const RoundedTextField(
     this.hintText,
@@ -25,6 +26,7 @@ class RoundedTextField extends StatelessWidget {
     this.showLabel = true,
     this.isFilled = false,
     this.fillColor,
+    this.onPressedPrefixIcon,
   });
 
   @override
@@ -39,9 +41,12 @@ class RoundedTextField extends StatelessWidget {
         fillColor: fillColor,
         label: showLabel ? Text(hintText) : null,
         prefixIcon: prefixIcon != null
-            ? Icon(
-                prefixIcon,
-                size: TSizes.iconMd,
+            ? IconButton(
+                icon: Icon(
+                  prefixIcon,
+                  size: TSizes.iconMd,
+                ),
+                onPressed: onPressedPrefixIcon,
               )
             : null,
         suffixIcon: suffixIcon,

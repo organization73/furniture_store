@@ -48,7 +48,9 @@ class StoreScreen extends StatelessWidget {
                           SizedBox(
                             height: TSizes.spaceBtwItems,
                           ),
-                          const BuildSearchBar(),
+                          BuildSearchBar(
+                            onPressedPrefixIcon: () {},
+                          ),
                           const SizedBox(
                             height: TSizes.sm,
                           ),
