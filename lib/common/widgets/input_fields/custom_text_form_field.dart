@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CostomTextFormFild extends StatelessWidget {
-  CostomTextFormFild(
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField(
       {super.key,
       required this.hint,
       this.suffixIcon,
@@ -14,21 +14,25 @@ class CostomTextFormFild extends StatelessWidget {
       required this.prefixIcon,
       this.filled = false,
       this.enabled = true,
-      this.initialValue});
-  String hint;
-  IconData prefixIcon;
-  IconData? suffixIcon;
-  VoidCallback? onTapSuffixIcon;
-  bool obscureText;
-  bool filled;
-  bool enabled;
-  String? initialValue;
+      this.initialValue,
+      this.onTap,
+      this.readOnly = false});
+  final String hint;
+  final IconData prefixIcon;
+  final IconData? suffixIcon;
+  final VoidCallback? onTapSuffixIcon;
+  final bool obscureText;
+  final bool filled;
+  final bool enabled;
+  final String? initialValue;
+  final VoidCallback? onTap;
+  final bool readOnly;
 
-  TextEditingController? controller;
-  Function()? onEditingComplete;
+  final TextEditingController? controller;
+  final Function()? onEditingComplete;
 
-  String? Function(String?)? validator;
-  Function(String)? onChanged;
+  final String? Function(String?)? validator;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,6 +45,8 @@ class CostomTextFormFild extends StatelessWidget {
         validator: validator,
         obscureText: obscureText,
         keyboardType: TextInputType.text,
+        readOnly: readOnly,
+        onTap: onTap,
         decoration: InputDecoration(
           fillColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
           hintText: hint,

@@ -1,3 +1,4 @@
+import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordash/features/home/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,10 +14,10 @@ import 'package:decordash/features/home/widgets/banners_slider.dart';
 import 'package:decordash/features/home/widgets/categories_section.dart';
 import 'package:decordash/features/home/widgets/home_appbar.dart';
 import 'package:decordash/features/home/widgets/room_section.dart';
-import 'package:decordash/features/home/widgets/search_bar.dart';
 import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -161,16 +162,22 @@ class FadeAppBar extends StatelessWidget {
       child: SafeArea(
         child: Center(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-            child: BuildSearchBar(
-              onPressedPrefixIcon: () => Get.to(
-                () => const SearchScreen(),
-                duration: const Duration(milliseconds: 300),
-                transition: Transition.rightToLeft,
-              ),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: TSizes.pagePaddingSpace),
+              child: SizedBox(
+                height: 50.h,
+                child: CustomTextFormField(
+                  hint: 'homeSearchBarHint'.tr,
+                  prefixIcon: Iconsax.search_normal_copy,
+                  readOnly: true,
+                  filled: true,
+                  onTap: () => Get.to(
+                    () => const SearchScreen(),
+                    duration: const Duration(milliseconds: 300),
+                    transition: Transition.downToUp,
+                  ),
+                ),
+              )),
         ),
       ),
     );

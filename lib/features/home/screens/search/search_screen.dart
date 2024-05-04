@@ -3,7 +3,7 @@ import 'package:decordash/features/home/screens/filters/widgets/button_group_spa
 import 'package:decordash/features/home/screens/filters/widgets/og_tab.dart';
 import 'package:decordash/features/home/screens/filters/widgets/og_tab_item.dart';
 import 'package:decordash/features/home/screens/search/controllers/recent_search_controller.dart';
-import 'package:decordash/features/home/screens/search/widgets/custom_Text_Form_fild.dart';
+import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
@@ -38,30 +38,25 @@ class _SearchScreenState extends State<SearchScreen> {
                 size: TSizes.iconMd,
               )),
           Expanded(
-            child: CostomTextFormFild(
+            child: CustomTextFormField(
               hint: 'homeSearchBarHint'.tr,
               prefixIcon: Iconsax.search_normal_copy,
               controller: searchController,
               filled: true,
-              suffixIcon: searchController.text.isEmpty
-                  ? null
-                  : Iconsax.close_circle_copy,
+              suffixIcon: Iconsax.close_circle_copy,
               onTapSuffixIcon: () {
                 searchController.clear();
               },
               onEditingComplete: () {
                 controller.addSearch(searchController.text);
-                // Get.back();
               },
             ),
           ),
           IconButton(
               onPressed: () {
-                setState(() {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) => _custombottomSheetFilter(context));
-                });
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) => _custombottomSheetFilter(context));
               },
               icon: const Icon(
                 Iconsax.filter_copy,
@@ -124,8 +119,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     Row(
                       children: [
-                        searchSuggestionsTiem("suchi"),
-                        searchSuggestionsTiem("sandwich"),
+                        searchSuggestions("Chair"),
+                        searchSuggestions("Bed"),
                       ],
                     ),
                     SizedBox(
@@ -133,8 +128,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     Row(
                       children: [
-                        searchSuggestionsTiem("seafood"),
-                        searchSuggestionsTiem("fried rice"),
+                        searchSuggestions("Table"),
+                        searchSuggestions("Sofa"),
                       ],
                     ),
                   ],
@@ -147,7 +142,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  searchSuggestionsTiem(String text) {
+  searchSuggestions(String text) {
     return Container(
       margin: const EdgeInsets.only(left: 8),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),

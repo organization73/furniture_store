@@ -18,7 +18,7 @@ class PushNotifications {
     );
     // get the device fcm token
     final token = await _firebaseMessaging.getToken();
-    print("device token: $token");
+    // print("device token: $token");
   }
 
 // initalize local notifications
