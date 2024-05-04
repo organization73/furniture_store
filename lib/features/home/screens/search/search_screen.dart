@@ -1,9 +1,11 @@
-import 'package:decordash/features/home/screens/home_screen.dart';
-import 'package:decordash/features/home/screens/search/widgets/CustomSlider.dart';
+import 'package:decordash/common/widgets/buttons/cta_button.dart';
+import 'package:decordash/features/home/screens/filters/widgets/button_group_spaced.dart';
+import 'package:decordash/features/home/screens/filters/widgets/og_tab.dart';
+import 'package:decordash/features/home/screens/filters/widgets/og_tab_item.dart';
+import 'package:decordash/features/home/screens/search/controllers/recent_search_controller.dart';
 import 'package:decordash/features/home/screens/search/widgets/custom_Text_Form_fild.dart';
-import 'package:decordash/features/home/screens/search/widgets/custom_button.dart';
-import 'package:decordash/features/home/screens/search/widgets/custom_categories_list.dart';
 import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,145 +20,125 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
-  static List previousSearchs = [];
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RecentSearchController());
+    var lang = Get.locale!.languageCode;
+
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Search Bar
-            SizedBox(
-              height: 50.h,
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () => Get.back(),
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        size: TSizes.iconMd,
-                      )),
-                  Expanded(
-                    child: CostomTextFormFild(
-                      hint: "Serch",
-                      prefixIcon: Iconsax.search_normal_copy,
-                      controller: searchController,
-                      filled: true,
-                      suffixIcon: searchController.text.isEmpty
-                          ? null
-                          : Iconsax.close_circle_copy,
-                      onTapSuffixIcon: () {
-                        searchController.clear();
-                      },
-                      onChanged: (pure) {
-                        setState(() {});
-                      },
-                      onEditingComplete: () {
-                        previousSearchs.add(searchController.text);
-                        Get.back();
-                      },
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showModalBottomSheet(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(25),
-                                ),
-                              ),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              context: context,
-                              builder: (context) =>
-                                  _custombottomSheetFilter(context));
-                        });
-                      },
-                      icon: const Icon(
-                        Iconsax.filter_copy,
-                      )),
-                ],
-              ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 50.h,
+        actions: [
+          IconButton(
+              onPressed: () => Get.back(),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                size: TSizes.iconMd,
+              )),
+          Expanded(
+            child: CostomTextFormFild(
+              hint: 'homeSearchBarHint'.tr,
+              prefixIcon: Iconsax.search_normal_copy,
+              controller: searchController,
+              filled: true,
+              suffixIcon: searchController.text.isEmpty
+                  ? null
+                  : Iconsax.close_circle_copy,
+              onTapSuffixIcon: () {
+                searchController.clear();
+              },
+              onEditingComplete: () {
+                controller.addRecentSearch(searchController.text);
+                // Get.back();
+              },
             ),
-
-            SizedBox(
-              height: 5.h,
-            ),
-
-            // Previous Searches
-            ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: previousSearchs.length,
-                itemBuilder: (context, index) => previousSearchsItem(index)),
-            SizedBox(
-              height: 5.h,
-            ),
-
-            // Search Suggestions
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Search Suggestions",
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-                  Row(
-                    children: [
-                      searchSuggestionsTiem("suchi"),
-                      searchSuggestionsTiem("sandwich"),
-                    ],
-                  ),
-                  SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
-                  Row(
-                    children: [
-                      searchSuggestionsTiem("seafood"),
-                      searchSuggestionsTiem("fried rice"),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => _custombottomSheetFilter(context));
+                });
+              },
+              icon: const Icon(
+                Iconsax.filter_copy,
+              )),
+        ],
       ),
-    );
-  }
-
-  previousSearchsItem(int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: InkWell(
-        onTap: () {},
-        child: Dismissible(
-          key: GlobalKey(),
-          onDismissed: (DismissDirection dir) {
-            setState(() {});
-            previousSearchs.removeAt(index);
-          },
-          child: Row(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              const Icon(
-                Iconsax.timer_1_copy,
-              ),
-              SizedBox(
-                width: 10.w,
-              ),
-              Text(previousSearchs[index],
-                  style: Theme.of(context).textTheme.bodyMedium),
-              const Spacer(),
-              const Icon(
-                Icons.call_made_outlined,
-                color: Colors.blue,
+              // Previous Searches
+              Obx(() => ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: controller.recentSearchList.length,
+                    itemBuilder: (BuildContext ctx, index) => Dismissible(
+                        key: UniqueKey(),
+                        onDismissed: (DismissDirection dir) {
+                          controller.removeRecentSearchItem(index);
+                        },
+                        background: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          // Adjusting alignment based on the dismiss direction
+                          alignment: lang == 'ar'
+                              ? Alignment.centerLeft
+                              : Alignment.centerRight,
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
+                        ),
+                        child: ListTile(
+                          titleAlignment: ListTileTitleAlignment.titleHeight,
+                          leading: const Icon(
+                            Iconsax.timer_1_copy,
+                          ),
+                          title: Text(
+                            controller.recentSearchList[index],
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        )),
+                  )),
+              // Search Suggestions
+              Container(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Search Suggestions",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    SizedBox(
+                      height: TSizes.spaceBtwSections,
+                    ),
+                    Row(
+                      children: [
+                        searchSuggestionsTiem("suchi"),
+                        searchSuggestionsTiem("sandwich"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: TSizes.spaceBtwItems,
+                    ),
+                    Row(
+                      children: [
+                        searchSuggestionsTiem("seafood"),
+                        searchSuggestionsTiem("fried rice"),
+                      ],
+                    ),
+                  ],
+                ),
               )
             ],
           ),
@@ -183,46 +165,66 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   _custombottomSheetFilter(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      height: 500,
-      color: Colors.white,
+    return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
             "Add a Filter",
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
-          const CustomCategoriesList(),
-          const CustomSlider(),
-          Row(
-            children: [
-              Expanded(
-                  child: CustomButton(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                text: "Cancel",
-                color: Colors.blue,
-                textColor: Colors.blue,
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: CustomButton(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ));
-                },
-                text: "Done",
-              ))
-            ],
-          )
+          Padding(
+            padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+            child: Column(
+              children: [
+                OgTab(
+                  items: [
+                    OgTabItem(
+                      title: "Sale",
+                    ),
+                    OgTabItem(
+                      title: "Rent",
+                    ),
+                    OgTabItem(
+                      title: "Sold",
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: TSizes.spaceBtwSections,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      "Property Type",
+                    ),
+                    SizedBox(
+                      height: TSizes.spaceBtwSections,
+                    ),
+                    const ButtonGroupSpaced(
+                      items: [
+                        "Any",
+                        "House",
+                        "Apartment",
+                        "Office",
+                        "Commercial",
+                        "Swimming Pool",
+                        "Gardens"
+                      ],
+                    ),
+                    SizedBox(
+                      height: TSizes.spaceBtwSections,
+                    ),
+                  ],
+                ),
+                BuildCTAButton(
+                  text: 'Done',
+                  onPressed: () => LoggerHelper.info('apply filter'),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

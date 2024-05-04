@@ -1,3 +1,4 @@
+import 'package:decordash/features/home/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/appbar/tabbar.dart';
@@ -49,7 +50,11 @@ class StoreScreen extends StatelessWidget {
                             height: TSizes.spaceBtwItems,
                           ),
                           BuildSearchBar(
-                            onPressedPrefixIcon: () {},
+                            onPressedPrefixIcon: () => Get.to(
+                              () => const SearchScreen(),
+                              duration: const Duration(milliseconds: 300),
+                              transition: Transition.rightToLeft,
+                            ),
                           ),
                           const SizedBox(
                             height: TSizes.sm,

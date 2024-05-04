@@ -17,7 +17,6 @@ class BuildSearchBar extends StatelessWidget {
       height: 42,
       child: RoundedTextField(
           prefixIcon: Iconsax.search_normal_copy,
-          onPressedPrefixIcon: onPressedPrefixIcon,
           'homeSearchBarHint'.tr,
           keyboardType: TextInputType.text,
           showLabel: false,
