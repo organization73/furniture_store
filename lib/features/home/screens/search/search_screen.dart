@@ -2,7 +2,6 @@ import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/layouts/grid_layout.dart';
 import 'package:decordash/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
-import 'package:decordash/features/home/controllers/product/product_controller.dart';
 import 'package:decordash/features/home/screens/filters/widgets/button_group_spaced.dart';
 import 'package:decordash/features/home/screens/filters/widgets/og_tab.dart';
 import 'package:decordash/features/home/screens/filters/widgets/og_tab_item.dart';
@@ -80,7 +79,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemCount: controller.recentSearches.length,
                     itemBuilder: (BuildContext ctx, index) => Dismissible(
                         key: UniqueKey(),
-                        onDismissed: (DismissDirection dir) {
+                        direction: DismissDirection.endToStart,
+                        onDismissed: (_) {
                           controller.removeSearch(index);
                         },
                         background: Container(
