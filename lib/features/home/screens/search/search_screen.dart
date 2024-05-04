@@ -10,6 +10,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
+class ActionChipData {
+  final IconData icon;
+  final String label;
+
+  ActionChipData({required this.icon, required this.label});
+}
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -20,6 +27,11 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final searchPageController = Get.put(SearchPageController());
   final recentSearchController = Get.put(RecentSearchController());
+  final List<ActionChipData> actionChips = [
+    ActionChipData(icon: Icons.add, label: 'Wooden Chair'),
+    ActionChipData(icon: Icons.edit, label: 'White Table'),
+    ActionChipData(icon: Icons.delete, label: 'Red Bed'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +127,14 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             ),
                             child: ListTile(
+                              onTap: () {
+                                // Set the search text to the tapped item's text
+                                searchPageController.searchController.text =
+                                    recentSearchController
+                                        .recentSearches[index];
+                                // Trigger the search
+                                searchPageController.fetchSearchProducts();
+                              },
                               titleAlignment:
                                   ListTileTitleAlignment.titleHeight,
                               leading: const Icon(Iconsax.timer_1_copy),
@@ -129,26 +149,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     Container(
                       padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             "Search Suggestions",
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           SizedBox(height: TSizes.spaceBtwSections),
-                          Row(
-                            children: [
-                              searchSuggestions("Chair"),
-                              searchSuggestions("Bed"),
-                            ],
-                          ),
-                          SizedBox(height: TSizes.spaceBtwItems),
-                          Row(
-                            children: [
-                              searchSuggestions("Table"),
-                              searchSuggestions("Sofa"),
-                            ],
-                          ),
+                          buildActionChips(),
                         ],
                       ),
                     ),
@@ -163,20 +171,20 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   // Helper function to create search suggestion widgets
-  Widget searchSuggestions(String text) {
-    return Container(
-      margin: const EdgeInsets.only(left: 8),
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-            ),
-      ),
-    );
-  }
+  Widget buildActionChips() => Wrap(
+        runSpacing: 2,
+        spacing: 15,
+        children: actionChips
+            .map((actionChip) => ActionChip(
+                  label: Text(actionChip.label),
+                  onPressed: () {
+                    // Set the search text to the tapped item's text
+                    searchPageController.searchController.text =
+                        actionChip.label;
+                    // Trigger the search
+                    searchPageController.fetchSearchProducts();
+                  },
+                ))
+            .toList(),
+      );
 }
