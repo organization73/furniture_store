@@ -6,23 +6,19 @@ import 'package:get/get.dart';
 
 class SearchPageController extends GetxController {
   static SearchPageController get instance => Get.find();
-  final isLoading = false.obs;
   final isSearchSubmitted = false.obs;
   final _productRepo = ProductRepo.instance;
-  RxList<ProductModel> searchProducts = <ProductModel>[].obs;
   TextEditingController searchController = TextEditingController();
 
-  Future<void> fetchSearchProducts() async {
+  Future<List<ProductModel>> fetchSearchProducts() async {
     try {
-      isLoading.value = true;
       final searchProducts =
           await _productRepo.searchProducts(searchController.text);
-
-      this.searchProducts.assignAll(searchProducts);
+      return searchProducts;
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      return [];
     } finally {
-      isLoading.value = false;
       isSearchSubmitted.value = true;
     }
   }
