@@ -1,4 +1,8 @@
 import 'package:decordash/common/widgets/buttons/cta_button.dart';
+import 'package:decordash/common/widgets/layouts/grid_layout.dart';
+import 'package:decordash/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:decordash/features/home/controllers/product/product_controller.dart';
 import 'package:decordash/features/home/screens/filters/widgets/button_group_spaced.dart';
 import 'package:decordash/features/home/screens/filters/widgets/og_tab.dart';
 import 'package:decordash/features/home/screens/filters/widgets/og_tab_item.dart';
@@ -25,6 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final controller = Get.put(RecentSearchController());
     var lang = Get.locale!.languageCode;
+    final productsController = ProductController.instance;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,6 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
               },
               onEditingComplete: () {
                 controller.addSearch(searchController.text);
+                productsController.fetchSearchProducts(searchController.text);
               },
             ),
           ),
@@ -134,7 +140,22 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
+
+              Obx(() {
+                if (productsController.isLoading.value) {
+                  return const VerticalProductShimmer();
+                }
+                if (productsController.searchProducts.isEmpty) {
+                  return const Center(child: Text('No Products Found'));
+                }
+                return GridLayout(
+                    mainAxisExtent: 265.r,
+                    itemCount: productsController.searchProducts.length,
+                    itemBuilder: (_, index) => ProductCardVerical(
+                          product: productsController.searchProducts[index],
+                        ));
+              }),
             ],
           ),
         ),

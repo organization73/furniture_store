@@ -33,7 +33,7 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       final searchProducts =
-          await _productRepo.searchProducts('searchText');
+          await _productRepo.searchProducts(searchText);
 
       this.searchProducts.assignAll(searchProducts);
     } catch (e) {

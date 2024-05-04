@@ -106,30 +106,6 @@ class HomeScreen extends StatelessWidget {
                               SizedBox(
                                 height: TSizes.spaceBtwSections * 2,
                               ),
-                              const SectionHeading(
-                                title: 'fefe',
-                              ),
-                              Obx(() {
-                                if (productsController.isLoading.value) {
-                                  return const VerticalProductShimmer();
-                                }
-                                if (productsController.searchProducts.isEmpty) {
-                                  return const Center(
-                                      child: Text('No Products Found'));
-                                }
-                                return GridLayout(
-                                    mainAxisExtent: 265.r,
-                                    itemCount: productsController
-                                        .searchProducts.length,
-                                    itemBuilder: (_, index) =>
-                                        ProductCardVerical(
-                                          product: productsController
-                                              .searchProducts[index],
-                                        ));
-                              }),
-                              SizedBox(
-                                height: TSizes.spaceBtwItems,
-                              ),
                               const BuildRoomsSection(),
                             ],
                           ),
