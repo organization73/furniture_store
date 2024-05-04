@@ -17,24 +17,18 @@ class ActionChipData {
   ActionChipData({required this.icon, required this.label});
 }
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  final searchPageController = Get.put(SearchPageController());
-  final recentSearchController = Get.put(RecentSearchController());
-  final List<ActionChipData> actionChips = [
-    ActionChipData(icon: Icons.add, label: 'Wooden Chair'),
-    ActionChipData(icon: Icons.edit, label: 'White Table'),
-    ActionChipData(icon: Icons.delete, label: 'Red Bed'),
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    final searchPageController = Get.put(SearchPageController());
+    final recentSearchController = Get.put(RecentSearchController());
+    final List<ActionChipData> actionChips = [
+      ActionChipData(icon: Icons.add, label: 'Wooden Chair'),
+      ActionChipData(icon: Icons.edit, label: 'White Table'),
+      ActionChipData(icon: Icons.delete, label: 'Red Bed'),
+    ];
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -156,7 +150,23 @@ class _SearchScreenState extends State<SearchScreen> {
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           SizedBox(height: TSizes.spaceBtwSections),
-                          buildActionChips(),
+                          Wrap(
+                            runSpacing: 2,
+                            spacing: 15,
+                            children: actionChips
+                                .map((actionChip) => ActionChip(
+                                      label: Text(actionChip.label),
+                                      onPressed: () {
+                                        // Set the search text to the tapped item's text
+                                        searchPageController.searchController
+                                            .text = actionChip.label;
+                                        // Trigger the search
+                                        searchPageController
+                                            .fetchSearchProducts();
+                                      },
+                                    ))
+                                .toList(),
+                          )
                         ],
                       ),
                     ),
@@ -169,22 +179,4 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-
-  // Helper function to create search suggestion widgets
-  Widget buildActionChips() => Wrap(
-        runSpacing: 2,
-        spacing: 15,
-        children: actionChips
-            .map((actionChip) => ActionChip(
-                  label: Text(actionChip.label),
-                  onPressed: () {
-                    // Set the search text to the tapped item's text
-                    searchPageController.searchController.text =
-                        actionChip.label;
-                    // Trigger the search
-                    searchPageController.fetchSearchProducts();
-                  },
-                ))
-            .toList(),
-      );
 }
