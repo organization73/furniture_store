@@ -141,7 +141,7 @@ class FadeAppBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.pagePaddingSpace),
               child: SizedBox(
-                height: 55.h,
+                height: 60.r,
                 child: CustomTextFormField(
                   hint: 'homeSearchBarHint'.tr,
                   prefixIcon: Iconsax.search_normal_copy,

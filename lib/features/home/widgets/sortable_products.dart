@@ -35,7 +35,7 @@ class SortableProducts extends StatelessWidget {
               controller.sortProducts(value!);
             }),
         SizedBox(
-          height: TSizes.spaceBtwSections,
+          height: TSizes.spaceBtwSections * 1.5,
         ),
         Obx(() => GridLayout(
             mainAxisExtent: 265.r,

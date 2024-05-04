@@ -32,13 +32,12 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 55.h,
+        toolbarHeight: 60.r,
         actions: [
           IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(
               Icons.arrow_back_ios,
-              size: TSizes.iconMd,
             ),
           ),
           Expanded(
