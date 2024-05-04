@@ -1,28 +1,63 @@
+import 'dart:convert';
+
+import 'package:decordash/common/widgets/loaders/loaders.dart';
+import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:get/get.dart';
 
 class RecentSearchController extends GetxController {
   static RecentSearchController get instance => Get.find();
 
-  RxList recentSearchList = [].obs;
+  final recentSearches = <String>[].obs;
 
-  void addRecentSearch(String search) {
-    // Check if the search term already exists in the list
-    if (recentSearchList.contains(search)) {
-      // Option 1: Skip adding the search if it's already in the list
-      // Option 2: Remove the existing search and add it again to move it to the end
-      recentSearchList.remove(search);
-    }
-
-    // Ensure the list size does not exceed 5
-    if (recentSearchList.length >= 5) {
-      recentSearchList.removeAt(0); // Remove the oldest item
-    }
-
-    // Add the new search
-    recentSearchList.add(search);
+  @override
+  onInit() {
+    super.onInit();
+    initRecentSearches();
   }
 
-  void removeRecentSearchItem(int index) {
-    recentSearchList.removeAt(index);
+  void initRecentSearches() {
+    final json = TLocalStorage.instance().readData('recentSearches');
+    if (json != null) {
+      final storedSearches = jsonDecode(json) as List<dynamic>;
+      recentSearches.addAll(storedSearches.cast<String>());
+    }
+  }
+
+  void addSearch(String query) {
+  if (!recentSearches.contains(query)) {
+    // Check if the list already contains 5 items
+    if (recentSearches.length >= 5) {
+      // If it does, remove the oldest item before adding the new one
+      recentSearches.removeAt(0);
+    }
+    // Add the new search query to the list
+    recentSearches.add(query);
+    saveRecentSearchesToStorage();
+    TLoaders.customToast(
+        messege: 'Search query has been added to recent searches');
+  } else {
+    TLoaders.customToast(
+        messege: 'Search query is a duplicate. Cannot add duplicates.');
+  }
+}
+
+
+  void removeSearch(int query) {
+    recentSearches.removeAt(query);
+    saveRecentSearchesToStorage();
+    recentSearches.refresh();
+    TLoaders.customToast(
+        messege: 'Search query has been removed from recent searches');
+  }
+
+  void displayRecentSearches() {
+    // Assuming you have a method to display the list of recent searches
+    // This could be a simple print statement or a more complex UI update
+    print(recentSearches);
+  }
+
+  void saveRecentSearchesToStorage() {
+    final encodedRecentSearches = json.encode(recentSearches.toList());
+    TLocalStorage.instance().saveData('recentSearches', encodedRecentSearches);
   }
 }

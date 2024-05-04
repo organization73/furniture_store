@@ -50,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 searchController.clear();
               },
               onEditingComplete: () {
-                controller.addRecentSearch(searchController.text);
+                controller.addSearch(searchController.text);
                 // Get.back();
               },
             ),
@@ -76,11 +76,11 @@ class _SearchScreenState extends State<SearchScreen> {
               Obx(() => ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: controller.recentSearchList.length,
+                    itemCount: controller.recentSearches.length,
                     itemBuilder: (BuildContext ctx, index) => Dismissible(
                         key: UniqueKey(),
                         onDismissed: (DismissDirection dir) {
-                          controller.removeRecentSearchItem(index);
+                          controller.removeSearch(index);
                         },
                         background: Container(
                           decoration: const BoxDecoration(
@@ -104,7 +104,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             Iconsax.timer_1_copy,
                           ),
                           title: Text(
-                            controller.recentSearchList[index],
+                            controller.recentSearches[index],
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         )),
