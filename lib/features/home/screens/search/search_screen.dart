@@ -80,11 +80,14 @@ class _SearchScreenState extends State<SearchScreen> {
             if (searchPageController.searchProducts.isEmpty) {
               return const Center(child: Text('No Products Found'));
             }
-            return GridLayout(
-              mainAxisExtent: 265.r,
-              itemCount: searchPageController.searchProducts.length,
-              itemBuilder: (_, index) => ProductCardVerical(
-                product: searchPageController.searchProducts[index],
+            return Padding(
+              padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+              child: GridLayout(
+                mainAxisExtent: 265.r,
+                itemCount: searchPageController.searchProducts.length,
+                itemBuilder: (_, index) => ProductCardVerical(
+                  product: searchPageController.searchProducts[index],
+                ),
               ),
             );
           } else {
@@ -129,7 +132,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     )),
                 // Search Suggestions
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
