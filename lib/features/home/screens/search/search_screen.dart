@@ -8,6 +8,7 @@ import 'package:decordash/features/home/screens/filters/widgets/og_tab.dart';
 import 'package:decordash/features/home/screens/filters/widgets/og_tab_item.dart';
 import 'package:decordash/features/home/screens/search/controllers/recent_search_controller.dart';
 import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordash/features/home/screens/search/controllers/search_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,11 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RecentSearchController());
     var lang = Get.locale!.languageCode;
-    final productsController = ProductController.instance;
+    final searchPageController = Get.put(SearchPageController());
 
     return Scaffold(
       appBar: AppBar(
@@ -46,15 +45,16 @@ class _SearchScreenState extends State<SearchScreen> {
             child: CustomTextFormField(
               hint: 'homeSearchBarHint'.tr,
               prefixIcon: Iconsax.search_normal_copy,
-              controller: searchController,
+              controller: searchPageController.searchController,
               filled: true,
               suffixIcon: Iconsax.close_circle_copy,
               onTapSuffixIcon: () {
-                searchController.clear();
+                searchPageController.searchController.clear();
               },
               onEditingComplete: () {
-                controller.addSearch(searchController.text);
-                productsController.fetchSearchProducts(searchController.text);
+                controller
+                    .addSearch(searchPageController.searchController.text);
+                searchPageController.fetchSearchProducts();
               },
             ),
           ),
@@ -143,17 +143,17 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
 
               Obx(() {
-                if (productsController.isLoading.value) {
+                if (searchPageController.isLoading.value) {
                   return const VerticalProductShimmer();
                 }
-                if (productsController.searchProducts.isEmpty) {
+                if (searchPageController.searchProducts.isEmpty) {
                   return const Center(child: Text('No Products Found'));
                 }
                 return GridLayout(
                     mainAxisExtent: 265.r,
-                    itemCount: productsController.searchProducts.length,
+                    itemCount: searchPageController.searchProducts.length,
                     itemBuilder: (_, index) => ProductCardVerical(
-                          product: productsController.searchProducts[index],
+                          product: searchPageController.searchProducts[index],
                         ));
               }),
             ],
