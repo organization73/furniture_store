@@ -23,23 +23,25 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final searchPageController = Get.put(SearchPageController());
+  final recentSearchController = Get.put(RecentSearchController());
+  final isSearchSubmitted =
+      false.obs; // Observable to track if a search is submitted
+
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RecentSearchController());
-    var lang = Get.locale!.languageCode;
-    final searchPageController = Get.put(SearchPageController());
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 50.h,
         actions: [
           IconButton(
-              onPressed: () => Get.back(),
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: TSizes.iconMd,
-              )),
+            onPressed: () => Get.back(),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: TSizes.iconMd,
+            ),
+          ),
           Expanded(
             child: CustomTextFormField(
               hint: 'homeSearchBarHint'.tr,
@@ -49,39 +51,60 @@ class _SearchScreenState extends State<SearchScreen> {
               suffixIcon: Iconsax.close_circle_copy,
               onTapSuffixIcon: () {
                 searchPageController.searchController.clear();
+                // Reset the state if the search bar is cleared
+                isSearchSubmitted.value = false;
               },
               onEditingComplete: () {
-                controller
+                recentSearchController
                     .addSearch(searchPageController.searchController.text);
                 searchPageController.fetchSearchProducts();
+                // Update the state when a search is submitted
+                isSearchSubmitted.value = true;
               },
             ),
           ),
           IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) => _custombottomSheetFilter(context));
-              },
-              icon: const Icon(
-                Iconsax.filter_copy,
-              )),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => _customBottomSheetFilter(context),
+              );
+            },
+            icon: const Icon(Iconsax.filter_copy),
+          ),
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // Previous Searches
-              Obx(() => ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: controller.recentSearches.length,
-                    itemBuilder: (BuildContext ctx, index) => Dismissible(
+        child: Obx(() {
+          if (isSearchSubmitted.value) {
+            // Show search results
+            if (searchPageController.isLoading.value) {
+              return const VerticalProductShimmer();
+            }
+            if (searchPageController.searchProducts.isEmpty) {
+              return const Center(child: Text('No Products Found'));
+            }
+            return GridLayout(
+              mainAxisExtent: 265.r,
+              itemCount: searchPageController.searchProducts.length,
+              itemBuilder: (_, index) => ProductCardVerical(
+                product: searchPageController.searchProducts[index],
+              ),
+            );
+          } else {
+            // Show recent searches and search suggestions
+            return Column(
+              children: [
+                // Previous Searches
+                Obx(() => ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: recentSearchController.recentSearches.length,
+                      itemBuilder: (BuildContext ctx, index) => Dismissible(
                         key: UniqueKey(),
                         direction: DismissDirection.endToStart,
                         onDismissed: (_) {
-                          controller.removeSearch(index);
+                          recentSearchController.removeSearch(index);
                         },
                         background: Container(
                           decoration: const BoxDecoration(
@@ -90,8 +113,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          // Adjusting alignment based on the dismiss direction
-                          alignment: lang == 'ar'
+                          alignment: Get.locale!.languageCode == 'ar'
                               ? Alignment.centerLeft
                               : Alignment.centerRight,
                           child: const Icon(
@@ -101,86 +123,69 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         child: ListTile(
                           titleAlignment: ListTileTitleAlignment.titleHeight,
-                          leading: const Icon(
-                            Iconsax.timer_1_copy,
-                          ),
+                          leading: const Icon(Iconsax.timer_1_copy),
                           title: Text(
-                            controller.recentSearches[index],
+                            recentSearchController.recentSearches[index],
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                        )),
-                  )),
-              // Search Suggestions
-              Container(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Search Suggestions",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    SizedBox(
-                      height: TSizes.spaceBtwSections,
-                    ),
-                    Row(
-                      children: [
-                        searchSuggestions("Chair"),
-                        searchSuggestions("Bed"),
-                      ],
-                    ),
-                    SizedBox(
-                      height: TSizes.spaceBtwItems,
-                    ),
-                    Row(
-                      children: [
-                        searchSuggestions("Table"),
-                        searchSuggestions("Sofa"),
-                      ],
-                    ),
-                  ],
+                        ),
+                      ),
+                    )),
+                // Search Suggestions
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Search Suggestions",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      SizedBox(height: TSizes.spaceBtwSections),
+                      Row(
+                        children: [
+                          searchSuggestions("Chair"),
+                          searchSuggestions("Bed"),
+                        ],
+                      ),
+                      SizedBox(height: TSizes.spaceBtwItems),
+                      Row(
+                        children: [
+                          searchSuggestions("Table"),
+                          searchSuggestions("Sofa"),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-
-              Obx(() {
-                if (searchPageController.isLoading.value) {
-                  return const VerticalProductShimmer();
-                }
-                if (searchPageController.searchProducts.isEmpty) {
-                  return const Center(child: Text('No Products Found'));
-                }
-                return GridLayout(
-                    mainAxisExtent: 265.r,
-                    itemCount: searchPageController.searchProducts.length,
-                    itemBuilder: (_, index) => ProductCardVerical(
-                          product: searchPageController.searchProducts[index],
-                        ));
-              }),
-            ],
-          ),
-        ),
+              ],
+            );
+          }
+        }),
       ),
     );
   }
 
-  searchSuggestions(String text) {
+  // Helper function to create search suggestion widgets
+  Widget searchSuggestions(String text) {
     return Container(
       margin: const EdgeInsets.only(left: 8),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          borderRadius: BorderRadius.circular(30)),
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(30),
+      ),
       child: Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(color: Theme.of(context).colorScheme.onPrimaryContainer),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
       ),
     );
   }
 
-  _custombottomSheetFilter(BuildContext context) {
+  // Custom bottom sheet filter function
+  Widget _customBottomSheetFilter(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -212,12 +217,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      "Property Type",
-                    ),
-                    SizedBox(
-                      height: TSizes.spaceBtwSections,
-                    ),
+                    const Text("Property Type"),
+                    SizedBox(height: TSizes.spaceBtwSections),
                     const ButtonGroupSpaced(
                       items: [
                         "Any",
@@ -229,15 +230,13 @@ class _SearchScreenState extends State<SearchScreen> {
                         "Gardens"
                       ],
                     ),
-                    SizedBox(
-                      height: TSizes.spaceBtwSections,
-                    ),
+                    SizedBox(height: TSizes.spaceBtwSections),
                   ],
                 ),
                 BuildCTAButton(
                   text: 'Done',
                   onPressed: () => LoggerHelper.info('apply filter'),
-                )
+                ),
               ],
             ),
           ),
