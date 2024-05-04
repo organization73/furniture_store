@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class SearchPageController extends GetxController {
   static SearchPageController get instance => Get.find();
   final isLoading = false.obs;
+  final isSearchSubmitted = false.obs;
   final _productRepo = ProductRepo.instance;
   RxList<ProductModel> searchProducts = <ProductModel>[].obs;
   TextEditingController searchController = TextEditingController();
@@ -22,6 +23,7 @@ class SearchPageController extends GetxController {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     } finally {
       isLoading.value = false;
+      isSearchSubmitted.value = true;
     }
   }
 }

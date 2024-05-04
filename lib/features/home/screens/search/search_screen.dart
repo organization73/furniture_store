@@ -25,8 +25,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final searchPageController = Get.put(SearchPageController());
   final recentSearchController = Get.put(RecentSearchController());
-  final isSearchSubmitted =
-      false.obs; // Observable to track if a search is submitted
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +50,12 @@ class _SearchScreenState extends State<SearchScreen> {
               onTapSuffixIcon: () {
                 searchPageController.searchController.clear();
                 // Reset the state if the search bar is cleared
-                isSearchSubmitted.value = false;
+                searchPageController.isSearchSubmitted.value = false;
               },
               onEditingComplete: () {
                 recentSearchController
                     .addSearch(searchPageController.searchController.text);
                 searchPageController.fetchSearchProducts();
-                // Update the state when a search is submitted
-                isSearchSubmitted.value = true;
               },
             ),
           ),
@@ -76,7 +72,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: SafeArea(
         child: Obx(() {
-          if (isSearchSubmitted.value) {
+          if (searchPageController.isSearchSubmitted.value) {
             // Show search results
             if (searchPageController.isLoading.value) {
               return const VerticalProductShimmer();
