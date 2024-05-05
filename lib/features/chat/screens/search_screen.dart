@@ -1,12 +1,10 @@
-import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordash/features/chat/widgets/custom_text_form_field.dart';
+import 'package:decordash/features/chat/widgets/user_item.dart';
 import 'package:decordash/provider/firebase_provider.dart';
+import 'package:decordash/utils/constants/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../widgets/custom_text_form_field.dart';
-import '../widgets/empty_widget.dart';
-import '../widgets/user_item.dart';
+import 'package:get/get.dart';
 
 class UsersSearchScreen extends StatefulWidget {
   const UsersSearchScreen({super.key});
@@ -17,25 +15,7 @@ class UsersSearchScreen extends StatefulWidget {
 
 class _UsersSearchScreenState extends State<UsersSearchScreen> {
   final controller = TextEditingController();
-
-  final userData = [
-    UserModel(
-      id: '1',
-      userName: 'Hazy',
-      email: 'test@test.test',
-      avatar: 'https://i.pravatar.cc/150?img=0',
-      isOnline: true,
-      lastActive: DateTime.now(),
-    ),
-    UserModel(
-      id: '1',
-      userName: 'Charlotte',
-      email: 'test@test.test',
-      avatar: 'https://i.pravatar.cc/150?img=1',
-      isOnline: false,
-      lastActive: DateTime.now(),
-    ),
-  ];
+  final chatController = FirebaseProvider.instance;
 
   @override
   void dispose() {
@@ -46,43 +26,36 @@ class _UsersSearchScreenState extends State<UsersSearchScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          centerTitle: true,
-          foregroundColor: Colors.black,
           title: const Text(
             'Users Search',
-            style: TextStyle(fontSize: 25),
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              CustomTextFormField(
-                controller: controller,
-                hintText: 'Search',
-                onChanged: (val) =>
-                    Provider.of<FirebaseProvider>(context, listen: false)
-                        .searchUser(val),
-              ),
-              Consumer<FirebaseProvider>(
-                builder: (context, value, child) => Expanded(
-                  child: controller.text.isEmpty
-                      ? const EmptyWidget(
-                          icon: Icons.search, text: 'Search of User')
-                      : ListView.builder(
-                          padding: const EdgeInsets.all(16),
-                          itemCount: value.search.length,
-                          itemBuilder: (context, index) =>
-                              value.search[index].id !=
-                                      FirebaseAuth.instance.currentUser?.uid
-                                  ? UserItem(user: value.search[index])
-                                  : const SizedBox(),
-                        ),
+          padding:
+              const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomTextFormField(
+                  controller: controller,
+                  hintText: 'Search',
+                  onChanged: (val) => chatController.searchUser(val),
                 ),
-              ),
-            ],
+                Obx(
+                  () => ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: TSizes.pagePaddingSpace),
+                    shrinkWrap: true,
+                    itemCount: chatController.search.length,
+                    itemBuilder: (context, index) =>
+                        chatController.search[index].id !=
+                                FirebaseAuth.instance.currentUser?.uid
+                            ? UserItem(user: chatController.search[index])
+                            : const SizedBox(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

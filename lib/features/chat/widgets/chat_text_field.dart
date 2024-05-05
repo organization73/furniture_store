@@ -2,9 +2,10 @@ import 'dart:typed_data';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/media_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
-import 'package:decordash/utils/constants/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 import 'custom_text_form_field.dart';
 
@@ -19,7 +20,6 @@ class ChatTextField extends StatefulWidget {
 
 class _ChatTextFieldState extends State<ChatTextField> {
   final controller = TextEditingController();
-  // final notificationsService = NotificationsService();
   final notificationsService = NotificationsService();
 
   Uint8List? file;
@@ -45,24 +45,13 @@ class _ChatTextFieldState extends State<ChatTextField> {
               hintText: 'Add Message...',
             ),
           ),
-          const SizedBox(width: 5),
-          CircleAvatar(
-            backgroundColor: TColors.primary,
-            radius: 20,
-            child: IconButton(
-              icon: const Icon(Icons.send, color: Colors.white),
+          SizedBox(width: 5.w),
+          IconButton.filledTonal(
               onPressed: () => _sendText(context),
-            ),
-          ),
-          const SizedBox(width: 5),
-          CircleAvatar(
-            backgroundColor: TColors.primary,
-            radius: 20,
-            child: IconButton(
-              icon: const Icon(Icons.camera_alt, color: Colors.white),
-              onPressed: _sendImage,
-            ),
-          ),
+              icon: const Icon(Iconsax.send_1)),
+          SizedBox(width: 5.w),
+          IconButton.filledTonal(
+              onPressed: () => _sendImage(), icon: const Icon(Iconsax.camera)),
         ],
       );
 
@@ -77,9 +66,9 @@ class _ChatTextFieldState extends State<ChatTextField> {
         senderId: FirebaseAuth.instance.currentUser!.uid,
       );
       controller.clear();
-      FocusScope.of(context).unfocus();
+      // FocusScope.of(context).unfocus();
     }
-    FocusScope.of(context).unfocus();
+    // FocusScope.of(context).unfocus();
   }
 
   Future<void> _sendImage() async {
@@ -91,7 +80,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
         file: file!,
       );
       await notificationsService.sendNotification(
-        body: 'image........',
+        body: 'image recieved',
         senderId: FirebaseAuth.instance.currentUser!.uid,
       );
     }

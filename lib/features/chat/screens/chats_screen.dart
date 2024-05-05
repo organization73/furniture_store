@@ -2,11 +2,11 @@ import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/provider/firebase_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -17,12 +17,12 @@ class ChatsScreen extends StatefulWidget {
 
 class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
   final notificationService = NotificationsService();
+  final chatController = Get.put(FirebaseProvider());
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    Provider.of<FirebaseProvider>(context, listen: false).getAllUsers();
-
     notificationService.firebaseNotification(context);
   }
 
@@ -54,68 +54,32 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  final userData = [
-    UserModel(
-      id: '1',
-      userName: 'Hazy',
-      email: 'test@test.test',
-      avatar: 'https://i.pravatar.cc/150?img=0',
-      isOnline: true,
-      lastActive: DateTime.now(),
-    ),
-    UserModel(
-      id: '1',
-      userName: 'Charlotte',
-      email: 'test@test.test',
-      avatar: 'https://i.pravatar.cc/150?img=1',
-      isOnline: false,
-      lastActive: DateTime.now(),
-    ),
-    UserModel(
-      id: '2',
-      userName: 'Ahmed',
-      email: 'test@test.test',
-      avatar: 'https://i.pravatar.cc/150?img=2',
-      isOnline: true,
-      lastActive: DateTime.now(),
-    ),
-    UserModel(
-      id: '3',
-      userName: 'Prateek',
-      email: 'test@test.test',
-      avatar: 'https://i.pravatar.cc/150?img=3',
-      isOnline: false,
-      lastActive: DateTime.now(),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text('Chats'),
           actions: [
             IconButton(
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const UsersSearchScreen())),
-              icon: const Icon(Icons.search, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () => FirebaseAuth.instance.signOut(),
-              icon: const Icon(Icons.logout, color: Colors.black),
+              onPressed: () => Get.to(
+                () => const UsersSearchScreen(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              ),
+              icon: const Icon(
+                Iconsax.search_normal_copy,
+              ),
             ),
           ],
         ),
-        body: Consumer<FirebaseProvider>(builder: (context, value, child) {
-          return ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: value.users.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 10),
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) =>
-                value.users[index].id != FirebaseAuth.instance.currentUser?.uid
-                    ? UserItem(user: value.users[index])
-                    : const SizedBox(),
-          );
-        }),
+        body: Obx(() => chatController.users.isEmpty
+            ? const Center(child: Text('No chats available'))
+            : ListView.builder(
+                itemCount: chatController.users.length,
+                itemBuilder: (context, index) =>
+                    chatController.users[index].id !=
+                            FirebaseAuth.instance.currentUser?.uid
+                        ? UserItem(user: chatController.users[index])
+                        : const SizedBox(),
+              )),
       );
 }

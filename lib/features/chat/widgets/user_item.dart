@@ -1,6 +1,10 @@
+import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/features/chat/screens/chat_screen.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class UserItem extends StatefulWidget {
@@ -20,16 +24,19 @@ class _UserItemState extends State<UserItem> {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => ChatScreen(userId: widget.user.id))),
+        onTap: () => Get.to(
+          () => ChatScreen(userId: widget.user.id),
+          duration: const Duration(milliseconds: 300),
+          transition: Transition.downToUp,
+        ),
         child: ListTile(
-          contentPadding: EdgeInsets.zero,
           leading: Stack(
             alignment: Alignment.bottomRight,
             children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(widget.user.avatar),
+              CircularImage(
+                imageUrl: widget.user.avatar,
+                isNetworkImage: true,
+                height: 100.r,
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
@@ -41,23 +48,16 @@ class _UserItemState extends State<UserItem> {
               ),
             ],
           ),
-          title: Text(
-            widget.user.userName,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          title: Text(widget.user.userName,
+              style: Theme.of(context).textTheme.headlineMedium),
           subtitle: Text(
-            'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',
-            maxLines: 2,
-            style: const TextStyle(
-              color: Colors.amber,
-              fontSize: 15,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+              'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',
+              maxLines: 2,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelSmall!
+                  .copyWith(overflow: TextOverflow.ellipsis)),
+          trailing: const Icon(Iconsax.arrow_circle_right_copy),
         ),
       );
 }

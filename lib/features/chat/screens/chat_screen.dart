@@ -1,8 +1,10 @@
+import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/features/chat/widgets/chat_messages.dart';
 import 'package:decordash/features/chat/widgets/chat_text_field.dart';
 import 'package:decordash/provider/firebase_provider.dart';
+import 'package:decordash/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key, required this.userId});
@@ -14,9 +16,11 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final chatController = FirebaseProvider.instance;
+
   @override
   void initState() {
-    Provider.of<FirebaseProvider>(context, listen: false)
+    chatController
       ..getUserById(widget.userId)
       ..getMessages(widget.userId);
     super.initState();
@@ -27,10 +31,13 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
         child: Column(
           children: [
             ChatMessages(receiverId: widget.userId),
+            SizedBox(
+              height: TSizes.spaceBtwSections/2,
+            ),
             ChatTextField(receiverId: widget.userId)
           ],
         ),
@@ -39,45 +46,34 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   AppBar _buildAppBar() => AppBar(
-      elevation: 0,
-      foregroundColor: Colors.black,
-      backgroundColor: Colors.transparent,
-      title: Consumer<FirebaseProvider>(
-        builder: (context, value, child) =>
-            value.user != null
-                ? Row(
+          title: Obx(
+        () => chatController.user.value != null
+            ? Row(
+                children: [
+                  CircularImage(
+                    imageUrl: chatController.user.value!.avatar,
+                    isNetworkImage: true,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(value.user!.avatar),
-                        radius: 20,
+                      Text(
+                        chatController.user.value!.userName,
                       ),
-                      const SizedBox(width: 10),
-                      Column(
-                        children: [
-                          Text(
-                            value.user!.userName,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            value.user!.isOnline
-                                ? 'Online'
-                                : 'Offline',
-                            style: TextStyle(
-                              color: value.user!.isOnline
+                      Text(
+                        chatController.user.value!.isOnline
+                            ? 'Online'
+                            : 'Offline',
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: chatController.user.value!.isOnline
                                   ? Colors.green
                                   : Colors.grey,
-                              fontSize: 14,
                             ),
-                          ),
-                        ],
                       ),
                     ],
-                  )
-                : const SizedBox(),
+                  ),
+                ],
+              )
+            : const SizedBox(),
       ));
 }
