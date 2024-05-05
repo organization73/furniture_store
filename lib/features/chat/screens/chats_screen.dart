@@ -16,14 +16,14 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
-  // final notificationService = NotificationsService();
+  final notificationService = NotificationsService();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     Provider.of<FirebaseProvider>(context, listen: false).getAllUsers();
 
-    // notificationService.firebaseNotification(context);
+    notificationService.firebaseNotification(context);
   }
 
   @override

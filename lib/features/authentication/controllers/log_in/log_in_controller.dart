@@ -1,4 +1,5 @@
 import 'package:decordash/data/services/firebase_firestore_service.dart';
+import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -19,6 +20,7 @@ class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final userController = Get.put(UserController());
+  static final notifications = NotificationsService();
 
   @override
   void onInit() {
@@ -60,6 +62,8 @@ class LoginController extends GetxController {
         {'lastActive': DateTime.now()},
       );
 
+      await notifications.requestPermission();
+      await notifications.getToken();
       FullScreenLoader.stopLoading();
 
       AuthenticatorRepo.instance.screenRedirect();
@@ -90,6 +94,9 @@ class LoginController extends GetxController {
       await FirebaseFirestoreService.updateUserData(
         {'lastActive': DateTime.now()},
       );
+
+      await notifications.requestPermission();
+      await notifications.getToken();
       FullScreenLoader.stopLoading();
 
       AuthenticatorRepo.instance.screenRedirect();

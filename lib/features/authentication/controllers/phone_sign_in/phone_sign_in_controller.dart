@@ -1,5 +1,6 @@
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
+import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/utils/helpers/network_manager.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/utils/popups/full_screen_loader.dart';
@@ -18,6 +19,7 @@ class PhoneSingInController extends GetxController {
   final TextEditingController userNameController = TextEditingController();
 
   final TextEditingController phoneNumController = TextEditingController();
+  static final notifications = NotificationsService();
 
   void loginWithPhone() async {
     try {
@@ -45,6 +47,8 @@ class PhoneSingInController extends GetxController {
         {'lastActive': DateTime.now()},
       );
 
+      await notifications.requestPermission();
+      await notifications.getToken();
       FullScreenLoader.stopLoading();
     } catch (e) {
       FullScreenLoader.stopLoading();

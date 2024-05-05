@@ -1,3 +1,4 @@
+import 'package:decordash/data/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
@@ -24,7 +25,7 @@ class SignUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumController = TextEditingController();
-
+  static final notifications = NotificationsService();
   void signup() async {
     try {
       FullScreenLoader.openLoadingDialog(
@@ -68,6 +69,9 @@ class SignUpController extends GetxController {
 
       final userRepesotory = Get.put(UserRepo());
       await userRepesotory.saveuserRecord(newUser);
+
+      await notifications.requestPermission();
+      await notifications.getToken();
 
       FullScreenLoader.stopLoading();
 

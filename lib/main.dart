@@ -1,6 +1,7 @@
 import 'package:decordash/app.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -8,6 +9,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
+
+Future<void> _backgroundMessageHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+}
 
 Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +24,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseMessaging.instance.getInitialMessage();
 
+  FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
   await FirebaseAppCheck.instance
       .activate(
         androidProvider: AndroidProvider.debug,
       )
       .then((value) => Get.put(AuthenticatorRepo()));
+
   runApp(const MyApp());
 }

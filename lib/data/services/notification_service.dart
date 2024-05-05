@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/features/chat/screens/chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +15,7 @@ const channel = AndroidNotificationChannel(
 
 class NotificationsService {
   static const key =
-      'AAAAEqUOTOQ:APA91bFpNSEt_rnhIdc0IRpIUeZM1USeFDSh6AALHKXNsiJwrQH_rPV8qvp9-TsDTnrat8iKdPZiyyR5AHDSVF5SzsGpwWqeJSKT_0FFf0eEmI6uOQ3tSyHnlAwAq1TC253BBiui2olI';
+      'AAAAHjOO9Ic:APA91bHbdah0toECDdIn1IwS3Sgq2n6zL2R6AnPFoMO0gtWDa8GdRSVvF97MiRGUVblZjkfN7wJ0z3g-LjaZkLeKbjMiVwA3GIq81SmeNZzgT8UGlrNh7OeCXNrA0B7tO7sUFee84LFZ';
 
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 

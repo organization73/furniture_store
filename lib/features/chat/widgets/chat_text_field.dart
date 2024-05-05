@@ -20,12 +20,13 @@ class ChatTextField extends StatefulWidget {
 class _ChatTextFieldState extends State<ChatTextField> {
   final controller = TextEditingController();
   // final notificationsService = NotificationsService();
+  final notificationsService = NotificationsService();
 
   Uint8List? file;
 
   @override
   void initState() {
-    // notificationsService.getReceiverToken(widget.receiverId);
+    notificationsService.getReceiverToken(widget.receiverId);
     super.initState();
   }
 
@@ -71,10 +72,10 @@ class _ChatTextFieldState extends State<ChatTextField> {
         receiverId: widget.receiverId,
         content: controller.text,
       );
-      // await notificationsService.sendNotification(
-      //   body: controller.text,
-      //   senderId: FirebaseAuth.instance.currentUser!.uid,
-      // );
+      await notificationsService.sendNotification(
+        body: controller.text,
+        senderId: FirebaseAuth.instance.currentUser!.uid,
+      );
       controller.clear();
       FocusScope.of(context).unfocus();
     }
@@ -89,10 +90,10 @@ class _ChatTextFieldState extends State<ChatTextField> {
         receiverId: widget.receiverId,
         file: file!,
       );
-      // await notificationsService.sendNotification(
-      //   body: 'image........',
-      //   senderId: FirebaseAuth.instance.currentUser!.uid,
-      // );
+      await notificationsService.sendNotification(
+        body: 'image........',
+        senderId: FirebaseAuth.instance.currentUser!.uid,
+      );
     }
   }
 }
