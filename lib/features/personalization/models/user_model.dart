@@ -11,11 +11,13 @@ class UserModel {
   final String phoneNumber;
   final String userName;
   DateTime? createdDate;
+  DateTime? lastActive;
+  bool isOnline;
 
   // Additional fields for Vendor
   String galleryName;
   String galleryAddress;
-  String galleryCertificate ;
+  String galleryCertificate;
 
   UserModel({
     this.accountType = AccountType.regular,
@@ -26,6 +28,8 @@ class UserModel {
     this.email = '',
     this.id = '',
     this.userName = '',
+    this.lastActive,
+    this.isOnline = false,
     DateTime? createdDate,
     this.galleryName = '',
     this.galleryAddress = '',
@@ -60,6 +64,8 @@ class UserModel {
     String? phoneNumber,
     String? userName,
     DateTime? createdDate,
+    DateTime? lastActive,
+    bool? isOnline,
     String? galleryName,
     String? galleryAddress,
     String? galleryCertificate,
@@ -74,6 +80,8 @@ class UserModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       userName: userName ?? this.userName,
       createdDate: createdDate ?? this.createdDate,
+      lastActive: lastActive ?? this.lastActive,
+      isOnline: isOnline ?? this.isOnline,
       galleryName: galleryName ?? this.galleryName,
       galleryAddress: galleryAddress ?? this.galleryAddress,
       galleryCertificate: galleryCertificate ?? this.galleryCertificate,
@@ -94,6 +102,10 @@ class UserModel {
       createdDate: json['createdDate'] != null
           ? (json['createdDate'] as Timestamp).toDate()
           : null,
+      lastActive: json['lastActive'] != null
+          ? (json['lastActive'] as Timestamp).toDate()
+          : DateTime.now(),
+      isOnline: json['isOnline'] ?? false,
       galleryName: json['galleryName'] ?? '',
       galleryAddress: json['galleryAddress'] ?? '',
       galleryCertificate: json['galleryCertificate'] ?? '',
@@ -108,6 +120,8 @@ class UserModel {
       'lastName': lastName,
       'userName': userName,
       'createdDate': Timestamp.fromDate(createdDate ?? DateTime.now()),
+      'lastActive': Timestamp.fromDate(lastActive ?? DateTime.now()),
+      'isOnline': isOnline,
       'email': email,
       'phoneNumber': phoneNumber,
       'id': id,
@@ -128,6 +142,8 @@ class UserModel {
       id: '',
       userName: '',
       createdDate: DateTime.now(),
+      lastActive: DateTime.now(),
+      isOnline: false,
       galleryName: '',
       galleryAddress: '',
       galleryCertificate: '',
@@ -150,6 +166,10 @@ class UserModel {
         createdDate: data['createdDate'] != null
             ? (data['createdDate'] as Timestamp).toDate()
             : null,
+        lastActive: data['lastActive'] != null
+            ? (data['lastActive'] as Timestamp).toDate()
+            : DateTime.now(),
+        isOnline: data['isOnline'] ?? false,
         galleryName: data['galleryName'] ?? '',
         galleryAddress: data['galleryAddress'] ?? '',
         galleryCertificate: data['galleryCertificate'] ?? '',

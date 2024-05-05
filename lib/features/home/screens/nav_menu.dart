@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:decordash/features/chat/screens/chats_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:decordash/features/home/screens/home_screen.dart';
 import 'package:decordash/features/store/screens/store_screen.dart';
 import 'package:decordash/features/personalization/screens/settings/settings.dart';
@@ -76,7 +76,7 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     const StoreScreen(),
     const AddProductPage(),
-    const ChatScreen(),
+    const ChatsScreen(),
     const SettingsScreen(),
   ];
 }

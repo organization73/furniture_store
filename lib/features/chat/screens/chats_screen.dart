@@ -1,153 +1,121 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:decordash/data/services/firebase_firestore_service.dart';
+import 'package:decordash/data/services/notification_service.dart';
+import 'package:decordash/features/chat/screens/search_screen.dart';
+import 'package:decordash/features/chat/widgets/user_item.dart';
+import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordash/provider/firebase_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:decordash/data/repositories/chat/chats.dart';
-import 'package:decordash/data/repositories/chat/chats_fake_json.dart';
-import 'package:decordash/features/chat/screens/chat_detailes.dart';
-import 'package:get/get.dart';
+class ChatsScreen extends StatefulWidget {
+  const ChatsScreen({super.key});
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    List<Chat> chats = parseJson(jsonChats);
-    const String imageUrl = 'https://picsum.photos/id/1062/80/80';
+  State<ChatsScreen> createState() => _ChatsScreenState();
+}
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-          title: Text(
-        'chat'.tr,
-      )),
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: chats.length,
-          itemBuilder: (context, index) {
-            Chat chat = chats[index];
-            Message lastMessage = chat.messages.isNotEmpty
-                ? chat.messages.last
-                : Message(
-                    id: '',
-                    sender: {},
-                    timestamp: '',
-                    text: '',
-                    status: '',
-                  );
+class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
+  // final notificationService = NotificationsService();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    Provider.of<FirebaseProvider>(context, listen: false).getAllUsers();
 
-            return ListTile(
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              leading: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 25,
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
-              title: Text(
-                chat.participants.length == 1
-                    ? chat.participants[0]['name']
-                    : chat.participants[0]['name'] +
-                        ', ' +
-                        chat.participants[1]['name'],
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              subtitle: Text(
-                lastMessage.text,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    lastMessage.timestamp,
-                    style: const TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  if (lastMessage.status == 'uploading')
-                    const Icon(
-                      Icons.timer_outlined,
-                      size: 18.0,
-                      color: Colors.grey,
-                    ),
-                  if (lastMessage.status == 'sent')
-                    const Icon(
-                      Icons.check,
-                      size: 18.0,
-                      color: Colors.grey,
-                    ),
-                  if (lastMessage.status == 'delivered')
-                    const Icon(
-                      Icons.done_all,
-                      size: 18.0,
-                      color: Colors.grey,
-                    ),
-                  if (lastMessage.status == 'read')
-                    const Icon(
-                      Icons.check,
-                      size: 18.0,
-                      color: Colors.blue,
-                    ),
-                ],
-              ),
-              onTap: () => Get.to(
-                () => ChatDetailScreen(
-                  chat: chat,
-                  profileImage: imageUrl,
-                ),
-                duration: const Duration(milliseconds: 300),
-                transition: Transition.rightToLeft,
-              ),
-            );
-          },
-        ),
-      ),
-    );
+    // notificationService.firebaseNotification(context);
   }
 
-  List<Chat> parseJson(Map<String, dynamic> jsonChats) {
-    final List<dynamic> chatList = jsonChats['chats'];
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
 
-    List<Chat> chats = [];
-    for (var chatData in chatList) {
-      List<Map<String, dynamic>> participants =
-          List<Map<String, dynamic>>.from(chatData['participants']);
-      List<Message> messageList = List<Message>.from(
-        chatData['messages'].map(
-          (messageData) => Message(
-            id: messageData['id'],
-            sender: messageData['sender'],
-            timestamp: messageData['timestamp'],
-            text: messageData['text'],
-            status: messageData['status'],
-          ),
-        ),
-      );
+    switch (state) {
+      case AppLifecycleState.resumed:
+        FirebaseFirestoreService.updateUserData({
+          'lastActive': DateTime.now(),
+          'isOnline': true,
+        });
+        break;
 
-      Chat chat = Chat(
-        id: chatData['id'],
-        participants: participants,
-        messages: messageList,
-      );
-
-      chats.add(chat);
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        FirebaseFirestoreService.updateUserData({'isOnline': false});
+        break;
+      case AppLifecycleState.hidden:
+      // TODO: Handle this case.
     }
-
-    return chats;
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  final userData = [
+    UserModel(
+      id: '1',
+      userName: 'Hazy',
+      email: 'test@test.test',
+      avatar: 'https://i.pravatar.cc/150?img=0',
+      isOnline: true,
+      lastActive: DateTime.now(),
+    ),
+    UserModel(
+      id: '1',
+      userName: 'Charlotte',
+      email: 'test@test.test',
+      avatar: 'https://i.pravatar.cc/150?img=1',
+      isOnline: false,
+      lastActive: DateTime.now(),
+    ),
+    UserModel(
+      id: '2',
+      userName: 'Ahmed',
+      email: 'test@test.test',
+      avatar: 'https://i.pravatar.cc/150?img=2',
+      isOnline: true,
+      lastActive: DateTime.now(),
+    ),
+    UserModel(
+      id: '3',
+      userName: 'Prateek',
+      email: 'test@test.test',
+      avatar: 'https://i.pravatar.cc/150?img=3',
+      isOnline: false,
+      lastActive: DateTime.now(),
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Chats'),
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const UsersSearchScreen())),
+              icon: const Icon(Icons.search, color: Colors.black),
+            ),
+            IconButton(
+              onPressed: () => FirebaseAuth.instance.signOut(),
+              icon: const Icon(Icons.logout, color: Colors.black),
+            ),
+          ],
+        ),
+        body: Consumer<FirebaseProvider>(builder: (context, value, child) {
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: value.users.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) =>
+                value.users[index].id != FirebaseAuth.instance.currentUser?.uid
+                    ? UserItem(user: value.users[index])
+                    : const SizedBox(),
+          );
+        }),
+      );
 }

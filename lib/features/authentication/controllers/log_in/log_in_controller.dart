@@ -1,3 +1,5 @@
+import 'package:decordash/data/services/firebase_firestore_service.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
@@ -54,6 +56,9 @@ class LoginController extends GetxController {
 
       await AuthenticatorRepo.instance.loginWithEmailAndPassword(
           emailController.text.trim(), passwordController.text.trim());
+      await FirebaseFirestoreService.updateUserData(
+        {'lastActive': DateTime.now()},
+      );
 
       FullScreenLoader.stopLoading();
 
@@ -82,12 +87,15 @@ class LoginController extends GetxController {
       final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
       await userController.saveUserRecord(userCred);
+      await FirebaseFirestoreService.updateUserData(
+        {'lastActive': DateTime.now()},
+      );
       FullScreenLoader.stopLoading();
 
       AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       FullScreenLoader.stopLoading();
-
+      LoggerHelper.error(e.toString());
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }

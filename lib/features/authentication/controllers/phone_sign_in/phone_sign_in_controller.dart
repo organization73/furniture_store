@@ -1,4 +1,5 @@
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/utils/helpers/network_manager.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/utils/popups/full_screen_loader.dart';
@@ -40,6 +41,9 @@ class PhoneSingInController extends GetxController {
 
       await AuthenticatorRepo.instance
           .loginWithPhone(phoneNumController.text.trim());
+      await FirebaseFirestoreService.updateUserData(
+        {'lastActive': DateTime.now()},
+      );
 
       FullScreenLoader.stopLoading();
     } catch (e) {

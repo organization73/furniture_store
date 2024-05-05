@@ -53,8 +53,12 @@ dependencies:
   uuid: any
   flutter_otp_text_field: ^1.1.2+1
   intl_phone_number_input: ^0.7.4
-  firebase_messaging: ^14.7.20
-  flutter_local_notifications: ^17.0.0
+  firebase_messaging: ^14.9.1
+  flutter_local_notifications: ^17.1.1
+  timeago: ^3.6.1
+  provider_base_tools: ^0.1.6
+  provider: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
