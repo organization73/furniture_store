@@ -1,4 +1,8 @@
+const axios = require("axios");
 const yup = require("yup");
+
+const fs = require('fs');
+const path = require('path');
 
 const Product = require("../models/product");
 
@@ -31,11 +35,38 @@ exports.createProduct = async (req, res, next) => {
     next(error);
     return throwError(422, error.message, error.path, next);
   }
-  const imagesObjests = images.map((image) => {
-    return { imageUrl: image };
+  //classfiy images
+  const imagesObjests = images.map(async (image) => {
+    try {
+      // Download the image
+      const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+      const imageBuffer = imageResponse.data;
+  
+      // Save the image to a temporary file
+      const tempFilePath = path.join(process.cwd(), 'temp_image.jpg');
+      await fs.promises.writeFile(tempFilePath, imageBuffer);
+  
+      // Send the image file to the FastAPI server
+      const formData = new FormData();
+      formData.append('file', fs.createReadStream(tempFilePath));
+  
+      const response = await axios.post('http://your-fastapi-server/classify', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      const classificationResult = response.data;
+  
+      // Clean up the temporary file
+      fs.unlinkSync(tempFilePath);
+    } catch (error) {
+      console.error('Error classifying image:', error);
+      res.status(500).json({ error: 'Failed to classify image' });
+    }
+
+    return { imageUrl: image, category: classificationResult.category, confidence: classificationResult.ratio};
   });
-  console.log("here");
-  console.log("images3:", imagesObjests);
   // //validationg images
   // console.log(req.files.length);
   // if (!req.files.length) {

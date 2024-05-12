@@ -12,6 +12,11 @@ const productSchema = new Schema(
     description: String,
     images: [
       {
+        category: String,
+        confidence: {
+          type: Number,
+          default: 0,
+        },
         imageUrl: {
           // _id: false, // Add this line to remove the _id from the subdocument
           type: String,
