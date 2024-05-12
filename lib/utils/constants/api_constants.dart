@@ -1,3 +1,3 @@
 /* -- LIST OF Constants used in APIs -- */
 
-const String aiAPIKey = "sk-XZhoyaLTiRi8jPcSW3Oc3Dz3yr5IUClj9DQ9EaKPoSthLQjF";
+const String aiAPIKey = "sk-fwETRaDrr7XLNAnNXRtd4bKTv0KayLTyNnqJqP3gqRPHQzzz";

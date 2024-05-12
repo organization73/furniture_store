@@ -36,10 +36,7 @@ class _AiPageState extends State<AiPage> {
 
   @override
   Widget build(BuildContext context) {
-    final balanceController = Get.put(BalanceController());
-    // TODO fix this shit
-    // balanceController.fetchBalance();
-
+    Get.put(BalanceController());
     return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(

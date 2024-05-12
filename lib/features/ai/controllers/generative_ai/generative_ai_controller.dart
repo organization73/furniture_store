@@ -4,7 +4,14 @@ import 'package:get/get.dart';
 
 class BalanceController extends GetxController {
   static BalanceController get instance => Get.find();
-  var balance = 0.0.obs;
+  RxDouble balance = 0.0.obs;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    fetchBalance();
+  }
 
   void fetchBalance() {
     BalanceModel().fetchBalance().then((fetchedBalance) {
