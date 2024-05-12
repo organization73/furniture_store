@@ -1,8 +1,8 @@
 from fastapi import FastAPI, File, UploadFile
 import uvicorn
-from io import BytesIO
 from PIL import Image
 import tensorflow as tf
+from io import BytesIO
 import numpy as np
 import os
 
