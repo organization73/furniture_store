@@ -36,6 +36,7 @@ class ProfileWidget extends StatelessWidget {
               icon: Iconsax.edit_2,
               height: 35.r,
               width: 35.r,
+              onPress: onClicked,
             ),
           ),
         ],

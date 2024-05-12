@@ -10,12 +10,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 
-Future<void> _backgroundMessageHandler(RemoteMessage message) async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-}
-
 Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -24,13 +18,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseMessaging.instance.getInitialMessage();
 
-  FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
-  await FirebaseAppCheck.instance
-      .activate(
-        androidProvider: AndroidProvider.debug,
-      )
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug,
+  );
+  await FirebaseMessaging.instance
+      .getInitialMessage()
       .then((value) => Get.put(AuthenticatorRepo()));
 
   runApp(const MyApp());
