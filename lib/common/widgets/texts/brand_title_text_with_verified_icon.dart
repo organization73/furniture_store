@@ -1,3 +1,5 @@
+import 'package:decordash/features/home/model/vendor_model.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:decordash/common/widgets/texts/brand_title_text.dart';
 import 'package:decordash/utils/constants/colors.dart';
@@ -8,18 +10,20 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 class BrandTitleTextWithVerifiedIcon extends StatelessWidget {
   const BrandTitleTextWithVerifiedIcon(
       {super.key,
-      required this.title,
+      required this.vendor,
       this.maxLines = 1,
       this.textColor,
       this.iconColor = TColors.primary,
       this.textAlign = TextAlign.center,
+      this.title,
       this.beandtextSize = TextSizes.small});
 
-  final String title;
+  final VendorModel vendor;
   final int maxLines;
   final Color? textColor, iconColor;
   final TextAlign? textAlign;
   final TextSizes beandtextSize;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class BrandTitleTextWithVerifiedIcon extends StatelessWidget {
       children: [
         Flexible(
             child: BrandTitleText(
-          title: title,
+          title:vendor.name,
           color: textColor,
           maxLines: maxLines,
           textAlign: textAlign,
@@ -38,11 +42,12 @@ class BrandTitleTextWithVerifiedIcon extends StatelessWidget {
         const SizedBox(
           width: TSizes.xs,
         ),
-        Icon(
-          Iconsax.verify,
-          color: iconColor,
-          size: TSizes.iconSm,
-        )
+        if (vendor.isVerified??false)
+          Icon(
+            Iconsax.verify,
+            color: iconColor,
+            size: TSizes.iconSm,
+          )
       ],
     );
   }

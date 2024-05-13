@@ -109,7 +109,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             BrandTitleTextWithVerifiedIcon(
-                              title: product.productDetails.productSeller.name,
+                              vendor: product.productDetails.productSeller
                             ),
                           ],
                         ),

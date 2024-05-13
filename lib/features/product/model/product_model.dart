@@ -22,10 +22,10 @@ class ProductModel {
   ProductModel({
     required this.productName,
     required this.categoryId,
-    required this.productPrice,
-    required this.productSalePrice,
+    this.productPrice = 0,
+    this.productSalePrice = 0,
     required this.productImage,
-    required this.onSale,
+    this.onSale = false,
     required this.productDetails,
     this.rates = const [],
     this.isFeatured = false,

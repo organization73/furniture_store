@@ -45,7 +45,7 @@ class FeaturedGalleryCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   BrandTitleTextWithVerifiedIcon(
-                    title: vendor.name,
+                    vendor: vendor,
                     beandtextSize: TextSizes.medium,
                   ),
                   Text(

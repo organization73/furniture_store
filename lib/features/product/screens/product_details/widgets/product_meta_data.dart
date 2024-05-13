@@ -33,30 +33,39 @@ class ProductMetaData extends StatelessWidget {
       children: [
         Row(
           children: [
-            RoundedContainer(
-              raduis: TSizes.sm,
-              backgroundColor: TColors.secondary.withOpacity(0.8),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.sm, vertical: TSizes.xs),
-              child: Text(
-                '$salePercentage%',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge!
-                    .apply(color: TColors.black),
+            if (salePercentage != null)
+              Row(
+                children: [
+                  RoundedContainer(
+                    raduis: TSizes.sm,
+                    backgroundColor: TColors.secondary.withOpacity(0.8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: TSizes.sm, vertical: TSizes.xs),
+                    child: Text(
+                      '$salePercentage%',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .apply(color: TColors.black),
+                    ),
+                  ),
+                  SizedBox(
+                    width: TSizes.spaceBtwItems,
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              width: TSizes.spaceBtwItems,
-            ),
             if (product.onSale)
-              ProductPriceText(
-                price: product.productPrice.toStringAsFixed(1),
-                lineThrough: true,
+              Row(
+                children: [
+                  ProductPriceText(
+                    price: product.productPrice.toStringAsFixed(1),
+                    lineThrough: true,
+                  ),
+                  SizedBox(
+                    width: TSizes.spaceBtwItems,
+                  ),
+                ],
               ),
-            SizedBox(
-              width: TSizes.spaceBtwItems,
-            ),
             ProductPriceText(
               price: productsController
                   .getProductPrice(product)
@@ -73,7 +82,7 @@ class ProductMetaData extends StatelessWidget {
           height: TSizes.spaceBtwItems,
         ),
         BrandTitleTextWithVerifiedIcon(
-          title: product.productDetails.productSeller.name,
+          vendor: product.productDetails.productSeller,
           beandtextSize: TextSizes.medium,
         ),
         Row(

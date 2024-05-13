@@ -104,7 +104,7 @@ class ProductCardVerical extends StatelessWidget {
                       height: TSizes.spaceBtwItems / 2,
                     ),
                     BrandTitleTextWithVerifiedIcon(
-                      title: product.productDetails.productSeller.name,
+                      vendor: product.productDetails.productSeller
                     ),
                   ],
                 ),

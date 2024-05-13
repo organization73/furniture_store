@@ -74,9 +74,7 @@ class AddProductController extends GetxController {
         productName: nameController.text,
         categoryId: '1',
         productPrice: double.parse(priceController.text),
-        productSalePrice: 100,
         productImage: pickedImagePaths[0],
-        onSale: false,
         productDetails: ProductDetails(
           condition: condition == 1 ? 'used' : 'new',
           color: color.toString(),
