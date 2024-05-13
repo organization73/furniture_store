@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/features/home/model/product_category_model.dart';
+import 'package:decordash/features/home/model/vendor_category_model.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -265,6 +267,15 @@ class ProductRepo extends GetxController {
       }
 
       await _db.collection('Products').doc(product.id).set(product.toJson());
+
+      await _db.collection('ProductCategory').add(ProductCategoryModel(
+              productId: product.id, categoryId: product.categoryId)
+          .toJson());
+
+      await _db.collection('VendorCategory').add(VendorCategoryModel(
+              vendorId: product.productDetails.productSeller.id,
+              categoryId: product.categoryId)
+          .toJson());
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
