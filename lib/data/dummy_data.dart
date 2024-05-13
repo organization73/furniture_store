@@ -43,7 +43,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'used',
-        color: 'red',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/chairs/002.png',
           'assets/images/products/chairs/003.png'
@@ -98,7 +98,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'white',
+        color: "Color(0xff3820f1)",
         productListImages: [
           'assets/images/products/chairs/001.png',
           'assets/images/products/chairs/003.png'
@@ -153,7 +153,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'black',
+        color: "Color(0xff389744)",
         productListImages: [
           'assets/images/products/chairs/002.png',
           'assets/images/products/chairs/004.png'
@@ -202,7 +202,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'black',
+        color: "Color(0xff6011f1)",
         productListImages: [
           'assets/images/products/chairs/002.png',
           'assets/images/products/chairs/003.png'
@@ -263,7 +263,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'used',
-        color: 'red',
+        color: "Color(0xff3557001)",
         productListImages: [
           'assets/images/products/sofas/002.png',
           'assets/images/products/sofas/003.png'
@@ -318,7 +318,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'black',
+        color: "Color(0xff4907f8)",
         productListImages: [
           'assets/images/products/sofas/001.png',
           'assets/images/products/sofas/003.png'
@@ -373,7 +373,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'black',
+        color: "Color(0xff1291d1)",
         productListImages: [
           'assets/images/products/sofas/002.png',
           'assets/images/products/sofas/004.png'
@@ -422,7 +422,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'black',
+        color: "Color(0xff3fffff)",
         productListImages: [
           'assets/images/products/sofas/002.png',
           'assets/images/products/sofas/003.png'
@@ -471,7 +471,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'used',
-        color: 'beige',
+        color: "Color(0xff236998)",
         productListImages: [
           'assets/images/products/beds/002.png',
           'assets/images/products/beds/003.png'
@@ -526,7 +526,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'blue',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/beds/004.png',
           'assets/images/products/beds/003.png'
@@ -581,7 +581,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'red',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/beds/002.png',
           'assets/images/products/beds/001.png'
@@ -630,7 +630,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'beige',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/beds/002.png',
           'assets/images/products/beds/003.png'
@@ -685,7 +685,7 @@ class DummyData {
       onSale: true,
       productDetails: ProductDetails(
         condition: 'used',
-        color: 'red',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/tables/002.png',
           'assets/images/products/tables/003.png'
@@ -740,7 +740,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'used',
-        color: 'white',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/tables/004.png',
           'assets/images/products/tables/003.png'
@@ -795,7 +795,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'used',
-        color: 'black',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/tables/002.png',
           'assets/images/products/tables/001.png'
@@ -844,7 +844,7 @@ class DummyData {
       onSale: false,
       productDetails: ProductDetails(
         condition: 'new',
-        color: 'beige',
+        color: "Color(0xff3897f1)",
         productListImages: [
           'assets/images/products/tables/002.png',
           'assets/images/products/tables/003.png'
@@ -873,7 +873,6 @@ class DummyData {
             isVerified: true),
       ),
     ),
-  
   ];
 
   static final List<CategoryModel> categories = [
