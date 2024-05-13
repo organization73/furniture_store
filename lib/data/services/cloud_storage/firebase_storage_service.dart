@@ -13,14 +13,22 @@ class FirebaseStorageServices extends GetxController {
 
   Future<Uint8List> getImageDatafromAssets(String path) async {
     try {
-      final byteData = await rootBundle.load(path);
+      if (path.startsWith('assets')) {
+        LoggerHelper.info('ggggggggg');
 
-      final imageData = byteData.buffer
-          .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
-      return imageData;
+        // Load image data from assets
+        final byteData = await rootBundle.load(path);
+        return byteData.buffer.asUint8List();
+      } else {
+        LoggerHelper.info('eeee');
+
+        // Load image data from file path
+        final file = File(path);
+        return await file.readAsBytes();
+      }
     } catch (e) {
-      LoggerHelper.error('error', e);
-
+      // Handle errors
+      LoggerHelper.error('Error loading image data: $e');
       throw 'Error loading image data';
     }
   }

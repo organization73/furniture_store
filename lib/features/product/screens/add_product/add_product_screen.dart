@@ -1,3 +1,4 @@
+import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,64 +12,18 @@ import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/validators/validation.dart';
 import 'package:get/get.dart';
 
-class AddProductPage extends StatefulWidget {
+class AddProductPage extends StatelessWidget {
   const AddProductPage({super.key});
 
   @override
-  State<AddProductPage> createState() => _AddProductPageState();
-}
-
-class _AddProductPageState extends State<AddProductPage> {
-  final List<String> pickedImagePaths = [];
-  bool isSelected = false;
-
-  final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
-      GlobalKey<ScaffoldMessengerState>();
-  final _formKey = GlobalKey<FormState>();
-
-  TextEditingController adressController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-
-  @override
-  void dispose() {
-    adressController.dispose();
-    descriptionController.dispose();
-    priceController.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final addController = Get.put(AddProductController());
     return Scaffold(
-        key: _scaffoldKey,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
             actions: [
               IconButton(
-                  onPressed: () {
-                    if (pickedImagePaths.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Theme.of(context).colorScheme.error,
-                        content: Text(
-                          'imageUpVal'.tr,
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.onError),
-                        ),
-                        duration: const Duration(milliseconds: 1500),
-                      ));
-                    }
-                    if ((_formKey.currentState?.validate() ?? false) &
-                        (pickedImagePaths.isNotEmpty)) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Colors.green,
-                        content: Text('done'.tr),
-                        duration: const Duration(milliseconds: 1500),
-                      ));
-                    }
-                  },
+                  onPressed: () => addController.addProduct(),
                   icon: const Icon(Icons.add))
             ],
             title: Text(
@@ -79,10 +34,9 @@ class _AddProductPageState extends State<AddProductPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: BuildProductImageUpload(
-                      pickedImagePaths: pickedImagePaths),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: BuildProductImageUpload(),
                 ),
                 SizedBox(
                   height: 10.h,
@@ -100,18 +54,18 @@ class _AddProductPageState extends State<AddProductPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Form(
-                    key: _formKey,
+                    key: addController.formKey,
                     child: Column(
                       children: [
                         RoundedTextField(
                             'productName'.tr,
-                            nameController,
+                            addController.nameController,
                             keyboardType: TextInputType.text,
                             TValidator.validateUserInput),
                         SizedBox(height: TSizes.spaceBtwInputFields),
                         RoundedTextField(
                           'price'.tr,
-                          priceController,
+                          addController.priceController,
                           keyboardType: TextInputType.phone,
                           (value) {
                             if (value == null || value.isEmpty) {
@@ -121,7 +75,8 @@ class _AddProductPageState extends State<AddProductPage> {
                           },
                         ),
                         SizedBox(height: TSizes.spaceBtwInputFields),
-                        RoundedTextField('address'.tr, adressController,
+                        RoundedTextField(
+                            'address'.tr, addController.adressController,
                             (value) {
                           if (value == null || value.isEmpty) {
                             return 'addressVal'.tr;
@@ -130,7 +85,7 @@ class _AddProductPageState extends State<AddProductPage> {
                         }),
                         SizedBox(height: TSizes.spaceBtwInputFields),
                         TextFormField(
-                          controller: descriptionController,
+                          controller: addController.descriptionController,
                           maxLines: 4,
                           decoration: InputDecoration(
                             hintText: 'description'.tr,
@@ -149,7 +104,9 @@ class _AddProductPageState extends State<AddProductPage> {
                             'zan'.tr,
                             'ablakash'.tr,
                           ],
-                          onItemSelected: (selectedItem) {},
+                          onItemSelected: (selectedItem) {
+                            addController.wood = selectedItem;
+                          },
                           hintText: 'selectType'.tr,
                         ),
                         SizedBox(height: TSizes.spaceBtwInputFields),
@@ -158,7 +115,9 @@ class _AddProductPageState extends State<AddProductPage> {
                             'cotton'.tr,
                             'silk'.tr,
                           ],
-                          onItemSelected: (selectedItem) {},
+                          onItemSelected: (selectedItem) {
+                            addController.cloth = selectedItem;
+                          },
                           hintText: 'selectType'.tr,
                         ),
                       ],
@@ -182,8 +141,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ConditionSelection(
                     onOptionSelected: (int? selectedOption) {
-                      // Handle the selected option here
-                      // print('Selected option: $selectedOption');
+                      addController.condition = selectedOption!;
                     },
                   ),
                 ),
@@ -204,8 +162,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   padding: const EdgeInsets.only(left: 10),
                   child: ColorSelection(
                     onColorSelected: (Color selectedColor) {
-                      // Handle the selected color here
-                      // print('Selected color: $selectedColor');
+                      addController.color = selectedColor;
                     },
                   ),
                 ),

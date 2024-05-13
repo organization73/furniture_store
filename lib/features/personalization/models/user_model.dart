@@ -13,6 +13,8 @@ class UserModel {
   DateTime? createdDate;
   DateTime? lastActive;
   bool isOnline;
+  bool isFeatured;
+  bool isVerified;
 
   // Additional fields for Vendor
   String galleryName;
@@ -34,6 +36,8 @@ class UserModel {
     this.galleryName = '',
     this.galleryAddress = '',
     this.galleryCertificate = '',
+    this.isFeatured = false,
+    this.isVerified = false,
   }) : createdDate = createdDate ?? DateTime.now();
   String get fullName {
     return '$firstName $lastName';
@@ -69,6 +73,8 @@ class UserModel {
     String? galleryName,
     String? galleryAddress,
     String? galleryCertificate,
+    bool? isFeatured,
+    bool? isVerified,
   }) {
     return UserModel(
       accountType: accountType ?? this.accountType,
@@ -85,6 +91,8 @@ class UserModel {
       galleryName: galleryName ?? this.galleryName,
       galleryAddress: galleryAddress ?? this.galleryAddress,
       galleryCertificate: galleryCertificate ?? this.galleryCertificate,
+      isFeatured: isFeatured ?? this.isFeatured,
+      isVerified: isVerified ?? this.isVerified,
     );
   }
 
@@ -109,6 +117,8 @@ class UserModel {
       galleryName: json['galleryName'] ?? '',
       galleryAddress: json['galleryAddress'] ?? '',
       galleryCertificate: json['galleryCertificate'] ?? '',
+      isFeatured: json['isFeatured'] ?? false,
+      isVerified: json['isVerified'] ?? false,
     );
   }
 
@@ -128,6 +138,8 @@ class UserModel {
       'galleryName': galleryName,
       'galleryAddress': galleryAddress,
       'galleryCertificate': galleryCertificate,
+      'isFeatured': isFeatured,
+      'isVerified': isVerified,
     };
   }
 
@@ -147,6 +159,8 @@ class UserModel {
       galleryName: '',
       galleryAddress: '',
       galleryCertificate: '',
+      isFeatured: false,
+      isVerified: false,
     );
   }
 
@@ -173,6 +187,8 @@ class UserModel {
         galleryName: data['galleryName'] ?? '',
         galleryAddress: data['galleryAddress'] ?? '',
         galleryCertificate: data['galleryCertificate'] ?? '',
+        isFeatured: data['isFeatured'] ?? false,
+        isVerified: data['isVerified'] ?? false,
       );
     } else {
       return UserModel.empty();

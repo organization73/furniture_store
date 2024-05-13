@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/features/home/model/review_model.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/constants/enums.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductModel {
   String id;
@@ -28,9 +29,9 @@ class ProductModel {
     required this.productDetails,
     this.rates = const [],
     this.isFeatured = false,
-    required this.sku,
-    this.id = '',
-  }) {
+    this.sku = '',
+    String id = '',
+  }) : id = id.isEmpty ? const Uuid().v4() : id {
     updateRates();
   }
   static ProductModel empty() => ProductModel(

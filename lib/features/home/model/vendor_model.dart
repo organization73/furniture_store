@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/utils/constants/enums.dart';
+import 'package:uuid/uuid.dart';
 
 class VendorModel {
   String id;
@@ -12,7 +13,7 @@ class VendorModel {
   AccountType? accountType;
 
   VendorModel({
-    this.id = '',
+    String id = '',
     required this.image,
     required this.location,
     required this.name,
@@ -20,7 +21,7 @@ class VendorModel {
     this.isVerified = false,
     this.accountType = AccountType.regular,
     this.productsCount,
-  });
+  }) : id = id.isEmpty ? const Uuid().v4() : id;
 
   static VendorModel empty() => VendorModel(
       id: '',

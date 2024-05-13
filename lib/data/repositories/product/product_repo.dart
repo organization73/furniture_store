@@ -241,41 +241,38 @@ class ProductRepo extends GetxController {
     }
   }
 
-  Future<void> addProduct(ProductModel product) async {
+  Future<void> uploadProductToDatabase(ProductModel product) async {
     try {
-      FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', 'assets/animations/animation-of-docer.json');
+      final storage = Get.put(FirebaseStorageServices());
+      LoggerHelper.warning(product.productImage);
 
-      final CollectionReference products = _db.collection('Products');
+      final mainImageFile =
+          await storage.getImageDatafromAssets(product.productImage);
 
-      // Check if a product with the same ID already exists
-      final DocumentSnapshot existingProduct =
-          await products.doc(product.id).get();
+      final mainImageUrl = await storage.uploadImageData(
+          'Products', mainImageFile, product.productImage);
+      product.productImage = mainImageUrl;
 
-      if (existingProduct.exists) {
-        // Display a message if the product already exists
-        FullScreenLoader.stopLoading();
+      for (var imagePath in product.productDetails.productListImages) {
+        final imageFile = await storage.getImageDatafromAssets(imagePath);
+        final imageUrl =
+            await storage.uploadImageData('Products', imageFile, imagePath);
 
-        TLoaders.warningSnackBar(
-            title: 'Product Exist',
-            message: 'A product with the same ID exits');
-        return;
-      } else {
-        // Add the new product if it's unique
-        await products.doc(product.id).set(product.toJson());
+        product.productDetails.productListImages = product
+            .productDetails.productListImages
+            .map((path) => path == imagePath ? imageUrl : path)
+            .toList();
       }
 
-      FullScreenLoader.stopLoading();
-
-      TLoaders.successSnackBar(
-          title: 'Uploading Completed',
-          message: 'All categories data has been uploaded to firestore');
+      await _db.collection('Products').doc(product.id).set(product.toJson());
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      LoggerHelper.error('error', e);
+      rethrow;
+      // throw 'Something went wrong, Please try again';
     }
   }
 }
