@@ -171,9 +171,10 @@ class ProductMetaData extends StatelessWidget {
             transition: Transition.rightToLeft,
           ),
         ),
-        UserReviewCard(
-          product: product,
-        ),
+        if (product.rates.isNotEmpty)
+          UserReviewCard(
+            product: product,
+          ),
       ],
     );
   }
