@@ -22,6 +22,18 @@ class ProductMetaData extends StatelessWidget {
   const ProductMetaData({super.key, required this.product});
   final ProductModel product;
 
+  Color _getColorFromString(String colorString) {
+    // Remove unnecessary characters from the color string
+    String cleanedColorString = colorString
+        .replaceAll("Color(", "")
+        .replaceAll(")", "")
+        .replaceAll("0x", "");
+    // Converting hex string to integer
+    int intValue = int.parse(cleanedColorString, radix: 16);
+    // Creating Color object from integer value
+    return Color(intValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsController = ProductController.instance;
@@ -127,8 +139,7 @@ class ProductMetaData extends StatelessWidget {
         ),
         CircleAvatar(
             radius: 15,
-            backgroundColor:
-                THelperFunctions.getColor(product.productDetails.color)),
+            backgroundColor: _getColorFromString(product.productDetails.color)),
         SizedBox(
           height: TSizes.spaceBtwSections,
         ),
