@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             initialBinding: GeneralBinding(),
             debugShowCheckedModeBanner: false,
             title: 'Decor Dash',
-            locale: const Locale('en', 'US'),
+            locale: Get.deviceLocale,
             fallbackLocale: const Locale('en', 'US'),
             translations: Language(),
             themeMode: ThemeMode.system,

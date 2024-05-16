@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/features/ai/controllers/generative_ai/generative_ai_controller.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:get/get.dart';
 
 class AiInfoCard extends StatelessWidget {
@@ -45,17 +45,6 @@ class AiInfoCard extends StatelessWidget {
                     .textTheme
                     .titleLarge!
                     .copyWith(color: Colors.white),
-              ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: TColors.white),
-                ),
-                onPressed: () {},
-                child: Text('buyMore'.tr,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(color: Colors.white)),
               ),
             ],
           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -18,7 +18,6 @@ class NotificationsPage extends StatelessWidget {
           'notif'.tr,
         ),
       ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Obx(
           () => NotificationsController.instance.notiList.isEmpty
@@ -27,8 +26,8 @@ class NotificationsPage extends StatelessWidget {
                     children: [
                       Lottie.asset(
                         'assets/animations/no_notification.json',
-                        width: 300,
-                        height: 300,
+                        width: 300.r,
+                        height: 300.r,
                         fit: BoxFit.fill,
                       ),
                       Text(
@@ -49,9 +48,10 @@ class NotificationsPage extends StatelessWidget {
                             .removeNotification(index);
                       },
                       background: Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.error,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -69,8 +69,9 @@ class NotificationsPage extends StatelessWidget {
                         child: ListTile(
                           contentPadding: const EdgeInsets.all(15),
                           titleAlignment: ListTileTitleAlignment.titleHeight,
-                          leading: SvgPicture.asset(
-                            'assets/icons/sale_noti.svg',
+                          leading: Icon(
+                            Iconsax.activity_copy,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                           title: Text(
                             NotificationsController

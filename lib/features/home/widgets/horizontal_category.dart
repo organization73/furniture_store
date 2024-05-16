@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordash/features/home/model/category_model.dart';
-import 'package:decordash/utils/constants/colors.dart';
 
 class HorizontalCategory extends StatelessWidget {
   const HorizontalCategory(
@@ -18,7 +17,7 @@ class HorizontalCategory extends StatelessWidget {
         child: RoundedContainer(
           gradient: true,
           width: 115.w,
-          backgroundColor: TColors.grey.withOpacity(0.7),
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           raduis: 8.r,
           child: Stack(
             children: [
@@ -37,14 +36,9 @@ class HorizontalCategory extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0).r,
-                  child: Text(
-                    category.name,
-                    textAlign: TextAlign.left,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .apply(color: TColors.black),
-                  ),
+                  child: Text(category.name,
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.bodyMedium),
                 ),
               ),
             ],

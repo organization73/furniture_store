@@ -1,7 +1,7 @@
 import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/features/chat/widgets/chat_messages.dart';
 import 'package:decordash/features/chat/widgets/chat_text_field.dart';
-import 'package:decordash/provider/firebase_provider.dart';
+import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final chatController = FirebaseProvider.instance;
+  final chatController = ChatController.instance;
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             ChatMessages(receiverId: widget.userId),
             SizedBox(
-              height: TSizes.spaceBtwSections/2,
+              height: TSizes.spaceBtwSections / 2,
             ),
             ChatTextField(receiverId: widget.userId)
           ],

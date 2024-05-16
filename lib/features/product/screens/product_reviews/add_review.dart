@@ -4,7 +4,6 @@ import 'package:decordash/data/repositories/product/product.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AddReview extends StatelessWidget {
@@ -66,7 +65,6 @@ class AddReview extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 70.h,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(
             onPressed: () {

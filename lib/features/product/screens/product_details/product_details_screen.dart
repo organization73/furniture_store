@@ -4,7 +4,6 @@ import 'package:decordash/features/product/screens/product_details/widgets/produ
 import 'package:decordash/features/product/screens/product_details/widgets/product_meta_data.dart';
 import 'package:decordash/features/product/screens/product_details/widgets/product_rating_container.dart';
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -15,7 +14,6 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 70.h,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(
           child: Text(

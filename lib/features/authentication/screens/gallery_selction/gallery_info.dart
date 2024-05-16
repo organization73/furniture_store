@@ -5,7 +5,6 @@ import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/gallery_info/gallery_information_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -20,7 +19,6 @@ class GalleryInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 70.h,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'cont'.tr,

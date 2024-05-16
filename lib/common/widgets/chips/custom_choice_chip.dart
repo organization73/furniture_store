@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
 
 class CustomChoiceChip extends StatelessWidget {
   const CustomChoiceChip(
@@ -14,7 +13,6 @@ class CustomChoiceChip extends StatelessWidget {
       label: Text(text),
       selected: selected,
       onSelected: onSelected,
-      labelStyle: TextStyle(color: selected ? TColors.white : null),
     );
   }
 }

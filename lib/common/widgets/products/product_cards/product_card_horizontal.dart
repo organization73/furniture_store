@@ -9,9 +9,8 @@ import 'package:decordash/common/widgets/texts/product_title_text.dart';
 import 'package:decordash/features/home/controllers/product/product_controller.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_details/product_details_screen.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -21,7 +20,6 @@ class ProductCardHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     final productsController = ProductController.instance;
     final salePercentage = productsController.calculateSalePercnetage(
         product.productPrice, product.productSalePrice);
@@ -37,15 +35,14 @@ class ProductCardHorizontal extends StatelessWidget {
         width: 310.w,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-          color: dark ? TColors.darkerGrey : TColors.lightContainer,
-        ),
+            borderRadius: BorderRadius.circular(TSizes.productImageRadius),
+            color: Theme.of(context).colorScheme.surfaceContainer),
         child: Row(
           children: [
             RoundedContainer(
               hight: 125.h,
               padding: const EdgeInsets.all(TSizes.sm),
-              backgroundColor: dark ? TColors.black : TColors.light,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               child: Stack(
                 children: [
                   Align(
@@ -63,16 +60,11 @@ class ProductCardHorizontal extends StatelessWidget {
                       left: 0,
                       child: RoundedContainer(
                         raduis: TSizes.sm,
-                        backgroundColor: TColors.secondary.withOpacity(0.8),
+                        backgroundColor: Colors.amber.withOpacity(0.8),
                         padding: const EdgeInsets.symmetric(
                             horizontal: TSizes.sm, vertical: TSizes.xs),
-                        child: Text(
-                          '$salePercentage%',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .apply(color: TColors.black),
-                        ),
+                        child: Text('$salePercentage%',
+                            style: Theme.of(context).textTheme.labelMedium),
                       ),
                     ),
                   Positioned(
@@ -109,8 +101,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             BrandTitleTextWithVerifiedIcon(
-                              vendor: product.productDetails.productSeller
-                            ),
+                                vendor: product.productDetails.productSeller),
                           ],
                         ),
                       ],

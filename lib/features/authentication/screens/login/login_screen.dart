@@ -20,7 +20,6 @@ class LoginSignUpScreen extends StatelessWidget {
     final controller = Get.put(LoginController());
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
           PrimaryHeaderContainer(
@@ -47,7 +46,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20.r),
                     )),
-                height: 420.h,
+                height: 400.h,
                 child: Padding(
                   padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                   child: Column(
@@ -55,8 +54,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text('loginHeader'.tr,
-                          style: Theme.of(context).textTheme.headlineMedium),
-                      SizedBox(height: TSizes.spaceBtwSections),
+                          style: Theme.of(context).textTheme.headlineLarge),
                       Text(
                         'loginSubHeader'.tr,
                         style: Theme.of(context).textTheme.labelSmall,
@@ -71,7 +69,7 @@ class LoginSignUpScreen extends StatelessWidget {
                           transition: Transition.rightToLeft,
                         ),
                       ),
-                      SizedBox(height: TSizes.spaceBtwItems / 2),
+                      SizedBox(height: TSizes.spaceBtwItems / 4),
                       BuildCTAButton(
                         text: 'continueWithPhone'.tr,
                         onPressed: () => Get.to(
@@ -80,29 +78,29 @@ class LoginSignUpScreen extends StatelessWidget {
                           transition: Transition.rightToLeft,
                         ),
                       ),
-                      SizedBox(height: TSizes.spaceBtwItems / 2),
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton.icon(
-                          onPressed: () => controller.googleSignIn(),
-                          style: FilledButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: TSizes.buttonHeight - 3,
-                                horizontal: 10),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceContainerHighest,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(TSizes.buttonRadius)),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Divider(
+                              indent: 60,
+                              endIndent: 5,
+                            ),
                           ),
-                          icon: SvgPicture.asset(TImages.google),
-                          label: Text(
-                            'continueWithGoogle'.tr,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ),
+                          Text('Or'),
+                          Flexible(
+                            child: Divider(
+                              indent: 5,
+                              endIndent: 60,
+                            ),
+                          )
+                        ],
                       ),
-                      SizedBox(height: TSizes.spaceBtwItems / 2),
+                      IconButton.outlined(
+                        onPressed: () => controller.googleSignIn(),
+                        icon: SvgPicture.asset(TImages.google),
+                        padding: const EdgeInsets.all(15),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
 
 class CircularContainer extends StatelessWidget {
   const CircularContainer(
@@ -9,7 +8,7 @@ class CircularContainer extends StatelessWidget {
       this.raduis = 400,
       this.padding = 0,
       this.child,
-      this.backgroungColor = TColors.white});
+      this.backgroungColor = Colors.white});
   final double? width;
   final double? height;
   final double raduis;

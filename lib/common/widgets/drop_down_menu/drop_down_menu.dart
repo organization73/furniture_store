@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/utils/constants/colors.dart';
 
 class BuildDropDown extends StatefulWidget {
   final String? title;
@@ -35,7 +34,7 @@ class _SimpleDropDownState extends State<BuildDropDown> {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              border: Border.all(color: TColors.grey),
+              border: Border.all(),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Row(

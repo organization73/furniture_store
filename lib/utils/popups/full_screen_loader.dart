@@ -1,6 +1,5 @@
 import 'package:decordash/common/widgets/loaders/animation_loader.dart';
-import 'package:decordash/utils/constants/colors.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,9 +12,7 @@ class FullScreenLoader {
         builder: (_) => PopScope(
             canPop: false,
             child: Container(
-              color: THelperFunctions.isDarkMode(Get.context!)
-                  ? TColors.dark
-                  : TColors.light,
+              color: Theme.of(Get.context!).colorScheme.surfaceContainer,
               width: double.infinity,
               height: double.infinity,
               child: Column(

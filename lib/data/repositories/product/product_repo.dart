@@ -225,7 +225,7 @@ class ProductRepo extends GetxController {
               .toList();
         }
 
-        await _db.collection('Products').doc(product.id).set(product.toJson());
+        await _db.collection('Products').add(product.toJson());
       }
 
       FullScreenLoader.stopLoading();
@@ -246,8 +246,6 @@ class ProductRepo extends GetxController {
   Future<void> uploadProductToDatabase(ProductModel product) async {
     try {
       final storage = Get.put(FirebaseStorageServices());
-      LoggerHelper.warning(product.productImage);
-
       final mainImageFile =
           await storage.getImageDatafromAssets(product.productImage);
 
@@ -266,16 +264,23 @@ class ProductRepo extends GetxController {
             .toList();
       }
 
-      await _db.collection('Products').doc(product.id).set(product.toJson());
+      // Add the product to Firestore and wait for the operation to complete
+      await _db
+          .collection('Products')
+          .add(product.toJson())
+          .then((value) async {
+        // Retrieve the document ID of the newly added product
+        String productId = value.id;
+        // Optionally, update other collections with the new product ID
+        await _db.collection('ProductCategory').add(ProductCategoryModel(
+                productId: productId, categoryId: product.categoryId)
+            .toJson());
 
-      await _db.collection('ProductCategory').add(ProductCategoryModel(
-              productId: product.id, categoryId: product.categoryId)
-          .toJson());
-
-      await _db.collection('VendorCategory').add(VendorCategoryModel(
-              vendorId: product.productDetails.productSeller.id,
-              categoryId: product.categoryId)
-          .toJson());
+        await _db.collection('VendorCategory').add(VendorCategoryModel(
+                vendorId: product.productDetails.productSeller.id,
+                categoryId: product.categoryId)
+            .toJson());
+      });
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
@@ -283,7 +288,6 @@ class ProductRepo extends GetxController {
     } catch (e) {
       LoggerHelper.error('error', e);
       rethrow;
-      // throw 'Something went wrong, Please try again';
     }
   }
 }

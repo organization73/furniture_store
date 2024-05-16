@@ -1,9 +1,7 @@
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/data/services/firebase_firestore_service.dart';
-import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/utils/helpers/network_manager.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/utils/popups/full_screen_loader.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,47 +10,28 @@ class PhoneSingInController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final hidePassword = true.obs;
-
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
-
-  final TextEditingController phoneNumController = TextEditingController();
-  static final notifications = NotificationsService();
+  RxString phoneNumber = ''.obs;
 
   void loginWithPhone() async {
     try {
-      FullScreenLoader.openLoadingDialog(
-          'processingLoading'.tr, 'assets/animations/animation-of-docer.json');
-
       final isConnected = await NetworkManager.instance.isConnected();
+
       if (!isConnected) {
-        FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
             title: 'internet'.tr, message: 'noInternet'.tr);
         return;
       }
 
       if (!formKey.currentState!.validate()) {
-        FullScreenLoader.stopLoading();
-
         return;
       }
-      formKey.currentState?.save();
 
-      await AuthenticatorRepo.instance
-          .loginWithPhone(phoneNumController.text.trim());
-      await FirebaseFirestoreService.updateUserData(
-        {'lastActive': DateTime.now()},
-      );
-
-      await notifications.requestPermission();
-      await notifications.getToken();
-      FullScreenLoader.stopLoading();
+      await AuthenticatorRepo.instance.loginWithPhone(phoneNumber.value);
     } catch (e) {
-      FullScreenLoader.stopLoading();
-
+      LoggerHelper.error(e.toString());
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }

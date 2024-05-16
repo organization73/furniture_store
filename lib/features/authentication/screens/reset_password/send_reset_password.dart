@@ -19,7 +19,6 @@ class SentEmailPasswordReset extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
-          height: 70.h,
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
             text: 'tContinue'.tr,

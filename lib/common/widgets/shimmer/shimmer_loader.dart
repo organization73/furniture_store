@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
+
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerLoaderEffect extends StatelessWidget {
@@ -15,15 +14,14 @@ class ShimmerLoaderEffect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Shimmer.fromColors(
-        baseColor: dark ? Colors.grey[850]! : Colors.grey[300]!,
-        highlightColor: dark ? Colors.grey[700]! : Colors.grey[100]!,
+        baseColor: Theme.of(context).colorScheme.surfaceContainer,
+        highlightColor: Theme.of(context).colorScheme.surfaceContainerHigh,
         child: Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
-              color: color ?? (dark ? TColors.darkerGrey : TColors.white),
+              color: color ?? Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(raduis)),
         ));
   }

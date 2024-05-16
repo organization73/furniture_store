@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 
 class CircularImage extends StatelessWidget {
   const CircularImage({
@@ -30,10 +29,7 @@ class CircularImage extends StatelessWidget {
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color: backgroundColor ??
-            (THelperFunctions.isDarkMode(context)
-                ? TColors.black
-                : TColors.white),
+        color: backgroundColor ?? Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(100),
       ),
       child: ClipRRect(

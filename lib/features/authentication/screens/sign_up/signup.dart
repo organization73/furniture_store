@@ -6,7 +6,6 @@ import 'package:decordash/features/authentication/controllers/sign_up/sign_up_co
 import 'package:decordash/utils/constants/sizes.dart';
 
 import 'package:decordash/utils/validators/validation.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -20,7 +19,6 @@ class SignUpScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
-        height: 70.h,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'signUp'.tr,

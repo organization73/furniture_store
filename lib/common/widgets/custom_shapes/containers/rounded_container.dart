@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
 
 class RoundedContainer extends StatelessWidget {
@@ -10,9 +10,9 @@ class RoundedContainer extends StatelessWidget {
       this.raduis = TSizes.cardRadiusLg,
       this.child,
       this.showBorder = false,
-      this.borderColor = TColors.borderPrimary,
+      this.borderColor = Colors.grey,
       this.gradient = false,
-      this.backgroundColor = TColors.white,
+      this.backgroundColor = Colors.white,
       this.padding,
       this.margin});
 
@@ -35,13 +35,7 @@ class RoundedContainer extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-          gradient: gradient
-              ? RadialGradient(colors: [
-                  TColors.lightContainer.withOpacity(0.7),
-                  TColors.grey.withOpacity(0.7)
-                ], radius: 2)
-              : null,
-          color: !gradient ? backgroundColor : null,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(raduis),
           border: showBorder ? Border.all(color: borderColor) : null),
       child: child,

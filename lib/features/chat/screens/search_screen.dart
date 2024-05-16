@@ -1,6 +1,6 @@
 import 'package:decordash/features/chat/widgets/custom_text_form_field.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
-import 'package:decordash/provider/firebase_provider.dart';
+import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class UsersSearchScreen extends StatefulWidget {
 
 class _UsersSearchScreenState extends State<UsersSearchScreen> {
   final controller = TextEditingController();
-  final chatController = FirebaseProvider.instance;
+  final chatController = ChatController.instance;
 
   @override
   void dispose() {

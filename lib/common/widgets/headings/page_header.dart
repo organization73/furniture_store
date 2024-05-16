@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
 
 class PageHeader extends StatelessWidget {
@@ -28,7 +28,6 @@ class PageHeader extends StatelessWidget {
           Icon(
             iconName,
             size: size,
-            color: TColors.grey,
           ),
         SizedBox(height: TSizes.spaceBtwSections),
         Text(

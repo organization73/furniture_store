@@ -2,7 +2,7 @@ import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
-import 'package:decordash/provider/firebase_provider.dart';
+import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +17,7 @@ class ChatsScreen extends StatefulWidget {
 
 class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
   final notificationService = NotificationsService();
-  final chatController = Get.put(FirebaseProvider());
+  final chatController = Get.put(ChatController());
 
   @override
   void initState() {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 
 class CicularIcon extends StatelessWidget {
   const CicularIcon({
@@ -28,11 +27,8 @@ class CicularIcon extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: backgrounfColor != null
-              ? backgrounfColor!
-              : THelperFunctions.isDarkMode(context)
-                  ? TColors.black.withOpacity(0.9)
-                  : TColors.white.withOpacity(0.9)),
+          color: backgrounfColor ??
+              Theme.of(context).colorScheme.surfaceContainer),
       child: IconButton(
           onPressed: onPress,
           icon: Icon(

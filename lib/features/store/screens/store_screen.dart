@@ -12,9 +12,8 @@ import 'package:decordash/features/gallery/screens/vendor_products/vendor_produc
 import 'package:decordash/features/home/controllers/category_controller.dart';
 import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordash/features/store/widgets/category_tab.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -36,10 +35,7 @@ class StoreScreen extends StatelessWidget {
                     pinned: true,
                     automaticallyImplyLeading: false,
                     floating: true,
-                    backgroundColor: THelperFunctions.isDarkMode(context)
-                        ? TColors.black
-                        : TColors.white,
-                    expandedHeight: 365.h,
+                    expandedHeight: 290.h,
                     flexibleSpace: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
@@ -50,22 +46,16 @@ class StoreScreen extends StatelessWidget {
                           SizedBox(
                             height: TSizes.spaceBtwItems,
                           ),
-                          SizedBox(
-                            height: 50.h,
-                            child: CustomTextFormField(
-                              hint: 'homeSearchBarHint'.tr,
-                              prefixIcon: Iconsax.search_normal_copy,
-                              readOnly: true,
-                              filled: true,
-                              onTap: () => Get.to(
-                                () => const SearchScreen(),
-                                duration: const Duration(milliseconds: 300),
-                                transition: Transition.downToUp,
-                              ),
+                          CustomTextFormField(
+                            hint: 'homeSearchBarHint'.tr,
+                            prefixIcon: Iconsax.search_normal_copy,
+                            readOnly: true,
+                            filled: true,
+                            onTap: () => Get.to(
+                              () => const SearchScreen(),
+                              duration: const Duration(milliseconds: 300),
+                              transition: Transition.downToUp,
                             ),
-                          ),
-                          const SizedBox(
-                            height: TSizes.sm,
                           ),
                           SectionHeading(
                             title: 'Featured Galleries',
@@ -77,10 +67,10 @@ class StoreScreen extends StatelessWidget {
                           ),
                           Obx(() {
                             if (vendorsController.isLoading.value) {
-                              return const ShimmerLoaderEffect(
-                                width: 80,
-                                height: 80,
-                                raduis: 10,
+                              return ShimmerLoaderEffect(
+                                width: 80.r,
+                                height: 80.r,
+                                raduis: 10.r,
                               );
                             }
                             if (vendorsController.featuredVendors.isEmpty) {
@@ -89,7 +79,7 @@ class StoreScreen extends StatelessWidget {
                             return GridLayout(
                                 itemCount:
                                     vendorsController.featuredVendors.length,
-                                mainAxisExtent: 80.h,
+                                mainAxisExtent: 60.h,
                                 itemBuilder: (_, index) {
                                   final vendor =
                                       vendorsController.featuredVendors[index];

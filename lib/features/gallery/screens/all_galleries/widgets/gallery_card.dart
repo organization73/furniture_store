@@ -4,9 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/styles/shadows.dart';
 import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class GalleryCard extends StatelessWidget {
@@ -18,9 +17,7 @@ class GalleryCard extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [ShadowStyle.verticalProductShadow],
         borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-        color: THelperFunctions.isDarkMode(context)
-            ? TColors.darkerGrey
-            : TColors.white,
+        color: Theme.of(context).colorScheme.surfaceContainer,
       ),
       height: 250.h,
       child: Column(
@@ -36,7 +33,7 @@ class GalleryCard extends StatelessWidget {
                     image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        TImages.bedRoom,
+                        TImages.user,
                       ),
                     ),
                   ),

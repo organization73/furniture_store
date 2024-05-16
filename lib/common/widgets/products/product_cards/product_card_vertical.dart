@@ -10,9 +10,8 @@ import 'package:decordash/common/widgets/texts/product_title_text.dart';
 import 'package:decordash/features/home/controllers/product/product_controller.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_details/product_details_screen.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -22,7 +21,6 @@ class ProductCardVerical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     final productsController = ProductController.instance;
     final salePercentage = productsController.calculateSalePercnetage(
         product.productPrice, product.productSalePrice);
@@ -40,7 +38,7 @@ class ProductCardVerical extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [ShadowStyle.verticalProductShadow],
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-          color: dark ? TColors.darkerGrey : TColors.white,
+          color: Theme.of(context).colorScheme.surfaceContainer,
         ),
         child: Column(
           children: [
@@ -48,7 +46,7 @@ class ProductCardVerical extends StatelessWidget {
               hight: 135.h,
               width: double.infinity,
               padding: const EdgeInsets.all(TSizes.sm),
-              backgroundColor: dark ? TColors.black : TColors.light,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               child: Stack(
                 children: [
                   Align(
@@ -64,16 +62,11 @@ class ProductCardVerical extends StatelessWidget {
                       left: 0,
                       child: RoundedContainer(
                         raduis: TSizes.sm,
-                        backgroundColor: TColors.secondary.withOpacity(0.8),
+                        backgroundColor: Colors.amber.withOpacity(0.8),
                         padding: const EdgeInsets.symmetric(
                             horizontal: TSizes.sm, vertical: TSizes.xs),
-                        child: Text(
-                          '$salePercentage%',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .apply(color: TColors.black),
-                        ),
+                        child: Text('$salePercentage%',
+                            style: Theme.of(context).textTheme.labelMedium),
                       ),
                     ),
                   Positioned(
@@ -104,8 +97,7 @@ class ProductCardVerical extends StatelessWidget {
                       height: TSizes.spaceBtwItems / 2,
                     ),
                     BrandTitleTextWithVerifiedIcon(
-                      vendor: product.productDetails.productSeller
-                    ),
+                        vendor: product.productDetails.productSeller),
                   ],
                 ),
               ),

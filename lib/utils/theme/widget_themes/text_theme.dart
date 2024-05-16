@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/utils/constants/colors.dart';
 
 /// Custom Class for Light & Dark Text Themes
 class TTextTheme {
@@ -9,68 +8,104 @@ class TTextTheme {
   /// Customizable Light Text Theme
   static TextTheme lightTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
-        fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
+      fontSize: 16.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     headlineMedium: const TextStyle().copyWith(
-        fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
+      fontSize: 14.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     headlineSmall: const TextStyle().copyWith(
-        fontSize: 11.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     titleLarge: const TextStyle().copyWith(
-        fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: TColors.dark),
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     titleMedium: const TextStyle().copyWith(
-        fontSize: 11.0.sp, fontWeight: FontWeight.w500, color: TColors.dark),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.w500,
+    ),
     titleSmall: const TextStyle().copyWith(
-        fontSize: 10.0.sp, fontWeight: FontWeight.w400, color: TColors.dark),
+      fontSize: 10.0.sp,
+      fontWeight: FontWeight.w400,
+    ),
     bodyLarge: const TextStyle().copyWith(
-        fontSize: 12.0.sp, fontWeight: FontWeight.w500, color: TColors.dark),
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.w500,
+    ),
     bodyMedium: const TextStyle().copyWith(
-        fontSize: 11.0.sp, fontWeight: FontWeight.normal, color: TColors.dark),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
     bodySmall: const TextStyle().copyWith(
-        fontSize: 11.0.sp,
-        fontWeight: FontWeight.w500,
-        color: TColors.dark.withOpacity(0.5)),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.w500,
+    ),
     labelLarge: const TextStyle().copyWith(
-        fontSize: 13.0.sp, fontWeight: FontWeight.normal, color: TColors.dark),
+      fontSize: 13.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
     labelMedium: const TextStyle().copyWith(
-        fontSize: 12.0.sp,
-        fontWeight: FontWeight.normal,
-        color: TColors.dark.withOpacity(0.5)),
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
     labelSmall: const TextStyle().copyWith(
-        fontSize: 11.0.sp,
-        fontWeight: FontWeight.normal,
-        color: TColors.dark.withOpacity(0.5)),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
   );
 
   /// Customizable Dark Text Theme
   static TextTheme darkTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
-        fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
+      fontSize: 16.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     headlineMedium: const TextStyle().copyWith(
-        fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
+      fontSize: 14.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     headlineSmall: const TextStyle().copyWith(
-        fontSize: 11.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     titleLarge: const TextStyle().copyWith(
-        fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: TColors.light),
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.w600,
+    ),
     titleMedium: const TextStyle().copyWith(
-        fontSize: 11.0.sp, fontWeight: FontWeight.w500, color: TColors.light),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.w500,
+    ),
     titleSmall: const TextStyle().copyWith(
-        fontSize: 10.0.sp, fontWeight: FontWeight.w400, color: TColors.light),
+      fontSize: 10.0.sp,
+      fontWeight: FontWeight.w400,
+    ),
     bodyLarge: const TextStyle().copyWith(
-        fontSize: 12.0.sp, fontWeight: FontWeight.w500, color: TColors.light),
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.w500,
+    ),
     bodyMedium: const TextStyle().copyWith(
-        fontSize: 11.0.sp, fontWeight: FontWeight.normal, color: TColors.light),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
     bodySmall: const TextStyle().copyWith(
-        fontSize: 11.0.sp,
-        fontWeight: FontWeight.w500,
-        color: TColors.light.withOpacity(0.5)),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.w500,
+    ),
     labelLarge: const TextStyle().copyWith(
-        fontSize: 13.0.sp, fontWeight: FontWeight.normal, color: TColors.light),
+      fontSize: 13.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
     labelMedium: const TextStyle().copyWith(
-        fontSize: 12.0.sp,
-        fontWeight: FontWeight.normal,
-        color: TColors.light.withOpacity(0.5)),
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
     labelSmall: const TextStyle().copyWith(
-        fontSize: 11.0.sp,
-        fontWeight: FontWeight.normal,
-        color: TColors.white.withOpacity(0.5)),
+      fontSize: 11.0.sp,
+      fontWeight: FontWeight.normal,
+    ),
   );
 }

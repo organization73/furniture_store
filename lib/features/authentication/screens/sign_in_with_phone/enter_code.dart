@@ -22,7 +22,6 @@ class CodeVerificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomAppBar(
-        height: 70.h,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'verify'.tr,
@@ -63,7 +62,6 @@ class CodeVerificationScreen extends StatelessWidget {
                 OtpTextField(
                   numberOfFields: 6,
                   borderColor: Theme.of(context).primaryColor,
-                  showFieldAsBox: true,
                   onCodeChanged: (String code) {
                     //handle validation or checks here
                   },

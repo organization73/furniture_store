@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/features/product/screens/product_details/widgets/overlapping_cicular_avatar.dart';
 import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class RatingWidget extends StatelessWidget {
@@ -16,13 +15,11 @@ class RatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = THelperFunctions.isDarkMode(context);
-
     return Container(
-        height: 70.h.h,
+        height: 70.h,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: isDark ? TColors.darkerGrey : TColors.light,
+            color: Theme.of(context).colorScheme.surfaceContainer,
             borderRadius: const BorderRadius.all(Radius.circular(8))),
         child: Row(
           children: <Widget>[

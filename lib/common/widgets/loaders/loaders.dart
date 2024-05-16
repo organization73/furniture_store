@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
-import 'package:decordash/utils/helpers/helper_functions.dart';
+
 import 'package:get/get.dart';
 
 class TLoaders {
@@ -14,12 +13,9 @@ class TLoaders {
       backgroundColor: Colors.transparent,
       content: Container(
         padding: const EdgeInsets.all(8),
-        // margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: THelperFunctions.isDarkMode(Get.context!)
-                ? TColors.darkerGrey.withOpacity(0.9)
-                : TColors.grey.withOpacity(0.9)),
+            color: Theme.of(Get.context!).colorScheme.primaryContainer),
         child: Text(
           messege,
           style: Theme.of(Get.context!).textTheme.titleSmall,
@@ -33,14 +29,14 @@ class TLoaders {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: TColors.white,
-        backgroundColor: TColors.primary,
+        colorText: Colors.white,
+        backgroundColor: Theme.of(Get.context!).colorScheme.primary,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: duration),
         margin: const EdgeInsets.all(10),
         icon: const Icon(
           Icons.check_circle_outline_outlined,
-          color: TColors.white,
+          color: Colors.white,
         ));
   }
 
@@ -48,14 +44,14 @@ class TLoaders {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: TColors.white,
-        backgroundColor: TColors.warning,
+        colorText: Colors.white,
+        backgroundColor: Colors.orange,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
         margin: const EdgeInsets.all(16),
         icon: const Icon(
           Icons.warning_amber_rounded,
-          color: TColors.white,
+          color: Colors.white,
         ));
   }
 
@@ -63,14 +59,14 @@ class TLoaders {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: TColors.white,
-        backgroundColor: TColors.error,
+        colorText: Colors.white,
+        backgroundColor: Colors.red,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
         margin: const EdgeInsets.all(16),
         icon: const Icon(
           Icons.warning_amber_rounded,
-          color: TColors.white,
+          color: Colors.white,
         ));
   }
 }

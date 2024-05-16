@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
 
 /* -- Light & Dark Elevated Button Themes -- */
 class TElevatedButtonTheme {
-  TElevatedButtonTheme._(); //To avoid creating instances
+  TElevatedButtonTheme._();
 
   /* -- Light Theme -- */
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      elevation: 0,
-      foregroundColor: TColors.light,
-      backgroundColor: TColors.primary,
-      disabledForegroundColor: TColors.darkGrey,
-      disabledBackgroundColor: TColors.buttonDisabled,
-      side: const BorderSide(color: TColors.primary),
+      side: const BorderSide(),
       padding: const EdgeInsets.symmetric(
           vertical: TSizes.buttonHeight, horizontal: 20),
-      textStyle: TextStyle(
-          fontSize: 12.sp,
-          color: TColors.textWhite,
-          fontWeight: FontWeight.w500),
+      textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
@@ -30,18 +22,8 @@ class TElevatedButtonTheme {
   /* -- Dark Theme -- */
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      elevation: 0,
-      foregroundColor: TColors.light,
-      backgroundColor: TColors.primary,
-      disabledForegroundColor: TColors.darkGrey,
-      disabledBackgroundColor: TColors.darkerGrey,
-      side: const BorderSide(color: TColors.primary),
-      padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight, horizontal: 20),
-      textStyle: TextStyle(
-          fontSize: 12.sp,
-          color: TColors.textWhite,
-          fontWeight: FontWeight.w500),
+      side: const BorderSide(),
+      textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),

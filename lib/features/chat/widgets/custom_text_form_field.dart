@@ -1,4 +1,3 @@
-import 'package:decordash/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -43,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(color: TColors.primary),
+            borderSide: const BorderSide(),
           ),
         ),
       );

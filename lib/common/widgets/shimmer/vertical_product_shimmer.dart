@@ -15,15 +15,15 @@ class VerticalProductShimmer extends StatelessWidget {
         itemBuilder: (_, __) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ShimmerLoaderEffect(width: 180.w, height: 150.h),
+                ShimmerLoaderEffect(width: 185.w, height: 140.h),
                 SizedBox(
                   height: TSizes.spaceBtwItems,
                 ),
-                ShimmerLoaderEffect(width: 160.w, height: 15.h),
+                ShimmerLoaderEffect(width: 165.w, height: 20.h),
                 SizedBox(
                   height: TSizes.spaceBtwItems / 2,
                 ),
-                ShimmerLoaderEffect(width: 110.w, height: 15.h),
+                ShimmerLoaderEffect(width: 115.w, height: 20.h),
               ],
             ));
   }

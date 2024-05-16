@@ -9,24 +9,6 @@ import 'firebase_storage_service.dart';
 class FirebaseFirestoreService {
   static final firestore = FirebaseFirestore.instance;
 
-  static Future<void> createUser({
-    required String name,
-    required String image,
-    required String email,
-    required String uid,
-  }) async {
-    final user = UserModel(
-      id: uid,
-      email: email,
-      userName: name,
-      avatar: image,
-      isOnline: true,
-      lastActive: DateTime.now(),
-    );
-
-    await firestore.collection('Users').doc(uid).set(user.toJson());
-  }
-
   static Future<void> addTextMessage({
     required String content,
     required String receiverId,

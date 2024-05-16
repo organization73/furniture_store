@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FirebaseProvider extends GetxController {
-  static FirebaseProvider get instance => Get.find();
+class ChatController extends GetxController {
+  static ChatController get instance => Get.find();
 
   ScrollController scrollController = ScrollController();
 

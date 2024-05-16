@@ -5,8 +5,6 @@ import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -14,7 +12,6 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 class PhoneNumberScreen extends StatelessWidget {
   PhoneNumberScreen({super.key});
 
-  final String initialCountry = 'EG';
   final PhoneNumber number = PhoneNumber(
     isoCode: 'EG',
   );
@@ -25,7 +22,6 @@ class PhoneNumberScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-          height: 70.h,
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
               text: 'tContinue'.tr,
@@ -81,24 +77,20 @@ class PhoneNumberScreen extends StatelessWidget {
                           TValidator.validateUserInput),
                       SizedBox(height: TSizes.spaceBtwInputFields),
                       InternationalPhoneNumberInput(
-                        onInputChanged: null,
+                        onInputChanged: (PhoneNumber number) {
+                          controller.phoneNumber.value = number.phoneNumber!;
+                        },
+                        inputBorder: const OutlineInputBorder().copyWith(
+                          borderRadius:
+                              BorderRadius.circular(TSizes.inputFieldRadius),
+                        ),
                         selectorConfig: const SelectorConfig(
                           selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                          useBottomSheetSafeArea: true,
                           setSelectorButtonAsPrefixIcon: true,
                           leadingPadding: 15,
-                          trailingSpace: false,
                         ),
-                        ignoreBlank: false,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         initialValue: number,
-                        // textFieldController: controller.phoneNumController,
                         formatInput: true,
-                        keyboardType: TextInputType.phone,
-                        onSaved: (PhoneNumber number) {
-                          controller.phoneNumController.text =
-                              number.phoneNumber!;
-                        },
                       ),
                     ],
                   ),

@@ -12,9 +12,10 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
+
   await ScreenUtil.ensureScreenSize();
   await GetStorage.init();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

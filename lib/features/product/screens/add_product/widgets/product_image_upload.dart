@@ -4,7 +4,7 @@ import 'package:decordash/features/product/screens/add_product/controllers/uploa
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -24,7 +24,6 @@ class BuildProductImageUpload extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 border: Border.all(
-                  color: TColors.darkGrey,
                   width: 0.5,
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(32))),

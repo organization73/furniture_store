@@ -4,9 +4,7 @@ import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-
 import 'package:lottie/lottie.dart';
-// TODO Translate this page
 
 class ActionConfirmPage extends StatelessWidget {
   final String title;
@@ -24,7 +22,6 @@ class ActionConfirmPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 70.h,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(onPressed: onPressed, child: Text('cont'.tr)),
       ),

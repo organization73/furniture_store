@@ -62,20 +62,3 @@ class FavouritsPage extends StatelessWidget {
     );
   }
 }
-
-// Center(
-//                     child: Column(
-//                       children: [
-//                         Lottie.asset(
-//                           'assets/animations/no_favourits.json',
-//                           width: 250,
-//                           height: 250,
-//                           fit: BoxFit.fill,
-//                         ),
-//                         Text(
-//                           'noFavourites'.tr,
-//                           style: Theme.of(context).textTheme.labelSmall,
-//                         ),
-//                       ],
-//                     ),
-//                   )

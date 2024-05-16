@@ -4,7 +4,6 @@ import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/validators/validation.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -20,7 +19,6 @@ class ReAuthLoginForm extends StatelessWidget {
           title: const Text('Re-Authenticate User'),
         ),
         bottomNavigationBar: BottomAppBar(
-          height: 70.h,
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
             text: 'Delete',

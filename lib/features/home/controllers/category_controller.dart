@@ -3,6 +3,7 @@ import 'package:decordash/data/repositories/category/category_repo.dart';
 import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/features/product/model/product_model.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
@@ -57,6 +58,7 @@ class CategoryController extends GetxController {
       return products;
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      LoggerHelper.error(e.toString());
       return [];
     }
   }

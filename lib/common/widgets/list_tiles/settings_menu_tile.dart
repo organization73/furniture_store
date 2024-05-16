@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/sizes.dart';
 
 class SettingsMenuTile extends StatelessWidget {
@@ -22,7 +22,7 @@ class SettingsMenuTile extends StatelessWidget {
       leading: Icon(
         icon,
         size: TSizes.iconMd,
-        color: TColors.primary,
+        color: Theme.of(context).colorScheme.primary,
       ),
       title: Text(title, style: Theme.of(context).textTheme.titleMedium),
       subtitle: Text(subTitle, style: Theme.of(context).textTheme.labelSmall),

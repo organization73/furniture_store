@@ -1,4 +1,3 @@
-import 'package:decordash/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/headings/section_heading.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
@@ -111,9 +110,10 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () => controller.deleteAccountWarningPopup(),
-                  child: const Text(
+                  child: Text(
                     'Close Account',
-                    style: TextStyle(color: TColors.error),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.error),
                   ))
             ],
           ),

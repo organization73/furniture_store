@@ -1,5 +1,5 @@
 import 'package:decordash/features/chat/model/message.dart';
-import 'package:decordash/provider/firebase_provider.dart';
+import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'empty_widget.dart';
@@ -11,7 +11,7 @@ class ChatMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chatController = FirebaseProvider.instance;
+    final chatController = ChatController.instance;
 
     return Obx(
       () => chatController.messages.isEmpty

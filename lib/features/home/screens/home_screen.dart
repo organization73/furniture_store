@@ -30,7 +30,6 @@ class HomeScreen extends StatelessWidget {
         final productsController = ProductController.instance;
 
         return Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Stack(
             children: [
               CustomScrollView(
@@ -131,7 +130,7 @@ class FadeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 80.r,
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
@@ -140,18 +139,15 @@ class FadeAppBar extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.pagePaddingSpace),
-              child: SizedBox(
-                height: 60.r,
-                child: CustomTextFormField(
-                  hint: 'homeSearchBarHint'.tr,
-                  prefixIcon: Iconsax.search_normal_copy,
-                  readOnly: true,
-                  filled: true,
-                  onTap: () => Get.to(
-                    () => const SearchScreen(),
-                    duration: const Duration(milliseconds: 300),
-                    transition: Transition.downToUp,
-                  ),
+              child: CustomTextFormField(
+                hint: 'homeSearchBarHint'.tr,
+                prefixIcon: Iconsax.search_normal_copy,
+                readOnly: true,
+                filled: true,
+                onTap: () => Get.to(
+                  () => const SearchScreen(),
+                  duration: const Duration(milliseconds: 300),
+                  transition: Transition.downToUp,
                 ),
               )),
         ),

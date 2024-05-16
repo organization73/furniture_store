@@ -10,7 +10,7 @@ import 'package:decordash/features/product/screens/product_reviews/product_revie
 import 'package:decordash/features/product/screens/product_details/widgets/product_specs.dart';
 import 'package:decordash/features/product/screens/product_details/widgets/product_status_checkboxes.dart';
 import 'package:decordash/features/product/screens/product_reviews/widgets/user_review_card.dart';
-import 'package:decordash/utils/constants/colors.dart';
+
 import 'package:decordash/utils/constants/enums.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -49,16 +49,11 @@ class ProductMetaData extends StatelessWidget {
                 children: [
                   RoundedContainer(
                     raduis: TSizes.sm,
-                    backgroundColor: TColors.secondary.withOpacity(0.8),
+                    backgroundColor: Colors.amber.withOpacity(0.8),
                     padding: const EdgeInsets.symmetric(
                         horizontal: TSizes.sm, vertical: TSizes.xs),
-                    child: Text(
-                      '$salePercentage%',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .apply(color: TColors.black),
-                    ),
+                    child: Text('$salePercentage%',
+                        style: Theme.of(context).textTheme.labelLarge),
                   ),
                   SizedBox(
                     width: TSizes.spaceBtwItems,
