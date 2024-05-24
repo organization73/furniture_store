@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/common/widgets/loaders/loaders.dart';
+import 'package:decordash/data/repositories/chat/chat_repo.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/features/chat/model/message.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
   static ChatController get instance => Get.find();
+  final chatRepo = Get.put(ChatRepo());
 
   ScrollController scrollController = ScrollController();
 
@@ -19,8 +23,19 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getAllUsers();
   }
+
+  Future<List<UserModel>> getUserChats() async {
+    try {
+      final users = await chatRepo.fetchUserChats();
+      return users;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      LoggerHelper.error(e.toString());
+      return [];
+    }
+  }
+
 
   void getAllUsers() {
     FirebaseFirestore.instance
@@ -28,8 +43,9 @@ class ChatController extends GetxController {
         .orderBy('lastActive', descending: true)
         .snapshots(includeMetadataChanges: true)
         .listen((users) {
-      this.users.value =
-          users.docs.map((doc) => UserModel.fromJson(doc.data())).toList();
+      this
+          .users
+          .assignAll(users.docs.map((doc) => UserModel.fromJson(doc.data())));
     });
   }
 

@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
+import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,15 +75,47 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
             ),
           ],
         ),
-        body: Obx(() => chatController.users.isEmpty
-            ? const Center(child: Text('No chats available'))
-            : ListView.builder(
-                itemCount: chatController.users.length,
-                itemBuilder: (context, index) =>
-                    chatController.users[index].id !=
-                            FirebaseAuth.instance.currentUser?.uid
-                        ? UserItem(user: chatController.users[index])
-                        : const SizedBox(),
-              )),
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('Users')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection('chat')
+              .snapshots(includeMetadataChanges: true),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+            final chatDocs = snapshot.data!.docs;
+            if (chatDocs.isEmpty) {
+              return const Center(child: Text('No Chats Found'));
+            }
+            return ListView.builder(
+              itemCount: chatDocs.length,
+              itemBuilder: (context, index) {
+                final chatDoc = chatDocs[index];
+                // Extract data from chatDoc as needed
+                // For example, you can access document ID using chatDoc.id
+                return ListTile(
+                  title: Text(chatDoc.id), // Displaying document ID
+                  // Customize as needed based on the data in chatDoc
+                );
+              },
+            );
+          },
+        ),
       );
 }
+ //
+        //Obx(() => chatController.users.isEmpty
+        //     ? const Center(child: Text('No chats available'))
+        //     : ListView.builder(
+        //         itemCount: chatController.users.length,
+        //         itemBuilder: (context, index) =>
+        //             chatController.users[index].id !=
+        //                     FirebaseAuth.instance.currentUser?.uid
+        //                 ? UserItem(user: chatController.users[index])
+        //                 : const SizedBox(),
+        //       )),
