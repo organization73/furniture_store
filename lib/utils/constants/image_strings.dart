@@ -5,11 +5,6 @@ class TImages {
   // -- Social Logos
   static const String google = "assets/icons/google.svg";
 
-  // -- Rooms banners
-  static const String livingRoom = "assets/images/categories/living_room.png";
-  static const String deskRoom = "assets/images/categories/desk_room.png";
-  static const String bedRoom = "assets/images/categories/bed_room.png";
-
   // -- Animations
   static const String processingInfo =
       "assets/animations/animation-of-docer.json";

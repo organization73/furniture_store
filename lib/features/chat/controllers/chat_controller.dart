@@ -20,11 +20,6 @@ class ChatController extends GetxController {
   RxList<Message> messages = <Message>[].obs;
   RxList<UserModel> search = <UserModel>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   Future<List<UserModel>> getUserChats() async {
     try {
       final users = await chatRepo.fetchUserChats();
@@ -35,7 +30,6 @@ class ChatController extends GetxController {
       return [];
     }
   }
-
 
   void getAllUsers() {
     FirebaseFirestore.instance

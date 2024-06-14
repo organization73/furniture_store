@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
-
 class RoundedContainer extends StatelessWidget {
   const RoundedContainer(
       {super.key,
       this.width,
       this.hight,
-      this.raduis = TSizes.cardRadiusLg,
+      this.raduis = 16,
       this.child,
       this.showBorder = false,
       this.borderColor = Colors.grey,

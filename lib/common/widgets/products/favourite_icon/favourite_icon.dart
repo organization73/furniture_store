@@ -11,7 +11,7 @@ class FavouriteIcon extends StatelessWidget {
   final String productId;
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(FavoriteController());
+    final controller = FavoriteController.instance;
 
     return Obx(() => CicularIcon(
           width: 35.r,

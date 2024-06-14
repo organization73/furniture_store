@@ -15,7 +15,7 @@ class FavouritsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = FavoriteController.instance;
+    final controller = Get.put(FavoriteController());
     return Scaffold(
       appBar: AppBar(
         title: Text(

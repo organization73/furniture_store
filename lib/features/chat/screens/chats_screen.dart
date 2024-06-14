@@ -2,11 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
-import 'package:decordash/features/chat/widgets/user_item.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -108,14 +104,3 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
         ),
       );
 }
- //
-        //Obx(() => chatController.users.isEmpty
-        //     ? const Center(child: Text('No chats available'))
-        //     : ListView.builder(
-        //         itemCount: chatController.users.length,
-        //         itemBuilder: (context, index) =>
-        //             chatController.users[index].id !=
-        //                     FirebaseAuth.instance.currentUser?.uid
-        //                 ? UserItem(user: chatController.users[index])
-        //                 : const SizedBox(),
-        //       )),

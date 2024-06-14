@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordash/utils/exceptions/platform_exceptions.dart';
-import 'package:decordash/utils/logging/logger.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 

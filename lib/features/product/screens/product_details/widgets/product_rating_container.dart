@@ -34,7 +34,7 @@ class RatingWidget extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Iconsax.star,
                                 color: Colors.amber,
                                 size: TSizes.iconMd,

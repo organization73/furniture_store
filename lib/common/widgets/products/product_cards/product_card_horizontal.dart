@@ -132,7 +132,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        const Icon(
+                        Icon(
                           Iconsax.star,
                           color: Colors.amber,
                           size: TSizes.iconSm,

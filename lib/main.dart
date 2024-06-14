@@ -1,6 +1,5 @@
 import 'package:decordash/app.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,15 +13,13 @@ Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
 
-  await ScreenUtil.ensureScreenSize();
   await GetStorage.init();
+  await ScreenUtil.ensureScreenSize();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.debug,
-  );
   await FirebaseMessaging.instance
       .getInitialMessage()
       .then((value) => Get.put(AuthenticatorRepo()));

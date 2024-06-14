@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBV5QxGvGru16fYuSsvhq8oC0L6ao8mts8',
-    appId: '1:129714025607:android:5653b12663fdf84d3f3422',
-    messagingSenderId: '129714025607',
-    projectId: 'decordash-6e368',
-    storageBucket: 'decordash-6e368.appspot.com',
+    apiKey: 'AIzaSyB2vLufUqCGVKj03AeGZ-LAGjkeaeoN-WM',
+    appId: '1:323718755688:android:04e6d0ec19494f3dabd2dd',
+    messagingSenderId: '323718755688',
+    projectId: 'decordashapp',
+    storageBucket: 'decordashapp.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCDXJjOOFvgk0PkoLxEKSTMmFSip4mJ-uo',
-    appId: '1:129714025607:ios:f49f135c9c3ae2453f3422',
-    messagingSenderId: '129714025607',
-    projectId: 'decordash-6e368',
-    storageBucket: 'decordash-6e368.appspot.com',
-    androidClientId: '129714025607-18n1o24fg2u6agj5qi7mm03kh61d7sb7.apps.googleusercontent.com',
-    iosClientId: '129714025607-pvjjnjq5l0bp18vlc83pohv85llhuhiu.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDDtl1mU6DpRV12B1ym0zRgwii6TtGCECI',
+    appId: '1:323718755688:ios:93bb6a961d793602abd2dd',
+    messagingSenderId: '323718755688',
+    projectId: 'decordashapp',
+    storageBucket: 'decordashapp.appspot.com',
+    androidClientId: '323718755688-ig40vhp62nl5ck8gda69226bd5oafpr9.apps.googleusercontent.com',
+    iosClientId: '323718755688-is5ic65d33tsprvjl790einoh5spgqqa.apps.googleusercontent.com',
     iosBundleId: 'com.decordash.decordash',
   );
 

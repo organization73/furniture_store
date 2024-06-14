@@ -7,7 +7,7 @@ class CicularIcon extends StatelessWidget {
     super.key,
     this.width,
     this.height,
-    this.size = TSizes.iconMd,
+    this.size,
     required this.icon,
     this.color,
     this.backgrounfColor,
@@ -34,7 +34,7 @@ class CicularIcon extends StatelessWidget {
           icon: Icon(
             icon,
             color: color,
-            size: size,
+            size: size ?? TSizes.iconMd,
           )),
     );
   }
