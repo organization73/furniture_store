@@ -36,25 +36,26 @@ class BuildCategoriesSection extends StatelessWidget {
           } else {
             return SizedBox(
               height: 50.h,
-              child: ListView.separated(
+              child: ListView.builder(
                 shrinkWrap: true,
-                separatorBuilder: (_, __) => SizedBox(
-                  width: TSizes.spaceBtwItems,
-                ),
                 scrollDirection: Axis.horizontal,
                 itemCount: categoryController.featuredCatedories.length,
                 itemBuilder: (context, index) {
                   final category = categoryController.featuredCatedories[index];
 
-                  return HorizontalCategory(
+                  return Padding(
+                    padding: EdgeInsets.only(right: TSizes.spaceBtwItems),
+                    child: HorizontalCategory(
                       onTap: () => Get.to(
-                            () => SubCategoryScreen(
-                              category: category,
-                            ),
-                            duration: const Duration(milliseconds: 300),
-                            transition: Transition.rightToLeft,
-                          ),
-                      category: category);
+                        () => SubCategoryScreen(
+                          category: category,
+                        ),
+                        duration: const Duration(milliseconds: 300),
+                        transition: Transition.rightToLeft,
+                      ),
+                      category: category,
+                    ),
+                  );
                 },
               ),
             );
