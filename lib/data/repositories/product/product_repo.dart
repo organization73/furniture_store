@@ -182,9 +182,8 @@ class ProductRepo extends GetxController {
           .toList();
       final productsQuery = await _db
           .collection('Products')
-          .where(FieldPath.documentId, whereIn: productsIds)
+          .where('id', whereIn: productsIds)
           .get();
-
       List<ProductModel> products = productsQuery.docs
           .map((doc) => ProductModel.fromFirebaseDocument(doc))
           .toList();
