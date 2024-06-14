@@ -58,7 +58,7 @@ class StoreScreen extends StatelessWidget {
                             ),
                           ),
                           SectionHeading(
-                            title: 'Featured Galleries',
+                            title: 'featuredGalleries'.tr,
                             onPress: () => Get.to(
                               () => const AllGalleriesPage(),
                               duration: const Duration(milliseconds: 300),
@@ -74,7 +74,7 @@ class StoreScreen extends StatelessWidget {
                               );
                             }
                             if (vendorsController.featuredVendors.isEmpty) {
-                              return const Center(child: Text('No Data Found'));
+                              return Center(child: Text('noData'.tr));
                             }
                             return GridLayout(
                                 itemCount:

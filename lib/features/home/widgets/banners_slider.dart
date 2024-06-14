@@ -20,7 +20,7 @@ class ImageSlider extends StatelessWidget {
         return ShimmerLoaderEffect(width: double.infinity, height: 150.h);
       }
       if (controller.banners.isEmpty) {
-        return const Center(child: Text('No Data Found'));
+        return Center(child: Text('noData'.tr));
       }
       return Column(
         children: [

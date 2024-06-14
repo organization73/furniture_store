@@ -45,7 +45,7 @@ class AllGalleriesPage extends StatelessWidget {
                     );
                   }
                   if (vendorController.allVendors.isEmpty) {
-                    return const Center(child: Text('No Data Found'));
+                    return Center(child: Text('noData'.tr));
                   }
                   return ListView.separated(
                     separatorBuilder: (BuildContext context, int index) {

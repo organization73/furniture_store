@@ -35,7 +35,7 @@ class BuildRoomsSection extends StatelessWidget {
             );
           }
           if (controller.roomsCatedories.isEmpty) {
-            return const Center(child: Text('No Categories Found'));
+            return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
               height: 160.h,

@@ -4,6 +4,7 @@ class Language extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          "noCategories": "No Categories Found",
           "language": "English",
           "skip": "Skip",
           "product": "product",
@@ -245,11 +246,22 @@ class Language extends Translations {
           "policyAndTerms": "Accept Privacy Policy",
           "ohSnap": "Oh Snap!",
           "updatingInfo": "We are updating your indormation...",
+          "noData": "No Data Found",
+          "noProducts": "No Products Found",
+          "featuredGalleries": "Featured Galleries",
+          "chats": "Chats",
+          "noChats": "No Chats Found",
           "policyAndTermsDesc":
               "In order to create an account you must accept the privacy policy and terms of use.",
         },
         'ar_SA': {
+          "noCategories": "لا يوجد تصنيفات",
           "language": "العربية",
+          "noChats": "لا يوجد محادثات",
+          "featuredGalleries": "المعارض الاعلي تصنيفا",
+          "noData": "لا توجد بيانات",
+          "chats": "المحادثات",
+          "noProducts": "لا توجد منتجات",
           "internet": "انترنت",
           "ohSnap": "حدث خطأ!",
           "updatingInfo": "جاري تحديث بياناتك",

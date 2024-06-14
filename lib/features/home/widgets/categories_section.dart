@@ -32,7 +32,7 @@ class BuildCategoriesSection extends StatelessWidget {
             );
           }
           if (categoryController.featuredCatedories.isEmpty) {
-            return const Center(child: Text('No Categories Found'));
+            return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
               height: 50.h,
@@ -45,6 +45,7 @@ class BuildCategoriesSection extends StatelessWidget {
                 itemCount: categoryController.featuredCatedories.length,
                 itemBuilder: (context, index) {
                   final category = categoryController.featuredCatedories[index];
+
                   return HorizontalCategory(
                       onTap: () => Get.to(
                             () => SubCategoryScreen(

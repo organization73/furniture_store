@@ -17,7 +17,7 @@ class HorizontalCategory extends StatelessWidget {
         child: RoundedContainer(
           gradient: true,
           width: 115.w,
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
           raduis: 8.r,
           child: Stack(
             children: [

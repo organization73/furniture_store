@@ -57,7 +57,7 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Chats'),
+          title: Text('chats'.tr),
           actions: [
             IconButton(
               onPressed: () => Get.to(
@@ -86,7 +86,7 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
             }
             final chatDocs = snapshot.data!.docs;
             if (chatDocs.isEmpty) {
-              return const Center(child: Text('No Chats Found'));
+              return Center(child: Text('noChats'.tr));
             }
             return ListView.builder(
               itemCount: chatDocs.length,

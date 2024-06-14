@@ -1,5 +1,4 @@
 import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/features/home/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -90,8 +89,7 @@ class HomeScreen extends StatelessWidget {
                                 }
                                 if (productsController
                                     .featuredProducts.isEmpty) {
-                                  return const Center(
-                                      child: Text('No Products Found'));
+                                  return Center(child: Text('noProducts'.tr));
                                 }
                                 return GridLayout(
                                     mainAxisExtent: 265.r,
