@@ -1,4 +1,7 @@
 import 'package:decordash/features/ai/screens/ai_design_screen.dart';
+import 'package:decordash/features/personalization/controllers/theme_controller.dart';
+import 'package:decordash/utils/helpers/helper_functions.dart';
+import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -122,12 +125,12 @@ class SettingsScreen extends StatelessWidget {
                       transition: Transition.rightToLeft,
                     ),
                   ),
-                  SettingsMenuTile(
-                    icon: Iconsax.buy_crypto_copy,
-                    title: 'buyPoints'.tr,
-                    subTitle: 'buyPointsDesc'.tr,
-                    onTap: () {},
-                  ),
+                  // SettingsMenuTile(
+                  //   icon: Iconsax.buy_crypto_copy,
+                  //   title: 'buyPoints'.tr,
+                  //   subTitle: 'buyPointsDesc'.tr,
+                  //   onTap: () {},
+                  // ),
                   SettingsMenuTile(
                     icon: Iconsax.d_cube_scan_copy,
                     title: 'AI Designs',
