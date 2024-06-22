@@ -38,7 +38,6 @@ class _AiPageState extends State<AiPage> {
   Widget build(BuildContext context) {
     Get.put(BalanceController());
     return Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           title: Text(
             'aiDesigns'.tr,
@@ -54,11 +53,18 @@ class _AiPageState extends State<AiPage> {
                   AiInfoCard(
                     title: 'myPoints'.tr,
                     onMoreTap: () {},
-                    subIcon: CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      radius: 20,
+                    subIcon: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 59, 111, 255),
+                              Color(0xff3F6FEA)
+                            ],
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: const Icon(
-                        Iconsax.money_recive,
+                        Iconsax.buy_crypto_copy,
                         color: Colors.white,
                       ),
                     ),
