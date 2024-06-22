@@ -182,8 +182,9 @@ class ProductRepo extends GetxController {
           .toList();
       final productsQuery = await _db
           .collection('Products')
-          .where('id', whereIn: productsIds)
+          .where(FieldPath.documentId, whereIn: productsIds)
           .get();
+
       List<ProductModel> products = productsQuery.docs
           .map((doc) => ProductModel.fromFirebaseDocument(doc))
           .toList();
@@ -224,7 +225,7 @@ class ProductRepo extends GetxController {
               .toList();
         }
 
-        await _db.collection('Products').add(product.toJson());
+        await _db.collection('Products').doc(product.id).set(product.toJson());
       }
 
       FullScreenLoader.stopLoading();
@@ -263,23 +264,16 @@ class ProductRepo extends GetxController {
             .toList();
       }
 
-      // Add the product to Firestore and wait for the operation to complete
-      await _db
-          .collection('Products')
-          .add(product.toJson())
-          .then((value) async {
-        // Retrieve the document ID of the newly added product
-        String productId = value.id;
-        // Optionally, update other collections with the new product ID
-        await _db.collection('ProductCategory').add(ProductCategoryModel(
-                productId: productId, categoryId: product.categoryId)
-            .toJson());
+      await _db.collection('Products').doc(product.id).set(product.toJson());
 
-        await _db.collection('VendorCategory').add(VendorCategoryModel(
-                vendorId: product.productDetails.productSeller.id,
-                categoryId: product.categoryId)
-            .toJson());
-      });
+      await _db.collection('ProductCategory').add(ProductCategoryModel(
+              productId: product.id, categoryId: product.categoryId)
+          .toJson());
+
+      await _db.collection('VendorCategory').add(VendorCategoryModel(
+              vendorId: product.productDetails.productSeller.id,
+              categoryId: product.categoryId)
+          .toJson());
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {

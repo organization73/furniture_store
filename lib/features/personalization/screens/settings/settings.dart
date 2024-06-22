@@ -5,9 +5,7 @@ import 'package:decordash/common/widgets/custom_shapes/containers/primary_header
 import 'package:decordash/common/widgets/headings/section_heading.dart';
 import 'package:decordash/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:decordash/common/widgets/list_tiles/user_profile_tile.dart';
-import 'package:decordash/data/dummy_data.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/data/repositories/banners/banners_repo.dart';
 import 'package:decordash/features/manufacture_request/screens/manufacture_req_screen.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/personalization/screens/profile/profile.dart';
