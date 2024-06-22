@@ -17,7 +17,7 @@ class ImageSlider extends StatelessWidget {
 
     return Obx(() {
       if (controller.isLoading.value) {
-        return ShimmerLoaderEffect(width: double.infinity, height: 150.h);
+        return ShimmerLoaderEffect(width: double.infinity, height: 100.h);
       }
       if (controller.banners.isEmpty) {
         return Center(child: Text('noData'.tr));
@@ -28,6 +28,8 @@ class ImageSlider extends StatelessWidget {
             options: CarouselOptions(
               height: 100.h,
               viewportFraction: 1,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 6),
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index),
             ),
