@@ -26,7 +26,7 @@ class ImageSlider extends StatelessWidget {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              height: 150.h,
+              height: 100.h,
               viewportFraction: 1,
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index),
@@ -55,7 +55,7 @@ class ImageSlider extends StatelessWidget {
                     backgroundColor:
                         controller.carouselCurrentIndex.value == index
                             ? Theme.of(context).colorScheme.primary
-                            : Colors.grey,
+                            : Theme.of(context).colorScheme.primaryContainer,
                     margin: const EdgeInsets.only(right: 10).w,
                   );
                 }).toList(),

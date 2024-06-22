@@ -1210,14 +1210,11 @@ class DummyData {
   ];
 
   static final List<BannersModel> banners = [
-    BannersModel(image: 'TImages.banner1', active: false),
-    BannersModel(image: 'TImages.banner2', active: true),
-    BannersModel(image: 'TImages.banner3', active: true),
-    BannersModel(image: 'TImages.banner4', active: true),
-    BannersModel(image: 'TImages.banner5', active: true),
-    BannersModel(image: 'TImages.banner6', active: true),
-    BannersModel(image: 'TImages.banner7', active: true),
-    BannersModel(image: 'TImages.banner8', active: false),
+    BannersModel(image: 'assets/banners/chairs.jpg', active: true),
+    BannersModel(image: 'assets/banners/chairs2.jpg', active: true),
+    BannersModel(image: 'assets/banners/sofas.jpg', active: true),
+    BannersModel(image: 'assets/banners/sofas2.jpg', active: false),
+    BannersModel(image: 'assets/banners/decor.jpg', active: false),
   ];
 
   static final List<Notifications> notificationsList = [

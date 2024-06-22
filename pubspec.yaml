@@ -55,16 +55,16 @@ flutter:
 
   assets:
     - assets/icons/
-    - assets/images/
     - assets/images/onboarding/
-    - assets/images/categories/
     - assets/images/content/
     - assets/logos/
     - assets/animations/
-    - assets/images/products/beds/
-    - assets/images/products/chairs/
-    - assets/images/products/sofas/
-    - assets/images/products/tables/
+    # - assets/images/categories/
+    # - assets/banners/
+    # - assets/images/products/beds/
+    # - assets/images/products/chairs/
+    # - assets/images/products/sofas/
+    # - assets/images/products/tables/
 
   fonts:
     - family: Poppins
