@@ -1,45 +1,37 @@
 {
   "project_info": {
-    "project_number": "323718755688",
-    "project_id": "decordashapp",
-    "storage_bucket": "decordashapp.appspot.com"
+    "project_number": "263651591619",
+    "project_id": "decordashstore-98472",
+    "storage_bucket": "decordashstore-98472.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:323718755688:android:04e6d0ec19494f3dabd2dd",
+        "mobilesdk_app_id": "1:263651591619:android:4a7f23f1083882ee2e2976",
         "android_client_info": {
           "package_name": "com.decordash.decordash"
         }
       },
       "oauth_client": [
         {
-          "client_id": "323718755688-ig40vhp62nl5ck8gda69226bd5oafpr9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.decordash.decordash",
-            "certificate_hash": "a0d80266badc5b6618337869ac4752a5f1d3a4bc"
-          }
-        },
-        {
-          "client_id": "323718755688-gpor85osjm7rj0smo169nib37eu9pl1i.apps.googleusercontent.com",
+          "client_id": "263651591619-phacufs5joa0iv22cbv2imor8rah2h9v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2vLufUqCGVKj03AeGZ-LAGjkeaeoN-WM"
+          "current_key": "AIzaSyAAXowk6cdwFT_7CU_mO1GyJTUE6Yy0At4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "323718755688-gpor85osjm7rj0smo169nib37eu9pl1i.apps.googleusercontent.com",
+              "client_id": "263651591619-phacufs5joa0iv22cbv2imor8rah2h9v.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "323718755688-is5ic65d33tsprvjl790einoh5spgqqa.apps.googleusercontent.com",
+              "client_id": "263651591619-b7tkeohq3l4lc4j1nmjbq8ohs597ob1a.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.decordash.decordash"
