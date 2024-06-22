@@ -28,4 +28,32 @@ class ChatRepo extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
+
+  Future<List<UserModel>> fetchUserChatList(String currentUserId) async {
+    try {
+      final receiversSnapshot = await _db
+          .collection('UserChats')
+          .doc(currentUserId)
+          .collection('receivers')
+          .get();
+
+      List<String> receiverIds =
+          receiversSnapshot.docs.map((doc) => doc.id).toList();
+
+      final usersSnapshot = await _db
+          .collection('Users')
+          .where(FieldPath.documentId, whereIn: receiverIds)
+          .get();
+
+      return usersSnapshot.docs
+          .map((querySnapshot) => UserModel.fromFirebaseDocument(querySnapshot))
+          .toList();
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
 }

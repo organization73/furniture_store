@@ -54,7 +54,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
 
   Future<List<UserModel>> fetchUserChats() async {
     return await ChatRepo.instance
-        .fetchAllChats(FirebaseAuth.instance.currentUser!.uid);
+        .fetchUserChatList(FirebaseAuth.instance.currentUser!.uid);
   }
 
   void getUserById(String userId) {

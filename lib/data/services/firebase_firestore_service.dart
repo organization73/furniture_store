@@ -21,6 +21,7 @@ class FirebaseFirestoreService {
       senderId: FirebaseAuth.instance.currentUser!.uid,
     );
     await _addMessageToChat(receiverId, message);
+    await _addReceiverIdToMonCollection(receiverId);
   }
 
   static Future<void> addImageMessage({
@@ -38,6 +39,7 @@ class FirebaseFirestoreService {
       senderId: FirebaseAuth.instance.currentUser!.uid,
     );
     await _addMessageToChat(receiverId, message);
+    await _addReceiverIdToMonCollection(receiverId);
   }
 
   static Future<void> _addMessageToChat(
@@ -59,6 +61,15 @@ class FirebaseFirestoreService {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('messages')
         .add(message.toJson());
+  }
+
+  static Future<void> _addReceiverIdToMonCollection(String receiverId) async {
+    await firestore
+        .collection('UserChats')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('receivers')
+        .doc(receiverId)
+        .set({'receiverId': receiverId});
   }
 
   static Future<List<UserModel>> searchUser(String name) async {
