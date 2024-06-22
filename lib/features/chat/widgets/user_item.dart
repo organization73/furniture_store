@@ -18,11 +18,6 @@ class UserItem extends StatefulWidget {
 
 class _UserItemState extends State<UserItem> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.to(
           () => ChatScreen(userId: widget.user.id),
@@ -49,13 +44,13 @@ class _UserItemState extends State<UserItem> {
             ],
           ),
           title: Text(widget.user.userName,
-              style: Theme.of(context).textTheme.headlineMedium),
+              style: Theme.of(context).textTheme.titleLarge),
           subtitle: Text(
               'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',
               maxLines: 2,
               style: Theme.of(context)
                   .textTheme
-                  .labelSmall!
+                  .titleSmall!
                   .copyWith(overflow: TextOverflow.ellipsis)),
           trailing: const Icon(Iconsax.arrow_circle_right_copy),
         ),

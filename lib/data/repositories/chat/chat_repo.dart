@@ -10,11 +10,11 @@ class ChatRepo extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<List<UserModel>> fetchUserChats() async {
+  Future<List<UserModel>> fetchAllChats(String currentUserId) async {
     try {
       final snapshot = await _db
           .collection('Users')
-          .orderBy('lastActive', descending: true)
+          .where('id', isNotEqualTo: currentUserId)
           .get();
 
       return snapshot.docs

@@ -1,10 +1,11 @@
-import 'package:decordash/features/chat/widgets/custom_text_form_field.dart';
+import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class UsersSearchScreen extends StatefulWidget {
   const UsersSearchScreen({super.key});
@@ -38,8 +39,9 @@ class _UsersSearchScreenState extends State<UsersSearchScreen> {
               children: [
                 CustomTextFormField(
                   controller: controller,
-                  hintText: 'Search',
+                  hint: 'Search',
                   onChanged: (val) => chatController.searchUser(val),
+                  prefixIcon: Iconsax.search_normal_copy,
                 ),
                 Obx(
                   () => ListView.builder(

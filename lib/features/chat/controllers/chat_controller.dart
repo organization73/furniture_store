@@ -1,46 +1,60 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/chat/chat_repo.dart';
+import 'package:decordash/data/repositories/user/user_repo.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/features/chat/model/message.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChatController extends GetxController {
+class ChatController extends GetxController with WidgetsBindingObserver {
   static ChatController get instance => Get.find();
   final chatRepo = Get.put(ChatRepo());
+  final userRepo = Get.put(UserRepo());
 
   ScrollController scrollController = ScrollController();
 
-  RxList<UserModel> users = <UserModel>[].obs;
   Rx<UserModel?> user = Rx<UserModel?>(null);
   RxList<Message> messages = <Message>[].obs;
   RxList<UserModel> search = <UserModel>[].obs;
 
-  Future<List<UserModel>> getUserChats() async {
-    try {
-      final users = await chatRepo.fetchUserChats();
-      return users;
-    } catch (e) {
-      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
-      LoggerHelper.error(e.toString());
-      return [];
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.onClose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        userRepo.updateSingleField({
+          'lastActive': DateTime.now(),
+          'isOnline': true,
+        });
+        break;
+
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        userRepo.updateSingleField({'isOnline': false});
+        break;
     }
   }
 
-  void getAllUsers() {
-    FirebaseFirestore.instance
-        .collection('Users')
-        .orderBy('lastActive', descending: true)
-        .snapshots(includeMetadataChanges: true)
-        .listen((users) {
-      this
-          .users
-          .assignAll(users.docs.map((doc) => UserModel.fromJson(doc.data())));
-    });
+  Future<List<UserModel>> fetchUserChats() async {
+    return await ChatRepo.instance
+        .fetchAllChats(FirebaseAuth.instance.currentUser!.uid);
   }
 
   void getUserById(String userId) {

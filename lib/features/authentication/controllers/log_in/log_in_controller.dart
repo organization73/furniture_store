@@ -1,4 +1,4 @@
-import 'package:decordash/data/services/firebase_firestore_service.dart';
+import 'package:decordash/data/repositories/user/user_repo.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class LoginController extends GetxController {
 
       await AuthenticatorRepo.instance.loginWithEmailAndPassword(
           emailController.text.trim(), passwordController.text.trim());
-      await FirebaseFirestoreService.updateUserData(
+      await UserRepo.instance.updateSingleField(
         {'lastActive': DateTime.now()},
       );
 
@@ -91,7 +91,7 @@ class LoginController extends GetxController {
       final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
       await userController.saveUserRecord(userCred);
-      await FirebaseFirestoreService.updateUserData(
+      await UserRepo.instance.updateSingleField(
         {'lastActive': DateTime.now()},
       );
 

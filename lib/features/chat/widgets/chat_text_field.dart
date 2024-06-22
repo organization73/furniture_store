@@ -1,13 +1,14 @@
 import 'dart:typed_data';
+import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/media_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
+import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-
-import 'custom_text_form_field.dart';
 
 class ChatTextField extends StatefulWidget {
   const ChatTextField({super.key, required this.receiverId});
@@ -42,7 +43,8 @@ class _ChatTextFieldState extends State<ChatTextField> {
           Expanded(
             child: CustomTextFormField(
               controller: controller,
-              hintText: 'Add Message...',
+              hint: 'Add Message...',
+              prefixIcon: Iconsax.message_add_copy,
             ),
           ),
           SizedBox(width: 5.w),
@@ -51,7 +53,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
               icon: const Icon(Iconsax.send_1)),
           SizedBox(width: 5.w),
           IconButton.filledTonal(
-              onPressed: () => _sendImage(), icon: const Icon(Iconsax.camera)),
+              onPressed: () => _sendImage(), icon: const Icon(Iconsax.image)),
         ],
       );
 
@@ -66,9 +68,10 @@ class _ChatTextFieldState extends State<ChatTextField> {
         senderId: FirebaseAuth.instance.currentUser!.uid,
       );
       controller.clear();
-      // FocusScope.of(context).unfocus();
+      // FocusScope.of(Get.context!).unfocus();
     }
-    // FocusScope.of(context).unfocus();
+    // FocusScope.of(Get.context!).unfocus();
+    ChatController.instance.scrollDown();
   }
 
   Future<void> _sendImage() async {
@@ -83,6 +86,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
         body: 'image recieved',
         senderId: FirebaseAuth.instance.currentUser!.uid,
       );
+      ChatController.instance.scrollDown();
     }
   }
 }

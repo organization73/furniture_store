@@ -53,6 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   CircularImage(
                     imageUrl: chatController.user.value!.avatar,
                     isNetworkImage: true,
+                    backgroundColor: Colors.transparent,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

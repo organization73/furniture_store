@@ -18,13 +18,13 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Align(
-        alignment: isMe ? Alignment.topLeft : Alignment.topRight,
+        alignment: !isMe ? Alignment.topLeft : Alignment.topRight,
         child: Container(
           decoration: BoxDecoration(
-            color: isMe
-                ? Theme.of(context).colorScheme.primaryContainer
-                : Theme.of(context).colorScheme.tertiaryContainer,
-            borderRadius: isMe
+            color: !isMe
+                ? Theme.of(context).colorScheme.outlineVariant
+                : Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: !isMe
                 ? const BorderRadius.only(
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10),
@@ -41,7 +41,7 @@ class MessageBubble extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment:
-                isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+                !isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
             children: [
               isImage
                   ? RoundedImage(
