@@ -97,8 +97,7 @@ exports.allUsers = async (req, res, next) => {
 /* /chat/access-room?roomId=123 => POST request */
 exports.accessChatRoom = async (req, res, next) => {
   const { userId } = req.body;
-  const primaryUser = req.admin || req.user;
-  // let userDb = req.admin ? Admin : User;
+  const primaryUser = req.user;
   try {
     //validate input
     if (!userId) {
@@ -106,9 +105,7 @@ exports.accessChatRoom = async (req, res, next) => {
     }
     //check if user exists
     let secondaryUser = await User.findById(userId);
-    if (req.admin) {
-      secondaryUser = await Admin.findById(userId);
-    }
+
     if (!secondaryUser) {
       throwError("No secondaryUser found", 404, "secondaryUser");
     }
@@ -119,7 +116,6 @@ exports.accessChatRoom = async (req, res, next) => {
     })
       .populate({
         path: "users",
-        model: req.admin ? "Admin" : "User",
         select: "-password",
       })
       .populate({
@@ -130,7 +126,6 @@ exports.accessChatRoom = async (req, res, next) => {
           select: "-password",
         },
       });
-    // .populate("latestMessage");
     //if chat room exists, return it
     if (chatRoom) {
       console.log("chatRoom:", chatRoom);
@@ -143,9 +138,9 @@ exports.accessChatRoom = async (req, res, next) => {
         isGroupChat: false,
         users: [primaryUser._id, secondaryUser._id],
       });
-      newChatRoom.type = req.admin ? "admin-client" : "client-client";
-
+      newChatRoom.type = "client-client";
       const savedChatRoom = await newChatRoom.save();
+
       //open chatroom on reciever's side.
       io.getIO().in(secondaryUser._id).emit("recieve-new-room", savedChatRoom);
 

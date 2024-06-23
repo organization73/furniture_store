@@ -123,7 +123,7 @@ exports.accessChatRoom = async (req, res, next) => {
 
     //check if user exists
     let secondaryUser = await User.findById(userId);
-    if (1) {
+    if (!secondaryUser) {
       secondaryUser = await Admin.findById(userId);
     }
     if (!secondaryUser) {
@@ -184,10 +184,9 @@ exports.accessChatRoom = async (req, res, next) => {
   }
 };
 
-/* /chat/message => POST request */
+/* /chat/rooms => POST request */
 exports.fetchChatRooms = async (req, res, next) => {
   const user = req.admin;
-  console.log("right here");
   try {
     const chatRooms = await ChatRoom.find({
       users: {
@@ -200,10 +199,6 @@ exports.fetchChatRooms = async (req, res, next) => {
       .populate({
         path: "users",
         model: "Admin", // Use 'Admin' model instead of 'User' model
-        select: "-password",
-      })
-      .populate({
-        path: "users",
         select: "-password",
       })
       .populate({
@@ -221,11 +216,33 @@ exports.fetchChatRooms = async (req, res, next) => {
       })
       .sort({ updatedAt: -1 });
 
+    const ordinaryUsersChatRoom = await ChatRoom.find({
+      users: {
+        $elemMatch: {
+          $eq: user._id,
+          // Additional criteria for matching users array elements
+        },
+      },
+    }).populate({
+      path: "users",
+      select: "-password",
+    });
+
     // Update the chat room's fullName with the other user's name
     const updatedChatRooms = chatRooms.map((chatRoom) => {
-      chatRoom.users.map((u) => {
+      //add ordinary users to chat room.
+      const room = ordinaryUsersChatRoom.filter(
+        (room) => room._id.toString() === chatRoom._id.toString()
+      );
+      let allUsers = [];
+      if (room) {
+        allUsers = [...chatRoom.users, ...room[0].users];
+      }
+      //without the 2 the mongoose schema will convert the users objects to _id only objects.
+      chatRoom.users2 = allUsers;
+      allUsers.map((u) => {
         if (u._id.toString() !== user._id.toString()) {
-          chatRoom.fullName = u.firstName + " " + u.lastName;
+          chatRoom.fullName = u.username;
         }
       });
       return chatRoom;
