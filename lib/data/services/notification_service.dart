@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 const channel = AndroidNotificationChannel(
@@ -115,11 +116,16 @@ class NotificationsService {
     _initLocalNotification();
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => ChatScreen(userId: message.data['senderId']),
-        ),
+      await Get.to(
+        () =>  ChatScreen(userId: message.data['senderId']),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
       );
+      // await Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     builder: (_) => ChatScreen(userId: message.data['senderId']),
+      //   ),
+      // );
     });
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {

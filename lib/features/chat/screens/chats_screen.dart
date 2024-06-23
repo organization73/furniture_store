@@ -1,5 +1,4 @@
 import 'package:decordash/common/widgets/loaders/animation_loader.dart';
-import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
@@ -14,8 +13,6 @@ class ChatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chatController = Get.put(ChatController());
-    final notificationService = NotificationsService();
-    notificationService.firebaseNotification(context);
 
     return Scaffold(
       appBar: AppBar(

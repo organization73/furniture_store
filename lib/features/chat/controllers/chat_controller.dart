@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/chat/chat_repo.dart';
 import 'package:decordash/data/repositories/user/user_repo.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
+import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/model/message.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +13,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
   static ChatController get instance => Get.find();
   final chatRepo = Get.put(ChatRepo());
   final userRepo = Get.put(UserRepo());
+  final notificationService = NotificationsService();
 
   ScrollController scrollController = ScrollController();
 
@@ -23,6 +25,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
   void onInit() {
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
+    notificationService.firebaseNotification(Get.context);
   }
 
   @override
