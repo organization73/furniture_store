@@ -1,8 +1,8 @@
 const axios = require("axios");
 const yup = require("yup");
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 const Product = require("../models/product");
 
@@ -36,49 +36,35 @@ exports.createProduct = async (req, res, next) => {
     return throwError(422, error.message, error.path, next);
   }
   //classfiy images
-  const imagesObjests = images.map(async (image) => {
+  let imagesObjests = [];
+  for (let i = 0; i < images.length; i++) {
+    const imageUrl = images[i];
     try {
-      // Download the image
-      const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-      const imageBuffer = imageResponse.data;
-  
-      // Save the image to a temporary file
-      const tempFilePath = path.join(process.cwd(), 'temp_image.jpg');
-      await fs.promises.writeFile(tempFilePath, imageBuffer);
-  
-      // Send the image file to the FastAPI server
-      const formData = new FormData();
-      formData.append('file', fs.createReadStream(tempFilePath));
-  
-      const response = await axios.post('http://your-fastapi-server/classify', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const response = await fetch(
+        `http://localhost:8000/predict?image_url=${imageUrl}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const classificationResult = await response.json();
+      if (response.status !== 201 && response.status !== 200) {
+        throw new Error("imageUrl not valid.");
+      }
+
+      imagesObjests.push({
+        imageUrl: imageUrl,
+        class: classificationResult.class,
+        confidence: classificationResult.confidence,
       });
-  
-      const classificationResult = response.data;
-  
-      // Clean up the temporary file
-      fs.unlinkSync(tempFilePath);
     } catch (error) {
-      console.error('Error classifying image:', error);
-      res.status(500).json({ error: 'Failed to classify image' });
+      console.error("Error classifying image:", error);
+      res.status(500).json({ error: "Failed to classify image" });
     }
-
-    return { imageUrl: image, category: classificationResult.category, confidence: classificationResult.ratio};
-  });
-  // //validationg images
-  // console.log(req.files.length);
-  // if (!req.files.length) {
-  //   // errorsList.push({ message: "No image provided", path: "images" });
-  //   return throwError(422, "No image provided", "images", next);
-  // }
-
-  // const images = req.files.map((file) => {
-  //   return { imageUrl: file.path };
-  // });
-  // console.log("images:", images);
-
+  }
+  console.log("imagesObjests111:", imagesObjests);
   try {
     //Create the product
     const product = new Product({
@@ -89,19 +75,18 @@ exports.createProduct = async (req, res, next) => {
       images: imagesObjests,
       details: details,
     });
-    console.log("product:", product);
     // Save the product
     await product.save();
+    console.log("product saved success");
+
+    //add the product to the user's products array
+    console.log("start saving..");
+    req.user.products.push(product._id);
+    await req.user.save();
+    console.log("product added to user");
   } catch (error) {
     error.codeStatus = 401;
     next(error);
-  }
-  //add the product to the user's products array
-  try {
-    req.user.products.push(product);
-    await req.user.save();
-  } catch (error) {
-    return throwError(500, "Adding product to user failed");
   }
 
   res.status(201).json({ message: "Product created" });

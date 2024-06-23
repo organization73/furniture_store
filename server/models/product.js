@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
   {
-    creator: {
+    class: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -12,7 +12,7 @@ const productSchema = new Schema(
     description: String,
     images: [
       {
-        category: String,
+        class: String,
         confidence: {
           type: Number,
           default: 0,

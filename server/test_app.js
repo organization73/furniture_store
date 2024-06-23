@@ -10,5 +10,5 @@ const list2 = [
   { id: 5, name: "Frank" },
 ];
 
-
-console.log(list1.filter((item) => item.id === 1));
+list1.push({ id: 4, name: "David" });
+console.log(list1);
