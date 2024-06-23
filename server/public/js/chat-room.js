@@ -74,7 +74,7 @@ socket.on("recieve-typing", (senderUsername) => {
 });
 
 //fetching Users contacts
-fetch("/chat/rooms")
+fetch("/admin/chat/rooms")
   .then((res) => {
     return res.json();
   })
@@ -121,10 +121,9 @@ input.addEventListener("input", async () => {
   if (value.length === 0) {
     return;
   }
-  let response = await fetch(`/chat/users?search=${value.trim()}`);
+  let response = await fetch(`/admin/chat/users?search=${value.trim()}`);
   response = await response.json();
   const contacts = response.users;
-  console.log("value", value);
   filteredContacts = contacts;
 
   filteredContacts.forEach((contact) => {
@@ -160,7 +159,7 @@ async function addContact() {
   //add new contact in the db on server
   let chatRoom;
   try {
-    let response = await fetch("/chat/access-room", {
+    let response = await fetch("/admin/chat/access-room", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -169,12 +168,11 @@ async function addContact() {
         userId: input.dataset.id,
       }),
     });
+    let jsonResponse = await response.json();
     if (response.status !== 201 && response.status !== 200) {
-      throw new Error("Error adding contact");
+      throw new Error(jsonResponse.message);
     }
-    response = await response.json();
-    chatRoom = response.chatRoom;
-    console.log(chatRoom);
+    chatRoom = jsonResponse.chatRoom;
   } catch (err) {
     return console.log(err);
   }
@@ -221,7 +219,7 @@ socket.on("recieve-new-room", (chatRoom) => {
   //clean the input field
   input.value = "";
   input.dataset.id = "";
-})
+});
 
 //select a contact and send a GET request to the API
 function selectContact() {
@@ -240,7 +238,7 @@ function selectContact() {
   if (previouslySelectedContact) {
     //leave old room.
     console.log("leave room", previouslySelectedContact.dataset.id);
-    socket.emit("leave-room", previouslySelectedContact.dataset.id);//
+    socket.emit("leave-room", previouslySelectedContact.dataset.id); //
     previouslySelectedContact.classList.remove("selected");
   }
   // Add the "selected" class to the newly selected contact

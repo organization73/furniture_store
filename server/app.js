@@ -19,6 +19,7 @@ const userRouters = require("./routes/user");
 const adminAuthRoutes = require("./adminRouter/auth");
 const adminShopRoutes = require("./adminRouter/shop");
 const adminRouter = require("./adminRouter/admin");
+const adminChatRouter = require("./adminRouter/chat"); 
 
 const chatRoutes = require("./routes/chat");
 
@@ -114,6 +115,8 @@ app.use("/admin", adminAuthRoutes);
 app.use("/admin", adminShopRoutes);
 
 app.use("/admin", adminRouter);
+
+app.use("/admin/chat", adminChatRouter);
 
 app.use("/auth", authRoutes);
 

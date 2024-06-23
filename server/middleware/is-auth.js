@@ -20,6 +20,7 @@ const authMiddleware = async (req, res, next) => {
     }
     next(error);
   }
+  console.log('hereee')
 
   try {
     // Verify and decode the token

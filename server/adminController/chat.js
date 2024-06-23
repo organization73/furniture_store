@@ -66,6 +66,7 @@ exports.createChatRoom = async (req, res, next) => {
 
 /* /chat/rooms?search=abdo => GET request */
 exports.allUsers = async (req, res, next) => {
+  console.log("req.query.search:");
   const keyword = req.query.search
     ? {
         $or: [
@@ -75,15 +76,29 @@ exports.allUsers = async (req, res, next) => {
       }
     : {};
 
-  const user = req.user;
+  const user = req.admin;
   try {
     const conditions = {
       ...keyword,
       _id: { $ne: user._id },
     };
 
+    if (req.admin) {
+      var admins = await Admin.find(conditions).select("-password").limit(5);
+    }
     const users = await User.find(conditions).select("-password").limit(5);
-    const limitedUsers = users.slice(0, 5);
+    const allUsers = [];
+    // [...admins, ...users];
+    //mark the role of each search result.
+    admins.forEach((admin) => {
+      admin.role = "admin";
+      allUsers.push(admin);
+    });
+    users.forEach((user) => {
+      user.role = "user";
+      allUsers.push(user);
+    });
+    const limitedUsers = allUsers.slice(0, 5);
     // console.log("users:", users);
     res.status(200).json({ users: limitedUsers });
   } catch (err) {
@@ -97,21 +112,24 @@ exports.allUsers = async (req, res, next) => {
 /* /chat/access-room?roomId=123 => POST request */
 exports.accessChatRoom = async (req, res, next) => {
   const { userId } = req.body;
-  const primaryUser = req.admin || req.user;
+  const primaryUser = req.admin;
   // let userDb = req.admin ? Admin : User;
+
   try {
     //validate input
     if (!userId) {
       throwError("No userId provided", 400, "userId");
     }
+
     //check if user exists
     let secondaryUser = await User.findById(userId);
-    if (req.admin) {
+    if (1) {
       secondaryUser = await Admin.findById(userId);
     }
     if (!secondaryUser) {
       throwError("No secondaryUser found", 404, "secondaryUser");
     }
+
     //check if chat room already exists
     const chatRoom = await ChatRoom.findOne({
       users: { $all: [primaryUser._id, secondaryUser._id] },
@@ -123,6 +141,10 @@ exports.accessChatRoom = async (req, res, next) => {
         select: "-password",
       })
       .populate({
+        path: "users",
+        select: "-password",
+      })
+      .populate({
         path: "latestMessage",
         populate: {
           path: "sender",
@@ -130,13 +152,13 @@ exports.accessChatRoom = async (req, res, next) => {
           select: "-password",
         },
       });
-    // .populate("latestMessage");
+
     //if chat room exists, return it
     if (chatRoom) {
       console.log("chatRoom:", chatRoom);
       return res.status(200).json({ chatRoom });
     } else {
-      //create chat room
+      //if not create chat room
       console.log("create chat room");
       const newChatRoom = new ChatRoom({
         fullName: "sender",
@@ -144,7 +166,6 @@ exports.accessChatRoom = async (req, res, next) => {
         users: [primaryUser._id, secondaryUser._id],
       });
       newChatRoom.type = req.admin ? "admin-client" : "client-client";
-
       const savedChatRoom = await newChatRoom.save();
       //open chatroom on reciever's side.
       io.getIO().in(secondaryUser._id).emit("recieve-new-room", savedChatRoom);
@@ -165,8 +186,8 @@ exports.accessChatRoom = async (req, res, next) => {
 
 /* /chat/message => POST request */
 exports.fetchChatRooms = async (req, res, next) => {
-  const user = req.user;
-
+  const user = req.admin;
+  console.log("right here");
   try {
     const chatRooms = await ChatRoom.find({
       users: {
@@ -176,6 +197,11 @@ exports.fetchChatRooms = async (req, res, next) => {
         },
       },
     })
+      .populate({
+        path: "users",
+        model: "Admin", // Use 'Admin' model instead of 'User' model
+        select: "-password",
+      })
       .populate({
         path: "users",
         select: "-password",
@@ -189,11 +215,13 @@ exports.fetchChatRooms = async (req, res, next) => {
         path: "latestMessage",
         populate: {
           path: "sender",
+          model: "Admin", // Use the appropriate model for 'sender'
           select: "-password",
         },
       })
       .sort({ updatedAt: -1 });
 
+    // Update the chat room's fullName with the other user's name
     const updatedChatRooms = chatRooms.map((chatRoom) => {
       chatRoom.users.map((u) => {
         if (u._id.toString() !== user._id.toString()) {
