@@ -4,7 +4,7 @@ const router = express.Router();
 
 const chatController = require("../adminController/chat");
 
-// const messageController = require("../adminController/message");
+const messageController = require("../adminController/message");
 
 const adminAuth = require("../middleware/admin-auth");
 
@@ -36,7 +36,7 @@ router.post("/access-room", adminAuth, chatController.accessChatRoom);
 // //send message
 // router.post("/message", adminAuth, messageController.sendMessage);
 
-// router.get("/room/:roomId", adminAuth, messageController.FetchMessages);
+router.get("/room/:roomId", adminAuth, messageController.FetchMessages);
 
 // router.post("/create-chat-room", adminAuth,chatController.createChatRoom);
 

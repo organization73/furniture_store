@@ -134,7 +134,7 @@ exports.accessChatRoom = async (req, res, next) => {
       //create chat room
       console.log("create chat room");
       const newChatRoom = new ChatRoom({
-        fullName: "sender",
+        fullName: "client-client",
         isGroupChat: false,
         users: [primaryUser._id, secondaryUser._id],
       });

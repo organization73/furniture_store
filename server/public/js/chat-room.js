@@ -254,7 +254,7 @@ function selectContact() {
   console.log("join room", contactId);
 
   // Send a GET request to the API to retrieve messages for the selected contact
-  fetch(`/chat/room/${contactId}`)
+  fetch(`/admin/chat/room/${contactId}`)
     .then((response) => response.json())
     .then((messages) => {
       // Clear any existing messages
