@@ -80,7 +80,7 @@ fetch("/admin/chat/rooms")
   })
   .then((data) => {
     console.log(data);
-    console.log(typeof data.chatRooms);
+    console.log( data.chatRooms);
     data.chatRooms.forEach((chatRoom) => {
       console.log("chatRoom");
       console.log(chatRoom);
@@ -266,7 +266,7 @@ function selectContact() {
         const messageElement = document.createElement("p");
         console.log(`message sender${message.sender}`);
         messageElement.textContent = `${
-          message.sender.username.split(" ")[0]
+          message.sender.username
         }: ${message.content}`;
         messagesList.appendChild(messageElement);
       });

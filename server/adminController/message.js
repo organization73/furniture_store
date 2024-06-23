@@ -14,25 +14,12 @@ exports.FetchMessages = async (req, res, next) => {
       throw error;
     }
 
-    const messages = await Message.find({ chatRoom: roomId }).populate(
-      "chatRoom"
-    );
-
-    for (let message of messages) {
-      if (message.senderType === "admin") {
-        message =await message.populate({
-          path: "sender",
-          model: "Admin",
-          select: "username email",
-        });
-        console.log("assdfsda ", message.sender);
-      } else {
-        message = await message.populate({
-          path: "sender",
-          select: "username email",
-        });
-      }
-    }
+    const messages = await Message.find({ chatRoom: roomId })
+      .populate("chatRoom")
+      .populate({
+        path: "sender",
+        select: "username email",
+      });
 
     res.status(200).json(messages);
   } catch (error) {
@@ -64,7 +51,6 @@ exports.sendMessage = async (req, res, next) => {
     let message = await Message.create(newMessage);
     message = await message.populate({
       path: "sender",
-      model: "Admin",
       select: "username email",
     });
 
@@ -75,7 +61,6 @@ exports.sendMessage = async (req, res, next) => {
     });
     console.log("chat room", chatRoom);
 
-    //
     if (!chatRoom.users) {
       return console.log("no users in the chat room");
     }

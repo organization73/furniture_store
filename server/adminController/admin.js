@@ -1,4 +1,4 @@
-const Admin = require("../models/admin");
+const Admin = require("../models/user");
 
 exports.getProfile = (req, res, next) => {
   const admin = req.admin;

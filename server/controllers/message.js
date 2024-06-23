@@ -14,24 +14,12 @@ exports.FetchMessages = async (req, res, next) => {
       throw error;
     }
 
-    const messages = await Message.find({ chatRoom: roomId }).populate(
-      "chatRoom"
-    );
-    for (let message of messages) {
-      if (message.senderType === "admin") {
-        message = await message.populate({
-          path: "sender",
-          model: "Admin",
-          select: "username email",
-        });
-        console.log("assdfsda ", message.sender);
-      } else {
-        message = await message.populate({
-          path: "sender",
-          select: "username email",
-        });
-      }
-    }
+    const messages = await Message.find({ chatRoom: roomId })
+      .populate("chatRoom")
+      .populate({
+        path: "sender",
+        select: "username email",
+      });
 
     res.status(200).json(messages);
   } catch (error) {
@@ -76,10 +64,10 @@ exports.sendMessage = async (req, res, next) => {
     });
     console.log("chat room", chatRoom);
     if (!chatRoom.users) {
-      console.log("no users in the chat room");
-      return throwError("No users in the chat room", 400, "sendMessage");
+      throwError("No users in the chat room", 400, "sendMessage");
     }
     console.log("message", message);
+    //send message to all users in the room except the sender.
     chatRoom.users.forEach((user) => {
       if (user._id.toString() !== message.sender._id.toString()) {
         console.log("sending message to", user._id.toString());

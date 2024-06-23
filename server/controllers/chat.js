@@ -80,6 +80,7 @@ exports.allUsers = async (req, res, next) => {
     const conditions = {
       ...keyword,
       _id: { $ne: user._id },
+      type: "client",
     };
 
     const users = await User.find(conditions).select("-password").limit(5);
@@ -122,7 +123,6 @@ exports.accessChatRoom = async (req, res, next) => {
         path: "latestMessage",
         populate: {
           path: "sender",
-          model: req.admin ? "Admin" : "User", // Use the appropriate model for 'sender'
           select: "-password",
         },
       });
@@ -176,11 +176,6 @@ exports.fetchChatRooms = async (req, res, next) => {
         select: "-password",
       })
       .populate({
-        path: "admin",
-        model: "Admin", // Use the appropriate model for 'sender'
-        select: "-password",
-      })
-      .populate({
         path: "latestMessage",
         populate: {
           path: "sender",
@@ -192,7 +187,7 @@ exports.fetchChatRooms = async (req, res, next) => {
     const updatedChatRooms = chatRooms.map((chatRoom) => {
       chatRoom.users.map((u) => {
         if (u._id.toString() !== user._id.toString()) {
-          chatRoom.fullName = u.firstName + " " + u.lastName;
+          chatRoom.fullName = u.username;
         }
       });
       return chatRoom;

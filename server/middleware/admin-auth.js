@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Admin = require("../models/admin"); // Assuming you have a User model
+const Admin = require("../models/user"); // Assuming you have a User model
 
 const authMiddleware = async (req, res, next) => {
   //if request isn't from website, skip this middleware
@@ -26,7 +26,7 @@ const authMiddleware = async (req, res, next) => {
     // Verify and decode the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     // Check if the admin exists in the database
-    const admin = await Admin.findById(decoded.adminId);
+    const admin = await Admin.findById(decoded.userId);
     if (!admin) {
       const error = new Error("No admin found");
       error.statusCode = 401;

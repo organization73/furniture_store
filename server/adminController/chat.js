@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Admin = require("../models/admin");
+const Admin = require("../models/user");
 const User = require("../models/user");
 
 const ChatRoom = require("../models/chatRoom");
@@ -83,22 +83,9 @@ exports.allUsers = async (req, res, next) => {
       _id: { $ne: user._id },
     };
 
-    if (req.admin) {
-      var admins = await Admin.find(conditions).select("-password").limit(5);
-    }
-    const users = await User.find(conditions).select("-password").limit(5);
-    const allUsers = [];
-    // [...admins, ...users];
-    //mark the role of each search result.
-    admins.forEach((admin) => {
-      admin.role = "admin";
-      allUsers.push(admin);
-    });
-    users.forEach((user) => {
-      user.role = "user";
-      allUsers.push(user);
-    });
-    const limitedUsers = allUsers.slice(0, 5);
+    let users = await User.find(conditions).select("-password").limit(5);
+
+    const limitedUsers = users.slice(0, 5);
     // console.log("users:", users);
     res.status(200).json({ users: limitedUsers });
   } catch (err) {
@@ -124,9 +111,6 @@ exports.accessChatRoom = async (req, res, next) => {
     //check if user exists
     let secondaryUser = await User.findById(userId);
     if (!secondaryUser) {
-      secondaryUser = await Admin.findById(userId);
-    }
-    if (!secondaryUser) {
       throwError("No secondaryUser found", 404, "secondaryUser");
     }
 
@@ -137,18 +121,12 @@ exports.accessChatRoom = async (req, res, next) => {
     })
       .populate({
         path: "users",
-        model: req.admin ? "Admin" : "User",
-        select: "-password",
-      })
-      .populate({
-        path: "users",
         select: "-password",
       })
       .populate({
         path: "latestMessage",
         populate: {
           path: "sender",
-          model: req.admin ? "Admin" : "User", // Use the appropriate model for 'sender'
           select: "-password",
         },
       });
@@ -198,69 +176,33 @@ exports.fetchChatRooms = async (req, res, next) => {
     })
       .populate({
         path: "users",
-        model: "Admin", // Use 'Admin' model instead of 'User' model
-        select: "-password",
-      })
-      .populate({
-        path: "admin",
-        model: "Admin", // Use the appropriate model for 'sender'
         select: "-password",
       })
       .populate({
         path: "latestMessage",
         populate: {
           path: "sender",
-          model: "Admin", // Use the appropriate model for 'sender'
           select: "-password",
         },
       })
       .sort({ updatedAt: -1 });
 
-    const ordinaryUsersChatRoom = await ChatRoom.find({
-      users: {
-        $elemMatch: {
-          $eq: user._id,
-          // Additional criteria for matching users array elements
-        },
-      },
-    }).populate({
-      path: "users",
-      select: "-password",
-    });
-
-    // Update the chat room's fullName with the other user's name
-    const updatedChatRooms = chatRooms.map(async (chatRoom) => {
-      //last message fix
-      console.log("chatRoom1:", chatRoom.latestMessage);
-
-      if (chatRoom.latestMessage.senderType === "user") {
-        await chatRoom.populate({
-          path: "latestMessage",
-          populate: {
-            path: "sender",
-            select: "-password",
-          },
-        });
-      }
-      console.log("chatRoom:", chatRoom.latestMessage);
-      //add ordinary users to chat room.
-      const room = ordinaryUsersChatRoom.filter(
-        (room) => room._id.toString() === chatRoom._id.toString()
-      );
-      let allUsers = [];
-      if (room) {
-        allUsers = [...chatRoom.users, ...room[0].users];
-      }
-      //without the 2 the mongoose schema will convert the users objects to _id only objects.
-      chatRoom.users2 = allUsers;
-      allUsers.map((u) => {
+    //naming the chat room with the other user's name
+    const updatedChatRooms = chatRooms.map((chatRoom) => {
+      chatRoom.users.map((u) => {
         if (u._id.toString() !== user._id.toString()) {
           chatRoom.fullName = u.username;
         }
       });
       return chatRoom;
     });
-    res.status(200).json({ chatRooms: updatedChatRooms });
+    console.log("updatedChatRooms:", updatedChatRooms);
+    res
+      .status(200)
+      .json({
+        chatRooms: updatedChatRooms,
+        message: "fetching chat rooms successfully.",
+      });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

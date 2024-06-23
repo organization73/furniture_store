@@ -8,7 +8,7 @@ const sendgridTransport = require("nodemailer-sendgrid-transport");
 //get all the validation errors might have been thrown
 const { validationResult } = require("express-validator");
 
-const Admin = require("../models/admin");
+const User = require("../models/user");
 
 const API_KEY =
   "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";
@@ -55,11 +55,10 @@ exports.getSignup = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const confirmPassword = req.body.password;
-  const username = email.split("@")[0];
-  const firstName = username.split(".")[0];
-  const lastName = username.split(".")[1];
-  
+  const confirmPassword = req.body.confirmPassword;
+  const username = req.body.username;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -76,6 +75,7 @@ exports.postSignup = (req, res, next) => {
       validationErrors: errors.array(),
     });
   }
+  console.log("here");
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
@@ -86,10 +86,11 @@ exports.postSignup = (req, res, next) => {
     bcrypt
       .hash(password, 12)
       .then((hashedPassword) => {
-        const admin = new Admin({
+        const user = new User({
           firstName: firstName,
           lastName: lastName,
           username: username,
+          type: "Admin",
           email: email,
           password: hashedPassword,
           isConfirmed: false,
@@ -97,27 +98,17 @@ exports.postSignup = (req, res, next) => {
           confirmTokenExpiration: Date.now() + 60000 * 120, //120min
           cart: { items: [] },
         });
-        return admin.save();
+        return user.save();
       })
       .then((result) => {
         return res.redirect("/admin/login");
-        // return transporter
-        //   .sendMail({
-        //     to: email,
-        //     from: SINGLE_SENDER,
-        //     subject: "Signup successfully!",
-        //     html: `<h1>hi from us. </h1>
-        //       <p> To confirm you email <a href='http://localhost:3000/reset/${token}'> Click here </a>
-        //     `,
-        //   })
-        //   .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   });
 };
 
 exports.getProfile = (req, res, next) => {
-  res.render("user/profile", {
+  res.render("admin/profile", {
     path: "/profile",
     pageTitle: "Profile",
     isAuthenticated: false,
@@ -146,24 +137,24 @@ exports.postLogin = async (req, res, next) => {
   }
 
   try {
-    const admin = await Admin.findOne({ email: email });
-    if (!admin) {
+    const user = await User.findOne({ email: email });
+    if (!user) {
       const error = new Error("Invalid email or password.");
       error.statusCode = 401;
       throw error;
     }
 
-    const doMatch = await bcrypt.compare(password, admin.password);
+    const doMatch = await bcrypt.compare(password, user.password);
     if (doMatch) {
       const token = jwt.sign(
-        { adminId: admin._id, email: admin.email },
+        { userId: user._id, email: user.email },
         process.env.JWT_SECRET,
         { expiresIn: "2d" }
       );
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       res.cookie("token", token, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24* 2,
+        maxAge: 1000 * 60 * 60 * 24 * 2,
       });
       res.redirect("/admin");
     } else {
@@ -195,7 +186,7 @@ exports.postLogout = (req, res, next) => {
 exports.getConfirmSignup = (req, res, next) => {
   const token = req.params.token;
   console.log(token);
-  Admin.findOne({
+  User.findOne({
     confirmToken: token,
     confirmTokenExpiration: { $gt: Date.now() },
   }).then((user) => {
