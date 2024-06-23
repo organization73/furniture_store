@@ -12,7 +12,7 @@ import 'firebase_options.dart';
 Future<void> _backgroundMessageHandler(RemoteMessage message) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(AuthenticatorRepo()));
+  );
 }
 
 Future<void> main() async {
@@ -26,7 +26,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseMessaging.instance.getInitialMessage();
+  await FirebaseMessaging.instance
+      .getInitialMessage()
+      .then((value) => Get.put(AuthenticatorRepo()));
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
