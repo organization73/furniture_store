@@ -96,6 +96,7 @@ fetch("/admin/chat/rooms")
       listItem.addEventListener("click", selectContact);
       const lastMessage = document.createElement("h6");
       if (chatRoom.latestMessage) {
+        console.log('sadfd',chatRoom);
         lastMessage.textContent = `${
           chatRoom.latestMessage.sender.username.split(".")[0]
         } :${chatRoom.latestMessage.content}`;
@@ -263,6 +264,7 @@ function selectContact() {
       // Add the new messages to the messages div
       messages.forEach((message) => {
         const messageElement = document.createElement("p");
+        console.log(`message sender${message.sender}`);
         messageElement.textContent = `${
           message.sender.username.split(" ")[0]
         }: ${message.content}`;

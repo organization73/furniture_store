@@ -229,7 +229,20 @@ exports.fetchChatRooms = async (req, res, next) => {
     });
 
     // Update the chat room's fullName with the other user's name
-    const updatedChatRooms = chatRooms.map((chatRoom) => {
+    const updatedChatRooms = chatRooms.map(async (chatRoom) => {
+      //last message fix
+      console.log("chatRoom1:", chatRoom.latestMessage);
+
+      if (chatRoom.latestMessage.senderType === "user") {
+        await chatRoom.populate({
+          path: "latestMessage",
+          populate: {
+            path: "sender",
+            select: "-password",
+          },
+        });
+      }
+      console.log("chatRoom:", chatRoom.latestMessage);
       //add ordinary users to chat room.
       const room = ordinaryUsersChatRoom.filter(
         (room) => room._id.toString() === chatRoom._id.toString()

@@ -17,18 +17,19 @@ exports.FetchMessages = async (req, res, next) => {
     const messages = await Message.find({ chatRoom: roomId }).populate(
       "chatRoom"
     );
-
     for (let message of messages) {
-      if (message.sender) {
-        const admin = await Admin.findById(message.sender).select("username");
-        if (admin) {
-          message.sender = admin;
-        } else {
-          const user = await User.findById(message.sender).select("username");
-          if (user) {
-            message.sender = user;
-          }
-        }
+      if (message.senderType === "admin") {
+        message = await message.populate({
+          path: "sender",
+          model: "Admin",
+          select: "username email",
+        });
+        console.log("assdfsda ", message.sender);
+      } else {
+        message = await message.populate({
+          path: "sender",
+          select: "username email",
+        });
       }
     }
 
@@ -44,6 +45,9 @@ exports.FetchMessages = async (req, res, next) => {
 exports.sendMessage = async (req, res, next) => {
   const user = req.user;
   const { content, roomId } = req.body;
+  console.log(
+    `sending message to room ${roomId} from user ${user.username} with content ${content}`
+  );
   console.log("req.body", req.body);
 
   if (!content || !roomId) {
