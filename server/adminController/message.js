@@ -42,7 +42,7 @@ exports.FetchMessages = async (req, res, next) => {
 };
 
 exports.sendMessage = async (req, res, next) => {
-  const user = req.admin || req.user;
+  const admin = req.admin;
   const { content, roomId } = req.body;
   console.log("req.body", req.body);
 
@@ -51,40 +51,41 @@ exports.sendMessage = async (req, res, next) => {
     return res.sendStatus(400);
   }
 
-  var newMessage = {
-    sender: user._id,
+  let newMessage = {
+    sender: admin._id,
+    senderType: "admin",
     content: content,
     chatRoom: roomId,
     type: "text",
   };
   try {
-    var message = await Message.create(newMessage);
+    let message = await Message.create(newMessage);
     message = await message.populate({
       path: "sender",
-      model: req.admin ? "Admin" : "User",
+      model: "Admin",
       select: "username email",
     });
 
     message = await message.populate("chatRoom");
-    // message = await Admin.populate(message, {
-    //   path: "chatRoom.users",
-    //   model: req.admin ? "Admin" : "User",
-    //   select: "username email",
-    // });
+
+
 
     const chatRoom = await ChatRoom.findByIdAndUpdate(roomId, {
       latestMessage: message,
     });
     console.log("chat room", chatRoom);
+
     //
     if (!chatRoom.users) {
       return console.log("no users in the chat room");
     }
     console.log("message", message);
-    chatRoom.users.forEach((user) => {
-      if (user._id.toString() !== message.sender._id.toString()) {
-        console.log("sending message to", user._id.toString());
-        io.getIO().in(user._id.toString()).emit("recieve-message", message);
+
+    //send message to all users in the chat room except the sender.
+    chatRoom.users.forEach((reciever) => {
+      if (reciever._id.toString() !== message.sender._id.toString()) {
+        console.log("sending message to", reciever._id.toString());
+        io.getIO().in(reciever._id.toString()).emit("recieve-message", message);
       }
     });
 

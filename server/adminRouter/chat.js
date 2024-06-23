@@ -34,7 +34,7 @@ router.post("/access-room", adminAuth, chatController.accessChatRoom);
 // );
 
 // //send message
-// router.post("/message", adminAuth, messageController.sendMessage);
+router.post("/message", adminAuth, messageController.sendMessage);
 
 router.get("/room/:roomId", adminAuth, messageController.FetchMessages);
 

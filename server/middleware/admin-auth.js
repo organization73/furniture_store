@@ -35,6 +35,7 @@ const authMiddleware = async (req, res, next) => {
     }
     req.admin = admin;
     req.isAuthenticated = true;
+    console.log('authorized requist.')
     next();
   } catch (error) {
     if (!error.statusCode) {

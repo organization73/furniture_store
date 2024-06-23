@@ -304,7 +304,7 @@ async function sendMessage() {
     const selectedContact = document.querySelector("#contact-list li.selected");
     const messagesList = document.getElementById("messages");
     try {
-      const response = await fetch(`/chat/message`, {
+      const response = await fetch(`/admin/chat/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,12 @@ const Schema = mongoose.Schema;
 const messageSchema = new Schema({
   chatRoom: { type: Schema.Types.ObjectId, ref: "ChatRoom", required: true },
   sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  senderType: {
+    type: String,
+    required: true,
+    default: "user",
+    enum: ["user", "admin"],
+  },
   content: { type: String, required: true },
   type: { type: String, required: true },
   isRead: { type: Boolean, default: false },
