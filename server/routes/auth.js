@@ -16,7 +16,7 @@ router.post("/re-verify-email", authController.reVerifyEmail);
 
 router.post("/is-confirmed", authController.isConfirmed);
 
-router.post("/reset-password-email", authController.sendResetPassword);
+router.post("/reset-password", authController.sendResetPassword);
 
 // router.get("/reset-password-email/:token", authController.getResetPassword);
 
