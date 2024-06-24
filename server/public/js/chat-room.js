@@ -40,7 +40,7 @@ messageContainer.addEventListener("input", (event) => {
   );
   socket.emit("typing", {
     recieverId: reciever._id,
-    recieverUsername: reciever.username,
+    recieverUsername: currentUser.username,
   });
 });
 
@@ -320,7 +320,6 @@ async function sendMessage() {
         throw new Error("Error sending message");
       }
       const newMessage = await response.json();
-      // socket.emit("new-message", newMessage);
     } catch (error) {
       return console.log(error);
     }

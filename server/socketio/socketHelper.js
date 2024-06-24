@@ -45,8 +45,8 @@ module.exports.actionListeners = (socket) => {
   });
 
   //typing
-  socket.on("typing", ({ recieverId, recieverUsername }) => {
-    socket.in(recieverId).emit("recieve-typing", recieverUsername);
+  socket.on("typing", ({ recieverId, senderUsername }) => {
+    socket.in(recieverId).emit("recieve-typing", senderUsername);
   });
 
   //sending messages.
