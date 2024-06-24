@@ -5,6 +5,8 @@ const fs = require("fs");
 const path = require("path");
 
 const Product = require("../models/product");
+const AiProduct = require("../models/aiProduct");
+const ProductRate = require("../models/productRate");
 
 const productSchema = yup.object().shape({
   title: yup.string().required(),
@@ -24,6 +26,21 @@ const productSchema = yup.object().shape({
       modefiable: yup.boolean().required(),
     })
     .required(),
+});
+
+const aiProductSchema = yup.object().shape({
+  title: yup.string(),
+  price: yup.number(),
+  category: yup.string(),
+  subCategory: yup.string(),
+  imageUrl: yup.string(),
+  description: yup.string(),
+});
+
+const rateProductSchema = yup.object().shape({
+  productId: yup.string().required(),
+  rate: yup.number().required(),
+  description: yup.string(),
 });
 
 exports.createProduct = async (req, res, next) => {
@@ -92,54 +109,97 @@ exports.createProduct = async (req, res, next) => {
   res.status(201).json({ message: "Product created" });
 };
 
-// exports.createProduct = async (req, res, next) => {
-//   // Validate the product data
-//   const { title, price, description } = req.body;
-//   const details = JSON.parse(req.body.details);
-//   try {
-//     productSchema.validateSync({ title, price, description, details });
-//   } catch (error) {
-//     return throwError(422, error.message, error.path, next);
-//   }
-//   //validationg images
-//   console.log(req.files.length);
-//   if (!req.files.length) {
-//     // errorsList.push({ message: "No image provided", path: "images" });
-//     return throwError(422, "No image provided", "images", next);
-//   }
+exports.createAIProduct = async (req, res, next) => {
+  console.log("create ai p");
+  const { title, price, description, category, subCategory, imageUrl } =
+    req.body;
+  //validate user input.
+  try {
+    await aiProductSchema.validateSync({
+      title,
+      price,
+      description,
+      category,
+      subCategory,
+      imageUrl,
+    });
+  } catch (error) {
+    return throwError(422, error.message, error.path, next);
+  }
 
-//   const images = req.files.map((file) => {
-//     return { imageUrl: file.path };
-//   });
-//   console.log("images:", images);
+  //create the product
+  const product = new AiProduct({
+    creator: req.user._id,
+    title: title,
+    price: price,
+    category: category,
+    subCategory: subCategory,
+    imageUrl: imageUrl,
+    description: description,
+  });
 
-//   //Create the product
-//   const product = new Product({
-//     creator: req.user._id, //why id required?
-//     title: title,
-//     price: price,
-//     description: description,
-//     images: images,
-//     details: details,
-//   });
-//   console.log("product:", product);
-//   // Save the product
-//   try {
-//     await product.save();
-//   } catch (error) {
-//     error.codeStatus = 401;
-//     next(error);
-//   }
-//   //add the product to the user's products array
-//   try {
-//     req.user.products.push(product);
-//     await req.user.save();
-//   } catch (error) {
-//     return throwError(500, "Adding product to user failed");
-//   }
+  //save the product
+  try {
+    await product.save();
+    res.status(201).json({ message: "Product created successfully" });
+  } catch (error) {
+    return throwError(500, "Failed to save product", "server", next);
+  }
+};
 
-//   res.status(201).json({ message: "Product created" });
-// };
+exports.rateProduct = async (req, res, next) => {
+  const { productId, rate, description } = req.body;
+  //validate the user input
+  try {
+    await rateProductSchema.validateSync({ productId, rate, description });
+  } catch (error) {
+    return throwError(422, error.message, error.path, next);
+  }
+
+  //find the product
+  let product = await Product.findById(productId).populate("rates");
+  if (!product) {
+    return throwError(404, "Product not found", "server", next);
+  }
+
+  //create the product rate
+  const productRate = new ProductRate({
+    productId: productId,
+    customerId: req.user._id,
+    rate: rate,
+    description: description,
+  });
+
+  //save the rate
+  try {
+    await productRate.save();
+  } catch (error) {
+    return throwError(500, "Failed to save rate", "server", next);
+  }
+
+  //add the rate to the prouct rates array
+  try {
+    let totalRates =
+      product.rates.reduce((acc, rateObject) => acc + rateObject.rate, 0) +
+      rate;
+    product.rates.push(productRate._id);
+    //update the average rate.
+    console.log("product.rates:", product.rates);
+    console.log("total rates:", totalRates);
+    console.log("product.rates.length:", product.rates.length);
+    const newRate = totalRates / product.rates.length;
+    product.rate = newRate;
+    await product.save();
+    res.status(201).json({ message: "Rate saved successfully" });
+  } catch (error) {
+    return throwError(
+      500,
+      error.message || "Failed to save rate to product",
+      "server",
+      next
+    );
+  }
+};
 
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);

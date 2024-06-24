@@ -25,6 +25,7 @@ const productSchema = new Schema(
         },
       },
     ],
+    rates: [{ type: Schema.Types.ObjectId, ref: "productRate" }],
     rate: {
       type: Number,
       default: 0,
