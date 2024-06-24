@@ -43,6 +43,18 @@ exports.sendMessage = async (req, res, next) => {
     return res.sendStatus(400);
   }
 
+  try {
+    const chatRoom = await ChatRoom.findById(roomId);
+    if (!chatRoom) {
+      throwError("Chat room not found", 404, "roomId");
+    }
+    if (!chatRoom.users.includes(admin._id)) {
+      throwError("You are not a member of this chat room", 403, "roomId");
+    }
+  }catch (error) {
+    next(error);
+  }
+
   let newMessage = {
     sender: user._id,
     content: content,
