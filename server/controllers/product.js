@@ -57,24 +57,30 @@ exports.createProduct = async (req, res, next) => {
   for (let i = 0; i < images.length; i++) {
     const imageUrl = images[i];
     try {
-      const response = await fetch(
-        `http://localhost:8000/predict?image_url=${imageUrl}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const classificationResult = await response.json();
-      if (response.status !== 201 && response.status !== 200) {
-        throw new Error("imageUrl not valid.");
-      }
+      //make the values fixed until the AI model is deployed.
+      // const response = await fetch(
+      //   `http://localhost:8000/predict?image_url=${imageUrl}`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
+      // const classificationResult = await response.json();
+      // if (response.status !== 201 && response.status !== 200) {
+      //   throw new Error("imageUrl not valid.");
+      // }
 
+      // imagesObjests.push({
+      //   imageUrl: imageUrl,
+      //   class: classificationResult.class,
+      //   confidence: classificationResult.confidence,
+      // });
       imagesObjests.push({
-        imageUrl: imageUrl,
-        class: classificationResult.class,
-        confidence: classificationResult.confidence,
+        imageUrl: "www.furniture.com/image1",
+        class: "chair",
+        confidence: 98,
       });
     } catch (error) {
       console.error("Error classifying image:", error);
