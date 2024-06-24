@@ -150,7 +150,7 @@ exports.accessChatRoom = async (req, res, next) => {
         .in(secondaryUser._id.toString())
         .emit("recieve-new-room", {
           chatRoom: savedChatRoom,
-          senderUsername: req.admin.username,
+          senderUsername: primaryUser.username,
         });
 
       return res.status(201).json({

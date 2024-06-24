@@ -46,10 +46,10 @@ exports.sendMessage = async (req, res, next) => {
   try {
     const chatRoom = await ChatRoom.findById(roomId);
     if (!chatRoom) {
-      throwError("Chat room not found", 404, "roomId");
+     return throwError("Chat room not found", 404, "roomId");
     }
-    if (!chatRoom.users.includes(admin._id)) {
-      throwError("You are not a member of this chat room", 403, "roomId");
+    if (!chatRoom.users.includes(user._id)) {
+     return throwError("You are not a member of this chat room", 403, "roomId");
     }
   }catch (error) {
     next(error);
@@ -76,7 +76,7 @@ exports.sendMessage = async (req, res, next) => {
     });
     console.log("chat room", chatRoom);
     if (!chatRoom.users) {
-      throwError("No users in the chat room", 400, "sendMessage");
+     return throwError("No users in the chat room", 400, "sendMessage");
     }
     console.log("message", message);
     //send message to all users in the room except the sender.
