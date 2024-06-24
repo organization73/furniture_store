@@ -139,14 +139,24 @@ exports.accessChatRoom = async (req, res, next) => {
       //if not create chat room
       console.log("create chat room");
       const newChatRoom = new ChatRoom({
-        fullName: "sender",
+        fullName: "group name",
         isGroupChat: false,
         users: [primaryUser._id, secondaryUser._id],
       });
-      newChatRoom.type = req.admin ? "admin-client" : "client-client";
+      await newChatRoom.populate({
+        path: "users",
+        select: "-password",
+      });
+      newChatRoom.type = "admin-client";
+
       const savedChatRoom = await newChatRoom.save();
       //open chatroom on reciever's side.
-      io.getIO().in(secondaryUser._id).emit("recieve-new-room", savedChatRoom);
+      io.getIO()
+        .in(secondaryUser._id.toString())
+        .emit("recieve-new-room", {
+          chatRoom: savedChatRoom,
+          senderUsername: req.admin.username,
+        });
 
       return res.status(201).json({
         message: "Chat room created",
@@ -197,12 +207,10 @@ exports.fetchChatRooms = async (req, res, next) => {
       return chatRoom;
     });
     console.log("updatedChatRooms:", updatedChatRooms);
-    res
-      .status(200)
-      .json({
-        chatRooms: updatedChatRooms,
-        message: "fetching chat rooms successfully.",
-      });
+    res.status(200).json({
+      chatRooms: updatedChatRooms,
+      message: "fetching chat rooms successfully.",
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

@@ -134,15 +134,24 @@ exports.accessChatRoom = async (req, res, next) => {
       //create chat room
       console.log("create chat room");
       const newChatRoom = new ChatRoom({
-        fullName: "client-client",
+        fullName: "group name",
         isGroupChat: false,
         users: [primaryUser._id, secondaryUser._id],
+      });
+      await newChatRoom.populate({
+        path: "users",
+        select: "-password",
       });
       newChatRoom.type = "client-client";
       const savedChatRoom = await newChatRoom.save();
 
       //open chatroom on reciever's side.
-      io.getIO().in(secondaryUser._id).emit("recieve-new-room", savedChatRoom);
+      io.getIO()
+        .in(secondaryUser._id.toString())
+        .emit("recieve-new-room", {
+          chatRoom: savedChatRoom,
+          senderUsername: req.admin.username,
+        });
 
       return res.status(201).json({
         message: "Chat room created",

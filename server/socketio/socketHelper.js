@@ -46,6 +46,7 @@ module.exports.actionListeners = (socket) => {
 
   //typing
   socket.on("typing", ({ recieverId, senderUsername }) => {
+    console.log(senderUsername, "is typing to", recieverId);
     socket.in(recieverId).emit("recieve-typing", senderUsername);
   });
 
@@ -72,6 +73,7 @@ module.exports.actionListeners = (socket) => {
     const userIndex = onlineUsers.findIndex(
       (user) => user.socketId === socket.id
     );
+    console.log("user disconnected",  socket.id);
     if (userIndex !== -1) {
       socket.leave(onlineUsers[userIndex].userId);
       onlineUsers.splice(userIndex, 1);
