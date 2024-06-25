@@ -9,6 +9,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 
+Future<void> _backgroundMessageHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+}
+
 Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
@@ -23,6 +29,8 @@ Future<void> main() async {
   await FirebaseMessaging.instance
       .getInitialMessage()
       .then((value) => Get.put(AuthenticatorRepo()));
+
+  FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
   runApp(const MyApp());
 }
