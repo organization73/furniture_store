@@ -62,13 +62,21 @@ const userSchema = yup.object().shape({
     //   return value === this.parent.password;
     // })
     .notOneOf([null], "Field cannot be null"),
+  phone: yup.string(),
 });
 
 exports.creatUser = async (req, res, next) => {
   //exprtactoin of data
   console.log("Create User\n+++++++");
-  const { firstName, lastName, username, email, password, confirmPassword } =
-    req.body;
+  const {
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+    confirmPassword,
+    phone,
+  } = req.body;
   //Data Validation
   try {
     await userSchema.validate({
@@ -78,6 +86,7 @@ exports.creatUser = async (req, res, next) => {
       email,
       password,
       confirmPassword,
+      phone,
     });
   } catch (error) {
     return throwError(422, error.message, error.path, next);
@@ -101,6 +110,13 @@ exports.creatUser = async (req, res, next) => {
         );
       }
     }
+    //check if phone already exist
+    // if (phone) {
+    //   const existingPhone = await User.findOne({ phone });
+    //   if (existingPhone) {
+    //     return throwError(409, "Phone is already in use", "phone", next);
+    //   }
+    // }
   } catch (error) {
     if (!error.statusCode) error.statusCode = 500;
     next(error);
@@ -159,12 +175,12 @@ exports.creatUser = async (req, res, next) => {
     confirmToken: token,
     confirmTokenExpiration: Date.now() + TOKEN_VALID_MIN * 60 * 1000,
     password: hashedPassword,
+    phone,
   });
   //saving the user into the database
   try {
     const saveUser = await user.save();
     console.log("email was saved to:", email);
-
     return res
       .status(200)
       .json({ message: "User created successfully", email: saveUser.email });

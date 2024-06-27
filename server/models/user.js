@@ -11,6 +11,7 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     imageUrl: { type: String },
     password: { type: String, required: true },
+    phone: { type: String },
     isConfirmed: { type: Boolean },
     confirmToken: String,
     confirmTokenExpiration: Date,
