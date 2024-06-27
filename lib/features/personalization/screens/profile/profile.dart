@@ -70,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               ProfileMenu(
                 title: 'Username',
-                value: controller.user.value.userName,
+                value: controller.user.value.username!,
                 onPress: () {},
               ),
               SizedBox(

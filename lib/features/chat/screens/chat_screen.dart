@@ -59,7 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        chatController.user.value!.userName,
+                        chatController.user.value!.username!,
                       ),
                       Text(
                         chatController.user.value!.isOnline

@@ -9,11 +9,18 @@ import 'package:decordash/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordash/utils/exceptions/format_exceptions.dart';
 import 'package:decordash/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserRepo extends GetxController {
   static UserRepo get instance => Get.find();
-
+Future<void> saveUserRecord(UserModel user) async {
+    try {
+      GetStorage().write('user_data', user.toJson());
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> saveuserRecord(UserModel user) async {
@@ -52,22 +59,37 @@ class UserRepo extends GetxController {
     }
   }
 
-  Future<void> updateUserData(UserModel updatedUser) async {
-    try {
-      await _db
-          .collection('Users')
-          .doc(updatedUser.id)
-          .update(updatedUser.toJson());
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
+  Future<UserModel?> getUserData() async {
+    final userData = GetStorage().read('user_data');
+    if (userData != null) {
+      return UserModel.fromJson(userData);
     }
+    return null;
   }
+
+ Future<void> updateUserRecord(UserModel user) async {
+    try {
+      GetStorage().write('user_data', user.toJson());
+    } catch (e) {
+      throw 'Failed to update user data: $e';
+    }
+ }
+  // Future<void> updateUserData(UserModel updatedUser) async {
+  //   try {
+  //     await _db
+  //         .collection('Users')
+  //         .doc(updatedUser.id)
+  //         .update(updatedUser.toJson());
+  //   } on FirebaseException catch (e) {
+  //     throw TFirebaseException(e.code).message;
+  //   } on FormatException catch (_) {
+  //     throw const TFormatException();
+  //   } on PlatformException catch (e) {
+  //     throw TPlatformException(e.code).message;
+  //   } catch (e) {
+  //     throw 'Something went wrong, Please try again';
+  //   }
+  // }
 
   Future<void> updateSingleField(Map<String, dynamic> json) async {
     try {

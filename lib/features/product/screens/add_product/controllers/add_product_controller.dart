@@ -93,7 +93,7 @@ class AddProductController extends GetxController {
               id: userController.user.value.id,
               image: userController.user.value.avatar,
               location: adressController.text,
-              name: userController.user.value.userName,
+              name: userController.user.value.username!,
               accountType: userController.user.value.accountType,
               isFeatured: userController.user.value.isFeatured,
               productsCount: 2,

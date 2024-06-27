@@ -29,13 +29,14 @@ class SignUpController extends GetxController {
   void signup() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'processingLoading'.tr, 'assets/animations/animation-of-docer.json');
+          'We are processing your information...',
+          'assets/animations/animation-of-docer.json');
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-            title: 'internet'.tr, message: 'noInternet'.tr);
+            title: 'No Internet', message: 'No internet connection!');
         return;
       }
 
@@ -49,29 +50,32 @@ class SignUpController extends GetxController {
         FullScreenLoader.stopLoading();
 
         TLoaders.warningSnackBar(
-            title: 'policyAndTerms'.tr, message: 'policyAndTermsDesc'.tr);
+            title: 'Accept Privacy Policy',
+            message:
+                'In order to create an account you must accept the privacy policy and terms of use.');
 
         return;
       }
 
-      final userCred = await AuthenticatorRepo.instance
-          .registerWithEmailAndPassword(
-              emailController.text.trim(), passwordController.text.trim());
-
+      await AuthenticatorRepo.instance.registerWithEmailAndPassword(
+        firstNameController.text,
+        lastNameController.text,
+        userNameController.text,
+        phoneNumController.text,
+        emailController.text,
+        passwordController.text,
+      );
+      
       final newUser = UserModel(
-          id: userCred.user!.uid,
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
-          userName: userNameController.text.trim(),
+          username: userNameController.text.trim(),
           email: emailController.text.trim(),
           phoneNumber: phoneNumController.text.trim(),
-          lastActive: DateTime.now());
+          imageUrl: '');
 
       final userRepesotory = Get.put(UserRepo());
-      await userRepesotory.saveuserRecord(newUser);
-
-      await notifications.requestPermission();
-      await notifications.getToken();
+      await userRepesotory.saveUserRecord(newUser);
 
       FullScreenLoader.stopLoading();
 
@@ -85,7 +89,7 @@ class SignUpController extends GetxController {
     } catch (e) {
       FullScreenLoader.stopLoading();
 
-      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
 }

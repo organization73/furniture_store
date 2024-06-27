@@ -9,13 +9,25 @@ class UserModel {
   final String email;
   final String id;
   final String phoneNumber;
-  final String userName;
   DateTime? createdDate;
   DateTime? lastActive;
   bool isOnline;
   bool isFeatured;
   bool isVerified;
-
+  List<Products>? wishList;
+  String? sId;
+  String? firstNameNew;
+  String? lastNameNew;
+  String? username;
+  String? type;
+  String? emailNew;
+  String? phoneNumberNew;
+  bool? isConfirmed;
+  List<Products>? products;
+  String? createdAt;
+  String? updatedAt;
+  int? iV;
+  String? imageUrl;
   // Additional fields for Vendor
   String galleryName;
   String galleryAddress;
@@ -29,16 +41,26 @@ class UserModel {
     this.lastName = '',
     this.email = '',
     this.id = '',
-    this.userName = '',
     this.lastActive,
     this.isOnline = false,
-    DateTime? createdDate,
     this.galleryName = '',
     this.galleryAddress = '',
     this.galleryCertificate = '',
     this.isFeatured = false,
     this.isVerified = false,
-  }) : createdDate = createdDate ?? DateTime.now();
+    this.wishList,
+    this.sId,
+    this.firstNameNew,
+    this.lastNameNew,
+    this.type,
+    this.emailNew,
+    this.phoneNumberNew,
+    this.iV,
+    this.imageUrl,
+    this.isConfirmed,
+    this.products,
+    this.username
+  });
   String get fullName {
     return '$firstName $lastName';
   }
@@ -84,8 +106,6 @@ class UserModel {
       email: email ?? this.email,
       id: id ?? this.id,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      userName: userName ?? this.userName,
-      createdDate: createdDate ?? this.createdDate,
       lastActive: lastActive ?? this.lastActive,
       isOnline: isOnline ?? this.isOnline,
       galleryName: galleryName ?? this.galleryName,
@@ -98,27 +118,42 @@ class UserModel {
 
   static UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
-      accountType:
-          EnumUtil.fromStringEnum(AccountType.values, json['accountType']),
+      // accountType:
+      //     EnumUtil.fromStringEnum(AccountType.values, json['accountType']),
       avatar: json['avatar'] ?? '',
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
       email: json['email'] ?? '',
       id: json['id'] ?? '',
       phoneNumber: json['phoneNumber'] ?? '',
-      userName: json['userName'] ?? '',
-      createdDate: json['createdDate'] != null
-          ? (json['createdDate'] as Timestamp).toDate()
-          : null,
-      lastActive: json['lastActive'] != null
-          ? (json['lastActive'] as Timestamp).toDate()
-          : DateTime.now(),
+      // lastActive: json['lastActive'] != null
+      //     ? (json['lastActive'] as Timestamp).toDate()
+      //     : DateTime.now(),
       isOnline: json['isOnline'] ?? false,
       galleryName: json['galleryName'] ?? '',
       galleryAddress: json['galleryAddress'] ?? '',
       galleryCertificate: json['galleryCertificate'] ?? '',
       isFeatured: json['isFeatured'] ?? false,
       isVerified: json['isVerified'] ?? false,
+      wishList: json['wishList'] != null
+          ? (json['wishList']['items'] as List)
+              .map((x) => Products.fromJson(x as Map<String, dynamic>))
+              .toList()
+          : [],
+      sId: json['sId'],
+      firstNameNew: json['firstNameNew'],
+      lastNameNew: json['lastNameNew'],
+      type: json['type'],
+      emailNew: json['emailNew'],
+      phoneNumberNew: json['phoneNumberNew'],
+      isConfirmed: json['isConfirmed'],
+      products: json['products'] != null
+          ? List<Products>.from(
+              json['products'].map((x) => Products.fromJson(x)))
+          : null,
+      iV: json['iV'],
+      imageUrl: json['imageUrl'],
+      username:json['username']
     );
   }
 
@@ -128,9 +163,6 @@ class UserModel {
       'avatar': avatar,
       'firstName': firstName,
       'lastName': lastName,
-      'userName': userName,
-      'createdDate': Timestamp.fromDate(createdDate ?? DateTime.now()),
-      'lastActive': Timestamp.fromDate(lastActive ?? DateTime.now()),
       'isOnline': isOnline,
       'email': email,
       'phoneNumber': phoneNumber,
@@ -140,6 +172,7 @@ class UserModel {
       'galleryCertificate': galleryCertificate,
       'isFeatured': isFeatured,
       'isVerified': isVerified,
+      'username':username
     };
   }
 
@@ -152,8 +185,6 @@ class UserModel {
       lastName: '',
       email: '',
       id: '',
-      userName: '',
-      createdDate: DateTime.now(),
       lastActive: DateTime.now(),
       isOnline: false,
       galleryName: '',
@@ -176,10 +207,6 @@ class UserModel {
         lastName: data['lastName'] ?? '',
         email: data['email'] ?? '',
         phoneNumber: data['phoneNumber'] ?? '',
-        userName: data['userName'] ?? '',
-        createdDate: data['createdDate'] != null
-            ? (data['createdDate'] as Timestamp).toDate()
-            : null,
         lastActive: data['lastActive'] != null
             ? (data['lastActive'] as Timestamp).toDate()
             : DateTime.now(),
@@ -193,5 +220,19 @@ class UserModel {
     } else {
       return UserModel.empty();
     }
+  }
+}
+
+class Products {
+  String? sId;
+  Products({this.sId});
+  Products.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    return data;
   }
 }

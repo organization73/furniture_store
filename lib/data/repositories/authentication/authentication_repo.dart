@@ -1,5 +1,8 @@
 import 'package:decordash/common/widgets/loaders/loaders.dart';
+import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/authentication/screens/sign_in_with_phone/enter_code.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
+import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,6 +36,8 @@ class AuthenticatorRepo extends GetxController {
   }
 
   screenRedirect() async {
+    var userController = UserController.instance;
+    userController.loadUserData();
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified || user.phoneNumber != null) {
@@ -52,6 +57,12 @@ class AuthenticatorRepo extends GetxController {
           transition: Transition.rightToLeft,
         );
       }
+    } else if (userController.user.value.firstName != "") {
+      Get.offAll(
+        () => const NavMenu(),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
     } else {
       deviceStorage.writeIfNull('isFirstTime', true);
       deviceStorage.read('isFirstTime') != true
@@ -68,22 +79,16 @@ class AuthenticatorRepo extends GetxController {
     }
   }
 
-  /// Email login
-  Future<UserCredential> loginWithEmailAndPassword(
+  Future<Map<String, dynamic>> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      return await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      final response = await HttpService.instance.loginUser(email, password);
+      final token = response['token'];
+      deviceStorage.write('token', token);
+      deviceStorage.write('isConfirmed', true);
+      return response;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 
@@ -148,22 +153,14 @@ class AuthenticatorRepo extends GetxController {
     }
   }
 
-  /// Email registeration
-  Future<UserCredential> registerWithEmailAndPassword(
-      String email, String password) async {
+  Future<void> registerWithEmailAndPassword(String firstName, String lastName,
+      String username, String phoneNum, String email, String password) async {
     try {
-      return await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      await HttpService.instance
+          .signUpUser(firstName, lastName, username, phoneNum, email, password);
+      deviceStorage.write('token', '');
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      rethrow;
     }
   }
 
@@ -260,6 +257,8 @@ class AuthenticatorRepo extends GetxController {
 
   Future<void> logOut() async {
     try {
+      UserController.instance.removeUserData();
+
       await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(

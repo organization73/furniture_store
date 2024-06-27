@@ -43,7 +43,7 @@ class _UserItemState extends State<UserItem> {
               ),
             ],
           ),
-          title: Text(widget.user.userName,
+          title: Text(widget.user.username!,
               style: Theme.of(context).textTheme.titleLarge),
           subtitle: Text(
               'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',

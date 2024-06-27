@@ -12,6 +12,7 @@ import 'package:decordash/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {
@@ -20,12 +21,12 @@ class UserController extends GetxController {
   final profileLoading = false.obs;
   final imageLoading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
+  final GetStorage _storage = GetStorage();
 
   final hidePassword = true.obs;
   final GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
   final TextEditingController verifyEmail = TextEditingController();
   final TextEditingController verifyPassword = TextEditingController();
-
   final userRepository = Get.put(UserRepo());
 
   @override
@@ -50,7 +51,7 @@ class UserController extends GetxController {
     try {
       /// refresh user record
       await fetchUserRecord();
-      if (user.value.id.isEmpty) {
+      if (user.value!.id.isEmpty) {
         if (userCred != null) {
           final namePart =
               UserModel.nameParts(userCred.user!.displayName ?? '');
@@ -62,7 +63,7 @@ class UserController extends GetxController {
               firstName: namePart[0],
               lastName:
                   namePart.length > 1 ? namePart.sublist(1).join(' ') : '',
-              userName: userName,
+              username: userName,
               email: userCred.user!.email ?? '',
               phoneNumber: userCred.user!.phoneNumber ?? '',
               avatar: userCred.user!.photoURL ?? '');
@@ -186,7 +187,7 @@ class UserController extends GetxController {
 
         Map<String, dynamic> json = {"avatar": imageUrl};
         await userRepository.updateSingleField(json);
-        user.value.avatar = imageUrl;
+        user.value!.avatar = imageUrl;
         user.refresh();
 
         TLoaders.successSnackBar(
@@ -212,7 +213,7 @@ class UserController extends GetxController {
 
         Map<String, dynamic> json = {"galleryCertificate": imageUrl};
         await userRepository.updateSingleField(json);
-        user.value.galleryCertificate = imageUrl;
+        user.value!.galleryCertificate = imageUrl;
         user.refresh();
 
         TLoaders.successSnackBar(
@@ -230,11 +231,35 @@ class UserController extends GetxController {
       if (value == 1) {
         Map<String, dynamic> json = {"accountType": 'vendor'};
         await userRepository.updateSingleField(json);
-        user.value.accountType = AccountType.vendor;
+        user.value!.accountType = AccountType.vendor;
         user.refresh();
       }
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
+  }
+
+  void loadUserData() {
+    final userData = _storage.read('user_data');
+    if (userData != null) {
+      user.value = UserModel.fromJson(userData);
+      // LoggerHelper.info(_user.value!.toJson().toString());
+    } else {
+      // LoggerHelper.warning('No user data saved');
+    }
+  }
+
+  void updateUser(UserModel userr) {
+    user.value = userr;
+    _storage.write('user_data', userr.toJson());
+  }
+
+  void saveUserData(UserModel user) {
+    _storage.write('user_data', user.toJson());
+  }
+
+  void removeUserData() {
+    UserModel user = UserModel.empty();
+    _storage.write('user_data', user.toJson());
   }
 }
