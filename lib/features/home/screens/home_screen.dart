@@ -1,6 +1,7 @@
 import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/features/home/screens/search/search_screen.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -18,6 +19,7 @@ import 'package:decordash/features/home/widgets/room_section.dart';
 import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,6 +27,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("eeeeeeeeeeeee");
+    print(GetStorage().read('token'));
+    print(UserController.instance.user.value.email);
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {

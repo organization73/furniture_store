@@ -14,11 +14,13 @@ class RecentSearchController extends GetxController {
   }
 
   void initRecentSearches() {
-    final json = TLocalStorage.instance().readData('recentSearches');
-    if (json != null) {
-      final storedSearches = jsonDecode(json) as List<dynamic>;
-      recentSearches.addAll(storedSearches.cast<String>());
-    }
+        // TODO TLOCAl
+
+    // final json = TLocalStorage.instance().readData('recentSearches');
+    // if (json != null) {
+    //   final storedSearches = jsonDecode(json) as List<dynamic>;
+    //   recentSearches.addAll(storedSearches.cast<String>());
+    // }
   }
 
   void addSearch(String query) {
@@ -42,6 +44,7 @@ class RecentSearchController extends GetxController {
 
   void saveRecentSearchesToStorage() {
     final encodedRecentSearches = json.encode(recentSearches.toList());
-    TLocalStorage.instance().saveData('recentSearches', encodedRecentSearches);
+    // TODO TLOCAl
+    // TLocalStorage.instance().saveData('recentSearches', encodedRecentSearches);
   }
 }

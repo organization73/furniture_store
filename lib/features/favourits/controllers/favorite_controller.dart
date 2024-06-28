@@ -18,12 +18,14 @@ class FavoriteController extends GetxController {
   }
 
   void initFavourites() {
-    final json = TLocalStorage.instance().readData('favourites');
-    if (json != null) {
-      final storedFavourites = jsonDecode(json) as Map<String, dynamic>;
-      favourites.assignAll(
-          storedFavourites.map((key, value) => MapEntry(key, value as bool)));
-    }
+        // TODO TLOCAl
+
+    // final json = TLocalStorage.instance().readData('favourites');
+    // if (json != null) {
+    //   final storedFavourites = jsonDecode(json) as Map<String, dynamic>;
+    //   favourites.assignAll(
+    //       storedFavourites.map((key, value) => MapEntry(key, value as bool)));
+    // }
   }
 
   bool isFavourite(String productId) {
@@ -36,7 +38,9 @@ class FavoriteController extends GetxController {
       saveFavouritesToStorage();
       TLoaders.customToast(messege: 'Product has been added to favourites');
     } else {
-      TLocalStorage.instance().removeData(productId);
+          // TODO TLOCAl
+
+      // TLocalStorage.instance().removeData(productId);
       favourites.remove(productId);
       saveFavouritesToStorage();
       favourites.refresh();
@@ -46,7 +50,9 @@ class FavoriteController extends GetxController {
 
   void saveFavouritesToStorage() {
     final encodedFavourites = json.encode(favourites);
-    TLocalStorage.instance().saveData('favourites', encodedFavourites);
+        // TODO TLOCAl
+
+    // TLocalStorage.instance().saveData('favourites', encodedFavourites);
   }
 
   Future<List<ProductModel>> favouriteProducts() async {
