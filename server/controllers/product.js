@@ -170,8 +170,8 @@ exports.rateProduct = async (req, res, next) => {
 
   //create the product rate
   const productRate = new ProductRate({
-    productId: productId,
-    customerId: req.user._id,
+    product: productId,
+    customer: req.user._id,
     rate: rate,
     description: description,
   });

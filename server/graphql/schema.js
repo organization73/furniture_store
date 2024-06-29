@@ -1,6 +1,5 @@
 const { graphql, buildSchema } = require("graphql");
 
-
 const schema = buildSchema(`
     type Details {
         wood: String
@@ -15,16 +14,27 @@ const schema = buildSchema(`
 
     type Image {
         imageUrl: String!
-      }      
+        class: String
+        confidence: Float
+      }
 
     type User {
-    _id: ID!
+    _id: ID
     email: String
+    imageUrl: String
     firstName: String
     lastName: String
     username: String
     isConfirmed: Boolean
     }
+    type Rate {
+        product: ID
+        customer: User
+        rate: Float
+        description: String
+        createdAt: String
+        updatedAt: String
+      }
 
     type Product {
         _id: ID!
@@ -35,6 +45,7 @@ const schema = buildSchema(`
         createdAt: String!
         updatedAt: String
         images: [Image!]
+        rates: [Rate]
         rate: Float
         details: Details
     }

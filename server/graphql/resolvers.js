@@ -14,12 +14,22 @@ const root = {
       field.replace("products.", "")
     );
     cleanedFields.push("updatedAt");
+
     // Extract the paths that include the 'creator' field
     const [creatorProperties, arrayCreatorProperties] =
       extractCreatorProperties(cleanedFields);
     cleanedFields = cleanedFields.filter(
       (field) => !arrayCreatorProperties.includes(field)
     );
+
+    // Check for any subfields of 'rates' and ensure 'rates' is included for population
+    if (cleanedFields.some((field) => field.startsWith("rates."))) {
+      cleanedFields = cleanedFields.filter(
+        (field) => !field.startsWith("rates.")
+      );
+      cleanedFields.push("rates");
+    }
+
     //validating data
     if (!page) page = 1;
     let products;
@@ -29,8 +39,14 @@ const root = {
         .select(cleanedFields)
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
-        .sort({ createdAt: -1 });
-
+        .sort({ createdAt: -1 })
+        .populate({
+          path: "rates",
+          populate: {
+            path: "customer", // Example of a nested field to populate
+            select: " firstName lastName email username imageUrl",
+          },
+        });
       // console.log("products:", products);
     } catch (error) {
       throw error;
@@ -41,6 +57,24 @@ const root = {
         return {
           ...p._doc,
           _id: p._id ? p._id.toString() : undefined,
+          rates: p.rates.map((r) => {
+            console.log(r);
+            return {
+              ...r._doc,
+              _id: r._id ? r._id.toString() : undefined,
+              product: r.product.toString(),
+              customer: r.customer,
+              rate: r.rate,
+              description: r.description,
+              createdAt: r.createdAt
+                ? r.createdAt.toISOString()
+                : undefined,
+              ImageUrl: r.imageUrl,
+              updatedAt: r.updatedAt
+                ? r.updatedAt.toISOString()
+                : undefined,
+            };
+          }),
           creator: p.creator,
           createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
           updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
@@ -59,25 +93,42 @@ const root = {
       field.replace("products.", "")
     );
     cleanedFields.push("updatedAt");
+
     // Extract the paths that include the 'creator' field
     const [creatorProperties, arrayCreatorProperties] =
       extractCreatorProperties(cleanedFields);
     cleanedFields = cleanedFields.filter(
       (field) => !arrayCreatorProperties.includes(field)
     );
+
+    // Check for any subfields of 'rates' and ensure 'rates' is included for population
+    if (cleanedFields.some((field) => field.startsWith("rates."))) {
+      cleanedFields = cleanedFields.filter(
+        (field) => !field.startsWith("rates.")
+      );
+      cleanedFields.push("rates");
+    }
+
     //fetching data
     let product;
     try {
       product = await Product.findById(id)
         .populate("creator", creatorProperties)
-        .select(cleanedFields);
-      console.log("product:", product);
+        .select(cleanedFields)
+        .populate({
+          path: "rates",
+          populate: {
+            path: "customer", // Example of a nested field to populate
+            select: " firstName lastName email username imageUrl",
+          },
+        });
     } catch (error) {
       if (error.statusCode) {
         error.statusCode = 500;
       }
       throw error;
     }
+
     //validating data existance
     if (!product) {
       const error = new Error("Could not find product.");
@@ -88,6 +139,24 @@ const root = {
     return {
       ...product._doc,
       _id: product._id ? product._id.toString() : undefined,
+      rates: product.rates.map((r) => {
+        console.log(r);
+        return {
+          ...r._doc,
+          _id: r._id ? r._id.toString() : undefined,
+          product: r.product.toString(),
+          customer: r.customer,
+          rate: r.rate,
+          description: r.description,
+          createdAt: r.createdAt
+            ? r.createdAt.toISOString()
+            : undefined,
+          updatedAt: r.updatedAt
+            ? r.updatedAt.toISOString()
+            : undefined,
+        };
+      }),
+
       creator: product.creator,
       createdAt: product.createdAt
         ? product.createdAt.toISOString()

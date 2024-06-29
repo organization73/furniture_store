@@ -1,0 +1,537 @@
+#1-userData
+firstName=>String,3-12
+lastName=>String,3-12
+username=>String,3-25
+email=>String,email
+password=>String,6-20,match=>/special ch, number, uppercase
+confirmPassword=>String,6-20,ref=>password
+
+#2-signup method=>put
+http://localhost:3000/auth/signup
+request:
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johndoe",
+  "email": "abdo.make73@gmail.com",
+  "password": "my_password1@A",
+  "confirmPassword": "my_password1@A"
+}
+response:
+{ message: "User created successfully" }
+
+#3-verifyUser method=> get
+http://localhost:3000/auth/verify
+request:
+response:
+send("User confirmed successfully")
+
+#4-login method=>post
+request:
+{
+    "email": "abdo.make73@gmail.com",
+    "password": "my_password1@A"
+}
+response:
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiZG8uZWxzaGFyYWJhc3k3M0BnbWFpbC5jb20iLCJ1c2VySWQiOiI2Njc3MmEwNzYyMmQwZTcyYTI3NGZmMWYiLCJpYXQiOjE3MTkwODYxNjR9.3U5Lde3lHw4mnLI-NkIpbF9OjkOc3WtnMugxU2Oyz8E",
+    "user": {
+        "wishList": {
+            "items": []
+        },
+        "_id": "66772a07622d0e72a274ff1f",
+        "firstName": "ordinary",
+        "lastName": "user",
+        "username": "first_user",
+        "type": "client",
+        "email": "abdo.elsharabasy73@gmail.com",
+        "password": "$2a$12$2wP119FvSey4c9VDjwwnVOnbINSMzvZizkkuGy8j0qK5pxaFHCATG",
+        "isConfirmed": true,
+        "products": [],
+        "createdAt": "2024-06-22T19:46:15.204Z",
+        "updatedAt": "2024-06-22T19:50:09.068Z",
+        "__v": 0
+    }
+}
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiZG8ubWFrZTczQGdtYWlsLmNvbSIsInVzZXJJZCI6IjY2Nzg1MjkzMGY4OGIxOGM0MzA0NDYzMiIsImlhdCI6MTcxOTE2MTYzNn0.ycygPAidjTm4XEFW6RJhQhKXB59AfaXsWoAF7qtX_TA",
+    "user": {
+        "wishList": {
+            "items": []
+        },
+        "_id": "667852930f88b18c43044632",
+        "firstName": "ordinary",
+        "lastName": "user",
+        "username": "second_user",
+        "type": "client",
+        "email": "abdo.make73@gmail.com",
+        "password": "$2a$12$/tfkrpL9fC3iPuRCH9DjVeH6C4d6QdFc1eyJ/sxVZK40OD4QXDvte",
+        "isConfirmed": true,
+        "products": [],
+        "createdAt": "2024-06-23T16:51:31.902Z",
+        "updatedAt": "2024-06-23T16:53:26.524Z",
+        "__v": 0
+    }
+}
+
+#5-post format
+title => String, required
+price => Number, required  
+description => String, required
+rate => Number
+details => Object, required
+    wood => String, required
+    cloth => String, required 
+    condition => String, required
+    color => String, required
+    delevary => Boolean, required
+    negotiable => Boolean, required
+    modefiable => Boolean, required
+
+#6-createProduct method=>post
+request: post
+http://localhost:3000/product/create-product
+{
+    "title": "new Prod2",
+    "price": 99.95,
+    "description": "your_description_here",
+    "images": [
+        "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+        "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+        "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+    ],
+    "details": {
+        "wood": "your_wood_here",
+        "abalakach": "your_abalakach_here",
+        "cloth": "your_cloth_here",
+        "condition": "your_condition_here",
+        "color": "your_color_here",
+        "delevary": false,
+        "negotiable": true,
+        "modefiable": true
+    }
+}
+response:
+{
+    "message": "Product created"
+}
+
+#7-fetching Products method=>post (graphql)
+request:
+in postman
+{
+    "query": " { products(page: 1) { products { _id title  details{ wood color } creator{_id username firstName } createdAt images{imageUrl} } } }"
+}
+in front end
+const query = `
+query {
+  getProducts(page: 1) {
+    products {
+      _id
+      title
+      price
+      description
+      details{
+        wood
+      }
+      creator
+      createdAt
+    }
+  }
+}
+`;
+fetch(
+  'https://your-api-endpoint.com/graphql',
+  {
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/json'
+    },
+    body: {
+      mode: 'raw',
+      raw: JSON.stringify({ query })
+    }
+  }
+)
+
+response:
+{
+    "data": {
+        "Products": {
+            "products": [
+                {
+                    "_id": "65d88dce88520bc98eef2974",
+                    "title": "finaltest",
+                    "price": 99.95,
+                    "description": "your_description_here",
+                    "details": {
+                        "wood": "your_wood_here"
+                    },
+                    "creator": "65d7c0f952eb4b6afb401b01",
+                    "createdAt": "2024-02-23T12:21:34.189Z"
+                }
+            ]
+        }
+    }
+}
+#8- fetching single product method=>POST
+request:
+{
+  "query": "query { product(id: \"667960a3981e1b1a24fbcce7\") { _id  createdAt creator{firstName} rates{rate product customer{email firstName lastName username} description} images{imageUrl class confidence} rate details { wood cloth condition color delevary negotiable modefiable } } }"
+}
+fornt-end
+const query = `
+    query {
+      product(id: "65d88dce88520bc98eef2974") {
+        _id  
+        images {
+          imageUrl
+        }
+        rate 
+        details {
+          wood 
+          cloth
+          condition
+          color
+          delevary
+          negotiable
+          modefiable
+        }
+      }
+    }
+  `;
+
+response:
+{
+    "data": {
+        "product": {
+            "_id": "667960a3981e1b1a24fbcce7",
+            "createdAt": "2024-06-24T12:03:47.186Z",
+            "creator": {
+                "firstName": "ordinary"
+            },
+            "rates": [
+                {
+                    "rate": 1,
+                    "product": "667960a3981e1b1a24fbcce7",
+                    "customer": {
+                        "email": "abdo.make73@gmail.com",
+                        "firstName": "abdo",
+                        "lastName": "user",
+                        "username": "second_user"
+                    },
+                    "description": "not really that good."
+                }
+            ],
+            "images": [
+                {
+                    "imageUrl": "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+                    "class": "swivelchair",
+                    "confidence": 0.9806806445121765
+                },
+                {
+                    "imageUrl": "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+                    "class": "chair",
+                    "confidence": 0.9999756813049316
+                },
+                {
+                    "imageUrl": "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+                    "class": "chair",
+                    "confidence": 0.9999756813049316
+                }
+            ],
+            "rate": 1,
+            "details": {
+                "wood": "your_wood_here",
+                "cloth": "your_cloth_here",
+                "condition": "your_condition_here",
+                "color": "your_color_here",
+                "delevary": false,
+                "negotiable": true,
+                "modefiable": true
+            }
+        }
+    }
+}
+9- get products of the login user
+request: Post
+http://localhost:3000/graphql
+{
+  "query": " { usersProducts(id:\"\") { products { _id title  details{ wood color } creator{_id username firstName } createdAt images{imageUrl} } } }"
+}
+response:
+{
+    "data": {
+        "usersProducts": {
+            "products": [
+                {
+                    "_id": "6678af3a3c5e2badece4844a",
+                    "title": "new Prod2",
+                    "details": {
+                        "wood": "your_wood_here",
+                        "color": "your_color_here"
+                    },
+                    "creator": {
+                        "_id": "66772a07622d0e72a274ff1f",
+                        "username": "first_user",
+                        "firstName": "ordinary"
+                    },
+                    "createdAt": "2024-06-23T23:26:50.545Z",
+                    "images": [
+                        {
+                            "imageUrl": "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+                        },
+                        {
+                            "imageUrl": "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+                        },
+                        {
+                            "imageUrl": "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+                        }
+                    ]
+                },
+                {
+                    "_id": "6678af333c5e2badece48441",
+                    "title": "new Prod",
+                    "details": {
+                        "wood": "your_wood_here",
+                        "color": "your_color_here"
+                    },
+                    "creator": {
+                        "_id": "66772a07622d0e72a274ff1f",
+                        "username": "first_user",
+                        "firstName": "ordinary"
+                    },
+                    "createdAt": "2024-06-23T23:26:43.819Z",
+                    "images": [
+                        {
+                            "imageUrl": "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+                        },
+                        {
+                            "imageUrl": "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+                        },
+                        {
+                            "imageUrl": "https://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+
+#9-user search for new contact.
+request: Get
+http://localhost:3000/chat/users?search=use
+response:
+{
+    "users": [
+        {
+            "wishList": {
+                "items": []
+            },
+            "_id": "66772ced622d0e72a274ff26",
+            "firstName": "ordinary",
+            "lastName": "user",
+            "username": "second_user",
+            "type": "client",
+            "email": "abdo.make73@gmail.com",
+            "isConfirmed": true,
+            "products": [],
+            "createdAt": "2024-06-22T19:58:37.393Z",
+            "updatedAt": "2024-06-22T19:59:04.182Z",
+            "__v": 0
+        }
+    ]
+}
+
+#10- user access or create new contact
+request: post
+http://localhost:3000/chat/access-room
+
+{
+    "userId":"667852930f88b18c43044632"
+}
+
+response:
+{
+    "message": "Chat room created",
+    "chatRoom": {
+        "fullName": "client-client",
+        "isGroupChat": false,
+        "users": [
+            "66772a07622d0e72a274ff1f",
+            "667852930f88b18c43044632"
+        ],
+        "_id": "6678554d7cf2967f9e20e484",
+        "type": "client-client",
+        "createdAt": "2024-06-23T17:03:09.460Z",
+        "updatedAt": "2024-06-23T17:03:09.460Z",
+        "__v": 0
+    },
+    "fullName": "ordinary user"
+}
+
+11-send messages
+request: post
+http://localhost:3000/chat/message
+
+{
+    "content": "User sec message.",
+    "roomId": "667896947b81f515f70b862a"
+}
+
+response:
+
+{
+    "chatRoom": {
+        "_id": "667896947b81f515f70b862a",
+        "fullName": "client-client",
+        "isGroupChat": false,
+        "users": [
+            "66772a07622d0e72a274ff1f",
+            "6678748e26f2371901a1f72b"
+        ],
+        "type": "client-client",
+        "createdAt": "2024-06-23T21:41:40.766Z",
+        "updatedAt": "2024-06-23T21:41:40.766Z",
+        "__v": 0
+    },
+    "sender": {
+        "_id": "66772a07622d0e72a274ff1f",
+        "username": "first_user",
+        "email": "abdo.elsharabasy73@gmail.com"
+    },
+    "senderType": "user",
+    "content": "User sec message.",
+    "type": "text",
+    "isRead": false,
+    "_id": "6678971f7b81f515f70b863f",
+    "createdAt": "2024-06-23T21:43:59.975Z",
+    "__v": 0
+}
+#12-create ai product
+request: post
+http://localhost:3000/product/create-ai-product
+
+{
+    "title": "new Prod2",
+    "price": 99.95,
+    "description": "your_description_here",
+    "category": "fjurnature",
+    "subCategory":"sofa",
+    "imageUrl":"https://chair.com"
+}
+
+response: status 201
+{
+    "message": "Product created successfully"
+}
+
+
+#13-rate the proucts
+request: http://localhost:3000/product/rate-product
+{
+    "productId": "667960a3981e1b1a24fbcce7",
+    "rate": 1,
+    "description": "not really that good."
+}
+response: status
+{
+    "message": "Rate saved successfully"
+}
+
+#13- fetch all messages of a users chat room
+request: get
+http://localhost:3000/chat/room/6679c2886164dd860586cf75
+
+
+[
+    {
+        "_id": "6679c2936164dd860586cf8e",
+        "chatRoom": {
+            "_id": "6679c2886164dd860586cf75",
+            "fullName": "group name",
+            "isGroupChat": false,
+            "users": [
+                "66772a07622d0e72a274ff1f",
+                "6678748e26f2371901a1f72b"
+            ],
+            "type": "client-client",
+            "createdAt": "2024-06-24T19:01:28.366Z",
+            "updatedAt": "2024-06-24T19:01:58.428Z",
+            "__v": 0,
+            "latestMessage": "6679c2a56164dd860586cfa5"
+        },
+        "sender": {
+            "_id": "66772a07622d0e72a274ff1f",
+            "username": "first_user",
+            "email": "abdo.elsharabasy73@gmail.com"
+        },
+        "senderType": "user",
+        "content": "User nine message.",
+        "type": "text",
+        "isRead": false,
+        "createdAt": "2024-06-24T19:01:39.176Z",
+        "__v": 0
+    },
+    {
+        "_id": "6679c29e6164dd860586cf95",
+        "chatRoom": {
+            "_id": "6679c2886164dd860586cf75",
+            "fullName": "group name",
+            "isGroupChat": false,
+            "users": [
+                "66772a07622d0e72a274ff1f",
+                "6678748e26f2371901a1f72b"
+            ],
+            "type": "client-client",
+            "createdAt": "2024-06-24T19:01:28.366Z",
+            "updatedAt": "2024-06-24T19:01:58.428Z",
+            "__v": 0,
+            "latestMessage": "6679c2a56164dd860586cfa5"
+        },
+        "sender": {
+            "_id": "6678748e26f2371901a1f72b",
+            "username": "abdo ahmed73",
+            "email": "abdo.ahmed73@gmail.com"
+        },
+        "senderType": "admin",
+        "content": "10",
+        "type": "text",
+        "isRead": false,
+        "createdAt": "2024-06-24T19:01:50.935Z",
+        "__v": 0
+    },
+    {
+        "_id": "6679c2a56164dd860586cfa5",
+        "chatRoom": {
+            "_id": "6679c2886164dd860586cf75",
+            "fullName": "group name",
+            "isGroupChat": false,
+            "users": [
+                "66772a07622d0e72a274ff1f",
+                "6678748e26f2371901a1f72b"
+            ],
+            "type": "client-client",
+            "createdAt": "2024-06-24T19:01:28.366Z",
+            "updatedAt": "2024-06-24T19:01:58.428Z",
+            "__v": 0,
+            "latestMessage": "6679c2a56164dd860586cfa5"
+        },
+        "sender": {
+            "_id": "66772a07622d0e72a274ff1f",
+            "username": "first_user",
+            "email": "abdo.elsharabasy73@gmail.com"
+        },
+        "senderType": "user",
+        "content": "User 11 message.",
+        "type": "text",
+        "isRead": false,
+        "createdAt": "2024-06-24T19:01:57.895Z",
+        "__v": 0
+    }
+]
+
+
+
