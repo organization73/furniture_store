@@ -26,6 +26,7 @@ const schema = buildSchema(`
     lastName: String
     username: String
     isConfirmed: Boolean
+    type: String
     }
     type Rate {
         product: ID
