@@ -167,6 +167,16 @@ exports.rateProduct = async (req, res, next) => {
   if (!product) {
     return throwError(404, "Product not found", "server", next);
   }
+  //check if the user has already rated the product
+  const rated = product.rates.find(
+    (rateObject) => rateObject.customer.toString() === req.user._id.toString()
+  );
+
+  if (rated) {
+    return res
+      .status(403)
+      .json({ message: "You have already rated this product", rate: rated });
+  }
 
   //create the product rate
   const productRate = new ProductRate({
