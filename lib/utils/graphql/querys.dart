@@ -50,13 +50,33 @@ class Querys {
                     username
                     firstName
                     lastName
+                    imageUrl
+                    email
+                    type
+                    _id
+                    
                   }
-                  createdAt
                   images {
                     imageUrl
+                    class
+                    confidence
                   }
+                  rate
                 }
               }
             }
+          ''';
+  static UsersQuery(page) => '''
+            query {
+  users(page: 1) {
+    _id
+    email
+    imageUrl
+    firstName
+    lastName
+    username
+    isConfirmed
+  }
+}
           ''';
 }

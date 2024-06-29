@@ -100,7 +100,7 @@ class THttpHelper {
   }
 
   static Future<Map<String, dynamic>> postWithBearAuthForGraphQLRequest(
-      int page, String token, String endPoint) async {
+      int page, String token, String endPoint , String query) async {
     try {
       final respone = await http.post(
         Uri.parse('$_baseUrl/$endPoint'),
@@ -109,7 +109,7 @@ class THttpHelper {
           'Authorization': 'Bearer $token',
         },
         body: json.encode({
-          'query': Querys.productsQuery(page),
+          'query':query,
         }),
       );
 

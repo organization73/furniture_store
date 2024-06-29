@@ -1,4 +1,5 @@
 import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/features/home/screens/search/search_screen.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
@@ -28,6 +29,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("eeeeeeeeeeeee");
+    ProductRepo p = Get.put(ProductRepo());
+     p.fetchProductsFromServer();
     print(GetStorage().read('token'));
     print(UserController.instance.user.value.email);
     return GetBuilder<StartPageController>(

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/home/model/product_category_model.dart';
 import 'package:decordash/features/home/model/vendor_category_model.dart';
+import 'package:decordash/features/home/model/vendor_model.dart';
+import 'package:decordash/utils/constants/enums.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -10,6 +13,7 @@ import 'package:decordash/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordash/utils/exceptions/platform_exceptions.dart';
 import 'package:decordash/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProductRepo extends GetxController {
   static ProductRepo get instance => Get.find();
@@ -281,6 +285,121 @@ class ProductRepo extends GetxController {
     } catch (e) {
       LoggerHelper.error('error', e);
       rethrow;
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsFromServer() async {
+    try {
+      var products =
+          await HttpService.instance.getProducts(1, GetStorage().read('token'));
+      var prods = products
+          .map((m) => ProductModel(
+              productName: m['title'],
+              categoryId: mapingTheCategories(m['images']),
+              productImage: m['images'][0]
+                  ['imageUrl'], // Ensure key name consistency
+              productDetails: ProductDetails(
+                  condition: m['details']['condition'],
+                  color: 'Color(0xff3820f1)',//TODO map the color
+                  productListImages: fromImage(m['images']),
+                  productSpecs: {
+                    'ablakash': m['details']['abalakach'],
+                    'fabric type': m['details']['cloth'],
+                    'fabric density': '60',
+                    'wood type': m['details']['wood'],
+                  },
+                  productDesc: m['description'],
+                  productStats: ProductStats(
+                      delivery: m['details']['delevary'],
+                      negotiable: m['details']['negotiable'],
+                      modifiable: m['details']['modefiable']),
+                  productSeller: VendorModel(
+                      name:
+                          "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                      location: "Egypt",
+                      id: m['creator']['_id'],
+                      image: m['creator']['imageUrl']??"",
+                      isFeatured: false,
+                      productsCount: 0,
+                      accountType: mapType(m['creator']['type'])))))
+          .toList();
+      return prods;
+    } catch (e) {
+      LoggerHelper.warning(e.toString());
+      return [];
+    }
+  }
+
+  String mapingTheCategories(List listImages) {
+    int count11 = 0;
+    int count12 = 0;
+    int count21 = 0;
+    int count31 = 0;
+    int count41 = 0;
+
+    for (var e in listImages) {
+      switch (e['class']) {
+        // Ensure correct key name
+        case "chair":
+          count11++;
+          break;
+        case "swivelchair":
+          count12++;
+          break;
+        case "sofa":
+          count21++;
+          break;
+        case "bed":
+          count31++;
+          break;
+        case "table":
+          count41++;
+          break;
+        default:
+          count11++;
+          break;
+      }
+    }
+
+    int maxCount = 0;
+    String res = "11";
+    if (count11 > maxCount) {
+      maxCount = count11;
+      res = "11";
+    }
+    if (count12 > maxCount) {
+      maxCount = count12;
+      res = "12";
+    }
+    if (count21 > maxCount) {
+      maxCount = count21;
+      res = "21";
+    }
+    if (count31 > maxCount) {
+      maxCount = count31;
+      res = "31";
+    }
+    if (count41 > maxCount) {
+      maxCount = count41;
+      res = "41";
+    }
+    return res;
+  }
+
+  List<String> fromImage(List listImages) {
+    return listImages
+        .map((e) => e['imageUrl'] as String)
+        .toList(); // Ensure correct key name and type
+  }
+
+  AccountType mapType(String type) {
+    switch (type) {
+      case "client":
+        return AccountType.regular;
+      case "gallary":
+        return AccountType.vendor;
+      default:
+        return AccountType.regular;
     }
   }
 }

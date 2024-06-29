@@ -147,6 +147,44 @@ class CategoryRepo extends GetxController {
             parentId: '1'),
       ];
     }
+    if (categoryId == '9') {
+      return [
+        CategoryModel(
+            id: '11',
+            image: 'assets/images/categories/chairs.png',
+            name: 'Wooden Chairs',
+            isFeatured: false,
+            parentId: '1'),
+        CategoryModel(
+            id: '31',
+            image: 'assets/images/categories/beds.png',
+            name: 'Regular Beds',
+            isFeatured: false,
+            parentId: '3'),
+      ];
+    }
+    if (categoryId == '10') {
+      return [
+        CategoryModel(
+            id: '11',
+            image: 'assets/images/categories/chairs.png',
+            name: 'Wooden Chairs',
+            isFeatured: false,
+            parentId: '1'),
+        CategoryModel(
+            id: '12',
+            image: 'assets/images/categories/chairs.png',
+            name: 'Swivle Chairs',
+            isFeatured: false,
+            parentId: '1'),
+        CategoryModel(
+            id: '41',
+            image: 'assets/images/categories/tables.png',
+            name: 'wooden Tables',
+            isFeatured: false,
+            parentId: '4'),
+      ];
+    }
 
     try {
       final snapshot = await _db

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:decordash/utils/graphql/querys.dart';
 import 'package:decordash/utils/http/http_client.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:get/get.dart';
@@ -20,21 +21,22 @@ class HttpService extends GetxService {
   }
 
   Future<List<dynamic>> getProducts(int page, String token) async {
+   String query = Querys.productsQuery(page);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
-        page, token, 'graphql');
+        page, token, 'graphql',query);
     return response['data']['products']['products'];
   }
 
-  Future getProduct(String email, String password) async {
-    try {
-      return THttpHelper.post('graphql', {
-        "query":
-            "query { product(id: \"65d88dce88520bc98eef2974\") { _id  images{imageurl} rate details { wood cloth condition color delevary negotiable modefiable } } }"
-      });
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // Future getProduct() async {
+  //   try {
+  //     return THttpHelper.post('graphql', {
+  //       "query":
+  //           "query { product(id: \"65d88dce88520bc98eef2974\") { _id  images{imageurl} rate details { wood cloth condition color delevary negotiable modefiable } } }"
+  //     });
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   static Future<Map<String, dynamic>> getUsers(
       String token, Map<String, dynamic> data) async {
@@ -132,13 +134,13 @@ class HttpService extends GetxService {
       return {};
     }
   }
+
   Future<Map<String, dynamic>> sendMessage() async {
     try {
       var response = await THttpHelper.postBearerAuth(
-          "chat/message", GetStorage().read("token"), {
-    "roomId": "66280d8658b8eb2765b7cc12",
-    "content": "Hello Wrold!"
-});
+          "chat/message",
+          GetStorage().read("token"),
+          {"roomId": "66280d8658b8eb2765b7cc12", "content": "Hello Wrold!"});
       var r = json.decode(response.body);
       return r;
     } catch (e) {

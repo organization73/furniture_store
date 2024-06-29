@@ -11,14 +11,15 @@ class ProductController extends GetxController {
 
   @override
   void onInit() {
-    fetchFeaturedProducts();
+    // fetchFeaturedProducts();
+
+    fetchProductsFromServer();
     super.onInit();
   }
 
   Future<void> fetchFeaturedProducts() async {
     try {
       isLoading.value = true;
-      final featuredProducts = await _productRepo.fetchFeaturedProducts();
 
       this.featuredProducts.assignAll(featuredProducts);
     } catch (e) {
@@ -35,6 +36,20 @@ class ProductController extends GetxController {
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
       return [];
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsFromServer() async {
+    try {
+      isLoading.value = true;
+      var products = await _productRepo.fetchProductsFromServer();
+      featuredProducts.value = products;
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+      return [];
+    } finally {
+      isLoading.value = false;
     }
   }
 
