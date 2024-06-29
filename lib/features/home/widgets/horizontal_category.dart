@@ -27,7 +27,7 @@ class HorizontalCategory extends StatelessWidget {
                     width: 50.r,
                     height: 50.r,
                     imageUrl: category.image,
-                    isNetworkImage: true,
+                    isNetworkImage: false,
                     fit: BoxFit.cover,
                     applyImageRaduis: false,
                     padding: const EdgeInsets.all(5).r,

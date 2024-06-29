@@ -1027,6 +1027,13 @@ class DummyData {
         name: 'Wooden Windows',
         isFeatured: false,
         parentId: '7'),
+
+      CategoryModel(
+        id: '00',
+        image: 'assets/images/categories/windows.png',
+        name: 'All Product',
+        isFeatured: false,
+        parentId: ''),
   ];
 
   static final List<VendorModel> vendors = [

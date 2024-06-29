@@ -59,10 +59,11 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/onboarding/
+    # - assets/images/
     - assets/images/content/
     - assets/logos/
     - assets/animations/
-    # - assets/images/categories/
+    - assets/images/categories/
     # - assets/banners/
     # - assets/images/products/beds/
     # - assets/images/products/chairs/

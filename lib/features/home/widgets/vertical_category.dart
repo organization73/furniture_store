@@ -25,7 +25,7 @@ class VerticalCategory extends StatelessWidget {
               Align(
                   child: RoundedImage(
                 imageUrl: category.image,
-                isNetworkImage: true,
+                isNetworkImage: false,
                 applyImageRaduis: false,
               )),
               Align(
