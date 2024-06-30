@@ -1,14 +1,14 @@
 const express = require("express");
+const yup = require("yup");
 
 const User = require("../models/user");
 
+const userController = require("../controllers/user");
+
 const router = express.Router();
 
-router.put("/assign-image", async (req, res, next) => {
-  const { imageUrl } = req.body;
-  req.user.imageUrl = imageUrl;
-  await req.user.save();
-  res.status(200).json({ message: "Image assigned" });
-});
+router.put("/assign-image", userController.assignImage);
+
+router.post("/add-gallary",userController.addGallary);
 
 module.exports = router;

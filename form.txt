@@ -534,4 +534,54 @@ http://localhost:3000/chat/room/6679c2886164dd860586cf75
 ]
 
 
+#14- create  a gallary
+request: Post
+http://localhost:3000/user/add-gallary
 
+{
+  "name": "Art Gallery",
+  "address": "123 Art St, Art City",
+  "images": [
+    {
+      "imageUrl": "http://example.com/image1.jpg"
+    },
+    {
+      "imageUrl": "http://example.com/image2.jpg"
+    }
+  ],
+  "certificate": "www.certificate.com",
+  "coordinates": {
+    "lat": 40.7128,
+    "lng": -74.0060
+  }
+}
+
+response:
+
+{
+    "message": "Gallary created",
+    "gallary": {
+        "creator": "667f1c88e5f1c74a5092e387",
+        "name": "Art Gallery",
+        "address": "123 Art St, Art City",
+        "images": [
+            {
+                "imageUrl": "http://example.com/image1.jpg",
+                "_id": "6681549ffe2a68b2607fc19e"
+            },
+            {
+                "imageUrl": "http://example.com/image2.jpg",
+                "_id": "6681549ffe2a68b2607fc19f"
+            }
+        ],
+        "certificate": "www.certificate.com",
+        "coordinates": {
+            "lat": 40.7128,
+            "lng": -74.006
+        },
+        "_id": "6681549ffe2a68b2607fc19d",
+        "createdAt": "2024-06-30T12:50:39.982Z",
+        "updatedAt": "2024-06-30T12:50:39.982Z",
+        "__v": 0
+    }
+}

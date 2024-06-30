@@ -17,6 +17,10 @@ const userSchema = new Schema(
     confirmTokenExpiration: Date,
     resetToken: String,
     resetTokenExpiration: Date,
+    gallaries:[{
+      type: Schema.Types.ObjectId,
+      ref: "Gallary",
+    }],
     products: [
       {
         productId: {
