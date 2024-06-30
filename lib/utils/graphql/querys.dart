@@ -33,6 +33,7 @@ class Querys {
             query GetProducts {
               products(page: $page) {
                 products {
+                  _id
                   title
                   price
                   description
