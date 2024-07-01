@@ -178,7 +178,7 @@ response:
 
 with filters:
 {
-    "query": " { products(filters:{class:\"bed\",leastPrice:0,mostPrice:1, newest:1},page: 1) { products { _id title  createdAt  } } }"
+    "query": " { products(filters:{class:\"chair\",leastPrice:1,mostPrice:1, newest:1}, searchTitle:\"bed\",page: 1) { products { _id title  createdAt  } } }"
 }
 {
     "query": " { products(filters:{leastPrice:0,mostPrice:1, newest:1},page: 1) { products { _id title  createdAt  } } }"
