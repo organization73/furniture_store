@@ -418,7 +418,15 @@ const root = {
     let cleanedFields = requestedFields.map((field) =>
       field.replace("products.", "")
     );
-    //fetching users
+
+    //fetching the number of products per user
+    if (cleanedFields.includes("numberOfProducts")) {
+      cleanedFields = cleanedFields.filter((field) => field !== "numberOfProducts");
+      cleanedFields.push("products");
+    }
+    console.log("cleanedFields:", cleanedFields);
+
+    //fetching users 
     let users;
     try {
       users = await User.find()
@@ -445,6 +453,7 @@ const root = {
         _id: u._id ? u._id.toString() : undefined,
         createdAt: u.createdAt ? u.createdAt.toISOString() : undefined,
         updatedAt: u.updatedAt ? u.updatedAt.toISOString() : undefined,
+        numberOfProducts: u.products?u.products.length:undefined,
       };
     });
     // console.log("users:", result);
