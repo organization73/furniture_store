@@ -52,6 +52,7 @@ exports.addGallary = async (req, res, next) => {
     if (!req.user.gallaries) {
       req.user.gallaries = [];
     }
+    req.user.type = "Gallery";
     req.user.gallaries.push(gallary._id);
     await req.user.save();
     res.status(201).json({ message: "Gallary created", gallary });
