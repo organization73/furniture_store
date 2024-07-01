@@ -4,7 +4,7 @@ const PRODUCTS_PER_PAGE = 6;
 const USERS_PER_PAGE = 6;
 
 const root = {
-  products: async function ({ page, filters }, { req }, info) {
+  products: async function ({ page, filters, searchTitle }, { req }, info) {
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
@@ -40,12 +40,15 @@ const root = {
       sortCondition = { price: 1 };
     }
 
-    let searchQuery = {};
     //searching query
+    let searchQuery = {};
     if (filters.class) {
-      searchQuery = {  'images.class': filters.class };
+      searchQuery = { "images.class": filters.class };
     }
 
+    if (searchTitle) {
+      searchQuery.title = { $regex: searchTitle, $options: "i" };
+    }
     //validating data
     if (!page) page = 1;
     let products;
@@ -175,6 +178,103 @@ const root = {
         : undefined,
     };
   },
+
+  //fetching ai products
+  aiProducts: async function ({ page, filters }, { req }, info) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("products.", "")
+    );
+    cleanedFields.push("updatedAt");
+
+    // Extract the paths that include the 'creator' field
+    const [creatorProperties, arrayCreatorProperties] =
+      extractCreatorProperties(cleanedFields);
+    cleanedFields = cleanedFields.filter(
+      (field) => !arrayCreatorProperties.includes(field)
+    );
+
+    // Check for any subfields of 'rates' and ensure 'rates' is included for population
+    if (cleanedFields.some((field) => field.startsWith("rates."))) {
+      cleanedFields = cleanedFields.filter(
+        (field) => !field.startsWith("rates.")
+      );
+      cleanedFields.push("rates");
+    }
+
+    // Complete the sort condition logic
+    if (filters.newest) {
+      sortCondition = { createdAt: -1 };
+    }
+
+    if (filters.mostPrice) {
+      sortCondition = { price: -1 };
+    } else if (filters.leastPrice) {
+      sortCondition = { price: 1 };
+    }
+
+    let searchQuery = {};
+    //searching query
+    if (filters.category) {
+      searchQuery = { category: filters.category };
+    }
+    if (filters.subCategory) {
+      searchQuery = { subCategory: filters.subCategory };
+    }
+
+    //validating data
+    if (!page) page = 1;
+    let products;
+    try {
+      products = await Product.find(searchQuery)
+        .populate("creator", creatorProperties) // Populate the 'creator' path without selecting any fields
+        .select(cleanedFields)
+        .skip((page - 1) * PRODUCTS_PER_PAGE)
+        .limit(PRODUCTS_PER_PAGE)
+        .sort(sortCondition)
+        .populate({
+          path: "rates",
+          populate: {
+            path: "customer", // Example of a nested field to populate
+            select: " firstName lastName email username imageUrl",
+          },
+        });
+      // console.log("products:", products);
+    } catch (error) {
+      throw error;
+    }
+
+    const return_values = {
+      products: products.map((p) => {
+        return {
+          ...p._doc,
+          _id: p._id ? p._id.toString() : undefined,
+          rates: p.rates.map((r) => {
+            return {
+              ...r._doc,
+              _id: r._id ? r._id.toString() : undefined,
+              product: r.product.toString(),
+              customer: r.customer,
+              rate: r.rate,
+              description: r.description,
+              createdAt: r.createdAt ? r.createdAt.toISOString() : undefined,
+              ImageUrl: r.imageUrl,
+
+              updatedAt: r.updatedAt ? r.updatedAt.toISOString() : undefined,
+            };
+          }),
+          creator: p.creator,
+          createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
+          updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
+        };
+      }),
+    };
+    return return_values;
+  },
+
   hello: (parent, args, context, info) => {
     console.log(context);
     return "Hello world!";

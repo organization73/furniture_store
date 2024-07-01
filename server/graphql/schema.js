@@ -64,7 +64,7 @@ const schema = buildSchema(`
     }
 
     type RootQuery {
-    products(filters: ProductFilterInput, page: Int ): productData!
+    products(filters: ProductFilterInput,searchTitle:String, page: Int ): productData!
     product(id: ID!): Product!
     hello: String
     user(id:ID!): User!
