@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const User = require("../models/user");
+const AiProduct = require("../models/aiProduct");
 const PRODUCTS_PER_PAGE = 6;
 const USERS_PER_PAGE = 6;
 
@@ -50,6 +51,13 @@ const root = {
       searchQuery.title = { $regex: searchTitle, $options: "i" };
     }
     //validating data
+
+    console.log("iam here:",);
+    console.log("searchQuery:", searchQuery);
+    console.log("sortCondition:", sortCondition);
+    console.log("cleanedFields:", cleanedFields);
+    console.log("creatorProperties:", creatorProperties);
+
     if (!page) page = 1;
     let products;
     try {
@@ -180,13 +188,13 @@ const root = {
   },
 
   //fetching ai products
-  aiProducts: async function ({ page, filters }, { req }, info) {
+  aiProducts: async function ({ page, filters, searchTitle }, { req }, info) {
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
     );
     let cleanedFields = requestedFields.map((field) =>
-      field.replace("products.", "")
+      field.replace("aiProducts.", "")
     );
     cleanedFields.push("updatedAt");
 
@@ -202,7 +210,7 @@ const root = {
       cleanedFields = cleanedFields.filter(
         (field) => !field.startsWith("rates.")
       );
-      cleanedFields.push("rates");
+      // cleanedFields.push("rates");
     }
 
     // Complete the sort condition logic
@@ -225,53 +233,44 @@ const root = {
       searchQuery = { subCategory: filters.subCategory };
     }
 
+    if (searchTitle) {
+      searchQuery.title = { $regex: searchTitle, $options: "i" };
+    }
+
+    console.log("iam here:",);
+    console.log("searchQuery:", searchQuery);
+    console.log("sortCondition:", sortCondition);
+    console.log("cleanedFields:", cleanedFields);
+    console.log("creatorProperties:", creatorProperties);
+
     //validating data
     if (!page) page = 1;
     let products;
     try {
-      products = await Product.find(searchQuery)
+      products = await AiProduct.find(searchQuery)
         .populate("creator", creatorProperties) // Populate the 'creator' path without selecting any fields
         .select(cleanedFields)
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
         .sort(sortCondition)
-        .populate({
-          path: "rates",
-          populate: {
-            path: "customer", // Example of a nested field to populate
-            select: " firstName lastName email username imageUrl",
-          },
-        });
       // console.log("products:", products);
     } catch (error) {
       throw error;
     }
+    console.log("products:", products);
 
     const return_values = {
-      products: products.map((p) => {
+      aiProducts: products.map((p) => {
         return {
           ...p._doc,
           _id: p._id ? p._id.toString() : undefined,
-          rates: p.rates.map((r) => {
-            return {
-              ...r._doc,
-              _id: r._id ? r._id.toString() : undefined,
-              product: r.product.toString(),
-              customer: r.customer,
-              rate: r.rate,
-              description: r.description,
-              createdAt: r.createdAt ? r.createdAt.toISOString() : undefined,
-              ImageUrl: r.imageUrl,
-
-              updatedAt: r.updatedAt ? r.updatedAt.toISOString() : undefined,
-            };
-          }),
           creator: p.creator,
           createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
           updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
         };
       }),
     };
+    console.log("return_values:", return_values);
     return return_values;
   },
 

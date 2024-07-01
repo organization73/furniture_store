@@ -51,9 +51,27 @@ const schema = buildSchema(`
         details: Details
     }
 
+    type AiProduct {
+        _id: ID
+        title: String
+        category: String
+        subCategory: String
+        price: Float
+        description: String
+        creator: User
+        createdAt: String
+        updatedAt: String
+        imageUrl: String
+
+    }
+
+
     type productData{
         products: [Product!]!
-        totalPosts: Int
+    }
+
+    type AiProductData{
+        aiProducts: [AiProduct!]!
     }
 
     input ProductFilterInput {
@@ -62,9 +80,17 @@ const schema = buildSchema(`
         mostPrice: Float
         leastPrice: Float
     }
+    input AiProductFilterInput {
+        category: String
+        subCategory: String
+        newest: Int
+        mostPrice: Float
+        leastPrice: Float
+    }
 
     type RootQuery {
     products(filters: ProductFilterInput,searchTitle:String, page: Int ): productData!
+    aiProducts(filters: AiProductFilterInput,searchTitle:String, page: Int ): AiProductData!
     product(id: ID!): Product!
     hello: String
     user(id:ID!): User!

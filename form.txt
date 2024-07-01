@@ -632,3 +632,26 @@ response:
         "__v": 0
     }
 }
+
+#15- fetch ai products
+request:post
+http://localhost:3000/graphql
+{
+    "query": " { aiProducts(filters:{leastPrice:1 newest:1}, searchTitle:\"soft\",page: 1) { aiProducts { _id title price category   } } }"
+}
+
+response:
+{
+    "data": {
+        "aiProducts": {
+            "aiProducts": [
+                {
+                    "_id": "668311b0e4176e3c984dfd31",
+                    "title": "soft sofa",
+                    "price": 199.95,
+                    "category": "sit"
+                }
+            ]
+        }
+    }
+}
