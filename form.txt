@@ -175,6 +175,53 @@ response:
         }
     }
 }
+
+with filters:
+{
+    "query": " { products(filters:{class:\"bed\",leastPrice:0,mostPrice:1, newest:1},page: 1) { products { _id title  createdAt  } } }"
+}
+{
+    "query": " { products(filters:{leastPrice:0,mostPrice:1, newest:1},page: 1) { products { _id title  createdAt  } } }"
+}
+response:
+{
+    "data": {
+        "products": {
+            "products": [
+                {
+                    "_id": "66796709c64f23496c606260",
+                    "price": 1000,
+                    "createdAt": "2024-06-24T12:31:05.420Z"
+                },
+                {
+                    "_id": "66796717c64f23496c606287",
+                    "price": 99.95,
+                    "createdAt": "2024-06-24T12:31:19.238Z"
+                },
+                {
+                    "_id": "6679670fc64f23496c60626c",
+                    "price": 99.95,
+                    "createdAt": "2024-06-24T12:31:11.672Z"
+                },
+                {
+                    "_id": "668181982ce7e9e3d8176502",
+                    "price": 99.95,
+                    "createdAt": "2024-06-30T16:02:33.231Z"
+                },
+                {
+                    "_id": "6679671ec64f23496c6062a6",
+                    "price": 99.95,
+                    "createdAt": "2024-06-24T12:31:26.454Z"
+                },
+                {
+                    "_id": "6679671ac64f23496c606296",
+                    "price": 99.95,
+                    "createdAt": "2024-06-24T12:31:22.424Z"
+                }
+            ]
+        }
+    }
+}
 #8- fetching single product method=>POST
 request:
 {

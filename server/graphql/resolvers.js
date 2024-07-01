@@ -4,8 +4,7 @@ const PRODUCTS_PER_PAGE = 6;
 const USERS_PER_PAGE = 6;
 
 const root = {
-  products: async function ({ page }, { req }, info) {
-    console.log("graphql Users");
+  products: async function ({ page, filters }, { req }, info) {
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
@@ -30,16 +29,33 @@ const root = {
       cleanedFields.push("rates");
     }
 
+    // Complete the sort condition logic
+    if (filters.newest) {
+      sortCondition = { createdAt: -1 };
+    }
+
+    if (filters.mostPrice) {
+      sortCondition = { price: -1 };
+    } else if (filters.leastPrice) {
+      sortCondition = { price: 1 };
+    }
+
+    let searchQuery = {};
+    //searching query
+    if (filters.class) {
+      searchQuery = {  'images.class': filters.class };
+    }
+
     //validating data
     if (!page) page = 1;
     let products;
     try {
-      products = await Product.find()
+      products = await Product.find(searchQuery)
         .populate("creator", creatorProperties) // Populate the 'creator' path without selecting any fields
         .select(cleanedFields)
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
-        .sort({ createdAt: -1 })
+        .sort(sortCondition)
         .populate({
           path: "rates",
           populate: {
@@ -58,7 +74,6 @@ const root = {
           ...p._doc,
           _id: p._id ? p._id.toString() : undefined,
           rates: p.rates.map((r) => {
-            console.log(r);
             return {
               ...r._doc,
               _id: r._id ? r._id.toString() : undefined,
@@ -66,13 +81,10 @@ const root = {
               customer: r.customer,
               rate: r.rate,
               description: r.description,
-              createdAt: r.createdAt
-                ? r.createdAt.toISOString()
-                : undefined,
+              createdAt: r.createdAt ? r.createdAt.toISOString() : undefined,
               ImageUrl: r.imageUrl,
-              updatedAt: r.updatedAt
-                ? r.updatedAt.toISOString()
-                : undefined,
+
+              updatedAt: r.updatedAt ? r.updatedAt.toISOString() : undefined,
             };
           }),
           creator: p.creator,
@@ -148,12 +160,8 @@ const root = {
           customer: r.customer,
           rate: r.rate,
           description: r.description,
-          createdAt: r.createdAt
-            ? r.createdAt.toISOString()
-            : undefined,
-          updatedAt: r.updatedAt
-            ? r.updatedAt.toISOString()
-            : undefined,
+          createdAt: r.createdAt ? r.createdAt.toISOString() : undefined,
+          updatedAt: r.updatedAt ? r.updatedAt.toISOString() : undefined,
         };
       }),
 

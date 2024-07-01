@@ -56,8 +56,15 @@ const schema = buildSchema(`
         totalPosts: Int
     }
 
+    input ProductFilterInput {
+        class: String
+        newest: Int
+        mostPrice: Float
+        leastPrice: Float
+    }
+
     type RootQuery {
-    products(page: Int): productData!
+    products(filters: ProductFilterInput, page: Int ): productData!
     product(id: ID!): Product!
     hello: String
     user(id:ID!): User!
