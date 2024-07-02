@@ -655,3 +655,31 @@ response:
         }
     }
 }
+
+#16- delete products
+only user who created the product can delete it.
+request:delete
+http://localhost:3000/product/delete-product
+{
+    "productId":"6683df1314a522121a813893"
+}
+
+response:
+
+{
+    "message": "Product deleted successfully",
+}
+
+#17- delete products
+only user who created the product can delete it.
+request:delete
+http://localhost:3000/product/delete-ai-product
+{
+    "productId":"6683df1314a522121a813893"
+}
+
+response:
+
+{
+    "message": "Product deleted successfully",
+}

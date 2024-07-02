@@ -222,7 +222,7 @@ exports.deleteProduct = async (req, res, next) => {
 
   //validate the date
   if (!productId) {
-    return throwError(422, "Product id is required", "server", next);
+    return throwError(422, "productId is required", "server", next);
   }
 
   //find the product
@@ -268,7 +268,7 @@ exports.deleteAIProduct = async (req, res, next) => {
 
   //validate the date
   if (!productId) {
-    return throwError(422, "Product id is required", "server", next);
+    return throwError(422, "productId is required", "server", next);
   }
 
   //find the product
