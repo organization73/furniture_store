@@ -13,7 +13,7 @@ class ProductController extends GetxController {
   void onInit() {
     // fetchFeaturedProducts();
 
-    fetchProductsFromServer();
+    fetchProductsFromServer(1);
     super.onInit();
   }
 
@@ -39,10 +39,10 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<List<ProductModel>> fetchProductsFromServer() async {
+  Future<List<ProductModel>> fetchProductsFromServer(int page) async {
     try {
       isLoading.value = true;
-      var products = await _productRepo.fetchProductsFromServer(1);
+      var products = await _productRepo.fetchProductsFromServer(page);
       featuredProducts.value = products;
       return products;
     } catch (e) {

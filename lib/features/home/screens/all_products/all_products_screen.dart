@@ -24,7 +24,6 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   Widget build(BuildContext context) {
-    
     final controller = Get.put(AllProductsController());
     return Scaffold(
       appBar: AppBar(

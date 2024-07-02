@@ -19,7 +19,7 @@ class StartPageController extends GetxController {
   void onInit() {
     scrollController.addListener(_scrollListener);
     Get.put(NotificationsController());
-    Get.put(ProductController());
+    // Get.put(ProductController());
     Get.put(ProductRepo());
     super.onInit();
   }

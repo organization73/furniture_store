@@ -1,3 +1,4 @@
+import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/layouts/grid_layout.dart';
@@ -9,7 +10,8 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class SortableProducts extends StatelessWidget {
-  const SortableProducts({super.key, required this.products,required this.loadMoreProducts});
+  const SortableProducts(
+      {super.key, required this.products, required this.loadMoreProducts});
   final List<ProductModel> products;
   final Function loadMoreProducts;
   @override
@@ -48,7 +50,6 @@ class SortableProducts extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               loadMoreProducts();
-
             },
             child: const Text('Load More'),
           ),

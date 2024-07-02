@@ -28,8 +28,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final con = Get.put(UserController());
-   
+    Get.put(UserController());
+    Get.put(ProductController());
+
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {
@@ -98,14 +99,14 @@ class HomeScreen extends StatelessWidget {
                                     .featuredProducts.isEmpty) {
                                   return Center(child: Text('noProducts'.tr));
                                 }
+                                var p = productsController.featuredProducts
+                                    .sublist(0, 4);
                                 return GridLayout(
                                     mainAxisExtent: 265.r,
-                                    itemCount: productsController
-                                        .featuredProducts.length,
+                                    itemCount: p.length,
                                     itemBuilder: (_, index) =>
                                         ProductCardVerical(
-                                          product: productsController
-                                              .featuredProducts[index],
+                                          product: p[index],
                                         ));
                               }),
                               SizedBox(
