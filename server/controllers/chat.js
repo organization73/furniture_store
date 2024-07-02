@@ -80,7 +80,7 @@ exports.allUsers = async (req, res, next) => {
     const conditions = {
       ...keyword,
       _id: { $ne: user._id },
-      type: "client",
+      type: { $ne: "Admin" },
     };
 
     const users = await User.find(conditions).select("-password").limit(5);

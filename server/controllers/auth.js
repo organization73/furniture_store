@@ -268,7 +268,7 @@ exports.login = async (req, res, next) => {
       email: user.email,
       userId: user._id,
     },
-    "thisisaverylong"
+    process.env.JWT_SECRET
   );
   // res.status(200).json({ token: token, userId: user._id.toString() ,username: user.username, email: user.email, firstName: user.firstName, lastName: user.lastName, isConfirmed: user.isConfirmed,});
   res.status(200).json({ token: token, user: user });
@@ -327,11 +327,9 @@ exports.reVerifyEmail = async (req, res, next) => {
   //saving the user into the database
   try {
     await user.save();
-    return res
-      .status(200)
-      .json({
-        message: `Re-send emial to ${email} have been done successfully`,
-      });
+    return res.status(200).json({
+      message: `Re-send emial to ${email} have been done successfully`,
+    });
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
     next(err);
@@ -362,17 +360,31 @@ exports.isConfirmed = async (req, res, next) => {
   let user;
   try {
     user = await User.findOne({ email });
+    if (!user) {
+      return throwError(404, "user not found", "email", next);
+    }
+
+    //generating JSON web token.
+    let token;
+    if (user.isConfirmed) {
+      token = jwt.sign(
+        {
+          email: user.email,
+          userId: user._id,
+        },
+        process.env.JWT_SECRET
+      );
+    }
+
+    return res.status(200).json({
+      message: "Fetching user status successfully",
+      isConfirmed: user.isConfirmed,
+      token: token || undefined,
+    });
   } catch (error) {
     if (!error.statusCode) error.statusCode = 422;
     return next(error);
   }
-  if (!user) {
-    return throwError(404, "user not found", "email", next);
-  }
-  return res.status(200).json({
-    message: "Fetching user status successfully",
-    isConfirmed: user.isConfirmed,
-  });
 };
 
 exports.sendResetPassword = async (req, res, next) => {
