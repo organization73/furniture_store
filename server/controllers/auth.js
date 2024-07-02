@@ -7,9 +7,10 @@ const jwt = require("jsonwebtoken");
 
 const domain = require("../utils/domain");
 const User = require("../models/user");
+const { error } = require("console");
 //todo
 let from = "beterabdo811@gmail.com";
-TOKEN_VALID_MIN = 60;
+TOKEN_VALID_MIN = 120;
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
@@ -248,7 +249,11 @@ exports.login = async (req, res, next) => {
   }
 
   //Check if the user exists and confirmed
-  const user = await User.findOne({ email, isConfirmed: true, $or: [{ type: "Client" }, { type: "Gallery" }] });
+  const user = await User.findOne({
+    email,
+    isConfirmed: true,
+    $or: [{ type: "Client" }, { type: "Gallery" }],
+  });
   if (!user) {
     return throwError(404, "Email not found", "email", next);
   }
@@ -355,7 +360,7 @@ exports.isConfirmed = async (req, res, next) => {
   let user;
   try {
     user = await User.findOne({ email });
-  } catch (err) {
+  } catch (error) {
     if (!error.statusCode) error.statusCode = 422;
     return next(error);
   }
@@ -369,7 +374,9 @@ exports.isConfirmed = async (req, res, next) => {
 };
 
 exports.sendResetPassword = async (req, res, next) => {
+  console.log("reser");
   const email = req.body.email;
+
   //Data Validation
   try {
     await yup
@@ -388,21 +395,27 @@ exports.sendResetPassword = async (req, res, next) => {
   let user;
   try {
     user = await User.findOne({ email });
-  } catch (err) {
+  } catch (error) {
     if (!error.statusCode) error.statusCode = 422;
     return next(error);
   }
   if (!user) {
     return throwError(404, "user not found", "email", next);
   }
+
   //creating the token
   let token;
   try {
     token = await crypto.randomBytes(32).toString("hex");
+    user.resetToken = token;
+    //give the token 120 min to expire
+    user.resetTokenExpiration = Date.now() + TOKEN_VALID_MIN * 60 * 1000;
+    await user.save();
   } catch (error) {
     if (!error.statusCode) error.statusCode = 500;
     return next(error);
   }
+
   //sending the confirmation email
   try {
     const info = await transporter.sendMail({
@@ -410,17 +423,17 @@ exports.sendResetPassword = async (req, res, next) => {
       to: email,
       subject: "Re-Signup Confirmation ✔",
       text: "Hello world?",
-      html: `<h2>Dear ${user.firstName}</h2>
+      html: `<h2>Dear ${user.firstName},</h2>
 
-        <p>Thank you for signing up for our platform! </p>
-        <p>To ensure that you have provided a valid email address</p>
-        <p> please click on the link below to verify your account: <a href='${domain(
-          req
-        )}/auth/verify/${token}'> Verify </a> </p>
-        <p>If you did not sign up for our platform, please ignore this email.</p>
-        <p>Thank you for your cooperation.</p>
-        <p>Best regards,</p>
-        <p>College Team</p>
+      <p>We received a request to reset your password.</p>
+      <p>If you made this request, please click on the link below to reset your password:</p>
+      <p><a href='${domain(
+        req
+      )}/auth/reset-password/${token}'>Reset Password</a></p>
+      <p>If you did not request a password reset, please ignore this email or contact support if you have any concerns.</p>
+      <p>Thank you for your cooperation.</p>
+      <p>Best regards,</p>
+      <p>College Team</p>
         `,
     });
     console.log("Message sent: %s", info.messageId);
@@ -434,33 +447,92 @@ exports.sendResetPassword = async (req, res, next) => {
 };
 
 exports.getResetPassword = async (req, res, next) => {
-  const token = req.query.token;
+  const token = req.params.token;
 
-  let user;
-  try {
-    user = await User.findOne({ resetToken: token });
-  } catch (error) {
-    return throwError(500, "user dosen't exists.", "email", next);
+  //Check if the token is valid
+  if (!token) {
+    return throwError(404, "no token was provided.", "token", next);
   }
-  res.render("/user/resetPassword", {
-    id: user._id,
-  });
+
+  try {
+    //Find the user with the token
+    let user = await User.findOne({ resetToken: token });
+    if (!user) {
+      console.log("user not found");
+      const error = new Error("user not found");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    //Check if the token is expired
+    if (user.resetTokenExpiration < Date.now()) {
+      return res.status(404).json({ message: "Token expired" });
+    }
+
+    return res.render("auth/reset", {
+      path: "/reset-password",
+      pageTitle: "reset-password",
+      token: token,
+      errorMessage: null, // Pass the stored flash message to the view
+      oldInput: {
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+      validationErrors: [],
+      isAuthenticated: false,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.resetPassword = async (req, res, next) => {
-  const id = req.body;
-  if (!id) {
-    return res.status(404).json({ message: "no id was provided." });
-  }
+  const { email, token, password, confirmPassword } = req.body;
+  console.log(email, token, password, confirmPassword);
   try {
-    const user = await User.findById(id);
-    if (!user) {
-      throwErrorInfo(404, "user not found!", "id");
+    //validate the data
+    if (password !== confirmPassword) {
+      return throwErrorInfo(422, "Passwords do not match", "password");
     }
-    user;
+    if (!token) {
+      return throwErrorInfo(404, "no token was provided.", "token");
+    }
+
+    await userSchema.validate({
+      email,
+      password,
+      confirmPassword,
+    });
   } catch (error) {
     if (!error.statusCode) error.statuscode = 500;
     throwError(error.statuscode, error.message, error.path, next);
+  }
+
+  try {
+    //Find the user with the token
+    let user = await User.findOne({ resetToken: token, email: email });
+    if (!user) {
+      return throwErrorInfo(404, "user not found", "user");
+    }
+    //Check if the token is expired
+    if (user.resetTokenExpiration < Date.now()) {
+      return throwErrorInfo(404, "Token expired", "token");
+    }
+    //hashing the password
+    let hashedPassword = await bcrypt.hash(password, 12);
+
+    //reset the password
+    user.password = hashedPassword;
+    user.resetToken = undefined;
+    user.resetTokenExpiration = undefined;
+    console.log(user)
+    await user.save();
+    return res.status(200).json({
+      message: "Password reset successfully",
+    });
+  } catch (error) {
+    next(error);
   }
 };
 function throwError(codeStatus, message, path, next) {

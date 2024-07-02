@@ -16,10 +16,11 @@ router.post("/re-verify-email", authController.reVerifyEmail);
 
 router.post("/is-confirmed", authController.isConfirmed);
 
-router.post("/reset-password", authController.sendResetPassword);
+router.post("/send-reset-password-email", authController.sendResetPassword);
 
-// router.get("/reset-password-email/:token", authController.getResetPassword);
+router.get("/reset-password/:token", authController.getResetPassword);
 
+router.post("/reset-password", authController.resetPassword);
 
 
 module.exports = router;

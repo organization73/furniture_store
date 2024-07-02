@@ -4,6 +4,10 @@ const User = require("../models/user");
 const Gallary = require("../models/gallary");
 const Product = require("../models/product");
 const AiProduct = require("../models/aiProduct");
+const Rate = require("../models/productRate");
+const Message = require("../models/message");
+const Chatroom = require("../models/chatRoom");
+
 const gallarySchema = yup.object().shape({
   name: yup.string().required(),
   address: yup.string(),
@@ -104,12 +108,26 @@ exports.deleteUser = async (req, res, next) => {
     const user = await User.findByIdAndDelete(req.user._id);
     if (user) {
       res.status(200).json({ message: "User deleted" });
+
       //delete user's gallaries
       await Gallary.deleteMany({ creator: req.user._id });
+
       //delete user's products
       await Product.deleteMany({ creator: req.user._id });
+
       //delete user's ai products
       await AiProduct.deleteMany({ creator: req.user._id });
+
+      //delete user's rates
+      await Rate.deleteMany({ user: req.user._id });
+
+      //delete user's chatrooms
+      const chatRoom = await Chatroom.deleteMany({ users: req.user._id });
+
+      //delete user's messages
+      await Message.deleteMany({ chatRoom: chatRoom._id });
+      
+      res.status(200).json({ message: `${user.username} was deleted.` });
     } else {
       const error = new Error("User not found");
       error.statusCode = 404;
