@@ -142,10 +142,12 @@ class ProductRepo extends GetxController {
               productName: m['title'],
               categoryId: mapingTheCategories(m['images']),
               productImage: m['images'][0]
-                  ['imageUrl'], // Ensure key name consistency
+                  ['imageUrl'],
+                  // productPrice: m['price'] as double, // Ensure key name consistency
               productDetails: ProductDetails(
                   condition: m['details']['condition'],
-                  color: 'Color(0xff3820f1)', //TODO map the color
+                  
+                  color:m['details']['color'], //TODO map the color
                   productListImages: fromImage(m['images']),
                   productSpecs: {
                     'ablakash': m['details']['abalakach'],
@@ -254,14 +256,14 @@ class ProductRepo extends GetxController {
       var products = await HttpService.instance
           .getProducts(page, GetStorage().read('token'));
       print(products);
-      print("ssssssssssssssssssssssss");
       var prods = products
           .map((m) => ProductModel(
               id: m['_id'],
               productName: m['title'],
               categoryId: mapingTheCategories(m['images']),
               productImage: m['images'][0]
-                  ['imageUrl'], // Ensure key name consistency
+                  ['imageUrl'], 
+                    // productPrice: m['price'] as double,// Ensure key name consistency
               productDetails: ProductDetails(
                   condition: m['details']['condition'],
                   color: m['details']['color'], //TODO map the color
@@ -271,6 +273,7 @@ class ProductRepo extends GetxController {
                     'fabric type': m['details']['cloth'],
                     'wood type': m['details']['wood'],
                   },
+                
                   productDesc: m['description'],
                   productStats: ProductStats(
                       delivery: m['details']['delevary'],

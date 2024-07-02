@@ -38,7 +38,7 @@ class AuthenticatorRepo extends GetxController {
   screenRedirect() async {
     var userController = UserController.instance;
     final con = Get.put(UserController());
-    con.loadUserData();
+    // con.loadUserData();
     LoggerHelper.info(userController.user.value.firstName);
     final user = _auth.currentUser;
     if (user != null) {

@@ -4,6 +4,7 @@ import 'package:decordash/data/repositories/user/user_repo.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/model/message.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -66,14 +67,16 @@ class ChatController extends GetxController with WidgetsBindingObserver {
         .doc(userId)
         .snapshots(includeMetadataChanges: true)
         .listen((user) {
-      this.user.value = UserModel.fromJson(user.data()!);
+      this.user.value = UserModel.fromJsonForFireBase(user.data()!);
     });
   }
 
   void getMessages(String receiverId) {
+    print("iiiiiiddddddddd");
+    print(UserController.instance.user.value.id);
     FirebaseFirestore.instance
         .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(UserController.instance.user.value.id)
         .collection('chat')
         .doc(receiverId)
         .collection('messages')

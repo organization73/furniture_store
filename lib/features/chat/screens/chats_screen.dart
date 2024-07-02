@@ -2,6 +2,7 @@ import 'package:decordash/common/widgets/loaders/animation_loader.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,10 @@ class ChatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chatController = Get.put(ChatController());
-
+    final con = Get.put(UserController());
+     print(con.user.value.firstName);
+    print(con.user.value.firstName);
+    print(con.user.value.firstName);
     return Scaffold(
       appBar: AppBar(
         title: Text('chats'.tr),

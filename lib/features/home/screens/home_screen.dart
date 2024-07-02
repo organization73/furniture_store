@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final con = Get.put(UserController());
-    print(con.user.value.firstName);
+   
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {

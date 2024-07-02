@@ -35,6 +35,7 @@ class ProductMetaData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(product.productPrice);
     final productsController = ProductController.instance;
     final salePercentage = productsController.calculateSalePercnetage(
         product.productPrice, product.productSalePrice);

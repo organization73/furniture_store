@@ -90,14 +90,38 @@ class UserModel {
       isVerified: isVerified ?? this.isVerified,
     );
   }
-
+static UserModel fromJsonForFireBase(Map<String, dynamic> json) {
+    return UserModel(
+      accountType:
+          EnumUtil.fromStringEnum(AccountType.values, json['accountType']),
+      imageUrl: json['avatar'] ?? "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
+      email: json['email'] ?? '',
+      id: json['id'] ?? '',
+      phoneNumber: json['phoneNumber'] ?? '',
+      username: json['userName'] ?? '',
+      // createdDate: json['createdDate'] != null
+      //     ? (json['createdDate'] as Timestamp).toDate()
+      //     : null,
+      // lastActive: json['lastActive'] != null
+      //     ? (json['lastActive'] as Timestamp).toDate()
+      //     : DateTime.now(),
+      // isOnline: json['isOnline'] ?? false,
+      galleryName: json['galleryName'] ?? '',
+      galleryAddress: json['galleryAddress'] ?? '',
+      galleryCertificate: json['galleryCertificate'] ?? '',
+      isFeatured: json['isFeatured'] ?? false,
+      isVerified: json['isVerified'] ?? false,
+    );
+  }
   static UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
       // accountType: EnumUtil.fromStringEnum(AccountType.values, json['accountType'] ?? ''),
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
       email: json['email'] ?? '',
-      id: json['id'] ?? '',
+      id: json['_id'] ?? '',
       phoneNumber: json['phoneNumber'] ?? '',
       galleryName: json['galleryName'] ?? '',
       galleryAddress: json['galleryAddress'] ?? '',
@@ -171,7 +195,7 @@ class UserModel {
     if (snapshot.data() != null) {
       return UserModel(
         id: snapshot.id,
-        // accountType: EnumUtil.fromStringEnum(AccountType.values, data['accountType'] ?? ''),
+        accountType: EnumUtil.fromStringEnum(AccountType.values, data['accountType'] ?? ''),
         imageUrl: data['imageUrl'] ?? '',
         firstName: data['firstName'] ?? '',
         lastName: data['lastName'] ?? '',
