@@ -2,7 +2,8 @@ const yup = require("yup");
 
 const User = require("../models/user");
 const Gallary = require("../models/gallary");
-
+const Product = require("../models/product");
+const AiProduct = require("../models/aiProduct");
 const gallarySchema = yup.object().shape({
   name: yup.string().required(),
   address: yup.string(),
@@ -80,17 +81,40 @@ exports.deleteGallary = async (req, res, next) => {
 
     //check if the user is the creator of the gallary
     if (gallary.creator.toString() !== req.user._id.toString()) {
-      const error  = new Error("Not authorized");
+      const error = new Error("Not authorized");
       error.statusCode = 403;
       throw error;
     }
 
     //delete the gallary
     await Gallary.findByIdAndDelete(gallaryId);
-    req.user.gallaries = req.user.gallaries.filter((g) => g.toString() !== gallaryId.toString());
+    req.user.gallaries = req.user.gallaries.filter(
+      (g) => g.toString() !== gallaryId.toString()
+    );
     await req.user.save();
 
     res.status(200).json({ message: "Gallary deleted" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndDelete(req.user._id);
+    if (user) {
+      res.status(200).json({ message: "User deleted" });
+      //delete user's gallaries
+      await Gallary.deleteMany({ creator: req.user._id });
+      //delete user's products
+      await Product.deleteMany({ creator: req.user._id });
+      //delete user's ai products
+      await AiProduct.deleteMany({ creator: req.user._id });
+    } else {
+      const error = new Error("User not found");
+      error.statusCode = 404;
+      throw error;
+    }
   } catch (err) {
     next(err);
   }

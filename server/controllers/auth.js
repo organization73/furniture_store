@@ -248,7 +248,7 @@ exports.login = async (req, res, next) => {
   }
 
   //Check if the user exists and confirmed
-  const user = await User.findOne({ email, isConfirmed: true, type: "client" });
+  const user = await User.findOne({ email, isConfirmed: true, $or: [{ type: "Client" }, { type: "Gallery" }] });
   if (!user) {
     return throwError(404, "Email not found", "email", next);
   }

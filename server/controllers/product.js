@@ -301,6 +301,46 @@ exports.deleteAIProduct = async (req, res, next) => {
   }
 };
 
+exports.editProduct = async (req, res, next) => {
+  const { productId, title, price, description, details, images } = req.body;
+
+  //validate the data
+  try {
+    productSchema.validateSync({ title, price, description, details });
+  } catch (error) {
+    return throwError(422, error.message, error.path, next);
+  }
+
+  //find the product
+  try {
+    let product = await Product.findById(productId);
+    if (!product) {
+      return throwError(404, "Product not found", "server", next);
+    }
+
+    //check if the user is authorized to edit the product
+    if (product.creator.toString() !== req.user._id.toString()) {
+      return throwError(
+        403,
+        "You are not authorized to edit this product",
+        "server",
+        next
+      );
+    }
+
+    //edit the product
+    product.title = title;
+    product.price = price;
+    product.description = description;
+    product.details = details;
+    product.images = images;
+    await product.save();
+    return res.status(200).json({ message: "Product edited successfully" });
+  } catch (error) {
+    next(error);
+  }
+}
+
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);
   error.statusCode = codeStatus;

@@ -13,6 +13,8 @@ router.post("/add-gallary",userController.addGallary);
 
 router.delete("/delete-gallary",userController.deleteGallary);
 
+router.delete("/delete-user",userController.deleteUser);
+
 // router.delete("delete-user",userController.deleteUser);
 
 module.exports = router;
