@@ -1,3 +1,7 @@
+import 'package:decordash/common/widgets/shimmer/boxes_shimmer.dart';
+import 'package:decordash/common/widgets/shimmer/list_tile_shimmer.dart';
+import 'package:decordash/common/widgets/vendors/vendor_showcase.dart';
+import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordash/features/gallery/screens/all_galleries/widgets/gallery_card.dart';
@@ -56,9 +60,38 @@ class AllGalleriesPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
-                      return GalleryCard(
-                        vendor: vendorController.allVendors[index],
+                      var loader = Column(
+                        children: [
+                          const ListTileShimmer(),
+                          SizedBox(
+                            height: TSizes.spaceBtwItems,
+                          ),
+                          const BoxesShimmer(),
+                          SizedBox(
+                            height: TSizes.spaceBtwItems,
+                          ),
+                        ],
                       );
+                      return FutureBuilder(
+                          future: vendorController.getVendorProducts(
+                              vendorId: vendorController.allVendors[index].id,
+                              limit: 3),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              final widget =
+                                  TCloudHelperFunctions.checkMultiRecordState(
+                                      snapshot: snapshot, loader: loader);
+                              if (widget != null) return widget;
+                            }
+
+                            final products = snapshot.data!;
+                            return VendorShowCase(
+                              images:
+                                  products.map((e) => e.productImage).toList(),
+                              vendor: vendorController.allVendors[index],
+                            );
+                          });
                     },
                   );
                 })

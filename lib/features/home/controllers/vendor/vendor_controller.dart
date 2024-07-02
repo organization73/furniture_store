@@ -59,4 +59,6 @@ class VendorController extends GetxController {
       return [];
     }
   }
+
+  
 }
