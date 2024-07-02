@@ -11,4 +11,8 @@ router.put("/assign-image", userController.assignImage);
 
 router.post("/add-gallary",userController.addGallary);
 
+router.delete("/delete-gallary",userController.deleteGallary);
+
+// router.delete("delete-user",userController.deleteUser);
+
 module.exports = router;

@@ -60,3 +60,38 @@ exports.addGallary = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteGallary = async (req, res, next) => {
+  const { gallaryId } = req.body;
+
+  //validate data
+  if (!gallaryId) {
+    return res.status(400).json({ message: "gallaryId is required" });
+  }
+
+  try {
+    //find the gallary
+    const gallary = await Gallary.findById(gallaryId);
+    if (!gallary) {
+      const error = new Error("Gallary not found");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    //check if the user is the creator of the gallary
+    if (gallary.creator.toString() !== req.user._id.toString()) {
+      const error  = new Error("Not authorized");
+      error.statusCode = 403;
+      throw error;
+    }
+
+    //delete the gallary
+    await Gallary.findByIdAndDelete(gallaryId);
+    req.user.gallaries = req.user.gallaries.filter((g) => g.toString() !== gallaryId.toString());
+    await req.user.save();
+
+    res.status(200).json({ message: "Gallary deleted" });
+  } catch (err) {
+    next(err);
+  }
+};

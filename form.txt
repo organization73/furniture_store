@@ -683,3 +683,15 @@ response:
 {
     "message": "Product deleted successfully",
 }
+
+#18- delet gallary
+request:DELETE
+http://localhost:3000/user/delete-gallary
+
+{
+    "gallaryId":"6683e83ff61d7ce940cd1d89"
+}
+response:
+{
+    "message": "Gallary deleted"
+}

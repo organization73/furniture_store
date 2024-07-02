@@ -1,18 +1,3 @@
-const product = {}
-product.rates = [
-  {
-    rate: 5,
-    description: 'very good prodcut.',
-    __v: 0
-  },
-  {
-    rate: 3,
-    description: 'not really that good.',
-    __v: 0
-  },
-]
+p = [1,2,3,4,5]
 
-console.log(
-  "total rates:",
-  product.rates.reduce((acc, rateObject) => acc + rateObject.rate, 0)
-);
+console.log(p)
