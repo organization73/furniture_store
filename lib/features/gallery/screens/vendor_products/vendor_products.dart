@@ -14,7 +14,7 @@ class VendorProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = VendorController.instance;
-      Get.lazyPut(()=>FavoriteController());
+    Get.lazyPut(() => FavoriteController());
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +34,12 @@ class VendorProductsScreen extends StatelessWidget {
                     if (widget != null) return widget;
 
                     final products = snapshot.data!;
-                    return SortableProducts(products: products);
+                    return SortableProducts(
+                      products: products,
+                      loadMoreProducts: () {
+                        print("loaddded more vendor products");
+                      },
+                    );
                   })
             ],
           ),

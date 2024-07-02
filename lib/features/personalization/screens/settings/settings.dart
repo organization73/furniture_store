@@ -68,7 +68,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(UserController.instance.user.value.firstName);
+    final con = Get.put(UserController());
+    print(con.user.value.firstName);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

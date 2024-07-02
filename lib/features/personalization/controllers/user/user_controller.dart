@@ -242,12 +242,10 @@ class UserController extends GetxController {
   void loadUserData() {
     final userData = _storage.read('user_data');
     if (userData != null) {
+      
 
-    // print(userData['user']);
-    
-    // UserModel userr = UserModel.fromJson(userData['user']);
-    // user.value = userr;
-    
+      UserModel userr = UserModel.fromJson(userData['user']);
+      user.value = userr;
     } else {
       LoggerHelper.warning('No user data saved');
     }

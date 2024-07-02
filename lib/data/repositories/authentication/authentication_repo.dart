@@ -37,8 +37,9 @@ class AuthenticatorRepo extends GetxController {
 
   screenRedirect() async {
     var userController = UserController.instance;
-    userController.loadUserData();
-    // LoggerHelper.info("${userController.user.value.firstName}");
+    final con = Get.put(UserController());
+    con.loadUserData();
+    LoggerHelper.info(userController.user.value.firstName);
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified || user.phoneNumber != null) {
@@ -58,7 +59,7 @@ class AuthenticatorRepo extends GetxController {
           transition: Transition.rightToLeft,
         );
       }
-    } else if (userController.user.value.firstName != "") {
+    } else if (userController.user.value.firstName.isNotEmpty) {
       Get.offAll(
         () => const NavMenu(),
         duration: const Duration(milliseconds: 300),

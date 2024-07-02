@@ -9,8 +9,9 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class SortableProducts extends StatelessWidget {
-  const SortableProducts({super.key, required this.products});
+  const SortableProducts({super.key, required this.products,required this.loadMoreProducts});
   final List<ProductModel> products;
+  final Function loadMoreProducts;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AllProductsController());
@@ -41,7 +42,17 @@ class SortableProducts extends StatelessWidget {
             mainAxisExtent: 265.r,
             itemCount: controller.products.length,
             itemBuilder: (__, index) =>
-                ProductCardVerical(product: controller.products[index])))
+                ProductCardVerical(product: controller.products[index]))),
+        Padding(
+          padding: EdgeInsets.all(16.0.w),
+          child: ElevatedButton(
+            onPressed: () {
+              loadMoreProducts();
+
+            },
+            child: const Text('Load More'),
+          ),
+        )
       ],
     );
   }

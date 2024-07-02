@@ -21,7 +21,6 @@ class StartPageController extends GetxController {
     Get.put(NotificationsController());
     Get.put(ProductController());
     Get.put(ProductRepo());
-    ProductRepo.instance.fetchProductsFromServer();
     super.onInit();
   }
 

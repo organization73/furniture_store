@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/home/controllers/home_page_controller.dart';
-import 'package:decordash/features/home/model/product_category_model.dart';
-import 'package:decordash/features/home/model/vendor_category_model.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/constants/enums.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -19,7 +16,7 @@ import 'package:get_storage/get_storage.dart';
 
 class ProductRepo extends GetxController {
   static ProductRepo get instance => Get.find();
-
+  static int pagenumber = 1;
   final _db = FirebaseFirestore.instance;
 
   // Future<List<ProductModel>> fetchProducts() async {
@@ -65,12 +62,13 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> fetchFeaturedProducts() async {
     if (StartPageController.instance.products.isNotEmpty) {
-      return StartPageController.instance.products
-          .where((e) => e.isFeatured ?? false)
-          .toList();
+      return StartPageController.instance.products;
+      // .where((e) => e.isFeatured ?? false)
+      // .toList();
     } else {
-      var l = await fetchProductsFromServer();
-      return l.where((e) => e.isFeatured ?? false).toList();
+      var l = await fetchProductsFromServer(1);
+      return l;
+      // .where((e) => e.isFeatured ?? false).toList();
     }
   }
 
@@ -250,11 +248,11 @@ class ProductRepo extends GetxController {
     }
   }
 
-  Future<List<ProductModel>> fetchProductsFromServer() async {
+  Future<List<ProductModel>> fetchProductsFromServer(int page) async {
     try {
       print("ssssssssssssssssssssssss");
-      var products =
-          await HttpService.instance.getProducts(1, GetStorage().read('token'));
+      var products = await HttpService.instance
+          .getProducts(page, GetStorage().read('token'));
       print(products);
       print("ssssssssssssssssssssssss");
       var prods = products
@@ -293,7 +291,7 @@ class ProductRepo extends GetxController {
         print(element.id);
         print(element.categoryId);
       }
-      return prods.sublist(0, 4);
+      return prods;
     } catch (e) {
       LoggerHelper.warning(e.toString());
       return [];

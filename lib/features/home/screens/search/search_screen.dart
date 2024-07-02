@@ -83,6 +83,9 @@ class SearchScreen extends StatelessWidget {
                       final products = snapshot.data!;
                       return SortableProducts(
                         products: products,
+                        loadMoreProducts: () {
+                          print("loaddded more searchinggg products");
+                        },
                       );
                     });
               } else {

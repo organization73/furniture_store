@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ProductSpecs extends StatelessWidget {
-  final Map<String, String> productSpecs;
+  Map<String, String> productSpecs;
 
-  const ProductSpecs({super.key, required this.productSpecs});
+  ProductSpecs({super.key, required this.productSpecs});
 
   @override
   Widget build(BuildContext context) {
+    productSpecs.remove('ablakash');
     List<Widget> textWidgets = productSpecs.entries.map((entry) {
       return ListTile(
         title: Text(

@@ -42,7 +42,7 @@ class ProductController extends GetxController {
   Future<List<ProductModel>> fetchProductsFromServer() async {
     try {
       isLoading.value = true;
-      var products = await _productRepo.fetchProductsFromServer();
+      var products = await _productRepo.fetchProductsFromServer(1);
       featuredProducts.value = products;
       return products;
     } catch (e) {

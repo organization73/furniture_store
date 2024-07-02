@@ -103,7 +103,9 @@ class ProductMetaData extends StatelessWidget {
               width: TSizes.xs,
             ),
             Text(
-              product.productDetails.productSeller.location,
+              product.productDetails.productSeller.isFeatured ?? false
+                  ? 'Gallery'
+                  : 'Not Gallery',
               style: Theme.of(context).textTheme.labelMedium,
             )
           ],
@@ -145,7 +147,7 @@ class ProductMetaData extends StatelessWidget {
           height: TSizes.spaceBtwItems / 2,
         ),
         ReadMoreText(
-          product.productDetails.productDesc * 7,
+          product.productDetails.productDesc,
           trimLines: 3,
           trimMode: TrimMode.Line,
           trimExpandedText: 'Less',
