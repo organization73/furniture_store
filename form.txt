@@ -695,3 +695,29 @@ response:
 {
     "message": "Gallary deleted"
 }
+
+#19-edit product
+request: POST
+http://localhost:3000/product/edit-product
+request:
+{
+    "productId":"66845d618d73201d03380d9f",
+    "title": "chair5",
+    "price": 99.95,
+    "description": "your_description_here",
+
+    "details": {
+        "wood": "zan",
+        "abalakach": "your_abalakach_here",
+        "cloth": "your_cloth_here",
+        "condition": "your_condition_here",
+        "color": "your_color_here",
+        "delevary": true,
+        "negotiable": true,
+        "modefiable": true
+    }
+}
+response:
+{
+    "message": "Product edited successfully"
+}

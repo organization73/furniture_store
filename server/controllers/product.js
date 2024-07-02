@@ -302,7 +302,7 @@ exports.deleteAIProduct = async (req, res, next) => {
 };
 
 exports.editProduct = async (req, res, next) => {
-  const { productId, title, price, description, details, images } = req.body;
+  const { productId, title, price, description, details } = req.body;
 
   //validate the data
   try {
@@ -333,7 +333,6 @@ exports.editProduct = async (req, res, next) => {
     product.price = price;
     product.description = description;
     product.details = details;
-    product.images = images;
     await product.save();
     return res.status(200).json({ message: "Product edited successfully" });
   } catch (error) {
