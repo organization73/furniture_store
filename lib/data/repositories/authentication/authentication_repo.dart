@@ -38,6 +38,7 @@ class AuthenticatorRepo extends GetxController {
   screenRedirect() async {
     var userController = UserController.instance;
     userController.loadUserData();
+    // LoggerHelper.info("${userController.user.value.firstName}");
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified || user.phoneNumber != null) {

@@ -71,22 +71,20 @@ class AddProductPage extends StatelessWidget {
                             if (value == null || value.isEmpty) {
                               return 'priceVal'.tr;
                             }
+                            if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                              return 'Invalid Price';
+                            }
+                            if (value.length > 9) {
+                              return "Invalid Price";
+                            }
                             return null;
                           },
                         ),
                         SizedBox(height: TSizes.spaceBtwInputFields),
-                        RoundedTextField(
-                            'address'.tr, addController.adressController,
-                            (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'addressVal'.tr;
-                          }
-                          return null;
-                        }),
-                        SizedBox(height: TSizes.spaceBtwInputFields),
                         TextFormField(
                           controller: addController.descriptionController,
                           maxLines: 4,
+                          maxLength: 85,
                           decoration: InputDecoration(
                             hintText: 'description'.tr,
                           ),
@@ -94,31 +92,43 @@ class AddProductPage extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'descriptionVal'.tr;
                             }
+
                             return null;
                           },
                         ),
                         SizedBox(height: TSizes.spaceBtwInputFields),
                         BuildDropDown(
-                          items: [
-                            'regular'.tr,
-                            'zan'.tr,
-                            'ablakash'.tr,
+                          items: const [
+                            'Oak',
+                            'Mahogany',
+                            'Pine',
+                            'Birch',
+                            'Maple',
+                            'Cherry',
+                            'Walnut',
+                            'Cedar',
                           ],
                           onItemSelected: (selectedItem) {
                             addController.wood = selectedItem;
                           },
-                          hintText: 'selectType'.tr,
+                          hintText: 'Select Wood',
                         ),
                         SizedBox(height: TSizes.spaceBtwInputFields),
                         BuildDropDown(
-                          items: [
-                            'cotton'.tr,
-                            'silk'.tr,
+                          items: const [
+                            'Cotton',
+                            'Leather',
+                            'Polyester',
+                            'Velvet',
+                            'Silk',
+                            'Linen',
+                            'Wool',
+                            'Nylon',
                           ],
                           onItemSelected: (selectedItem) {
                             addController.cloth = selectedItem;
                           },
-                          hintText: 'selectType'.tr,
+                          hintText: 'Select Cloth Type',
                         ),
                       ],
                     ),

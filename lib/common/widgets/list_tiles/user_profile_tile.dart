@@ -15,11 +15,13 @@ class ProfileTile extends StatelessWidget {
   final VoidCallback onPress;
   @override
   Widget build(BuildContext context) {
-    final controller = UserController.instance;
+     var controller = UserController.instance;
+    print("nnnnnnnnnnnnnnnn");
+    print(controller.user.value.firstName);
 
     return ListTile(
       leading: Obx(() {
-        final networkImage = controller.user.value.avatar;
+        final networkImage = controller.user.value.imageUrl;
         final image = networkImage.isNotEmpty ? networkImage : TImages.user;
         if (controller.profileLoading.value) {
           return ShimmerLoaderEffect(

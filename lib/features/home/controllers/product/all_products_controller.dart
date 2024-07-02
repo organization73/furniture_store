@@ -12,6 +12,7 @@ class AllProductsController extends GetxController {
   final RxList<ProductModel> products = <ProductModel>[].obs;
 
   Future<List<ProductModel>> fetchProductsByQuery(Query? query) async {
+    return [];
     try {
       if (query == null) return [];
 

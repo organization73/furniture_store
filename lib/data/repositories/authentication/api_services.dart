@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/graphql/querys.dart';
 import 'package:decordash/utils/http/http_client.dart';
 import 'package:decordash/utils/logging/logger.dart';
@@ -21,10 +22,34 @@ class HttpService extends GetxService {
   }
 
   Future<List<dynamic>> getProducts(int page, String token) async {
-   String query = Querys.productsQuery(page);
+    String query = Querys.productsQuery(page);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
-        page, token, 'graphql',query);
+        token, 'graphql', query);
+    print(response);
     return response['data']['products']['products'];
+  }
+
+  Future<void> addProduct(ProductModel product) async {
+    var m = {
+      "title": product.productName,
+      "price": product.productPrice,
+      "description": product.productDetails.productDesc,
+      "images": product.productDetails.productListImages,
+      "details": {
+        "wood": product.productDetails.productSpecs['ablakash'],
+        "abalakach":"your ablakash here",
+        "cloth": product.productDetails.productSpecs['fabric type'],
+        "condition": product.productDetails.condition,
+        "color": product.productDetails.color,
+        "delevary": product.productDetails.productStats.delivery,
+        "negotiable": product.productDetails.productStats.negotiable,
+        "modefiable": product.productDetails.productStats.modifiable,
+      }
+    };
+    print('--------------');
+    print(m);
+    String t = GetStorage().read('token');
+    await THttpHelper.postBearerAuth('product/create-product', t, m);
   }
 
   // Future getProduct() async {
@@ -37,20 +62,36 @@ class HttpService extends GetxService {
   //     rethrow;
   //   }
   // }
-
-  static Future<Map<String, dynamic>> getUsers(
-      String token, Map<String, dynamic> data) async {
-    try {
-      var response = await THttpHelper.postBearerAuth('graphql', token, data);
-      var r = THttpHelper.responseToMap(response);
-      // r.forEach((key, value) {
-      //   LoggerHelper.info("key : $key , value : $value");
-      // });
-      return r;
-    } catch (e) {
-      return {};
-    }
+  Future<List<dynamic>> getUsers(int page) async {
+    String query = Querys.UsersQuery(page);
+    var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
+        "${GetStorage().read("token")}", 'graphql', query);
+    return response['data']['users'];
   }
+
+  Future<List<dynamic>> getProductOfUser(String id) async {
+    String query = Querys.getProductOfUser(id);
+    var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
+        "${GetStorage().read("token")}", 'graphql', query);
+    LoggerHelper.error(
+        response['data']['usersProducts']['products'].toString());
+
+    return response['data']['usersProducts']['products'];
+  }
+
+  // Future<Map<String, dynamic>> getUsers(
+  //      Map<String, dynamic> data) async {
+  //   try {
+  //     var response = await THttpHelper.postBearerAuth('graphql', "${GetStorage().read('token')}", data);
+  //     var r = THttpHelper.responseToMap(response);
+  //     // r.forEach((key, value) {
+  //     //   LoggerHelper.info("key : $key , value : $value");
+  //     // });
+  //     return r;
+  //   } catch (e) {
+  //     return {};
+  //   }
+  // }
 
 // method to change user avater
   Future<http.Response> changeUserAvatar(

@@ -28,11 +28,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("eeeeeeeeeeeee");
-    ProductRepo p = Get.put(ProductRepo());
-     p.fetchProductsFromServer();
-    print(GetStorage().read('token'));
-    print(UserController.instance.user.value.email);
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {

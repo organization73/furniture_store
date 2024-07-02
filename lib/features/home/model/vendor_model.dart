@@ -76,4 +76,19 @@ class VendorModel {
       return VendorModel.empty();
     }
   }
+  factory VendorModel.fromJsonToServerModel(Map<String, dynamic> serverData) {
+    print("imageUrl ${serverData['imageUrl']}");
+    return VendorModel(
+      id: serverData['_id'] ?? '',
+      name: '${serverData['firstName'] ?? ''} ${serverData['lastName'] ?? ''}',
+      image: serverData['imageUrl'] ?? "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+      location: 'Egypt',
+      isFeatured: serverData['type'] == 'Gallery' ? true : false,
+      isVerified: serverData['type'] == 'Gallery' ? true : false,
+      productsCount: serverData['numberOfProducts'] ?? 0,
+      accountType: serverData['type'] == 'Gallery'
+          ? AccountType.vendor
+          : AccountType.regular,
+    );
+  }
 }

@@ -63,17 +63,9 @@ class LoginController extends GetxController {
           .loginWithEmailAndPassword(
               emailController.text.trim(), passwordController.text.trim());
       final userController = Get.find<UserController>();
-      print(response);
-
+      userController.saveUserData(response);
       UserModel user = UserModel.fromJson(response['user']);
       UserController.instance.user.value = user;
-      userController.saveUserData(user);
-      print("firstname ${user.firstName}");
-      print("lastname ${user.lastName}");
-      print("email ${user.email}");
-      print("phone ${user.phoneNumber}");
-      print("username ${user.username}");
-
       FullScreenLoader.stopLoading();
 
       AuthenticatorRepo.instance.screenRedirect();

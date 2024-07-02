@@ -85,7 +85,23 @@ class ProductModel {
         'rates': rates.map((rate) => rate.toJson()).toList(),
         'ProductDetails': productDetails.toJson(),
       };
-
+      factory ProductModel.fromJson(Map<String, dynamic> json) {
+        return ProductModel(
+          id: json['id'] ?? '',
+          productName: json['productName'] ?? '',
+          sku: json['sku'] ?? '',
+          categoryId: json['categoryId'] ?? '',
+          productPrice: json['productPrice']?.toDouble() ?? 0.0,
+          productSalePrice: json['productSalePrice']?.toDouble() ?? 0.0,
+          productImage: json['productImage'] ?? '',
+          onSale: json['onSale'] ?? false,
+          isFeatured: json['isFeatured'] ?? false,
+          rates: (json['rates'] as List<dynamic>?)
+              ?.map((rate) => Review.fromJson(rate))
+              .toList() ?? [],
+          productDetails: ProductDetails.fromJson(json['ProductDetails'] ?? {}),
+        );
+      }
   factory ProductModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     if (snapshot.exists) {

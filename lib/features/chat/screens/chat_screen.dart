@@ -51,7 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ? Row(
                 children: [
                   CircularImage(
-                    imageUrl: chatController.user.value!.avatar,
+                    imageUrl: chatController.user.value!.imageUrl,
                     isNetworkImage: true,
                     backgroundColor: Colors.transparent,
                   ),
@@ -61,16 +61,16 @@ class _ChatScreenState extends State<ChatScreen> {
                       Text(
                         chatController.user.value!.username!,
                       ),
-                      Text(
-                        chatController.user.value!.isOnline
-                            ? 'Online'
-                            : 'Offline',
-                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              color: chatController.user.value!.isOnline
-                                  ? Colors.green
-                                  : Colors.grey,
-                            ),
-                      ),
+                      // Text(
+                      //   chatController.user.value!.isOnline
+                      //       ? 'Online'
+                      //       : 'Offline',
+                      //   style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                      //         color: chatController.user.value!.isOnline
+                      //             ? Colors.green
+                      //             : Colors.grey,
+                      //       ),
+                      // ),
                     ],
                   ),
                 ],

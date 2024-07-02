@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
+import 'package:decordash/features/home/controllers/home_page_controller.dart';
 import 'package:decordash/features/home/model/product_category_model.dart';
 import 'package:decordash/features/home/model/vendor_category_model.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/constants/enums.dart';
+import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -62,24 +64,13 @@ class ProductRepo extends GetxController {
   }
 
   Future<List<ProductModel>> fetchFeaturedProducts() async {
-    try {
-      final snapshot = await _db
-          .collection('Products')
-          .where('isFeatured', isEqualTo: true)
-          .limit(4)
-          .get();
-
-      final list = snapshot.docs
-          .map((document) => ProductModel.fromFirebaseDocument(document))
+    if (StartPageController.instance.products.isNotEmpty) {
+      return StartPageController.instance.products
+          .where((e) => e.isFeatured ?? false)
           .toList();
-
-      return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
+    } else {
+      var l = await fetchProductsFromServer();
+      return l.where((e) => e.isFeatured ?? false).toList();
     }
   }
 
@@ -143,64 +134,53 @@ class ProductRepo extends GetxController {
   Future<List<ProductModel>> getProductsForVendor(
       {required String vendorId, int limit = -1}) async {
     try {
-      final qureySnapshot = limit == -1
-          ? await _db
-              .collection('Products')
-              .where('ProductDetails.productSeller.id', isEqualTo: vendorId)
-              .get()
-          : await _db
-              .collection('Products')
-              .where('ProductDetails.productSeller.id', isEqualTo: vendorId)
-              .limit(limit)
-              .get();
+      var r = await HttpService.instance.getProductOfUser(vendorId);
+      print("eeeeeeeeeeeeeeeeeeeerrrrr");
 
-      final products = qureySnapshot.docs
-          .map((doc) => ProductModel.fromFirebaseDocument(doc))
+      print(r);
+      return r
+          .map((m) => ProductModel(
+              id: m['_id'],
+              productName: m['title'],
+              categoryId: mapingTheCategories(m['images']),
+              productImage: m['images'][0]
+                  ['imageUrl'], // Ensure key name consistency
+              productDetails: ProductDetails(
+                  condition: m['details']['condition'],
+                  color: 'Color(0xff3820f1)', //TODO map the color
+                  productListImages: fromImage(m['images']),
+                  productSpecs: {
+                    'ablakash': m['details']['abalakach'],
+                    'fabric type': m['details']['cloth'],
+                    'wood type': m['details']['wood'],
+                  },
+                  productDesc: m['description'],
+                  productStats: ProductStats(
+                      delivery: m['details']['delevary'],
+                      negotiable: m['details']['negotiable'],
+                      modifiable: m['details']['modefiable']),
+                  productSeller: VendorModel(
+                      name:
+                          "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                      location: "Egypt",
+                      id: m['creator']['_id'],
+                      image: m['creator']['imageUrl'] ??
+                          "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                      isFeatured: m['creator']['type'] == "Gallery",
+                      productsCount: 0,
+                      accountType: mapType(m['creator']['type'])))))
           .toList();
-      return products;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      print("rrrrrrrrrrrrrrrrrrrrrrrrr$e");
+      return [];
     }
   }
 
   Future<List<ProductModel>> getProductsForCategory(
       {required String categoryId, int limit = -1}) async {
-    try {
-      final productCategoryQuery = limit == -1
-          ? await _db
-              .collection('ProductCategory')
-              .where('categoryId', isEqualTo: categoryId)
-              .get()
-          : await _db
-              .collection('ProductCategory')
-              .where('categoryId', isEqualTo: categoryId)
-              .limit(limit)
-              .get();
-
-      final productsIds = productCategoryQuery.docs
-          .map((doc) => doc['productId'] as String)
-          .toList();
-      final productsQuery = await _db
-          .collection('Products')
-          .where(FieldPath.documentId, whereIn: productsIds)
-          .get();
-
-      List<ProductModel> products = productsQuery.docs
-          .map((doc) => ProductModel.fromFirebaseDocument(doc))
-          .toList();
-
-      return products;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
-    }
+    return StartPageController.instance.products
+        .where((element) => element.categoryId == categoryId)
+        .toList();
   }
 
   Future<void> uploadDummyData(List<ProductModel> products) async {
@@ -250,38 +230,20 @@ class ProductRepo extends GetxController {
   Future<void> uploadProductToDatabase(ProductModel product) async {
     try {
       final storage = Get.put(FirebaseStorageServices());
-      final mainImageFile =
-          await storage.getImageDatafromAssets(product.productImage);
-
-      final mainImageUrl = await storage.uploadImageData(
-          'Products', mainImageFile, product.productImage);
-      product.productImage = mainImageUrl;
 
       for (var imagePath in product.productDetails.productListImages) {
         final imageFile = await storage.getImageDatafromAssets(imagePath);
         final imageUrl =
             await storage.uploadImageData('Products', imageFile, imagePath);
-
+        // imagePath = imageUrl;
         product.productDetails.productListImages = product
             .productDetails.productListImages
             .map((path) => path == imagePath ? imageUrl : path)
             .toList();
       }
-
-      await _db.collection('Products').doc(product.id).set(product.toJson());
-
-      await _db.collection('ProductCategory').add(ProductCategoryModel(
-              productId: product.id, categoryId: product.categoryId)
-          .toJson());
-
-      await _db.collection('VendorCategory').add(VendorCategoryModel(
-              vendorId: product.productDetails.productSeller.id,
-              categoryId: product.categoryId)
-          .toJson());
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      print(product.productDetails.productListImages);
+      await HttpService.instance.addProduct(product);
+      // hereeeer
     } catch (e) {
       LoggerHelper.error('error', e);
       rethrow;
@@ -290,18 +252,21 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> fetchProductsFromServer() async {
     try {
+      print("ssssssssssssssssssssssss");
       var products =
           await HttpService.instance.getProducts(1, GetStorage().read('token'));
+      print(products);
+      print("ssssssssssssssssssssssss");
       var prods = products
           .map((m) => ProductModel(
-            id:m['_id'],
+              id: m['_id'],
               productName: m['title'],
               categoryId: mapingTheCategories(m['images']),
               productImage: m['images'][0]
                   ['imageUrl'], // Ensure key name consistency
               productDetails: ProductDetails(
                   condition: m['details']['condition'],
-                  color: 'Color(0xff3820f1)',//TODO map the color
+                  color: m['details']['color'], //TODO map the color
                   productListImages: fromImage(m['images']),
                   productSpecs: {
                     'ablakash': m['details']['abalakach'],
@@ -318,16 +283,17 @@ class ProductRepo extends GetxController {
                           "${m['creator']['firstName']} ${m['creator']['lastName']}",
                       location: "Egypt",
                       id: m['creator']['_id'],
-                      image: m['creator']['imageUrl']??"",
-                      isFeatured: false,
+                      image: m['creator']['imageUrl'] ??
+                          "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                      isFeatured: m['creator']['type'] == "Gallery",
                       productsCount: 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
-          prods.forEach((element) {
-            print(element.id);
-            print(element.categoryId);
-          });
-      return prods.sublist(0,4);
+      for (var element in prods) {
+        print(element.id);
+        print(element.categoryId);
+      }
+      return prods.sublist(0, 4);
     } catch (e) {
       LoggerHelper.warning(e.toString());
       return [];
@@ -398,9 +364,9 @@ class ProductRepo extends GetxController {
 
   AccountType mapType(String type) {
     switch (type) {
-      case "client":
+      case "Client":
         return AccountType.regular;
-      case "gallary":
+      case "Gallary":
         return AccountType.vendor;
       default:
         return AccountType.regular;

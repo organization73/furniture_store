@@ -1,33 +1,24 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/constants/enums.dart';
 
 class UserModel {
   AccountType accountType;
-  String avatar;
   String firstName;
   String lastName;
   final String email;
   final String id;
   final String phoneNumber;
-  DateTime? createdDate;
-  DateTime? lastActive;
-  bool isOnline;
   bool isFeatured;
   bool isVerified;
-  List<Products>? wishList;
-  String? sId;
-  String? firstNameNew;
-  String? lastNameNew;
+  List<ProductModel>? wishList;
   String? username;
   String? type;
-  String? emailNew;
-  String? phoneNumberNew;
   bool? isConfirmed;
-  List<Products>? products;
-  String? createdAt;
-  String? updatedAt;
-  int? iV;
-  String? imageUrl;
+  List<ProductModel>? products;
+  String imageUrl;
   // Additional fields for Vendor
   String galleryName;
   String galleryAddress;
@@ -36,31 +27,23 @@ class UserModel {
   UserModel({
     this.accountType = AccountType.regular,
     this.phoneNumber = '',
-    this.avatar = '',
     this.firstName = '',
     this.lastName = '',
     this.email = '',
     this.id = '',
-    this.lastActive,
-    this.isOnline = false,
     this.galleryName = '',
     this.galleryAddress = '',
     this.galleryCertificate = '',
     this.isFeatured = false,
     this.isVerified = false,
     this.wishList,
-    this.sId,
-    this.firstNameNew,
-    this.lastNameNew,
     this.type,
-    this.emailNew,
-    this.phoneNumberNew,
-    this.iV,
-    this.imageUrl,
+    this.imageUrl = "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
     this.isConfirmed,
     this.products,
-    this.username
+    this.username,
   });
+
   String get fullName {
     return '$firstName $lastName';
   }
@@ -72,7 +55,6 @@ class UserModel {
   static List<String> nameParts(fullName) => fullName.split(' ');
 
   static String generateUsernameFromFullName(String fullName) {
-    // Split the full name into parts
     List<String> nameParts = fullName.split(' ');
     String firstName = nameParts[0].toLowerCase();
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
@@ -82,16 +64,12 @@ class UserModel {
 
   UserModel copyWith({
     AccountType? accountType,
-    String? avatar,
     String? firstName,
     String? lastName,
     String? email,
     String? id,
     String? phoneNumber,
-    String? userName,
-    DateTime? createdDate,
-    DateTime? lastActive,
-    bool? isOnline,
+    String? username,
     String? galleryName,
     String? galleryAddress,
     String? galleryCertificate,
@@ -100,14 +78,11 @@ class UserModel {
   }) {
     return UserModel(
       accountType: accountType ?? this.accountType,
-      avatar: avatar ?? this.avatar,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       id: id ?? this.id,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      lastActive: lastActive ?? this.lastActive,
-      isOnline: isOnline ?? this.isOnline,
       galleryName: galleryName ?? this.galleryName,
       galleryAddress: galleryAddress ?? this.galleryAddress,
       galleryCertificate: galleryCertificate ?? this.galleryCertificate,
@@ -118,61 +93,60 @@ class UserModel {
 
   static UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
-      // accountType:
-      //     EnumUtil.fromStringEnum(AccountType.values, json['accountType']),
-      avatar: json['avatar'] ?? '',
+      // accountType: EnumUtil.fromStringEnum(AccountType.values, json['accountType'] ?? ''),
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
       email: json['email'] ?? '',
       id: json['id'] ?? '',
       phoneNumber: json['phoneNumber'] ?? '',
-      // lastActive: json['lastActive'] != null
-      //     ? (json['lastActive'] as Timestamp).toDate()
-      //     : DateTime.now(),
-      isOnline: json['isOnline'] ?? false,
       galleryName: json['galleryName'] ?? '',
       galleryAddress: json['galleryAddress'] ?? '',
       galleryCertificate: json['galleryCertificate'] ?? '',
       isFeatured: json['isFeatured'] ?? false,
       isVerified: json['isVerified'] ?? false,
-      wishList: json['wishList'] != null
-          ? (json['wishList']['items'] as List)
-              .map((x) => Products.fromJson(x as Map<String, dynamic>))
-              .toList()
-          : [],
-      sId: json['sId'],
-      firstNameNew: json['firstNameNew'],
-      lastNameNew: json['lastNameNew'],
-      type: json['type'],
-      emailNew: json['emailNew'],
-      phoneNumberNew: json['phoneNumberNew'],
-      isConfirmed: json['isConfirmed'],
-      products: json['products'] != null
-          ? List<Products>.from(
-              json['products'].map((x) => Products.fromJson(x)))
-          : null,
-      iV: json['iV'],
-      imageUrl: json['imageUrl'],
-      username:json['username']
+      // wishList: parseProductList(json['wishList']),
+      type: json['type'] ?? '',
+      imageUrl: json['imageUrl'] ?? "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+      isConfirmed: json['isConfirmed'] ?? false,
+      // products: parseProductList(json['products']),
+      username: json['username'] ?? '',
     );
+  }
+
+  static List<ProductModel>? parseProductList(dynamic jsonList) {
+    if (jsonList == null) return null;
+    if (jsonList is String) {
+      if (jsonList.isEmpty) return [];
+      return (jsonDecode(jsonList) as List<dynamic>)
+          .map((json) => ProductModel.fromJson(json))
+          .toList();
+    } else if (jsonList is List) {
+      return jsonList.map((json) => ProductModel.fromJson(json)).toList();
+    } else if (jsonList is Map) {
+      return [ProductModel.fromJson(jsonList as Map<String, dynamic>)];
+    }
+    return null;
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'accountType': accountType.toString().split('.').last,
-      'avatar': avatar,
+      // 'accountType': accountType.toString().split('.').last,
       'firstName': firstName,
       'lastName': lastName,
-      'isOnline': isOnline,
       'email': email,
-      'phoneNumber': phoneNumber,
       'id': id,
+      'phoneNumber': phoneNumber,
       'galleryName': galleryName,
       'galleryAddress': galleryAddress,
       'galleryCertificate': galleryCertificate,
       'isFeatured': isFeatured,
       'isVerified': isVerified,
-      'username':username
+      // 'wishList': wishList != null ? wishList!.map((e) => e.toJson()).toList() : [],
+      'type': type,
+      'imageUrl': imageUrl,
+      'isConfirmed': isConfirmed,
+      // 'products': products != null ? products!.map((e) => e.toJson()).toList() : [],
+      'username': username,
     };
   }
 
@@ -180,13 +154,10 @@ class UserModel {
     return UserModel(
       accountType: AccountType.regular,
       phoneNumber: '',
-      avatar: '',
       firstName: '',
       lastName: '',
       email: '',
       id: '',
-      lastActive: DateTime.now(),
-      isOnline: false,
       galleryName: '',
       galleryAddress: '',
       galleryCertificate: '',
@@ -200,39 +171,25 @@ class UserModel {
     if (snapshot.data() != null) {
       return UserModel(
         id: snapshot.id,
-        accountType: EnumUtil.fromStringEnum(
-            AccountType.values, data['accountType'] ?? ''),
-        avatar: data['avatar'] ?? '',
+        // accountType: EnumUtil.fromStringEnum(AccountType.values, data['accountType'] ?? ''),
+        imageUrl: data['imageUrl'] ?? '',
         firstName: data['firstName'] ?? '',
         lastName: data['lastName'] ?? '',
         email: data['email'] ?? '',
         phoneNumber: data['phoneNumber'] ?? '',
-        lastActive: data['lastActive'] != null
-            ? (data['lastActive'] as Timestamp).toDate()
-            : DateTime.now(),
-        isOnline: data['isOnline'] ?? false,
         galleryName: data['galleryName'] ?? '',
         galleryAddress: data['galleryAddress'] ?? '',
         galleryCertificate: data['galleryCertificate'] ?? '',
         isFeatured: data['isFeatured'] ?? false,
         isVerified: data['isVerified'] ?? false,
+        wishList: parseProductList(data['wishList']),
+        products: parseProductList(data['products']),
+        type: data['type'],
+        isConfirmed: data['isConfirmed'],
+        username: data['username'],
       );
     } else {
       return UserModel.empty();
     }
-  }
-}
-
-class Products {
-  String? sId;
-  Products({this.sId});
-  Products.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    return data;
   }
 }

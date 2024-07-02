@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 class AllGalleriesPage extends StatelessWidget {
   const AllGalleriesPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     final vendorController = VendorController.instance;

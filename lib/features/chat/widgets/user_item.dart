@@ -29,15 +29,15 @@ class _UserItemState extends State<UserItem> {
             alignment: Alignment.bottomRight,
             children: [
               CircularImage(
-                imageUrl: widget.user.avatar,
+                imageUrl: widget.user.imageUrl,
                 isNetworkImage: true,
                 height: 100.r,
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: CircleAvatar(
-                  backgroundColor:
-                      widget.user.isOnline ? Colors.green : Colors.grey,
+                  // backgroundColor:
+                  //     widget.user.isOnline ? Colors.green : Colors.grey,
                   radius: 5,
                 ),
               ),
@@ -45,13 +45,13 @@ class _UserItemState extends State<UserItem> {
           ),
           title: Text(widget.user.username!,
               style: Theme.of(context).textTheme.titleLarge),
-          subtitle: Text(
-              'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',
-              maxLines: 2,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(overflow: TextOverflow.ellipsis)),
+          // subtitle: Text(
+          //     'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',
+          //     maxLines: 2,
+          //     style: Theme.of(context)
+          //         .textTheme
+          //         .titleSmall!
+          //         .copyWith(overflow: TextOverflow.ellipsis)),
           trailing: const Icon(Iconsax.arrow_circle_right_copy),
         ),
       );

@@ -78,7 +78,7 @@ class AddProductController extends GetxController {
         productDetails: ProductDetails(
           condition: condition == 1 ? 'used' : 'new',
           color: color.toString(),
-          productListImages: pickedImagePaths.sublist(1),
+          productListImages: pickedImagePaths,
           productSpecs: {
             'ablakash': wood ?? '',
             'fabric type': cloth ?? '',
@@ -89,20 +89,12 @@ class AddProductController extends GetxController {
             negotiable: productStats.values.elementAt(1),
             modifiable: productStats.values.elementAt(2),
           ),
-          productSeller: VendorModel(
-              id: userController.user.value.id,
-              image: userController.user.value.avatar,
-              location: adressController.text,
-              name: userController.user.value.username!,
-              accountType: userController.user.value.accountType,
-              isFeatured: userController.user.value.isFeatured,
-              productsCount: 2,
-              isVerified: userController.user.value.isVerified),
+          productSeller: VendorModel.empty(),
         ),
       );
 
       await ProductRepo.instance.uploadProductToDatabase(newProduct);
-
+////////////////////////////////////////////
       FullScreenLoader.stopLoading();
 
       TLoaders.successSnackBar(

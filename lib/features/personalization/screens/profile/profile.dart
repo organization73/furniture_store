@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               Obx(() {
-                final networkImage = controller.user.value.avatar;
+                final networkImage = controller.user.value.imageUrl;
                 final image =
                     networkImage.isNotEmpty ? networkImage : TImages.user;
                 if (controller.imageLoading.value) {

@@ -42,7 +42,7 @@ class ManufactureRequestsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _AvatarImage(item.user.avatar),
+                    _AvatarImage(item.user.imageUrl),
                     const SizedBox(width: 16),
                     Expanded(
                       child: Column(
@@ -182,22 +182,22 @@ class FeedItem {
 
 final List<UserModel> _users = [
   UserModel(
-    avatar: 'https://picsum.photos/id/1062/80/80',
+    imageUrl: 'https://picsum.photos/id/1062/80/80',
     firstName: 'John Doe',
     email: 'test@gmail.com',
   ),
   UserModel(
-    avatar: 'https://picsum.photos/id/1066/80/80',
+    imageUrl: 'https://picsum.photos/id/1066/80/80',
     firstName: 'John Doe',
     email: 'test@gmail.com',
   ),
   UserModel(
-    avatar: 'https://picsum.photos/id/1072/80/80',
+    imageUrl: 'https://picsum.photos/id/1072/80/80',
     firstName: 'John Doe',
     email: 'test@gmail.com',
   ),
   UserModel(
-    avatar: 'https://picsum.photos/id/80/80/80',
+    imageUrl: 'https://picsum.photos/id/80/80/80',
     firstName: 'John Doe',
     email: 'test@gmail.com',
   ),

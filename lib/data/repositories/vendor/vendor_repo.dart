@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -16,17 +17,36 @@ class VendorRepo extends GetxController {
 
   Future<List<VendorModel>> fetchAllVendors() async {
     try {
-      final snapshot = await _db.collection('Vendors').get();
-
-      final list = snapshot.docs
-          .map((document) => VendorModel.fromFirebaseDocument(document))
+      print("sssssss");
+      final sna1 = await HttpService.instance.getUsers(1);
+      final sna2 = await HttpService.instance.getUsers(2);
+      final sna3 = await HttpService.instance.getUsers(3);
+      final sna = sna1 + sna2 + sna3;
+      // print(sna);
+      print("bbbbbbbbbbbbbbbbbbb");
+      final vendors = sna
+          .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
           .toList();
+      for (var e in vendors) {
+        print("name: ${e.name}");
+        print("isFeatured: ${e.isFeatured}");
+        print("isverified: ${e.isVerified}");
+        print("imageUrl ${e.image}");
+        print("prod ${e.productsCount}");
+      }
+      // print(vendors[0].name);
+      return vendors;
+      // final snapshot = await _db.collection('Vendors').get();
 
-      return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      // final list = snapshot.docs
+      //     .map((document) => VendorModel.fromFirebaseDocument(document))
+      //     .toList();
+
+      // return list;
+      // } on FirebaseException catch (e) {
+      //   throw TFirebaseException(e.code).message;
+      // } on PlatformException catch (e) {
+      //   throw TPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }

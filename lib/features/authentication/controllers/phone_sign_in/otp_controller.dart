@@ -27,8 +27,7 @@ class OTPController extends GetxController {
               lastName: phoneController.lastNameController.text.trim(),
               username: phoneController.userNameController.text.trim(),
               phoneNumber: phoneController.phoneNumber.value,
-              lastActive: DateTime.now(),
-            );
+              );
 
             await UserRepo.instance.saveuserRecord(newUser);
 

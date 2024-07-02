@@ -35,6 +35,7 @@ class FirebaseStorageServices extends GetxController {
       final ref = _firebaseStorage.ref(path).child(name);
       await ref.putData(image);
       final url = await ref.getDownloadURL();
+      print("urllllllllllllllllllllllllllll");
       return url;
     } catch (e) {
       if (e is FirebaseException) {
