@@ -78,7 +78,7 @@ exports.createProduct = async (req, res, next) => {
       //   confidence: classificationResult.confidence,
       // });
       imagesObjests.push({
-        imageUrl: "www.furniture.com/image1",
+        imageUrl: "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
         class: "chair",
         confidence: 98,
       });
