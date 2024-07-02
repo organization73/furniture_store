@@ -315,18 +315,8 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> fetchProductsFromServer(int page) async {
     try {
-      print("ssssssssssssssssssssssss");
       var products = await HttpService.instance
           .getProducts(page, GetStorage().read('token'));
-      print(products);
-
-      print("price");
-      print("price");
-      print("price");
-      // print("${(products[0]['price'] as double).toDouble()}");
-      print("price");
-      print("price");
-
       var prods = products
           // TODO product mapping
           .map((m) => ProductModel(
@@ -361,17 +351,7 @@ class ProductRepo extends GetxController {
                       productsCount: m['creator']['numberOfProducts'] ?? 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
-      for (var i = 0; i < prods.length; i++) {
-        // double p = (products[i]['price'] as int).toDouble();
-        // print(products[i]['price']);
-        // print("pppppppppp");
-
-        // prods[i].productPrice = p;
-      }
-      for (var element in prods) {
-        print(element.id);
-        print(element.categoryId);
-      }
+   
       return prods;
     } catch (e) {
       LoggerHelper.warning(e.toString());

@@ -18,7 +18,6 @@ class VendorRepo extends GetxController {
 
   Future<List<VendorModel>> fetchAllVendors() async {
     try {
-      print("sssssss");
       final sna1 = await HttpService.instance.getUsers(1);
       final sna2 = await HttpService.instance.getUsers(2);
       final sna3 = await HttpService.instance.getUsers(3);
@@ -26,13 +25,7 @@ class VendorRepo extends GetxController {
       final vendors = sna
           .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
           .toList();
-      for (var e in vendors) {
-        print("name: ${e.name}");
-        print("isFeatured: ${e.isFeatured}");
-        print("isverified: ${e.isVerified}");
-        print("imageUrl ${e.image}");
-        print("prod ${e.productsCount}");
-      }
+      
       // print(vendors[0].name);
       return vendors;
     } catch (e) {

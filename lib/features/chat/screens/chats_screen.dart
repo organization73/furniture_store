@@ -15,10 +15,7 @@ class ChatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final chatController = Get.put(ChatController());
     final con = Get.put(UserController());
-     print(con.user.value.firstName);
-    print(con.user.value.firstName);
-    print(con.user.value.firstName);
-    return Scaffold(
+      return Scaffold(
       appBar: AppBar(
         title: Text('chats'.tr),
         actions: [

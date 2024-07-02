@@ -72,8 +72,6 @@ class ChatController extends GetxController with WidgetsBindingObserver {
   }
 
   void getMessages(String receiverId) {
-    print("iiiiiiddddddddd");
-    print(UserController.instance.user.value.id);
     FirebaseFirestore.instance
         .collection('Users')
         .doc(UserController.instance.user.value.id)
