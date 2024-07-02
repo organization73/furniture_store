@@ -310,7 +310,7 @@ exports.reVerifyEmail = async (req, res, next) => {
         <p>Thank you for using our platform! </p>
         <p>To ensure that you have provided a valid email address</p>
         <p> please click on the link below to reset your password:
-        <a href='${domain(req)}/auth/verify/${token}'> Reset </a> </p>
+        <a href='${domain(req)}/auth/verify/${token}'> Verify </a> </p>
         <p>Thank you for your cooperation.</p>
         <p>Best regards,</p>
         <p>College Team</p>
@@ -322,14 +322,16 @@ exports.reVerifyEmail = async (req, res, next) => {
     next(err);
   }
   //Editser's token the user
-  user.resetToken = token;
-  user.resetTokenExpiration = Date.now() + TOKEN_VALID_MIN * 60 * 1000;
+  user.confirmToken = token;
+  user.confirmTokenExpiration = Date.now() + TOKEN_VALID_MIN * 60 * 1000;
   //saving the user into the database
   try {
-    const saveUser = await user.save();
+    await user.save();
     return res
       .status(200)
-      .json({ message: "Re-send emial have been done successfully" });
+      .json({
+        message: `Re-send emial to ${email} have been done successfully`,
+      });
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
     next(err);
@@ -526,7 +528,7 @@ exports.resetPassword = async (req, res, next) => {
     user.password = hashedPassword;
     user.resetToken = undefined;
     user.resetTokenExpiration = undefined;
-    console.log(user)
+    console.log(user);
     await user.save();
     return res.status(200).json({
       message: "Password reset successfully",

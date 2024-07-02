@@ -747,3 +747,15 @@ response:
 {
     "message": "Password updated"
 }
+
+22-
+request: Post
+http://localhost:3000/auth//re-verify-email
+
+{
+    "email": "abdo.make631@gmail.com"
+}
+response:
+{
+    "message": "Re-send emial to abdo.make631@gmail.com have been done successfully"
+}
