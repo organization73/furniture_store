@@ -217,6 +217,90 @@ exports.rateProduct = async (req, res, next) => {
   }
 };
 
+exports.deleteProduct = async (req, res, next) => {
+  const { productId } = req.body;
+
+  //validate the date
+  if (!productId) {
+    return throwError(422, "Product id is required", "server", next);
+  }
+
+  //find the product
+  try {
+    let product = await Product.findById(productId);
+
+    //check if the user is authorized to delete the product
+    if (product.creator.toString() === req.user._id.toString()) {
+      //delete the product
+      await Product.findByIdAndDelete(productId);
+    } else {
+      //user is not authorized to delete the product
+      return throwError(
+        403,
+        "You are not authorized to delete this product",
+        "server",
+        next
+      );
+    }
+
+    //check if the product was deleted
+    if (product) {
+      //delete the product from the user's products array
+      req.user.products = req.user.products.filter((product) => {
+        if (product._id.toString() === productId.toString()) {
+          return false;
+        }
+        return product._id.toString() !== productId.toString();
+      });
+      await req.user.save();
+      return res.status(200).json({ message: "Product deleted successfully" });
+    } else {
+      //product not found
+      return throwError(404, "Product not found", "server", next);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteAIProduct = async (req, res, next) => {
+  const { productId } = req.body;
+
+  //validate the date
+  if (!productId) {
+    return throwError(422, "Product id is required", "server", next);
+  }
+
+  //find the product
+  try {
+    let product = await AiProduct.findById(productId);
+
+    //check if the user is authorized to delete the product
+    if (product.creator.toString() === req.user._id.toString()) {
+      //delete the product
+      await AiProduct.findByIdAndDelete(productId);
+    } else {
+      //user is not authorized to delete the product
+      return throwError(
+        403,
+        "You are not authorized to delete this product",
+        "server",
+        next
+      );
+    }
+
+    //check if the product was deleted
+    if (product) {
+      return res.status(200).json({ message: "Product deleted successfully" });
+    } else {
+      //product not found
+      return throwError(404, "Product not found", "server", next);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);
   error.statusCode = codeStatus;

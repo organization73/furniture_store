@@ -9,4 +9,10 @@ router.post("/create-ai-product", productController.createAIProduct);
 //create a route for rating products
 router.post("/rate-product", productController.rateProduct);
 
+//delete a product
+router.delete("/delete-product", productController.deleteProduct);
+
+//delete ai product
+router.delete("/delete-ai-product", productController.deleteAIProduct);
+
 module.exports = router;
