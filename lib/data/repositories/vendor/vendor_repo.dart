@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
+import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -22,8 +23,6 @@ class VendorRepo extends GetxController {
       final sna2 = await HttpService.instance.getUsers(2);
       final sna3 = await HttpService.instance.getUsers(3);
       final sna = sna1 + sna2 + sna3;
-      // print(sna);
-      print("bbbbbbbbbbbbbbbbbbb");
       final vendors = sna
           .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
           .toList();
@@ -36,49 +35,34 @@ class VendorRepo extends GetxController {
       }
       // print(vendors[0].name);
       return vendors;
-      // final snapshot = await _db.collection('Vendors').get();
-
-      // final list = snapshot.docs
-      //     .map((document) => VendorModel.fromFirebaseDocument(document))
-      //     .toList();
-
-      // return list;
-      // } on FirebaseException catch (e) {
-      //   throw TFirebaseException(e.code).message;
-      // } on PlatformException catch (e) {
-      //   throw TPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }
   }
 
   Future<List<VendorModel>> getVendorsForCategory(categoryId) async {
-    try {
-      QuerySnapshot vendorCategoryQuery = await _db
-          .collection('VendorCategory')
-          .where('categoryId', isEqualTo: categoryId)
-          .get();
+    var pro = await ProductRepo.instance
+        .getProductsForCategory(1, categoryId: categoryId);
 
-      List<String> vendorIds = vendorCategoryQuery.docs
-          .map((doc) => doc['vendorId'] as String)
-          .toList();
-      final vendorsQuery = await _db
-          .collection('Vendors')
-          .where(FieldPath.documentId, whereIn: vendorIds)
-          .limit(1)
-          .get();
+    var vs = pro
+        .map((e) => VendorModel(
+          productsCount: e.productDetails.productSeller.productsCount,
+            image: e.productDetails.productSeller.image,
+            location: "Egypt",
+            name: e.productDetails.productSeller.name,
+            id: e.productDetails.productSeller.id))
+        .toList();
 
-      List<VendorModel> vendors = vendorsQuery.docs
-          .map((doc) => VendorModel.fromFirebaseDocument(doc))
-          .toList();
-      return vendors;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
+    var uniqueVendors = <VendorModel>[];
+    Map<String, bool> isExist = {};
+    for (var vendor in vs) {
+      print("vendor.id ${vendor.id}");
+      if (isExist[vendor.id] == true) continue;
+      isExist[vendor.id] = true;
+      uniqueVendors.add(vendor);
     }
+    return uniqueVendors;
+    // return vs;
   }
 
   Future<void> uploadDummyData(List<VendorModel> vendors) async {

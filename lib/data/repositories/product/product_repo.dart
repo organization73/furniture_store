@@ -133,10 +133,7 @@ class ProductRepo extends GetxController {
       {required String vendorId, int limit = -1}) async {
     try {
       var r = await HttpService.instance.getProductOfUser(vendorId);
-      print("eeeeeeeeeeeeeeeeeeeerrrrr");
-
-      print(r);
-      return r
+      var p = r
           // TODO product mapping
           .map((m) => ProductModel(
               id: m['_id'],
@@ -167,31 +164,38 @@ class ProductRepo extends GetxController {
                       image: m['creator']['imageUrl'] ??
                           "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
                       isFeatured: m['creator']['type'] == "Gallery",
-                      productsCount: 0,
+                      productsCount:  m['creator']['numberOfProducts']??0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
+
+      if (limit == -1) {
+        return p;
+      } else {
+        return p.sublist(0, limit);
+      }
     } catch (e) {
       print("rrrrrrrrrrrrrrrrrrrrrrrrr$e");
       return [];
     }
   }
 
-  Future<List<ProductModel>> getProductsForCategory(
+  Future<List<ProductModel>> getProductsForCategory(int page,
       {required String categoryId, int limit = -1}) async {
-    var clas = categoryId == '11'
+    var clas = categoryId == '1'
         ? "chair"
-        : categoryId == '12'
+        : categoryId == '1'
             ? "swivelchair"
-            : categoryId == '21'
+            : categoryId == '2'
                 ? "sofa"
-                : categoryId == '31'
+                : categoryId == '3'
                     ? "bed"
                     : "table";
-    print(clas);
-    var p = await HttpService.instance.getProductsbyQyery(1, clas);
-    print(p);
+    // print(clas);
+    var p = await HttpService.instance.getProductsbyQyery(page, clas);
+    // print(p);
     return p
         .map((m) => ProductModel(
+          // TODO product mapping
             id: m['_id'],
             productName: m['title'],
             categoryId: mapingTheCategories(m['images']),
@@ -220,7 +224,7 @@ class ProductRepo extends GetxController {
                     image: m['creator']['imageUrl'] ??
                         "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
                     isFeatured: m['creator']['type'] == "Gallery",
-                    productsCount: 0,
+                    productsCount:  m['creator']['numberOfProducts']??0,
                     accountType: mapType(m['creator']['type'])))))
         .toList();
   }
@@ -337,7 +341,7 @@ class ProductRepo extends GetxController {
                       image: m['creator']['imageUrl'] ??
                           "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
                       isFeatured: m['creator']['type'] == "Gallery",
-                      productsCount: 0,
+                      productsCount:  m['creator']['numberOfProducts']??0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
       for (var i = 0; i < prods.length; i++) {
