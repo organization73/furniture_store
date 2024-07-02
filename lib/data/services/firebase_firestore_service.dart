@@ -70,6 +70,12 @@ class FirebaseFirestoreService {
         .collection('receivers')
         .doc(receiverId)
         .set({'receiverId': receiverId});
+    await firestore
+        .collection('UserChats')
+        .doc(receiverId)
+        .collection('receivers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({'receiverId': FirebaseAuth.instance.currentUser!.uid});
   }
 
   static Future<List<UserModel>> searchUser(String name) async {

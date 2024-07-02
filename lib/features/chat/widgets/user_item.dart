@@ -18,6 +18,11 @@ class UserItem extends StatefulWidget {
 
 class _UserItemState extends State<UserItem> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.to(
           () => ChatScreen(userId: widget.user.id),

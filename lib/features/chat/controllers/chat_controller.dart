@@ -21,40 +21,6 @@ class ChatController extends GetxController with WidgetsBindingObserver {
   RxList<Message> messages = <Message>[].obs;
   RxList<UserModel> search = <UserModel>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    WidgetsBinding.instance.addObserver(this);
-    notificationService.firebaseNotification(Get.context);
-  }
-
-  @override
-  void onClose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.onClose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-
-    switch (state) {
-      case AppLifecycleState.resumed:
-        userRepo.updateSingleField({
-          'lastActive': DateTime.now(),
-          'isOnline': true,
-        });
-        break;
-
-      case AppLifecycleState.inactive:
-      case AppLifecycleState.paused:
-      case AppLifecycleState.detached:
-      case AppLifecycleState.hidden:
-        userRepo.updateSingleField({'isOnline': false});
-        break;
-    }
-  }
-
   Future<List<UserModel>> fetchUserChats() async {
     return await ChatRepo.instance
         .fetchUserChatList(FirebaseAuth.instance.currentUser!.uid);

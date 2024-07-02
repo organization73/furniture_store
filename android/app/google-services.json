@@ -1,37 +1,45 @@
 {
   "project_info": {
-    "project_number": "263651591619",
-    "project_id": "decordashstore-98472",
-    "storage_bucket": "decordashstore-98472.appspot.com"
+    "project_number": "163403932625",
+    "project_id": "decoredashplatform",
+    "storage_bucket": "decoredashplatform.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:263651591619:android:4a7f23f1083882ee2e2976",
+        "mobilesdk_app_id": "1:163403932625:android:c3a743ffa7da13c5b676f0",
         "android_client_info": {
-          "package_name": "com.decordash.decordash"
+          "package_name": "com.decordashstore.decordashstore"
         }
       },
       "oauth_client": [
         {
-          "client_id": "263651591619-phacufs5joa0iv22cbv2imor8rah2h9v.apps.googleusercontent.com",
+          "client_id": "163403932625-5vtmhvmf8qpp86mmjuhqvolard2g5jel.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.decordashstore.decordashstore",
+            "certificate_hash": "2ee43955a61218170198bdb37e607d8310850a3e"
+          }
+        },
+        {
+          "client_id": "163403932625-rc90cnhfj7hc5pt55acuss6e5po4qlot.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAAXowk6cdwFT_7CU_mO1GyJTUE6Yy0At4"
+          "current_key": "AIzaSyAxE68vGmR0q3nlC6fM1TP90oLo1dXn30s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "263651591619-phacufs5joa0iv22cbv2imor8rah2h9v.apps.googleusercontent.com",
+              "client_id": "163403932625-rc90cnhfj7hc5pt55acuss6e5po4qlot.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "263651591619-b7tkeohq3l4lc4j1nmjbq8ohs597ob1a.apps.googleusercontent.com",
+              "client_id": "163403932625-46c9utk2fjfcj21hcqp9d2vsbcng9mpn.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.decordash.decordash"

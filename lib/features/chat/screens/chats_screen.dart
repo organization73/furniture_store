@@ -1,4 +1,6 @@
 import 'package:decordash/common/widgets/loaders/animation_loader.dart';
+import 'package:decordash/data/repositories/user/user_repo.dart';
+import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/screens/search_screen.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/features/chat/widgets/user_item.dart';
@@ -7,13 +9,53 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
-class ChatsScreen extends StatelessWidget {
+class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final chatController = Get.put(ChatController());
+  State<ChatsScreen> createState() => _ChatsScreenState();
+}
 
+class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
+  final notificationService = NotificationsService();
+  final chatController = Get.put(ChatController());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    notificationService.firebaseNotification(context);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        UserRepo.instance.updateSingleField({
+          'lastActive': DateTime.now(),
+          'isOnline': true,
+        });
+        break;
+
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.detached:
+        UserRepo.instance.updateSingleField({'isOnline': false});
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('chats'.tr),
@@ -26,6 +68,12 @@ class ChatsScreen extends StatelessWidget {
             ),
             icon: const Icon(
               Iconsax.search_normal_copy,
+            ),
+          ),
+          IconButton(
+            onPressed: () => chatController.fetchUserChats(),
+            icon: const Icon(
+              Iconsax.refresh_copy,
             ),
           ),
         ],

@@ -7,7 +7,9 @@ class MediaService {
     try {
       final imagePicker = ImagePicker();
       final file = await imagePicker.pickImage(
-          source: ImageSource.gallery);
+        source: ImageSource.gallery,
+        imageQuality: 70,
+      );
       if (file != null) {
         return await file.readAsBytes();
       }

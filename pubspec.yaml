@@ -61,12 +61,12 @@ flutter:
     - assets/images/content/
     - assets/logos/
     - assets/animations/
-    # - assets/images/categories/
-    # - assets/banners/
-    # - assets/images/products/beds/
-    # - assets/images/products/chairs/
-    # - assets/images/products/sofas/
-    # - assets/images/products/tables/
+    - assets/images/categories/
+    - assets/banners/
+    - assets/images/products/beds/
+    - assets/images/products/chairs/
+    - assets/images/products/sofas/
+    - assets/images/products/tables/
 
   fonts:
     - family: Poppins

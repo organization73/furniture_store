@@ -896,22 +896,6 @@ class DummyData {
         image: 'assets/images/categories/tables.png',
         name: 'Tables',
         isFeatured: true),
-    CategoryModel(
-        id: '5',
-        image: 'assets/images/categories/cabinets.png',
-        name: 'Cabinets',
-        isFeatured: true),
-
-    CategoryModel(
-        id: '6',
-        image: 'assets/images/categories/doors.png',
-        name: 'Doors',
-        isFeatured: true),
-    CategoryModel(
-        id: '7',
-        image: 'assets/images/categories/windows.png',
-        name: 'Windows',
-        isFeatured: true),
 
     /// Rooms
     CategoryModel(
@@ -1000,33 +984,6 @@ class DummyData {
         name: 'Bedside Tables',
         isFeatured: false,
         parentId: '4'),
-
-    CategoryModel(
-        id: '51',
-        image: 'assets/images/categories/cabinets.png',
-        name: 'Closets',
-        isFeatured: false,
-        parentId: '5'),
-    CategoryModel(
-        id: '52',
-        image: 'assets/images/categories/cabinets.png',
-        name: 'Cupboards',
-        isFeatured: false,
-        parentId: '5'),
-
-    CategoryModel(
-        id: '61',
-        image: 'assets/images/categories/doors.png',
-        name: 'Wooden Doors',
-        isFeatured: false,
-        parentId: '6'),
-
-    CategoryModel(
-        id: '71',
-        image: 'assets/images/categories/windows.png',
-        name: 'Wooden Windows',
-        isFeatured: false,
-        parentId: '7'),
   ];
 
   static final List<VendorModel> vendors = [
@@ -1178,35 +1135,21 @@ class DummyData {
   static final List<VendorCategoryModel> vendorsCategory = [
     VendorCategoryModel(vendorId: '1', categoryId: '1'),
     VendorCategoryModel(vendorId: '1', categoryId: '2'),
-    VendorCategoryModel(vendorId: '1', categoryId: '5'),
-    VendorCategoryModel(vendorId: '1', categoryId: '7'),
     VendorCategoryModel(vendorId: '2', categoryId: '3'),
     VendorCategoryModel(vendorId: '2', categoryId: '4'),
-    VendorCategoryModel(vendorId: '2', categoryId: '5'),
     VendorCategoryModel(vendorId: '2', categoryId: '1'),
-    VendorCategoryModel(vendorId: '3', categoryId: '7'),
-    VendorCategoryModel(vendorId: '3', categoryId: '8'),
     VendorCategoryModel(vendorId: '3', categoryId: '4'),
-    VendorCategoryModel(vendorId: '3', categoryId: '5'),
     VendorCategoryModel(vendorId: '4', categoryId: '1'),
     VendorCategoryModel(vendorId: '4', categoryId: '3'),
-    VendorCategoryModel(vendorId: '4', categoryId: '5'),
     VendorCategoryModel(vendorId: '4', categoryId: '2'),
-    VendorCategoryModel(vendorId: '5', categoryId: '5'),
     VendorCategoryModel(vendorId: '5', categoryId: '2'),
     VendorCategoryModel(vendorId: '10', categoryId: '4'),
     VendorCategoryModel(vendorId: '10', categoryId: '2'),
     VendorCategoryModel(vendorId: '6', categoryId: '3'),
-    VendorCategoryModel(vendorId: '6', categoryId: '6'),
     VendorCategoryModel(vendorId: '7', categoryId: '2'),
-    VendorCategoryModel(vendorId: '8', categoryId: '5'),
     VendorCategoryModel(vendorId: '8', categoryId: '1'),
-    VendorCategoryModel(vendorId: '8', categoryId: '5'),
     VendorCategoryModel(vendorId: '8', categoryId: '3'),
-    VendorCategoryModel(vendorId: '9', categoryId: '5'),
     VendorCategoryModel(vendorId: '9', categoryId: '1'),
-    VendorCategoryModel(vendorId: '9', categoryId: '6'),
-    VendorCategoryModel(vendorId: '9', categoryId: '7'),
   ];
 
   static final List<BannersModel> banners = [
