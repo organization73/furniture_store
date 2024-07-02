@@ -721,3 +721,29 @@ response:
 {
     "message": "Product edited successfully"
 }
+#20- update user's info
+request: PUT
+http://localhost:3000/user/update-user-info
+{
+    "username":"abdo.body123",
+    "firstName":"abdo",
+    "lastName":"body",
+    "phone":"12345678912"
+}
+response:
+{
+    "message": "User updated"
+}
+#21- update password
+request:PUT
+http://localhost:3000/user/update-user-password
+
+{
+    "oldPassword": "123456aA@1",
+    "newPassword": "123456aA@12 ",
+    "confirmNewPassword": "123456aA@12 "
+}
+response:
+{
+    "message": "Password updated"
+}

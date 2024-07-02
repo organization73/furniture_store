@@ -15,5 +15,8 @@ router.delete("/delete-gallary",userController.deleteGallary);
 
 router.delete("/delete-user",userController.deleteUser);
 
+router.put("/update-user-info",userController.updateUser);
+
+router.put("/update-user-password",userController.updatePassword);
 
 module.exports = router;
