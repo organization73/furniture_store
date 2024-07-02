@@ -137,17 +137,17 @@ class ProductRepo extends GetxController {
 
       print(r);
       return r
+          // TODO product mapping
           .map((m) => ProductModel(
               id: m['_id'],
               productName: m['title'],
               categoryId: mapingTheCategories(m['images']),
-              productImage: m['images'][0]
-                  ['imageUrl'],
-                  // productPrice: m['price'] as double, // Ensure key name consistency
+              productImage: m['images'][0]['imageUrl'],
+              productPrice:
+                  (m['price']).toDouble(), // Ensure key name consistency
               productDetails: ProductDetails(
                   condition: m['details']['condition'],
-                  
-                  color:m['details']['color'], //TODO map the color
+                  color: m['details']['color'], //TODO map the color
                   productListImages: fromImage(m['images']),
                   productSpecs: {
                     'ablakash': m['details']['abalakach'],
@@ -178,8 +178,50 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> getProductsForCategory(
       {required String categoryId, int limit = -1}) async {
-    return StartPageController.instance.products
-        .where((element) => element.categoryId == categoryId)
+    var clas = categoryId == '11'
+        ? "chair"
+        : categoryId == '12'
+            ? "swivelchair"
+            : categoryId == '21'
+                ? "sofa"
+                : categoryId == '31'
+                    ? "bed"
+                    : "table";
+    print(clas);
+    var p = await HttpService.instance.getProductsbyQyery(1, clas);
+    print(p);
+    return p
+        .map((m) => ProductModel(
+            id: m['_id'],
+            productName: m['title'],
+            categoryId: mapingTheCategories(m['images']),
+            productImage: m['images'][0]['imageUrl'],
+            productPrice:
+                (m['price']).toDouble(), // Ensure key name consistency
+            productDetails: ProductDetails(
+                condition: m['details']['condition'],
+                color: m['details']['color'], //TODO map the color
+                productListImages: fromImage(m['images']),
+                productSpecs: {
+                  'ablakash': m['details']['abalakach'],
+                  'fabric type': m['details']['cloth'],
+                  'wood type': m['details']['wood'],
+                },
+                productDesc: m['description'],
+                productStats: ProductStats(
+                    delivery: m['details']['delevary'],
+                    negotiable: m['details']['negotiable'],
+                    modifiable: m['details']['modefiable']),
+                productSeller: VendorModel(
+                    name:
+                        "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                    location: "Egypt",
+                    id: m['creator']['_id'],
+                    image: m['creator']['imageUrl'] ??
+                        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                    isFeatured: m['creator']['type'] == "Gallery",
+                    productsCount: 0,
+                    accountType: mapType(m['creator']['type'])))))
         .toList();
   }
 
@@ -256,14 +298,23 @@ class ProductRepo extends GetxController {
       var products = await HttpService.instance
           .getProducts(page, GetStorage().read('token'));
       print(products);
+
+      print("price");
+      print("price");
+      print("price");
+      // print("${(products[0]['price'] as double).toDouble()}");
+      print("price");
+      print("price");
+
       var prods = products
+          // TODO product mapping
           .map((m) => ProductModel(
               id: m['_id'],
               productName: m['title'],
               categoryId: mapingTheCategories(m['images']),
-              productImage: m['images'][0]
-                  ['imageUrl'], 
-                    // productPrice: m['price'] as double,// Ensure key name consistency
+              productImage: m['images'][0]['imageUrl'],
+              productPrice:
+                  (m['price']).toDouble(), // Ensure key name consistency
               productDetails: ProductDetails(
                   condition: m['details']['condition'],
                   color: m['details']['color'], //TODO map the color
@@ -273,7 +324,6 @@ class ProductRepo extends GetxController {
                     'fabric type': m['details']['cloth'],
                     'wood type': m['details']['wood'],
                   },
-                
                   productDesc: m['description'],
                   productStats: ProductStats(
                       delivery: m['details']['delevary'],
@@ -290,6 +340,13 @@ class ProductRepo extends GetxController {
                       productsCount: 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
+      for (var i = 0; i < prods.length; i++) {
+        // double p = (products[i]['price'] as int).toDouble();
+        // print(products[i]['price']);
+        // print("pppppppppp");
+
+        // prods[i].productPrice = p;
+      }
       for (var element in prods) {
         print(element.id);
         print(element.categoryId);

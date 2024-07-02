@@ -67,6 +67,45 @@ class Querys {
               }
             }
           ''';
+
+          static productsQuerybyFilter(page,String clas) => '''
+            query GetProducts {
+              products(page: $page,filters:{class:\"$clas\",leastPrice:0,mostPrice:1, newest:0} ) {
+                products {
+                  _id
+                  title
+                  price
+                  description
+                  details {
+                    wood
+                    abalakach
+                    cloth
+                    color
+                    condition
+                    delevary
+                    negotiable
+                    modefiable
+                  }
+                  creator {
+                    username
+                    firstName
+                    lastName
+                    imageUrl
+                    email
+                    type
+                    _id
+                    
+                  }
+                  images {
+                    imageUrl
+                    class
+                    confidence
+                  }
+                  rate
+                }
+              }
+            }
+          ''';
   static UsersQuery(page) => '''
             query {
   users(page: $page ) {

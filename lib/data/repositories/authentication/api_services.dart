@@ -21,11 +21,17 @@ class HttpService extends GetxService {
     }
   }
 
+  Future<List<dynamic>> getProductsbyQyery(int page, String clas) async {
+    String query = Querys.productsQuerybyFilter(page, clas);
+    var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
+        GetStorage().read("token"), 'graphql', query);
+    return response['data']['products']['products'];
+  }
+
   Future<List<dynamic>> getProducts(int page, String token) async {
     String query = Querys.productsQuery(page);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         token, 'graphql', query);
-    print(response);
     return response['data']['products']['products'];
   }
 
@@ -37,7 +43,7 @@ class HttpService extends GetxService {
       "images": product.productDetails.productListImages,
       "details": {
         "wood": product.productDetails.productSpecs['ablakash'],
-        "abalakach":"your ablakash here",
+        "abalakach": "your ablakash here",
         "cloth": product.productDetails.productSpecs['fabric type'],
         "condition": product.productDetails.condition,
         "color": product.productDetails.color,
