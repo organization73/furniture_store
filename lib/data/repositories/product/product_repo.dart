@@ -164,7 +164,7 @@ class ProductRepo extends GetxController {
                       image: m['creator']['imageUrl'] ??
                           "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
                       isFeatured: m['creator']['type'] == "Gallery",
-                      productsCount:  m['creator']['numberOfProducts']??0,
+                      productsCount: m['creator']['numberOfProducts'] ?? 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
 
@@ -181,21 +181,38 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> getProductsForCategory(int page,
       {required String categoryId, int limit = -1}) async {
-    var clas = categoryId == '1'
-        ? "chair"
-        : categoryId == '1'
-            ? "swivelchair"
-            : categoryId == '2'
-                ? "sofa"
-                : categoryId == '3'
-                    ? "bed"
-                    : "table";
+    print("categoryId $categoryId");
+    var clas = '1';
+    if (categoryId.length == 2) {
+      print("yes category id is 1 digit");
+      clas = categoryId == '11'
+          ? "chair"
+          : categoryId == '12'
+              ? "swivelchair"
+              : categoryId == '21'
+                  ? "sofa"
+                  : categoryId == '31'
+                      ? "bed"
+                      : "table";
+    } else {
+      print("no category id is 2 digit");
+      clas = categoryId == '1'
+          ? "chair"
+          : categoryId == '1'
+              ? "swivelchair"
+              : categoryId == '2'
+                  ? "sofa"
+                  : categoryId == '3'
+                      ? "bed"
+                      : "table";
+    }
+
     // print(clas);
     var p = await HttpService.instance.getProductsbyQyery(page, clas);
     // print(p);
     return p
         .map((m) => ProductModel(
-          // TODO product mapping
+            // TODO product mapping
             id: m['_id'],
             productName: m['title'],
             categoryId: mapingTheCategories(m['images']),
@@ -224,7 +241,7 @@ class ProductRepo extends GetxController {
                     image: m['creator']['imageUrl'] ??
                         "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
                     isFeatured: m['creator']['type'] == "Gallery",
-                    productsCount:  m['creator']['numberOfProducts']??0,
+                    productsCount: m['creator']['numberOfProducts'] ?? 0,
                     accountType: mapType(m['creator']['type'])))))
         .toList();
   }
@@ -341,7 +358,7 @@ class ProductRepo extends GetxController {
                       image: m['creator']['imageUrl'] ??
                           "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
                       isFeatured: m['creator']['type'] == "Gallery",
-                      productsCount:  m['creator']['numberOfProducts']??0,
+                      productsCount: m['creator']['numberOfProducts'] ?? 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
       for (var i = 0; i < prods.length; i++) {

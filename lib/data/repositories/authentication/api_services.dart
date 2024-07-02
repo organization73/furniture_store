@@ -79,8 +79,6 @@ class HttpService extends GetxService {
     String query = Querys.getProductOfUser(id);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         "${GetStorage().read("token")}", 'graphql', query);
-    LoggerHelper.error(
-        response['data']['usersProducts']['products'].toString());
 
     return response['data']['usersProducts']['products'];
   }
