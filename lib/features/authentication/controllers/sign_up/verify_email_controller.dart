@@ -67,6 +67,8 @@ class VerifyEmailController extends GetxController {
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
+    } else {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: 'Email not verified');
     }
   }
 }
