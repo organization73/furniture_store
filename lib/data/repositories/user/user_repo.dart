@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
@@ -14,13 +15,14 @@ import 'package:image_picker/image_picker.dart';
 
 class UserRepo extends GetxController {
   static UserRepo get instance => Get.find();
-Future<void> saveUserRecord(UserModel user) async {
+  Future<void> saveUserRecord(UserModel user) async {
     try {
       GetStorage().write('user_data', user.toJson());
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }
   }
+
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> saveuserRecord(UserModel user) async {
@@ -32,6 +34,14 @@ Future<void> saveUserRecord(UserModel user) async {
       throw const TFormatException();
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<void> assignImageForUser(String imageUrl) async {
+    try {
+      await HttpService.instance.updateImage(imageUrl);
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }
@@ -67,13 +77,13 @@ Future<void> saveUserRecord(UserModel user) async {
     return null;
   }
 
- Future<void> updateUserRecord(UserModel user) async {
+  Future<void> updateUserRecord(UserModel user) async {
     try {
       GetStorage().write('user_data', user.toJson());
     } catch (e) {
       throw 'Failed to update user data: $e';
     }
- }
+  }
   // Future<void> updateUserData(UserModel updatedUser) async {
   //   try {
   //     await _db

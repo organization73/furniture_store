@@ -167,6 +167,7 @@ class AuthenticatorRepo extends GetxController {
   }
 
   Future<void> sendEmailVerification() async {
+    // TODO resend code
     try {
       await _auth.currentUser?.sendEmailVerification();
     } on FirebaseAuthException catch (e) {

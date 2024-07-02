@@ -21,6 +21,18 @@ class HttpService extends GetxService {
     }
   }
 
+  Future<void> updateImage(String imageUrl) async {
+    try {
+      var r = await THttpHelper.putBearerAuth(
+          'user/assign-image', GetStorage().read('token'), {
+        'imageUrl': imageUrl,
+      });
+      LoggerHelper.warning(r.toString());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<dynamic>> getProductsbyQyery(int page, String clas) async {
     String query = Querys.productsQuerybyFilter(page, clas);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
@@ -127,7 +139,8 @@ class HttpService extends GetxService {
           "username": username,
           "email": email,
           "password": password,
-          "confirmPassword": phoneNum
+          "confirmPassword": password,
+          "phone": phoneNum
         }),
       );
       // LoggerHelper.info('Response body: ${response.body}');

@@ -7,7 +7,6 @@ import 'package:decordash/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:decordash/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordash/features/manufacture_request/screens/manufacture_req_screen.dart';
-import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/personalization/screens/profile/profile.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/theme/theme.dart';
@@ -68,8 +67,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final con = Get.put(UserController());
-    print(con.user.value.firstName);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
