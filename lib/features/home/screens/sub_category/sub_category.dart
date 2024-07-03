@@ -2,6 +2,7 @@ import 'package:decordash/common/widgets/loaders/animation_loader.dart';
 import 'package:decordash/common/widgets/shimmer/horizontal_product_shimmer.dart';
 import 'package:decordash/features/home/controllers/category_controller.dart';
 import 'package:decordash/features/home/model/category_model.dart';
+import 'package:decordash/features/home/screens/all_products/all_category_products_screen.dart';
 import 'package:decordash/features/home/screens/all_products/all_products_screen.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class SubCategoryScreen extends StatelessWidget {
                                     SectionHeading(
                                       title: subCategory.name,
                                       onPress: () => Get.to(
-                                        () => AllProductsScreen(
+                                        () => AllCatergoryProductsScreen(
                                           title: subCategory.name,
                                           futureMethod:
                                               controller.getCategoryProducts(

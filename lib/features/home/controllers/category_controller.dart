@@ -56,8 +56,6 @@ class CategoryController extends GetxController {
 
   Future<List<ProductModel>> getCategoryProducts(
       {required String categoryId, int limit = 4,int page=1}) async {
-  
-
     try {
       final products = await ProductRepo.instance
           .getProductsForCategory(page,categoryId: categoryId, limit: limit);
