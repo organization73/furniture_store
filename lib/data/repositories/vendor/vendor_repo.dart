@@ -30,9 +30,6 @@ class VendorRepo extends GetxController {
           .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
           .toList();
       vendors.removeWhere((e) => e.id == UserController.instance.user.value.id);
-      print(
-          "UserController.instance.user.value.id ${UserController.instance.user.value.id}");
-      // print(vendors[0].name);
       return vendors;
     } catch (e) {
       throw 'Something went wrong, Please try again';
@@ -55,7 +52,6 @@ class VendorRepo extends GetxController {
     var uniqueVendors = <VendorModel>[];
     Map<String, bool> isExist = {};
     for (var vendor in vs) {
-      print("vendor.id ${vendor.productsCount}");
       if (isExist[vendor.id] == true) continue;
       isExist[vendor.id] = true;
       uniqueVendors.add(vendor);

@@ -211,7 +211,6 @@ class ProductRepo extends GetxController {
 
     // print(clas);
     var p = await HttpService.instance.getProductsbyQyery(page, clas);
-    print(p);
     var ps = p
         .map((m) => ProductModel(
             // TODO product mapping
@@ -246,10 +245,6 @@ class ProductRepo extends GetxController {
                     productsCount: m['creator']['numberOfProducts'] ?? 0,
                     accountType: mapType(m['creator']['type'])))))
         .toList();
-    for (var product in ps) {
-      print(product.productName);
-      print(product.productDetails.productSeller.productsCount);
-    }
     return ps;
   }
 

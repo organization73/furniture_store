@@ -43,7 +43,7 @@ class CategoryVendors extends StatelessWidget {
                 final vendor = vendors[index];
                 return FutureBuilder(
                     future: controller.getVendorProducts(
-                        vendorId: vendor.id, limit: 3),
+                        vendorId: vendor.id, limit: 15),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         final widget =
@@ -51,7 +51,34 @@ class CategoryVendors extends StatelessWidget {
                                 snapshot: snapshot, loader: loader);
                         if (widget != null) return widget;
                       }
-                      final products = snapshot.data!;
+                      var products = snapshot.data!;
+                      for (var e in products) {
+                        print(e.categoryId);
+                        print(category.id);
+                        print("===");
+                      }
+                      products = products.where((element) {
+                        if (category.id == '1' &&
+                            (element.categoryId == "11" ||
+                                element.categoryId == "12")) return true;
+                        if (category.id == '2' &&
+                            (element.categoryId == "21")) {
+                          return true;
+                        }
+                        if (category.id == '3' &&
+                            (element.categoryId == "31")) {
+                          return true;
+                        }
+                        if (category.id == '4' &&
+                            (element.categoryId == "41")) {
+                          return true;
+                        }
+
+                        return element.categoryId == category.id;
+                      }).toList();
+                      if (products.isEmpty) {
+                        return const SizedBox();
+                      }
                       return VendorShowCase(
                         images: products.map((e) => e.productImage).toList(),
                         vendor: vendor,
