@@ -12,7 +12,9 @@ import 'package:stability_image_generation/stability_image_generation.dart';
 
 class ImageGenerator extends StatefulWidget {
   final TextEditingController descriptionController;
+  final String prompt;
   const ImageGenerator({
+    required this.prompt,
     super.key,
     required this.descriptionController,
   });
@@ -164,22 +166,23 @@ class ImageGeneratorState extends State<ImageGenerator> {
             BuildCTAButton(
               text: 'createDesign'.tr,
               onPressed: () {
-                String query = widget.descriptionController.text;
-                if (query.isNotEmpty) {
-                  setState(() {
-                    run = true;
-                  });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Theme.of(context).colorScheme.error,
-                    content: Text(
-                      'promptVal'.tr,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.onError),
-                    ),
-                    duration: const Duration(milliseconds: 2500),
-                  ));
-                }
+                print(widget.prompt);
+                //   String query = widget.descriptionController.text;
+                //   if (query.isNotEmpty) {
+                //     setState(() {
+                //       run = true;
+                //     });
+                //   } else {
+                //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                //       backgroundColor: Theme.of(context).colorScheme.error,
+                //       content: Text(
+                //         'promptVal'.tr,
+                //         style: TextStyle(
+                //             color: Theme.of(context).colorScheme.onError),
+                //       ),
+                //       duration: const Duration(milliseconds: 2500),
+                //     ));
+                //   }
               },
             ),
             SizedBox(

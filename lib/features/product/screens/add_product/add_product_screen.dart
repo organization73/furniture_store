@@ -98,6 +98,7 @@ class AddProductPage extends StatelessWidget {
                         ),
                         SizedBox(height: TSizes.spaceBtwInputFields),
                         BuildDropDown(
+                          
                           items: const [
                             'Oak',
                             'Mahogany',
