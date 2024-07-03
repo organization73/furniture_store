@@ -234,7 +234,16 @@ exports.deleteProduct = async (req, res, next) => {
     let product = await Product.findById(productId);
 
     //check if the user is authorized to delete the product
-    if (product.creator.toString() === req.user._id.toString()) {
+
+    let flage = false;
+    if (product.creator.toString() !== req.user._id.toString()) {
+      flage = true;
+    }
+    if (req.user.type === "Admin") {
+      flage = false;
+    }
+
+    if (!flage) {
       //delete the product
       await Product.findByIdAndDelete(productId);
     } else {
@@ -325,7 +334,14 @@ exports.editProduct = async (req, res, next) => {
     }
 
     //check if the user is authorized to edit the product
+    let flage = false;
     if (product.creator.toString() !== req.user._id.toString()) {
+      flage = true;
+    }
+    if (req.user.type === "Admin") {
+      flage = false;
+    }
+    if (flage) {
       return throwError(
         403,
         "You are not authorized to edit this product",
@@ -403,7 +419,14 @@ exports.deleteRate = async (req, res, next) => {
       return throwError(404, "Rate not found", "server", next);
     }
     //check if the user is authorized to edit the rate
+    let flage = false;
     if (productRate.customer.toString() !== req.user._id.toString()) {
+      flage = true;
+    }
+    if (req.user.type === "Admin") {
+      flage = false;
+    }
+    if (flage) {
       return throwError(
         403,
         "You are not authorized to edit this rate",
