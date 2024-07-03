@@ -19,23 +19,6 @@ class ProductRepo extends GetxController {
   static int pagenumber = 1;
   final _db = FirebaseFirestore.instance;
 
-  // Future<List<ProductModel>> fetchProducts() async {
-  //   try {
-  //     final snapshot = await _db.collection('Products').get();
-
-  //     final list = snapshot.docs
-  //         .map((document) => ProductModel.fromFirebaseDocument(document))
-  //         .toList();
-
-  //     return list;
-  //   } on FirebaseException catch (e) {
-  //     throw TFirebaseException(e.code).message;
-  //   } on PlatformException catch (e) {
-  //     throw TPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong, Please try again';
-  //   }
-  // }
 
   Future<List<ProductModel>> searchProducts(String query) async {
     try {
