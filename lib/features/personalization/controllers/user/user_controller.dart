@@ -1,3 +1,4 @@
+import 'package:decordash/features/authentication/controllers/gallery_info/gallery_information_controller.dart';
 import 'package:decordash/utils/constants/enums.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -210,9 +211,10 @@ class UserController extends GetxController {
         final imageUrl = await userRepository.uploadImage(
             'Users/Images/Certificate/', image);
 
-        Map<String, dynamic> json = {"galleryCertificate": imageUrl};
-        await userRepository.updateSingleField(json);
+        // Map<String, dynamic> json = {"galleryCertificate": imageUrl};
+        // await userRepository.updateSingleField(json);
         user.value.galleryCertificate = imageUrl;
+        GalleryInfoController. isGalleryCertificateUploaded = true;
         user.refresh();
 
         TLoaders.successSnackBar(

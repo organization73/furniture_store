@@ -1,4 +1,5 @@
 import 'package:decordash/data/services/notification_service.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
@@ -65,7 +66,7 @@ class SignUpController extends GetxController {
         emailController.text,
         passwordController.text,
       );
-      
+
       final newUser = UserModel(
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
@@ -76,7 +77,7 @@ class SignUpController extends GetxController {
 
       final userRepesotory = Get.put(UserRepo());
       await userRepesotory.saveUserRecord(newUser);
-
+      UserController.instance.user.value = newUser;
       FullScreenLoader.stopLoading();
 
       TLoaders.successSnackBar(

@@ -7,6 +7,20 @@ import 'package:get/get.dart';
 class AllProductsController extends GetxController {
   static AllProductsController get instance => Get.find();
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    ProductRepo.pagenumber = 1;
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    ProductRepo.pagenumber = 1;
+  }
+
   final repo = ProductRepo.instance;
   final RxString selectedSortOption = 'Name'.obs;
   final RxList<ProductModel> products = <ProductModel>[].obs;

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -117,7 +118,14 @@ class UserRepo extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
+  Future<void> updateGalleryInfoTOServer(String name , String address, String imageUrl) async{
+    try {
+      await HttpService.instance.updateGalleryInfo(name, address, imageUrl);
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
+    }
 
+  }
   Future<void> removeUserRecord(String userId) async {
     try {
       // Delete the user's document from the 'Users' collection

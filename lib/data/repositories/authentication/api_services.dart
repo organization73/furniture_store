@@ -33,6 +33,23 @@ class HttpService extends GetxService {
     }
   }
 
+  Future<void> updateGalleryInfo(
+      String name, String adress, String imageUrl) async {
+    try {
+      var r = await THttpHelper.postBearerAuth(
+          'user/add-gallary', GetStorage().read('token'), {
+        "name": name,
+        "address": adress,
+        "images": [],
+        "certificate": imageUrl,
+        "coordinates": {"lat": 40.7128, "lng": -74.0060}
+      });
+      LoggerHelper.warning(r.toString());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<dynamic>> getProductsbyQyery(int page, String clas) async {
     String query = Querys.productsQuerybyFilter(page, clas);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
@@ -157,17 +174,17 @@ class HttpService extends GetxService {
     }
   }
 
-  Future<Map<String, dynamic>> senEmailVerification(String email) async {
+  Future<Map<String, dynamic>> checkIsConfirmed(String email) async {
     try {
-      return THttpHelper.post('auth/re-verify-email', {"email": email});
+      return THttpHelper.post('auth/is-confirmed', {"email": email});
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<Map<String, dynamic>> checkIsConfirmed(String email) async {
+  Future<Map<String, dynamic>> senEmailVerification(String email) async {
     try {
-      return THttpHelper.post('auth/is-confirmed', {"email": email});
+      return THttpHelper.post('auth/re-verify-email', {"email": email});
     } catch (e) {
       rethrow;
     }

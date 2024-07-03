@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/data/repositories/product/product_repo.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -22,10 +25,13 @@ class VendorRepo extends GetxController {
       final sna2 = await HttpService.instance.getUsers(2);
       final sna3 = await HttpService.instance.getUsers(3);
       final sna = sna1 + sna2 + sna3;
+
       final vendors = sna
           .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
           .toList();
-      
+      vendors.removeWhere((e) => e.id == UserController.instance.user.value.id);
+      print(
+          "UserController.instance.user.value.id ${UserController.instance.user.value.id}");
       // print(vendors[0].name);
       return vendors;
     } catch (e) {
@@ -39,7 +45,7 @@ class VendorRepo extends GetxController {
 
     var vs = pro
         .map((e) => VendorModel(
-          productsCount: e.productDetails.productSeller.productsCount,
+            productsCount: e.productDetails.productSeller.productsCount,
             image: e.productDetails.productSeller.image,
             location: "Egypt",
             name: e.productDetails.productSeller.name,

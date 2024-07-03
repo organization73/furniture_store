@@ -94,6 +94,23 @@ class AuthenticatorRepo extends GetxController {
     }
   }
 
+  Future<Map<String, dynamic>> checkIsConfirmed(String email) async {
+    try {
+      final response = await HttpService.instance.checkIsConfirmed(email);
+      final isConfirmed = response['isConfirmed'];
+      print(isConfirmed);
+      if (isConfirmed) {
+        GetStorage().write('token', response['token']);
+      }
+      LoggerHelper.error(response.toString());
+      // updateUserVerificationStatus(isConfirmed);
+      return response;
+    } catch (e) {
+      LoggerHelper.error('Error checking email verification status', e);
+      rethrow;
+    }
+  }
+
   Future<void> loginWithPhone(String phoneNum) async {
     try {
       await _auth.verifyPhoneNumber(
@@ -166,7 +183,12 @@ class AuthenticatorRepo extends GetxController {
     }
   }
 
-  Future<void> sendEmailVerification() async {
+  Future<void> sendEmailVerification(String email) async {
+    try {
+      await HttpService.instance.senEmailVerification(email);
+    } catch (e) {
+      rethrow;
+    }
     // TODO resend code
     try {
       await _auth.currentUser?.sendEmailVerification();
