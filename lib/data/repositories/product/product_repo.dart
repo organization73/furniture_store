@@ -19,7 +19,7 @@ class ProductRepo extends GetxController {
   static int pagenumber = 1;
   final _db = FirebaseFirestore.instance;
 
-  Future<List<ProductModrchProducts(int page, String query) async {
+  Future<List<ProductModel>> searchProducts(int page, String query) async {
     // TODO add your search logic here
     var p = await HttpService.instance.searchProducts(page, query);
     var prods = p
@@ -57,26 +57,6 @@ class ProductRepo extends GetxController {
                     accountType: mapType(m['creator']['type'])))))
         .toList();
     return prods;
-    try {
-      // Fetch a larger set of documents
-      final snapshot = await _db.collection('Products').get();
-
-      // Filter documents on the client side
-      final list = snapshot.docs
-          .where((document) => document['productName']
-              .toLowerCase()
-              .contains(query.toLowerCase()))
-          .map((document) => ProductModel.fromFirebaseDocument(document))
-          .toList();
-
-      return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
-    }
   }
 
   Future<List<ProductModel>> fetchFeaturedProducts() async {
