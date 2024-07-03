@@ -3,6 +3,7 @@ import 'package:decordash/features/home/screens/search/controllers/recent_search
 import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordash/features/home/screens/search/controllers/search_controller.dart';
 import 'package:decordash/features/home/widgets/sortable_products.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -54,12 +55,16 @@ class _SearchScreenState extends State<SearchScreen> {
               controller: searchPageController.searchController,
               filled: true,
               onSubmitted: () {
-                print("submitted search");
-                setState(() {
-                  recentSearchController
-                      .addSearch(searchPageController.searchController.text);
-                  searchPageController.fetchSearchProducts();
-                });
+                if (searchPageController.searchController.text
+                    .trim()
+                    .isNotEmpty) {
+                  setState(() {
+                    // recentSearchController.addSearch(
+                    //     searchPageController.searchController.text.trim());
+                    searchPageController.fetchSearchProducts(1);
+                  });
+                }
+                // print("submitted search");
               },
               suffixIcon: Iconsax.close_circle_copy,
               onTapSuffixIcon: () {
@@ -68,9 +73,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 searchPageController.isSearchSubmitted.value = false;
               },
               onEditingComplete: () {
-                recentSearchController
-                    .addSearch(searchPageController.searchController.text);
-                searchPageController.fetchSearchProducts();
+                if (searchPageController.searchController.text
+                    .trim()
+                    .isNotEmpty) {
+                  recentSearchController.addSearch(
+                      searchPageController.searchController.text.trim());
+                  searchPageController.fetchSearchProducts(1);
+                }
               },
             ),
           ),
@@ -87,7 +96,7 @@ class _SearchScreenState extends State<SearchScreen> {
               if (searchPageController.isSearchSubmitted.value) {
                 // Show search results
                 return FutureBuilder(
-                    future: searchPageController.fetchSearchProducts(),
+                    future: searchPageController.fetchSearchProducts(1),
                     builder: (context, snapshot) {
                       const loader = VerticalProductShimmer();
                       final widget =
@@ -95,13 +104,10 @@ class _SearchScreenState extends State<SearchScreen> {
                               snapshot: snapshot, loader: loader);
                       if (widget != null) return widget;
 
-                      final products = snapshot.data!;
-                      return SortableProducts(
-                        products: products,
-                        loadMoreProducts: () {
-                          print("loaddded more searchinggg products");
-                        },
-                      );
+                      var products = snapshot.data!;
+                      return searchLoadMore(
+                          products: products,
+                          searchPageController: searchPageController);
                     });
               } else {
                 // Show recent searches and search suggestions
@@ -144,7 +150,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     recentSearchController
                                         .recentSearches[index];
                                 // Trigger the search
-                                searchPageController.fetchSearchProducts();
+                                searchPageController.fetchSearchProducts(1);
                               },
                               titleAlignment:
                                   ListTileTitleAlignment.titleHeight,
@@ -182,7 +188,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 .searchController.text);
                                         // Trigger the search
                                         searchPageController
-                                            .fetchSearchProducts();
+                                            .fetchSearchProducts(1);
                                       },
                                     ))
                                 .toList(),
@@ -197,6 +203,39 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class searchLoadMore extends StatefulWidget {
+  const searchLoadMore({
+    super.key,
+    required this.products,
+    required this.searchPageController,
+  });
+
+  final List<ProductModel> products;
+  final SearchPageController searchPageController;
+
+  @override
+  searchLoadMoreState createState() => searchLoadMoreState();
+}
+
+class searchLoadMoreState extends State<searchLoadMore> {
+  @override
+  Widget build(BuildContext context) {
+    return SortableProducts(
+      products: widget.products,
+      loadMoreProducts: () async {
+        var ps = await widget.searchPageController
+            .fetchSearchProducts(++SearchPageController.pagenumberOfsearch);
+        print(ps);
+        setState(() {
+          widget.products.addAll(ps);
+        });
+        print("products length ${widget.products.length} ");
+        print("loaded more searching products");
+      },
     );
   }
 }

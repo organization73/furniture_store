@@ -22,21 +22,11 @@ class AllProductsController extends GetxController {
   }
 
   final repo = ProductRepo.instance;
-  final RxString selectedSortOption = 'Name'.obs;
+  final RxString selectedSortOption = 'Newest'.obs;
   final RxList<ProductModel> products = <ProductModel>[].obs;
 
   Future<List<ProductModel>> fetchProductsByQuery(Query? query) async {
     return [];
-    try {
-      if (query == null) return [];
-
-      final products = await repo.fetchProductsByQuery(query);
-      return products;
-    } catch (e) {
-      TLoaders.errorSnackBar(
-          title: 'ohSnap'.tr, message: 'Something went wrong');
-      return [];
-    }
   }
 
   void sortProducts(String sortOption) {
@@ -83,6 +73,6 @@ class AllProductsController extends GetxController {
 
   void assignProducts(List<ProductModel> products) {
     this.products.assignAll(products);
-    sortProducts('Name');
+    sortProducts('Newest');
   }
 }

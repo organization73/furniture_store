@@ -25,14 +25,18 @@ class RecentSearchController extends GetxController {
   }
 
   void addSearch(String query) {
+    query = query.trim();
+    if (recentSearches.length >= 7) {
+      // If it does, remove the oldest item before adding the new one
+      recentSearches.removeAt(6);
+    }
+ 
+    if (recentSearches.contains(query)) {
+      recentSearches.remove(query);
+    }
+    recentSearches.insert(0, query);
+
     if (!recentSearches.contains(query)) {
-      // Check if the list already contains 5 items
-      if (recentSearches.length >= 7) {
-        // If it does, remove the oldest item before adding the new one
-        recentSearches.removeAt(0);
-      }
-      // Add the new search query to the list
-      recentSearches.insert(0, query);
       saveRecentSearchesToStorage();
     }
   }

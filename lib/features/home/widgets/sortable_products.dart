@@ -25,11 +25,10 @@ class SortableProducts extends StatelessWidget {
                 const InputDecoration(prefixIcon: Icon(Iconsax.sort_copy)),
             value: controller.selectedSortOption.value,
             items: [
-              'Name',
+              'Newest',
               'Higher Price',
               'Lower Price',
-              'Sale',
-              'Newest',
+              'Name',
             ]
                 .map((option) =>
                     DropdownMenuItem(value: option, child: Text(option)))
