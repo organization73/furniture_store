@@ -94,6 +94,7 @@ class Querys {
                     email
                     type
                     _id
+                    numberOfProducts
                     
                   }
                   images {

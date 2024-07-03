@@ -42,7 +42,7 @@ class VendorRepo extends GetxController {
   Future<List<VendorModel>> getVendorsForCategory(categoryId) async {
     var pro = await ProductRepo.instance
         .getProductsForCategory(1, categoryId: categoryId);
-
+    
     var vs = pro
         .map((e) => VendorModel(
             productsCount: e.productDetails.productSeller.productsCount,
@@ -55,7 +55,7 @@ class VendorRepo extends GetxController {
     var uniqueVendors = <VendorModel>[];
     Map<String, bool> isExist = {};
     for (var vendor in vs) {
-      print("vendor.id ${vendor.id}");
+      print("vendor.id ${vendor.productsCount}");
       if (isExist[vendor.id] == true) continue;
       isExist[vendor.id] = true;
       uniqueVendors.add(vendor);

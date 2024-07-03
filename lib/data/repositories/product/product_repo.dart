@@ -133,6 +133,9 @@ class ProductRepo extends GetxController {
       {required String vendorId, int limit = -1}) async {
     try {
       var r = await HttpService.instance.getProductOfUser(vendorId);
+      if (r.isEmpty) {
+        return [];
+      }
       var p = r
           // TODO product mapping
           .map((m) => ProductModel(
@@ -167,11 +170,14 @@ class ProductRepo extends GetxController {
                       productsCount: m['creator']['numberOfProducts'] ?? 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
-
       if (limit == -1) {
         return p;
       } else {
-        return p.sublist(0, limit);
+        if (p.length < limit) {
+          return p;
+        } else {
+          return p.sublist(0, limit);
+        }
       }
     } catch (e) {
       print("rrrrrrrrrrrrrrrrrrrrrrrrr$e");
@@ -181,10 +187,8 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> getProductsForCategory(int page,
       {required String categoryId, int limit = -1}) async {
-    print("categoryId $categoryId");
     var clas = '1';
     if (categoryId.length == 2) {
-      print("yes category id is 1 digit");
       clas = categoryId == '11'
           ? "chair"
           : categoryId == '12'
@@ -195,7 +199,6 @@ class ProductRepo extends GetxController {
                       ? "bed"
                       : "table";
     } else {
-      print("no category id is 2 digit");
       clas = categoryId == '1'
           ? "chair"
           : categoryId == '1'
@@ -209,8 +212,8 @@ class ProductRepo extends GetxController {
 
     // print(clas);
     var p = await HttpService.instance.getProductsbyQyery(page, clas);
-    // print(p);
-    return p
+    print(p);
+    var ps = p
         .map((m) => ProductModel(
             // TODO product mapping
             id: m['_id'],
@@ -244,6 +247,11 @@ class ProductRepo extends GetxController {
                     productsCount: m['creator']['numberOfProducts'] ?? 0,
                     accountType: mapType(m['creator']['type'])))))
         .toList();
+    for (var product in ps) {
+      print(product.productName);
+      print(product.productDetails.productSeller.productsCount);
+    }
+    return ps;
   }
 
   Future<void> uploadDummyData(List<ProductModel> products) async {
@@ -304,7 +312,6 @@ class ProductRepo extends GetxController {
             .map((path) => path == imagePath ? imageUrl : path)
             .toList();
       }
-      print(product.productDetails.productListImages);
       await HttpService.instance.addProduct(product);
       // hereeeer
     } catch (e) {
@@ -351,7 +358,7 @@ class ProductRepo extends GetxController {
                       productsCount: m['creator']['numberOfProducts'] ?? 0,
                       accountType: mapType(m['creator']['type'])))))
           .toList();
-   
+
       return prods;
     } catch (e) {
       LoggerHelper.warning(e.toString());

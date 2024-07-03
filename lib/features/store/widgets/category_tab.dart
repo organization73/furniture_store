@@ -38,11 +38,12 @@ class CategoryTab extends StatelessWidget {
                   future:
                       controller.getCategoryProducts(categoryId: category.id),
                   builder: (context, snapshot) {
-                    const loader = VerticalProductShimmer();
-                    final widget = TCloudHelperFunctions.checkMultiRecordState(
-                        snapshot: snapshot, loader: loader);
-                    if (widget != null) return widget;
-
+                      const loader = VerticalProductShimmer();
+                      final widget =
+                          TCloudHelperFunctions.checkMultiRecordState(
+                              snapshot: snapshot, loader: loader);
+                      if (widget != null) return widget;
+                    
                     final products = snapshot.data!;
                     return Column(
                       children: [

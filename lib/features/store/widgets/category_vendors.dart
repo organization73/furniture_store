@@ -29,10 +29,11 @@ class CategoryVendors extends StatelessWidget {
               ),
             ],
           );
-          final widget = TCloudHelperFunctions.checkMultiRecordState(
-              snapshot: snapshot, loader: loader);
-          if (widget != null) return widget;
-
+          if (!snapshot.hasData) {
+            final widget = TCloudHelperFunctions.checkMultiRecordState(
+                snapshot: snapshot, loader: loader);
+            if (widget != null) return widget;
+          }
           final vendors = snapshot.data!;
           return ListView.builder(
               shrinkWrap: true,
@@ -44,11 +45,12 @@ class CategoryVendors extends StatelessWidget {
                     future: controller.getVendorProducts(
                         vendorId: vendor.id, limit: 3),
                     builder: (context, snapshot) {
-                      final widget =
-                          TCloudHelperFunctions.checkMultiRecordState(
-                              snapshot: snapshot, loader: loader);
-                      if (widget != null) return widget;
-
+                      if (!snapshot.hasData) {
+                        final widget =
+                            TCloudHelperFunctions.checkMultiRecordState(
+                                snapshot: snapshot, loader: loader);
+                        if (widget != null) return widget;
+                      }
                       final products = snapshot.data!;
                       return VendorShowCase(
                         images: products.map((e) => e.productImage).toList(),
