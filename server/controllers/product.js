@@ -38,9 +38,9 @@ const aiProductSchema = yup.object().shape({
 });
 
 const rateProductSchema = yup.object().shape({
-  productId: yup.string().required(),
+  productId: yup.string(),
   rate: yup.number().required(),
-  description: yup.string(),
+  description: yup.string().required(),
 });
 
 exports.createProduct = async (req, res, next) => {
@@ -78,7 +78,8 @@ exports.createProduct = async (req, res, next) => {
       //   confidence: classificationResult.confidence,
       // });
       imagesObjests.push({
-        imageUrl: "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+        imageUrl:
+          "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
         class: "chair",
         confidence: 98,
       });
@@ -157,6 +158,9 @@ exports.rateProduct = async (req, res, next) => {
   const { productId, rate, description } = req.body;
   //validate the user input
   try {
+    if (!productId) {
+      throw new Error("productId is required");
+    }
     await rateProductSchema.validateSync({ productId, rate, description });
   } catch (error) {
     return throwError(422, error.message, error.path, next);
@@ -253,6 +257,8 @@ exports.deleteProduct = async (req, res, next) => {
         return product._id.toString() !== productId.toString();
       });
       await req.user.save();
+      //delete product rates
+      await ProductRate.deleteMany({ product: productId });
       return res.status(200).json({ message: "Product deleted successfully" });
     } else {
       //product not found
@@ -338,7 +344,102 @@ exports.editProduct = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
+exports.editRate = async (req, res, next) => {
+  const { rateId, rate, description } = req.body;
+
+  //validate the data
+  try {
+    rateProductSchema.validateSync({ rate, description });
+  } catch (error) {
+    return throwError(422, error.message, error.path, next);
+  }
+
+  //find the rate
+  try {
+    let productRate = await ProductRate.findById(rateId);
+    if (!productRate) {
+      return throwError(404, "Rate not found", "server", next);
+    }
+    //check if the user is authorized to edit the rate
+    if (productRate.customer.toString() !== req.user._id.toString()) {
+      return throwError(
+        403,
+        "You are not authorized to edit this rate",
+        "server",
+        next
+      );
+    }
+    //edit the rate
+    productRate.rate = rate;
+    productRate.description = description;
+    await productRate.save();
+
+    //calculate the new total rate
+    let product = await Product.findById(productRate.product).populate("rates");
+    let totalRates = product.rates.reduce(
+      (acc, rateObject) => acc + rateObject.rate,
+      0
+    );
+
+    const newRate = totalRates / product.rates.length;
+    product.rate = newRate;
+    await product.save();
+
+    return res.status(200).json({ message: "Rate edited successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteRate = async (req, res, next) => {
+  const { rateId } = req.body;
+
+  //find the rate
+  try {
+    let productRate = await ProductRate.findById(rateId);
+    if (!productRate) {
+      return throwError(404, "Rate not found", "server", next);
+    }
+    //check if the user is authorized to edit the rate
+    if (productRate.customer.toString() !== req.user._id.toString()) {
+      return throwError(
+        403,
+        "You are not authorized to edit this rate",
+        "server",
+        next
+      );
+    }
+
+    //delete the rate
+    await ProductRate.findByIdAndDelete(rateId);
+    //delete the rate from the product rates array
+    let product = await Product.findById(productRate.product).populate("rates");
+
+    //calculate the new total rate
+    let totalRates = 0;
+    const rates = [];
+    for (let i = 0; i < product.rates.length; i++) {
+      totalRates += product.rates[i].rate;
+      if (product.rates[i].toString() === rateId.toString()) {
+        console.log("deleted rate", product.rates[i]);
+        product.rates.splice(i, 1);
+      } else {
+        rates.push(product.rates[i]._id);
+      }
+    }
+    console.log("product.rates", product.rates);
+    const newRate = totalRates / product.rates.length;
+    product.rates = rates;
+    product.rate = newRate;
+    await product.save();
+
+    return res.status(200).json({ message: "Rate deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
 
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);

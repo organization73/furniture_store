@@ -748,7 +748,7 @@ response:
     "message": "Password updated"
 }
 
-22-
+22-reverify email
 request: Post
 http://localhost:3000/auth//re-verify-email
 
@@ -758,4 +758,30 @@ http://localhost:3000/auth//re-verify-email
 response:
 {
     "message": "Re-send emial to abdo.make631@gmail.com have been done successfully"
+}
+
+#23- user edit his own rate.
+request:PUT
+http://localhost:3000/product/edit-rate
+ {
+    "rateId":"668550fe3109ec1752b72fee",
+    "rate":1,
+    "description":"i change my mind it is good."
+}
+
+response:
+{
+    "message": "Rate edited successfully"
+}
+
+24- user delete his own rates.
+request:DELETE
+http://localhost:3000/product/delete-rate
+
+{
+    "rateId":"668555784d510d57ac7d5d8d"
+}
+response:
+{
+    "message": "Rate deleted successfully"
 }
