@@ -19,12 +19,21 @@ class VendorRepo extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<List<VendorModel>> fetchAllVendors() async {
+  Future<List<VendorModel>> fetchAllVendors({int page = 1}) async {
     try {
-      final sna1 = await HttpService.instance.getUsers(1);
-      final sna2 = await HttpService.instance.getUsers(2);
-      final sna3 = await HttpService.instance.getUsers(3);
-      final sna = sna1 + sna2 + sna3;
+      if (page != 1) {
+        final sna = await HttpService.instance.getUsers(page);
+
+        final vendors = sna
+            .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
+            .toList();
+        vendors
+            .removeWhere((e) => e.id == UserController.instance.user.value.id);
+        return vendors;
+      }
+      final sna1 = await HttpService.instance.getUsers(page);
+      final sna2 = await HttpService.instance.getUsers(page + 1);
+      final sna = sna1 + sna2;
 
       final vendors = sna
           .map((vendor) => VendorModel.fromJsonToServerModel(vendor))
@@ -39,7 +48,7 @@ class VendorRepo extends GetxController {
   Future<List<VendorModel>> getVendorsForCategory(categoryId) async {
     var pro = await ProductRepo.instance
         .getProductsForCategory(1, categoryId: categoryId);
-    
+
     var vs = pro
         .map((e) => VendorModel(
             productsCount: e.productDetails.productSeller.productsCount,

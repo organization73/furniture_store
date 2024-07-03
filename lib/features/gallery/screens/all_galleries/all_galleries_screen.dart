@@ -1,19 +1,46 @@
 import 'package:decordash/common/widgets/shimmer/boxes_shimmer.dart';
 import 'package:decordash/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:decordash/common/widgets/vendors/vendor_showcase.dart';
+import 'package:decordash/data/repositories/vendor/vendor_repo.dart';
+import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordash/features/gallery/screens/all_galleries/widgets/gallery_card.dart';
 import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class AllGalleriesPage extends StatelessWidget {
+class AllGalleriesPage extends StatefulWidget {
   const AllGalleriesPage({super.key});
+
+  @override
+  State<AllGalleriesPage> createState() => _AllGalleriesPageState();
+}
+
+class _AllGalleriesPageState extends State<AllGalleriesPage> {
+  List<VendorModel> relist = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    VendorController.vendorsPageNumber = 2;
+    relist = VendorController.instance.allVendors;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    VendorController.vendorsPageNumber = 2;
+    VendorController.instance.allVendors.value = relist;
+  }
+
   @override
   Widget build(BuildContext context) {
     final vendorController = VendorController.instance;
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -40,6 +67,7 @@ class AllGalleriesPage extends StatelessWidget {
                   height: TSizes.spaceBtwSections,
                 ),
                 Obx(() {
+                
                   if (vendorController.isLoading.value) {
                     return const ShimmerLoaderEffect(
                       width: double.infinity,
@@ -94,7 +122,31 @@ class AllGalleriesPage extends StatelessWidget {
                           });
                     },
                   );
-                })
+                }),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        final vendors = await VendorRepo.instance
+                            .fetchAllVendors(
+                                page: ++VendorController.vendorsPageNumber);
+                        vendorController.allVendors.addAll(vendors);
+                        // print("vvvvvvvvvvvvvvvv");
+                        // print(VendorController.vendorsPageNumber);
+                        // for (var e in vendors) {
+                        //   print(e.name);
+                        //   print(e.image);
+                        //   print(e.location);
+                        //   print(e.id);
+                        //   print(e.productsCount);
+                        // }
+                        // print("vvvvvvvvvvvvvvveeeeee");
+                      },
+                      child: const Text('Load More'),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
