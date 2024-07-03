@@ -6,7 +6,6 @@ import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/features/gallery/screens/all_galleries/widgets/gallery_card.dart';
 import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -52,11 +52,6 @@ class CategoryVendors extends StatelessWidget {
                         if (widget != null) return widget;
                       }
                       var products = snapshot.data!;
-                      for (var e in products) {
-                        print(e.categoryId);
-                        print(category.id);
-                        print("===");
-                      }
                       products = products.where((element) {
                         if (category.id == '1' &&
                             (element.categoryId == "11" ||
@@ -78,6 +73,9 @@ class CategoryVendors extends StatelessWidget {
                       }).toList();
                       if (products.isEmpty) {
                         return const SizedBox();
+                      }
+                      if (products.length > 4) {
+                        products = products.take(4).toList();
                       }
                       return VendorShowCase(
                         images: products.map((e) => e.productImage).toList(),
