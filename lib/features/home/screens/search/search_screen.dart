@@ -17,17 +17,24 @@ class ActionChipData {
   ActionChipData({required this.icon, required this.label});
 }
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final searchPageController = Get.put(SearchPageController());
     final recentSearchController = Get.put(RecentSearchController());
     final List<ActionChipData> actionChips = [
-      ActionChipData(icon: Icons.add, label: 'Wooden Chair'),
-      ActionChipData(icon: Icons.edit, label: 'White Table'),
-      ActionChipData(icon: Icons.delete, label: 'Red Bed'),
+      ActionChipData(icon: Icons.add, label: 'Luxury'),
+      ActionChipData(icon: Icons.edit, label: 'Modern'),
+      ActionChipData(icon: Icons.delete, label: 'Classic'),
+      ActionChipData(icon: Icons.delete, label: 'Comfortable'),
+      ActionChipData(icon: Icons.delete, label: 'Elegant'),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -46,6 +53,14 @@ class SearchScreen extends StatelessWidget {
               prefixIcon: Iconsax.search_normal_copy,
               controller: searchPageController.searchController,
               filled: true,
+              onSubmitted: () {
+                print("submitted search");
+                setState(() {
+                  recentSearchController
+                      .addSearch(searchPageController.searchController.text);
+                  searchPageController.fetchSearchProducts();
+                });
+              },
               suffixIcon: Iconsax.close_circle_copy,
               onTapSuffixIcon: () {
                 searchPageController.searchController.clear();
@@ -162,6 +177,9 @@ class SearchScreen extends StatelessWidget {
                                         // Set the search text to the tapped item's text
                                         searchPageController.searchController
                                             .text = actionChip.label;
+                                        recentSearchController.addSearch(
+                                            searchPageController
+                                                .searchController.text);
                                         // Trigger the search
                                         searchPageController
                                             .fetchSearchProducts();

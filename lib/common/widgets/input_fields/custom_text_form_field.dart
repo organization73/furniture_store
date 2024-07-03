@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
       this.enabled = true,
       this.initialValue,
       this.onTap,
+      this.onSubmitted,
       this.readOnly = false});
   final String hint;
   final IconData prefixIcon;
@@ -26,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool enabled;
   final String? initialValue;
   final VoidCallback? onTap;
+  final VoidCallback? onSubmitted;
   final bool readOnly;
 
   final TextEditingController? controller;
@@ -38,6 +40,11 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        onFieldSubmitted: (v) {
+          if (onSubmitted != null) {
+            onSubmitted!();
+          }
+        },
         initialValue: initialValue,
         onEditingComplete: onEditingComplete,
         controller: controller,
