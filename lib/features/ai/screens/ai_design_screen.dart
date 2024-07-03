@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/utils/constants/api_constants.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/features/ai/widgets/ai_banner.dart';
@@ -27,6 +28,7 @@ class _AiPageState extends State<AiPage> {
   final String apiKey = aiAPIKey; // Replace with your actual API key
   final ImageAIStyle imageAIStyle = ImageAIStyle.christmas;
   bool run = false;
+  Map<String, String> imageData = {};
 
   Uint8List? _imageBytes; // Variable to hold the image bytes
   Future<Uint8List> _generate(String query) async {
@@ -35,6 +37,19 @@ class _AiPageState extends State<AiPage> {
       imageAIStyle: imageAIStyle,
       prompt: query,
     );
+    // Upload the image to Firebase Storage
+    const String imageName =
+        'image.jpg'; // Replace with your desired image name
+    final Reference storageRef =
+        FirebaseStorage.instance.ref().child(imageName);
+    final UploadTask uploadTask = storageRef.putData(image);
+    final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+
+    // Get the image URL
+    query = query.substring(0, 7);
+    query = query[0].toUpperCase();
+    imageData['prompt'] = query;
+    imageData['imageUrl'] = await taskSnapshot.ref.getDownloadURL();
     return image;
   }
 
@@ -409,6 +424,19 @@ class _AiPageState extends State<AiPage> {
                         ),
                         duration: const Duration(milliseconds: 2500),
                       ));
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: TSizes.spaceBtwInputFields,
+                ),
+                BuildCTAButton(
+                  text: "Add to manufacturing orders",
+                  onPressed: () {
+                    if (imageData['imageUrl'] == null ||
+                        imageData['prompt'] == null) {
+                      TLoaders.warningSnackBar(title: "Create Design First");
+                      return;
                     }
                   },
                 ),
