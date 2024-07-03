@@ -13,7 +13,7 @@ class SearchPageController extends GetxController {
   Future<List<ProductModel>> fetchSearchProducts() async {
     try {
       final searchProducts =
-          await _productRepo.searchProducts(searchController.text);
+          await _productRepo.searchProducts(1,searchController.text);
       return searchProducts;
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());

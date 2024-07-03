@@ -32,7 +32,6 @@ class HttpService extends GetxService {
       rethrow;
     }
   }
-
   Future<void> updateGalleryInfo(
       String name, String adress, String imageUrl) async {
     try {
@@ -52,6 +51,12 @@ class HttpService extends GetxService {
 
   Future<List<dynamic>> getProductsbyQyery(int page, String clas) async {
     String query = Querys.productsQuerybyFilter(page, clas);
+    var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
+        GetStorage().read("token"), 'graphql', query);
+    return response['data']['products']['products'];
+  }
+  Future<List<dynamic>> searchProducts(int page, String title,) async {
+    String query = Querys.productsQuerybyFilterTitle(page, title);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         GetStorage().read("token"), 'graphql', query);
     return response['data']['products']['products'];

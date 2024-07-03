@@ -19,8 +19,44 @@ class ProductRepo extends GetxController {
   static int pagenumber = 1;
   final _db = FirebaseFirestore.instance;
 
-
-  Future<List<ProductModel>> searchProducts(String query) async {
+  Future<List<ProductModrchProducts(int page, String query) async {
+    // TODO add your search logic here
+    var p = await HttpService.instance.searchProducts(page, query);
+    var prods = p
+        // TODO product mapping
+        .map((m) => ProductModel(
+            id: m['_id'],
+            productName: m['title'],
+            categoryId: mapingTheCategories(m['images']),
+            productImage: m['images'][0]['imageUrl'],
+            productPrice:
+                (m['price']).toDouble(), // Ensure key name consistency
+            productDetails: ProductDetails(
+                condition: m['details']['condition'],
+                color: m['details']['color'], //TODO map the color
+                productListImages: fromImage(m['images']),
+                productSpecs: {
+                  'ablakash': m['details']['abalakach'],
+                  'fabric type': m['details']['cloth'],
+                  'wood type': m['details']['wood'],
+                },
+                productDesc: m['description'],
+                productStats: ProductStats(
+                    delivery: m['details']['delevary'],
+                    negotiable: m['details']['negotiable'],
+                    modifiable: m['details']['modefiable']),
+                productSeller: VendorModel(
+                    name:
+                        "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                    location: "Egypt",
+                    id: m['creator']['_id'],
+                    image: m['creator']['imageUrl'] ??
+                        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                    isFeatured: m['creator']['type'] == "Gallery",
+                    productsCount: m['creator']['numberOfProducts'] ?? 0,
+                    accountType: mapType(m['creator']['type'])))))
+        .toList();
+    return prods;
     try {
       // Fetch a larger set of documents
       final snapshot = await _db.collection('Products').get();
