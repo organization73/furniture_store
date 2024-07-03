@@ -108,7 +108,14 @@ class _AiPageState extends State<AiPage> {
     'Maroon',
   ];
 
-  final List<String> _sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
+  final List<String> _sizes = [
+    'Classic',
+    'Modern',
+    'Contemporary',
+    'Industrial',
+    'Scandinavian',
+    'Rustic',
+  ];
   final List<String> _materials = [
     'Wood',
     'Metal',
@@ -211,6 +218,7 @@ class _AiPageState extends State<AiPage> {
                           setState(() {
                             _selectedClass = className;
                             _selectedSubClass = _subClasses[className]?.first;
+                            _selectedObject = null;
                           });
                         }
                       },
@@ -307,14 +315,14 @@ class _AiPageState extends State<AiPage> {
                   height: TSizes.spaceBtwInputFields,
                 ),
                 BuildDropDown(
-                  title: "Size",
+                  title: "Style",
                   items: _sizes,
                   onItemSelected: (selectedSize) {
                     setState(() {
                       _selectedSize = selectedSize;
                     });
                   },
-                  hintText: 'Select Size',
+                  hintText: 'Select Style',
                 ),
                 SizedBox(
                   height: TSizes.spaceBtwInputFields,

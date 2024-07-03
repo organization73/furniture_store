@@ -132,26 +132,9 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
-                  SectionHeading(
-                    title: 'appSettings'.tr,
-                    showActionButton: false,
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.language_square_copy,
-                    title: 'language'.tr,
-                    subTitle: 'languageDesc'.tr,
-                    onTap: () => _showLanguageModel(),
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.moon_copy,
-                    title: 'darkMode'.tr,
-                    subTitle: 'darkModeDesc'.tr,
-                    onTap: () {
-                      Get.changeTheme(Get.isDarkMode
-                          ? TAppTheme.lightTheme
-                          : TAppTheme.darkTheme);
-                    },
-                  ),
+                  
+                
+                  
                   const Divider(),
                   // SettingsMenuTile(
                   //   icon: Iconsax.arrow_up_1_copy,
