@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/home/controllers/home_page_controller.dart';
@@ -110,22 +112,46 @@ class ProductRepo extends GetxController {
 
   Future<List<ProductModel>> getFavouriteProducts(
       List<String> productIds) async {
-    try {
-      final snapshot = await _db
-          .collection('Products')
-          .where(FieldPath.documentId, whereIn: productIds)
-          .get();
-      return snapshot.docs
-          .map((querySnapshot) =>
-              ProductModel.fromFirebaseDocument(querySnapshot))
-          .toList();
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
+    List<ProductModel> productss = [];
+    for (var e in productIds) {
+      var m = await HttpService.instance
+          .getOneProducts(e, GetStorage().read('token'));
+      ProductModel prod = ProductModel(
+          id: m['_id'],
+          productName: m['title'],
+          categoryId: mapingTheCategories(m['images']),
+          productImage: m['images'][0]['imageUrl'],
+          productPrice: (m['price']).toDouble(), // Ensure key name consistency
+          productDetails: ProductDetails(
+              condition: m['details']['condition'],
+              color: m['details']['color'], //TODO map the color
+              productListImages: fromImage(m['images']),
+              productSpecs: {
+                'ablakash': m['details']['abalakach'],
+                'fabric type': m['details']['cloth'],
+                'wood type': m['details']['wood'],
+              },
+              productDesc: m['description'],
+              productStats: ProductStats(
+                  delivery: m['details']['delevary'],
+                  negotiable: m['details']['negotiable'],
+                  modifiable: m['details']['modefiable']),
+              productSeller: VendorModel(
+                  name:
+                      "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                  location: "Egypt",
+                  id: m['creator']['_id'],
+                  image: m['creator']['imageUrl'] ??
+                      "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                  isFeatured: m['creator']['type'] == "Gallery",
+                  productsCount: m['creator']['numberOfProducts'] ?? 0,
+                  accountType: mapType(m['creator']['type']))));
+      print(prod.productName);
+      productss.insert(0, prod);
+      print(productss);
     }
+    print(productss.length);
+    return productss;
   }
 
   Future<List<ProductModel>> getProductsForVendor(

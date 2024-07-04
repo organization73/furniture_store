@@ -107,6 +107,44 @@ class Querys {
               }
             }
           ''';
+  static productOneQuery(id) => '''
+            query GetProducts {
+              product(id: \"$id\") {
+                  _id
+                  title
+                  price
+                  description
+                  details {
+                    wood
+                    abalakach
+                    cloth
+                    color
+                    condition
+                    delevary
+                    negotiable
+                    modefiable
+                  }
+                  creator {
+                    username
+                    firstName
+                    lastName
+                    imageUrl
+                    email
+                    type
+                    _id
+                    numberOfProducts
+                    
+                  }
+                  images {
+                    imageUrl
+                    class
+                    confidence
+                  }
+                  rate
+                }
+              }
+            
+          ''';
   static productsQuerybyFilterTitle(page, String title) => '''
             query GetProducts {
               products(filters:{leastPrice:1,mostPrice:1, newest:1}, searchTitle:\"$title\",page: $page) {

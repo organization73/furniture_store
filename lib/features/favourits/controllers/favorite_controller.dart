@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/product/product_repo.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class FavoriteController extends GetxController {
   static FavoriteController get instance => Get.find();
@@ -18,14 +20,14 @@ class FavoriteController extends GetxController {
   }
 
   void initFavourites() {
-        // TODO TLOCAl
+    // TODO TLOCAl
 
-    // final json = TLocalStorage.instance().readData('favourites');
-    // if (json != null) {
-    //   final storedFavourites = jsonDecode(json) as Map<String, dynamic>;
-    //   favourites.assignAll(
-    //       storedFavourites.map((key, value) => MapEntry(key, value as bool)));
-    // }
+    final json = GetStorage().read(UserController.instance.user.value.id);
+    if (json != null) {
+      final storedFavourites = jsonDecode(json) as Map<String, dynamic>;
+      favourites.assignAll(
+          storedFavourites.map((key, value) => MapEntry(key, value as bool)));
+    }
   }
 
   bool isFavourite(String productId) {
@@ -38,7 +40,7 @@ class FavoriteController extends GetxController {
       saveFavouritesToStorage();
       TLoaders.customToast(messege: 'Product has been added to favourites');
     } else {
-          // TODO TLOCAl
+      // TODO TLOCAl
 
       // TLocalStorage.instance().removeData(productId);
       favourites.remove(productId);
@@ -50,9 +52,9 @@ class FavoriteController extends GetxController {
 
   void saveFavouritesToStorage() {
     final encodedFavourites = json.encode(favourites);
-        // TODO TLOCAl
-
-    // TLocalStorage.instance().saveData('favourites', encodedFavourites);
+    // TODO TLOCAl
+    GetStorage()
+        .write(UserController.instance.user.value.id, encodedFavourites);
   }
 
   Future<List<ProductModel>> favouriteProducts() async {

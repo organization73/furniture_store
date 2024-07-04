@@ -74,6 +74,13 @@ class HttpService extends GetxService {
     return response['data']['products']['products'];
   }
 
+  Future<Map<String, dynamic>> getOneProducts(String id, String token) async {
+    String query = Querys.productOneQuery(id);
+    var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
+        token, 'graphql', query);
+    return response['data']['product'];
+  }
+
   Future<void> addProduct(ProductModel product) async {
     var m = {
       "title": product.productName,
