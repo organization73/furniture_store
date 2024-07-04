@@ -1,8 +1,10 @@
 const Product = require("../models/product");
 const User = require("../models/user");
 const AiProduct = require("../models/aiProduct");
+const Gallary = require("../models/gallary");
 const PRODUCTS_PER_PAGE = 6;
 const USERS_PER_PAGE = 6;
+const Gallaries_PER_PAGE = 6;
 
 const root = {
   products: async function ({ page, filters, searchTitle }, { req }, info) {
@@ -51,7 +53,6 @@ const root = {
       searchQuery.title = { $regex: searchTitle, $options: "i" };
     }
     //validating data
-
     console.log("iam here:");
     console.log("searchQuery:", searchQuery);
     console.log("sortCondition:", sortCondition);
@@ -250,6 +251,11 @@ const root = {
     if (searchTitle) {
       searchQuery.title = { $regex: searchTitle, $options: "i" };
     }
+    console.log("iam here:");
+    console.log("searchQuery:", searchQuery);
+    console.log("sortCondition:", sortCondition);
+    console.log("cleanedFields:", cleanedFields);
+    console.log("creatorProperties:", creatorProperties);
 
     //validating data
     if (!page) page = 1;
@@ -542,14 +548,40 @@ const root = {
     }
 
     if (searchTitle) {
-      searchQuery.title = { $regex: searchTitle, $options: "i" };
+      searchQuery.name = { $regex: searchTitle, $options: "i" };
     }
     console.log("searchQuery:", searchQuery);
     console.log("sortCondition:", sortCondition);
     console.log("cleanedFields:", cleanedFields);
     console.log("creatorProperties:", creatorProperties);
     console.log(page);
-    return;
+
+    //validating data
+    if (!page) page = 1;
+    try {
+      const gallaries = await Gallary.find(searchQuery)
+        .populate("creator", creatorProperties) // Populate the 'creator' path without selecting any fields
+        .select(cleanedFields)
+        .skip((page - 1) * Gallaries_PER_PAGE)
+        .limit(Gallaries_PER_PAGE)
+        .sort(sortCondition);
+
+      console.log("gallaries:", gallaries);
+
+      return {
+        gallaries: gallaries.map((g) => {
+          return {
+            ...g._doc,
+            _id: g._id ? g._id.toString() : undefined,
+            creator: g.creator,
+            createdAt: g.createdAt ? g.createdAt.toISOString() : undefined,
+            updatedAt: g.updatedAt ? g.updatedAt.toISOString() : undefined,
+          };
+        }),
+      };
+    } catch (error) {
+      throw error;
+    }
   },
 };
 

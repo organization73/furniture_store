@@ -819,3 +819,30 @@ response:
         }
     }
 }
+
+#26- fetching gallaries
+request:Post
+http://localhost:3000/graphql
+{
+    "query":"{ gallaries(filters:{ newest:1}, searchTitle:\"Meet\", page:1, id:\"\") { gallaries{ name creator{_id username} coordinates{lat} } } }"
+}
+
+response:
+{
+    "data": {
+        "gallaries": {
+            "gallaries": [
+                {
+                    "name": "Meet Elsheyoukh Art Gallery",
+                    "creator": {
+                        "_id": "667f1c88e5f1c74a5092e387",
+                        "username": "abdo.body123"
+                    },
+                    "coordinates": {
+                        "lat": 40.7128
+                    }
+                }
+            ]
+        }
+    }
+}
