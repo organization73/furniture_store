@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:decordash/common/widgets/products/favourite_icon/favourite_icon.dart';
+import 'package:decordash/common/widgets/products/favourite_icon/report_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordash/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
@@ -88,6 +89,12 @@ class ProductImageSlider extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
                 child: FavouriteIcon(
+                  productId: product.id,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
+                child: ReportIcon(
                   productId: product.id,
                 ),
               )

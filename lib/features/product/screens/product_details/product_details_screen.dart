@@ -6,6 +6,7 @@ import 'package:decordash/features/product/screens/product_details/widgets/produ
 import 'package:decordash/features/product/screens/product_details/widgets/product_rating_container.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.product});
