@@ -846,3 +846,12 @@ response:
         }
     }
 }
+
+#27-report a product you found in the appellation
+request:post
+  http://localhost:3000/product/report-product
+{
+    "productId":"66842f1e97de9e1aa1bc71b5"
+}
+response:
+{ message: "Product reported successfully" }

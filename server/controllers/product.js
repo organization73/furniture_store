@@ -7,6 +7,7 @@ const path = require("path");
 const Product = require("../models/product");
 const AiProduct = require("../models/aiProduct");
 const ProductRate = require("../models/productRate");
+const ReportProduct = require("../models/reportProduct");
 
 const productSchema = yup.object().shape({
   title: yup.string().required(),
@@ -45,7 +46,14 @@ const rateProductSchema = yup.object().shape({
 
 exports.createProduct = async (req, res, next) => {
   // Validate the product data
-  const { title, price, description, details, images, appeallingClassfication } = req.body;
+  const {
+    title,
+    price,
+    description,
+    details,
+    images,
+    appeallingClassfication,
+  } = req.body;
   try {
     productSchema.validateSync({ title, price, description, details });
   } catch (error) {
@@ -474,7 +482,36 @@ exports.deleteRate = async (req, res, next) => {
   }
 };
 
-
+exports.reportProduct = async (req, res, next) => {
+  const { productId, reason } = req.body;
+  try {
+    //validate the data
+    if (!productId) {
+      return throwError(422, "productId is required", "server", next);
+    }
+    
+    //find the product
+    let product = await Product.findById(productId);
+    if (!product) {
+      return throwError(404, "Product not found", "server", next);
+    }
+    //check if the user has already reported the product
+    let reported = await ReportProduct.findOne({productId: productId, reporter: req.user._id});
+    if (reported) {
+      return res.status(403).json({ message: "You have already reported this product" });
+    }
+    //create the report
+    const report = new ReportProduct({
+      productId: productId,
+      reporter: req.user._id,
+      reason: reason,
+    });
+    report.save();
+    return res.status(201).json({ message: "Product reported successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
 
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);
