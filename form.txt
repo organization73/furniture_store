@@ -796,3 +796,26 @@ response:
 {
     "message": "Rate deleted successfully"
 }
+
+#25- get user's info
+request: POST
+http://localhost:3000/graphql
+{
+  "query": "query { user(id: \"66847f76c4f8e49ded5f8583\") { _id firstName lastName email imageUrl numberOfProducts  } }"
+}
+if id if empty 
+user(id: \"\") 
+it will return log in user's data.
+response:
+{
+    "data": {
+        "user": {
+            "_id": "66847f76c4f8e49ded5f8583",
+            "firstName": "abdo",
+            "lastName": "user",
+            "email": "abdo.make631@gmail.com",
+            "imageUrl": null,
+            "numberOfProducts": 1
+        }
+    }
+}

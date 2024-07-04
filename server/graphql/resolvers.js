@@ -188,7 +188,11 @@ const root = {
   },
 
   //fetching ai products
-  aiProducts: async function ({ page, filters, searchTitle, id }, { req }, info) {
+  aiProducts: async function (
+    { page, filters, searchTitle, id },
+    { req },
+    info
+  ) {
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
@@ -218,26 +222,25 @@ const root = {
     page = page || 1;
     console.log("id1:", null);
     console.log("id1:", undefined);
-    console.log(filters)
+    console.log(filters);
     // Complete the sort condition logic
-    if (id){
+    if (id) {
       searchQuery = { creator: id };
-    }else if (id ==="")
-      {
-        searchQuery = { creator: req.raw.user._id };
-      }
+    } else if (id === "") {
+      searchQuery = { creator: req.raw.user._id };
+    }
 
-    if (filters){
+    if (filters) {
       if (filters.newest) {
         sortCondition = { createdAt: -1 };
       }
-  
+
       if (filters.mostPrice) {
         sortCondition = { price: -1 };
       } else if (filters.leastPrice) {
         sortCondition = { price: 1 };
       }
-  
+
       //searching query
       if (filters.category) {
         searchQuery = { category: filters.category };
@@ -245,8 +248,8 @@ const root = {
       if (filters.subCategory) {
         searchQuery = { subCategory: filters.subCategory };
       }
-    }else{
-      console.log("no filters")
+    } else {
+      console.log("no filters");
     }
 
     if (searchTitle) {
@@ -286,46 +289,57 @@ const root = {
     console.log(context);
     return "Hello world!";
   },
-  user: async function ({ id }, { req }, info) {
-    //fetching request data.
-    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
-      getRequestedFields(fieldNode)
-    );
-    let cleanedFields = requestedFields.map((field) =>
-      field.replace("products.", "")
-    );
-    cleanedFields.push("updatedAt");
-    //validate Id
-    console.log("id:", id);
-    if (!id) {
-      const error = new Error("Wrong Id.");
-      error.statusCode = 404;
-      throw error;
-    }
-    //fetching user's data
-    let user;
-    try {
-      user = await User.findById(id).select(cleanedFields);
-      console.log("user:", user);
-    } catch (error) {
-      if (error.statusCode) {
-        error.statusCode = 500;
-      }
-      // throw error;
-      throw error;
-    }
-    //validate user exist.
-    if (!user) {
-      const error = new Error("User not found.");
-      error.statusCode = 404;
-      // throw error;
-      throw error;
-    }
-    return {
-      ...user._doc,
-      _id: user._id ? user._id.toString() : undefined,
-    };
-  },
+  // user: async function ({ id }, { req }, info) {
+  //   //fetching request data.
+  //   const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+  //     getRequestedFields(fieldNode)
+  //   );
+  //   let cleanedFields = requestedFields.map((field) =>
+  //     field.replace("products.", "")
+  //   );
+  //   cleanedFields.push("updatedAt");
+
+  //   //fetching the number of products per user
+  //   if (cleanedFields.includes("numberOfProducts")) {
+  //     cleanedFields = cleanedFields.filter(
+  //       (field) => field !== "numberOfProducts"
+  //     );
+  //     cleanedFields.push("products");
+  //   }
+  //   //validate Id
+  //   console.log("id:", id);
+  //   console.log("hellow")
+  //   console.log("cleanedFields:", cleanedFields)
+  //   if (!id) {
+  //     const error = new Error("Wrong Id.");
+  //     error.statusCode = 404;
+  //     throw error;
+  //   }
+  //   //fetching user's data
+  //   let user;
+  //   try {
+  //     user = await User.findById(id).select(cleanedFields);
+  //     console.log("user:", user);
+  //   } catch (error) {
+  //     if (error.statusCode) {
+  //       error.statusCode = 500;
+  //     }
+  //     // throw error;
+  //     throw error;
+  //   }
+  //   //validate user exist.
+  //   if (!user) {
+  //     const error = new Error("User not found.");
+  //     error.statusCode = 404;
+  //     // throw error;
+  //     throw error;
+  //   }
+  //   return {
+  //     ...user._doc,
+  //     _id: user._id ? user._id.toString() : undefined,
+  //     numberOfProducts: user.products ? user.products.length : undefined,
+  //   };
+  // },
   usersProducts: async function ({ id }, { req }, info) {
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
@@ -376,61 +390,6 @@ const root = {
       }),
     };
   },
-  // //get user's ai products by id
-  // usersProducts: async function ({ id }, { req }, info) {
-  //   //fetching request data.
-  //   const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
-  //     getRequestedFields(fieldNode)
-  //   );
-  //   let cleanedFields = requestedFields.map((field) =>
-  //     field.replace("aiProducts.", "")
-  //   );
-  //   // cleanedFields.push("updatedAt");
-  //   // Extract the paths that include the 'creator' field
-  //   const [creatorProperties, arrayCreatorProperties] =
-  //     extractCreatorProperties(cleanedFields);
-  //   cleanedFields = cleanedFields.filter(
-  //     (field) => !arrayCreatorProperties.includes(field)
-  //   );
-
-  //   //fetching user's products
-  //   id = id || req.raw.user._id;
-  //   console.log("id:", id);
-  //   let products;
-  //   console.log("cleanedFields:", cleanedFields);
-  //   console.log(creatorProperties);
-  //   try {
-  //     products = await AiProduct.find({ creator: id })
-  //       .populate("creator", creatorProperties)
-  //       .select(cleanedFields)
-  //       .sort({ createdAt: -1 });
-  //   } catch (error) {
-  //     if (error.statusCode) {
-  //       error.statusCode = 500;
-  //     }
-  //     throw error;
-  //   }
-
-  //   //validating data existance
-  //   if (!products) {
-  //     const error = new Error("Could not find products.");
-  //     error.statusCode = 404;
-  //     throw error;
-  //   }
-
-  //   //returning data
-  //   return {
-  //     products: products.map((p) => {
-  //       return {
-  //         ...p._doc,
-  //         _id: p._id ? p._id.toString() : undefined,
-  //         creator: p.creator,
-  //         createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
-  //         updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
-  //       };
-  //     }),
-  //   };
-  // },
   //getuser by id
   user: async function ({ id }, { req }, info) {
     //fetching request data.
@@ -442,6 +401,18 @@ const root = {
     );
     //validate Id
     console.log("id:", id);
+    //fetching the number of products per user
+    if (cleanedFields.includes("numberOfProducts")) {
+      cleanedFields = cleanedFields.filter(
+        (field) => field !== "numberOfProducts"
+      );
+      cleanedFields.push("products");
+    }
+    //validate Id
+    console.log("id:", id);
+    console.log("hellow");
+    console.log("cleanedFields:", cleanedFields);
+    
     if (!id) {
       id = req.raw.user._id;
     }
@@ -469,6 +440,7 @@ const root = {
       _id: user._id ? user._id.toString() : undefined,
       createdAt: user.createdAt ? user.createdAt.toISOString() : undefined,
       updatedAt: user.updatedAt ? user.updatedAt.toISOString() : undefined,
+      numberOfProducts: user.products ? user.products.length : undefined,
     };
   },
   //get all users
