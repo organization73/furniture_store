@@ -29,22 +29,22 @@ const root = {
       );
       cleanedFields.push("rates");
     }
+    let sortCondition = {};
+    let searchQuery = {};
 
     // Complete the sort condition logic
-    if (filters.newest) {
-      sortCondition = { createdAt: -1 };
-    }
-
     if (filters.mostPrice) {
-      sortCondition = { price: -1 };
+      sortCondition.price = -1;
     } else if (filters.leastPrice) {
-      sortCondition = { price: 1 };
+      sortCondition.price = 1;
     }
-
+    if (filters.newest) {
+      sortCondition.createdAt = -1;
+    }
     //searching query
-    let searchQuery = {};
     if (filters.class) {
-      searchQuery = { "images.class": filters.class };
+      const imageObject = { "images.class": filters.class };
+      searchQuery = { ...searchQuery, ...imageObject };
     }
 
     if (searchTitle) {
@@ -220,9 +220,6 @@ const root = {
     let sortCondition = {};
     let searchQuery = {};
     page = page || 1;
-    console.log("id1:", null);
-    console.log("id1:", undefined);
-    console.log(filters);
     // Complete the sort condition logic
     if (id) {
       searchQuery = { creator: id };
@@ -231,22 +228,20 @@ const root = {
     }
 
     if (filters) {
-      if (filters.newest) {
-        sortCondition = { createdAt: -1 };
-      }
-
       if (filters.mostPrice) {
-        sortCondition = { price: -1 };
+        sortCondition.price = -1;
       } else if (filters.leastPrice) {
-        sortCondition = { price: 1 };
+        sortCondition.price = 1;
       }
-
+      if (filters.newest) {
+        sortCondition.createdAt = -1;
+      }
       //searching query
       if (filters.category) {
-        searchQuery = { category: filters.category };
+        searchQuery.category = filters.category;
       }
       if (filters.subCategory) {
-        searchQuery = { subCategory: filters.subCategory };
+        searchQuery.subCategory = filters.subCategory;
       }
     } else {
       console.log("no filters");
@@ -412,7 +407,7 @@ const root = {
     console.log("id:", id);
     console.log("hellow");
     console.log("cleanedFields:", cleanedFields);
-    
+
     if (!id) {
       id = req.raw.user._id;
     }
@@ -495,6 +490,66 @@ const root = {
     });
     // console.log("users:", result);
     return result;
+  },
+  gallaries: async function (
+    { filters, searchTitle, page, id },
+    { req },
+    info
+  ) {
+    //fetching request data.
+    const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+      getRequestedFields(fieldNode)
+    );
+    let cleanedFields = requestedFields.map((field) =>
+      field.replace("gallaries.", "")
+    );
+    cleanedFields.push("updatedAt");
+
+    // Extract the paths that include the 'creator' field
+    const [creatorProperties, arrayCreatorProperties] =
+      extractCreatorProperties(cleanedFields);
+    cleanedFields = cleanedFields.filter(
+      (field) => !arrayCreatorProperties.includes(field)
+    );
+
+    let sortCondition = {};
+    let searchQuery = {};
+    page = page || 1;
+
+    // Complete the sort condition logic
+    if (id) {
+      searchQuery.creator = id;
+    } else if (id === "") {
+      searchQuery.creator = req.raw.user._id;
+    }
+
+    if (filters) {
+      if (filters.newest) {
+        sortCondition = { createdAt: -1 };
+      }
+      //searching query
+      if (filters.country) {
+        searchQuery.country = filters.country;
+      }
+      if (filters.city) {
+        searchQuery.city = filters.city;
+      }
+      if (filters.street) {
+        searchQuery.street = filters.street;
+      }
+    } else {
+      console.log("no filters");
+    }
+
+    if (searchTitle) {
+      searchQuery.title = { $regex: searchTitle, $options: "i" };
+    }
+    console.log("searchQuery:", searchQuery);
+    console.log("sortCondition:", sortCondition);
+    console.log("cleanedFields:", cleanedFields);
+    console.log("creatorProperties:", creatorProperties);
+    console.log(page);
+    return;
   },
 };
 

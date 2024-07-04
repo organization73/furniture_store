@@ -14,7 +14,9 @@ const gallarySchema = new Schema(
       type: String,
       required: true,
     },
-    address: String,
+    country: String,
+    city: String,
+    street: String,
     images: [
       {
         imageUrl: {

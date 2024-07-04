@@ -82,12 +82,44 @@ const schema = buildSchema(`
         mostPrice: Float
         leastPrice: Float
     }
+        
+    type Coordinates {
+        lat: Float
+        lng: Float
+    }
+
+    type Gallary {
+        _id: ID
+        creator: User
+        name: String
+        country: String
+        city: String
+        street: String
+        images: [Image]
+        certificate: String
+        coordinates: Coordinates
+        createdAt: String
+        updatedAt: String
+    }
+
+    type GallariesData {
+        gallaries: [Gallary!]!
+    }
+
     input AiProductFilterInput {
         category: String
         subCategory: String
         newest: Int
         mostPrice: Float
         leastPrice: Float
+    }
+    
+    input GallariesFilterInput {
+    hasCertificate: Boolean
+    country: String
+    city: String
+    street: String
+    newest: Int
     }
 
     type RootQuery {
@@ -99,6 +131,7 @@ const schema = buildSchema(`
     usersProducts(id:ID): productData!
     usersAiProducts(id:ID): AiProductData!
     users(page: Int): [User!]!
+    gallaries (filters: GallariesFilterInput,searchTitle:String , page:Int, id:ID): GallariesData!
     }
 
     schema {
