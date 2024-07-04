@@ -158,7 +158,7 @@ class Language extends Translations {
           "prompt": "Prompt",
           "promptVal": "Prompt is empty",
           "createDesign": "Create Design",
-          "promptDesc": "enter text and click the button to generate image",
+          "promptDesc": "Choose fields and click the button to generate image",
           "manufreq": "Manufacture Requests",
           "buyPoints": "Buy Points",
           "contactUs": "Contact Us",
