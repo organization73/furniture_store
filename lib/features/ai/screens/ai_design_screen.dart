@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/utils/constants/api_constants.dart';
+import 'package:decordash/utils/http/http_client.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ import 'package:decordash/features/ai/widgets/generative_image.dart';
 import 'package:decordash/features/ai/model/generative_ai/balance_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:stability_image_generation/stability_image_generation.dart';
 
@@ -31,7 +33,8 @@ class _AiPageState extends State<AiPage> {
   Map<String, String> imageData = {};
 
   Uint8List? _imageBytes; // Variable to hold the image bytes
-  Future<Uint8List> _generate(String query) async {
+  Future<Uint8List> _generate(
+      String query, String selectCatory, String selectsubCatory) async {
     Uint8List image = await _ai.generateImage(
       apiKey: apiKey,
       imageAIStyle: imageAIStyle,
@@ -46,10 +49,12 @@ class _AiPageState extends State<AiPage> {
     final TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
 
     // Get the image URL
-    query = query.substring(0, 7);
-    query = query[0].toUpperCase();
+    query = query.substring(7);
+    query = query[0].toUpperCase() + query.substring(1);
     imageData['prompt'] = query;
+    imageData['category'] = selectCatory;
     imageData['imageUrl'] = await taskSnapshot.ref.getDownloadURL();
+    imageData['subcategory'] = selectsubCatory;
     return image;
   }
 
@@ -362,7 +367,8 @@ class _AiPageState extends State<AiPage> {
                           height: 400.w,
                           child: Center(
                             child: FutureBuilder<Uint8List>(
-                              future: _generate(_generatePrompt()),
+                              future: _generate(_generatePrompt(),
+                                  _selectedClass!, _selectedSubClass!),
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
@@ -432,11 +438,24 @@ class _AiPageState extends State<AiPage> {
                 ),
                 BuildCTAButton(
                   text: "Add to manufacturing orders",
-                  onPressed: () {
+                  onPressed: () async {
                     if (imageData['imageUrl'] == null ||
-                        imageData['prompt'] == null) {
+                        imageData['prompt'] == null ||
+                        imageData['category'] == null) {
                       TLoaders.warningSnackBar(title: "Create Design First");
                       return;
+                    } else {
+                      var r = await THttpHelper.postBearerAuth(
+                          "product/create-ai-product",
+                          GetStorage().read("token"), {
+                        "title": imageData['prompt']!.toUpperCase(),
+                        "price": 99.95,
+                        "description": imageData['prompt'],
+                        "category": imageData['category'],
+                        "subCategory": imageData['subcategory'],
+                        "imageUrl": "https://chair.com"
+                      });
+                      print(r.body);
                     }
                   },
                 ),
