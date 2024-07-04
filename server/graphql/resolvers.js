@@ -32,7 +32,7 @@ const root = {
       cleanedFields.push("rates");
     }
     let sortCondition = {};
-    let searchQuery = {};
+    let searchQuery = { appellation: { $ne: true } };
 
     // Complete the sort condition logic
     if (filters.mostPrice) {
@@ -362,7 +362,7 @@ const root = {
     console.log("id:", id);
     let products;
     try {
-      products = await Product.find({ creator: id })
+      products = await Product.find({ creator: id, appellation: { $ne: true } })
         .populate("creator", creatorProperties)
         .select(cleanedFields)
         .sort({ createdAt: -1 });

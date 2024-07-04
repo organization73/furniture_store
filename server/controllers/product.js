@@ -45,7 +45,7 @@ const rateProductSchema = yup.object().shape({
 
 exports.createProduct = async (req, res, next) => {
   // Validate the product data
-  const { title, price, description, details, images } = req.body;
+  const { title, price, description, details, images, appeallingClassfication } = req.body;
   try {
     productSchema.validateSync({ title, price, description, details });
   } catch (error) {
@@ -81,17 +81,27 @@ exports.createProduct = async (req, res, next) => {
         imageUrl:
           "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
         class: "chair",
-        confidence: 98,
+        confidence: 59,
       });
+      const classificationResult = {};
+      classificationResult.confidence = 59;
+
+      //check the confidenece of the classification
+      if (classificationResult.confidence < 60 && !appeallingClassfication) {
+        throw new Error("Image classification confidence is too low");
+      }
     } catch (error) {
       console.error("Error classifying image:", error);
-      res.status(500).json({ error: "Failed to classify image" });
+      return res
+        .status(500)
+        .json({ error: error.message || "Failed to classify image" });
     }
   }
   console.log("imagesObjests111:", imagesObjests);
   try {
     //Create the product
     const product = new Product({
+      appellation: appeallingClassfication,
       creator: req.user._id, //why id required?
       title: title,
       price: price,
@@ -463,6 +473,8 @@ exports.deleteRate = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);

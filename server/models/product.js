@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
   {
+    appellation: Boolean,
     creator: {
       type: Schema.Types.ObjectId,
       ref: "User",

@@ -14,6 +14,8 @@ router.put("/edit-rate", productController.editRate);
 
 router.post("/edit-product", productController.editProduct);
 
+router.post("/appealling-classfification", productController.createProduct);
+
 router.delete("/delete-rate", productController.deleteRate);
 
 //delete a product
