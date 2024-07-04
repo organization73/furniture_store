@@ -336,6 +336,7 @@ class ProductRepo extends GetxController {
       // hereeeer
     } catch (e) {
       LoggerHelper.error('error', e);
+      
       rethrow;
     }
   }

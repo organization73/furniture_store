@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/graphql/querys.dart';
 import 'package:decordash/utils/http/http_client.dart';
 import 'package:decordash/utils/logging/logger.dart';
+import 'package:decordash/utils/popups/full_screen_loader.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -101,7 +104,11 @@ class HttpService extends GetxService {
     print('--------------');
     print(m);
     String t = GetStorage().read('token');
-    await THttpHelper.postBearerAuth('product/create-product', t, m);
+    var r = await THttpHelper.postBearerAuth('product/create-product', t, m);
+    if (r.statusCode == 500) {
+      print(jsonDecode(r.body)['error']);
+      throw Exception(jsonDecode(r.body)['error']);
+    }
   }
 
   // Future getProduct() async {
@@ -118,6 +125,7 @@ class HttpService extends GetxService {
     String query = Querys.UsersQuery(page);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         "${GetStorage().read("token")}", 'graphql', query);
+
     return response['data']['users'];
   }
 
