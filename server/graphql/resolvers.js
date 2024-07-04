@@ -52,7 +52,7 @@ const root = {
     }
     //validating data
 
-    console.log("iam here:",);
+    console.log("iam here:");
     console.log("searchQuery:", searchQuery);
     console.log("sortCondition:", sortCondition);
     console.log("cleanedFields:", cleanedFields);
@@ -188,7 +188,7 @@ const root = {
   },
 
   //fetching ai products
-  aiProducts: async function ({ page, filters, searchTitle }, { req }, info) {
+  aiProducts: async function ({ page, filters, searchTitle, id }, { req }, info) {
     //fetching request data.
     const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
       getRequestedFields(fieldNode)
@@ -213,35 +213,45 @@ const root = {
       // cleanedFields.push("rates");
     }
 
-    // Complete the sort condition logic
-    if (filters.newest) {
-      sortCondition = { createdAt: -1 };
-    }
-
-    if (filters.mostPrice) {
-      sortCondition = { price: -1 };
-    } else if (filters.leastPrice) {
-      sortCondition = { price: 1 };
-    }
-
+    let sortCondition = {};
     let searchQuery = {};
-    //searching query
-    if (filters.category) {
-      searchQuery = { category: filters.category };
-    }
-    if (filters.subCategory) {
-      searchQuery = { subCategory: filters.subCategory };
+    page = page || 1;
+    console.log("id1:", null);
+    console.log("id1:", undefined);
+    console.log(filters)
+    // Complete the sort condition logic
+    if (id){
+      searchQuery = { creator: id };
+    }else if (id ==="")
+      {
+        searchQuery = { creator: req.raw.user._id };
+      }
+
+    if (filters){
+      if (filters.newest) {
+        sortCondition = { createdAt: -1 };
+      }
+  
+      if (filters.mostPrice) {
+        sortCondition = { price: -1 };
+      } else if (filters.leastPrice) {
+        sortCondition = { price: 1 };
+      }
+  
+      //searching query
+      if (filters.category) {
+        searchQuery = { category: filters.category };
+      }
+      if (filters.subCategory) {
+        searchQuery = { subCategory: filters.subCategory };
+      }
+    }else{
+      console.log("no filters")
     }
 
     if (searchTitle) {
       searchQuery.title = { $regex: searchTitle, $options: "i" };
     }
-
-    console.log("iam here:",);
-    console.log("searchQuery:", searchQuery);
-    console.log("sortCondition:", sortCondition);
-    console.log("cleanedFields:", cleanedFields);
-    console.log("creatorProperties:", creatorProperties);
 
     //validating data
     if (!page) page = 1;
@@ -252,12 +262,11 @@ const root = {
         .select(cleanedFields)
         .skip((page - 1) * PRODUCTS_PER_PAGE)
         .limit(PRODUCTS_PER_PAGE)
-        .sort(sortCondition)
+        .sort(sortCondition);
       // console.log("products:", products);
     } catch (error) {
       throw error;
     }
-    console.log("products:", products);
 
     const return_values = {
       aiProducts: products.map((p) => {
@@ -270,7 +279,6 @@ const root = {
         };
       }),
     };
-    console.log("return_values:", return_values);
     return return_values;
   },
 
@@ -368,6 +376,61 @@ const root = {
       }),
     };
   },
+  // //get user's ai products by id
+  // usersProducts: async function ({ id }, { req }, info) {
+  //   //fetching request data.
+  //   const requestedFields = info.fieldNodes.flatMap((fieldNode) =>
+  //     getRequestedFields(fieldNode)
+  //   );
+  //   let cleanedFields = requestedFields.map((field) =>
+  //     field.replace("aiProducts.", "")
+  //   );
+  //   // cleanedFields.push("updatedAt");
+  //   // Extract the paths that include the 'creator' field
+  //   const [creatorProperties, arrayCreatorProperties] =
+  //     extractCreatorProperties(cleanedFields);
+  //   cleanedFields = cleanedFields.filter(
+  //     (field) => !arrayCreatorProperties.includes(field)
+  //   );
+
+  //   //fetching user's products
+  //   id = id || req.raw.user._id;
+  //   console.log("id:", id);
+  //   let products;
+  //   console.log("cleanedFields:", cleanedFields);
+  //   console.log(creatorProperties);
+  //   try {
+  //     products = await AiProduct.find({ creator: id })
+  //       .populate("creator", creatorProperties)
+  //       .select(cleanedFields)
+  //       .sort({ createdAt: -1 });
+  //   } catch (error) {
+  //     if (error.statusCode) {
+  //       error.statusCode = 500;
+  //     }
+  //     throw error;
+  //   }
+
+  //   //validating data existance
+  //   if (!products) {
+  //     const error = new Error("Could not find products.");
+  //     error.statusCode = 404;
+  //     throw error;
+  //   }
+
+  //   //returning data
+  //   return {
+  //     products: products.map((p) => {
+  //       return {
+  //         ...p._doc,
+  //         _id: p._id ? p._id.toString() : undefined,
+  //         creator: p.creator,
+  //         createdAt: p.createdAt ? p.createdAt.toISOString() : undefined,
+  //         updatedAt: p.updatedAt ? p.updatedAt.toISOString() : undefined,
+  //       };
+  //     }),
+  //   };
+  // },
   //getuser by id
   user: async function ({ id }, { req }, info) {
     //fetching request data.
@@ -421,12 +484,14 @@ const root = {
 
     //fetching the number of products per user
     if (cleanedFields.includes("numberOfProducts")) {
-      cleanedFields = cleanedFields.filter((field) => field !== "numberOfProducts");
+      cleanedFields = cleanedFields.filter(
+        (field) => field !== "numberOfProducts"
+      );
       cleanedFields.push("products");
     }
     console.log("cleanedFields:", cleanedFields);
 
-    //fetching users 
+    //fetching users
     let users;
     try {
       users = await User.find()
@@ -453,7 +518,7 @@ const root = {
         _id: u._id ? u._id.toString() : undefined,
         createdAt: u.createdAt ? u.createdAt.toISOString() : undefined,
         updatedAt: u.updatedAt ? u.updatedAt.toISOString() : undefined,
-        numberOfProducts: u.products?u.products.length:undefined,
+        numberOfProducts: u.products ? u.products.length : undefined,
       };
     });
     // console.log("users:", result);

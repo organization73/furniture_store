@@ -637,8 +637,19 @@ response:
 request:post
 http://localhost:3000/graphql
 {
-    "query": " { aiProducts(filters:{leastPrice:1 newest:1}, searchTitle:\"soft\",page: 1) { aiProducts { _id title price category   } } }"
+    "query": " { aiProducts(filters:{category:\"sit\",subCategory:\"chair\",leastPrice:1 newest:1}, searchTitle:\"abdo\",page: 1) { aiProducts { _id title price category   } } }"
 }
+search:
+{
+    "query": " { aiProducts(page: 1,id:\"\") { aiProducts { _id title price category creator{username  firstName phone _id}  } } }"
+}
+id:
+    1-id not passed aiProducts(page: 1)
+        it will return all products from all users
+    2- id passed but empty aiProducts(page: 1,id:\"\") 
+        it will return all ai product of the login user(user regested in the token).
+    3-id has a value  aiProducts(page: 1,id:\"66847f76c4f8e49ded5f8583\")
+        return ai product of the user with the passed id.
 
 response:
 {

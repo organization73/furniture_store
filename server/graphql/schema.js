@@ -28,6 +28,7 @@ const schema = buildSchema(`
     isConfirmed: Boolean
     type: String
     numberOfProducts: Int
+    phone: String
     }
     type Rate {
         product: ID
@@ -91,11 +92,12 @@ const schema = buildSchema(`
 
     type RootQuery {
     products(filters: ProductFilterInput,searchTitle:String, page: Int ): productData!
-    aiProducts(filters: AiProductFilterInput,searchTitle:String, page: Int ): AiProductData!
+    aiProducts(filters: AiProductFilterInput,searchTitle:String, page: Int, id:ID ): AiProductData!
     product(id: ID!): Product!
     hello: String
     user(id:ID!): User!
     usersProducts(id:ID): productData!
+    usersAiProducts(id:ID): AiProductData!
     users(page: Int): [User!]!
     }
 
@@ -105,7 +107,3 @@ const schema = buildSchema(`
 `);
 
 module.exports = schema;
-
-// input ProductInputData {
-//     page: Int
-// }
