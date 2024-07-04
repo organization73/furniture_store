@@ -88,10 +88,25 @@ class VendorProductsScreen extends StatelessWidget {
                                   icon: const Icon(Iconsax.message))
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: "Gallery Productss\n",
+                          style: Theme.of(context).textTheme.headlineLarge),
+                      TextSpan(
+                          text: "You can apply filter to gallery products\n",
+                          style: Theme.of(context).textTheme.bodyLarge),
+                    ],
+                  ),
                 ),
               ),
               FutureBuilder(

@@ -56,7 +56,7 @@ class _AllGalleriesPageState extends State<AllGalleriesPage> {
                           text: "Find Thousands of Products\n",
                           style: Theme.of(context).textTheme.bodyLarge),
                       TextSpan(
-                          text: "Form Mulltiple Galleries",
+                          text: "From Mulltiple Galleries",
                           style: Theme.of(context).textTheme.headlineLarge),
                     ],
                   ),
