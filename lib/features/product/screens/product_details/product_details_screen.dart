@@ -1,3 +1,4 @@
+import 'package:decordash/features/chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/product_details/widgets/product_image_slider.dart';
@@ -19,7 +20,16 @@ class ProductDetailsScreen extends StatelessWidget {
           child: Text(
             'contactSeller'.tr,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.to(
+              () => ChatScreen(
+                userId: product.productDetails.productSeller.id,
+                vendor: product.productDetails.productSeller,
+              ),
+              duration: const Duration(milliseconds: 300),
+              transition: Transition.rightToLeft,
+            );
+          },
         ),
       ),
       body: SingleChildScrollView(

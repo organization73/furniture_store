@@ -4,6 +4,7 @@ import 'package:decordash/common/widgets/texts/brand_title_text_with_verified_ic
 import 'package:decordash/common/widgets/vendors/featured_gallery_card.dart';
 import 'package:decordash/features/chat/screens/chat_screen.dart';
 import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
+import 'package:decordash/features/home/widgets/sortable_withoutloadmore.dart';
 import 'package:decordash/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
@@ -102,11 +103,9 @@ class VendorProductsScreen extends StatelessWidget {
                     if (widget != null) return widget;
 
                     final products = snapshot.data!;
-                    return SortableProducts(
+                    return SortableProductsWithouTLoader(
                       products: products,
-                      loadMoreProducts: () {
-                        print("loaddded more vendor products");
-                      },
+                      loadMoreProducts: () {},
                     );
                   })
             ],
