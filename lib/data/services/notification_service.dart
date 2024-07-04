@@ -116,11 +116,11 @@ class NotificationsService {
     _initLocalNotification();
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      Get.to(
-        () => ChatScreen(userId: message.data['senderId']),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
-      );
+      // Get.to(
+      //   () => ChatScreen(userId: message.data['senderId']),
+      //   duration: const Duration(milliseconds: 300),
+      //   transition: Transition.rightToLeft,
+      // );
     });
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {

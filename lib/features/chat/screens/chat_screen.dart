@@ -2,34 +2,33 @@ import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/features/chat/widgets/chat_messages.dart';
 import 'package:decordash/features/chat/widgets/chat_text_field.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
+import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, required this.userId});
+  const ChatScreen({super.key, required this.userId, required this.vendor});
 
   final String userId;
-
+  final VendorModel vendor;
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   final chatController = ChatController.instance;
-
   @override
   void initState() {
-    chatController
-      ..getUserById(widget.userId)
-      ..getMessages(widget.userId);
+    chatController.getMessages(widget.userId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ChatController());
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: AppBar(title: Text(widget.vendor.name)),
       body: Padding(
         padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
         child: Column(

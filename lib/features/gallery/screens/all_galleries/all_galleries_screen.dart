@@ -1,3 +1,4 @@
+import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/common/widgets/shimmer/boxes_shimmer.dart';
 import 'package:decordash/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:decordash/common/widgets/vendors/vendor_showcase.dart';
@@ -25,7 +26,6 @@ class _AllGalleriesPageState extends State<AllGalleriesPage> {
     // TODO: implement initState
     super.initState();
     VendorController.vendorsPageNumber = 2;
-    relist = VendorController.instance.allVendors;
   }
 
   @override
@@ -33,7 +33,6 @@ class _AllGalleriesPageState extends State<AllGalleriesPage> {
     // TODO: implement dispose
     super.dispose();
     VendorController.vendorsPageNumber = 2;
-    VendorController.instance.allVendors.value = relist;
   }
 
   @override
@@ -66,7 +65,6 @@ class _AllGalleriesPageState extends State<AllGalleriesPage> {
                   height: TSizes.spaceBtwSections,
                 ),
                 Obx(() {
-                
                   if (vendorController.isLoading.value) {
                     return const ShimmerLoaderEffect(
                       width: double.infinity,
@@ -130,6 +128,12 @@ class _AllGalleriesPageState extends State<AllGalleriesPage> {
                         final vendors = await VendorRepo.instance
                             .fetchAllVendors(
                                 page: ++VendorController.vendorsPageNumber);
+                        if (vendors.isEmpty) {
+                          TLoaders.warningSnackBar(
+                              title: "No more vendors",
+                              message: "You have reached the end of the list");
+                          return;
+                        }
                         vendorController.allVendors.addAll(vendors);
                         // print("vvvvvvvvvvvvvvvv");
                         // print(VendorController.vendorsPageNumber);

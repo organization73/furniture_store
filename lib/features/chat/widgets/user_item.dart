@@ -1,5 +1,6 @@
 import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/features/chat/screens/chat_screen.dart';
+import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,16 @@ class _UserItemState extends State<UserItem> {
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.to(
-          () => ChatScreen(userId: widget.user.id),
+          () => ChatScreen(
+            userId: widget.user.id,
+            vendor: VendorModel(
+                image: widget.user.imageUrl,
+                name: "${widget.user.firstName} ${widget.user.lastName}",
+                id: widget.user.id,
+                isFeatured: widget.user.isFeatured,
+                isVerified: widget.user.isVerified,
+                location: 'Egypt'),
+          ),
           duration: const Duration(milliseconds: 300),
           transition: Transition.downToUp,
         ),
@@ -33,17 +43,9 @@ class _UserItemState extends State<UserItem> {
                 isNetworkImage: true,
                 height: 100.r,
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: CircleAvatar(
-                  // backgroundColor:
-                  //     widget.user.isOnline ? Colors.green : Colors.grey,
-                  radius: 5,
-                ),
-              ),
             ],
           ),
-          title: Text(widget.user.username!,
+          title: Text("${widget.user.firstName} ${widget.user.lastName}",
               style: Theme.of(context).textTheme.titleLarge),
           // subtitle: Text(
           //     'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',

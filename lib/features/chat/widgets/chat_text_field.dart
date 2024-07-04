@@ -1,10 +1,9 @@
 import 'dart:typed_data';
 import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/services/firebase_firestore_service.dart';
 import 'package:decordash/data/services/media_service.dart';
-import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/controllers/chat_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -20,13 +19,13 @@ class ChatTextField extends StatefulWidget {
 
 class _ChatTextFieldState extends State<ChatTextField> {
   final controller = TextEditingController();
-  final notificationsService = NotificationsService();
+  // final notificationsService = NotificationsService();
 
   Uint8List? file;
 
   @override
   void initState() {
-    notificationsService.getReceiverToken(widget.receiverId);
+    // notificationsService.getReceiverToken(widget.receiverId);
     super.initState();
   }
 
@@ -62,12 +61,14 @@ class _ChatTextFieldState extends State<ChatTextField> {
         receiverId: widget.receiverId,
         content: controller.text,
       );
-      await notificationsService.sendNotification(
-        body: controller.text,
-        senderId: FirebaseAuth.instance.currentUser!.uid,
-      );
+      // await notificationsService.sendNotification(
+      //   body: controller.text,
+      //   senderId: FirebaseAuth.instance.currentUser!.uid,
+      // );
       controller.clear();
       // FocusScope.of(Get.context!).unfocus();
+    } else {
+      TLoaders.warningSnackBar(title: "please provide a message");
     }
     // FocusScope.of(Get.context!).unfocus();
     ChatController.instance.scrollDown();
@@ -81,10 +82,10 @@ class _ChatTextFieldState extends State<ChatTextField> {
         receiverId: widget.receiverId,
         file: file!,
       );
-      await notificationsService.sendNotification(
-        body: 'image recieved',
-        senderId: FirebaseAuth.instance.currentUser!.uid,
-      );
+      // await notificationsService.sendNotification(
+      //   body: 'image recieved',
+      //   senderId: FirebaseAuth.instance.currentUser!.uid,
+      // );
       ChatController.instance.scrollDown();
     }
   }

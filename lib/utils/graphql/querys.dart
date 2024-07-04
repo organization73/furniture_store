@@ -161,6 +161,21 @@ class Querys {
   }
 }
           ''';
+  static getUserQuery(id) => '''
+            query {
+  user (id: \"$id\" ) {
+    _id
+    email
+    imageUrl
+    firstName
+    lastName
+    username
+    isConfirmed
+    type
+    numberOfProducts
+  }
+}
+          ''';
   static String getProductOfUser(String id) {
     return '''
  query {

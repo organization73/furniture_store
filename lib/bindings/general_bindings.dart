@@ -1,4 +1,5 @@
 import 'package:decordash/data/repositories/authentication/api_services.dart';
+import 'package:decordash/features/chat/controllers/chat_controller.dart';
 import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/features/home/controllers/home_page_controller.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
@@ -12,6 +13,7 @@ class GeneralBinding extends Bindings {
     Get.put(NetworkManager());
     Get.lazyPut(() => HttpService());
     Get.lazyPut(() => StartPageController());
+    Get.lazyPut(() => ChatController());
     Get.lazyPut(() => FavoriteController());
     Get.lazyPut(() => UserController());
     Get.put(StartPageController());

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/features/chat/model/message.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_storage_service.dart';
 
 class FirebaseFirestoreService {
@@ -18,7 +18,7 @@ class FirebaseFirestoreService {
       sentTime: DateTime.now(),
       receiverId: receiverId,
       messageType: MessageType.text,
-      senderId: FirebaseAuth.instance.currentUser!.uid,
+      senderId: UserController.instance.user.value.id,
     );
     await _addMessageToChat(receiverId, message);
     await _addReceiverIdToMonCollection(receiverId);
@@ -36,7 +36,7 @@ class FirebaseFirestoreService {
       sentTime: DateTime.now(),
       receiverId: receiverId,
       messageType: MessageType.image,
-      senderId: FirebaseAuth.instance.currentUser!.uid,
+      senderId: UserController.instance.user.value.id,
     );
     await _addMessageToChat(receiverId, message);
     await _addReceiverIdToMonCollection(receiverId);
@@ -48,7 +48,25 @@ class FirebaseFirestoreService {
   ) async {
     await firestore
         .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(UserController.instance.user.value.id)
+        .collection('chat')
+        .doc(receiverId)
+        .set({
+      'receiverId': receiverId,
+      'lastMessage': message.toJson(),
+    });
+    await firestore
+        .collection('Users')
+        .doc(UserController.instance.user.value.id)
+        .collection('chat')
+        .doc(receiverId)
+        .set({
+      'receiverId': receiverId,
+      'lastMessage': message.toJson(),
+    });
+    await firestore
+        .collection('Users')
+        .doc(UserController.instance.user.value.id)
         .collection('chat')
         .doc(receiverId)
         .collection('messages')
@@ -58,7 +76,7 @@ class FirebaseFirestoreService {
         .collection('Users')
         .doc(receiverId)
         .collection('chat')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(UserController.instance.user.value.id)
         .collection('messages')
         .add(message.toJson());
   }
@@ -66,9 +84,15 @@ class FirebaseFirestoreService {
   static Future<void> _addReceiverIdToMonCollection(String receiverId) async {
     await firestore
         .collection('UserChats')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(UserController.instance.user.value.id)
         .collection('receivers')
         .doc(receiverId)
+        .set({'receiverId': receiverId});
+    await firestore
+        .collection('UserChats')
+        .doc(receiverId)
+        .collection('receivers')
+        .doc(UserController.instance.user.value.id)
         .set({'receiverId': receiverId});
   }
 
@@ -78,6 +102,8 @@ class FirebaseFirestoreService {
         .where("userName", isGreaterThanOrEqualTo: name)
         .get();
 
-    return snapshot.docs.map((doc) => UserModel.fromJsonForFireBase(doc.data())).toList();
+    return snapshot.docs
+        .map((doc) => UserModel.fromJsonForFireBase(doc.data()))
+        .toList();
   }
 }
