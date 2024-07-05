@@ -66,33 +66,34 @@ exports.createProduct = async (req, res, next) => {
     const imageUrl = images[i];
     try {
       //make the values fixed until the AI model is deployed.
-      // const response = await fetch(
-      //   `http://localhost:8000/predict?image_url=${imageUrl}`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
-      // const classificationResult = await response.json();
-      // if (response.status !== 201 && response.status !== 200) {
-      //   throw new Error("imageUrl not valid.");
-      // }
-
-      // imagesObjests.push({
-      //   imageUrl: imageUrl,
-      //   class: classificationResult.class,
-      //   confidence: classificationResult.confidence,
-      // });
-      const randomNumber = Math.floor(Math.random() * (98 - 85 + 1)) + 85;
+      const response = await fetch(
+        `http://localhost:8000/predict?image_url=${imageUrl}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const classificationResult = await response.json();
+      if (response.status !== 201 && response.status !== 200) {
+        throw new Error("imageUrl not valid.");
+      }
+      console.log("classificationResult:", classificationResult);
+      classificationResult.confidence = classificationResult.confidence * 100;
       imagesObjests.push({
         imageUrl: imageUrl,
-        class: "chair",
-        confidence: randomNumber,
+        class: classificationResult.class,
+        confidence: classificationResult.confidence,
+        // });
+        // const classificationResult = {};
+        // const randomNumber = Math.floor(Math.random() * (98 - 85 + 1)) + 85;
+        // imagesObjests.push({
+        //   imageUrl: imageUrl,
+        //   class: "chair",
+        //   confidence: randomNumber,
       });
-      const classificationResult = {};
-      classificationResult.confidence = 59;
+      // classificationResult.confidence = 59;
 
       //check the confidenece of the classification
       if (classificationResult.confidence < 60 && !appeallingClassfication) {
@@ -131,7 +132,6 @@ exports.createProduct = async (req, res, next) => {
     error.codeStatus = 401;
     next(error);
   }
-
 };
 
 exports.createAIProduct = async (req, res, next) => {
@@ -489,16 +489,21 @@ exports.reportProduct = async (req, res, next) => {
     if (!productId) {
       return throwError(422, "productId is required", "server", next);
     }
-    
+
     //find the product
     let product = await Product.findById(productId);
     if (!product) {
       return throwError(404, "Product not found", "server", next);
     }
     //check if the user has already reported the product
-    let reported = await ReportProduct.findOne({productId: productId, reporter: req.user._id});
+    let reported = await ReportProduct.findOne({
+      productId: productId,
+      reporter: req.user._id,
+    });
     if (reported) {
-      return res.status(403).json({ message: "You have already reported this product" });
+      return res
+        .status(403)
+        .json({ message: "You have already reported this product" });
     }
     //create the report
     const report = new ReportProduct({
