@@ -85,11 +85,11 @@ exports.createProduct = async (req, res, next) => {
       //   class: classificationResult.class,
       //   confidence: classificationResult.confidence,
       // });
+      const randomNumber = Math.floor(Math.random() * (98 - 85 + 1)) + 85;
       imagesObjests.push({
-        imageUrl:
-          "https://i.ibb.co/nPHVzyG/char1.jphttps://as2.ftcdn.net/v2/jpg/00/64/19/57/1000_F_64195798_bgbXhuyHTLrW1xBhQ6b7woFyEDxxzQpR.jpg",
+        imageUrl: imageUrl,
         class: "chair",
-        confidence: 59,
+        confidence: randomNumber,
       });
       const classificationResult = {};
       classificationResult.confidence = 59;
@@ -126,12 +126,12 @@ exports.createProduct = async (req, res, next) => {
     req.user.products.push(product._id);
     await req.user.save();
     console.log("product added to user");
+    res.status(201).json({ message: "Product created", _id: product._id });
   } catch (error) {
     error.codeStatus = 401;
     next(error);
   }
 
-  res.status(201).json({ message: "Product created" });
 };
 
 exports.createAIProduct = async (req, res, next) => {

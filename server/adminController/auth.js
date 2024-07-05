@@ -137,7 +137,7 @@ exports.postLogin = async (req, res, next) => {
   }
 
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email, type:"Admin" });
     if (!user) {
       const error = new Error("Invalid email or password.");
       error.statusCode = 401;

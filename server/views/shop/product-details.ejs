@@ -1,0 +1,174 @@
+<%- include('../includes/head.ejs') %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/main.css">
+<script src="/js/productHandler.js" defer></script>
+  <style>
+    .error-notification {
+      display: block;
+      background-color: red;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      position: fixed;
+      z-index: 1000;
+    }
+
+    .success-notification {
+      display: block;
+      background-color: green;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+  </style>
+
+  <style>
+    .product-info {
+      font-family: 'Arial', sans-serif;
+    }
+
+    .product-info h2,
+    .product-info h3 {
+      color: #333;
+    }
+
+    .product-info p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .creator-info {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .creator-info h5 {
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    .creator-info img {
+      margin-top: 10px;
+    }
+
+    .success-notification {
+      display: block;
+      background-color: green;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+  </style>
+  </head>
+
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+      <div class="card__actions1">
+        <div class="card__actions1"></div>
+        <button class="btn" type="button"
+          onclick="approveProduct(this.closest('article'), '<%= product._id %>')">approve</button>
+        <input type="hidden" value="<%= product._id %>" name="productId">
+        <button class="btn" type="button"
+          onclick="deleteProduct(this.closest('article'), '<%= product._id %>')">Delete</button>
+      </div>
+      <main class="container mt-5">
+
+
+        <div class="col-md-6 product-info">
+          <!-- Product Details -->
+          <h2>
+            <%= product.title %>
+          </h2>
+          <p>
+            <%= product.description %>
+          </p>
+          <p>Price: $<%= product.price %>
+          </p>
+          <p>Condition: <%= product.details.condition %>
+          </p>
+          <p>Color: <%= product.details.color %>
+          </p>
+          <!-- Creator Details -->
+          <div class="creator-info d-flex align-items-center">
+            <div class="col-3">
+              <img
+                src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?size=626&ext=jpg&ga=GA1.1.1413502914.1720051200&semt=ais_user"
+                class="img-fluid rounded-circle" alt="Creator's Image" style="width: 100px;">
+            </div>
+            <div class="col-10">
+              <h6>Creator: <%= product.creator.username %>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+        </div>
+        <div class="col-md-12">
+          <!-- Product Images Carousel -->
+          <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% product.images.forEach(function(image, index) { %>
+                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                  <div class="row g-3">
+                    <% for(let i=0; i < product.images.length && i < 5; i++) { %>
+                      <div class="col-md-6 col-lg-4">
+                        <div class="image-container" style="position: relative;">
+                          <img src="<%= product.images[i].imageUrl %>" class="img-fluid" alt="Product Image"
+                            style="max-width: 100%; height: auto; display: block;">
+                          <p class="text-center">Confidence: <%= product.images[i].confidence %>%</p>
+                        </div>
+                      </div>
+                      <% } %>
+                  </div>
+                </div>
+                <% }); %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+        </div>
+      </main>
+      <%- include('../includes/end.ejs') %>
+
+
+
+        <!-- 
+      
+       <div class="card__actions">
+          <div class="card__actions"></div>
+          <button class="btn" type="button"
+            onclick="approveProduct(this.closest('article'), '<%= product._id %>')">approve</button>
+          <input type="hidden" value="<%= product._id %>" name="productId">
+          <button class="btn" type="button"
+            onclick="deleteProduct(this.closest('article'), '<%= product._id %>')">Delete</button>
+        </div>
+      -->

@@ -14,6 +14,12 @@ router.get("/products", isAuth, shopController.getProducts);
 
 router.delete("/product/:productId", isAuth, shopController.deleteProduct);
 
+//approve products
+router.patch("/approve-product/:productId", isAuth, shopController.approveProduct);
+
+//get product details
+router.get("/product-details/:productId", isAuth, shopController.getProduct);
+
 router.get("/chat", isAuth, shopController.getChat);
 
 module.exports = router;
