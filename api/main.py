@@ -23,6 +23,7 @@ CLASS_NAMES = ["bed", "chair", "sofa", "swivelchair", "table"]
 
 @app.get("/ping")
 async def ping():
+    print("Hello, I am alive")
     return "Hello, I am alive"
 
 def read_file_as_image(data) -> np.ndarray:
