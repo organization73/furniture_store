@@ -136,7 +136,7 @@ class HttpService extends GetxService {
     return response['data']['user'];
   }
 
-  Future<List<dynamic>> getProductOfUser(String id) async {
+  Future<List<dynamic>> getProductOfUser(String id,{int page = 1}) async {
     String query = Querys.getProductOfUser(id);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         "${GetStorage().read("token")}", 'graphql', query);

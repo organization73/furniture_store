@@ -155,12 +155,13 @@ class ProductRepo extends GetxController {
   }
 
   Future<List<ProductModel>> getProductsForVendor(
-      {required String vendorId, int limit = -1}) async {
+      {required String vendorId, int limit = -1,int page = 1}) async {
     try {
-      var r = await HttpService.instance.getProductOfUser(vendorId);
+      var r = await HttpService.instance.getProductOfUser(vendorId,page:1);
       if (r.isEmpty) {
         return [];
       }
+      print(r);
       var p = r
           // TODO product mapping
           .map((m) => ProductModel(
@@ -196,6 +197,7 @@ class ProductRepo extends GetxController {
                       accountType: mapType(m['creator']['type'])))))
           .toList();
       if (limit == -1) {
+        print("object");
         return p;
       } else {
         if (p.length < limit) {
@@ -336,7 +338,7 @@ class ProductRepo extends GetxController {
       // hereeeer
     } catch (e) {
       LoggerHelper.error('error', e);
-      
+
       rethrow;
     }
   }

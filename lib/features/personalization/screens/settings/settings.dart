@@ -1,4 +1,11 @@
+import 'package:decordash/data/repositories/authentication/api_services.dart';
+import 'package:decordash/data/repositories/product/product.dart';
+import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:decordash/features/ai/screens/ai_design_screen.dart';
+import 'package:decordash/features/home/widgets/sortable_for_myuser.dart';
+import 'package:decordash/features/home/widgets/sortable_products.dart';
+import 'package:decordash/features/home/widgets/sortable_withoutloadmore.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -132,9 +139,33 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
-                  
-                
-                  
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'My Products',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
+                  SizedBox(
+                    height: TSizes.spaceBtwSections,
+                  ),
+                  FutureBuilder(
+                      future: getMyProducts(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          print("Error while loading my products");
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return SortedProductForMyUser(
+                            products: snapshot.data!, loadMoreProducts: () {});
+                      }),
+
                   const Divider(),
                   // SettingsMenuTile(
                   //   icon: Iconsax.arrow_up_1_copy,
@@ -189,4 +220,8 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<List<ProductModel>> getMyProducts() async {
+  return await ProductRepo.instance.getProductsForVendor(vendorId: "");
 }
