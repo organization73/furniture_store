@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAAXowk6cdwFT_7CU_mO1GyJTUE6Yy0At4',
-    appId: '1:263651591619:android:4a7f23f1083882ee2e2976',
+    appId: '1:263651591619:android:bcc1017099c7b20d2e2976',
     messagingSenderId: '263651591619',
     projectId: 'decordashstore-98472',
     storageBucket: 'decordashstore-98472.appspot.com',
@@ -59,12 +59,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDqljPbsXbzH52sc7_QcJF8_JpeShK1WN4',
-    appId: '1:263651591619:ios:9001adbbf2348a382e2976',
+    appId: '1:263651591619:ios:308757152d57ed2f2e2976',
     messagingSenderId: '263651591619',
     projectId: 'decordashstore-98472',
     storageBucket: 'decordashstore-98472.appspot.com',
-    androidClientId: '263651591619-u79g29j3q0hn8mjcf19ktsf2qc0j5vpc.apps.googleusercontent.com',
+    androidClientId: '263651591619-1j1d13lpjkvtfqj6sehuhkmblq9j2v4n.apps.googleusercontent.com',
     iosClientId: '263651591619-b7tkeohq3l4lc4j1nmjbq8ohs597ob1a.apps.googleusercontent.com',
     iosBundleId: 'com.decordash.decordash',
   );
+
 }

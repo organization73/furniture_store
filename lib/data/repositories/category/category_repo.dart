@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/features/home/model/product_category_model.dart';
 import 'package:decordash/features/home/model/vendor_category_model.dart';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/services/cloud_storage/firebase_storage_service.dart';

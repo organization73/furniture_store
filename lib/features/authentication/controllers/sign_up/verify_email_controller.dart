@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:decordash/features/authentication/controllers/sign_up/sign_up_controller.dart';
 import 'package:decordash/features/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decordash/common/widgets/action_confirmation/action_confirmation_page.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';

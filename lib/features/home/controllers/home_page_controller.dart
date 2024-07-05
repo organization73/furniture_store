@@ -1,12 +1,8 @@
-import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/data/repositories/product/product_repo.dart';
-import 'package:decordash/features/product/model/product.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/features/home/controllers/product/product_controller.dart';
 import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class StartPageController extends GetxController {
   static StartPageController get instance => Get.find();

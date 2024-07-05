@@ -2,7 +2,6 @@ import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/authentication/screens/sign_in_with_phone/enter_code.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';

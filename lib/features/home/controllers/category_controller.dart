@@ -1,12 +1,8 @@
 import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/data/repositories/category/category_repo.dart';
 import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:decordash/features/home/model/category_model.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/utils/constants/enums.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:get/get.dart';
 

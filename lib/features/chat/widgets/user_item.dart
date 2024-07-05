@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class UserItem extends StatefulWidget {
   const UserItem({super.key, required this.user});
