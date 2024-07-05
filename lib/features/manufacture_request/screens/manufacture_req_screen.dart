@@ -1,10 +1,18 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:decordash/features/chat/screens/chat_screen.dart';
+import 'package:decordash/features/home/model/vendor_model.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
+import 'package:decordash/utils/graphql/querys.dart';
+import 'package:decordash/utils/http/http_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/features/manufacture_request/screens/add_new_request/screens/add_new_request.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 // TODO Translate this page
 
 class ManufactureRequestsPage extends StatelessWidget {
@@ -13,95 +21,105 @@ class ManufactureRequestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        tooltip: 'Add a request',
-        onPressed: () => Get.to(
-          () => const AddManRequestPage(),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        ),
-        heroTag: 'addFAB',
-        child: const Icon(Icons.add),
-      ),
       appBar: AppBar(
         title: const Text('Manufacture Requests'),
       ),
       body: SafeArea(
-        child: Center(
-          child: ListView.separated(
-            itemCount: _feedItems.length,
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider();
-            },
-            itemBuilder: (BuildContext context, int index) {
-              final item = _feedItems[index];
-              return Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _AvatarImage(item.user.imageUrl),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                  child: RichText(
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                    text: item.user.firstName,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall,
+        child: FutureBuilder(
+            future: fetchAiProducts(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                print(snapshot.error);
+                print("Error loading the Ai products");
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasData) {
+                return Center(
+                  child: ListView.separated(
+                    itemCount: snapshot.data!.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider();
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = snapshot.data![index];
+                      return Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _AvatarImage(item.user.imageUrl),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                          child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(children: [
+                                          TextSpan(
+                                            text: item.user.firstName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall,
+                                          ),
+                                        ]),
+                                      )),
+                                    ],
                                   ),
-                                ]),
-                              )),
-                              Text('· 5m',
-                                  style:
-                                      Theme.of(context).textTheme.labelSmall),
-                            ],
-                          ),
-                          if (item.content != null) Text(item.content!),
-                          if (item.imageUrl != null)
-                            CachedNetworkImage(
-                              imageUrl: item.imageUrl!,
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
-                                height: 200.h,
-                                margin: const EdgeInsets.only(top: 15.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) => Icon(
-                                Icons.error_rounded,
-                                size: TSizes.iconLg,
+                                  if (item.content != null) Text(item.content!),
+                                  if (item.imageUrl != null)
+                                    CachedNetworkImage(
+                                      imageUrl: item.imageUrl!,
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        height: 200.h,
+                                        margin:
+                                            const EdgeInsets.only(top: 15.0),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(
+                                        Icons.error_rounded,
+                                        size: TSizes.iconLg,
+                                      ),
+                                    ),
+                                  if (snapshot.data![index].user.id !=
+                                      UserController.instance.user.value.id)
+                                    _ActionsRow(item: item)
+                                ],
                               ),
                             ),
-                          _ActionsRow(item: item)
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+              return const Center(
+                child: Text("Error"),
               );
-            },
-          ),
-        ),
+            }),
       ),
     );
   }
@@ -153,7 +171,22 @@ class _ActionsRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(
+                () => ChatScreen(
+                  userId: item.user.id,
+                  vendor: VendorModel(
+                      image: item.user.imageUrl,
+                      name: "${item.user.firstName} ${item.user.lastName}",
+                      id: item.user.id,
+                      isFeatured: item.user.isFeatured,
+                      isVerified: item.user.isVerified,
+                      location: 'Egypt'),
+                ),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.downToUp,
+              );
+            },
             icon: const Icon(Icons.mode_comment_outlined),
             label: const Text('Message'),
           ),
@@ -180,74 +213,89 @@ class FeedItem {
       this.retweetsCount = 0});
 }
 
-final List<UserModel> _users = [
-  UserModel(
-    imageUrl: 'https://picsum.photos/id/1062/80/80',
-    firstName: 'John Doe',
-    email: 'test@gmail.com',
-  ),
-  UserModel(
-    imageUrl: 'https://picsum.photos/id/1066/80/80',
-    firstName: 'John Doe',
-    email: 'test@gmail.com',
-  ),
-  UserModel(
-    imageUrl: 'https://picsum.photos/id/1072/80/80',
-    firstName: 'John Doe',
-    email: 'test@gmail.com',
-  ),
-  UserModel(
-    imageUrl: 'https://picsum.photos/id/80/80/80',
-    firstName: 'John Doe',
-    email: 'test@gmail.com',
-  ),
-];
+// final List<UserModel> _users = [
+//   UserModel(
+//     imageUrl: 'https://picsum.photos/id/1062/80/80',
+//     firstName: 'John Doe',
+//     email: 'test@gmail.com',
+//   ),
+//   UserModel(
+//     imageUrl: 'https://picsum.photos/id/1066/80/80',
+//     firstName: 'John Doe',
+//     email: 'test@gmail.com',
+//   ),
+//   UserModel(
+//     imageUrl: 'https://picsum.photos/id/1072/80/80',
+//     firstName: 'John Doe',
+//     email: 'test@gmail.com',
+//   ),
+//   UserModel(
+//     imageUrl: 'https://picsum.photos/id/80/80/80',
+//     firstName: 'John Doe',
+//     email: 'test@gmail.com',
+//   ),
+// ];
 
-final List<FeedItem> _feedItems = [
-  FeedItem(
-    content:
-        "A son asked his father (a programmer) why the sun rises in the east, and sets in the west. His response? It works, don’t touch!",
-    user: _users[0],
-    imageUrl: "https://picsum.photos/id/1000/960/540",
-    likesCount: 100,
-    commentsCount: 10,
-    retweetsCount: 1,
-  ),
-  FeedItem(
-      user: _users[1],
-      imageUrl: "https://picsum.photos/id/1001/960/540",
-      likesCount: 10,
-      commentsCount: 2),
-  FeedItem(
-      user: _users[0],
-      content:
-          "How many programmers does it take to change a light bulb? None, that’s a hardware problem.",
-      likesCount: 50,
-      commentsCount: 22,
-      retweetsCount: 30),
-  FeedItem(
-      user: _users[1],
-      content:
-          "Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.",
-      imageUrl: "https://picsum.photos/id/1002/960/540",
-      likesCount: 500,
-      commentsCount: 202,
-      retweetsCount: 120),
-  FeedItem(
-    user: _users[2],
-    content: "Good morning!",
-    imageUrl: "https://picsum.photos/id/1003/960/540",
-  ),
-  FeedItem(
-    user: _users[1],
-    imageUrl: "https://picsum.photos/id/1004/960/540",
-  ),
-  FeedItem(
-    user: _users[3],
-    imageUrl: "https://picsum.photos/id/1005/960/540",
-  ),
-  FeedItem(
-    user: _users[0],
-    imageUrl: "https://picsum.photos/id/1006/960/540",
-  ),
-];
+// final List<FeedItem> _feedItems = [
+//   FeedItem(
+//     content:
+//         "A son asked his father (a programmer) why the sun rises in the east, and sets in the west. His response? It works, don’t touch!",
+//     user: _users[0],
+//     imageUrl: "https://picsum.photos/id/1000/960/540",
+//     likesCount: 100,
+//     commentsCount: 10,
+//     retweetsCount: 1,
+//   ),
+//   FeedItem(
+//       user: _users[1],
+//       imageUrl: "https://picsum.photos/id/1001/960/540",
+//       likesCount: 10,
+//       commentsCount: 2),
+//   FeedItem(
+//       user: _users[0],
+//       content:
+//           "How many programmers does it take to change a light bulb? None, that’s a hardware problem.",
+//       likesCount: 50,
+//       commentsCount: 22,
+//       retweetsCount: 30),
+//   FeedItem(
+//       user: _users[1],
+//       content:
+//           "Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.",
+//       imageUrl: "https://picsum.photos/id/1002/960/540",
+//       likesCount: 500,
+//       commentsCount: 202,
+//       retweetsCount: 120),
+//   FeedItem(
+//     user: _users[2],
+//     content: "Good morning!",
+//     imageUrl: "https://picsum.photos/id/1003/960/540",
+//   ),
+//   FeedItem(
+//     user: _users[1],
+//     imageUrl: "https://picsum.photos/id/1004/960/540",
+//   ),
+//   FeedItem(
+//     user: _users[3],
+//     imageUrl: "https://picsum.photos/id/1005/960/540",
+//   ),
+//   FeedItem(
+//     user: _users[0],
+//     imageUrl: "https://picsum.photos/id/1006/960/540",
+//   ),
+// ];
+
+Future<List<FeedItem>> fetchAiProducts() async {
+  String query = Querys.getAiProducts(1);
+  var q = await THttpHelper.postWithBearAuthForGraphQLRequest(
+      GetStorage().read("token"), "graphql", query);
+  print(q);
+  List list = q['data']['aiProducts']['aiProducts'];
+  return list
+      .map((e) => FeedItem(
+            user: UserModel.fromJson(e['creator']),
+            content: e['description'],
+            imageUrl: e['imageUrl'],
+          ))
+      .toList();
+}

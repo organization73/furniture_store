@@ -455,7 +455,9 @@ class _AiPageState extends State<AiPage> {
                         "subCategory": imageData['subcategory'],
                         "imageUrl": "https://chair.com"
                       });
-                      print(r.body);
+
+                      TLoaders.successSnackBar(
+                          title: "Product Added Successfully.");
                     }
                   },
                 ),

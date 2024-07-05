@@ -70,21 +70,21 @@ class UserRepo extends GetxController {
     }
   }
 
-  Future<UserModel?> getUserData() async {
-    final userData = GetStorage().read('user_data');
-    if (userData != null) {
-      return UserModel.fromJson(userData);
-    }
-    return null;
-  }
+  // Future<UserModel?> getUserData() async {
+  //   final userData = GetStorage().read('user_data');
+  //   if (userData != null) {
+  //     return UserModel.fromJson(userData);
+  //   }
+  //   return null;
+  // }
 
-  Future<void> updateUserRecord(UserModel user) async {
-    try {
-      GetStorage().write('user_data', user.toJson());
-    } catch (e) {
-      throw 'Failed to update user data: $e';
-    }
-  }
+  // Future<void> updateUserRecord(UserModel user) async {
+  //   try {
+  //     GetStorage().write('user_data', user.toJson());
+  //   } catch (e) {
+  //     throw 'Failed to update user data: $e';
+  //   }
+  // }
   // Future<void> updateUserData(UserModel updatedUser) async {
   //   try {
   //     await _db
@@ -118,14 +118,16 @@ class UserRepo extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
-  Future<void> updateGalleryInfoTOServer(String name , String address, String imageUrl) async{
+
+  Future<void> updateGalleryInfoTOServer(
+      String name, String address, String imageUrl) async {
     try {
       await HttpService.instance.updateGalleryInfo(name, address, imageUrl);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
-
   }
+
   Future<void> removeUserRecord(String userId) async {
     try {
       // Delete the user's document from the 'Users' collection

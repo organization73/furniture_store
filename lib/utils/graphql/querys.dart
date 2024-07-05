@@ -107,6 +107,32 @@ class Querys {
               }
             }
           ''';
+  static getAiProducts(page) => '''
+            query {
+              aiProducts(filters:{category:\"\",subCategory:\"\",leastPrice:1 newest:1}, searchTitle:\"\",page: $page)  {
+                aiProducts {
+                  _id
+                  title
+                  price
+                  description
+                  imageUrl
+                  category
+                  
+                  creator {
+                    _id
+    email
+    imageUrl
+    firstName
+    lastName
+    username
+    isConfirmed
+    type
+    
+                  }
+                }
+              }
+            }
+          ''';
   static productOneQuery(id) => '''
             query GetProducts {
               product(id: \"$id\") {

@@ -16,6 +16,7 @@ class GeneralBinding extends Bindings {
     Get.lazyPut(() => ChatController());
     Get.lazyPut(() => FavoriteController());
     Get.lazyPut(() => UserController());
+    Get.put(ChatController());
     Get.put(StartPageController());
     Get.put(UserController());
   }
