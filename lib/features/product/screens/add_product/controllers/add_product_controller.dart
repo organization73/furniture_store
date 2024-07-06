@@ -129,7 +129,7 @@ class AddProductController extends GetxController {
           AlertDialog(
             title: const Text('Low Confidence'),
             content: const Text(
-                'Image classification confidence is too low. Do you want to report this?'),
+                'Image doesn\' have furniture. Do you want to report this?'),
             actions: [
               TextButton(
                 onPressed: () async {
@@ -184,7 +184,6 @@ class AddProductController extends GetxController {
               TextButton(
                 onPressed: () {
                   // Handle the user's choice not to report
-                  Get.back(); // Close the dialog
                   Get.back(); // Close the dialog
                   // Add your code here to handle the logic when the user chooses not to report
                 },
