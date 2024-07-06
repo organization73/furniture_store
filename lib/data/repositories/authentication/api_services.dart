@@ -115,7 +115,6 @@ class HttpService extends GetxService {
       "title": product.productName,
       "price": product.productPrice,
       "description": product.productDetails.productDesc,
-      "images": product.productDetails.productListImages,
       "details": {
         "wood": product.productDetails.productSpecs['ablakash'],
         "abalakach": "your ablakash here",

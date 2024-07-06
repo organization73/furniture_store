@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:decordash/data/repositories/authentication/api_services.dart';
+import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,8 +17,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class EditProductScreen extends StatelessWidget {
-  const EditProductScreen({super.key, required this.productId});
+  const EditProductScreen(
+      {super.key, required this.productId, required this.editedProduct});
   final String productId;
+  final ProductModel editedProduct;
   @override
   Widget build(BuildContext context) {
     final addController = Get.put(AddProductController());
@@ -59,7 +62,7 @@ class EditProductScreen extends StatelessWidget {
 
               // Create a Color object
               Color color = Color(value);
-              
+
               AddProductController.instance.color = color;
               AddProductController.instance.pickedImagePaths.value =
                   ((snapShot.data!['images']) as List<dynamic>)
@@ -76,7 +79,8 @@ class EditProductScreen extends StatelessWidget {
                 appBar: AppBar(
                     actions: [
                       IconButton(
-                          onPressed: () => addController.editProduct(id:productId),
+                          onPressed: () => addController.editProduct(
+                              id: productId, Editingproduct: editedProduct),
                           icon: const Icon(Icons.edit))
                     ],
                     title: const Text(
@@ -87,10 +91,6 @@ class EditProductScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          child: BuildProductImageUpload(),
-                        ),
                         SizedBox(
                           height: 10.h,
                         ),

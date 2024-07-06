@@ -344,19 +344,7 @@ class ProductRepo extends GetxController {
   }
   Future<void> uploadProductToDatabase2(ProductModel product) async {
     try {
-      final storage = Get.put(FirebaseStorageServices());
-
-      for (var imagePath in product.productDetails.productListImages) {
-        if (imagePath.startsWith('http')) continue;
-        final imageFile = await storage.getImageDatafromAssets(imagePath);
-        final imageUrl =
-            await storage.uploadImageData('Products', imageFile, imagePath);
-        // imagePath = imageUrl;
-        product.productDetails.productListImages = product
-            .productDetails.productListImages
-            .map((path) => path == imagePath ? imageUrl : path)
-            .toList();
-      }
+    
       await HttpService.instance.editProduct(product);
       // hereeeer
     } catch (e) {

@@ -1,4 +1,6 @@
 import 'package:decordash/common/widgets/products/favourite_icon/favourite_icon.dart';
+import 'package:decordash/features/home/widgets/product_screen_for_user.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/styles/shadows.dart';
@@ -26,13 +28,26 @@ class ProductCardVerical extends StatelessWidget {
         product.productPrice, product.productSalePrice);
 
     return GestureDetector(
-      onTap: () => Get.to(
-        () => ProductDetailsScreen(
-          product: product,
-        ),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
-      ),
+      onTap: () {
+        if (product.productDetails.productSeller.id ==
+            UserController.instance.user.value.id) {
+          Get.to(
+            () => ProductDetailsScreenForUser(
+              product: product,
+            ),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
+        } else {
+          Get.to(
+            () => ProductDetailsScreen(
+              product: product,
+            ),
+            duration: const Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(

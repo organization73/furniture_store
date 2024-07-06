@@ -197,7 +197,7 @@ class AddProductController extends GetxController {
     }
   }
 
-  Future<void> editProduct({String id = ''}) async {
+  Future<void> editProduct({String id = '',required ProductModel Editingproduct}) async {
     try {
       FullScreenLoader.openLoadingDialog(
           'processingLoading'.tr, 'assets/animations/animation-of-docer.json');
