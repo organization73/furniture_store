@@ -6,6 +6,7 @@ from io import BytesIO
 import numpy as np
 import os
 import requests
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -45,13 +46,16 @@ def read_file_as_image(data) -> np.ndarray:
 #         'class': predicted_class,
 #         'confidence': float(confidence)
 #     }
+class InputModel(BaseModel):
+    imageUrl: str
 
 @app.post("/predict")
-async def predict(image_url: str):
-    print("image_url: ", image_url)
+async def predict(inputModel: InputModel):
+    imageUrl = inputModel.imageUrl
+    print("imageUrl: ", imageUrl)
     try:
         # Download the image
-        response = requests.get(image_url)
+        response = requests.get(imageUrl)
         response.raise_for_status()
         image_data = response.content
 
