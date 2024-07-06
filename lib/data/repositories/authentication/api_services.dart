@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/graphql/querys.dart';
 import 'package:decordash/utils/http/http_client.dart';
 import 'package:decordash/utils/logging/logger.dart';
-import 'package:decordash/utils/popups/full_screen_loader.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;

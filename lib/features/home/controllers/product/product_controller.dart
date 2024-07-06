@@ -21,7 +21,7 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
 
-      this.featuredProducts.assignAll(featuredProducts);
+      featuredProducts.assignAll(featuredProducts);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     } finally {

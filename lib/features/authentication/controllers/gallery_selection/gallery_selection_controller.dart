@@ -1,4 +1,3 @@
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordash/features/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:decordash/features/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:decordash/features/authentication/screens/login/login_screen.dart';

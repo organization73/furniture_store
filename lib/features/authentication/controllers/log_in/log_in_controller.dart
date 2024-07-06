@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:decordash/data/repositories/user/user_repo.dart';
 import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/logging/logger.dart';
@@ -93,16 +90,18 @@ class LoginController extends GetxController {
 
       final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
-      await userController.saveUserRecord(userCred);
-      await UserRepo.instance.updateSingleField(
-        {'lastActive': DateTime.now()},
-      );
+      // await userController.saveUserRecord(userCred);
 
-      await notifications.requestPermission();
-      await notifications.getToken();
+      // await notifications.requestPermission();
+      // await notifications.getToken();
       FullScreenLoader.stopLoading();
 
       AuthenticatorRepo.instance.screenRedirect();
+      LoggerHelper.info('Gooooogle Siiiiiiii');
+      LoggerHelper.info(userCred.user!.uid.toString());
+      LoggerHelper.info(userCred.user!.email.toString());
+      LoggerHelper.info(userCred.user!.displayName.toString());
+      LoggerHelper.info(userCred.user!.photoURL.toString());
     } catch (e) {
       FullScreenLoader.stopLoading();
       LoggerHelper.error(e.toString());

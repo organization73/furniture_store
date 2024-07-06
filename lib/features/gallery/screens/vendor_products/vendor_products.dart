@@ -1,7 +1,6 @@
 import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordash/common/widgets/images/circular_image.dart';
 import 'package:decordash/common/widgets/texts/brand_title_text_with_verified_icon.dart';
-import 'package:decordash/common/widgets/vendors/featured_gallery_card.dart';
 import 'package:decordash/features/chat/screens/chat_screen.dart';
 import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/features/home/widgets/sortable_withoutloadmore.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';
-import 'package:decordash/features/home/widgets/sortable_products.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

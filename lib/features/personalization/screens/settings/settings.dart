@@ -16,7 +16,6 @@ import 'package:decordash/data/repositories/authentication/authentication_repo.d
 import 'package:decordash/features/manufacture_request/screens/manufacture_req_screen.dart';
 import 'package:decordash/features/personalization/screens/profile/profile.dart';
 import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/theme/theme.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 

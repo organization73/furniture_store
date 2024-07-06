@@ -20,7 +20,6 @@ import 'package:decordash/features/home/widgets/room_section.dart';
 import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeScreen extends StatelessWidget {

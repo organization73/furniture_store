@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:263651591619:android:4a7f23f1083882ee2e2976",
+        "mobilesdk_app_id": "1:263651591619:android:bcc1017099c7b20d2e2976",
         "android_client_info": {
           "package_name": "com.decordash.decordash"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "263651591619-1j1d13lpjkvtfqj6sehuhkmblq9j2v4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.decordash.decordash",
+            "certificate_hash": "2ee43955a61218170198bdb37e607d8310850a3e"
+          }
+        },
         {
           "client_id": "263651591619-phacufs5joa0iv22cbv2imor8rah2h9v.apps.googleusercontent.com",
           "client_type": 3

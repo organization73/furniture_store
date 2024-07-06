@@ -6,7 +6,6 @@ import 'package:decordash/data/services/notification_service.dart';
 import 'package:decordash/features/chat/model/message.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -4,7 +4,6 @@ import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/product/product_repo.dart';
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/utils/local_storage/storage_utility.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

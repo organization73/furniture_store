@@ -3,7 +3,6 @@ import 'package:decordash/features/authentication/screens/login/login_screen.dar
 import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:get/get.dart';
 
 class GalleryInfoController extends GetxController {

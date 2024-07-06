@@ -3,7 +3,6 @@ import 'package:decordash/common/widgets/shimmer/horizontal_product_shimmer.dart
 import 'package:decordash/features/home/controllers/category_controller.dart';
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/features/home/screens/all_products/all_category_products_screen.dart';
-import 'package:decordash/features/home/screens/all_products/all_products_screen.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

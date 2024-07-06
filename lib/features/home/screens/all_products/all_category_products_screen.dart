@@ -10,7 +10,6 @@ import 'package:decordash/features/home/widgets/sortable_products.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class AllCatergoryProductsScreen extends StatefulWidget {
   const AllCatergoryProductsScreen(
