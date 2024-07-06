@@ -19,6 +19,7 @@ class AddProductController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  static ProductModel nestedProducrt = ProductModel.empty();
   int? condition;
   Color? color;
   String? wood;
@@ -94,7 +95,7 @@ class AddProductController extends GetxController {
           productSeller: VendorModel.empty(),
         ),
       );
-
+      nestedProducrt = newProduct;
       await ProductRepo.instance.uploadProductToDatabase(newProduct);
 ////////////////////////////////////////////
       FullScreenLoader.stopLoading();
@@ -124,49 +125,31 @@ class AddProductController extends GetxController {
 
                   FullScreenLoader.openLoadingDialog('processingLoading'.tr,
                       'assets/animations/animation-of-docer.json');
-                  final product = ProductModel(
-                    productName: nameController.text,
-                    categoryId: '1',
-                    productPrice: double.parse(priceController.text),
-                    productImage: pickedImagePaths[0],
-                    productDetails: ProductDetails(
-                      condition: condition == 1 ? 'used' : 'new',
-                      color: color.toString(),
-                      productListImages: pickedImagePaths,
-                      productSpecs: {
-                        'ablakash': wood ?? '',
-                        'fabric type': cloth ?? '',
-                      },
-                      productDesc: descriptionController.text,
-                      productStats: ProductStats(
-                        delivery: productStats.values.elementAt(0),
-                        negotiable: productStats.values.elementAt(1),
-                        modifiable: productStats.values.elementAt(2),
-                      ),
-                      productSeller: VendorModel.empty(),
-                    ),
-                  );
-                  await ProductRepo.instance.uploadProductToDatabase(product);
+
+                  await ProductRepo.instance
+                      .uploadProductToDatabase(nestedProducrt);
 
                   // Handle the user's choice to report
                   var m = {
-                    "appeallingClassfication": true,
-                    "title": product.productName,
-                    "price": product.productPrice,
-                    "description": product.productDetails.productDesc,
-                    "images": product.productDetails.productListImages,
+                    "appellation": true,
+                    "title": nestedProducrt.productName,
+                    "price": nestedProducrt.productPrice,
+                    "description": nestedProducrt.productDetails.productDesc,
+                    "images": nestedProducrt.productDetails.productListImages,
                     "details": {
-                      "wood": product.productDetails.productSpecs['ablakash'],
+                      "wood": nestedProducrt
+                          .productDetails.productSpecs['ablakash'],
                       "abalakach": "your ablakash here",
-                      "cloth":
-                          product.productDetails.productSpecs['fabric type'],
-                      "condition": product.productDetails.condition,
-                      "color": product.productDetails.color,
-                      "delevary": product.productDetails.productStats.delivery,
+                      "cloth": nestedProducrt
+                          .productDetails.productSpecs['fabric type'],
+                      "condition": nestedProducrt.productDetails.condition,
+                      "color": nestedProducrt.productDetails.color,
+                      "delevary":
+                          nestedProducrt.productDetails.productStats.delivery,
                       "negotiable":
-                          product.productDetails.productStats.negotiable,
+                          nestedProducrt.productDetails.productStats.negotiable,
                       "modefiable":
-                          product.productDetails.productStats.modifiable,
+                          nestedProducrt.productDetails.productStats.modifiable,
                     }
                   };
                   print('--------------');

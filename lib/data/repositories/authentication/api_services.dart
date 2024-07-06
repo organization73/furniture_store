@@ -101,8 +101,9 @@ class HttpService extends GetxService {
         "modefiable": product.productDetails.productStats.modifiable,
       }
     };
-    print('--------------');
+    print('---=++++++++++++++++++++++++++------------');
     print(m);
+    print('-----========================---------');
     String t = GetStorage().read('token');
     var r = await THttpHelper.postBearerAuth('product/create-product', t, m);
     if (r.statusCode == 500) {
@@ -136,7 +137,7 @@ class HttpService extends GetxService {
     return response['data']['user'];
   }
 
-  Future<List<dynamic>> getProductOfUser(String id,{int page = 1}) async {
+  Future<List<dynamic>> getProductOfUser(String id, {int page = 1}) async {
     String query = Querys.getProductOfUser(id);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         "${GetStorage().read("token")}", 'graphql', query);

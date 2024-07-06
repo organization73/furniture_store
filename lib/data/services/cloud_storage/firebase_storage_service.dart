@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:decordash/common/widgets/shorten.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +36,9 @@ class FirebaseStorageServices extends GetxController {
       final ref = _firebaseStorage.ref(path).child(name);
       await ref.putData(image);
       final url = await ref.getDownloadURL();
-      return url;
+      // final shortUrl = await shortenUrl(url);
+  return url;
+      // return shortUrl;
     } catch (e) {
       if (e is FirebaseException) {
         throw 'Firebase Exception: ${e.message}';
@@ -44,7 +47,7 @@ class FirebaseStorageServices extends GetxController {
       } else if (e is PlatformException) {
         throw 'Platform Exception: ${e.message}';
       } else {
-        throw 'Something went wrong, Please try again';
+        throw '$e';
       }
     }
   }
