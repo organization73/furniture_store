@@ -67,12 +67,13 @@ exports.createProduct = async (req, res, next) => {
     try {
       //make the values fixed until the AI model is deployed.
       const response = await fetch(
-        `http://localhost:8000/predict?image_url=${imageUrl}`,
+        `http://localhost:8000/predict`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({ imageUrl: imageUrl }),
         }
       );
       const classificationResult = await response.json();
@@ -94,9 +95,8 @@ exports.createProduct = async (req, res, next) => {
         //   confidence: randomNumber,
       });
       // classificationResult.confidence = 59;
-
       //check the confidenece of the classification
-      if (classificationResult.confidence < 60 && !appeallingClassfication) {
+      if (classificationResult.confidence < 80 && !appeallingClassfication) {
         throw new Error("Image classification confidence is too low");
       }
     } catch (error) {
