@@ -98,8 +98,9 @@ class HomeScreen extends StatelessWidget {
                                     .featuredProducts.isEmpty) {
                                   return Center(child: Text('noProducts'.tr));
                                 }
-                                var p = productsController.featuredProducts
-                                    .sublist(0, 4);
+                                var p = productsController
+                                    .featuredProducts.reversed
+                                    .toList();
                                 return GridLayout(
                                     mainAxisExtent: 265.r,
                                     itemCount: p.length,
@@ -146,6 +147,7 @@ class FadeAppBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.pagePaddingSpace),
               child: CustomTextFormField(
+                
                 hint: 'homeSearchBarHint'.tr,
                 prefixIcon: Iconsax.search_normal_copy,
                 readOnly: true,

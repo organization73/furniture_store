@@ -33,26 +33,6 @@ class HomeAppBar extends StatelessWidget {
             icon: const Icon(
               Iconsax.heart_copy,
             )),
-        Obx(
-          () => IconButton(
-            onPressed: () => Get.to(
-              () => const NotificationsPage(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.downToUp,
-            ),
-            icon: Badge(
-                backgroundColor:
-                    Theme.of(context).colorScheme.onPrimaryContainer,
-                label: Text('${controller.notiList.length}'),
-                child: (controller.notiList.isEmpty)
-                    ? const Icon(
-                        Iconsax.notification_copy,
-                      )
-                    : const Icon(
-                        Iconsax.notification,
-                      )),
-          ),
-        )
       ],
     );
   }

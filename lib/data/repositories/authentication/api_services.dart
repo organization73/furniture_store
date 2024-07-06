@@ -109,6 +109,36 @@ class HttpService extends GetxService {
     }
   }
 
+  Future<void> editProduct(ProductModel product) async {
+    var m = {
+      "productId": product.id,
+      "title": product.productName,
+      "price": product.productPrice,
+      "description": product.productDetails.productDesc,
+      "images": product.productDetails.productListImages,
+      "details": {
+        "wood": product.productDetails.productSpecs['ablakash'],
+        "abalakach": "your ablakash here",
+        "cloth": product.productDetails.productSpecs['fabric type'],
+        "condition": product.productDetails.condition,
+        "color": product.productDetails.color,
+        "delevary": product.productDetails.productStats.delivery,
+        "negotiable": product.productDetails.productStats.negotiable,
+        "modefiable": product.productDetails.productStats.modifiable,
+      }
+    };
+    print('---=++++++++++++++++++++++++++------------');
+    print(m);
+    print('-----========================---------');
+    String t = GetStorage().read('token');
+    var r = await THttpHelper.postBearerAuth('product/edit-product', t, m);
+    print(r.body);
+    if (r.statusCode == 500) {
+      print(jsonDecode(r.body)['error']);
+      throw Exception(jsonDecode(r.body)['error']);
+    }
+  }
+
   // Future getProduct() async {
   //   try {
   //     return THttpHelper.post('graphql', {

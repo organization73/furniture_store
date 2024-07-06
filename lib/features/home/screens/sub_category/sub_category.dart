@@ -1,5 +1,6 @@
 import 'package:decordash/common/widgets/loaders/animation_loader.dart';
 import 'package:decordash/common/widgets/shimmer/horizontal_product_shimmer.dart';
+import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordash/features/home/controllers/category_controller.dart';
 import 'package:decordash/features/home/model/category_model.dart';
 import 'package:decordash/features/home/screens/all_products/all_category_products_screen.dart';
@@ -18,6 +19,7 @@ class SubCategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(() => FavoriteController());
     final controller = CategoryController.instance;
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +61,28 @@ class SubCategoryScreen extends StatelessWidget {
                                         snapshot: snapshot,
                                         nothingFound: emptyWidget,
                                         loader: loader);
-                                if (widget != null) return widget;
+                                if (widget != null) {
+                                  return Column(
+                                    children: [
+                                      SectionHeading(
+                                        title: subCategory.name,
+                                        onPress: () => Get.to(
+                                          () => AllCatergoryProductsScreen(
+                                            title: subCategory.name,
+                                            futureMethod:
+                                                controller.getCategoryProducts(
+                                                    categoryId: subCategory.id,
+                                                    limit: -1),
+                                          ),
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          transition: Transition.rightToLeft,
+                                        ),
+                                      ),
+                                      widget,
+                                    ],
+                                  );
+                                }
 
                                 final products = snapshot.data!;
                                 return Column(

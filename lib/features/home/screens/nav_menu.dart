@@ -71,7 +71,9 @@ class NavMenu extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
-  final RxInt selectedIndex = 0.obs;
+  static NavigationController get instance => Get.find();
+
+  RxInt selectedIndex = 0.obs;
   final screens = [
     const HomeScreen(),
     const StoreScreen(),

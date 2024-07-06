@@ -105,8 +105,8 @@ class SettingsScreen extends StatelessWidget {
                   horizontal: TSizes.pagePaddingSpace),
               child: Column(
                 children: [
-                  SectionHeading(
-                    title: 'accountSettings'.tr,
+                  const SectionHeading(
+                    title: 'AI Section',
                     showActionButton: false,
                   ),
                   SettingsMenuTile(
@@ -135,36 +135,6 @@ class SettingsScreen extends StatelessWidget {
                       transition: Transition.rightToLeft,
                     ),
                   ),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'My Products',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-                  FutureBuilder(
-                      future: getMyProducts(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          print("Error while loading my products");
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return SortedProductForMyUser(
-                            products: snapshot.data!, loadMoreProducts: () {});
-                      }),
-
                   const Divider(),
                   // SettingsMenuTile(
                   //   icon: Iconsax.arrow_up_1_copy,
@@ -210,7 +180,36 @@ class SettingsScreen extends StatelessWidget {
                     child: OutlinedButton(
                         onPressed: () => AuthenticatorRepo.instance.logOut(),
                         child: Text('logout'.tr)),
-                  )
+                  ),
+                  SizedBox(
+                    height: TSizes.spaceBtwSections,
+                  ),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'My Products',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
+                  SizedBox(
+                    height: TSizes.spaceBtwSections,
+                  ),
+                  FutureBuilder(
+                      future: getMyProducts(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          print("Error while loading my products");
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return SortedProductForMyUser(
+                            products: snapshot.data!, loadMoreProducts: () {});
+                      }),
                 ],
               ),
             )

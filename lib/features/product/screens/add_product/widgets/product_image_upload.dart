@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:decordash/features/product/screens/add_product/controllers/upload_image_controller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -49,83 +47,94 @@ class BuildProductImageUpload extends StatelessWidget {
           height: 30,
         ),
         FilledButton.tonalIcon(
-            onPressed: imageUploadController.takePhoto,
-            icon: Icon(
-              Iconsax.camera,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            label: Text(
-              'openCam'.tr,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Theme.of(context).colorScheme.primary),
-            )),
+          onPressed: imageUploadController.takePhoto,
+          icon: Icon(
+            Iconsax.camera,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          label: Text(
+            'openCam'.tr,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Theme.of(context).colorScheme.primary),
+          ),
+        ),
         SizedBox(
           height: 10.h,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Obx(() => Row(
-                children: AddProductController.instance.pickedImagePaths
-                    .asMap()
-                    .entries
-                    .map((entry) {
-                  final int index = entry.key;
-                  final String path = entry.value;
+          child: Obx(
+            () => Row(
+              children: AddProductController.instance.pickedImagePaths
+                  .asMap()
+                  .entries
+                  .map((entry) {
+                final int index = entry.key;
+                final String path = entry.value;
 
-                  return Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            imageUploadController.navigateToImageDetail(
-                              path,
-                            );
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12.0),
-                            child: Image.file(
-                              File(path),
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          imageUploadController.navigateToImageDetail(path);
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: path.contains('http') || path.contains('https')
+                              ? Image.network(
+                                  path,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(
+                                  File(path),
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: Container(
-                          width: 35,
-                          height: 35,
-                          decoration: const ShapeDecoration(
-                            gradient: LinearGradient(colors: [
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: const ShapeDecoration(
+                          gradient: LinearGradient(
+                            colors: [
                               Color.fromARGB(255, 202, 56, 56),
                               Color.fromARGB(255, 217, 40, 72)
-                            ]),
-                            shape: CircleBorder(
-                                side: BorderSide(color: Colors.transparent)),
+                            ],
                           ),
-                          child: IconButton(
-                            padding: EdgeInsets.zero,
-                            splashRadius: 35 / 2,
-                            iconSize: 35 / 2,
-                            icon: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            ),
-                            onPressed: () =>
-                                imageUploadController.deleteImage(index),
+                          shape: CircleBorder(
+                            side: BorderSide(color: Colors.transparent),
                           ),
                         ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          splashRadius: 35 / 2,
+                          iconSize: 35 / 2,
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
+                          onPressed: () =>
+                              imageUploadController.deleteImage(index),
+                        ),
                       ),
-                    ],
-                  );
-                }).toList(),
-              )),
+                    ),
+                  ],
+                );
+              }).toList(),
+            ),
+          ),
         ),
       ],
     );

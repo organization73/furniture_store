@@ -1,3 +1,4 @@
+import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fast_color_picker/fast_color_picker.dart';
 
@@ -13,12 +14,12 @@ class ColorSelection extends StatefulWidget {
 }
 
 class ColorSelectionState extends State<ColorSelection> {
-  Color _color = Colors.white;
+  Color? _color = AddProductController.instance.color;
 
   @override
   Widget build(BuildContext context) {
     return FastColorPicker(
-      selectedColor: _color,
+      selectedColor: _color??Colors.white,  
       onColorSelected: (color) {
         setState(() {
           _color = color;

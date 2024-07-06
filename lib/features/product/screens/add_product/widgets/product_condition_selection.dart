@@ -1,4 +1,5 @@
 import 'package:decordash/common/widgets/chips/custom_choice_chip.dart';
+import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,16 +7,16 @@ import 'package:get/get.dart';
 typedef OnOptionSelected = void Function(int? selectedOption);
 
 class ConditionSelection extends StatefulWidget {
-  final OnOptionSelected onOptionSelected;
+  OnOptionSelected onOptionSelected;
 
-  const ConditionSelection({super.key, required this.onOptionSelected});
+  ConditionSelection({super.key, required this.onOptionSelected});
 
   @override
   State<ConditionSelection> createState() => _ConditionSelectionState();
 }
 
 class _ConditionSelectionState extends State<ConditionSelection> {
-  int? _value; // Set to null initially
+  int _value= AddProductController.instance.condition; // Set to null initially
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +40,11 @@ class _ConditionSelectionState extends State<ConditionSelection> {
                   _value = index;
                 });
                 // Call the callback function with the selected option
-                widget.onOptionSelected(_value!);
+                widget.onOptionSelected(_value);
               } else if (!selected && _value == index) {
                 // Deselect the current option
                 setState(() {
-                  _value = null;
+                  _value = 0;
                 });
                 // Call the callback function with null to indicate deselection
                 widget.onOptionSelected(null);

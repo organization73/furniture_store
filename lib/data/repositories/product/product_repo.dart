@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/home/controllers/home_page_controller.dart';
@@ -154,9 +153,9 @@ class ProductRepo extends GetxController {
   }
 
   Future<List<ProductModel>> getProductsForVendor(
-      {required String vendorId, int limit = -1,int page = 1}) async {
+      {required String vendorId, int limit = -1, int page = 1}) async {
     try {
-      var r = await HttpService.instance.getProductOfUser(vendorId,page:1);
+      var r = await HttpService.instance.getProductOfUser(vendorId, page: 1);
       if (r.isEmpty) {
         return [];
       }
@@ -275,55 +274,56 @@ class ProductRepo extends GetxController {
     return ps;
   }
 
-  Future<void> uploadDummyData(List<ProductModel> products) async {
-    try {
-      FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', 'assets/animations/animation-of-docer.json');
+  // Future<void> uploadDummyData(List<ProductModel> products) async {
+  //   try {
+  //     FullScreenLoader.openLoadingDialog(
+  //         'Uploading Data...', 'assets/animations/animation-of-docer.json');
 
-      final storage = Get.put(FirebaseStorageServices());
+  //     final storage = Get.put(FirebaseStorageServices());
 
-      for (var product in products) {
-        final mainImageFile =
-            await storage.getImageDatafromAssets(product.productImage);
+  //     for (var product in products) {
+  //       final mainImageFile =
+  //           await storage.getImageDatafromAssets(product.productImage);
 
-        final mainImageUrl = await storage.uploadImageData(
-            'Products', mainImageFile, product.productImage);
-        product.productImage = mainImageUrl;
+  //       final mainImageUrl = await storage.uploadImageData(
+  //           'Products', mainImageFile, product.productImage);
+  //       product.productImage = mainImageUrl;
 
-        for (var imagePath in product.productDetails.productListImages) {
-          final imageFile = await storage.getImageDatafromAssets(imagePath);
-          final imageUrl =
-              await storage.uploadImageData('Products', imageFile, imagePath);
+  //       for (var imagePath in product.productDetails.productListImages) {
+  //         final imageFile = await storage.getImageDatafromAssets(imagePath);
+  //         final imageUrl =
+  //             await storage.uploadImageData('Products', imageFile, imagePath);
 
-          product.productDetails.productListImages = product
-              .productDetails.productListImages
-              .map((path) => path == imagePath ? imageUrl : path)
-              .toList();
-        }
+  //         product.productDetails.productListImages = product
+  //             .productDetails.productListImages
+  //             .map((path) => path == imagePath ? imageUrl : path)
+  //             .toList();
+  //       }
 
-        await _db.collection('Products').doc(product.id).set(product.toJson());
-      }
+  //       await _db.collection('Products').doc(product.id).set(product.toJson());
+  //     }
 
-      FullScreenLoader.stopLoading();
+  //     FullScreenLoader.stopLoading();
 
-      TLoaders.successSnackBar(
-          title: 'Uploading Completed',
-          message: 'All categories data has been uploaded to firestore');
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      LoggerHelper.error('error', e);
-      throw 'Something went wrong, Please try again';
-    }
-  }
+  //     TLoaders.successSnackBar(
+  //         title: 'Uploading Completed',
+  //         message: 'All categories data has been uploaded to firestore');
+  //   } on FirebaseException catch (e) {
+  //     throw TFirebaseException(e.code).message;
+  //   } on PlatformException catch (e) {
+  //     throw TPlatformException(e.code).message;
+  //   } catch (e) {
+  //     LoggerHelper.error('error', e);
+  //     throw 'Something went wrong, Please try again';
+  //   }
+  // }
 
   Future<void> uploadProductToDatabase(ProductModel product) async {
     try {
       final storage = Get.put(FirebaseStorageServices());
 
       for (var imagePath in product.productDetails.productListImages) {
+        if (imagePath.startsWith('http')) continue;
         final imageFile = await storage.getImageDatafromAssets(imagePath);
         final imageUrl =
             await storage.uploadImageData('Products', imageFile, imagePath);
@@ -333,7 +333,31 @@ class ProductRepo extends GetxController {
             .map((path) => path == imagePath ? imageUrl : path)
             .toList();
       }
+      print("finishing uploading");
       await HttpService.instance.addProduct(product);
+      // hereeeer
+    } catch (e) {
+      LoggerHelper.error('error', e);
+
+      rethrow;
+    }
+  }
+  Future<void> uploadProductToDatabase2(ProductModel product) async {
+    try {
+      final storage = Get.put(FirebaseStorageServices());
+
+      for (var imagePath in product.productDetails.productListImages) {
+        if (imagePath.startsWith('http')) continue;
+        final imageFile = await storage.getImageDatafromAssets(imagePath);
+        final imageUrl =
+            await storage.uploadImageData('Products', imageFile, imagePath);
+        // imagePath = imageUrl;
+        product.productDetails.productListImages = product
+            .productDetails.productListImages
+            .map((path) => path == imagePath ? imageUrl : path)
+            .toList();
+      }
+      await HttpService.instance.editProduct(product);
       // hereeeer
     } catch (e) {
       LoggerHelper.error('error', e);

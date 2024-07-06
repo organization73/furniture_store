@@ -151,7 +151,7 @@ class AddProductPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ConditionSelection(
                     onOptionSelected: (int? selectedOption) {
-                      addController.condition = selectedOption!;
+                      addController.condition = selectedOption ?? 0;
                     },
                   ),
                 ),
