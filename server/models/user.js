@@ -9,8 +9,8 @@ const userSchema = new Schema(
     username: { type: String, required: true },
     type: { type: String, default: "Client" },
     email: { type: String, required: true },
+    password: { type: String },
     imageUrl: { type: String },
-    password: { type: String, required: true },
     phone: { type: String },
     isConfirmed: { type: Boolean },
     confirmToken: String,
@@ -39,6 +39,7 @@ const userSchema = new Schema(
         },
       ],
     },
+    googleId: { type: String },
   },
   { timestamps: true }
 );

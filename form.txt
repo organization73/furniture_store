@@ -855,3 +855,38 @@ request:post
 }
 response:
 { message: "Product reported successfully" }
+#27- continue with google
+request:POST
+http://localhost:3000/auth/continue-with-google
+{
+    "firstName": "abdo",
+    "lastName": "user",
+    "username": "third",
+    "email": "abdo.make631@gmail.com",
+    "googleId": "googleId",
+    "phone":"01098432753"
+}
+response:
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiZG8ubWFrZTYzMUBnbWFpbC5jb20iLCJ1c2VySWQiOiI2NjhhYzNhYmYxNGUzZGNiNzE5OTAwN2YiLCJpYXQiOjE3MjAzNzAwOTl9.5TVw2TFPBEE9X_Q7n6WzzFDhEcRxx9z1-WXKEd-CGTU",
+    "user": {
+        "wishList": {
+            "items": []
+        },
+        "_id": "668ac3abf14e3dcb7199007f",
+        "firstName": "abdo",
+        "lastName": "user",
+        "username": "third",
+        "type": "Client",
+        "email": "abdo.make631@gmail.com",
+        "phone": "01098432753",
+        "isConfirmed": true,
+        "gallaries": [],
+        "googleId": "$2a$12$P572fhauxViAv.BVTkIxjukULdxTQzuhAQtonnpWNIX0KLElJRZRC",
+        "products": [],
+        "createdAt": "2024-07-07T16:34:51.339Z",
+        "updatedAt": "2024-07-07T16:34:51.339Z",
+        "__v": 0
+    },
+    "firstTime": true
+}

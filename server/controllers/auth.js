@@ -549,6 +549,103 @@ exports.resetPassword = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.continueWithGoogle = async (req, res, next) => {
+  //exprtactoin of data
+  console.log("Create User\n+++++++");
+  const { firstName, lastName, username, email, googleId } = req.body;
+  //Data Validation
+  try {
+    await userSchema.validate({
+      firstName,
+      lastName,
+      username,
+      email,
+      googleId,
+    });
+  } catch (error) {
+    return throwError(422, error.message, error.path, next);
+  }
+  console.log("data validated:", email);
+  //Check if user's email  already exists
+  try {
+    const existingUser = await User.findOne({
+      $and: [{ email }],
+    });
+    if (existingUser) {
+      //check if user has a googleid
+      if (!existingUser.googleId) {
+        return throwError(
+          409,
+          "Email is already in use with ordinary signup",
+          "email",
+          next
+        );
+      }
+      //if user exist. sign in
+      //generating JSON web token.
+      const token = jwt.sign(
+        {
+          email: existingUser.email,
+          userId: existingUser._id,
+        },
+        process.env.JWT_SECRET
+      );
+      return res
+        .status(200)
+        .json({ token: token, user: existingUser, firstTime: true });
+    }
+  } catch (error) {
+    if (!error.statusCode) error.statusCode = 500;
+    next(error);
+  }
+  //user is first to signup
+  //check if the username is already in use
+  try {
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return throwError(409, "Username is already in use", "username", next);
+    }
+  } catch (error) {
+    next(error);
+  }
+  //hashing the password
+  let hashedGoogleId;
+  try {
+    hashedGoogleId = await bcrypt.hash(googleId, 12);
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
+  console.log("GoogleId :", googleId);
+  console.log("GoogleId hashed:", hashedGoogleId);
+
+  //creating the user
+  const user = new User({
+    firstName,
+    lastName,
+    username,
+    email,
+    isConfirmed: true,
+    googleId: hashedGoogleId,
+  });
+  //saving the user into the database
+  try {
+    const saveUser = await user.save();
+    console.log("email was saved :", email);
+    return res
+      .status(200)
+      .json({
+        message: "User created successfully",
+        email: saveUser.email,
+        firstTime: true,
+      });
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
+};
+
 function throwError(codeStatus, message, path, next) {
   const error = new Error(message);
   error.statusCode = codeStatus;

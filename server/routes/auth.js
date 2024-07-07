@@ -22,5 +22,8 @@ router.get("/reset-password/:token", authController.getResetPassword);
 
 router.post("/reset-password", authController.resetPassword);
 
+router.post("/continue-with-google",authController.continueWithGoogle);
+
+
 
 module.exports = router;
