@@ -8,9 +8,9 @@ class UserModel {
   AccountType accountType;
   String firstName;
   String lastName;
-  final String email;
-  final String id;
-  final String phoneNumber;
+  String email;
+  String id;
+  String phoneNumber;
   bool isFeatured;
   bool isVerified;
   List<ProductModel>? wishList;
@@ -38,7 +38,8 @@ class UserModel {
     this.isVerified = false,
     this.wishList,
     this.type,
-    this.imageUrl = "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+    this.imageUrl =
+        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
     this.isConfirmed,
     this.products,
     this.username,
@@ -90,11 +91,13 @@ class UserModel {
       isVerified: isVerified ?? this.isVerified,
     );
   }
-static UserModel fromJsonForFireBase(Map<String, dynamic> json) {
+
+  static UserModel fromJsonForFireBase(Map<String, dynamic> json) {
     return UserModel(
       accountType:
           EnumUtil.fromStringEnum(AccountType.values, json['accountType']),
-      imageUrl: json['avatar'] ?? "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+      imageUrl: json['avatar'] ??
+          "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
       email: json['email'] ?? '',
@@ -115,6 +118,7 @@ static UserModel fromJsonForFireBase(Map<String, dynamic> json) {
       isVerified: json['isVerified'] ?? false,
     );
   }
+
   static UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
       // accountType: EnumUtil.fromStringEnum(AccountType.values, json['accountType'] ?? ''),
@@ -130,7 +134,8 @@ static UserModel fromJsonForFireBase(Map<String, dynamic> json) {
       isVerified: json['isVerified'] ?? false,
       // wishList: parseProductList(json['wishList']),
       type: json['type'] ?? '',
-      imageUrl: json['imageUrl'] ?? "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+      imageUrl: json['imageUrl'] ??
+          "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
       isConfirmed: json['isConfirmed'] ?? false,
       // products: parseProductList(json['products']),
       username: json['username'] ?? '',
@@ -195,7 +200,8 @@ static UserModel fromJsonForFireBase(Map<String, dynamic> json) {
     if (snapshot.data() != null) {
       return UserModel(
         id: snapshot.id,
-        accountType: EnumUtil.fromStringEnum(AccountType.values, data['accountType'] ?? ''),
+        accountType: EnumUtil.fromStringEnum(
+            AccountType.values, data['accountType'] ?? ''),
         imageUrl: data['imageUrl'] ?? '',
         firstName: data['firstName'] ?? '',
         lastName: data['lastName'] ?? '',

@@ -34,51 +34,40 @@ class UserController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    fetchUserRecord();
-  }
-
-  Future<void> fetchUserRecord() async {
-    try {
-      profileLoading.value = true;
-      final user = await userRepository.fetchUserData();
-      this.user(user);
-    } catch (e) {
-      user(UserModel.empty());
-    } finally {
-      profileLoading.value = false;
+    if (GetStorage().read('user_data') != null) {
+      loadUserData();
     }
   }
 
-  Future<void> saveUserRecord(UserCredential? userCred) async {
-    try {
-      /// refresh user record
-      await fetchUserRecord();
-      if (user.value.id.isEmpty) {
-        if (userCred != null) {
-          final namePart =
-              UserModel.nameParts(userCred.user!.displayName ?? '');
-          final userName = UserModel.generateUsernameFromFullName(
-              userCred.user!.displayName ?? '');
+  // Future<void> saveUserRecord(UserCredential? userCred) async {
+  //   try {
+  //     /// refresh user record
+  //     if (user.value.id.isEmpty) {
+  //       if (userCred != null) {
+  //         final namePart =
+  //             UserModel.nameParts(userCred.user!.displayName ?? '');
+  //         final userName = UserModel.generateUsernameFromFullName(
+  //             userCred.user!.displayName ?? '');
 
-          final user = UserModel(
-              id: userCred.user!.uid,
-              firstName: namePart[0],
-              lastName:
-                  namePart.length > 1 ? namePart.sublist(1).join(' ') : '',
-              username: userName,
-              email: userCred.user!.email ?? '',
-              phoneNumber: userCred.user!.phoneNumber ?? '',
-              imageUrl: userCred.user!.photoURL ?? '');
+  //         final user = UserModel(
+  //             id: userCred.user!.uid,
+  //             firstName: namePart[0],
+  //             lastName:
+  //                 namePart.length > 1 ? namePart.sublist(1).join(' ') : '',
+  //             username: userName,
+  //             email: userCred.user!.email ?? '',
+  //             phoneNumber: userCred.user!.phoneNumber ?? '',
+  //             imageUrl: userCred.user!.photoURL ?? '');
 
-          await userRepository.saveuserRecord(user);
-        }
-      }
-    } catch (e) {
-      TLoaders.warningSnackBar(
-          title: 'Data is not saved!',
-          message: 'Something went wrong while saving you information');
-    }
-  }
+  //         await userRepository.saveuserRecord(user);
+  //       }
+  //     }
+  //   } catch (e) {
+  //     TLoaders.warningSnackBar(
+  //         title: 'Data is not saved!',
+  //         message: 'Something went wrong while saving you information');
+  //   }
+  // }
 
   void deleteAccountWarningPopup() {
     Get.defaultDialog(
@@ -223,10 +212,12 @@ class UserController extends GetxController {
   }
 
   void loadUserData() {
-    final userData = _storage.read('user_data');
+    final userData = GetStorage().read('user_data');
+    print("userData $userData");
     if (userData != null) {
-      UserModel userr = UserModel.fromJson(userData['user']);
-      user.value = userr;
+      UserModel userm = UserModel.fromJson(userData);
+      user.value = userm;
+      user.refresh();
     } else {
       LoggerHelper.warning('No user data saved');
     }
@@ -234,15 +225,15 @@ class UserController extends GetxController {
 
   void updateUser(UserModel userr) {
     user.value = userr;
-    _storage.write('user_data', userr.toJson());
+    _storage.write('user_data', userr);
   }
 
-  void saveUserData(Map<String, dynamic> user) {
+  void saveUserData(UserModel user) {
     _storage.write('user_data', user);
   }
 
   void removeUserData() {
     UserModel user = UserModel.empty();
-    _storage.write('user_data', user.toJson());
+    _storage.write('user_data', user);
   }
 }

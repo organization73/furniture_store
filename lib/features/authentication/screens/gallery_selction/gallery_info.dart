@@ -58,7 +58,7 @@ class GalleryInformationScreen extends StatelessWidget {
                     prefixIcon: Iconsax.location_copy,
                     keyboardType: TextInputType.name,
                     (value) =>
-                        value == null || value.isEmpty || value.length <= 6
+                        value == null || value.isEmpty || value.length <= 4
                             ? 'galleryAddressVal'.tr
                             : null,
                   ),

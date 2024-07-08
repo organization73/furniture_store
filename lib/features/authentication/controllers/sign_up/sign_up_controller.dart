@@ -9,6 +9,7 @@ import 'package:decordash/features/personalization/models/user_model.dart';
 import 'package:decordash/utils/helpers/network_manager.dart';
 import 'package:decordash/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -82,6 +83,11 @@ class SignUpController extends GetxController {
 
       TLoaders.successSnackBar(
           title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
+      if (GetStorage().hasData('email')) {
+        GetStorage().remove('email');
+      }
+
+      GetStorage().write('email', emailController.text.trim());
       Get.to(
         () => VerifySignUpEmail(email: emailController.text.trim()),
         duration: const Duration(milliseconds: 300),

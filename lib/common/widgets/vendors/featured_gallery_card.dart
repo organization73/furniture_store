@@ -49,7 +49,9 @@ class FeaturedGalleryCard extends StatelessWidget {
                     beandtextSize: TextSizes.medium,
                   ),
                   Text(
-                    '${vendor.productsCount ?? 0} Products',
+                    vendor.productsCount == null || vendor.productsCount == 0
+                        ? ''
+                        : '${vendor.productsCount ?? 0} Products ',
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelSmall,
                   )

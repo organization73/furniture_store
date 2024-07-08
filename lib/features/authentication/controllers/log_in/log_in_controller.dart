@@ -61,8 +61,8 @@ class LoginController extends GetxController {
               emailController.text.trim(), passwordController.text.trim());
       final userController = Get.find<UserController>();
       print("response: $response['user']");
-      userController.saveUserData(response);
       UserModel user = UserModel.fromJson(response['user']);
+      userController.saveUserData(user);
       UserController.instance.user.value = user;
       FullScreenLoader.stopLoading();
 

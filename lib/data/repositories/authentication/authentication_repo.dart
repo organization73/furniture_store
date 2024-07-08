@@ -35,8 +35,34 @@ class AuthenticatorRepo extends GetxController {
   }
 
   screenRedirect() async {
+    UserController.instance.loadUserData();
     var userController = UserController.instance;
-    final con = Get.put(UserController());
+    if (GetStorage().hasData('email')) {
+      userController.user.value.email = GetStorage().read('email');
+      print(userController.user.value.email);
+      print("GetStorage().read('email') ${GetStorage().read('email')}");
+      Get.offAll(
+        () => VerifySignUpEmail(
+          email: GetStorage().read('email'),
+        ),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
+      return;
+    }
+    if (GetStorage().read('islogin') == true) {
+      if (UserController.instance.user.value.firstName.isNotEmpty) {
+        print(
+            "userController.user.value.firstName.isNotEmpty ${userController.user.value.firstName}");
+        Get.offAll(
+          () => const NavMenu(),
+          duration: const Duration(milliseconds: 300),
+          transition: Transition.rightToLeft,
+        );
+        return;
+      }
+    }
+
     // con.loadUserData();
     LoggerHelper.info(userController.user.value.firstName);
     final user = _auth.currentUser;
@@ -86,7 +112,7 @@ class AuthenticatorRepo extends GetxController {
       final response = await HttpService.instance.loginUser(email, password);
       final token = response['token'];
       deviceStorage.write('token', token);
-      deviceStorage.write('isConfirmed', true);
+      deviceStorage.write('islogin', true);
       return response;
     } catch (e) {
       rethrow;
@@ -282,22 +308,12 @@ class AuthenticatorRepo extends GetxController {
   Future<void> logOut() async {
     try {
       UserController.instance.removeUserData();
-
-      await GoogleSignIn().signOut();
-      await FirebaseAuth.instance.signOut();
+      GetStorage().write('islogin', false);
       Get.offAll(
         () => const LoginSignUpScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.upToDown,
       );
-    } on FirebaseAuthException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong, Please try again';
     }

@@ -7,6 +7,7 @@ import 'package:decordash/common/widgets/action_confirmation/action_confirmation
 import 'package:decordash/common/widgets/loaders/loaders.dart';
 import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
@@ -14,7 +15,7 @@ class VerifyEmailController extends GetxController {
   @override
   void onInit() {
     sendEmailVerification();
-    setTimerForAutoRedirect();
+    // setTimerForAutoRedirect();
     super.onInit();
   }
 
@@ -22,7 +23,7 @@ class VerifyEmailController extends GetxController {
     final user = UserController.instance.user.value;
 
     try {
-      await AuthenticatorRepo.instance.sendEmailVerification(user.email);
+      await AuthenticatorRepo.instance.sendEmailVerification(GetStorage().read('email') ?? user.email ?? '');
       TLoaders.successSnackBar(
           title: 'changeYourEmailTitle'.tr,
           message: 'changeYourEmailSubTitle'.tr);
@@ -31,34 +32,34 @@ class VerifyEmailController extends GetxController {
     }
   }
 
-  setTimerForAutoRedirect() {
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
-      await FirebaseAuth.instance.currentUser?.reload();
-      final user = FirebaseAuth.instance.currentUser;
-      if (user?.emailVerified ?? false) {
-        timer.cancel();
-        Get.off(
-          () => ActionConfirmPage(
-            subTitle: 'yourAccountCreatedSubTitle'.tr,
-            title: 'yourAccountCreatedTitle'.tr,
-            onPressed: () => Get.off(
-              () => GallerySelection(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            ),
-          ),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
-      }
-    });
-  }
+  // setTimerForAutoRedirect() {
+  //   Timer.periodic(const Duration(seconds: 1), (timer) async {
+  //     await FirebaseAuth.instance.currentUser?.reload();
+  //     final user = FirebaseAuth.instance.currentUser;
+  //     if (user?.emailVerified ?? false) {
+  //       timer.cancel();
+  //       Get.off(
+  //         () => ActionConfirmPage(
+  //           subTitle: 'yourAccountCreatedSubTitle'.tr,
+  //           title: 'yourAccountCreatedTitle'.tr,
+  //           onPressed: () => Get.off(
+  //             () => GallerySelection(),
+  //             duration: const Duration(milliseconds: 300),
+  //             transition: Transition.rightToLeft,
+  //           ),
+  //         ),
+  //         duration: const Duration(milliseconds: 300),
+  //         transition: Transition.rightToLeft,
+  //       );
+  //     }
+  //   });
+  // }
 
-  checkEmailVerificationStatus() async {
-    final user = UserController.instance.user.value;
+  checkEmailVerificationStatus({String email=''}) async {
     final currentUser =
-        await AuthenticatorRepo.instance.checkIsConfirmed(user.email);
+        await AuthenticatorRepo.instance.checkIsConfirmed(email);
     if (currentUser['isConfirmed'] != null && currentUser['isConfirmed']) {
+      GetStorage().remove('email');
       Get.off(
         () => GallerySelection(),
         duration: const Duration(milliseconds: 300),

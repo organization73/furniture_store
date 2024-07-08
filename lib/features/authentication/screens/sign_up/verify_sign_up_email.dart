@@ -21,7 +21,8 @@ class VerifySignUpEmail extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton(
-            onPressed: () => controller.checkEmailVerificationStatus(),
+            onPressed: () =>
+                controller.checkEmailVerificationStatus(email: email ?? ''),
             child: Text('cont'.tr)),
       ),
       appBar: AppBar(

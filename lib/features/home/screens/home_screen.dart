@@ -27,7 +27,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(UserController());
     Get.put(ProductController());
 
     return GetBuilder<StartPageController>(
@@ -147,7 +146,6 @@ class FadeAppBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.pagePaddingSpace),
               child: CustomTextFormField(
-                
                 hint: 'homeSearchBarHint'.tr,
                 prefixIcon: Iconsax.search_normal_copy,
                 readOnly: true,
