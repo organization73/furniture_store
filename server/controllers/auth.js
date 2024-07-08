@@ -572,6 +572,7 @@ exports.continueWithGoogle = async (req, res, next) => {
     const existingUser = await User.findOne({
       $and: [{ email }],
     });
+    
     if (existingUser) {
       //check if user has a googleid
       if (!existingUser.googleId) {
@@ -591,6 +592,8 @@ exports.continueWithGoogle = async (req, res, next) => {
         },
         process.env.JWT_SECRET
       );
+      existingUser.username = username;
+      await existingUser.save();
       return res
         .status(200)
         .json({ token: token, user: existingUser, firstTime: false });
