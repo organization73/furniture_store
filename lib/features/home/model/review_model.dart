@@ -5,15 +5,13 @@ class Review {
   String reviewerImage;
   int rating;
   String comment;
-  DateTime? date;
 
   Review({
     required this.reviewerName,
     required this.reviewerImage,
     required this.rating,
     required this.comment,
-    DateTime? date,
-  }) : date = date ?? DateTime.now();
+  });
 
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(
@@ -21,7 +19,6 @@ class Review {
       reviewerImage: json['reviewerImage'] ?? '',
       rating: json['rating'] ?? 0,
       comment: json['comment'] ?? '',
-      date: (json['date'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
@@ -30,6 +27,5 @@ class Review {
         'reviewerImage': reviewerImage,
         'rating': rating,
         'comment': comment,
-        'date': Timestamp.fromDate(date ?? DateTime.now()),
       };
 }

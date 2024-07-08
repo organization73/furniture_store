@@ -63,6 +63,15 @@ class Querys {
                     confidence
                   }
                   rate
+                  rates {
+                  description
+                  rate
+                  customer{
+                  firstName
+                  lastName
+                  imageUrl
+                  }}
+                  
                 }
               }
             }
@@ -103,6 +112,14 @@ class Querys {
                     confidence
                   }
                   rate
+                  rates {
+                  description
+                  rate
+                  customer{
+                  firstName
+                  lastName
+                  imageUrl
+                  }}
                 }
               }
             }
@@ -167,6 +184,14 @@ class Querys {
                     confidence
                   }
                   rate
+                  rates {
+                  description
+                  rate
+                  customer{
+                  firstName
+                  lastName
+                  imageUrl
+                  }}
                 }
               }
             
@@ -206,6 +231,14 @@ class Querys {
                     confidence
                   }
                   rate
+                  rates {
+                  description
+                  rate
+                  customer{
+                  firstName
+                  lastName
+                  imageUrl
+                  }}
                 }
               }
             }
@@ -276,6 +309,14 @@ class Querys {
                     confidence
                   }
                   rate
+                  rates {
+                  description
+                  rate
+                  customer{
+                  firstName
+                  lastName
+                  imageUrl
+                  }}
                 }
   }
 }

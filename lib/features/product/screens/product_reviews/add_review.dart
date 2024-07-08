@@ -1,3 +1,5 @@
+import 'package:decordash/features/home/model/review_model.dart';
+import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:decordash/data/repositories/product/product.dart';
@@ -69,11 +71,11 @@ class AddReview extends StatelessWidget {
         child: ElevatedButton(
             onPressed: () {
               controller.addReview(Review(
-                reviewerName: "UserClass",
+                reviewerName: "${UserController.instance.user!.value!.firstName} ${UserController.instance.user.value.lastName}",
                 rating: controller.selectedRating
                     .value, // Use the selected rating from the controller
                 comment: controller.reviewController.text,
-                timestamp: DateTime.now().toString(),
+                reviewerImage: UserController.instance.user.value.imageUrl,
               ));
             },
             child: const Text('Continue')),

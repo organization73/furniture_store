@@ -1,9 +1,11 @@
+import 'package:decordash/features/home/model/review_model.dart';
+
 class Product {
   String productName;
   double productPrice;
   double productRating = 0;
   int productNumOfRating = 0;
-  List<dynamic> rates;
+  List<Review> rates;
   String productImage;
   bool onSale;
   ProductDetails productDetails;
@@ -113,29 +115,6 @@ class ProductSeller {
   factory ProductSeller.fromJson(Map<String, dynamic> json) {
     return ProductSeller(
       name: json['name'],
-    );
-  }
-}
-
-class Review {
-  String reviewerName;
-  int rating;
-  String comment;
-  String timestamp;
-
-  Review({
-    required this.reviewerName,
-    required this.rating,
-    required this.comment,
-    required this.timestamp,
-  });
-
-  factory Review.fromJson(Map<String, dynamic> json) {
-    return Review(
-      reviewerName: json['reviewer_name'],
-      rating: json['rating'],
-      comment: json['comment'],
-      timestamp: json['timestamp'],
     );
   }
 }

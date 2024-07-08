@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordash/data/repositories/authentication/api_services.dart';
 import 'package:decordash/features/home/controllers/home_page_controller.dart';
+import 'package:decordash/features/home/model/review_model.dart';
 import 'package:decordash/features/home/model/vendor_model.dart';
 import 'package:decordash/utils/constants/enums.dart';
 import 'package:decordash/utils/logging/logger.dart';
@@ -24,38 +25,52 @@ class ProductRepo extends GetxController {
     var p = await HttpService.instance.searchProducts(page, query);
     var prods = p
         // TODO product mapping
-        .map((m) => ProductModel(
-            id: m['_id'],
-            productName: m['title'],
-            categoryId: mapingTheCategories(m['images']),
-            productImage: m['images'][0]['imageUrl'],
-            productPrice:
-                (m['price']).toDouble(), // Ensure key name consistency
-            productDetails: ProductDetails(
-                condition: m['details']['condition'],
-                color: m['details']['color'], //TODO map the color
-                productListImages: fromImage(m['images']),
-                productSpecs: {
-                  'ablakash': m['details']['abalakach'],
-                  'fabric type': m['details']['cloth'],
-                  'wood type': m['details']['wood'],
-                },
-                productDesc: m['description'],
-                productStats: ProductStats(
-                    delivery: m['details']['delevary'],
-                    negotiable: m['details']['negotiable'],
-                    modifiable: m['details']['modefiable']),
-                productSeller: VendorModel(
-                    name:
-                        "${m['creator']['firstName']} ${m['creator']['lastName']}",
-                    location: "Egypt",
-                    id: m['creator']['_id'],
-                    image: m['creator']['imageUrl'] ??
-                        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
-                    isFeatured: m['creator']['type'] == "Gallery",
-                    productsCount: m['creator']['numberOfProducts'] ?? 0,
-                    accountType: mapType(m['creator']['type'])))))
-        .toList();
+        .map((m) {
+      List<dynamic> rates = m['rates'];
+      List<Review> reviews = [];
+      for (var rate in rates) {
+        Review r = Review(
+          comment: rate['description'],
+          rating: 2,
+          reviewerImage: rate['customer']['imageUrl'] ??
+              "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+          reviewerName:
+              "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
+        );
+        reviews.add(r);
+      }
+      return ProductModel(
+          id: m['_id'],
+          rates: reviews,
+          productName: m['title'],
+          categoryId: mapingTheCategories(m['images']),
+          productImage: m['images'][0]['imageUrl'],
+          productPrice: (m['price']).toDouble(), // Ensure key name consistency
+          productDetails: ProductDetails(
+              condition: m['details']['condition'],
+              color: m['details']['color'], //TODO map the color
+              productListImages: fromImage(m['images']),
+              productSpecs: {
+                'ablakash': m['details']['abalakach'],
+                'fabric type': m['details']['cloth'],
+                'wood type': m['details']['wood'],
+              },
+              productDesc: m['description'],
+              productStats: ProductStats(
+                  delivery: m['details']['delevary'],
+                  negotiable: m['details']['negotiable'],
+                  modifiable: m['details']['modefiable']),
+              productSeller: VendorModel(
+                  name:
+                      "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                  location: "Egypt",
+                  id: m['creator']['_id'],
+                  image: m['creator']['imageUrl'] ??
+                      "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                  isFeatured: m['creator']['type'] == "Gallery",
+                  productsCount: m['creator']['numberOfProducts'] ?? 0,
+                  accountType: mapType(m['creator']['type']))));
+    }).toList();
     return prods;
   }
 
@@ -114,8 +129,22 @@ class ProductRepo extends GetxController {
     for (var e in productIds) {
       var m = await HttpService.instance
           .getOneProducts(e, GetStorage().read('token'));
+      List<dynamic> rates = m['rates'];
+      List<Review> reviews = [];
+      for (var rate in rates) {
+        Review r = Review(
+          comment: rate['description'],
+          rating: 0,
+          reviewerImage: rate['customer']['imageUrl'] ??
+              "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+          reviewerName:
+              "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
+        );
+        reviews.add(r);
+      }
       ProductModel prod = ProductModel(
           id: m['_id'],
+          rates: reviews,
           productName: m['title'],
           categoryId: mapingTheCategories(m['images']),
           productImage: m['images'][0]['imageUrl'],
@@ -162,38 +191,53 @@ class ProductRepo extends GetxController {
       print(r);
       var p = r
           // TODO product mapping
-          .map((m) => ProductModel(
-              id: m['_id'],
-              productName: m['title'],
-              categoryId: mapingTheCategories(m['images']),
-              productImage: m['images'][0]['imageUrl'],
-              productPrice:
-                  (m['price']).toDouble(), // Ensure key name consistency
-              productDetails: ProductDetails(
-                  condition: m['details']['condition'],
-                  color: m['details']['color'], //TODO map the color
-                  productListImages: fromImage(m['images']),
-                  productSpecs: {
-                    'ablakash': m['details']['abalakach'],
-                    'fabric type': m['details']['cloth'],
-                    'wood type': m['details']['wood'],
-                  },
-                  productDesc: m['description'],
-                  productStats: ProductStats(
-                      delivery: m['details']['delevary'],
-                      negotiable: m['details']['negotiable'],
-                      modifiable: m['details']['modefiable']),
-                  productSeller: VendorModel(
-                      name:
-                          "${m['creator']['firstName']} ${m['creator']['lastName']}",
-                      location: "Egypt",
-                      id: m['creator']['_id'],
-                      image: m['creator']['imageUrl'] ??
-                          "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
-                      isFeatured: m['creator']['type'] == "Gallery",
-                      productsCount: m['creator']['numberOfProducts'] ?? 0,
-                      accountType: mapType(m['creator']['type'])))))
-          .toList();
+          .map((m) {
+        List<dynamic> rates = m['rates'];
+        List<Review> reviews = [];
+        for (var rate in rates) {
+          Review r = Review(
+            comment: rate['description'],
+            rating: 0,
+            reviewerImage: rate['customer']['imageUrl'] ??
+                "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+            reviewerName:
+                "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
+          );
+          reviews.add(r);
+        }
+        return ProductModel(
+            id: m['_id'],
+            rates: reviews,
+            productName: m['title'],
+            categoryId: mapingTheCategories(m['images']),
+            productImage: m['images'][0]['imageUrl'],
+            productPrice:
+                (m['price']).toDouble(), // Ensure key name consistency
+            productDetails: ProductDetails(
+                condition: m['details']['condition'],
+                color: m['details']['color'], //TODO map the color
+                productListImages: fromImage(m['images']),
+                productSpecs: {
+                  'ablakash': m['details']['abalakach'],
+                  'fabric type': m['details']['cloth'],
+                  'wood type': m['details']['wood'],
+                },
+                productDesc: m['description'],
+                productStats: ProductStats(
+                    delivery: m['details']['delevary'],
+                    negotiable: m['details']['negotiable'],
+                    modifiable: m['details']['modefiable']),
+                productSeller: VendorModel(
+                    name:
+                        "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                    location: "Egypt",
+                    id: m['creator']['_id'],
+                    image: m['creator']['imageUrl'] ??
+                        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                    isFeatured: m['creator']['type'] == "Gallery",
+                    productsCount: m['creator']['numberOfProducts'] ?? 0,
+                    accountType: mapType(m['creator']['type']))));
+      }).toList();
       if (limit == -1) {
         print("object");
         return p;
@@ -237,40 +281,53 @@ class ProductRepo extends GetxController {
 
     // print(clas);
     var p = await HttpService.instance.getProductsbyQyery(page, clas);
-    var ps = p
-        .map((m) => ProductModel(
-            // TODO product mapping
-            id: m['_id'],
-            productName: m['title'],
-            categoryId: mapingTheCategories(m['images']),
-            productImage: m['images'][0]['imageUrl'],
-            productPrice:
-                (m['price']).toDouble(), // Ensure key name consistency
-            productDetails: ProductDetails(
-                condition: m['details']['condition'],
-                color: m['details']['color'], //TODO map the color
-                productListImages: fromImage(m['images']),
-                productSpecs: {
-                  'ablakash': m['details']['abalakach'],
-                  'fabric type': m['details']['cloth'],
-                  'wood type': m['details']['wood'],
-                },
-                productDesc: m['description'],
-                productStats: ProductStats(
-                    delivery: m['details']['delevary'],
-                    negotiable: m['details']['negotiable'],
-                    modifiable: m['details']['modefiable']),
-                productSeller: VendorModel(
-                    name:
-                        "${m['creator']['firstName']} ${m['creator']['lastName']}",
-                    location: "Egypt",
-                    id: m['creator']['_id'],
-                    image: m['creator']['imageUrl'] ??
-                        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
-                    isFeatured: m['creator']['type'] == "Gallery",
-                    productsCount: m['creator']['numberOfProducts'] ?? 0,
-                    accountType: mapType(m['creator']['type'])))))
-        .toList();
+    var ps = p.map((m) {
+      List<dynamic> rates = m['rates'];
+        List<Review> reviews = [];
+        for (var rate in rates) {
+          Review r = Review(
+            comment: rate['description'],
+            rating: 0,
+            reviewerImage: rate['customer']['imageUrl'] ??
+                "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+            reviewerName:
+                "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
+          );
+          reviews.add(r);
+        }
+      return ProductModel(
+          // TODO product mapping
+          id: m['_id'],
+          rates: reviews,
+          productName: m['title'],
+          categoryId: mapingTheCategories(m['images']),
+          productImage: m['images'][0]['imageUrl'],
+          productPrice: (m['price']).toDouble(), // Ensure key name consistency
+          productDetails: ProductDetails(
+              condition: m['details']['condition'],
+              color: m['details']['color'], //TODO map the color
+              productListImages: fromImage(m['images']),
+              productSpecs: {
+                'ablakash': m['details']['abalakach'],
+                'fabric type': m['details']['cloth'],
+                'wood type': m['details']['wood'],
+              },
+              productDesc: m['description'],
+              productStats: ProductStats(
+                  delivery: m['details']['delevary'],
+                  negotiable: m['details']['negotiable'],
+                  modifiable: m['details']['modefiable']),
+              productSeller: VendorModel(
+                  name:
+                      "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                  location: "Egypt",
+                  id: m['creator']['_id'],
+                  image: m['creator']['imageUrl'] ??
+                      "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                  isFeatured: m['creator']['type'] == "Gallery",
+                  productsCount: m['creator']['numberOfProducts'] ?? 0,
+                  accountType: mapType(m['creator']['type']))));
+    }).toList();
     return ps;
   }
 
@@ -342,9 +399,9 @@ class ProductRepo extends GetxController {
       rethrow;
     }
   }
+
   Future<void> uploadProductToDatabase2(ProductModel product) async {
     try {
-    
       await HttpService.instance.editProduct(product);
       // hereeeer
     } catch (e) {
@@ -358,40 +415,58 @@ class ProductRepo extends GetxController {
     try {
       var products = await HttpService.instance
           .getProducts(page, GetStorage().read('token'));
+      for (var i = 0; i < products.length; i++) {
+        print(products[i]);
+      }
       var prods = products
           // TODO product mapping
-          .map((m) => ProductModel(
-              id: m['_id'],
-              productName: m['title'],
-              categoryId: mapingTheCategories(m['images']),
-              productImage: m['images'][0]['imageUrl'],
-              productPrice:
-                  (m['price']).toDouble(), // Ensure key name consistency
-              productDetails: ProductDetails(
-                  condition: m['details']['condition'],
-                  color: m['details']['color'], //TODO map the color
-                  productListImages: fromImage(m['images']),
-                  productSpecs: {
-                    'ablakash': m['details']['abalakach'],
-                    'fabric type': m['details']['cloth'],
-                    'wood type': m['details']['wood'],
-                  },
-                  productDesc: m['description'],
-                  productStats: ProductStats(
-                      delivery: m['details']['delevary'],
-                      negotiable: m['details']['negotiable'],
-                      modifiable: m['details']['modefiable']),
-                  productSeller: VendorModel(
-                      name:
-                          "${m['creator']['firstName']} ${m['creator']['lastName']}",
-                      location: "Egypt",
-                      id: m['creator']['_id'],
-                      image: m['creator']['imageUrl'] ??
-                          "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
-                      isFeatured: m['creator']['type'] == "Gallery",
-                      productsCount: m['creator']['numberOfProducts'] ?? 0,
-                      accountType: mapType(m['creator']['type'])))))
-          .toList();
+          .map((m) {
+        List<dynamic> rates = m['rates'];
+        List<Review> reviews = [];
+        for (var rate in rates) {
+          Review r = Review(
+            comment: rate['description'],
+            rating: 2,
+            reviewerImage: rate['customer']['imageUrl'] ??
+                "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+            reviewerName:
+                "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
+          );
+          reviews.add(r);
+        }
+        return ProductModel(
+            id: m['_id'],
+            rates: reviews,
+            productName: m['title'],
+            categoryId: mapingTheCategories(m['images']),
+            productImage: m['images'][0]['imageUrl'],
+            productPrice:
+                (m['price']).toDouble(), // Ensure key name consistency
+            productDetails: ProductDetails(
+                condition: m['details']['condition'],
+                color: m['details']['color'], //TODO map the color
+                productListImages: fromImage(m['images']),
+                productSpecs: {
+                  'ablakash': m['details']['abalakach'],
+                  'fabric type': m['details']['cloth'],
+                  'wood type': m['details']['wood'],
+                },
+                productDesc: m['description'],
+                productStats: ProductStats(
+                    delivery: m['details']['delevary'],
+                    negotiable: m['details']['negotiable'],
+                    modifiable: m['details']['modefiable']),
+                productSeller: VendorModel(
+                    name:
+                        "${m['creator']['firstName']} ${m['creator']['lastName']}",
+                    location: "Egypt",
+                    id: m['creator']['_id'],
+                    image: m['creator']['imageUrl'] ??
+                        "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+                    isFeatured: m['creator']['type'] == "Gallery",
+                    productsCount: m['creator']['numberOfProducts'] ?? 0,
+                    accountType: mapType(m['creator']['type']))));
+      }).toList();
 
       return prods;
     } catch (e) {

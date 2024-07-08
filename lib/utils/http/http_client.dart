@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class THttpHelper {
   static const String _baseUrl =
-      "http://192.168.1.10:3000"; // Replace with your API base URL
+      "http://192.168.1.12:3000"; // Replace with your API base URL
 
   // Helper method to make a GET request
   static Future<Map<String, dynamic>> get(String endpoint) async {
@@ -41,6 +41,7 @@ class THttpHelper {
       body: jsonEncode(data),
     );
   }
+
   static Future<http.Response> deleteBearerAuth(
       String endPoint, String token, Map<String, dynamic> data) async {
     return await http.delete(
@@ -110,7 +111,7 @@ class THttpHelper {
   }
 
   static Future<Map<String, dynamic>> postWithBearAuthForGraphQLRequest(
-       String token, String endPoint , String query) async {
+      String token, String endPoint, String query) async {
     try {
       final respone = await http.post(
         Uri.parse('$_baseUrl/$endPoint'),
@@ -119,7 +120,7 @@ class THttpHelper {
           'Authorization': 'Bearer $token',
         },
         body: json.encode({
-          'query':query,
+          'query': query,
         }),
       );
 

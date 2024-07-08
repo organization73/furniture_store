@@ -58,8 +58,7 @@ class UserReviewCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(height: 8.h),
-                  Text(product.rates[0].date.toString(),
-                      style: Theme.of(context).textTheme.bodySmall)
+                  
                 ],
               ),
             ),

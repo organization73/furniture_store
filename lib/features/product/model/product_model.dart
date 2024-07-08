@@ -14,7 +14,7 @@ class ProductModel {
   String productImage;
   bool onSale;
   ProductDetails productDetails;
-  List<dynamic> rates = [];
+  List<Review> rates = [];
   double productRating = 0;
   int productNumOfRating = 0;
   bool? isFeatured;
