@@ -559,7 +559,7 @@ exports.continueWithGoogle = async (req, res, next) => {
     await userSchema.validate({
       firstName,
       lastName,
-      username,
+      // username,
       email,
       googleId,
     });
@@ -601,14 +601,14 @@ exports.continueWithGoogle = async (req, res, next) => {
   }
   //user is first to signup
   //check if the username is already in use
-  try {
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return throwError(409, "Username is already in use", "username", next);
-    }
-  } catch (error) {
-    next(error);
-  }
+  // try {
+  //   const existingUser = await User.findOne({ username });
+  //   if (existingUser) {
+  //     return throwError(409, "Username is already in use", "username", next);
+  //   }
+  // } catch (error) {
+  //   next(error);
+  // }
   //hashing the password
   let hashedGoogleId;
   try {
@@ -624,7 +624,7 @@ exports.continueWithGoogle = async (req, res, next) => {
   const user = new User({
     firstName,
     lastName,
-    username,
+    // username,
     email,
     isConfirmed: true,
     googleId: hashedGoogleId,
