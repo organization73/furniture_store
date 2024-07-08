@@ -39,7 +39,6 @@ import 'package:decordash/features/product/screens/product_details/widgets/produ
 import 'package:decordash/features/product/screens/product_details/widgets/product_meta_data.dart';
 import 'package:decordash/features/product/screens/product_details/widgets/product_rating_container.dart';
 
-
 class ProductDetailsScreenForUser extends StatelessWidget {
   const ProductDetailsScreenForUser({super.key, required this.product});
   final ProductModel product;
@@ -47,24 +46,6 @@ class ProductDetailsScreenForUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: ElevatedButton(
-          child: Text(
-            'contactSeller'.tr,
-          ),
-          onPressed: () {
-            Get.to(
-              () => ChatScreen(
-                userId: product.productDetails.productSeller.id,
-                vendor: product.productDetails.productSeller,
-              ),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            );
-          },
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

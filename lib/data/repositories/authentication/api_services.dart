@@ -71,6 +71,9 @@ class HttpService extends GetxService {
     String query = Querys.productsQuery(page);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         token, 'graphql', query);
+    print("query $query");
+    print("response $response");
+
     return response['data']['products']['products'];
   }
 

@@ -31,7 +31,7 @@ class Querys {
   //             ''';
   static productsQuery(page) => '''
             query GetProducts {
-              products(page: $page,filters:{leastPrice:0,mostPrice:1, newest:0} ) {
+              products(page: $page,filters:{leastPrice:0,mostPrice:0, newest:1} ) {
                 products {
                   _id
                   title

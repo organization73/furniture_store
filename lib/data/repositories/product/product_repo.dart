@@ -415,6 +415,7 @@ class ProductRepo extends GetxController {
     try {
       var products = await HttpService.instance
           .getProducts(page, GetStorage().read('token'));
+          print("products");
       for (var i = 0; i < products.length; i++) {
         print(products[i]);
       }
