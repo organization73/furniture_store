@@ -104,8 +104,16 @@ class UserController extends GetxController {
 
       // THttpHelper.postBearerAuth("", token, data)
       //TODO delete account
-
+      THttpHelper.deleteBearerAuth(
+          "user/delete-user", GetStorage().read('token'), {});
       FullScreenLoader.stopLoading();
+      Get.offAll(
+        () => const LoginSignUpScreen(),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
+      TLoaders.successSnackBar(
+          title: 'Done', message: 'Your account is deleted');
     } catch (e) {
       FullScreenLoader.stopLoading();
 

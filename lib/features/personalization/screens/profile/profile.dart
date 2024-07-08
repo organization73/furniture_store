@@ -117,13 +117,13 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              // TextButton(
-              //     onPressed: () => controller.deleteAccountWarningPopup(),
-              //     child: Text(
-              //       'Close Account',
-              //       style:
-              //           TextStyle(color: Theme.of(context).colorScheme.error),
-              //     ))
+              TextButton(
+                  onPressed: () => controller.deleteAccountWarningPopup(),
+                  child: Text(
+                    'Close Account',
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.error),
+                  ))
             ],
           ),
         ),
