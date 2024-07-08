@@ -1,5 +1,6 @@
 import 'package:decordash/features/authentication/controllers/gallery_info/gallery_information_controller.dart';
 import 'package:decordash/utils/constants/enums.dart';
+import 'package:decordash/utils/http/http_client.dart';
 import 'package:decordash/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decordash/common/widgets/loaders/loaders.dart';
@@ -101,37 +102,10 @@ class UserController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'Processing', 'assets/animations/animation-of-docer.json');
 
-      final auth = AuthenticatorRepo.instance;
-      final provider =
-          auth.authUser!.providerData.map((e) => e.providerId).first;
+      // THttpHelper.postBearerAuth("", token, data)
+      //TODO delete account
 
-      if (provider.isNotEmpty) {
-        if (provider == 'google.com') {
-          await auth.signInWithGoogle();
-          await auth.deleteAccount();
-          FullScreenLoader.stopLoading();
-          Get.offAll(
-            () => const LoginSignUpScreen(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          );
-        } else if (provider == 'password') {
-          FullScreenLoader.stopLoading();
-          Get.to(
-            () => const ReAuthLoginForm(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          );
-        } else if (provider == 'phone') {
-          await auth.deleteAccount();
-          FullScreenLoader.stopLoading();
-          Get.offAll(
-            () => const LoginSignUpScreen(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          );
-        }
-      }
+      FullScreenLoader.stopLoading();
     } catch (e) {
       FullScreenLoader.stopLoading();
 
@@ -214,7 +188,7 @@ class UserController extends GetxController {
         // Map<String, dynamic> json = {"galleryCertificate": imageUrl};
         // await userRepository.updateSingleField(json);
         user.value.galleryCertificate = imageUrl;
-        GalleryInfoController. isGalleryCertificateUploaded = true;
+        GalleryInfoController.isGalleryCertificateUploaded = true;
         user.refresh();
 
         TLoaders.successSnackBar(
@@ -243,8 +217,6 @@ class UserController extends GetxController {
   void loadUserData() {
     final userData = _storage.read('user_data');
     if (userData != null) {
-      
-
       UserModel userr = UserModel.fromJson(userData['user']);
       user.value = userr;
     } else {

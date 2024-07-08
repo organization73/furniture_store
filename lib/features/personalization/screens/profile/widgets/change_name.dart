@@ -15,7 +15,7 @@ class ChangeNameScreen extends StatelessWidget {
     final controller = Get.put(UpdateNameController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change Name'),
+        title: const Text('Change User Info'),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -47,6 +47,14 @@ class ChangeNameScreen extends StatelessWidget {
                         controller.lastNameController,
                         keyboardType: TextInputType.name,
                         TValidator.validateUserInput),
+                    SizedBox(height: TSizes.spaceBtwInputFields),
+                    RoundedTextField(
+                        prefixIcon: Iconsax.user_copy,
+                        'username',
+                        controller.usernameController,
+                        keyboardType: TextInputType.name,
+                        TValidator.validateUserInput),
+                    SizedBox(height: TSizes.spaceBtwInputFields),
                   ],
                 ))
           ],

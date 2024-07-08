@@ -9,6 +9,7 @@ import 'package:decordash/utils/constants/image_strings.dart';
 import 'package:decordash/utils/constants/sizes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -51,42 +52,50 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              const SectionHeading(
-                title: 'Profile Information',
-                showActionButton: false,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SectionHeading(
+                    title: 'Profile Information',
+                    showActionButton: false,
+                  ),
+                  IconButton(
+                      onPressed: () => Get.off(
+                            () => const ChangeNameScreen(),
+                            duration: const Duration(milliseconds: 300),
+                            transition: Transition.downToUp,
+                          ),
+                      icon: const Icon(Iconsax.edit_2))
+                ],
               ),
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               ProfileMenu(
                 title: 'Name',
-                showIcon: true,
+                showIcon: false,
                 value: controller.user.value.fullName,
-                onPress: () => Get.off(
-                  () => const ChangeNameScreen(),
-                  duration: const Duration(milliseconds: 300),
-                  transition: Transition.downToUp,
-                ),
+                onPress: () => {},
               ),
               ProfileMenu(
                 title: 'Username',
                 value: controller.user.value.username!,
                 onPress: () {},
               ),
-              SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
-              const Divider(),
-              SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
-              const SectionHeading(
-                title: 'Account Information',
-                showActionButton: false,
-              ),
-              SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
+              // SizedBox(
+              //   height: TSizes.spaceBtwItems,
+              // ),
+              // const Divider(),
+              // SizedBox(
+              //   height: TSizes.spaceBtwItems,
+              // ),
+              // const SectionHeading(
+              //   title: 'Account Information',
+              //   showActionButton: false,
+              // ),
+              // SizedBox(
+              //   height: TSizes.spaceBtwItems,
+              // ),
               (controller.user.value.email.isNotEmpty)
                   ? ProfileMenu(
                       title: 'E-mail',
@@ -94,13 +103,13 @@ class ProfileScreen extends StatelessWidget {
                       onPress: () {},
                     )
                   : const SizedBox(),
-              (controller.user.value.phoneNumber.isNotEmpty)
-                  ? ProfileMenu(
-                      title: 'Phone Number',
-                      value: controller.user.value.phoneNumber,
-                      onPress: () {},
-                    )
-                  : const SizedBox(),
+              // (controller.user.value.phoneNumber.isNotEmpty)
+              //     ? ProfileMenu(
+              //         title: 'Phone Number',
+              //         value: controller.user.value.phoneNumber,
+              //         onPress: () {},
+              //       )
+              //     : const SizedBox(),
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
@@ -108,13 +117,13 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              TextButton(
-                  onPressed: () => controller.deleteAccountWarningPopup(),
-                  child: Text(
-                    'Close Account',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
-                  ))
+              // TextButton(
+              //     onPressed: () => controller.deleteAccountWarningPopup(),
+              //     child: Text(
+              //       'Close Account',
+              //       style:
+              //           TextStyle(color: Theme.of(context).colorScheme.error),
+              //     ))
             ],
           ),
         ),
