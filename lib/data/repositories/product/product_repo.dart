@@ -31,7 +31,7 @@ class ProductRepo extends GetxController {
       for (var rate in rates) {
         Review r = Review(
           comment: rate['description'],
-          rating: 2,
+          rating: rate['rate'] ?? 0,
           reviewerImage: rate['customer']['imageUrl'] ??
               "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
           reviewerName:
@@ -134,7 +134,7 @@ class ProductRepo extends GetxController {
       for (var rate in rates) {
         Review r = Review(
           comment: rate['description'],
-          rating: 0,
+           rating: rate['rate'] ?? 0,
           reviewerImage: rate['customer']['imageUrl'] ??
               "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
           reviewerName:
@@ -197,7 +197,7 @@ class ProductRepo extends GetxController {
         for (var rate in rates) {
           Review r = Review(
             comment: rate['description'],
-            rating: 0,
+            rating: rate['rate'] ?? 0,
             reviewerImage: rate['customer']['imageUrl'] ??
                 "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
             reviewerName:
@@ -283,18 +283,18 @@ class ProductRepo extends GetxController {
     var p = await HttpService.instance.getProductsbyQyery(page, clas);
     var ps = p.map((m) {
       List<dynamic> rates = m['rates'];
-        List<Review> reviews = [];
-        for (var rate in rates) {
-          Review r = Review(
-            comment: rate['description'],
-            rating: 0,
-            reviewerImage: rate['customer']['imageUrl'] ??
-                "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
-            reviewerName:
-                "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
-          );
-          reviews.add(r);
-        }
+      List<Review> reviews = [];
+      for (var rate in rates) {
+        Review r = Review(
+          comment: rate['description'],
+          rating: rate['rate'] ?? 0,
+          reviewerImage: rate['customer']['imageUrl'] ??
+              "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+          reviewerName:
+              "${rate['customer']['firstName']} ${rate['customer']['lastName']}",
+        );
+        reviews.add(r);
+      }
       return ProductModel(
           // TODO product mapping
           id: m['_id'],
@@ -415,7 +415,7 @@ class ProductRepo extends GetxController {
     try {
       var products = await HttpService.instance
           .getProducts(page, GetStorage().read('token'));
-          print("products");
+      print("products");
       for (var i = 0; i < products.length; i++) {
         print(products[i]);
       }
@@ -427,7 +427,7 @@ class ProductRepo extends GetxController {
         for (var rate in rates) {
           Review r = Review(
             comment: rate['description'],
-            rating: 2,
+            rating: rate['rate'] ?? 0,
             reviewerImage: rate['customer']['imageUrl'] ??
                 "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
             reviewerName:
