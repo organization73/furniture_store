@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:decordash/features/product/model/product_model.dart';
 import 'package:decordash/utils/graphql/querys.dart';
 import 'package:decordash/utils/http/http_client.dart';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -27,7 +26,6 @@ class HttpService extends GetxService {
           'user/assign-image', GetStorage().read('token'), {
         'imageUrl': imageUrl,
       });
-      LoggerHelper.warning(r.toString());
     } catch (e) {
       rethrow;
     }
@@ -44,7 +42,6 @@ class HttpService extends GetxService {
         "certificate": imageUrl,
         "coordinates": {"lat": 40.7128, "lng": -74.0060}
       });
-      LoggerHelper.warning(r.toString());
     } catch (e) {
       rethrow;
     }
@@ -71,8 +68,6 @@ class HttpService extends GetxService {
     String query = Querys.productsQuery(page);
     var response = await THttpHelper.postWithBearAuthForGraphQLRequest(
         token, 'graphql', query);
-    print("query $query");
-    print("response $response");
 
     return response['data']['products']['products'];
   }
@@ -224,14 +219,10 @@ class HttpService extends GetxService {
       );
       // LoggerHelper.info('Response body: ${response.body}');
       if (response.statusCode == 200) {
-        LoggerHelper.info('Request succeeded');
       } else {
-        LoggerHelper.error(
-            'Request failed with status: ${response.statusCode}');
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (err) {
-      LoggerHelper.error('Error sending request: $err');
       rethrow;
     }
   }

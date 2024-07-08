@@ -29,15 +29,18 @@ class RecentSearchController extends GetxController {
       // If it does, remove the oldest item before adding the new one
       recentSearches.removeAt(6);
     }
- 
+
     if (recentSearches.contains(query)) {
       recentSearches.remove(query);
     }
     recentSearches.insert(0, query);
 
-    if (!recentSearches.contains(query)) {
-      saveRecentSearchesToStorage();
+    if (recentSearches.contains(query)) {
+      recentSearches.remove(query);
+      recentSearches.insert(0, query);
+      recentSearches.refresh();
     }
+    saveRecentSearchesToStorage();
   }
 
   void removeSearch(int query) {

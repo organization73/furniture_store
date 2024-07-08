@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:decordash/utils/logging/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
@@ -125,8 +124,6 @@ class THttpHelper {
           'query': query,
         }),
       );
-      print(respone.statusCode);
-      LoggerHelper.error(respone.body);
       return _handleResponse(respone);
     } catch (e) {
       rethrow;
