@@ -119,8 +119,6 @@ exports.deleteUser = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.user._id);
     if (user) {
-      res.status(200).json({ message: "User deleted" });
-
       //delete user's gallaries
       await Gallary.deleteMany({ creator: req.user._id });
 
@@ -131,7 +129,7 @@ exports.deleteUser = async (req, res, next) => {
       await AiProduct.deleteMany({ creator: req.user._id });
 
       //delete user's rates
-      await Rate.deleteMany({ user: req.user._id });
+      await Rate.deleteMany({ customer: req.user._id });
 
       //delete user's chatrooms
       const chatRoom = await Chatroom.deleteMany({ users: req.user._id });
