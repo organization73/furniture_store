@@ -181,7 +181,7 @@ class ProductMetaData extends StatelessWidget {
         ),
         if (product.rates.isNotEmpty)
           UserReviewCard(
-            product: product,
+            review: product.rates[0],
           ),
       ],
     );

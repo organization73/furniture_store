@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:decordash/features/home/model/review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordash/common/widgets/products/rattings/rating_indicator.dart';
@@ -7,9 +8,9 @@ import 'package:decordash/features/product/model/product_model.dart';
 class UserReviewCard extends StatelessWidget {
   const UserReviewCard({
     super.key,
-    required this.product,
+    required this.review,
   });
-  final ProductModel product;
+  final Review review;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class UserReviewCard extends StatelessWidget {
             CircleAvatar(
                 radius: 25,
                 child: CachedNetworkImage(
-                  imageUrl: product.rates[0].reviewerImage,
+                  imageUrl: review.reviewerImage,
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -41,24 +42,23 @@ class UserReviewCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product.rates[0].reviewerName,
+                  Text(review.reviewerName,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleMedium),
                   SizedBox(
                     height: 5.h,
                   ),
                   CustomRatingBarIndicator(
-                    rating: product.rates[0].rating.toDouble(),
+                    rating: review.rating.toDouble(),
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
                   Text(
-                    product.rates[0].comment,
+                    review.comment,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(height: 8.h),
-                  
                 ],
               ),
             ),

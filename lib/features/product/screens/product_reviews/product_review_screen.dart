@@ -42,7 +42,7 @@ class ProductReviewsScreen extends StatelessWidget {
                       return Column(
                         children: [
                           UserReviewCard(
-                            product: product,
+                            review: product.rates[index],
                           ),
                           SizedBox(height: TSizes.spaceBtwItems),
                         ],
