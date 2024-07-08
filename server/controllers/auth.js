@@ -593,7 +593,7 @@ exports.continueWithGoogle = async (req, res, next) => {
       );
       return res
         .status(200)
-        .json({ token: token, user: existingUser, firstTime: true });
+        .json({ token: token, user: existingUser, firstTime: false });
     }
   } catch (error) {
     if (!error.statusCode) error.statusCode = 500;
