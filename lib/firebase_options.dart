@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '163403932625',
     projectId: 'decoredashplatform',
     storageBucket: 'decoredashplatform.appspot.com',
-    androidClientId: '163403932625-5vtmhvmf8qpp86mmjuhqvolard2g5jel.apps.googleusercontent.com',
+    androidClientId: '163403932625-4umo7lk0lmdh95rv1k0e9esaukip6oh1.apps.googleusercontent.com',
     iosClientId: '163403932625-hjq2o7l76i5p3kgv44bfs90ejm9tvsb5.apps.googleusercontent.com',
     iosBundleId: 'com.decordashstore.decordashstore',
   );
