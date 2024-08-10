@@ -3,8 +3,8 @@ import 'package:decordash/data/repositories/banners/banners_repo.dart';
 import 'package:decordash/features/home/model/banners_model.dart';
 import 'package:get/get.dart';
 
-class CarouselSliderController extends GetxController {
-  static CarouselSliderController get instance => Get.find();
+class CustomeCarouselSliderController extends GetxController {
+  static CustomeCarouselSliderController get instance => Get.find();
 
   final carouselCurrentIndex = 0.obs;
   final isLoading = false.obs;

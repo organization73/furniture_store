@@ -56,6 +56,7 @@
         android:label="DecorDash"
         android:name="${applicationName}"
         android:roundIcon="@mipmap/round_launcher"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

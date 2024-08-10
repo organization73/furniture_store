@@ -13,7 +13,7 @@ class ImageSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CarouselSliderController());
+    final controller = Get.put(CustomeCarouselSliderController());
 
     return Obx(() {
       if (controller.isLoading.value) {
@@ -29,7 +29,7 @@ class ImageSlider extends StatelessWidget {
               height: 100.h,
               viewportFraction: 1,
               autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 6),
+              autoPlayInterval: const Duration(seconds: 10),
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index),
             ),
