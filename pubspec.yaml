@@ -60,7 +60,10 @@ flutter:
     - assets/icons/
     - assets/images/onboarding/
     - assets/images/content/
+    - assets/images/products/
+    - assets/images/categories/
     - assets/logos/
+    - assets/banners/
     - assets/animations/
 
   fonts:

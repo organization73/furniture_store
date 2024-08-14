@@ -133,19 +133,19 @@ class NotificationsService {
     final client = await clientViaServiceAccount(
         ServiceAccountCredentials.fromJson({
           "type": "service_account",
-          "project_id": "decoredashplatform",
-          "private_key_id": "50e1841bfbf4f91cc46a0af9eb57c772d13f7155",
+          "project_id": "decoredashappplatform",
+          "private_key_id": "24c595aabfaf88aec14a9e8d676ceba0ec8dff52",
           "private_key":
-              "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDiSGDbooWCq3Ba\nfXL2KmNlDP5AWv/e90R3b7y6h4hoW46NTwCM57Mleir33agvAEkPhvGmZvGsk7Vo\nZsUoLvzdGJSCEjLXUgtEAMdOuV7MWB0W3W56zhnmn6XxYoxRFuuI6s8oE3h0BbFX\neACqNP4p2kB0/mebJW5/L/3eDUzGK5l0dTqwXij2LKM7IuRlQ8IRyZgWDBL6cXWz\nbDe153wSw0pq2q7bgGMOX8YBOwb8aZLqiUP2UYI9cUdq8ZMVuSI6ezL9WTX7MkUy\nQV+1iTQoPDHZRbyMHbW1o6Cc22kny7rxMEcBgrybDyrIETWuHY4n2/IR99VF6YNm\nbjFFP7gZAgMBAAECggEAElCqakySwttOejyKKAuRRPYSxDG5YRohdAtaurxKmavD\nc4OP91evo9pqDOrneHps73FMMNxHNmE0PzGGRrTa6ahaKNcBP3VYDRaFC0Wsuxxs\nqlOc5Bq3dPe6DjocQln5EXlz7/n3d2iYjIxdfWlRoyCTtAR9bUzPz0KaqTTpYGaz\nA7CiQmPVq627YLHH1P/imHu3pJkrm/l+U/aDtM344UiP5xucsuSZTItaeChCMuf4\noidNcpAAq9MhPKBNFox9UDZkA1VYi0oPW2ckiqCjI9HgFUownWaGt/H9RDKZpWZE\nPujOGbz9y+0Wps067V1knl6NDu9rWNU3rdFTnzbIwQKBgQD63GwyxU0POZuXaecT\n+al8S0eF2Dp9udF8qSAvSqo2tqeQyRHy5Gymio8jjMq4qmGCQfc+cS37DDseWiXs\nd1vqtHo/+ti9VCC83GbDS9JheSo3ozLObc1Cs7Wy5qSZ3ZAB5FHTgQj68B15vlZx\nd6VC+C0wLrW0AOpwTQYfKyJtKQKBgQDm6w+e+UZtCMZ34IZT5MZ5lwEWf1FYAJoS\nBHDfNntG/QNR+8QP8Fq+OKQpV/QpZJRhuxTgSxVT/ui/N5JCH1yeysQCTDP70bni\nOR1VmeTgB7Nd1oEQ7y5AKoG90/MCvHJragKS8RaHyGOJCPaM+TxINJ8HHmEHBwzm\nmdpId0lhcQKBgQDVdrFfNoLPHM8oNcabOcwd5xTycL+88lyvPl8Tvu4+ZokJ6/8o\n93T49li9AHYUU29r3uQbr0VYJd08g6tXn22It5B7VuINoUPGUankL2XS6b6h325B\nOC/8vV004YxZHa8H3Rg/6MISfjYmvW9jWFM5PGN/Z4/Ynxre+rvl09eUmQKBgAcg\nxGes3C6rcazrolnemv3P2nm+Tl2AD0F1H6LURLPpRXv3YJL5YWOzzeV00JWihC4M\nH1XZG3xvRvH4HiyqWSqRqcFEZupkC+/ewXgN+xGrSy8fWvaR24Shi0W30C2KcaG9\nMP0mMgLY/bGSNEIfw2ubLDmFB4u2/P/1Sdaoz/wRAoGBAM0RHF6AIYQlJfiuDZkP\neJbupWDZ7/v04vnyVYOKVsjBOnwx2zwF4qEpOi/yPnvDb4tUiOaUc47Xjh9o4EnW\nGae+mTNecoxsaj/JPA7iVUs/EAebXn+U6ZZFstmx3v61HaPtQLuBgeVCsr71xb4r\nVuLgHltL6BOAm94I0N7xShyS\n-----END PRIVATE KEY-----\n",
+              "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDb7YWlL89prvKn\ndnoVWJTp4v+wEbC+rRJhp2o1NNhE2oZQqdH11U6L77lX9JyAv5Kl8Vs45OqGrrK8\nud5eEbwwWKRH4+BFSKxr10A+VEJarnMAduF+Y4Ub//V+Wu5u5ZqrAVFUEuHwjcJD\ne7pJJC5KPmOPUofoLsDX+VjNrMNA8CLIjBsruh5l4m01gRTCl4gq/B/KhPgJYHVO\nBSvxvbcUrMrADxbEvyb3tyn+SXHilk4XbOJz2wBeg4pk3/iS6HrH/+AZDm8JcI7N\nwhx7EJVKtLOjG2DwO/N5hnxf1p8IdUzBGQndyEV+LM9VEOJnf6cv9Qeujn1OdH13\n51wLSG1JAgMBAAECggEAA17yH/SKJNAKJxfxShd3/Ne+XIgA4gNMF1QWFCexsuh4\ni472yWJSGGH9wMPejDijekinQcl8cMEHu03MAzwZWtJY/kMXYmh5QBPmB66J79Lh\nr12jGilTVnkHXb7uDaQWSU21XekGLoY1towUcF+OGBQ5uW4l6CCjUwwe2NQvj/S3\nAjZWoRNg2CeJjeRllYYX271Y8ULkjEbECY2mjDJNceh/XeXchA4V3z/EdWCs6QJw\no+yT0UXXmBfH5sY/bq5gU2241edDsIOCK9wiOWGodpHGIvgA5LLHDCUQZhQGNlx/\n9CxxSsu3UZOZL4MDp/qsShQTdzWG/jh9+A/lergmSQKBgQD8NpCQ+m++jlDemx5I\nWXbCdIA2OwURwFNHW+DrFymf8SiArmum8BG5sT9fPsh+sVcrRU2/atEE3Br95Dwp\nVXt2n+awUy0G6zftngw8o9HqzVKGfPgTVjwWAijU7Oms1l/QMQhcpBUlW0fV9TKL\nznEiUM4DoD2RxGlBb3ymbf3//QKBgQDfOtydlVGH2H2gFBc9le/e28R/xM5QxVcB\nxmLr5jZlUzBfYDPVSJwdjGO7rLzlADm+8/Yr3axbmwiZGoh80CSCOzM94qdGyfEY\nnl3NGvA19sK2lJS/eDAY3epzClP1yvEW9aaJ/rL4DL5MC9fslKPsBeykqw11u98Y\nuM89ChSGPQKBgGNnhhb9/ajXIpx5+rd9O0ds71Nwc5EJgkkvtzgxCuDVBaeiFx/W\nosXTTCzX6+GzN64ARKJbEUKfFaxXljacUGryntOEFM0TTBnFHwGPd57Zidsjygql\nBE2QUFOLhJXwcBb4HFmW+hadIXT8jQ15MjHaMzhOobWf+fQmYrSdyWxpAoGADaRG\nOScX3WpgevjfVrcj+oWJo5k+VndI0uXxw6LE7jpAOYPihwUx7ShYK+7peEEkRkQY\nZiPc1ZhK1Thm4OHDaWX+wqhoOo46uptq9g7QYSvcSFYaJP1OSya8nh0idmHZi+Kl\nM8ep3jjBJFqQ7ndC8TiHdqSxZOF/R757g6prCK0CgYBrGuaryiGTEbCx7HYz9/+D\nSpL/cmKMHsB8lclDwGEmrpIIX9Q5Ho/sQIXDnu4f8hetZNxbZtvsltA7V/aDsoWX\nhZy+0VJdexCQUXy+ndBLkCKPmfnzbUj/MRyt2Su+qD/i9B30ADfJXPUZvg26cvO2\njsTkRiXMJ64FcXf+jLrwjg==\n-----END PRIVATE KEY-----\n",
           "client_email":
-              "firebase-adminsdk-cb3be@decoredashplatform.iam.gserviceaccount.com",
-          "client_id": "115368558199234501613",
+              "firebase-adminsdk-5wij7@decoredashappplatform.iam.gserviceaccount.com",
+          "client_id": "103101517882701367425",
           "auth_uri": "https://accounts.google.com/o/oauth2/auth",
           "token_uri": "https://oauth2.googleapis.com/token",
           "auth_provider_x509_cert_url":
               "https://www.googleapis.com/oauth2/v1/certs",
           "client_x509_cert_url":
-              "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-cb3be%40decoredashplatform.iam.gserviceaccount.com",
+              "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-5wij7%40decoredashappplatform.iam.gserviceaccount.com",
           "universe_domain": "googleapis.com"
         }),
         [firebaseMessagingScope]);
@@ -159,7 +159,7 @@ class NotificationsService {
     try {
       final String accessToken = await getAccessToken(); // Get OAuth 2.0 token
       const String url =
-          'https://fcm.googleapis.com/v1/projects/decoredashplatform/messages:send';
+          'https://fcm.googleapis.com/v1/projects/decoredashappplatform/messages:send';
       final Map<String, dynamic> notification = {
         "message": {
           "token": receiverToken,
