@@ -1,16 +1,21 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:decordash/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordash/common/widgets/buttons/cta_button.dart';
 import 'package:decordash/common/widgets/headings/page_header.dart';
 import 'package:decordash/features/authentication/controllers/sign_up/sign_up_controller.dart';
 import 'package:decordash/utils/constants/sizes.dart';
-
 import 'package:decordash/utils/validators/validation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
@@ -77,12 +82,32 @@ class SignUpScreen extends StatelessWidget {
                       controller.emailController,
                       TValidator.validateEmail),
                   SizedBox(height: TSizes.spaceBtwInputFields),
-                  RoundedTextField(
-                      'phoneNo'.tr,
-                      prefixIcon: Iconsax.call_copy,
-                      keyboardType: TextInputType.phone,
-                      controller.phoneNumController,
-                      TValidator.validatePhoneNumber),
+                  InternationalPhoneNumberInput(
+                    onInputChanged: (PhoneNumber number) {
+                      controller.phoneNumController.value =
+                          number.phoneNumber as TextEditingValue;
+                    },
+                    inputDecoration: InputDecoration(
+                      border: const OutlineInputBorder().copyWith(
+                        borderRadius:
+                            BorderRadius.circular(TSizes.inputFieldRadius),
+                      ),
+                      labelText: 'phoneNo'.tr,
+                    ),
+                    keyboardType: const TextInputType.numberWithOptions(
+                      signed: true,
+                      decimal: false,
+                    ),
+                    selectorConfig: const SelectorConfig(
+                      selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                      setSelectorButtonAsPrefixIcon: true,
+                      leadingPadding: 15,
+                    ),
+                    initialValue: PhoneNumber(
+                      isoCode: 'EG',
+                    ),
+                    formatInput: false,
+                  ),
                   SizedBox(height: TSizes.spaceBtwInputFields),
                   GetX<SignUpController>(
                     builder: (controller) => Column(
@@ -123,36 +148,52 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         width: TSizes.spaceBtwItems,
                       ),
-                      Text.rich(TextSpan(children: [
+                      Text.rich(
                         TextSpan(
-                            text: '${'iAgreeTo'.tr} ',
-                            style: Theme.of(context).textTheme.labelSmall),
-                        TextSpan(
-                            text: 'privacyPolicy'.tr,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .apply(
+                          children: [
+                            TextSpan(
+                              text: '${'iAgreeTo'.tr} ',
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
+                            TextSpan(
+                              text: 'privacyPolicy'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .apply(
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     decoration: TextDecoration.underline,
                                     decorationColor:
-                                        Theme.of(context).colorScheme.primary)),
-                        TextSpan(
-                            text: ' ${'and'.tr} ',
-                            style: Theme.of(context).textTheme.labelSmall),
-                        TextSpan(
-                            text: 'termsOfUse'.tr,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .apply(
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => _showBottomSheet(context,
+                                    'assets/markdown/privacy_policy.md'),
+                            ),
+                            TextSpan(
+                              text: ' ${'and'.tr} ',
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
+                            TextSpan(
+                              text: 'termsOfUse'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .apply(
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     decoration: TextDecoration.underline,
                                     decorationColor:
-                                        Theme.of(context).colorScheme.primary)),
-                      ]))
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => _showBottomSheet(context,
+                                    'assets/markdown/terms_and_conditions.md'),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ],
@@ -161,6 +202,67 @@ class SignUpScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showBottomSheet(BuildContext context, String filePath) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: SizedBox(
+                height: 0.75.sh,
+                child: FutureBuilder(
+                  future: rootBundle.loadString(filePath),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.hasData) {
+                      return MarkdownWidget(
+                        config: MarkdownConfig(configs: [
+                          const PConfig(textStyle: TextStyle(fontSize: 15)),
+                          H1Config(
+                              style:
+                                  Theme.of(context).textTheme.headlineLarge!),
+                          H2Config(
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium!),
+                          H3Config(
+                              style:
+                                  Theme.of(context).textTheme.headlineSmall!),
+                          H4Config(
+                              style: Theme.of(context).textTheme.labelMedium!),
+                          const TableConfig(
+                            columnWidths: {0: FractionColumnWidth(0.25)},
+                          ),
+                          ListConfig(
+                            marker: (isOrdered, depth, index) => const Padding(
+                              padding: EdgeInsets.only(top: 6),
+                              child: Icon(Icons.circle, size: 6),
+                            ),
+                          ),
+                        ]),
+                        data: snapshot.data!,
+                      );
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                ),
+              ),
+            ),
+            Positioned(
+              top: 0.0,
+              right: 0.0,
+              child: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => Get.back(),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
