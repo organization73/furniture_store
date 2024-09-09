@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:decordashapp/utils/constants/sizes.dart';
 
 /* -- Light & Dark Outlined Button Themes -- */
@@ -10,20 +8,9 @@ class TOutlinedButtonTheme {
   /* -- Light Theme -- */
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      textStyle: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
-      padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight, horizontal: 20),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
-    ),
-  );
-
-  /* -- Dark Theme -- */
-  static final darkOutlinedButtonTheme = OutlinedButtonThemeData(
-    style: OutlinedButton.styleFrom(
-      textStyle: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
-      padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight, horizontal: 20),
+      // textStyle: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
+      // padding: const EdgeInsets.symmetric(
+      //     vertical: TSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),

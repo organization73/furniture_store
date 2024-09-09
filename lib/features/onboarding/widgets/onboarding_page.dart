@@ -1,9 +1,8 @@
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordashapp/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -41,16 +40,23 @@ class OnBoardingView extends StatelessWidget {
                                   const EdgeInsets.all(TSizes.pagePaddingSpace),
                               child: Text(
                                 item.title,
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
                             ),
                             Container(
-                              constraints: BoxConstraints(maxWidth: 250.w),
+                              constraints: BoxConstraints(
+                                  maxWidth:
+                                      TDeviceUtils.getScreenWidth(context) *
+                                          0.75),
                               child: Text(
                                 item.description,
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.labelSmall,
+                                style: Theme.of(context).textTheme.labelMedium,
                               ),
                             ),
                           ],
@@ -72,7 +78,7 @@ class OnBoardingView extends StatelessWidget {
                                   controller.pages.indexOf(item)
                               ? 30
                               : 8,
-                          height: 8.h,
+                          height: 8,
                           margin: const EdgeInsets.all(2.0),
                           decoration: BoxDecoration(
                             color: controller.currentPage ==

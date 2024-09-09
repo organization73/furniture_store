@@ -34,7 +34,7 @@ class SortableProducts extends StatelessWidget {
             onChanged: (value) {
               controller.sortProducts(value!);
             }),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections * 1.5,
         ),
         Obx(() => GridLayout(

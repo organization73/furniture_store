@@ -41,7 +41,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     'assets/animations/reset_pass.json',
                     width: 150,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   PageHeader(
@@ -49,7 +49,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     subTitle: email,
                     alignment: CrossAxisAlignment.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   Text(
@@ -57,7 +57,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.labelSmall,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   TextButton(

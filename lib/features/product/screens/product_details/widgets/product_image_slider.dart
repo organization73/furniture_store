@@ -72,7 +72,7 @@ class ProductImageSlider extends StatelessWidget {
                         imageUrl: images[index]);
                   },
                 ),
-                separatorBuilder: (_, __) => SizedBox(
+                separatorBuilder: (_, __) => const SizedBox(
                   width: TSizes.spaceBtwItems,
                 ),
                 itemCount: images.length,

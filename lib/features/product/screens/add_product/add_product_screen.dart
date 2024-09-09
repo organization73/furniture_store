@@ -62,7 +62,7 @@ class AddProductPage extends StatelessWidget {
                             addController.nameController,
                             keyboardType: TextInputType.text,
                             TValidator.validateUserInput),
-                        SizedBox(height: TSizes.spaceBtwInputFields),
+                        const SizedBox(height: TSizes.spaceBtwInputFields),
                         RoundedTextField(
                           'price'.tr,
                           addController.priceController,
@@ -74,7 +74,7 @@ class AddProductPage extends StatelessWidget {
                             return null;
                           },
                         ),
-                        SizedBox(height: TSizes.spaceBtwInputFields),
+                        const SizedBox(height: TSizes.spaceBtwInputFields),
                         RoundedTextField(
                             'address'.tr, addController.adressController,
                             (value) {
@@ -83,7 +83,7 @@ class AddProductPage extends StatelessWidget {
                           }
                           return null;
                         }),
-                        SizedBox(height: TSizes.spaceBtwInputFields),
+                        const SizedBox(height: TSizes.spaceBtwInputFields),
                         TextFormField(
                           controller: addController.descriptionController,
                           maxLines: 4,
@@ -97,7 +97,7 @@ class AddProductPage extends StatelessWidget {
                             return null;
                           },
                         ),
-                        SizedBox(height: TSizes.spaceBtwInputFields),
+                        const SizedBox(height: TSizes.spaceBtwInputFields),
                         BuildDropDown(
                           items: [
                             'regular'.tr,
@@ -109,7 +109,7 @@ class AddProductPage extends StatelessWidget {
                           },
                           hintText: 'selectType'.tr,
                         ),
-                        SizedBox(height: TSizes.spaceBtwInputFields),
+                        const SizedBox(height: TSizes.spaceBtwInputFields),
                         BuildDropDown(
                           items: [
                             'cotton'.tr,

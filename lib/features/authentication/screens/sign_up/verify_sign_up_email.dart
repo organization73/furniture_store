@@ -45,7 +45,7 @@ class VerifySignUpEmail extends StatelessWidget {
                     TImages.emailDelivery,
                     width: 150.r,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   PageHeader(
@@ -53,7 +53,7 @@ class VerifySignUpEmail extends StatelessWidget {
                     subTitle: email ?? '',
                     alignment: CrossAxisAlignment.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   Text(
@@ -64,7 +64,7 @@ class VerifySignUpEmail extends StatelessWidget {
                   SizedBox(
                     height: 60.h,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   TextButton(

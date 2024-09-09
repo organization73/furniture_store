@@ -16,11 +16,11 @@ class VerticalProductShimmer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ShimmerLoaderEffect(width: 185.r, height: 140.r),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwItems,
                 ),
                 ShimmerLoaderEffect(width: 165.r, height: 20.r),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwItems / 2,
                 ),
                 ShimmerLoaderEffect(width: 115.r, height: 20.r),

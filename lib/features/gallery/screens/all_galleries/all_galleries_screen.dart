@@ -33,7 +33,7 @@ class AllGalleriesPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
                 Obx(() {
@@ -49,7 +49,7 @@ class AllGalleriesPage extends StatelessWidget {
                   }
                   return ListView.separated(
                     separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
+                      return const SizedBox(
                         height: TSizes.spaceBtwItems,
                       );
                     },

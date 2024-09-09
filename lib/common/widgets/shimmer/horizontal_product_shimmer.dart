@@ -10,7 +10,7 @@ class HorizontalProductShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: TSizes.spaceBtwSections),
+      margin: const EdgeInsets.only(bottom: TSizes.spaceBtwSections),
       height: 115.r,
       child: ListView.separated(
           shrinkWrap: true,
@@ -19,22 +19,22 @@ class HorizontalProductShimmer extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ShimmerLoaderEffect(width: 120.r, height: 120.r),
-                  SizedBox(
+                  const SizedBox(
                     width: TSizes.spaceBtwItems,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
                       ShimmerLoaderEffect(width: 160.w, height: 15.h),
-                      SizedBox(
+                      const SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
                       ShimmerLoaderEffect(width: 110.w, height: 15.h),
-                      SizedBox(
+                      const SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
                       ShimmerLoaderEffect(width: 80.w, height: 15.h),
@@ -44,7 +44,7 @@ class HorizontalProductShimmer extends StatelessWidget {
                 ],
               ),
           separatorBuilder: (context, index) =>
-              SizedBox(width: TSizes.spaceBtwItems),
+              const SizedBox(width: TSizes.spaceBtwItems),
           itemCount: itemCount),
     );
   }

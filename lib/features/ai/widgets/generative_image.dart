@@ -158,7 +158,7 @@ class ImageGeneratorState extends State<ImageGenerator> {
                           style: Theme.of(context).textTheme.labelMedium),
                     ),
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwInputFields,
             ),
             BuildCTAButton(
@@ -182,7 +182,7 @@ class ImageGeneratorState extends State<ImageGenerator> {
                 }
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwInputFields,
             ),
             BuildCTAButton(

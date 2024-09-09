@@ -45,7 +45,7 @@ class CircularImage extends StatelessWidget {
                     height: height,
                     raduis: 55,
                   ),
-                  errorWidget: (context, url, error) => Icon(
+                  errorWidget: (context, url, error) => const Icon(
                     Icons.error,
                     size: TSizes.iconLg,
                   ),

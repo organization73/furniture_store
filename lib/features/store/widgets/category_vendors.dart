@@ -17,13 +17,13 @@ class CategoryVendors extends StatelessWidget {
     return FutureBuilder(
         future: controller.getVendorsForCategory(category.id),
         builder: (context, snapshot) {
-          var loader = Column(
+          var loader = const Column(
             children: [
-              const ListTileShimmer(),
+              ListTileShimmer(),
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              const BoxesShimmer(),
+              BoxesShimmer(),
               SizedBox(
                 height: TSizes.spaceBtwItems,
               ),

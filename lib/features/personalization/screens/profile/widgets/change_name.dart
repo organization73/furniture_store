@@ -40,7 +40,7 @@ class ChangeNameScreen extends StatelessWidget {
                         prefixIcon: Iconsax.user_copy,
                         keyboardType: TextInputType.name,
                         TValidator.validateUserInput),
-                    SizedBox(height: TSizes.spaceBtwInputFields),
+                    const SizedBox(height: TSizes.spaceBtwInputFields),
                     RoundedTextField(
                         prefixIcon: Iconsax.user_copy,
                         'lastName'.tr,

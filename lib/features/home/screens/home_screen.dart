@@ -52,11 +52,11 @@ class HomeScreen extends StatelessWidget {
                                   HomeAppBar(
                                       controller:
                                           NotificationsController.instance),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: TSizes.spaceBtwSections,
                                   ),
                                   const BuildCategoriesSection(),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: TSizes.spaceBtwSections,
                                   )
                                 ],
@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                                   transition: Transition.rightToLeft,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: TSizes.spaceBtwItems,
                               ),
                               Obx(() {
@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                                               .featuredProducts[index],
                                         ));
                               }),
-                              SizedBox(
+                              const SizedBox(
                                 height: TSizes.spaceBtwSections * 2,
                               ),
                               const BuildRoomsSection(),

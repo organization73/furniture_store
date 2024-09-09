@@ -55,7 +55,7 @@ class RoundedImage extends StatelessWidget {
                     height: height ?? 150,
                     raduis: borderRaduis,
                   ),
-                  errorWidget: (context, url, error) => Icon(
+                  errorWidget: (context, url, error) => const Icon(
                     Icons.error,
                     size: TSizes.iconLg,
                   ),

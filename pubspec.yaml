@@ -46,6 +46,7 @@ dependencies:
   googleapis_auth: ^1.6.0
   markdown_widget: ^2.3.2+6
   http: ^1.2.2
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -66,15 +67,3 @@ flutter:
     - assets/banners/
     - assets/animations/
     - assets/markdown/
-
-
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Poppins-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
-          weight: 600

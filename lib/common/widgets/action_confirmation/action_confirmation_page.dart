@@ -34,7 +34,7 @@ class ActionConfirmPage extends StatelessWidget {
               TImages.confirmation,
               width: 150.w,
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwItems,
             ),
             PageHeader(
@@ -42,7 +42,7 @@ class ActionConfirmPage extends StatelessWidget {
               subTitle: '',
               alignment: CrossAxisAlignment.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwItems,
             ),
             Text(

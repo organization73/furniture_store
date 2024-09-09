@@ -55,7 +55,7 @@ class ProductMetaData extends StatelessWidget {
                     child: Text('$salePercentage%',
                         style: Theme.of(context).textTheme.labelLarge),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: TSizes.spaceBtwItems,
                   ),
                 ],
@@ -67,7 +67,7 @@ class ProductMetaData extends StatelessWidget {
                     price: product.productPrice.toStringAsFixed(1),
                     lineThrough: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: TSizes.spaceBtwItems,
                   ),
                 ],
@@ -80,11 +80,11 @@ class ProductMetaData extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwItems,
         ),
         ProductTitleText(title: product.productName),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwItems,
         ),
         BrandTitleTextWithVerifiedIcon(
@@ -108,40 +108,40 @@ class ProductMetaData extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections,
         ),
         const SectionHeading(
           title: 'Condition',
           showActionButton: false,
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwItems / 2,
         ),
         Chip(
           label: Text(product.productDetails.condition),
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections,
         ),
         const SectionHeading(
           title: 'Color',
           showActionButton: false,
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwItems / 2,
         ),
         CircleAvatar(
             radius: 15,
             backgroundColor: _getColorFromString(product.productDetails.color)),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections,
         ),
         const SectionHeading(
           title: 'Specifications',
           showActionButton: false,
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwItems / 2,
         ),
         ReadMoreText(
@@ -159,7 +159,7 @@ class ProductMetaData extends StatelessWidget {
               .headlineSmall!
               .copyWith(color: Theme.of(context).colorScheme.primary),
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections,
         ),
         ProductSpecs(

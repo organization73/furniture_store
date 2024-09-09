@@ -91,7 +91,7 @@ class SettingsScreen extends StatelessWidget {
                       transition: Transition.downToUp,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
                 ],
@@ -132,7 +132,7 @@ class SettingsScreen extends StatelessWidget {
                       transition: Transition.rightToLeft,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
                   SectionHeading(
@@ -151,8 +151,8 @@ class SettingsScreen extends StatelessWidget {
                     subTitle: 'darkModeDesc'.tr,
                     onTap: () {
                       Get.changeTheme(Get.isDarkMode
-                          ? TAppTheme.lightTheme
-                          : TAppTheme.darkTheme);
+                          ? const MaterialTheme(TextTheme()).light()
+                          : const MaterialTheme(TextTheme()).dark());
                     },
                   ),
                   const Divider(),
@@ -192,7 +192,7 @@ class SettingsScreen extends StatelessWidget {
                   //     VendorRepo.instance.uploadDummyData(DummyData.vendors);
                   //   },
                   // ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   SizedBox(

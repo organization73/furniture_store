@@ -25,7 +25,7 @@ class BuildRoomsSection extends StatelessWidget {
           showSubTitle: true,
           showActionButton: false,
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections / 2,
         ),
         Obx(() {
@@ -46,7 +46,7 @@ class BuildRoomsSection extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final category = controller.roomsCatedories[index];
                   return Padding(
-                    padding: EdgeInsets.only(right: TSizes.spaceBtwItems),
+                    padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
                     child: VerticalCategory(
                         onTap: () => Get.to(
                               () => SubCategoryScreen(

@@ -87,7 +87,7 @@ class ManufactureRequestsPage extends StatelessWidget {
                               ),
                               placeholder: (context, url) =>
                                   const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) => Icon(
+                              errorWidget: (context, url, error) => const Icon(
                                 Icons.error_rounded,
                                 size: TSizes.iconLg,
                               ),
@@ -127,7 +127,7 @@ class _AvatarImage extends StatelessWidget {
           ),
         ),
         placeholder: (context, url) => const CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(
+        errorWidget: (context, url, error) => const Icon(
           Icons.person_2_rounded,
           size: TSizes.iconLg,
         ),

@@ -7,11 +7,11 @@ class ListTileShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Row(
           children: [
-            const ShimmerLoaderEffect(
+            ShimmerLoaderEffect(
               width: 50,
               height: 50,
               raduis: 50,
@@ -21,11 +21,11 @@ class ListTileShimmer extends StatelessWidget {
             ),
             Column(
               children: [
-                const ShimmerLoaderEffect(width: 100, height: 15),
+                ShimmerLoaderEffect(width: 100, height: 15),
                 SizedBox(
                   height: TSizes.spaceBtwItems / 2,
                 ),
-                const ShimmerLoaderEffect(width: 80, height: 12)
+                ShimmerLoaderEffect(width: 80, height: 12)
               ],
             )
           ],

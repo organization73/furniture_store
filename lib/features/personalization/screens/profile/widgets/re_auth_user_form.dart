@@ -39,7 +39,7 @@ class ReAuthLoginForm extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       controller.verifyEmail,
                       TValidator.validateEmail),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   Obx(() => RoundedTextField(
                       'password'.tr,
                       prefixIcon: Iconsax.password_check_copy,
@@ -57,7 +57,7 @@ class ReAuthLoginForm extends StatelessWidget {
                       controller.verifyPassword,
                       TValidator.validatePassword,
                       isPassword: controller.hidePassword.value)),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                 ],
               )),
         ));

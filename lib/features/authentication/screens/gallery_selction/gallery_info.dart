@@ -51,7 +51,7 @@ class GalleryInformationScreen extends StatelessWidget {
                             ? 'galleryVallen'.tr
                             : null,
                   ),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                     'galleryAddress'.tr,
                     controller.galleryAddressController,
@@ -62,7 +62,7 @@ class GalleryInformationScreen extends StatelessWidget {
                             ? 'galleryAddressVal'.tr
                             : null,
                   ),
-                  SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwSections),
                   OutlinedButton.icon(
                     onPressed: () => userController.uploadGalleryCertificate(),
                     icon: const Icon(Iconsax.additem_copy),

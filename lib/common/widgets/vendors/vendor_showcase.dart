@@ -32,7 +32,7 @@ class VendorShowCase extends StatelessWidget {
         padding: const EdgeInsets.all(TSizes.sm),
         showBorder: true,
         backgroundColor: Colors.transparent,
-        margin: EdgeInsets.only(bottom: TSizes.spaceBtwItems),
+        margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
         child: Column(
           children: [
             FeaturedGalleryCard(

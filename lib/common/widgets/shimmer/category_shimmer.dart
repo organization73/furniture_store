@@ -15,7 +15,7 @@ class CategoryShimmer extends StatelessWidget {
         shrinkWrap: true,
         itemCount: itemCount,
         scrollDirection: Axis.horizontal,
-        separatorBuilder: (_, __) => SizedBox(
+        separatorBuilder: (_, __) => const SizedBox(
           width: TSizes.spaceBtwItems,
         ),
         itemBuilder: (_, __) {

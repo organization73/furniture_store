@@ -67,21 +67,21 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                       'username'.tr,
                       controller.userNameController,
                       prefixIcon: Iconsax.user_edit_copy,
                       keyboardType: TextInputType.name,
                       TValidator.validateUserInput),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                       'email'.tr,
                       prefixIcon: Iconsax.direct_copy,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   InternationalPhoneNumberInput(
                     onInputChanged: (PhoneNumber number) {
                       controller.phoneNumController.value =
@@ -108,7 +108,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     formatInput: false,
                   ),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   GetX<SignUpController>(
                     builder: (controller) => Column(
                       children: [
@@ -132,7 +132,7 @@ class SignUpScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   Row(
                     children: [
                       SizedBox(
@@ -145,7 +145,7 @@ class SignUpScreen extends StatelessWidget {
                                   !controller.privacyPolicy.value;
                             })),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: TSizes.spaceBtwItems,
                       ),
                       Text.rich(

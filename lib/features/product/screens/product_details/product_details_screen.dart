@@ -38,7 +38,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   RatingWidget(
                     product: product,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   ProductMetaData(

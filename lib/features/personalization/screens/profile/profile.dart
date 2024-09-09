@@ -44,18 +44,18 @@ class ProfileScreen extends StatelessWidget {
                   );
                 }
               }),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems / 2,
               ),
               const Divider(),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               const SectionHeading(
                 title: 'Profile Information',
                 showActionButton: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               ProfileMenu(
@@ -73,18 +73,18 @@ class ProfileScreen extends StatelessWidget {
                 value: controller.user.value.userName,
                 onPress: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               const Divider(),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               const SectionHeading(
                 title: 'Account Information',
                 showActionButton: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               (controller.user.value.email.isNotEmpty)
@@ -101,11 +101,11 @@ class ProfileScreen extends StatelessWidget {
                       onPress: () {},
                     )
                   : const SizedBox(),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               const Divider(),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
               TextButton(

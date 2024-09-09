@@ -1,6 +1,7 @@
 import 'package:decordashapp/bindings/general_bindings.dart';
 import 'package:decordashapp/localization/language_keys.dart';
 import 'package:decordashapp/utils/theme/theme.dart';
+import 'package:decordashapp/utils/theme/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieves the default theme for the platform
+    //TextTheme textTheme = Theme.of(context).textTheme;
+
+    // Use with Google Fonts package to use downloadable fonts
+    TextTheme textTheme = createTextTheme(context, "Poppins", "Poppins");
+
+    MaterialTheme theme = MaterialTheme(textTheme);
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -23,8 +31,8 @@ class MyApp extends StatelessWidget {
             fallbackLocale: const Locale('en', 'US'),
             translations: Language(),
             themeMode: ThemeMode.system,
-            theme: TAppTheme.lightTheme,
-            darkTheme: TAppTheme.darkTheme,
+            theme: theme.light(),
+            darkTheme: theme.dark(),
             home: const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),

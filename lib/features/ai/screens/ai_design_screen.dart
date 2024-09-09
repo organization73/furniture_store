@@ -78,7 +78,7 @@ class _AiPageState extends State<AiPage> {
                     onItemSelected: (selectedItem) {},
                     hintText: 'selectType'.tr,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwInputFields,
                   ),
                   BuildDropDown(
@@ -87,7 +87,7 @@ class _AiPageState extends State<AiPage> {
                     onItemSelected: (selectedItem) {},
                     hintText: 'selectType'.tr,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwInputFields,
                   ),
                   Text(
@@ -117,7 +117,7 @@ class _AiPageState extends State<AiPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwInputFields,
                   ),
                   ImageGenerator(

@@ -22,7 +22,7 @@ class BuildCategoriesSection extends StatelessWidget {
           title: 'categories'.tr,
           showActionButton: false,
         ),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwItems,
         ),
         Obx(() {
@@ -44,7 +44,7 @@ class BuildCategoriesSection extends StatelessWidget {
                   final category = categoryController.featuredCatedories[index];
 
                   return Padding(
-                    padding: EdgeInsets.only(right: TSizes.spaceBtwItems),
+                    padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
                     child: HorizontalCategory(
                       onTap: () => Get.to(
                         () => SubCategoryScreen(
@@ -61,7 +61,7 @@ class BuildCategoriesSection extends StatelessWidget {
             );
           }
         }),
-        SizedBox(
+        const SizedBox(
           height: TSizes.spaceBtwSections,
         ),
       ],

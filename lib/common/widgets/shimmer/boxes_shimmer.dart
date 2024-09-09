@@ -7,23 +7,23 @@ class BoxesShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Row(
           children: [
-            const Expanded(
+            Expanded(
               child: ShimmerLoaderEffect(width: 150, height: 110),
             ),
             SizedBox(
               width: TSizes.spaceBtwItems,
             ),
-            const Expanded(
+            Expanded(
               child: ShimmerLoaderEffect(width: 150, height: 110),
             ),
             SizedBox(
               width: TSizes.spaceBtwItems,
             ),
-            const Expanded(
+            Expanded(
               child: ShimmerLoaderEffect(width: 150, height: 110),
             ),
           ],

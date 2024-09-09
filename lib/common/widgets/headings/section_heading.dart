@@ -49,14 +49,14 @@ class SectionHeading extends StatelessWidget {
               if (showSubTitle)
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwItems / 2,
                     ),
                     Text(
                       subTitle,
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwItems / 2,
                     ),
                   ],

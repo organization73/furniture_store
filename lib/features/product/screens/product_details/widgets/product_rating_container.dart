@@ -34,12 +34,12 @@ class RatingWidget extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Iconsax.star,
                                 color: Colors.amber,
                                 size: TSizes.iconMd,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: TSizes.spaceBtwItems / 2,
                               ),
                               Text(product.productRating.toStringAsFixed(1),

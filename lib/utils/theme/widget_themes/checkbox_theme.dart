@@ -11,11 +11,4 @@ class TCheckboxTheme {
     shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(TSizes.xs)),
   );
-
-  /// Customizable Dark Text Theme
-  static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
-    visualDensity: VisualDensity.compact,
-    shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(TSizes.xs)),
-  );
 }

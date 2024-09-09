@@ -44,7 +44,7 @@ class AddReview extends StatelessWidget {
                   controller.updateSelectedRating(rating.toInt());
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwSections,
               ),
               TextFormField(

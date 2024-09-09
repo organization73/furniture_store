@@ -1,5 +1,5 @@
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -9,7 +9,6 @@ import 'package:decordashapp/features/authentication/screens/sign_in_with_phone/
 import 'package:decordashapp/features/authentication/screens/sign_up/signup.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-
 import 'package:get/get.dart';
 
 class LoginSignUpScreen extends StatelessWidget {
@@ -27,12 +26,12 @@ class LoginSignUpScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
                 SvgPicture.asset(
-                  'assets/logos/logo.svg',
-                  width: 200.r,
+                  TImages.logo,
+                  fit: BoxFit.cover,
                 ),
               ],
             ),
@@ -43,10 +42,10 @@ class LoginSignUpScreen extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20.r),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(20),
                     )),
-                height: 400.h,
+                height: TDeviceUtils.getScreenHeight() * 0.55,
                 child: Padding(
                   padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                   child: Column(
@@ -60,7 +59,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelSmall,
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: TSizes.spaceBtwSections / 2),
+                      const SizedBox(height: TSizes.spaceBtwSections / 2),
                       BuildCTAButton(
                         text: 'continueWithEmail'.tr,
                         onPressed: () => Get.to(
@@ -69,7 +68,7 @@ class LoginSignUpScreen extends StatelessWidget {
                           transition: Transition.rightToLeft,
                         ),
                       ),
-                      SizedBox(height: TSizes.spaceBtwItems / 4),
+                      const SizedBox(height: TSizes.spaceBtwItems / 4),
                       BuildCTAButton(
                         text: 'continueWithPhone'.tr,
                         onPressed: () => Get.to(

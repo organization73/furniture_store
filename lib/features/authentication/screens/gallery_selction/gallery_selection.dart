@@ -65,7 +65,7 @@ class GallerySelection extends StatelessWidget {
                         ),
                       ),
                     )),
-                SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: TSizes.spaceBtwInputFields),
                 Obx(() => Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0.r),
@@ -89,7 +89,7 @@ class GallerySelection extends StatelessWidget {
                         ),
                       ),
                     )),
-                SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.spaceBtwSections),
                 Center(
                   child: SvgPicture.asset(
                     'assets/icons/gallery_loc.svg',

@@ -47,7 +47,7 @@ class EmailSignInScreen extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   Obx(() => RoundedTextField(
                       'password'.tr,
                       prefixIcon: Iconsax.password_check_copy,
@@ -65,7 +65,7 @@ class EmailSignInScreen extends StatelessWidget {
                       controller.passwordController,
                       TValidator.validatePassword,
                       isPassword: controller.hidePassword.value)),
-                  SizedBox(height: TSizes.spaceBtwInputFields),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -81,7 +81,7 @@ class EmailSignInScreen extends StatelessWidget {
                                       !controller.rememberMe.value;
                                 })),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: TSizes.spaceBtwItems,
                           ),
                           Text(

@@ -22,7 +22,7 @@ class ProfileMenu extends StatelessWidget {
     return InkWell(
       onTap: onPress,
       child: Padding(
-        padding: EdgeInsets.all(TSizes.spaceBtwItems / 1.5),
+        padding: const EdgeInsets.all(TSizes.spaceBtwItems / 1.5),
         child: Row(
           children: [
             Expanded(

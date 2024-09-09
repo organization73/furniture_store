@@ -43,7 +43,7 @@ class StoreScreen extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: TSizes.spaceBtwItems,
                           ),
                           CustomTextFormField(

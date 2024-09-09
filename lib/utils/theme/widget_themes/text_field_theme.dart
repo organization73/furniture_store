@@ -10,10 +10,4 @@ class TTextFormFieldTheme {
       borderRadius: BorderRadius.circular(TSizes.inputFieldRadius),
     ),
   );
-
-  static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
-    border: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(TSizes.inputFieldRadius),
-    ),
-  );
 }

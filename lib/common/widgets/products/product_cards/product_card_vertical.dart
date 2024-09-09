@@ -79,7 +79,7 @@ class ProductCardVerical extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwItems / 2,
             ),
             Padding(
@@ -93,7 +93,7 @@ class ProductCardVerical extends StatelessWidget {
                       title: product.productName,
                       smallSize: true,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwItems / 2,
                     ),
                     BrandTitleTextWithVerifiedIcon(
@@ -126,7 +126,7 @@ class ProductCardVerical extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Icon(
+                  const Icon(
                     Iconsax.star,
                     color: Colors.amber,
                     size: TSizes.iconSm,

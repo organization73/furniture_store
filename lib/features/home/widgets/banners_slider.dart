@@ -44,7 +44,7 @@ class ImageSlider extends StatelessWidget {
               );
             }).toList(),
           ),
-          SizedBox(
+          const SizedBox(
             height: TSizes.spaceBtwSections / 2,
           ),
           Obx(() => Row(

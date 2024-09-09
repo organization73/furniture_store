@@ -36,7 +36,7 @@ class FeaturedGalleryCard extends StatelessWidget {
                 backgroundColor: Colors.transparent,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: TSizes.spaceBtwItems / 2,
             ),
             Expanded(

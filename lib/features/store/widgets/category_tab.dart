@@ -69,7 +69,7 @@ class CategoryTab extends StatelessWidget {
                       ],
                     );
                   }),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
             ],

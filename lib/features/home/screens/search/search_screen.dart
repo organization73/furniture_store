@@ -148,7 +148,7 @@ class SearchScreen extends StatelessWidget {
                             "Search Suggestions",
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
-                          SizedBox(height: TSizes.spaceBtwSections),
+                          const SizedBox(height: TSizes.spaceBtwSections),
                           Wrap(
                             runSpacing: 2,
                             spacing: 15,

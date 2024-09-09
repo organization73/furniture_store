@@ -94,7 +94,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           title: product.productName,
                           smallSize: true,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: TSizes.spaceBtwItems / 2,
                         ),
                         Row(
@@ -132,7 +132,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        Icon(
+                        const Icon(
                           Iconsax.star,
                           color: Colors.amber,
                           size: TSizes.iconSm,

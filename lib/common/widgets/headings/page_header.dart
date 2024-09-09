@@ -29,7 +29,7 @@ class PageHeader extends StatelessWidget {
             iconName,
             size: size,
           ),
-        SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: TSizes.spaceBtwSections),
         Text(
           title,
           style: Theme.of(context).textTheme.headlineLarge,
@@ -39,7 +39,7 @@ class PageHeader extends StatelessWidget {
           subTitle,
           style: Theme.of(context).textTheme.labelMedium,
         ),
-        SizedBox(height: TSizes.spaceBtwSections * 2),
+        const SizedBox(height: TSizes.spaceBtwSections * 2),
       ],
     );
   }

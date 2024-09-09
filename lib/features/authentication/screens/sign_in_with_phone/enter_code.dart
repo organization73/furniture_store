@@ -43,22 +43,22 @@ class CodeVerificationScreen extends StatelessWidget {
                   size: 45.r,
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 ),
-                SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.spaceBtwSections),
                 Text(
                   'enterCode'.tr,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: TSizes.spaceBtwInputFields),
                 Text(
                   'codeDesc'.tr,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
-                SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: TSizes.spaceBtwInputFields),
                 Text(
                   phoneNumber,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.spaceBtwSections),
                 OtpTextField(
                   numberOfFields: 6,
                   borderColor: Theme.of(context).primaryColor,

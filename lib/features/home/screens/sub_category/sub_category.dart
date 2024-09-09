@@ -79,7 +79,7 @@ class SubCategoryScreen extends StatelessWidget {
                                         transition: Transition.rightToLeft,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: TSizes.spaceBtwItems / 2,
                                     ),
                                     SizedBox(
@@ -92,7 +92,7 @@ class SubCategoryScreen extends StatelessWidget {
                                             product: products[index],
                                           );
                                         },
-                                        separatorBuilder: (_, __) => SizedBox(
+                                        separatorBuilder: (_, __) => const SizedBox(
                                           width: TSizes.spaceBtwItems,
                                         ),
                                       ),
