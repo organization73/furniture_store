@@ -1,4 +1,4 @@
-package com.decordashstore.decordashstore
+package com.decordashapp.decordashapp
 
 import io.flutter.embedding.android.FlutterActivity
 

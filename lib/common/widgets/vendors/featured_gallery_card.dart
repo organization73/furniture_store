@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:decordash/common/widgets/images/circular_image.dart';
-import 'package:decordash/common/widgets/texts/brand_title_text_with_verified_icon.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
-import 'package:decordash/utils/constants/enums.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:decordashapp/common/widgets/images/circular_image.dart';
+import 'package:decordashapp/common/widgets/texts/brand_title_text_with_verified_icon.dart';
+import 'package:decordashapp/features/home/model/vendor_model.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 class FeaturedGalleryCard extends StatelessWidget {
   const FeaturedGalleryCard({

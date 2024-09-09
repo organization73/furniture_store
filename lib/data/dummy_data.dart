@@ -1,13 +1,13 @@
-import 'package:decordash/features/home/model/banners_model.dart';
-import 'package:decordash/features/home/model/category_model.dart';
-import 'package:decordash/features/home/model/product_category_model.dart';
-import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/features/home/model/review_model.dart';
-import 'package:decordash/features/home/model/vendor_category_model.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
-import 'package:decordash/features/notifications/model/notifications_model.dart';
-import 'package:decordash/utils/constants/enums.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
+import 'package:decordashapp/features/home/model/banners_model.dart';
+import 'package:decordashapp/features/home/model/category_model.dart';
+import 'package:decordashapp/features/home/model/product_category_model.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/features/home/model/review_model.dart';
+import 'package:decordashapp/features/home/model/vendor_category_model.dart';
+import 'package:decordashapp/features/home/model/vendor_model.dart';
+import 'package:decordashapp/features/notifications/model/notifications_model.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 
 class DummyData {
   static final List<ProductModel> products = [

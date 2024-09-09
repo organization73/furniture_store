@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:decordash/utils/local_storage/storage_utility.dart';
+import 'package:decordashapp/utils/local_storage/storage_utility.dart';
 import 'package:get/get.dart';
 
 class RecentSearchController extends GetxController {

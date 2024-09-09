@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordash/features/home/model/product_category_model.dart';
-import 'package:decordash/features/home/model/vendor_category_model.dart';
+import 'package:decordashapp/features/home/model/product_category_model.dart';
+import 'package:decordashapp/features/home/model/vendor_category_model.dart';
 import 'package:flutter/services.dart';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:decordash/features/home/model/category_model.dart';
-import 'package:decordash/utils/exceptions/firebase_exceptions.dart';
-import 'package:decordash/utils/exceptions/platform_exceptions.dart';
-import 'package:decordash/utils/popups/full_screen_loader.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
+import 'package:decordashapp/features/home/model/category_model.dart';
+import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
+import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
+import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
 
 class CategoryRepo extends GetxController {

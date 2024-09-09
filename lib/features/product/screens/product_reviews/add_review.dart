@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:decordash/data/repositories/product/product.dart';
-import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/data/repositories/product/product.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class AddReview extends StatelessWidget {

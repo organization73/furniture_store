@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/features/product/screens/product_reviews/product_review_screen.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/features/product/screens/product_reviews/product_review_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 

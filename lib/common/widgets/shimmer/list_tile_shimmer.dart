@@ -1,5 +1,5 @@
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class ListTileShimmer extends StatelessWidget {

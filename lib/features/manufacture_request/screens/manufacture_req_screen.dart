@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/features/manufacture_request/screens/add_new_request/screens/add_new_request.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/features/manufacture_request/screens/add_new_request/screens/add_new_request.dart';
+import 'package:decordashapp/features/personalization/models/user_model.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 // TODO Translate this page
 

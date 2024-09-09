@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/features/authentication/screens/login/login_screen.dart';
-import 'package:decordash/features/onboarding/model/page_model.dart';
+import 'package:decordashapp/features/authentication/screens/login/login_screen.dart';
+import 'package:decordashapp/features/onboarding/model/page_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

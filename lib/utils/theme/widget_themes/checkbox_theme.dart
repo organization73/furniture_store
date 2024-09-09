@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 /// Custom Class for Light & Dark Text Themes
 class TCheckboxTheme {

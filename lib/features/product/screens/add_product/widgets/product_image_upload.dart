@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
-import 'package:decordash/features/product/screens/add_product/controllers/upload_image_controller.dart';
+import 'package:decordashapp/features/product/screens/add_product/controllers/add_product_controller.dart';
+import 'package:decordashapp/features/product/screens/add_product/controllers/upload_image_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';

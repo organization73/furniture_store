@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/buttons/cta_button.dart';
-import 'package:decordash/common/widgets/headings/page_header.dart';
-import 'package:decordash/features/authentication/controllers/forget_password/forget_password_controller.dart';
-import 'package:decordash/features/authentication/screens/login/login_screen.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/common/widgets/headings/page_header.dart';
+import 'package:decordashapp/features/authentication/controllers/forget_password/forget_password_controller.dart';
+import 'package:decordashapp/features/authentication/screens/login/login_screen.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 

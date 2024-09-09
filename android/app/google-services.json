@@ -1,34 +1,49 @@
 {
   "project_info": {
-    "project_number": "260620295228",
-    "project_id": "decoredashappplatform",
-    "storage_bucket": "decoredashappplatform.appspot.com"
+    "project_number": "401754565844",
+    "project_id": "decordashapp-2cc20",
+    "storage_bucket": "decordashapp-2cc20.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:260620295228:android:e5ff7cdc923176117b7739",
+        "mobilesdk_app_id": "1:401754565844:android:33a3f946132861aae65f41",
         "android_client_info": {
-          "package_name": "com.decordashstore.decordashstore"
+          "package_name": "com.decordashapp.decordashapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "260620295228-gdsg8upf04acqkc042v55iubqrg0jd4g.apps.googleusercontent.com",
+          "client_id": "401754565844-o4j4p7nov3phb4f284pvb45n8ut8fo8j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.decordashapp.decordashapp",
+            "certificate_hash": "07db7ba0fe6b0b9d687749db8dfb220f9bbebe11"
+          }
+        },
+        {
+          "client_id": "401754565844-1le85pd4a9uv7umipe0t6dbr7h5tiql3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCK4OZ3o3eYocDptaoVbXbs51_YWZ6PqnE"
+          "current_key": "AIzaSyAhjXgGWhwvIidnZtFm1xHTz9QE53VlCrg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "260620295228-gdsg8upf04acqkc042v55iubqrg0jd4g.apps.googleusercontent.com",
+              "client_id": "401754565844-1le85pd4a9uv7umipe0t6dbr7h5tiql3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "401754565844-3c7l7h869ehspqa5qrv99jss07mc16sr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.decordashapp.decordashapp"
+              }
             }
           ]
         }

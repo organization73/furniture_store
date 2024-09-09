@@ -1,9 +1,9 @@
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/data/repositories/user/user_repo.dart';
-import 'package:decordash/data/services/notification_service.dart';
-import 'package:decordash/utils/helpers/network_manager.dart';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/utils/logging/logger.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/data/repositories/user/user_repo.dart';
+import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/utils/helpers/network_manager.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

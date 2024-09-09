@@ -1,19 +1,19 @@
-import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordash/features/home/screens/search/search_screen.dart';
+import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordashapp/features/home/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/appbar/tabbar.dart';
-import 'package:decordash/common/widgets/vendors/featured_gallery_card.dart';
-import 'package:decordash/common/widgets/headings/section_heading.dart';
-import 'package:decordash/common/widgets/layouts/grid_layout.dart';
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/features/gallery/screens/all_galleries/all_galleries_screen.dart';
-import 'package:decordash/features/gallery/screens/vendor_products/vendor_products.dart';
-import 'package:decordash/features/home/controllers/category_controller.dart';
-import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
-import 'package:decordash/features/store/widgets/category_tab.dart';
+import 'package:decordashapp/common/widgets/appbar/tabbar.dart';
+import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
+import 'package:decordashapp/common/widgets/headings/section_heading.dart';
+import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/features/gallery/screens/all_galleries/all_galleries_screen.dart';
+import 'package:decordashapp/features/gallery/screens/vendor_products/vendor_products.dart';
+import 'package:decordashapp/features/home/controllers/category_controller.dart';
+import 'package:decordashapp/features/home/controllers/vendor/vendor_controller.dart';
+import 'package:decordashapp/features/store/widgets/category_tab.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 

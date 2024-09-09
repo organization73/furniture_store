@@ -1,4 +1,4 @@
-import 'package:decordash/common/widgets/chips/custom_choice_chip.dart';
+import 'package:decordashapp/common/widgets/chips/custom_choice_chip.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

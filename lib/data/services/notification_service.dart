@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordash/features/chat/screens/chat_screen.dart';
-import 'package:decordash/utils/logging/logger.dart';
+import 'package:decordashapp/features/chat/screens/chat_screen.dart';
+import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -133,19 +133,19 @@ class NotificationsService {
     final client = await clientViaServiceAccount(
         ServiceAccountCredentials.fromJson({
           "type": "service_account",
-          "project_id": "decoredashappplatform",
-          "private_key_id": "24c595aabfaf88aec14a9e8d676ceba0ec8dff52",
+          "project_id": "decordashapp-2cc20",
+          "private_key_id": "7c5ec2148d990cb4843883312a49c41d248e9e1d",
           "private_key":
-              "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDb7YWlL89prvKn\ndnoVWJTp4v+wEbC+rRJhp2o1NNhE2oZQqdH11U6L77lX9JyAv5Kl8Vs45OqGrrK8\nud5eEbwwWKRH4+BFSKxr10A+VEJarnMAduF+Y4Ub//V+Wu5u5ZqrAVFUEuHwjcJD\ne7pJJC5KPmOPUofoLsDX+VjNrMNA8CLIjBsruh5l4m01gRTCl4gq/B/KhPgJYHVO\nBSvxvbcUrMrADxbEvyb3tyn+SXHilk4XbOJz2wBeg4pk3/iS6HrH/+AZDm8JcI7N\nwhx7EJVKtLOjG2DwO/N5hnxf1p8IdUzBGQndyEV+LM9VEOJnf6cv9Qeujn1OdH13\n51wLSG1JAgMBAAECggEAA17yH/SKJNAKJxfxShd3/Ne+XIgA4gNMF1QWFCexsuh4\ni472yWJSGGH9wMPejDijekinQcl8cMEHu03MAzwZWtJY/kMXYmh5QBPmB66J79Lh\nr12jGilTVnkHXb7uDaQWSU21XekGLoY1towUcF+OGBQ5uW4l6CCjUwwe2NQvj/S3\nAjZWoRNg2CeJjeRllYYX271Y8ULkjEbECY2mjDJNceh/XeXchA4V3z/EdWCs6QJw\no+yT0UXXmBfH5sY/bq5gU2241edDsIOCK9wiOWGodpHGIvgA5LLHDCUQZhQGNlx/\n9CxxSsu3UZOZL4MDp/qsShQTdzWG/jh9+A/lergmSQKBgQD8NpCQ+m++jlDemx5I\nWXbCdIA2OwURwFNHW+DrFymf8SiArmum8BG5sT9fPsh+sVcrRU2/atEE3Br95Dwp\nVXt2n+awUy0G6zftngw8o9HqzVKGfPgTVjwWAijU7Oms1l/QMQhcpBUlW0fV9TKL\nznEiUM4DoD2RxGlBb3ymbf3//QKBgQDfOtydlVGH2H2gFBc9le/e28R/xM5QxVcB\nxmLr5jZlUzBfYDPVSJwdjGO7rLzlADm+8/Yr3axbmwiZGoh80CSCOzM94qdGyfEY\nnl3NGvA19sK2lJS/eDAY3epzClP1yvEW9aaJ/rL4DL5MC9fslKPsBeykqw11u98Y\nuM89ChSGPQKBgGNnhhb9/ajXIpx5+rd9O0ds71Nwc5EJgkkvtzgxCuDVBaeiFx/W\nosXTTCzX6+GzN64ARKJbEUKfFaxXljacUGryntOEFM0TTBnFHwGPd57Zidsjygql\nBE2QUFOLhJXwcBb4HFmW+hadIXT8jQ15MjHaMzhOobWf+fQmYrSdyWxpAoGADaRG\nOScX3WpgevjfVrcj+oWJo5k+VndI0uXxw6LE7jpAOYPihwUx7ShYK+7peEEkRkQY\nZiPc1ZhK1Thm4OHDaWX+wqhoOo46uptq9g7QYSvcSFYaJP1OSya8nh0idmHZi+Kl\nM8ep3jjBJFqQ7ndC8TiHdqSxZOF/R757g6prCK0CgYBrGuaryiGTEbCx7HYz9/+D\nSpL/cmKMHsB8lclDwGEmrpIIX9Q5Ho/sQIXDnu4f8hetZNxbZtvsltA7V/aDsoWX\nhZy+0VJdexCQUXy+ndBLkCKPmfnzbUj/MRyt2Su+qD/i9B30ADfJXPUZvg26cvO2\njsTkRiXMJ64FcXf+jLrwjg==\n-----END PRIVATE KEY-----\n",
+              "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0lhLU8DsoaSD0\nTEhGDlJOXtx4iak4b1cQTjub0fkEHmwLTcaPeHINZriq9/tb+nZHMp+TqQh78mn9\nGZokgu5pSdHzW6BEnwjwvqZxMGE2q34Q8Oo6A6S2Hg58PYY+HSZ3kT39B2MNmc5q\nRMtZXnJXRvuGa6It23xt4AFMzPIZHgcs0VuUFQ0BO2F3XACio7R3ZuE07JnjgY6V\niTRin0j+Y1c5LzNAvHpQx0JMH1vnVWeGrxiVtcBSYKVzmO3/Hu3qNT19T/VKK70D\n0aCo5ofTp+E6KTG1flS7p7vJjKcI4fiZuj9VS5VK0PXl3KYNUz4XUVsLk9x44VPo\nfQBSVuvvAgMBAAECggEAKKvEAgE40ZkbuumTPXPsRYpHzT3zxqoMybdU5Xscwji3\nzLPvjFBsH2iLHrZK/iQij1ZvaiofpwqppD8n4CE84Kmnh0+TgODweof1pHho7I8j\nDV204uv/JKUQThrtKQAXscYcV+hZ/q4tNvHXeoEy70UlUNjc5ccQ9w4EPO/LdqxT\nx6WfMrq+biKy2BvN4C6mSWFk4DWm9yQX4cwEyzuPK0WVcRQKrlfaQWHpjJnWIdvt\nQvxqzDTgdU4nzwnIGvx2XP/Bw5/JuOSe7j/o+vUSfQ3AAf9f4UZz+vXWe3wOR07m\nK+7Y6YatzBrmzY3O8J+SbWI2mMFkmWhXmmLGtb85gQKBgQDXzGj1HbKtykrs/aG9\nPqJJ0KesJ/UMXPcWsn7Epmho77eXym+PPKeA62TcV2zr1NgVmdVuG/cesHwqDvMh\n6c4C5SQIK9JiVyxKiEl12zeotWHA6UK1eJQz0r8fyct/ALg9A78rb4vRdPmS86x8\nlZ3KmYcaxxmDCFjturcC8qsuqQKBgQDWOl11cRP0xoeKWY9sZHtoSsJKQIoXOXrO\nXeia5ocr+caDyrdjl89yyKjVihNhBdPHVFTHU1DL6hF899ZgMG66A7ZYpEyj3YUR\n3ENb31arMAe8+RSE1FLL1FdyxC9vSvPNKI5Zi5EETq71djONiTewCmfOTKogXQWJ\ng3tSSB5c1wKBgQDNUiSuy0HdTvL5B90ipPxeRROznhTuXWmPA+fPjREcfrBs0ORS\nIYCyDcXaS6hLviiWbNaAPEVkwsBwd+bm5oDnikM9LwyuGoj+pStX4mrTrzhCBu48\noWxI3oSQZzyiKvogu3bhifE7KhPnuMbthqEqSecdGEByxrduAU/tkxxCeQKBgFT6\nsAofQghOHIQgBMm9jkqPpUSpF14hGfr0u4l+us4R9dJfvqGOHedte7PBYvCQzDJ8\n3Gh5P0q0Xh2RfoOHktTNFi9RdWlnPRsZocq27H1ZvygSMjaCtxlN8SaAdkSSmeWf\nGeChgXQQ9kw+iDKz5Ng7OHRYawANhl3HP0sjeo/fAoGBAJDO/vY1a9MtZHCnedG5\nBW2SU80cVw0eH1vLB40pdbovn7F5KJrvbo+JtHfiU9Qmvp/wBhI5yTh1hpCwgYXK\nllrmYBNQJjr1pn2sDhaS8LnW/wOvNVirDs1exhWt8RQp+Hk6Q8lfuUrM0pv4nbdE\nAHr8q1vp2yESJP7amFJ7zLD9\n-----END PRIVATE KEY-----\n",
           "client_email":
-              "firebase-adminsdk-5wij7@decoredashappplatform.iam.gserviceaccount.com",
-          "client_id": "103101517882701367425",
+              "firebase-adminsdk-5ok8k@decordashapp-2cc20.iam.gserviceaccount.com",
+          "client_id": "101089103956871665332",
           "auth_uri": "https://accounts.google.com/o/oauth2/auth",
           "token_uri": "https://oauth2.googleapis.com/token",
           "auth_provider_x509_cert_url":
               "https://www.googleapis.com/oauth2/v1/certs",
           "client_x509_cert_url":
-              "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-5wij7%40decoredashappplatform.iam.gserviceaccount.com",
+              "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-5ok8k%40decordashapp-2cc20.iam.gserviceaccount.com",
           "universe_domain": "googleapis.com"
         }),
         [firebaseMessagingScope]);
@@ -159,7 +159,7 @@ class NotificationsService {
     try {
       final String accessToken = await getAccessToken(); // Get OAuth 2.0 token
       const String url =
-          'https://fcm.googleapis.com/v1/projects/decoredashappplatform/messages:send';
+          'https://fcm.googleapis.com/v1/projects/decordashapp-2cc20/messages:send';
       final Map<String, dynamic> notification = {
         "message": {
           "token": receiverToken,

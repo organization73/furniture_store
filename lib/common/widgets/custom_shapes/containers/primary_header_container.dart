@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/custom_shapes/containers/circular_container.dart';
-import 'package:decordash/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/containers/circular_container.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 
 class PrimaryHeaderContainer extends StatelessWidget {
   const PrimaryHeaderContainer({

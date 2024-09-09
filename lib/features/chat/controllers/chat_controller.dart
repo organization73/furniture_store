@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordash/data/repositories/chat/chat_repo.dart';
-import 'package:decordash/data/repositories/user/user_repo.dart';
-import 'package:decordash/data/services/firebase_firestore_service.dart';
-import 'package:decordash/data/services/notification_service.dart';
-import 'package:decordash/features/chat/model/message.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordashapp/data/repositories/chat/chat_repo.dart';
+import 'package:decordashapp/data/repositories/user/user_repo.dart';
+import 'package:decordashapp/data/services/firebase_firestore_service.dart';
+import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/features/chat/model/message.dart';
+import 'package:decordashapp/features/personalization/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

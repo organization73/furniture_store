@@ -1,5 +1,5 @@
-import 'package:decordash/common/widgets/icons/circular_icon.dart';
-import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
+import 'package:decordashapp/common/widgets/icons/circular_icon.dart';
+import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

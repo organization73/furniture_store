@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:decordash/features/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordashapp/features/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:decordash/common/widgets/action_confirmation/action_confirmation_page.dart';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/common/widgets/action_confirmation/action_confirmation_page.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:get/get.dart';
 
 class VerifyEmailController extends GetxController {

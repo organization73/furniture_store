@@ -1,10 +1,10 @@
-import 'package:decordash/common/widgets/shimmer/boxes_shimmer.dart';
-import 'package:decordash/common/widgets/shimmer/list_tile_shimmer.dart';
-import 'package:decordash/common/widgets/vendors/vendor_showcase.dart';
-import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
-import 'package:decordash/features/home/model/category_model.dart';
-import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordashapp/common/widgets/shimmer/boxes_shimmer.dart';
+import 'package:decordashapp/common/widgets/shimmer/list_tile_shimmer.dart';
+import 'package:decordashapp/common/widgets/vendors/vendor_showcase.dart';
+import 'package:decordashapp/features/home/controllers/vendor/vendor_controller.dart';
+import 'package:decordashapp/features/home/model/category_model.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class CategoryVendors extends StatelessWidget {

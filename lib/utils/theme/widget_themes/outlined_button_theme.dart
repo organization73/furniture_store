@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 /* -- Light & Dark Outlined Button Themes -- */
 class TOutlinedButtonTheme {

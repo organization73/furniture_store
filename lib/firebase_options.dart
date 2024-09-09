@@ -50,20 +50,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCK4OZ3o3eYocDptaoVbXbs51_YWZ6PqnE',
-    appId: '1:260620295228:android:e5ff7cdc923176117b7739',
-    messagingSenderId: '260620295228',
-    projectId: 'decoredashappplatform',
-    storageBucket: 'decoredashappplatform.appspot.com',
+    apiKey: 'AIzaSyAhjXgGWhwvIidnZtFm1xHTz9QE53VlCrg',
+    appId: '1:401754565844:android:33a3f946132861aae65f41',
+    messagingSenderId: '401754565844',
+    projectId: 'decordashapp-2cc20',
+    storageBucket: 'decordashapp-2cc20.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDGLSmIVpH4B47Rvj393Zm0_RAU2-BPTSI',
-    appId: '1:260620295228:ios:a21d07bccfb3e07d7b7739',
-    messagingSenderId: '260620295228',
-    projectId: 'decoredashappplatform',
-    storageBucket: 'decoredashappplatform.appspot.com',
-    iosClientId: '260620295228-e4a3s255qj6juaq5021f4hilvrufaing.apps.googleusercontent.com',
-    iosBundleId: 'com.decordashstore.decordashstore',
+    apiKey: 'AIzaSyDFJMtFgozUTy55miU__QpO38XPVt2_ADI',
+    appId: '1:401754565844:ios:73f8872c04fb1899e65f41',
+    messagingSenderId: '401754565844',
+    projectId: 'decordashapp-2cc20',
+    storageBucket: 'decordashapp-2cc20.appspot.com',
+    androidClientId: '401754565844-o4j4p7nov3phb4f284pvb45n8ut8fo8j.apps.googleusercontent.com',
+    iosClientId: '401754565844-3c7l7h869ehspqa5qrv99jss07mc16sr.apps.googleusercontent.com',
+    iosBundleId: 'com.decordashapp.decordashapp',
   );
+
 }

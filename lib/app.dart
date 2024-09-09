@@ -1,6 +1,6 @@
-import 'package:decordash/bindings/general_bindings.dart';
-import 'package:decordash/localization/language_keys.dart';
-import 'package:decordash/utils/theme/theme.dart';
+import 'package:decordashapp/bindings/general_bindings.dart';
+import 'package:decordashapp/localization/language_keys.dart';
+import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

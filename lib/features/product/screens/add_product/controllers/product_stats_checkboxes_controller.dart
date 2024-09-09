@@ -1,4 +1,4 @@
-import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
+import 'package:decordashapp/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:get/get.dart';
 
 class ProductStatsCheckboxesController extends GetxController {

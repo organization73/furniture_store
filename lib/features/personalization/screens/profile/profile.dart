@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/headings/section_heading.dart';
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/common/widgets/user_profile/profile_widget.dart';
-import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
-import 'package:decordash/features/personalization/screens/profile/widgets/change_name.dart';
-import 'package:decordash/features/personalization/screens/profile/widgets/profile_menu.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/headings/section_heading.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/common/widgets/user_profile/profile_widget.dart';
+import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
+import 'package:decordashapp/features/personalization/screens/profile/widgets/change_name.dart';
+import 'package:decordashapp/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 

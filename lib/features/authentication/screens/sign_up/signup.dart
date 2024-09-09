@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/input_fields/build_user_input_field.dart';
-import 'package:decordash/common/widgets/buttons/cta_button.dart';
-import 'package:decordash/common/widgets/headings/page_header.dart';
-import 'package:decordash/features/authentication/controllers/sign_up/sign_up_controller.dart';
-import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/validators/validation.dart';
+import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/common/widgets/headings/page_header.dart';
+import 'package:decordashapp/features/authentication/controllers/sign_up/sign_up_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

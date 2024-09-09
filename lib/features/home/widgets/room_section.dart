@@ -1,9 +1,9 @@
-import 'package:decordash/common/widgets/headings/section_heading.dart';
-import 'package:decordash/common/widgets/shimmer/category_shimmer.dart';
-import 'package:decordash/features/home/controllers/category_controller.dart';
-import 'package:decordash/features/home/screens/sub_category/sub_category.dart';
-import 'package:decordash/features/home/widgets/vertical_category.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/headings/section_heading.dart';
+import 'package:decordashapp/common/widgets/shimmer/category_shimmer.dart';
+import 'package:decordashapp/features/home/controllers/category_controller.dart';
+import 'package:decordashapp/features/home/screens/sub_category/sub_category.dart';
+import 'package:decordashapp/features/home/widgets/vertical_category.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';

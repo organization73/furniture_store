@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:decordash/utils/device/device_utility.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 
 class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomTabBar({super.key, required this.tabs});

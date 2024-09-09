@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/images/circular_image.dart';
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/features/personalization/controllers/user/user_controller.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
+import 'package:decordashapp/common/widgets/images/circular_image.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';

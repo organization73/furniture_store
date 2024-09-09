@@ -9,8 +9,8 @@ plugins {
 }
 
 android {
-    namespace = "com.decordashstore.decordashstore"
-    compileSdk = 34
+    namespace = "com.decordashapp.decordashapp"
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -24,10 +24,10 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.decordashstore.decordashstore"
+        applicationId = "com.decordashapp.decordashapp"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23
+        minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

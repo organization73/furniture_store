@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/features/product/screens/product_details/widgets/overlapping_cicular_avatar.dart';
-import 'package:decordash/features/product/model/product_model.dart';
+import 'package:decordashapp/features/product/screens/product_details/widgets/overlapping_cicular_avatar.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class RatingWidget extends StatelessWidget {

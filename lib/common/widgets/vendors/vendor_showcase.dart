@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/features/gallery/screens/vendor_products/vendor_products.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/features/gallery/screens/vendor_products/vendor_products.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:decordash/common/widgets/vendors/featured_gallery_card.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
+import 'package:decordashapp/features/home/model/vendor_model.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 

@@ -1,11 +1,11 @@
-import 'package:decordash/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/styles/shadows.dart';
-import 'package:decordash/common/widgets/images/circular_image.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
+import 'package:decordashapp/common/styles/shadows.dart';
+import 'package:decordashapp/common/widgets/images/circular_image.dart';
+import 'package:decordashapp/features/home/model/vendor_model.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class GalleryCard extends StatelessWidget {

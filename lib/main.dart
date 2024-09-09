@@ -1,5 +1,5 @@
-import 'package:decordash/app.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/app.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

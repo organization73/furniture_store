@@ -1,5 +1,5 @@
-import 'package:decordash/data/dummy_data.dart';
-import 'package:decordash/features/notifications/model/notifications_model.dart';
+import 'package:decordashapp/data/dummy_data.dart';
+import 'package:decordashapp/features/notifications/model/notifications_model.dart';
 import 'package:get/get.dart';
 
 class NotificationsController extends GetxController {

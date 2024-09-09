@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:decordash/common/widgets/images/rounded_image.dart';
-import 'package:decordash/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordash/features/home/controllers/carousel_slider_controller.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:decordashapp/common/widgets/images/rounded_image.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/features/home/controllers/carousel_slider_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 

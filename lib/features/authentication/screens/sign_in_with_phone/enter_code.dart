@@ -1,8 +1,8 @@
-import 'package:decordash/features/authentication/controllers/phone_sign_in/otp_controller.dart';
+import 'package:decordashapp/features/authentication/controllers/phone_sign_in/otp_controller.dart';
 import 'package:flutter/material.dart';
 
-import 'package:decordash/common/widgets/buttons/cta_button.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

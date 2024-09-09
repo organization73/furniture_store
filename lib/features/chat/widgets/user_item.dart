@@ -1,6 +1,6 @@
-import 'package:decordash/common/widgets/images/circular_image.dart';
-import 'package:decordash/features/chat/screens/chat_screen.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
+import 'package:decordashapp/common/widgets/images/circular_image.dart';
+import 'package:decordashapp/features/chat/screens/chat_screen.dart';
+import 'package:decordashapp/features/personalization/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

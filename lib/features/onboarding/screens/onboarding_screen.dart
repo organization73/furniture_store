@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:decordash/features/onboarding/controllers/onboarding_controller.dart';
-import 'package:decordash/features/onboarding/model/page_model.dart';
-import 'package:decordash/features/onboarding/widgets/onboarding_page.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
+import 'package:decordashapp/features/onboarding/controllers/onboarding_controller.dart';
+import 'package:decordashapp/features/onboarding/model/page_model.dart';
+import 'package:decordashapp/features/onboarding/widgets/onboarding_page.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
 
 class OnBoardingScreen extends StatelessWidget {

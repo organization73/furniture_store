@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/features/ai/controllers/generative_ai/generative_ai_controller.dart';
+import 'package:decordashapp/features/ai/controllers/generative_ai/generative_ai_controller.dart';
 
 import 'package:get/get.dart';
 

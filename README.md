@@ -1,6 +1,6 @@
-# decordash
+# decordashapp
 
-furniture store app
+A new Flutter project.
 
 ## Getting Started
 

@@ -1,5 +1,5 @@
-import 'package:decordash/common/widgets/images/rounded_image.dart';
-import 'package:decordash/features/chat/model/message.dart';
+import 'package:decordashapp/common/widgets/images/rounded_image.dart';
+import 'package:decordashapp/features/chat/model/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;

@@ -1,6 +1,6 @@
 // model/balance_model.dart
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/utils/constants/api_constants.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/utils/constants/api_constants.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

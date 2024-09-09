@@ -1,14 +1,14 @@
-import 'package:decordash/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/data/repositories/user/user_repo.dart';
-import 'package:decordash/features/authentication/screens/login/login_screen.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:decordash/features/personalization/screens/profile/widgets/re_auth_user_form.dart';
-import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/network_manager.dart';
-import 'package:decordash/utils/popups/full_screen_loader.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/data/repositories/user/user_repo.dart';
+import 'package:decordashapp/features/authentication/screens/login/login_screen.dart';
+import 'package:decordashapp/features/personalization/models/user_model.dart';
+import 'package:decordashapp/features/personalization/screens/profile/widgets/re_auth_user_form.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/helpers/network_manager.dart';
+import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

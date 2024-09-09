@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
-import 'package:decordash/features/home/controllers/vendor/vendor_controller.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
-import 'package:decordash/features/home/widgets/sortable_products.dart';
-import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:decordashapp/features/home/controllers/vendor/vendor_controller.dart';
+import 'package:decordashapp/features/home/model/vendor_model.dart';
+import 'package:decordashapp/features/home/widgets/sortable_products.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 
 class VendorProductsScreen extends StatelessWidget {
   const VendorProductsScreen({super.key, required this.vendor});

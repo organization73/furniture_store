@@ -1,8 +1,6 @@
-import 'package:decordash/features/product/screens/add_product/controllers/product_stats_checkboxes_controller.dart';
+import 'package:decordashapp/features/product/screens/add_product/controllers/product_stats_checkboxes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 
 class ProductStatsCheckboxes extends StatelessWidget {
   final ProductStatsCheckboxesController controller;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:decordash/common/widgets/buttons/cta_button.dart';
-import 'package:decordash/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:decordash/features/authentication/controllers/log_in/log_in_controller.dart';
-import 'package:decordash/features/authentication/screens/login/email_sign_in.dart';
-import 'package:decordash/features/authentication/screens/sign_in_with_phone/phone_sign_in_screen.dart';
-import 'package:decordash/features/authentication/screens/sign_up/signup.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:decordashapp/features/authentication/controllers/log_in/log_in_controller.dart';
+import 'package:decordashapp/features/authentication/screens/login/email_sign_in.dart';
+import 'package:decordashapp/features/authentication/screens/sign_in_with_phone/phone_sign_in_screen.dart';
+import 'package:decordashapp/features/authentication/screens/sign_up/signup.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
 

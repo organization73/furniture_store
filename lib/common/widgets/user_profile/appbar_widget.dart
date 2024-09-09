@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/theme/theme.dart';
+import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:get/get.dart';
 
 AppBar buildAppBar(BuildContext context) {

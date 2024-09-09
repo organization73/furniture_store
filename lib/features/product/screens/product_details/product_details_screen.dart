@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/features/product/model/product_model.dart';
-import 'package:decordash/features/product/screens/product_details/widgets/product_image_slider.dart';
-import 'package:decordash/features/product/screens/product_details/widgets/product_meta_data.dart';
-import 'package:decordash/features/product/screens/product_details/widgets/product_rating_container.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/features/product/screens/product_details/widgets/product_image_slider.dart';
+import 'package:decordashapp/features/product/screens/product_details/widgets/product_meta_data.dart';
+import 'package:decordashapp/features/product/screens/product_details/widgets/product_rating_container.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/products/rattings/rating_indicator.dart';
-import 'package:decordash/features/product/model/product_model.dart';
+import 'package:decordashapp/common/widgets/products/rattings/rating_indicator.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
 
 class UserReviewCard extends StatelessWidget {
   const UserReviewCard({

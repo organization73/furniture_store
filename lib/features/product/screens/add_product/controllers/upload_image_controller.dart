@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

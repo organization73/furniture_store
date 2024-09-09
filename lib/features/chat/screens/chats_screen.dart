@@ -1,10 +1,10 @@
-import 'package:decordash/common/widgets/loaders/animation_loader.dart';
-import 'package:decordash/data/repositories/user/user_repo.dart';
-import 'package:decordash/data/services/notification_service.dart';
-import 'package:decordash/features/chat/screens/search_screen.dart';
-import 'package:decordash/features/chat/controllers/chat_controller.dart';
-import 'package:decordash/features/chat/widgets/user_item.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
+import 'package:decordashapp/data/repositories/user/user_repo.dart';
+import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/features/chat/screens/search_screen.dart';
+import 'package:decordashapp/features/chat/controllers/chat_controller.dart';
+import 'package:decordashapp/features/chat/widgets/user_item.dart';
+import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/features/home/controllers/product/product_controller.dart';
-import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
+import 'package:decordashapp/features/home/controllers/product/product_controller.dart';
+import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
 import 'package:get/get.dart';
 
 class StartPageController extends GetxController {

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';

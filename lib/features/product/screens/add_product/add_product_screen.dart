@@ -1,15 +1,15 @@
-import 'package:decordash/features/product/screens/add_product/controllers/add_product_controller.dart';
+import 'package:decordashapp/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/input_fields/build_user_input_field.dart';
-import 'package:decordash/features/product/screens/add_product/widgets/color_selection.dart';
-import 'package:decordash/common/widgets/drop_down_menu/drop_down_menu.dart';
-import 'package:decordash/features/product/screens/add_product/widgets/product_condition_selection.dart';
-import 'package:decordash/features/product/screens/add_product/widgets/product_image_upload.dart';
-import 'package:decordash/features/product/screens/add_product/widgets/product_stats_checkboxs.dart';
-import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/validators/validation.dart';
+import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordashapp/features/product/screens/add_product/widgets/color_selection.dart';
+import 'package:decordashapp/common/widgets/drop_down_menu/drop_down_menu.dart';
+import 'package:decordashapp/features/product/screens/add_product/widgets/product_condition_selection.dart';
+import 'package:decordashapp/features/product/screens/add_product/widgets/product_image_upload.dart';
+import 'package:decordashapp/features/product/screens/add_product/widgets/product_stats_checkboxs.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
 
 class AddProductPage extends StatelessWidget {

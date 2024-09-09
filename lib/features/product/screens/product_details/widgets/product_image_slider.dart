@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:decordash/common/widgets/products/favourite_icon/favourite_icon.dart';
+import 'package:decordashapp/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/appbar/custom_appbar.dart';
-import 'package:decordash/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import 'package:decordash/common/widgets/images/rounded_image.dart';
-import 'package:decordash/features/home/controllers/product/images_controller.dart';
-import 'package:decordash/features/product/model/product_model.dart';
+import 'package:decordashapp/common/widgets/appbar/custom_appbar.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
+import 'package:decordashapp/common/widgets/images/rounded_image.dart';
+import 'package:decordashapp/features/home/controllers/product/images_controller.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
 
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class ProductImageSlider extends StatelessWidget {

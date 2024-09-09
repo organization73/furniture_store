@@ -1,7 +1,7 @@
-import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordash/features/chat/widgets/user_item.dart';
-import 'package:decordash/features/chat/controllers/chat_controller.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordashapp/features/chat/widgets/user_item.dart';
+import 'package:decordashapp/features/chat/controllers/chat_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

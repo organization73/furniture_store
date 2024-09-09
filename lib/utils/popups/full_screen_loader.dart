@@ -1,4 +1,4 @@
-import 'package:decordash/common/widgets/loaders/animation_loader.dart';
+import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +18,7 @@ class FullScreenLoader {
               height: double.infinity,
               child: Column(
                 children: [
-                   SizedBox(
+                  SizedBox(
                     height: 250.r,
                   ),
                   AnimationLoaderWidget(

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordash/features/home/model/review_model.dart';
-import 'package:decordash/features/home/model/vendor_model.dart';
-import 'package:decordash/utils/constants/enums.dart';
+import 'package:decordashapp/features/home/model/review_model.dart';
+import 'package:decordashapp/features/home/model/vendor_model.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductModel {

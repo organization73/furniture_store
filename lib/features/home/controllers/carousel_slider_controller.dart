@@ -1,6 +1,6 @@
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/banners/banners_repo.dart';
-import 'package:decordash/features/home/model/banners_model.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/data/repositories/banners/banners_repo.dart';
+import 'package:decordashapp/features/home/model/banners_model.dart';
 import 'package:get/get.dart';
 
 class CustomeCarouselSliderController extends GetxController {

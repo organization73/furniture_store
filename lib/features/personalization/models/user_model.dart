@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordash/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 
 class UserModel {
   AccountType accountType;

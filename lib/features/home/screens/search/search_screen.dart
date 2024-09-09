@@ -1,10 +1,10 @@
-import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
-import 'package:decordash/features/home/screens/search/controllers/recent_search_controller.dart';
-import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordash/features/home/screens/search/controllers/search_controller.dart';
-import 'package:decordash/features/home/widgets/sortable_products.dart';
-import 'package:decordash/utils/constants/sizes.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:decordashapp/features/home/screens/search/controllers/recent_search_controller.dart';
+import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordashapp/features/home/screens/search/controllers/search_controller.dart';
+import 'package:decordashapp/features/home/widgets/sortable_products.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

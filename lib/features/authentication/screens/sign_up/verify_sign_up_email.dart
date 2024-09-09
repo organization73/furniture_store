@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:decordash/common/widgets/headings/page_header.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/features/authentication/controllers/sign_up/verify_email_controller.dart';
-import 'package:decordash/utils/constants/image_strings.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/headings/page_header.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/features/authentication/controllers/sign_up/verify_email_controller.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';

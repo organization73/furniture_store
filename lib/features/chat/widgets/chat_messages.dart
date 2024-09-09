@@ -1,5 +1,5 @@
-import 'package:decordash/features/chat/model/message.dart';
-import 'package:decordash/features/chat/controllers/chat_controller.dart';
+import 'package:decordashapp/features/chat/model/message.dart';
+import 'package:decordashapp/features/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'empty_widget.dart';

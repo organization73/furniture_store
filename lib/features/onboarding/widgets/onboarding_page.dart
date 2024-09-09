@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:decordash/features/onboarding/controllers/onboarding_controller.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/features/onboarding/controllers/onboarding_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:decordash/features/product/model/product_model.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
 import 'package:get/get.dart';
 
 class ImageController extends GetxController {

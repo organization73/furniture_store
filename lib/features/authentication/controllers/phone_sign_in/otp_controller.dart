@@ -1,11 +1,11 @@
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/data/repositories/user/user_repo.dart';
-import 'package:decordash/data/services/notification_service.dart';
-import 'package:decordash/features/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
-import 'package:decordash/features/authentication/screens/gallery_selction/gallery_selection.dart';
-import 'package:decordash/features/personalization/models/user_model.dart';
-import 'package:decordash/utils/logging/logger.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/data/repositories/user/user_repo.dart';
+import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/features/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
+import 'package:decordashapp/features/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordashapp/features/personalization/models/user_model.dart';
+import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:get/get.dart';
 
 class OTPController extends GetxController {

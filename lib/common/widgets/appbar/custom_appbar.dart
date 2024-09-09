@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/device/device_utility.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 

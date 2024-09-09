@@ -1,8 +1,8 @@
-import 'package:decordash/common/widgets/images/rounded_image.dart';
+import 'package:decordashapp/common/widgets/images/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:decordash/features/home/model/category_model.dart';
+import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:decordashapp/features/home/model/category_model.dart';
 
 class HorizontalCategory extends StatelessWidget {
   const HorizontalCategory(

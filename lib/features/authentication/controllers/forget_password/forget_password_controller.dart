@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/common/widgets/loaders/loaders.dart';
-import 'package:decordash/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordash/features/authentication/screens/reset_password/reset_password_screen.dart';
-import 'package:decordash/utils/helpers/network_manager.dart';
-import 'package:decordash/utils/popups/full_screen_loader.dart';
+import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
+import 'package:decordashapp/features/authentication/screens/reset_password/reset_password_screen.dart';
+import 'package:decordashapp/utils/helpers/network_manager.dart';
+import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
 
 class ForgetPasswordController extends GetxController {

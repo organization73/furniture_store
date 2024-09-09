@@ -1,12 +1,12 @@
-import 'package:decordash/common/widgets/loaders/animation_loader.dart';
-import 'package:decordash/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
+import 'package:decordashapp/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/layouts/grid_layout.dart';
-import 'package:decordash/features/favourits/controllers/favorite_controller.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
+import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 
 import 'package:get/get.dart';
 

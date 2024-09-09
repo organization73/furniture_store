@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/features/favourits/screens/favourite_screen.dart';
-import 'package:decordash/features/notifications/controllers/notifications_controller.dart';
-import 'package:decordash/features/notifications/screens/notifications_screen.dart';
+import 'package:decordashapp/features/favourits/screens/favourite_screen.dart';
+import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
+import 'package:decordashapp/features/notifications/screens/notifications_screen.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';

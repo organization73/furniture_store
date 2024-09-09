@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordash/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 
 class BrandTitleText extends StatelessWidget {
   const BrandTitleText(

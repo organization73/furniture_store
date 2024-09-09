@@ -1,9 +1,9 @@
 import 'dart:typed_data';
-import 'package:decordash/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordash/data/services/firebase_firestore_service.dart';
-import 'package:decordash/data/services/media_service.dart';
-import 'package:decordash/data/services/notification_service.dart';
-import 'package:decordash/features/chat/controllers/chat_controller.dart';
+import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordashapp/data/services/firebase_firestore_service.dart';
+import 'package:decordashapp/data/services/media_service.dart';
+import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/features/chat/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

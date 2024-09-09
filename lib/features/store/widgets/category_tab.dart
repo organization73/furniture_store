@@ -1,16 +1,16 @@
-import 'package:decordash/common/widgets/shimmer/vertical_product_shimmer.dart';
-import 'package:decordash/features/home/controllers/category_controller.dart';
-import 'package:decordash/features/store/widgets/category_vendors.dart';
-import 'package:decordash/utils/helpers/cloud_helper_functions.dart';
+import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:decordashapp/features/home/controllers/category_controller.dart';
+import 'package:decordashapp/features/store/widgets/category_vendors.dart';
+import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:decordash/common/widgets/headings/section_heading.dart';
-import 'package:decordash/common/widgets/layouts/grid_layout.dart';
-import 'package:decordash/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:decordash/features/home/model/category_model.dart';
-import 'package:decordash/features/home/screens/all_products/all_products_screen.dart';
-import 'package:decordash/utils/constants/sizes.dart';
+import 'package:decordashapp/common/widgets/headings/section_heading.dart';
+import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
+import 'package:decordashapp/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:decordashapp/features/home/model/category_model.dart';
+import 'package:decordashapp/features/home/screens/all_products/all_products_screen.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class CategoryTab extends StatelessWidget {
