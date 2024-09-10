@@ -15,7 +15,7 @@ class PhoneSingInController extends GetxController {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
-  RxString phoneNumber = ''.obs;
+  final TextEditingController phoneNumber = TextEditingController();
   static final notifications = NotificationsService();
 
   void loginWithPhone() async {
@@ -32,7 +32,7 @@ class PhoneSingInController extends GetxController {
         return;
       }
 
-      await AuthenticatorRepo.instance.loginWithPhone(phoneNumber.value);
+      await AuthenticatorRepo.instance.loginWithPhone(phoneNumber.text);
       await UserRepo.instance.updateSingleField(
         {'lastActive': DateTime.now()},
       );

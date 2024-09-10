@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -7,7 +8,6 @@ import 'package:decordashapp/features/authentication/controllers/sign_up/sign_up
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -99,14 +99,15 @@ class SignUpScreen extends StatelessWidget {
                       decimal: false,
                     ),
                     selectorConfig: const SelectorConfig(
-                      selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                      setSelectorButtonAsPrefixIcon: true,
-                      leadingPadding: 15,
-                    ),
+                        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                        setSelectorButtonAsPrefixIcon: true,
+                        leadingPadding: 15,
+                        useEmoji: true),
                     initialValue: PhoneNumber(
                       isoCode: 'EG',
                     ),
                     formatInput: false,
+                    countries: const ["EG"],
                   ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   GetX<SignUpController>(
@@ -153,14 +154,14 @@ class SignUpScreen extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: '${'iAgreeTo'.tr} ',
-                              style: Theme.of(context).textTheme.labelSmall,
+                              style: Theme.of(context).textTheme.labelMedium,
                             ),
                             TextSpan(
                               text: 'privacyPolicy'.tr,
                               style: Theme.of(context)
                                   .textTheme
-                                  .labelMedium!
-                                  .apply(
+                                  .labelLarge!
+                                  .copyWith(
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     decoration: TextDecoration.underline,
@@ -173,14 +174,14 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text: ' ${'and'.tr} ',
-                              style: Theme.of(context).textTheme.labelSmall,
+                              style: Theme.of(context).textTheme.labelMedium,
                             ),
                             TextSpan(
                               text: 'termsOfUse'.tr,
                               style: Theme.of(context)
                                   .textTheme
-                                  .labelMedium!
-                                  .apply(
+                                  .labelLarge!
+                                  .copyWith(
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     decoration: TextDecoration.underline,
@@ -214,7 +215,7 @@ class SignUpScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
               child: SizedBox(
-                height: 0.75.sh,
+                height: TDeviceUtils.getScreenHeight() * 0.75,
                 child: FutureBuilder(
                   future: rootBundle.loadString(filePath),
                   builder:

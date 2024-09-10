@@ -1,5 +1,6 @@
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
@@ -32,8 +33,8 @@ class LoginController extends GetxController {
 
   Future<void> emailAndPasswordSignIn() async {
     try {
-      FullScreenLoader.openLoadingDialog('loggingInLoadingTitle'.tr,
-          'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog(
+          'loggingInLoadingTitle'.tr, TImages.processingInfo);
 
       final isConnected = await NetworkManager.instance.isConnected();
 
@@ -76,8 +77,8 @@ class LoginController extends GetxController {
 
   Future<void> googleSignIn() async {
     try {
-      FullScreenLoader.openLoadingDialog('loggingInLoadingTitle'.tr,
-          'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog(
+          'loggingInLoadingTitle'.tr, TImages.processingInfo);
 
       final isConnected = await NetworkManager.instance.isConnected();
 

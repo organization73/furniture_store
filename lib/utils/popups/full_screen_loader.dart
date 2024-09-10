@@ -1,8 +1,5 @@
 import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 
 class FullScreenLoader {
@@ -16,16 +13,11 @@ class FullScreenLoader {
               color: Theme.of(Get.context!).colorScheme.surfaceContainer,
               width: double.infinity,
               height: double.infinity,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 250.r,
-                  ),
-                  AnimationLoaderWidget(
-                    text: text,
-                    animation: animation,
-                  )
-                ],
+              child: Center(
+                child: AnimationLoaderWidget(
+                  text: text,
+                  animation: animation,
+                ),
               ),
             )));
   }

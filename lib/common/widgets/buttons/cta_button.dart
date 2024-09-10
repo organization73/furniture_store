@@ -1,5 +1,5 @@
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BuildCTAButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -14,7 +14,7 @@ class BuildCTAButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 1.sw,
+      width: TDeviceUtils.getScreenWidth(context),
       child: OutlinedButton(
         onPressed: onPressed,
         child: Text(

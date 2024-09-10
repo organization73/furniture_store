@@ -1,4 +1,5 @@
 import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
@@ -21,15 +22,16 @@ class SignUpController extends GetxController {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumController = TextEditingController();
+
   static final notifications = NotificationsService();
+
   void signup() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'processingLoading'.tr, 'assets/animations/animation-of-docer.json');
+          'processingLoading'.tr, TImages.processingInfo);
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {

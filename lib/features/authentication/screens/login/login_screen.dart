@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordashapp/features/authentication/controllers/log_in/log_in_controller.dart';
-import 'package:decordashapp/features/authentication/screens/login/email_sign_in.dart';
+import 'package:decordashapp/features/authentication/screens/email_login/email_sign_in.dart';
 import 'package:decordashapp/features/authentication/screens/sign_in_with_phone/phone_sign_in_screen.dart';
 import 'package:decordashapp/features/authentication/screens/sign_up/signup.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
@@ -22,19 +22,9 @@ class LoginSignUpScreen extends StatelessWidget {
       body: Stack(
         children: [
           PrimaryHeaderContainer(
-              child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
-                SvgPicture.asset(
-                  TImages.logo,
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
+              child: SvgPicture.asset(
+            TImages.logo,
+            fit: BoxFit.cover,
           )),
           SafeArea(
             child: Align(
@@ -45,7 +35,10 @@ class LoginSignUpScreen extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(20),
                     )),
-                height: TDeviceUtils.getScreenHeight() * 0.55,
+                height: TDeviceUtils.getScreenOrientation(context) ==
+                        Orientation.portrait
+                    ? TDeviceUtils.getScreenHeight() * 0.57
+                    : TDeviceUtils.getScreenHeight(),
                 child: Padding(
                   padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                   child: Column(
@@ -53,10 +46,13 @@ class LoginSignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text('loginHeader'.tr,
-                          style: Theme.of(context).textTheme.headlineLarge),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold)),
                       Text(
                         'loginSubHeader'.tr,
-                        style: Theme.of(context).textTheme.labelSmall,
+                        style: Theme.of(context).textTheme.labelMedium,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: TSizes.spaceBtwSections / 2),
@@ -105,7 +101,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         children: [
                           Text(
                             'newToApp'.tr,
-                            style: Theme.of(context).textTheme.labelSmall,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                           TextButton(
                             onPressed: () {

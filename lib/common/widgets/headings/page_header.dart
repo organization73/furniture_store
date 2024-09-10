@@ -1,6 +1,5 @@
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:decordashapp/utils/constants/sizes.dart';
 
 class PageHeader extends StatelessWidget {
@@ -16,7 +15,7 @@ class PageHeader extends StatelessWidget {
     required this.subTitle,
     this.iconName,
     this.alignment = CrossAxisAlignment.start,
-    this.size = 40,
+    this.size = 45,
   });
 
   @override
@@ -29,12 +28,15 @@ class PageHeader extends StatelessWidget {
             iconName,
             size: size,
           ),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: TSizes.spaceBtwSections * 1.5),
         Text(
           title,
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 15.h),
+        SizedBox(height: TDeviceUtils.getScreenHeight() * 0.02),
         Text(
           subTitle,
           style: Theme.of(context).textTheme.labelMedium,

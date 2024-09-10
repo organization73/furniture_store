@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
@@ -16,8 +17,8 @@ class ForgetPasswordController extends GetxController {
 
   sendPasswordResetEmail() async {
     try {
-      FullScreenLoader.openLoadingDialog('Processing your request...',
-          'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog(
+          'Processing your request...', TImages.processingInfo);
       final isConnected = await NetworkManager.instance.isConnected();
 
       if (!isConnected) {
@@ -56,8 +57,8 @@ class ForgetPasswordController extends GetxController {
 
   resendPasswordResetEmail(String email) async {
     try {
-      FullScreenLoader.openLoadingDialog('Processing your request...',
-          'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog(
+          'Processing your request...', TImages.processingInfo);
       final isConnected = await NetworkManager.instance.isConnected();
 
       if (!isConnected) {

@@ -3,6 +3,7 @@ import 'package:decordashapp/data/repositories/product/product_repo.dart';
 import 'package:decordashapp/features/home/model/vendor_model.dart';
 import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
@@ -35,7 +36,7 @@ class AddProductController extends GetxController {
   Future<void> addProduct() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'processingLoading'.tr, 'assets/animations/animation-of-docer.json');
+          'processingLoading'.tr, TImages.processingInfo);
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {

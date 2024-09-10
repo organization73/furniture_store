@@ -29,7 +29,9 @@ class PhoneNumberScreen extends StatelessWidget {
                 controller.loginWithPhone();
               })),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding:
@@ -76,22 +78,35 @@ class PhoneNumberScreen extends StatelessWidget {
                           keyboardType: TextInputType.name,
                           TValidator.validateUserInput),
                       const SizedBox(height: TSizes.spaceBtwInputFields),
+
                       InternationalPhoneNumberInput(
                         onInputChanged: (PhoneNumber number) {
-                          controller.phoneNumber.value = number.phoneNumber!;
+                          controller.phoneNumber.value =
+                              number.phoneNumber as TextEditingValue;
                         },
-                        inputBorder: const OutlineInputBorder().copyWith(
-                          borderRadius:
-                              BorderRadius.circular(TSizes.inputFieldRadius),
+                        inputDecoration: InputDecoration(
+                          border: const OutlineInputBorder().copyWith(
+                            borderRadius:
+                                BorderRadius.circular(TSizes.inputFieldRadius),
+                          ),
+                          labelText: 'phoneNo'.tr,
+                        ),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: true,
+                          decimal: false,
                         ),
                         selectorConfig: const SelectorConfig(
-                          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                          setSelectorButtonAsPrefixIcon: true,
-                          leadingPadding: 15,
+                            selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                            setSelectorButtonAsPrefixIcon: true,
+                            leadingPadding: 15,
+                            useEmoji: true),
+                        initialValue: PhoneNumber(
+                          isoCode: 'EG',
                         ),
-                        initialValue: number,
-                        formatInput: true,
+                        formatInput: false,
+                        countries: const ["EG"],
                       ),
+                      ////////////
                     ],
                   ),
                 )

@@ -26,6 +26,10 @@ class TDeviceUtils {
     return viewInsets.bottom != 0;
   }
 
+  static Orientation getScreenOrientation(BuildContext context) {
+    return MediaQuery.of(Get.context!).orientation;
+  }
+
   static void setFullScreen(bool enable) {
     SystemChrome.setEnabledSystemUIMode(
         enable ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
@@ -105,6 +109,4 @@ class TDeviceUtils {
   static bool isAndroid() {
     return Platform.isAndroid;
   }
-
- 
 }

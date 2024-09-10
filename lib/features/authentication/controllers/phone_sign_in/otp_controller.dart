@@ -26,7 +26,7 @@ class OTPController extends GetxController {
               firstName: phoneController.firstNameController.text.trim(),
               lastName: phoneController.lastNameController.text.trim(),
               userName: phoneController.userNameController.text.trim(),
-              phoneNumber: phoneController.phoneNumber.value,
+              phoneNumber: phoneController.phoneNumber.text.trim(),
               lastActive: DateTime.now(),
             );
 

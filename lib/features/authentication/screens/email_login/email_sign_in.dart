@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/features/authentication/controllers/log_in/log_in_controller.dart';
 import 'package:decordashapp/features/authentication/screens/reset_password/send_reset_password.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -20,7 +18,9 @@ class EmailSignInScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
@@ -40,7 +40,7 @@ class EmailSignInScreen extends StatelessWidget {
                   PageHeader(
                       title: 'loginTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
-                      iconName: Iconsax.link_circle),
+                      iconName: Iconsax.grid_3),
                   RoundedTextField(
                       prefixIcon: Iconsax.direct_right_copy,
                       'email'.tr,
@@ -60,7 +60,7 @@ class EmailSignInScreen extends StatelessWidget {
                             controller.hidePassword.value
                                 ? Iconsax.eye_copy
                                 : Iconsax.eye_slash_copy,
-                            size: TSizes.iconSm,
+                            size: TSizes.iconMd,
                           )),
                       controller.passwordController,
                       TValidator.validatePassword,
@@ -72,8 +72,8 @@ class EmailSignInScreen extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: 30.r,
-                            height: 30.r,
+                            width: 30,
+                            height: 30,
                             child: Obx(() => Checkbox(
                                 value: controller.rememberMe.value,
                                 onChanged: (value) {
@@ -97,7 +97,7 @@ class EmailSignInScreen extends StatelessWidget {
                           transition: Transition.downToUp,
                         ),
                         child: Text('forgetPassword'.tr,
-                            style: Theme.of(context).textTheme.labelSmall),
+                            style: Theme.of(context).textTheme.labelMedium),
                       )
                     ],
                   ),

@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
@@ -31,7 +32,7 @@ class UpdateNameController extends GetxController {
   Future<void> updateUserName() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'updatingInfo'.tr, 'assets/animations/animation-of-docer.json');
+          'updatingInfo'.tr, TImages.processingInfo);
 
       final isConnected = await NetworkManager.instance.isConnected();
 

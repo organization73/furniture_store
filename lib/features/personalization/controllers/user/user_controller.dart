@@ -1,4 +1,5 @@
 import 'package:decordashapp/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
@@ -96,8 +97,7 @@ class UserController extends GetxController {
 
   void deleteUserAccount() async {
     try {
-      FullScreenLoader.openLoadingDialog(
-          'Processing', 'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog('Processing', TImages.processingInfo);
 
       final auth = AuthenticatorRepo.instance;
       final provider =
@@ -139,8 +139,7 @@ class UserController extends GetxController {
 
   Future<void> reAuthEmailAndPasswordUser() async {
     try {
-      FullScreenLoader.openLoadingDialog(
-          'Processing', 'assets/animations/animation-of-docer.json');
+      FullScreenLoader.openLoadingDialog('Processing', TImages.processingInfo);
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         FullScreenLoader.stopLoading();

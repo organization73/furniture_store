@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/features/home/model/product_category_model.dart';
 import 'package:decordashapp/features/home/model/vendor_category_model.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/services.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
@@ -60,7 +61,7 @@ class CategoryRepo extends GetxController {
       List<VendorCategoryModel> vendorsCategory) async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', 'assets/animations/animation-of-docer.json');
+          'Uploading Data...', TImages.processingInfo);
       final storage = Get.put(FirebaseStorageServices());
 
       for (var category in categories) {

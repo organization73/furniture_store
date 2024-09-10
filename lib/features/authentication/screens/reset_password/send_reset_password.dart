@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -17,7 +15,9 @@ class SentEmailPasswordReset extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ForgetPasswordController());
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
       bottomNavigationBar: BottomAppBar(
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
@@ -39,7 +39,7 @@ class SentEmailPasswordReset extends StatelessWidget {
                     title: 'forgetPasswordTitle'.tr,
                     subTitle: 'forgetPasswordSubTitle'.tr,
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: TSizes.spaceBtwSections),
                   RoundedTextField(
                       'email'.tr,
                       prefixIcon: Iconsax.direct_right_copy,

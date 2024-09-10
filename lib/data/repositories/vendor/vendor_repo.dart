@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
@@ -64,7 +65,7 @@ class VendorRepo extends GetxController {
   Future<void> uploadDummyData(List<VendorModel> vendors) async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', 'assets/animations/animation-of-docer.json');
+          'Uploading Data...', TImages.processingInfo);
       final storage = Get.put(FirebaseStorageServices());
 
       for (var vendor in vendors) {
