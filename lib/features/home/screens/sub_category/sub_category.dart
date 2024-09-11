@@ -3,6 +3,7 @@ import 'package:decordashapp/common/widgets/shimmer/horizontal_product_shimmer.d
 import 'package:decordashapp/features/home/controllers/category_controller.dart';
 import 'package:decordashapp/features/home/model/category_model.dart';
 import 'package:decordashapp/features/home/screens/all_products/all_products_screen.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class SubCategoryScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 const emptyWidget = AnimationLoaderWidget(
                   text: 'Whoops! This category is Empty...',
-                  animation: 'assets/animations/empty-file.json',
+                  animation: TImages.noFiles,
                 );
                 const loader = HorizontalProductShimmer();
                 final widget = TCloudHelperFunctions.checkMultiRecordState(
@@ -92,7 +93,8 @@ class SubCategoryScreen extends StatelessWidget {
                                             product: products[index],
                                           );
                                         },
-                                        separatorBuilder: (_, __) => const SizedBox(
+                                        separatorBuilder: (_, __) =>
+                                            const SizedBox(
                                           width: TSizes.spaceBtwItems,
                                         ),
                                       ),

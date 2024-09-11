@@ -33,6 +33,9 @@ class RoundedTextField extends StatelessWidget {
       keyboardType: keyboardType,
       controller: controller,
       obscureText: isPassword,
+      style: const TextStyle(
+        fontSize: 12,
+      ),
       decoration: InputDecoration(
         hintText: hintText,
         filled: isFilled,

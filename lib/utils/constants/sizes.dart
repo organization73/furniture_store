@@ -14,6 +14,11 @@ class TSizes {
   // Button sizes
   static const double buttonHeight = 15.0;
   static const double buttonRadius = 10.0;
+  
+  // Font sizes
+  static const double fontSizeSm = 13.0;
+  static const double fontSizeMd = 16.0;
+  static const double fontSizeLg = 18.0;
 
   // Default spacing between sections
   static const double defaultSpace = 24.0;

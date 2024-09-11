@@ -8,14 +8,14 @@ class TImages {
   static const String galleryLoc = 'assets/icons/gallery_loc.svg';
 
   // -- Animations
-  static const String processingInfo =
-      "assets/animations/animation-of-docer.json";
+  static const String processingInfo = "assets/animations/loading";
   static const String confirmation = "assets/animations/confirm.json";
   static const String emailDelivery = "assets/animations/email_delivery.json";
   static const String emptyFavourits = "assets/animations/no_favourits.json";
   static const String emptyNotifications =
       "assets/animations/no_notification.json";
   static const String resetPassword = "assets/animations/reset_pass.json";
+  static const String noFiles = "assets/animations/empty_file.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
