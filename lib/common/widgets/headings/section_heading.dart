@@ -43,7 +43,7 @@ class SectionHeading extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge!
+                    .titleMedium!
                     .apply(color: textColor),
               ),
               if (showSubTitle)

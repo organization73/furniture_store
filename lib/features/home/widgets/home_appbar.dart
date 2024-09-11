@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/features/favourits/screens/favourite_screen.dart';
 import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordashapp/features/notifications/screens/notifications_screen.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -22,7 +21,10 @@ class HomeAppBar extends StatelessWidget {
           child: Text('homeAppbarTitle'.tr,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.headlineLarge),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w600)),
         ),
         IconButton(
             onPressed: () => Get.to(

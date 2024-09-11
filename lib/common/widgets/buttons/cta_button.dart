@@ -14,7 +14,7 @@ class BuildCTAButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: TDeviceUtils.getScreenWidth(context),
+      width: TDeviceUtils.getScreenWidth(),
       child: OutlinedButton(
         onPressed: onPressed,
         child: Text(

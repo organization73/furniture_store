@@ -51,7 +51,7 @@ class OnBoardingView extends StatelessWidget {
                             Container(
                               constraints: BoxConstraints(
                                   maxWidth:
-                                      TDeviceUtils.getScreenWidth(context) *
+                                      TDeviceUtils.getScreenWidth() *
                                           0.75),
                               child: Text(
                                 item.description,

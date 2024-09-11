@@ -8,7 +8,6 @@ class BalanceController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     fetchBalance();
   }

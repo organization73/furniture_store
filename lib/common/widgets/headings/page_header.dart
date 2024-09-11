@@ -8,6 +8,7 @@ class PageHeader extends StatelessWidget {
   final IconData? iconName;
   final CrossAxisAlignment alignment;
   final double size;
+  final TextAlign align;
 
   const PageHeader({
     super.key,
@@ -16,6 +17,7 @@ class PageHeader extends StatelessWidget {
     this.iconName,
     this.alignment = CrossAxisAlignment.start,
     this.size = 45,
+    this.align = TextAlign.left,
   });
 
   @override
@@ -31,9 +33,10 @@ class PageHeader extends StatelessWidget {
         const SizedBox(height: TSizes.spaceBtwSections * 1.5),
         Text(
           title,
+          textAlign: align,
           style: Theme.of(context)
               .textTheme
-              .headlineSmall
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: TDeviceUtils.getScreenHeight() * 0.02),

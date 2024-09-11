@@ -21,10 +21,9 @@ class SignUpController extends GetxController {
   // TextEditingController for each input field
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController userNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController phoneNumController = TextEditingController();
+   RxString phoneNumController = ''.obs;
 
   static final notifications = NotificationsService();
 
@@ -61,13 +60,12 @@ class SignUpController extends GetxController {
               emailController.text.trim(), passwordController.text.trim());
 
       final newUser = UserModel(
-          id: userCred.user!.uid,
-          firstName: firstNameController.text.trim(),
-          lastName: lastNameController.text.trim(),
-          userName: userNameController.text.trim(),
-          email: emailController.text.trim(),
-          phoneNumber: phoneNumController.text.trim(),
-          lastActive: DateTime.now());
+        id: userCred.user!.uid,
+        firstName: firstNameController.text.trim(),
+        lastName: lastNameController.text.trim(),
+        email: emailController.text.trim(),
+        phoneNumber: phoneNumController.value.trim(),
+      );
 
       final userRepesotory = Get.put(UserRepo());
       await userRepesotory.saveuserRecord(newUser);

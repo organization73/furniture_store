@@ -61,5 +61,16 @@ class TValidator {
     }
     return null;
   }
-// Add more custom validators as needed for your specific requirements.
+  static String? validateGalleryName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'galleryVal'.tr;
+    }
+    return null;
+  }
+  static String? validateGalleryLoc(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'galleryAddressVal'.tr;
+    }
+    return null;
+  }
 }

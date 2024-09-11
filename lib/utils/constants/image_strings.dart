@@ -5,6 +5,7 @@ class TImages {
   // -- Social Logos
   static const String google = "assets/icons/google.svg";
   static const String logo = 'assets/logos/logo.svg';
+  static const String galleryLoc = 'assets/icons/gallery_loc.svg';
 
   // -- Animations
   static const String processingInfo =

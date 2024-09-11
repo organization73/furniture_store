@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class UserItem extends StatefulWidget {
   const UserItem({super.key, required this.user});
@@ -30,33 +29,13 @@ class _UserItemState extends State<UserItem> {
           transition: Transition.downToUp,
         ),
         child: ListTile(
-          leading: Stack(
-            alignment: Alignment.bottomRight,
-            children: [
-              CircularImage(
-                imageUrl: widget.user.avatar,
-                isNetworkImage: true,
-                height: 100.r,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: CircleAvatar(
-                  backgroundColor:
-                      widget.user.isOnline ? Colors.green : Colors.grey,
-                  radius: 5,
-                ),
-              ),
-            ],
+          leading: CircularImage(
+            imageUrl: widget.user.avatar,
+            isNetworkImage: true,
+            height: 100.r,
           ),
           title: Text(widget.user.userName,
               style: Theme.of(context).textTheme.titleLarge),
-          subtitle: Text(
-              'Last Active : ${timeago.format(widget.user.lastActive ?? DateTime.now())}',
-              maxLines: 2,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(overflow: TextOverflow.ellipsis)),
           trailing: const Icon(Iconsax.arrow_circle_right_copy),
         ),
       );

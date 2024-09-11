@@ -1,12 +1,11 @@
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/features/authentication/controllers/sign_up/verify_email_controller.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -20,9 +19,10 @@ class VerifySignUpEmail extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: ElevatedButton(
-            onPressed: () => controller.checkEmailVerificationStatus(),
-            child: Text('cont'.tr)),
+        child: BuildCTAButton(
+          onPressed: () => controller.checkEmailVerificationStatus(),
+          text: 'cont'.tr,
+        ),
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -43,7 +43,7 @@ class VerifySignUpEmail extends StatelessWidget {
                 children: [
                   Lottie.asset(
                     TImages.emailDelivery,
-                    width: 150.r,
+                    width: TDeviceUtils.getScreenHeight() * 0.2,
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
@@ -58,11 +58,8 @@ class VerifySignUpEmail extends StatelessWidget {
                   ),
                   Text(
                     'confirmEmailSubTitle'.tr,
-                    style: Theme.of(context).textTheme.labelSmall,
+                    style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 60.h,
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,

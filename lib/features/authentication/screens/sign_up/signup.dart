@@ -69,13 +69,6 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
-                      'username'.tr,
-                      controller.userNameController,
-                      prefixIcon: Iconsax.user_edit_copy,
-                      keyboardType: TextInputType.name,
-                      TValidator.validateUserInput),
-                  const SizedBox(height: TSizes.spaceBtwInputFields),
-                  RoundedTextField(
                       'email'.tr,
                       prefixIcon: Iconsax.direct_copy,
                       keyboardType: TextInputType.emailAddress,
@@ -84,8 +77,7 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   InternationalPhoneNumberInput(
                     onInputChanged: (PhoneNumber number) {
-                      controller.phoneNumController.value =
-                          number.phoneNumber as TextEditingValue;
+                      controller.phoneNumController.value = number.phoneNumber!;
                     },
                     inputDecoration: InputDecoration(
                       border: const OutlineInputBorder().copyWith(

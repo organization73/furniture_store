@@ -1,8 +1,8 @@
 import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordashapp/features/home/screens/search/search_screen.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
@@ -42,7 +42,8 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         PrimaryHeaderContainer(
                           child: Padding(
-                            padding: EdgeInsets.only(top: 85.h),
+                            padding: EdgeInsets.only(
+                                top: TDeviceUtils.getScreenHeight() * 0.12),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -94,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                                   return Center(child: Text('noProducts'.tr));
                                 }
                                 return GridLayout(
-                                    mainAxisExtent: 265.r,
+                                    mainAxisExtent: 265,
                                     itemCount: productsController
                                         .featuredProducts.length,
                                     itemBuilder: (_, index) =>
@@ -131,7 +132,7 @@ class FadeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: TDeviceUtils.getScreenHeight() * 0.11,
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),

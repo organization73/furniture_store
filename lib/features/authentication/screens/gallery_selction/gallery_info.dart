@@ -1,4 +1,6 @@
 import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
+import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
@@ -25,7 +27,9 @@ class GalleryInformationScreen extends StatelessWidget {
           onPressed: controller.validateAndSubmit,
         ),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -46,10 +50,7 @@ class GalleryInformationScreen extends StatelessWidget {
                     controller.galleryNameController,
                     prefixIcon: Iconsax.user_octagon_copy,
                     keyboardType: TextInputType.name,
-                    (value) =>
-                        value == null || value.isEmpty || value.length <= 4
-                            ? 'galleryVallen'.tr
-                            : null,
+                    TValidator.validateGalleryName,
                   ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
@@ -57,19 +58,83 @@ class GalleryInformationScreen extends StatelessWidget {
                     controller.galleryAddressController,
                     prefixIcon: Iconsax.location_copy,
                     keyboardType: TextInputType.name,
-                    (value) =>
-                        value == null || value.isEmpty || value.length <= 6
-                            ? 'galleryAddressVal'.tr
-                            : null,
+                    TValidator.validateGalleryLoc,
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections),
-                  OutlinedButton.icon(
-                    onPressed: () => userController.uploadGalleryCertificate(),
-                    icon: const Icon(Iconsax.additem_copy),
-                    label: Text(
-                      'uploadGalleryID'.tr,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
+                  const Divider(),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          //TODO Add upload gallery picture function
+                          onTap: () {},
+                          child: Container(
+                            width: double.infinity,
+                            height: TDeviceUtils.getScreenHeight() * 0.12,
+                            decoration: BoxDecoration(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                border: Border.all(
+                                  width: 0.5,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(15))),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Iconsax.picture_frame,
+                                  size: 50,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                ),
+                                Text(
+                                  'Upload gallery picture',
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: TSizes.sm),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () =>
+                              userController.uploadGalleryCertificate(),
+                          child: Container(
+                            width: double.infinity,
+                            height: TDeviceUtils.getScreenHeight() * 0.12,
+                            decoration: BoxDecoration(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                border: Border.all(
+                                  width: 0.5,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(15))),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Iconsax.additem_copy,
+                                  size: 50,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                ),
+                                Text(
+                                  'uploadGalleryID'.tr,
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

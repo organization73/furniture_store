@@ -71,14 +71,6 @@ class PhoneNumberScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: TSizes.spaceBtwInputFields),
-                      RoundedTextField(
-                          'username'.tr,
-                          controller.userNameController,
-                          prefixIcon: Iconsax.user_edit_copy,
-                          keyboardType: TextInputType.name,
-                          TValidator.validateUserInput),
-                      const SizedBox(height: TSizes.spaceBtwInputFields),
-
                       InternationalPhoneNumberInput(
                         onInputChanged: (PhoneNumber number) {
                           controller.phoneNumber.value =

@@ -5,7 +5,6 @@ import 'package:decordashapp/features/manufacture_request/screens/add_new_reques
 import 'package:decordashapp/features/personalization/models/user_model.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-// TODO Translate this page
 
 class ManufactureRequestsPage extends StatelessWidget {
   const ManufactureRequestsPage({super.key});

@@ -14,7 +14,6 @@ class PhoneSingInController extends GetxController {
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController userNameController = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   static final notifications = NotificationsService();
 

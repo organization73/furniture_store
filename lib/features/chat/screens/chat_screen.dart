@@ -55,23 +55,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     isNetworkImage: true,
                     backgroundColor: Colors.transparent,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        chatController.user.value!.userName,
-                      ),
-                      Text(
-                        chatController.user.value!.isOnline
-                            ? 'Online'
-                            : 'Offline',
-                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              color: chatController.user.value!.isOnline
-                                  ? Colors.green
-                                  : Colors.grey,
-                            ),
-                      ),
-                    ],
+                  Text(
+                    chatController.user.value!.userName,
                   ),
                 ],
               )
