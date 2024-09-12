@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
@@ -38,7 +39,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Lottie.asset(
-                    'assets/animations/reset_pass.json',
+                    TImages.resetPassword,
                     width: 150,
                   ),
                   const SizedBox(

@@ -9,8 +9,8 @@ class TElevatedButtonTheme {
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       side: const BorderSide(),
-      // padding: const EdgeInsets.symmetric(
-      //     vertical: TSizes.buttonHeight, horizontal: 20),
+      padding: const EdgeInsets.symmetric(
+          vertical: TSizes.buttonHeight,),
       // textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),

@@ -18,6 +18,7 @@ class UserModel {
   String galleryName;
   String galleryAddress;
   String galleryCertificate;
+  String galleryPicture;
 
   UserModel({
     this.accountType = AccountType.regular,
@@ -32,6 +33,7 @@ class UserModel {
     this.galleryName = '',
     this.galleryAddress = '',
     this.galleryCertificate = '',
+    this.galleryPicture = '',
     this.isFeatured = false,
     this.isVerified = false,
   })  : createdDate = createdDate ?? DateTime.now(),
@@ -70,6 +72,7 @@ class UserModel {
     String? galleryName,
     String? galleryAddress,
     String? galleryCertificate,
+    String? galleryPicture,
     bool? isFeatured,
     bool? isVerified,
   }) {
@@ -86,6 +89,7 @@ class UserModel {
       galleryName: galleryName ?? this.galleryName,
       galleryAddress: galleryAddress ?? this.galleryAddress,
       galleryCertificate: galleryCertificate ?? this.galleryCertificate,
+      galleryPicture: galleryPicture ?? this.galleryPicture,
       isFeatured: isFeatured ?? this.isFeatured,
       isVerified: isVerified ?? this.isVerified,
     );
@@ -108,6 +112,7 @@ class UserModel {
       galleryName: json['galleryName'] ?? '',
       galleryAddress: json['galleryAddress'] ?? '',
       galleryCertificate: json['galleryCertificate'] ?? '',
+      galleryPicture: json['galleryPicture'] ?? '',
       isFeatured: json['isFeatured'] ?? false,
       isVerified: json['isVerified'] ?? false,
     );
@@ -127,6 +132,7 @@ class UserModel {
       'galleryName': galleryName,
       'galleryAddress': galleryAddress,
       'galleryCertificate': galleryCertificate,
+      'galleryPicture': galleryPicture,
       'isFeatured': isFeatured,
       'isVerified': isVerified,
     };
@@ -146,6 +152,7 @@ class UserModel {
       galleryName: '',
       galleryAddress: '',
       galleryCertificate: '',
+      galleryPicture: '',
       isFeatured: false,
       isVerified: false,
     );
@@ -170,6 +177,7 @@ class UserModel {
         galleryName: data['galleryName'] ?? '',
         galleryAddress: data['galleryAddress'] ?? '',
         galleryCertificate: data['galleryCertificate'] ?? '',
+        galleryPicture: data['galleryPicture'] ?? '',
         isFeatured: data['isFeatured'] ?? false,
         isVerified: data['isVerified'] ?? false,
       );

@@ -22,6 +22,13 @@ class GalleryInfoController extends GetxController {
         return;
       }
 
+      if (userController.user.value.galleryPicture.isEmpty) {
+        TLoaders.warningSnackBar(
+            title: 'Upload Gallery Picture',
+            message: 'Please upload your gallery picture');
+        return;
+      }
+
       if (userController.user.value.galleryCertificate.isEmpty) {
         TLoaders.warningSnackBar(
             title: 'Upload Gallery Certificate',

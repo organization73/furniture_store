@@ -1,5 +1,6 @@
+import 'package:decordashapp/features/authentication/widgets/upload_gallery_info.dart';
 import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
-import 'package:decordashapp/utils/device/device_utility.dart';
+import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -48,7 +49,7 @@ class GalleryInformationScreen extends StatelessWidget {
                   RoundedTextField(
                     'galleryName'.tr,
                     controller.galleryNameController,
-                    prefixIcon: Iconsax.user_octagon_copy,
+                    prefixIcon: Iconsax.user_tag_copy,
                     keyboardType: TextInputType.name,
                     TValidator.validateGalleryName,
                   ),
@@ -57,82 +58,32 @@ class GalleryInformationScreen extends StatelessWidget {
                     'galleryAddress'.tr,
                     controller.galleryAddressController,
                     prefixIcon: Iconsax.location_copy,
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          LoggerHelper.warning('loca');
+                        },
+                        icon: const Icon(
+                          Iconsax.map_copy,
+                          size: TSizes.iconMd,
+                        )),
                     keyboardType: TextInputType.name,
                     TValidator.validateGalleryLoc,
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections),
-                  const Divider(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
                   Row(
                     children: [
-                      Expanded(
-                        child: GestureDetector(
-                          //TODO Add upload gallery picture function
-                          onTap: () {},
-                          child: Container(
-                            width: double.infinity,
-                            height: TDeviceUtils.getScreenHeight() * 0.12,
-                            decoration: BoxDecoration(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                border: Border.all(
-                                  width: 0.5,
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(15))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Iconsax.picture_frame,
-                                  size: 50,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                ),
-                                Text(
-                                  'Upload gallery picture',
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                      UploadGalleryInfo(
+                        onTap: () => userController.uploadGalleryInfo(
+                            isCertificate: false),
+                        title: 'Upload gallery picture',
+                        icon: Iconsax.picture_frame,
                       ),
                       const SizedBox(width: TSizes.sm),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () =>
-                              userController.uploadGalleryCertificate(),
-                          child: Container(
-                            width: double.infinity,
-                            height: TDeviceUtils.getScreenHeight() * 0.12,
-                            decoration: BoxDecoration(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                border: Border.all(
-                                  width: 0.5,
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(15))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Iconsax.additem_copy,
-                                  size: 50,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                ),
-                                Text(
-                                  'uploadGalleryID'.tr,
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                      UploadGalleryInfo(
+                        onTap: () => userController.uploadGalleryInfo(
+                            isCertificate: true),
+                        title: 'uploadGalleryID'.tr,
+                        icon: Iconsax.card,
                       ),
                     ],
                   ),

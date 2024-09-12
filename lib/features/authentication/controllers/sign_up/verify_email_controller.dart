@@ -47,6 +47,8 @@ class VerifyEmailController extends GetxController {
           duration: const Duration(milliseconds: 300),
           transition: Transition.rightToLeft,
         );
+        TLoaders.successSnackBar(
+            title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
       }
     });
   }
@@ -67,6 +69,8 @@ class VerifyEmailController extends GetxController {
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
+      TLoaders.successSnackBar(
+          title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
     }
   }
 }

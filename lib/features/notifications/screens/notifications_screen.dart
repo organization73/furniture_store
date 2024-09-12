@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
@@ -25,7 +26,7 @@ class NotificationsPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Lottie.asset(
-                        'assets/animations/no_notification.json',
+                        TImages.emptyNotifications,
                         width: 300.r,
                         height: 300.r,
                         fit: BoxFit.fill,

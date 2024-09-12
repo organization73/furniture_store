@@ -42,7 +42,7 @@ class EmailSignInScreen extends StatelessWidget {
                       subTitle: 'loginSubTitle'.tr,
                       iconName: Iconsax.grid_3),
                   RoundedTextField(
-                      prefixIcon: Iconsax.direct_right_copy,
+                      prefixIcon: Iconsax.sms_copy,
                       'email'.tr,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
@@ -50,7 +50,7 @@ class EmailSignInScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   Obx(() => RoundedTextField(
                       'password'.tr,
-                      prefixIcon: Iconsax.password_check_copy,
+                      prefixIcon: Iconsax.lock_copy,
                       suffixIcon: IconButton(
                           onPressed: () {
                             controller.hidePassword.value =
@@ -66,40 +66,14 @@ class EmailSignInScreen extends StatelessWidget {
                       TValidator.validatePassword,
                       isPassword: controller.hidePassword.value)),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 30,
-                            height: 30,
-                            child: Obx(() => Checkbox(
-                                value: controller.rememberMe.value,
-                                onChanged: (value) {
-                                  controller.rememberMe.value =
-                                      !controller.rememberMe.value;
-                                })),
-                          ),
-                          const SizedBox(
-                            width: TSizes.spaceBtwItems,
-                          ),
-                          Text(
-                            'rememberMe'.tr,
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
-                      TextButton(
-                        onPressed: () => Get.to(
-                          () => const SentEmailPasswordReset(),
-                          duration: const Duration(milliseconds: 300),
-                          transition: Transition.downToUp,
-                        ),
-                        child: Text('forgetPassword'.tr,
-                            style: Theme.of(context).textTheme.labelMedium),
-                      )
-                    ],
+                  TextButton(
+                    onPressed: () => Get.to(
+                      () => const SentEmailPasswordReset(),
+                      duration: const Duration(milliseconds: 300),
+                      transition: Transition.downToUp,
+                    ),
+                    child: Text('forgetPassword'.tr,
+                        style: Theme.of(context).textTheme.labelMedium),
                   ),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:decordashapp/features/authentication/widgets/phone_number_input.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(width: TSizes.sm),
                       Expanded(
                         child: RoundedTextField(
-                            prefixIcon: Iconsax.user_copy,
+                            prefixIcon: Iconsax.clipboard_text_copy,
                             'lastName'.tr,
                             controller.lastNameController,
                             keyboardType: TextInputType.name,
@@ -70,36 +71,15 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                       'email'.tr,
-                      prefixIcon: Iconsax.direct_copy,
+                      prefixIcon: Iconsax.sms_copy,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
-                  InternationalPhoneNumberInput(
-                    onInputChanged: (PhoneNumber number) {
+                  PhoneNumberInput(
+                    onChange: (PhoneNumber number) {
                       controller.phoneNumController.value = number.phoneNumber!;
                     },
-                    inputDecoration: InputDecoration(
-                      border: const OutlineInputBorder().copyWith(
-                        borderRadius:
-                            BorderRadius.circular(TSizes.inputFieldRadius),
-                      ),
-                      labelText: 'phoneNo'.tr,
-                    ),
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: true,
-                      decimal: false,
-                    ),
-                    selectorConfig: const SelectorConfig(
-                        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                        setSelectorButtonAsPrefixIcon: true,
-                        leadingPadding: 15,
-                        useEmoji: true),
-                    initialValue: PhoneNumber(
-                      isoCode: 'EG',
-                    ),
-                    formatInput: false,
-                    countries: const ["EG"],
                   ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   GetX<SignUpController>(
@@ -107,7 +87,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         RoundedTextField(
                             'password'.tr,
-                            prefixIcon: Iconsax.password_check_copy,
+                            prefixIcon: Iconsax.lock_copy,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   controller.hidePassword.value =
@@ -130,7 +110,6 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 25,
-                        height: 35,
                         child: Obx(() => Checkbox(
                             value: controller.privacyPolicy.value,
                             onChanged: (value) {

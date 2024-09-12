@@ -1,4 +1,5 @@
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordashapp/features/authentication/widgets/phone_number_input.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
@@ -10,11 +11,7 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class PhoneNumberScreen extends StatelessWidget {
-  PhoneNumberScreen({super.key});
-
-  final PhoneNumber number = PhoneNumber(
-    isoCode: 'EG',
-  );
+  const PhoneNumberScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +59,7 @@ class PhoneNumberScreen extends StatelessWidget {
                           const SizedBox(width: TSizes.sm),
                           Expanded(
                             child: RoundedTextField(
-                                prefixIcon: Iconsax.user_copy,
+                                prefixIcon: Iconsax.clipboard_text_copy,
                                 'lastName'.tr,
                                 controller.lastNameController,
                                 keyboardType: TextInputType.name,
@@ -71,34 +68,11 @@ class PhoneNumberScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: TSizes.spaceBtwInputFields),
-                      InternationalPhoneNumberInput(
-                        onInputChanged: (PhoneNumber number) {
-                          controller.phoneNumber.value =
-                              number.phoneNumber as TextEditingValue;
+                      PhoneNumberInput(
+                        onChange: (PhoneNumber number) {
+                          controller.phoneNumber.value = number.phoneNumber!;
                         },
-                        inputDecoration: InputDecoration(
-                          border: const OutlineInputBorder().copyWith(
-                            borderRadius:
-                                BorderRadius.circular(TSizes.inputFieldRadius),
-                          ),
-                          labelText: 'phoneNo'.tr,
-                        ),
-                        keyboardType: const TextInputType.numberWithOptions(
-                          signed: true,
-                          decimal: false,
-                        ),
-                        selectorConfig: const SelectorConfig(
-                            selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                            setSelectorButtonAsPrefixIcon: true,
-                            leadingPadding: 15,
-                            useEmoji: true),
-                        initialValue: PhoneNumber(
-                          isoCode: 'EG',
-                        ),
-                        formatInput: false,
-                        countries: const ["EG"],
                       ),
-                      ////////////
                     ],
                   ),
                 )

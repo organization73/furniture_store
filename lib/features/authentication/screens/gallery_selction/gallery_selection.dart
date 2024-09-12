@@ -1,7 +1,4 @@
-import 'package:decordashapp/utils/constants/image_strings.dart';
-import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/features/authentication/controllers/gallery_selection/gallery_selection_controller.dart';
@@ -57,7 +54,7 @@ class GallerySelection extends StatelessWidget {
                         onTap: () => controller.model.selectOption(1),
                         child: ListTile(
                           title: Text('yesMes'.tr,
-                              style: Theme.of(context).textTheme.titleMedium),
+                              style: Theme.of(context).textTheme.bodyMedium),
                           leading: Radio(
                             value: 1,
                             groupValue: model.selectedOption.value,
@@ -81,7 +78,7 @@ class GallerySelection extends StatelessWidget {
                         onTap: () => controller.model.selectOption(0),
                         child: ListTile(
                           title: Text('noMes'.tr,
-                              style: Theme.of(context).textTheme.titleMedium),
+                              style: Theme.of(context).textTheme.bodyMedium),
                           leading: Radio(
                             value: 0,
                             groupValue: model.selectedOption.value,
@@ -91,13 +88,6 @@ class GallerySelection extends StatelessWidget {
                         ),
                       ),
                     )),
-                const SizedBox(height: TSizes.spaceBtwSections),
-                Center(
-                  child: SvgPicture.asset(
-                    TImages.galleryLoc,
-                    width: TDeviceUtils.getScreenWidth() * 0.2,
-                  ),
-                ),
               ],
             ),
           ),

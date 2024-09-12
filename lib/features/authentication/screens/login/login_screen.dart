@@ -64,11 +64,10 @@ class LoginSignUpScreen extends StatelessWidget {
                           transition: Transition.rightToLeft,
                         ),
                       ),
-                      const SizedBox(height: TSizes.spaceBtwItems / 4),
                       BuildCTAButton(
                         text: 'continueWithPhone'.tr,
                         onPressed: () => Get.to(
-                          () => PhoneNumberScreen(),
+                          () => const PhoneNumberScreen(),
                           duration: const Duration(milliseconds: 300),
                           transition: Transition.rightToLeft,
                         ),

@@ -8,9 +8,9 @@ class TOutlinedButtonTheme {
   /* -- Light Theme -- */
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      // textStyle: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
+      // textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
       padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight, horizontal: 20),
+          vertical: TSizes.buttonHeight),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),

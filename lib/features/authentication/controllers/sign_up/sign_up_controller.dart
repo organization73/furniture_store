@@ -23,7 +23,7 @@ class SignUpController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-   RxString phoneNumController = ''.obs;
+  RxString phoneNumController = ''.obs;
 
   static final notifications = NotificationsService();
 
@@ -75,8 +75,6 @@ class SignUpController extends GetxController {
 
       FullScreenLoader.stopLoading();
 
-      TLoaders.successSnackBar(
-          title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
       Get.to(
         () => VerifySignUpEmail(email: emailController.text.trim()),
         duration: const Duration(milliseconds: 300),

@@ -198,28 +198,57 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> uploadGalleryCertificate() async {
+  Future<void> uploadGalleryInfo({required bool isCertificate}) async {
     try {
       final image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
-          imageQuality: 70,
+          imageQuality: 65,
           maxHeight: 512,
           maxWidth: 512);
       if (image != null) {
+        FullScreenLoader.openLoadingDialog(
+            'Processing', TImages.processingInfo);
+
+        final isConnected = await NetworkManager.instance.isConnected();
+        if (!isConnected) {
+          FullScreenLoader.stopLoading();
+          TLoaders.warningSnackBar(
+              title: 'internet'.tr, message: 'noInternet'.tr);
+          return;
+        }
+
         final imageUrl = await userRepository.uploadImage(
-            'Users/Images/Certificate/', image);
+            isCertificate
+                ? 'Users/Images/Gallery/Certificate/'
+                : 'Users/Images/Gallery/Picture/',
+            image);
 
-        Map<String, dynamic> json = {"galleryCertificate": imageUrl};
+        Map<String, dynamic> json = {
+          isCertificate ? "galleryCertificate" : "galleryPicture": imageUrl
+        };
         await userRepository.updateSingleField(json);
-        user.value.galleryCertificate = imageUrl;
-        user.refresh();
+        if (isCertificate) {
+          user.value.galleryCertificate = imageUrl;
+        } else {
+          user.value.galleryPicture = imageUrl;
+        }
 
-        TLoaders.successSnackBar(
-            title: 'Done'.tr,
-            message:
-                'Your gallery certificate is uploaded and waiting verification');
+        user.refresh();
+        FullScreenLoader.stopLoading();
+
+        if (isCertificate) {
+          TLoaders.successSnackBar(
+              title: 'Done'.tr,
+              message:
+                  'Your gallery certificate is uploaded and waiting verification');
+        } else {
+          TLoaders.successSnackBar(
+              title: 'Done'.tr, message: 'Your gallery picture is uploaded ');
+        }
       }
     } catch (e) {
+      FullScreenLoader.stopLoading();
+
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }

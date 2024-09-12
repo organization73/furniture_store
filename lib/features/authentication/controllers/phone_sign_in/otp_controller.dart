@@ -25,7 +25,7 @@ class OTPController extends GetxController {
               id: userCred.user!.uid,
               firstName: phoneController.firstNameController.text.trim(),
               lastName: phoneController.lastNameController.text.trim(),
-              phoneNumber: phoneController.phoneNumber.text.trim(),
+              phoneNumber: phoneController.phoneNumber.value.trim(),
             );
 
             await UserRepo.instance.saveuserRecord(newUser);
