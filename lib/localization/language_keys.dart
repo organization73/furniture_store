@@ -43,8 +43,8 @@ class Language extends Translations {
           "codeFillMes": "Please fill all code fields",
           "resendDesc": "Resending in",
           "seconds": "seconds",
-          "yesMes": "yes",
-          "noMes": "no",
+          "yesMes": "Yes",
+          "noMes": "No",
           "onBoardingTitle1": "Your favorite Gallery everywhere",
           "onBoardingSubTitle1":
               "Get in contact with multiple trusted furniture galleries",

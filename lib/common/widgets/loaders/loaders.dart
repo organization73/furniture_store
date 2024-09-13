@@ -25,18 +25,18 @@ class TLoaders {
     ));
   }
 
-  static successSnackBar({required title, message = '', duration = 3}) {
+  static successSnackBar({required title, message = '', duration = 2}) {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: Colors.white,
+        colorText: Theme.of(Get.context!).colorScheme.onPrimary,
         backgroundColor: Theme.of(Get.context!).colorScheme.primary,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: duration),
         margin: const EdgeInsets.all(10),
-        icon: const Icon(
+        icon: Icon(
           Icons.check_circle_outline_outlined,
-          color: Colors.white,
+          color: Theme.of(Get.context!).colorScheme.onPrimary,
         ));
   }
 
@@ -48,7 +48,7 @@ class TLoaders {
         backgroundColor: Colors.orange,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
-        margin: const EdgeInsets.all(16),
+        margin: const EdgeInsets.all(10),
         icon: const Icon(
           Icons.warning_amber_rounded,
           color: Colors.white,
@@ -59,14 +59,14 @@ class TLoaders {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: Colors.white,
-        backgroundColor: Colors.red,
+        colorText: Theme.of(Get.context!).colorScheme.onError,
+        backgroundColor: Theme.of(Get.context!).colorScheme.error,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
-        margin: const EdgeInsets.all(16),
-        icon: const Icon(
+        margin: const EdgeInsets.all(10),
+        icon: Icon(
           Icons.warning_amber_rounded,
-          color: Colors.white,
+          color: Theme.of(Get.context!).colorScheme.onError,
         ));
   }
 }

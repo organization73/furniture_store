@@ -1,6 +1,5 @@
-import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
-import 'package:decordashapp/features/home/screens/search/search_screen.dart';
+import 'package:decordashapp/features/home/widgets/fade_appbar.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -18,7 +17,6 @@ import 'package:decordashapp/features/home/widgets/room_section.dart';
 import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,7 +41,11 @@ class HomeScreen extends StatelessWidget {
                         PrimaryHeaderContainer(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                top: TDeviceUtils.getScreenHeight() * 0.12),
+                              top: TDeviceUtils.getScreenOrientation(context) ==
+                                      Orientation.portrait
+                                  ? TDeviceUtils.getScreenHeight() * 0.11
+                                  : TDeviceUtils.getScreenHeight() * 0.23,
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -121,39 +123,6 @@ class HomeScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class FadeAppBar extends StatelessWidget {
-  final double scrollOffset;
-  const FadeAppBar({super.key, required this.scrollOffset});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: TDeviceUtils.getScreenHeight() * 0.11,
-      color: Theme.of(context)
-          .scaffoldBackgroundColor
-          .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
-      child: SafeArea(
-        child: Center(
-          child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.pagePaddingSpace),
-              child: CustomTextFormField(
-                hint: 'homeSearchBarHint'.tr,
-                prefixIcon: Iconsax.search_normal_copy,
-                readOnly: true,
-                filled: true,
-                onTap: () => Get.to(
-                  () => const SearchScreen(),
-                  duration: const Duration(milliseconds: 300),
-                  transition: Transition.downToUp,
-                ),
-              )),
-        ),
-      ),
     );
   }
 }

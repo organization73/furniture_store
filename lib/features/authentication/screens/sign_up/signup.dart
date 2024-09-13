@@ -1,5 +1,4 @@
 import 'package:decordashapp/features/authentication/widgets/phone_number_input.dart';
-import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -180,59 +179,38 @@ class SignUpScreen extends StatelessWidget {
   void _showBottomSheet(BuildContext context, String filePath) {
     showModalBottomSheet<void>(
       context: context,
+      showDragHandle: true,
       builder: (BuildContext context) {
-        return Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: SizedBox(
-                height: TDeviceUtils.getScreenHeight() * 0.75,
-                child: FutureBuilder(
-                  future: rootBundle.loadString(filePath),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    if (snapshot.hasData) {
-                      return MarkdownWidget(
-                        config: MarkdownConfig(configs: [
-                          const PConfig(textStyle: TextStyle(fontSize: 15)),
-                          H1Config(
-                              style:
-                                  Theme.of(context).textTheme.headlineLarge!),
-                          H2Config(
-                              style:
-                                  Theme.of(context).textTheme.headlineMedium!),
-                          H3Config(
-                              style:
-                                  Theme.of(context).textTheme.headlineSmall!),
-                          H4Config(
-                              style: Theme.of(context).textTheme.labelMedium!),
-                          const TableConfig(
-                            columnWidths: {0: FractionColumnWidth(0.25)},
-                          ),
-                          ListConfig(
-                            marker: (isOrdered, depth, index) => const Padding(
-                              padding: EdgeInsets.only(top: 6),
-                              child: Icon(Icons.circle, size: 6),
-                            ),
-                          ),
-                        ]),
-                        data: snapshot.data!,
-                      );
-                    }
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                ),
-              ),
-            ),
-            Positioned(
-              top: 0.0,
-              right: 0.0,
-              child: IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => Get.back(),
-              ),
-            ),
-          ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: FutureBuilder(
+            future: rootBundle.loadString(filePath),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasData) {
+                return MarkdownWidget(
+                  config: MarkdownConfig(configs: [
+                    const PConfig(textStyle: TextStyle(fontSize: 13)),
+                    H1Config(
+                        style: Theme.of(context).textTheme.headlineMedium!),
+                    H2Config(style: Theme.of(context).textTheme.headlineSmall!),
+                    H3Config(style: Theme.of(context).textTheme.titleMedium!),
+                    H4Config(style: Theme.of(context).textTheme.titleSmall!),
+                    const TableConfig(
+                      columnWidths: {0: FractionColumnWidth(0.25)},
+                    ),
+                    ListConfig(
+                      marker: (isOrdered, depth, index) => const Padding(
+                        padding: EdgeInsets.only(top: 6),
+                        child: Icon(Icons.circle, size: 6),
+                      ),
+                    ),
+                  ]),
+                  data: snapshot.data!,
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
         );
       },
     );

@@ -27,7 +27,7 @@ class TDeviceUtils {
   }
 
   static Orientation getScreenOrientation(BuildContext context) {
-    return MediaQuery.of(Get.context!).orientation;
+    return MediaQuery.of(context).orientation;
   }
 
   static void setFullScreen(bool enable) {

@@ -47,7 +47,7 @@ class GallerySelection extends StatelessWidget {
                         border: Border.all(
                           color: model.selectedOption.value == 1
                               ? Theme.of(context).colorScheme.primary
-                              : Colors.grey,
+                              : Theme.of(context).colorScheme.outlineVariant,
                         ),
                       ),
                       child: InkWell(
