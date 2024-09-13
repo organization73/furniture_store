@@ -1,6 +1,6 @@
+import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/features/home/controllers/product/product_controller.dart';
-import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
 import 'package:get/get.dart';
 
 class StartPageController extends GetxController {
@@ -11,10 +11,10 @@ class StartPageController extends GetxController {
 
   @override
   void onInit() {
-    scrollController.addListener(_scrollListener);
-    Get.put(NotificationsController());
-    Get.put(ProductController());
     super.onInit();
+    scrollController.addListener(_scrollListener);
+    Get.put(FavoriteController());
+    Get.put(ProductController());
   }
 
   void _scrollListener() {
@@ -24,7 +24,7 @@ class StartPageController extends GetxController {
 
   @override
   void onClose() {
-    scrollController.dispose();
     super.onClose();
+    scrollController.dispose();
   }
 }

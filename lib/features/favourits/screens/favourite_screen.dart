@@ -1,13 +1,13 @@
 import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
 import 'package:decordashapp/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
 import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-
 import 'package:get/get.dart';
 
 class FavouritsPage extends StatelessWidget {
@@ -20,7 +20,9 @@ class FavouritsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'favourites'.tr,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
+        forceMaterialTransparency: true,
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -33,7 +35,7 @@ class FavouritsPage extends StatelessWidget {
                 builder: (context, snapshot) {
                   final emptyWidget = AnimationLoaderWidget(
                     text: 'Whoops! Favourite List is Empty...',
-                    animation: 'assets/animations/no_favourits.json',
+                    animation: TImages.emptyFavorites,
                     showAction: true,
                     actionText: 'Let\'s add some',
                     onActionpress: () => Get.back(),
@@ -48,7 +50,7 @@ class FavouritsPage extends StatelessWidget {
                   final products = snapshot.data!;
 
                   return GridLayout(
-                      mainAxisExtent: 265.r,
+                      mainAxisExtent: TDeviceUtils.getScreenHeight() * 0.1,
                       itemCount: products.length,
                       itemBuilder: (_, index) {
                         return ProductCardVerical(

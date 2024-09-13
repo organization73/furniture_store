@@ -5,7 +5,6 @@ import 'package:decordashapp/common/widgets/images/rounded_image.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordashapp/features/home/controllers/carousel_slider_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ImageSlider extends StatelessWidget {
@@ -17,7 +16,7 @@ class ImageSlider extends StatelessWidget {
 
     return Obx(() {
       if (controller.isLoading.value) {
-        return ShimmerLoaderEffect(width: double.infinity, height: 100.h);
+        return const ShimmerLoaderEffect(width: double.infinity, height: 100);
       }
       if (controller.banners.isEmpty) {
         return Center(child: Text('noData'.tr));
@@ -26,7 +25,7 @@ class ImageSlider extends StatelessWidget {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              height: 100.h,
+              height: 100,
               viewportFraction: 1,
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 10),
@@ -52,13 +51,13 @@ class ImageSlider extends StatelessWidget {
                 children: controller.banners.map((item) {
                   int index = controller.banners.indexOf(item);
                   return RoundedContainer(
-                    hight: 4.r,
-                    width: 4.r,
+                    hight: 4,
+                    width: 4,
                     backgroundColor:
                         controller.carouselCurrentIndex.value == index
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.primaryContainer,
-                    margin: const EdgeInsets.only(right: 10).w,
+                    margin: const EdgeInsets.only(right: 10),
                   );
                 }).toList(),
               ))

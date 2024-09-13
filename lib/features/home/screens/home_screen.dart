@@ -14,7 +14,6 @@ import 'package:decordashapp/features/home/widgets/banners_slider.dart';
 import 'package:decordashapp/features/home/widgets/categories_section.dart';
 import 'package:decordashapp/features/home/widgets/home_appbar.dart';
 import 'package:decordashapp/features/home/widgets/room_section.dart';
-import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -46,20 +45,18 @@ class HomeScreen extends StatelessWidget {
                                   ? TDeviceUtils.getScreenHeight() * 0.11
                                   : TDeviceUtils.getScreenHeight() * 0.23,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  HomeAppBar(
-                                      controller:
-                                          NotificationsController.instance),
-                                  const SizedBox(
+                                  HomeAppBar(),
+                                  SizedBox(
                                     height: TSizes.spaceBtwSections,
                                   ),
-                                  const BuildCategoriesSection(),
-                                  const SizedBox(
+                                  BuildCategoriesSection(),
+                                  SizedBox(
                                     height: TSizes.spaceBtwSections,
                                   )
                                 ],

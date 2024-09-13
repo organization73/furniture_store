@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:decordashapp/features/favourits/screens/favourite_screen.dart';
-import 'package:decordashapp/features/notifications/controllers/notifications_controller.dart';
-import 'package:decordashapp/features/notifications/screens/notifications_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
-    required this.controller,
   });
-
-  final NotificationsController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +30,6 @@ class HomeAppBar extends StatelessWidget {
             icon: const Icon(
               Iconsax.heart_copy,
             )),
-        Obx(
-          () => IconButton(
-            onPressed: () => Get.to(
-              () => const NotificationsPage(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.downToUp,
-            ),
-            icon: Badge(
-                backgroundColor:
-                    Theme.of(context).colorScheme.onPrimaryContainer,
-                label: Text('${controller.notiList.length}'),
-                child: (controller.notiList.isEmpty)
-                    ? const Icon(
-                        Iconsax.notification_copy,
-                      )
-                    : const Icon(
-                        Iconsax.notification,
-                      )),
-          ),
-        )
       ],
     );
   }

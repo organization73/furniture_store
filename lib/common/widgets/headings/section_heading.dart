@@ -37,15 +37,13 @@ class SectionHeading extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .apply(color: textColor),
-              ),
+              Text(title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(color: textColor)),
               if (showSubTitle)
                 Column(
                   children: [
@@ -70,7 +68,10 @@ class SectionHeading extends StatelessWidget {
                 children: [
                   Text(
                     localizedButtonTitle,
-                    style: Theme.of(context).textTheme.labelSmall,
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   const SizedBox(
                     width: TSizes.sm,

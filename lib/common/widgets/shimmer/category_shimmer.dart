@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 
@@ -10,7 +9,8 @@ class CategoryShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55.h,
+      //TODO resposive
+      height: 55,
       child: ListView.separated(
         shrinkWrap: true,
         itemCount: itemCount,
@@ -19,12 +19,12 @@ class CategoryShimmer extends StatelessWidget {
           width: TSizes.spaceBtwItems,
         ),
         itemBuilder: (_, __) {
-          return Column(
+          return const Column(
             children: [
               ShimmerLoaderEffect(
-                width: 125.w,
-                height: 55.h,
-                raduis: 8.r,
+                width: 125,
+                height: 55,
+                raduis: 8,
               ),
             ],
           );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/shimmer/category_shimmer.dart';
 import 'package:decordashapp/features/home/controllers/category_controller.dart';
@@ -35,7 +34,7 @@ class BuildCategoriesSection extends StatelessWidget {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
-              height: 50.h,
+              height: 50,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
