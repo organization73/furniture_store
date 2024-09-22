@@ -1,4 +1,4 @@
-import 'package:decordashapp/features/favourits/controllers/favorite_controller.dart';
+import 'package:decordashapp/features/home/widgets/carousel_slider.dart';
 import 'package:decordashapp/features/home/widgets/fade_appbar.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,6 @@ import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dar
 import 'package:decordashapp/features/home/controllers/home_page_controller.dart';
 import 'package:decordashapp/features/home/controllers/product/product_controller.dart';
 import 'package:decordashapp/features/home/screens/all_products/all_products_screen.dart';
-import 'package:decordashapp/features/home/widgets/banners_slider.dart';
 import 'package:decordashapp/features/home/widgets/categories_section.dart';
 import 'package:decordashapp/features/home/widgets/home_appbar.dart';
 import 'package:decordashapp/features/home/widgets/room_section.dart';
@@ -25,7 +24,6 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<StartPageController>(
       init: StartPageController(),
       builder: (controller) {
-        Get.lazyPut(() => FavoriteController());
         final productsController = ProductController.instance;
 
         return Scaffold(
@@ -40,11 +38,7 @@ class HomeScreen extends StatelessWidget {
                         PrimaryHeaderContainer(
                           child: Padding(
                             padding: EdgeInsets.only(
-                              top: TDeviceUtils.getScreenOrientation(context) ==
-                                      Orientation.portrait
-                                  ? TDeviceUtils.getScreenHeight() * 0.11
-                                  : TDeviceUtils.getScreenHeight() * 0.23,
-                            ),
+                                top: TDeviceUtils.getStatusBarHeight() + 75),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -53,11 +47,11 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   HomeAppBar(),
                                   SizedBox(
-                                    height: TSizes.spaceBtwSections,
+                                    height: TSizes.spaceBtwSections / 2,
                                   ),
                                   BuildCategoriesSection(),
                                   SizedBox(
-                                    height: TSizes.spaceBtwSections,
+                                    height: TSizes.spaceBtwSections * 2,
                                   )
                                 ],
                               ),
@@ -69,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                               horizontal: TSizes.pagePaddingSpace),
                           child: Column(
                             children: [
-                              const ImageSlider(),
+                              const CarouselSlider(),
                               SectionHeading(
                                 title: 'popularProducts'.tr,
                                 onPress: () => Get.to(
@@ -83,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: TSizes.spaceBtwItems,
+                                height: TSizes.spaceBtwItems / 2,
                               ),
                               Obx(() {
                                 if (productsController.isLoading.value) {
@@ -94,7 +88,12 @@ class HomeScreen extends StatelessWidget {
                                   return Center(child: Text('noProducts'.tr));
                                 }
                                 return GridLayout(
-                                    mainAxisExtent: 265,
+                                    mainAxisExtent: TDeviceUtils
+                                                .getScreenOrientation(
+                                                    context) ==
+                                            Orientation.portrait
+                                        ? TDeviceUtils.getScreenHeight() * 0.29
+                                        : TDeviceUtils.getScreenHeight() * 0.4,
                                     itemCount: productsController
                                         .featuredProducts.length,
                                     itemBuilder: (_, index) =>

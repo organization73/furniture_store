@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({super.key, required this.icon, required this.text});
@@ -13,7 +12,7 @@ class EmptyWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, size: 150.r),
+            Icon(icon, size: 150),
             Text(
               text,
               style: Theme.of(context).textTheme.titleMedium,

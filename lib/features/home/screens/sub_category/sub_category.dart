@@ -6,7 +6,7 @@ import 'package:decordashapp/features/home/screens/all_products/all_products_scr
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/products/product_cards/product_card_horizontal.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
@@ -84,7 +84,7 @@ class SubCategoryScreen extends StatelessWidget {
                                       height: TSizes.spaceBtwItems / 2,
                                     ),
                                     SizedBox(
-                                      height: 115.r,
+                                      height: 115,
                                       child: ListView.separated(
                                         itemCount: products.length,
                                         scrollDirection: Axis.horizontal,

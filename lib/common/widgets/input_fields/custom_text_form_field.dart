@@ -13,8 +13,6 @@ class CustomTextFormField extends StatelessWidget {
       this.controller,
       required this.prefixIcon,
       this.filled = false,
-      this.enabled = true,
-      this.initialValue,
       this.onTap,
       this.readOnly = false});
   final String hint;
@@ -23,8 +21,6 @@ class CustomTextFormField extends StatelessWidget {
   final VoidCallback? onTapSuffixIcon;
   final bool obscureText;
   final bool filled;
-  final bool enabled;
-  final String? initialValue;
   final VoidCallback? onTap;
   final bool readOnly;
 
@@ -35,33 +31,28 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        initialValue: initialValue,
-        onEditingComplete: onEditingComplete,
-        controller: controller,
-        onChanged: onChanged,
-        validator: validator,
-        obscureText: obscureText,
-        keyboardType: TextInputType.text,
-        readOnly: readOnly,
-        onTap: onTap,
-        decoration: InputDecoration(
-          fillColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-          hintText: hint,
-          prefixIcon: Icon(
-            prefixIcon,
-          ),
-          suffixIcon: IconButton(
-            icon: Icon(
-              suffixIcon,
-            ),
-            onPressed: onTapSuffixIcon,
-          ),
-          filled: filled,
-          enabled: enabled,
+    return TextFormField(
+      onEditingComplete: onEditingComplete,
+      controller: controller,
+      onChanged: onChanged,
+      validator: validator,
+      obscureText: obscureText,
+      keyboardType: TextInputType.text,
+      readOnly: readOnly,
+      onTap: onTap,
+      decoration: InputDecoration(
+        fillColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
+        hintText: hint,
+        prefixIcon: Icon(
+          prefixIcon,
         ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            suffixIcon,
+          ),
+          onPressed: onTapSuffixIcon,
+        ),
+        filled: filled,
       ),
     );
   }

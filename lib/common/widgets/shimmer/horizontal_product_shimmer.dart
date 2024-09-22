@@ -1,7 +1,6 @@
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HorizontalProductShimmer extends StatelessWidget {
   const HorizontalProductShimmer({super.key, this.itemCount = 4});
@@ -11,34 +10,34 @@ class HorizontalProductShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwSections),
-      height: 115.r,
+      height: 115,
       child: ListView.separated(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => Row(
+          itemBuilder: (context, index) => const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ShimmerLoaderEffect(width: 120.r, height: 120.r),
-                  const SizedBox(
+                  ShimmerLoaderEffect(width: 120, height: 120),
+                  SizedBox(
                     width: TSizes.spaceBtwItems,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                      ShimmerLoaderEffect(width: 160.w, height: 15.h),
-                      const SizedBox(
+                      ShimmerLoaderEffect(width: 160, height: 15),
+                      SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                      ShimmerLoaderEffect(width: 110.w, height: 15.h),
-                      const SizedBox(
+                      ShimmerLoaderEffect(width: 110, height: 15),
+                      SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                      ShimmerLoaderEffect(width: 80.w, height: 15.h),
-                      const Spacer()
+                      ShimmerLoaderEffect(width: 80, height: 15),
+                      Spacer()
                     ],
                   )
                 ],

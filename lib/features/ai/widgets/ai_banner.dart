@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/features/ai/controllers/generative_ai/generative_ai_controller.dart';
 
 import 'package:get/get.dart';
@@ -48,7 +48,7 @@ class AiInfoCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10.h),
+          const SizedBox(height: 10),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -61,7 +61,7 @@ class AiInfoCard extends StatelessWidget {
                 () => Row(
                   children: [
                     subIcon,
-                    SizedBox(width: 10.w),
+                    const SizedBox(width: 10),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

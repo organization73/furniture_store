@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:decordashapp/utils/device/device_utility.dart';
 
 class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,7 +13,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
         tabs: tabs,
         isScrollable: true,
         tabAlignment: TabAlignment.start,
-        labelStyle: Theme.of(context).textTheme.titleMedium,
+        labelStyle: Theme.of(context).textTheme.titleSmall,
       ),
     );
   }

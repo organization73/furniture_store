@@ -20,7 +20,6 @@ class FavouritsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'favourites'.tr,
-          style: Theme.of(context).textTheme.labelLarge,
         ),
         forceMaterialTransparency: true,
       ),
@@ -50,7 +49,11 @@ class FavouritsPage extends StatelessWidget {
                   final products = snapshot.data!;
 
                   return GridLayout(
-                      mainAxisExtent: TDeviceUtils.getScreenHeight() * 0.1,
+                      mainAxisExtent:
+                          TDeviceUtils.getScreenOrientation(context) ==
+                                  Orientation.portrait
+                              ? TDeviceUtils.getScreenHeight() * 0.29
+                              : TDeviceUtils.getScreenHeight() * 0.4,
                       itemCount: products.length,
                       itemBuilder: (_, index) {
                         return ProductCardVerical(

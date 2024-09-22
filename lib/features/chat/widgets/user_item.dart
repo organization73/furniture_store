@@ -2,7 +2,7 @@ import 'package:decordashapp/common/widgets/images/circular_image.dart';
 import 'package:decordashapp/features/chat/screens/chat_screen.dart';
 import 'package:decordashapp/features/personalization/models/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -32,7 +32,7 @@ class _UserItemState extends State<UserItem> {
           leading: CircularImage(
             imageUrl: widget.user.avatar,
             isNetworkImage: true,
-            height: 100.r,
+            height: 100,
           ),
           title: Text(widget.user.userName,
               style: Theme.of(context).textTheme.titleLarge),

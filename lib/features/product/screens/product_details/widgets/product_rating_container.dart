@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/features/product/screens/product_details/widgets/overlapping_cicular_avatar.dart';
 import 'package:decordashapp/features/product/model/product_model.dart';
 
@@ -16,7 +16,7 @@ class RatingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 70.h,
+        height: 70,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceContainer,

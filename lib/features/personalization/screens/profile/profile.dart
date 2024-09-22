@@ -7,7 +7,7 @@ import 'package:decordashapp/features/personalization/screens/profile/widgets/ch
 import 'package:decordashapp/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -31,10 +31,10 @@ class ProfileScreen extends StatelessWidget {
                 final image =
                     networkImage.isNotEmpty ? networkImage : TImages.user;
                 if (controller.imageLoading.value) {
-                  return ShimmerLoaderEffect(
-                    width: 100.w,
-                    height: 100.h,
-                    raduis: 50.r,
+                  return const ShimmerLoaderEffect(
+                    width: 100,
+                    height: 100,
+                    raduis: 50,
                   );
                 } else {
                   return ProfileWidget(

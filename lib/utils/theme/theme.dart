@@ -126,6 +126,7 @@ class MaterialTheme {
         textTheme: textTheme.apply(
           bodyColor: colorScheme.onSurface,
           displayColor: colorScheme.onSurface,
+          fontSizeFactor: 0.85,
         ),
         scaffoldBackgroundColor: colorScheme.surface,
         canvasColor: colorScheme.surface,

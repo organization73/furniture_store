@@ -13,7 +13,7 @@ class StartPageController extends GetxController {
   void onInit() {
     super.onInit();
     scrollController.addListener(_scrollListener);
-    Get.put(FavoriteController());
+    Get.lazyPut(() => FavoriteController());
     Get.put(ProductController());
   }
 

@@ -6,7 +6,7 @@ import 'package:decordashapp/data/services/notification_service.dart';
 import 'package:decordashapp/features/chat/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ChatTextField extends StatefulWidget {
@@ -46,11 +46,11 @@ class _ChatTextFieldState extends State<ChatTextField> {
               prefixIcon: Iconsax.message_add_copy,
             ),
           ),
-          SizedBox(width: 5.w),
+          const SizedBox(width: 5),
           IconButton.filledTonal(
               onPressed: () => _sendText(context),
               icon: const Icon(Iconsax.send_1)),
-          SizedBox(width: 5.w),
+          const SizedBox(width: 5),
           IconButton.filledTonal(
               onPressed: () => _sendImage(), icon: const Icon(Iconsax.image)),
         ],

@@ -5,8 +5,6 @@ import 'package:decordashapp/features/home/screens/sub_category/sub_category.dar
 import 'package:decordashapp/features/home/widgets/vertical_category.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class BuildRoomsSection extends StatelessWidget {
@@ -38,25 +36,22 @@ class BuildRoomsSection extends StatelessWidget {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
-              height: 150.h,
+              height: 150,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: controller.roomsCatedories.length,
                 itemBuilder: (context, index) {
                   final category = controller.roomsCatedories[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
-                    child: VerticalCategory(
-                        onTap: () => Get.to(
-                              () => SubCategoryScreen(
-                                category: category,
-                              ),
-                              duration: const Duration(milliseconds: 300),
-                              transition: Transition.rightToLeft,
+                  return VerticalCategory(
+                      onTap: () => Get.to(
+                            () => SubCategoryScreen(
+                              category: category,
                             ),
-                        category: category),
-                  );
+                            duration: const Duration(milliseconds: 300),
+                            transition: Transition.rightToLeft,
+                          ),
+                      category: category);
                 },
               ),
             );

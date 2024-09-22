@@ -1,10 +1,11 @@
 import 'package:decordashapp/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:decordashapp/features/home/controllers/category_controller.dart';
 import 'package:decordashapp/features/store/widgets/category_vendors.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
 import 'package:decordashapp/common/widgets/products/product_cards/product_card_vertical.dart';
@@ -59,7 +60,11 @@ class CategoryTab extends StatelessWidget {
                           ),
                         ),
                         GridLayout(
-                            mainAxisExtent: 265.r,
+                            mainAxisExtent:
+                                TDeviceUtils.getScreenOrientation(context) ==
+                                        Orientation.portrait
+                                    ? TDeviceUtils.getScreenHeight() * 0.29
+                                    : TDeviceUtils.getScreenHeight() * 0.4,
                             itemCount: products.length,
                             itemBuilder: (_, index) {
                               return ProductCardVerical(

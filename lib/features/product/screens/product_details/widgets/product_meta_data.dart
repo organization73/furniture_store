@@ -152,11 +152,11 @@ class ProductMetaData extends StatelessWidget {
           trimCollapsedText: 'Show more',
           moreStyle: Theme.of(context)
               .textTheme
-              .headlineSmall!
+              .labelLarge!
               .copyWith(color: Theme.of(context).colorScheme.primary),
           lessStyle: Theme.of(context)
               .textTheme
-              .headlineSmall!
+              .labelLarge!
               .copyWith(color: Theme.of(context).colorScheme.primary),
         ),
         const SizedBox(

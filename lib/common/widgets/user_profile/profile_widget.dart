@@ -1,7 +1,7 @@
 import 'package:decordashapp/common/widgets/icons/circular_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -25,8 +25,8 @@ class ProfileWidget extends StatelessWidget {
         children: [
           CircularImage(
             imageUrl: imagePath,
-            width: 100.r,
-            height: 100.r,
+            width: 100,
+            height: 100,
             isNetworkImage: isNetworkImage,
           ),
           Positioned(
@@ -34,8 +34,8 @@ class ProfileWidget extends StatelessWidget {
             right: 2,
             child: CicularIcon(
               icon: Iconsax.edit_2,
-              height: 35.r,
-              width: 35.r,
+              height: 35,
+              width: 35,
               onPress: onClicked,
             ),
           ),

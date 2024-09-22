@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BuildDropDown extends StatefulWidget {
   final String? title;
@@ -45,7 +44,7 @@ class _SimpleDropDownState extends State<BuildDropDown> {
                     onItemSelected: widget.onItemSelected,
                     underline: Container(),
                     style: TextStyle(
-                        fontSize: 12.sp,
+                        fontSize: 13,
                         color:
                             Theme.of(context).colorScheme.onSecondaryContainer,
                         fontWeight: FontWeight.w400,
@@ -53,8 +52,8 @@ class _SimpleDropDownState extends State<BuildDropDown> {
                     dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                     iconEnabledColor:
                         Theme.of(context).colorScheme.onSecondaryContainer,
-                    hintStyle: TextStyle(
-                        fontSize: 12.sp,
+                    hintStyle: const TextStyle(
+                        fontSize: 13,
                         color: Colors.grey,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0.05),

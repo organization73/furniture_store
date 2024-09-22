@@ -1,6 +1,6 @@
+import 'package:decordashapp/common/widgets/shimmer/category_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
-import 'package:decordashapp/common/widgets/shimmer/category_shimmer.dart';
 import 'package:decordashapp/features/home/controllers/category_controller.dart';
 import 'package:decordashapp/features/home/screens/sub_category/sub_category.dart';
 import 'package:decordashapp/features/home/widgets/horizontal_category.dart';
@@ -34,35 +34,28 @@ class BuildCategoriesSection extends StatelessWidget {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
-              height: 50,
+              height: 60,
               child: ListView.builder(
-                shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: categoryController.featuredCatedories.length,
                 itemBuilder: (context, index) {
                   final category = categoryController.featuredCatedories[index];
 
-                  return Padding(
-                    padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
-                    child: HorizontalCategory(
-                      onTap: () => Get.to(
-                        () => SubCategoryScreen(
-                          category: category,
-                        ),
-                        duration: const Duration(milliseconds: 300),
-                        transition: Transition.rightToLeft,
+                  return HorizontalCategory(
+                    onTap: () => Get.to(
+                      () => SubCategoryScreen(
+                        category: category,
                       ),
-                      category: category,
+                      duration: const Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
                     ),
+                    category: category,
                   );
                 },
               ),
             );
           }
         }),
-        const SizedBox(
-          height: TSizes.spaceBtwSections,
-        ),
       ],
     );
   }

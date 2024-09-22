@@ -1,6 +1,6 @@
 import 'package:decordashapp/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordashapp/common/widgets/images/rounded_image.dart';
 import 'package:decordashapp/common/widgets/texts/brand_title_text_with_verified_icon.dart';
@@ -32,7 +32,7 @@ class ProductCardHorizontal extends StatelessWidget {
         transition: Transition.rightToLeft,
       ),
       child: Container(
-        width: 310.w,
+        width: 310,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(TSizes.productImageRadius),
@@ -40,7 +40,7 @@ class ProductCardHorizontal extends StatelessWidget {
         child: Row(
           children: [
             RoundedContainer(
-              hight: 125.h,
+              hight: 125,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: Theme.of(context).colorScheme.surface,
               child: Stack(
@@ -50,8 +50,8 @@ class ProductCardHorizontal extends StatelessWidget {
                     child: RoundedImage(
                       imageUrl: product.productImage,
                       isNetworkImage: true,
-                      height: 110.r,
-                      width: 110.r,
+                      height: 110,
+                      width: 110,
                     ),
                   ),
                   if (product.onSale)
@@ -78,7 +78,7 @@ class ProductCardHorizontal extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 180.w,
+              width: 180,
               child: Column(
                 children: [
                   Padding(

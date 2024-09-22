@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/features/ai/widgets/ai_banner.dart';
 import 'package:decordashapp/common/widgets/drop_down_menu/drop_down_menu.dart';
 import 'package:decordashapp/features/ai/controllers/generative_ai/generative_ai_controller.dart';
@@ -69,8 +68,8 @@ class _AiPageState extends State<AiPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20.h,
+                  const SizedBox(
+                    height: 20,
                   ),
                   BuildDropDown(
                     title: 'categories'.tr,
@@ -94,8 +93,8 @@ class _AiPageState extends State<AiPage> {
                     'prompt'.tr,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  SizedBox(
-                    height: 15.h,
+                  const SizedBox(
+                    height: 15,
                   ),
                   Form(
                     key: _formKey,

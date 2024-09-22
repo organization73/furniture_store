@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/common/widgets/products/rattings/rating_indicator.dart';
 import 'package:decordashapp/features/product/model/product_model.dart';
 
@@ -36,7 +36,7 @@ class UserReviewCard extends StatelessWidget {
                   errorWidget: (context, url, error) =>
                       const Icon(Icons.account_circle),
                 )),
-            SizedBox(width: 10.w),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,20 +44,20 @@ class UserReviewCard extends StatelessWidget {
                   Text(product.rates[0].reviewerName,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleMedium),
-                  SizedBox(
-                    height: 5.h,
+                  const SizedBox(
+                    height: 5,
                   ),
                   CustomRatingBarIndicator(
                     rating: product.rates[0].rating.toDouble(),
                   ),
-                  SizedBox(
-                    height: 5.h,
+                  const SizedBox(
+                    height: 5,
                   ),
                   Text(
                     product.rates[0].comment,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  SizedBox(height: 8.h),
+                  const SizedBox(height: 8),
                   Text(product.rates[0].date.toString(),
                       style: Theme.of(context).textTheme.bodySmall)
                 ],

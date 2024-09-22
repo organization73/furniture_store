@@ -1,7 +1,6 @@
 import 'package:decordashapp/features/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/features/product/screens/add_product/widgets/color_selection.dart';
 import 'package:decordashapp/common/widgets/drop_down_menu/drop_down_menu.dart';
@@ -38,8 +37,8 @@ class AddProductPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: BuildProductImageUpload(),
                 ),
-                SizedBox(
-                  height: 10.h,
+                const SizedBox(
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -48,8 +47,8 @@ class AddProductPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
-                SizedBox(
-                  height: 15.h,
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -124,8 +123,8 @@ class AddProductPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20.h,
+                const SizedBox(
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -134,8 +133,8 @@ class AddProductPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
-                SizedBox(
-                  height: 15.h,
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -145,8 +144,8 @@ class AddProductPage extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 15.h,
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -155,8 +154,8 @@ class AddProductPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
-                SizedBox(
-                  height: 15.h,
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
@@ -166,8 +165,8 @@ class AddProductPage extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 20.h,
+                const SizedBox(
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),

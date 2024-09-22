@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:decordashapp/features/manufacture_request/screens/add_new_request/screens/add_new_request.dart';
 import 'package:decordashapp/features/personalization/models/user_model.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
@@ -13,7 +12,6 @@ class ManufactureRequestsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
         tooltip: 'Add a request',
         onPressed: () => Get.to(
           () => const AddManRequestPage(),
@@ -25,6 +23,7 @@ class ManufactureRequestsPage extends StatelessWidget {
       ),
       appBar: AppBar(
         title: const Text('Manufacture Requests'),
+        forceMaterialTransparency: true,
       ),
       body: SafeArea(
         child: Center(
@@ -36,13 +35,13 @@ class ManufactureRequestsPage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final item = _feedItems[index];
               return Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _AvatarImage(item.user.avatar),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: TSizes.spaceBtwItems),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -57,9 +56,8 @@ class ManufactureRequestsPage extends StatelessWidget {
                                 text: TextSpan(children: [
                                   TextSpan(
                                     text: item.user.firstName,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
                                   ),
                                 ]),
                               )),
@@ -68,13 +66,17 @@ class ManufactureRequestsPage extends StatelessWidget {
                                       Theme.of(context).textTheme.labelSmall),
                             ],
                           ),
-                          if (item.content != null) Text(item.content!),
+                          if (item.content != null)
+                            Text(
+                              item.content!,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
                           if (item.imageUrl != null)
                             CachedNetworkImage(
                               imageUrl: item.imageUrl!,
                               imageBuilder: (context, imageProvider) =>
                                   Container(
-                                height: 200.h,
+                                height: 200,
                                 margin: const EdgeInsets.only(top: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),

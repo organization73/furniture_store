@@ -1,8 +1,9 @@
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:decordashapp/data/repositories/product/product.dart';
-import 'package:decordashapp/features/product/model/product_model.dart';
-import 'package:decordashapp/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -66,7 +67,7 @@ class AddReview extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: ElevatedButton(
+        child: BuildCTAButton(
             onPressed: () {
               controller.addReview(Review(
                 reviewerName: "UserClass",
@@ -76,7 +77,7 @@ class AddReview extends StatelessWidget {
                 timestamp: DateTime.now().toString(),
               ));
             },
-            child: const Text('Continue')),
+            text: 'Continue'),
       ),
     );
   }

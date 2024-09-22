@@ -7,7 +7,7 @@ import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
 import 'package:decordashapp/features/home/model/vendor_model.dart';
 
 import 'package:decordashapp/utils/constants/sizes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 
 class VendorShowCase extends StatelessWidget {
@@ -55,7 +55,7 @@ class VendorShowCase extends StatelessWidget {
   Widget galleryTopProductsWidget(String image, context) {
     return Expanded(
       child: RoundedContainer(
-        hight: 80.h,
+        hight: 80,
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
         margin: const EdgeInsets.only(right: TSizes.sm),
         padding: const EdgeInsets.all(TSizes.md),
@@ -63,7 +63,7 @@ class VendorShowCase extends StatelessWidget {
           fit: BoxFit.contain,
           imageUrl: image,
           progressIndicatorBuilder: (context, url, progress) =>
-              ShimmerLoaderEffect(width: 100.r, height: 100.r),
+              const ShimmerLoaderEffect(width: 100, height: 100),
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ),

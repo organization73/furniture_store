@@ -1,7 +1,7 @@
 import 'package:decordashapp/common/widgets/images/rounded_image.dart';
 import 'package:decordashapp/features/chat/model/message.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 
 class MessageBubble extends StatelessWidget {
@@ -47,18 +47,15 @@ class MessageBubble extends StatelessWidget {
                   ? RoundedImage(
                       imageUrl: message.content,
                       isNetworkImage: true,
-                      height: 200.r,
-                      width: 200.r,
+                      height: 200,
+                      width: 200,
                     )
                   : Text(
                       message.content,
                     ),
-              SizedBox(height: 8.h),
+              const SizedBox(height: 8),
               Text(timeago.format(message.sentTime),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall!
-                      .copyWith(fontSize: 8.sp)),
+                  style: Theme.of(context).textTheme.labelSmall),
             ],
           ),
         ),

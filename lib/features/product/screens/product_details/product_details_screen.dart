@@ -1,3 +1,4 @@
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/features/product/model/product_model.dart';
 import 'package:decordashapp/features/product/screens/product_details/widgets/product_image_slider.dart';
@@ -15,10 +16,8 @@ class ProductDetailsScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: ElevatedButton(
-          child: Text(
-            'contactSeller'.tr,
-          ),
+        child: BuildCTAButton(
+          text: 'contactSeller'.tr,
           onPressed: () {},
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class CustomeCarouselSliderController extends GetxController {
   static CustomeCarouselSliderController get instance => Get.find();
 
-  final carouselCurrentIndex = 0.obs;
   final isLoading = false.obs;
   final _bannersRepo = Get.put(BannersRepo());
 
@@ -14,14 +13,10 @@ class CustomeCarouselSliderController extends GetxController {
 
   @override
   void onInit() {
-    fetchBanners();
     super.onInit();
+    fetchBanners();
   }
-
-  void updatePageIndicator(index) {
-    carouselCurrentIndex.value = index;
-  }
-
+  
   Future<void> fetchBanners() async {
     try {
       isLoading.value = true;

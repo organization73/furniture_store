@@ -6,7 +6,7 @@ import 'package:decordashapp/features/home/widgets/sortable_products.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -32,7 +32,7 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 60.r,
+        toolbarHeight: 60,
         actions: [
           IconButton(
             onPressed: () => Get.back(),
@@ -59,8 +59,8 @@ class SearchScreen extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(
-            width: 20.w,
+          const SizedBox(
+            width: 20,
           )
         ],
       ),

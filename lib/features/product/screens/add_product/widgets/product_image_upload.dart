@@ -3,8 +3,6 @@ import 'package:decordashapp/features/product/screens/add_product/controllers/ad
 import 'package:decordashapp/features/product/screens/add_product/controllers/upload_image_controller.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -20,7 +18,7 @@ class BuildProductImageUpload extends StatelessWidget {
           onTap: imageUploadController.pickImagesFromGallery,
           child: Container(
             width: double.infinity,
-            height: 100.h,
+            height: 100,
             decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 border: Border.all(
@@ -61,8 +59,8 @@ class BuildProductImageUpload extends StatelessWidget {
                   .bodyMedium!
                   .copyWith(color: Theme.of(context).colorScheme.primary),
             )),
-        SizedBox(
-          height: 10.h,
+        const SizedBox(
+          height: 10,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,

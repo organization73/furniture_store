@@ -1,4 +1,5 @@
 import 'package:decordashapp/common/widgets/products/favourite_icon/favourite_icon.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/styles/shadows.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
@@ -41,8 +42,7 @@ class ProductCardVerical extends StatelessWidget {
         child: Column(
           children: [
             RoundedContainer(
-              //TODO resposive
-              hight: 135,
+              hight: TDeviceUtils.getScreenHeight() * 0.15,
               width: double.infinity,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: Theme.of(context).colorScheme.surface,

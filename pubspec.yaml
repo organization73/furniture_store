@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.2
+  sdk: ^3.5.3
 
 dependencies:
   flutter:
@@ -14,22 +14,20 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.1
-  firebase_core: ^3.4.0
-  firebase_auth: ^5.2.0
-  cloud_firestore: ^5.4.0
+  firebase_core: ^3.4.1
+  firebase_auth: ^5.2.1
+  cloud_firestore: ^5.4.1
   google_sign_in: ^6.2.1
-  firebase_storage: ^12.2.0
-  firebase_messaging: ^15.1.0
+  firebase_storage: ^12.3.0
+  firebase_messaging: ^15.1.1
   get: ^4.6.6
   get_storage: ^2.1.1
   iconsax_flutter: ^1.0.0
   lottie: ^3.1.2
   flutter_svg: ^2.0.10+1
-  flutter_screenutil: ^5.9.3
-  carousel_slider: ^5.0.0
   image_picker: ^1.1.2
   permission_handler: ^11.3.1
-  cached_network_image: ^3.4.0
+  cached_network_image: ^3.4.1
   fast_color_picker: ^0.1.1
   connectivity_plus: ^5.0.2
   stability_image_generation: ^0.0.4
@@ -61,7 +59,10 @@ flutter:
     - assets/icons/
     - assets/images/onboarding/
     - assets/images/content/
-    - assets/images/products/
+    - assets/images/products/beds/
+    - assets/images/products/chairs/
+    - assets/images/products/sofas/
+    - assets/images/products/tables/
     - assets/images/categories/
     - assets/logos/
     - assets/banners/

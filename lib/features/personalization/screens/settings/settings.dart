@@ -1,6 +1,10 @@
+import 'package:decordashapp/data/dummy_data.dart';
+import 'package:decordashapp/data/repositories/banners/banners_repo.dart';
+import 'package:decordashapp/data/repositories/category/category_repo.dart';
+import 'package:decordashapp/data/repositories/product/product_repo.dart';
+import 'package:decordashapp/data/repositories/vendor/vendor_repo.dart';
 import 'package:decordashapp/features/ai/screens/ai_design_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:decordashapp/common/widgets/appbar/custom_appbar.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/list_tiles/settings_menu_tile.dart';
@@ -10,7 +14,6 @@ import 'package:decordashapp/features/manufacture_request/screens/manufacture_re
 import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
 import 'package:decordashapp/features/personalization/screens/profile/profile.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
-import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -20,47 +23,45 @@ class SettingsScreen extends StatelessWidget {
   void _showLanguageModel() {
     showModalBottomSheet<void>(
       context: Get.overlayContext!,
+      showDragHandle: true,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: 200,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                'selectLan'.tr,
-                style: Theme.of(context).textTheme.headlineSmall,
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'selectLan'.tr,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            ListTile(
+              title: Text(
+                'English',
+                style: Theme.of(context).textTheme.titleSmall,
               ),
-              ListTile(
-                title: Text(
-                  'English',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                leading: const Text(
-                  'en',
-                  style: TextStyle(fontSize: 30),
-                ),
-                onTap: () {
-                  Get.updateLocale(const Locale('en', 'US'));
-                  Get.back();
-                },
+              leading: const Text(
+                'en',
+                style: TextStyle(fontSize: 25),
               ),
-              ListTile(
-                title: Text(
-                  'Arabic',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                leading: const Text(
-                  'ar',
-                  style: TextStyle(fontSize: 30),
-                ),
-                onTap: () {
-                  Get.updateLocale(const Locale('ar', 'SA'));
-                  Get.back();
-                },
+              onTap: () {
+                Get.updateLocale(const Locale('en', 'US'));
+                Get.back();
+              },
+            ),
+            ListTile(
+              title: Text(
+                'Arabic',
+                style: Theme.of(context).textTheme.titleSmall,
               ),
-            ],
-          ),
+              leading: const Text(
+                'ar',
+                style: TextStyle(fontSize: 25),
+              ),
+              onTap: () {
+                Get.updateLocale(const Locale('ar', 'SA'));
+                Get.back();
+              },
+            ),
+          ],
         );
       },
     );
@@ -78,12 +79,6 @@ class SettingsScreen extends StatelessWidget {
                 child: SafeArea(
               child: Column(
                 children: [
-                  CustomAppBar(
-                    title: Text(
-                      'myAccount'.tr,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ),
                   ProfileTile(
                     onPress: () => Get.to(
                       () => const ProfileScreen(),
@@ -92,7 +87,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwSections,
+                    height: TSizes.spaceBtwSections * 1.5,
                   ),
                 ],
               ),
@@ -116,12 +111,6 @@ class SettingsScreen extends StatelessWidget {
                       transition: Transition.rightToLeft,
                     ),
                   ),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.buy_crypto_copy,
-                  //   title: 'buyPoints'.tr,
-                  //   subTitle: 'buyPointsDesc'.tr,
-                  //   onTap: () {},
-                  // ),
                   SettingsMenuTile(
                     icon: Iconsax.d_cube_scan_copy,
                     title: 'AI Designs',
@@ -151,47 +140,47 @@ class SettingsScreen extends StatelessWidget {
                     subTitle: 'darkModeDesc'.tr,
                     onTap: () {
                       Get.changeTheme(Get.isDarkMode
-                          ? const MaterialTheme(TextTheme()).light()
-                          : const MaterialTheme(TextTheme()).dark());
+                          ? ThemeData.light()
+                          : ThemeData.dark());
                     },
                   ),
                   const Divider(),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Categories',
-                  //   subTitle: 'Upload all catedories data to firebase',
-                  //   onTap: () {
-                  //     CategoryRepo.instance.uploadDummyData(
-                  //         DummyData.categories,
-                  //         DummyData.productCategories,
-                  //         DummyData.vendorsCategory);
-                  //   },
-                  // ),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Products',
-                  //   subTitle: 'Upload all products data to firebase',
-                  //   onTap: () {
-                  //     ProductRepo.instance.uploadDummyData(DummyData.products);
-                  //   },
-                  // ),
-                  // const Divider(),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Banners',
-                  //   subTitle: 'Upload all banners data to firebase',
-                  //   onTap: () {
-                  //     BannersRepo.instance.uploadDummyData(DummyData.banners);
-                  //   },
-                  // ),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Vendors',
-                  //   subTitle: 'Upload all vendors data to firebase',
-                  //   onTap: () {
-                  //     VendorRepo.instance.uploadDummyData(DummyData.vendors);
-                  //   },
-                  // ),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1_copy,
+                    title: 'Upload Categories',
+                    subTitle: 'Upload all catedories data to firebase',
+                    onTap: () {
+                      CategoryRepo.instance.uploadDummyData(
+                          DummyData.categories,
+                          DummyData.productCategories,
+                          DummyData.vendorsCategory);
+                    },
+                  ),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1_copy,
+                    title: 'Upload Products',
+                    subTitle: 'Upload all products data to firebase',
+                    onTap: () {
+                      ProductRepo.instance.uploadDummyData(DummyData.products);
+                    },
+                  ),
+                  const Divider(),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1_copy,
+                    title: 'Upload Banners',
+                    subTitle: 'Upload all banners data to firebase',
+                    onTap: () {
+                      BannersRepo.instance.uploadDummyData(DummyData.banners);
+                    },
+                  ),
+                  SettingsMenuTile(
+                    icon: Iconsax.arrow_up_1_copy,
+                    title: 'Upload Vendors',
+                    subTitle: 'Upload all vendors data to firebase',
+                    onTap: () {
+                      VendorRepo.instance.uploadDummyData(DummyData.vendors);
+                    },
+                  ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),

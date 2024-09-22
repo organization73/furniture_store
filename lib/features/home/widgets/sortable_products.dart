@@ -1,5 +1,6 @@
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
 import 'package:decordashapp/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:decordashapp/features/home/controllers/product/all_products_controller.dart';
@@ -38,7 +39,10 @@ class SortableProducts extends StatelessWidget {
           height: TSizes.spaceBtwSections * 1.5,
         ),
         Obx(() => GridLayout(
-            mainAxisExtent: 265.r,
+            mainAxisExtent: TDeviceUtils.getScreenOrientation(context) ==
+                    Orientation.portrait
+                ? TDeviceUtils.getScreenHeight() * 0.29
+                : TDeviceUtils.getScreenHeight() * 0.4,
             itemCount: controller.products.length,
             itemBuilder: (__, index) =>
                 ProductCardVerical(product: controller.products[index])))

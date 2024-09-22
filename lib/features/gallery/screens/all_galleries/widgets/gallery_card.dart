@@ -1,6 +1,6 @@
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/common/styles/shadows.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
 import 'package:decordashapp/features/home/model/vendor_model.dart';
@@ -19,7 +19,7 @@ class GalleryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(TSizes.productImageRadius),
         color: Theme.of(context).colorScheme.surfaceContainer,
       ),
-      height: 250.h,
+      height: 250,
       child: Column(
         children: [
           Expanded(

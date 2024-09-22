@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -40,7 +40,7 @@ class CodeVerificationScreen extends StatelessWidget {
               children: [
                 Icon(
                   Iconsax.verify,
-                  size: 45.r,
+                  size: 45,
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),

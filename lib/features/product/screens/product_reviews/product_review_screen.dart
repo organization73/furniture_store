@@ -1,6 +1,7 @@
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/features/product/screens/product_reviews/widgets/user_review_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:decordashapp/features/product/model/product_model.dart';
 import 'package:decordashapp/features/product/screens/product_reviews/add_review.dart';
 import 'package:decordashapp/features/product/screens/product_reviews/controllers/product_reviews_controller.dart';
@@ -18,16 +19,17 @@ class ProductReviewsScreen extends StatelessWidget {
         title: const Text(
           "All Reviews",
         ),
+        forceMaterialTransparency: true,
       ),
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: ElevatedButton(
+        child: BuildCTAButton(
             onPressed: () => Get.to(
                   () => AddReview(product: product),
                   duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),
-            child: const Text('Write your review')),
+            text: 'Write your review'),
       ),
       body: SafeArea(
         child: Padding(
@@ -49,11 +51,11 @@ class ProductReviewsScreen extends StatelessWidget {
                       );
                     },
                   )
-                : Center(
+                : const Center(
                     child: Text(
                       "There are no Reviews...",
-                      style: TextStyle(
-                          fontSize: 21.sp, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                     ),
                   ),
           ),
