@@ -4,6 +4,7 @@ import 'package:decordashapp/data/repositories/category/category_repo.dart';
 import 'package:decordashapp/data/repositories/product/product_repo.dart';
 import 'package:decordashapp/data/repositories/vendor/vendor_repo.dart';
 import 'package:decordashapp/features/ai/screens/ai_design_screen.dart';
+import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
@@ -140,8 +141,8 @@ class SettingsScreen extends StatelessWidget {
                     subTitle: 'darkModeDesc'.tr,
                     onTap: () {
                       Get.changeTheme(Get.isDarkMode
-                          ? ThemeData.light()
-                          : ThemeData.dark());
+                          ? const MaterialTheme().light()
+                          : const MaterialTheme().dark());
                     },
                   ),
                   const Divider(),

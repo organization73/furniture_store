@@ -1,6 +1,5 @@
 import 'package:decordashapp/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter/material.dart';
-
 import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordashapp/common/widgets/images/rounded_image.dart';
 import 'package:decordashapp/common/widgets/texts/brand_title_text_with_verified_icon.dart';
@@ -9,7 +8,6 @@ import 'package:decordashapp/common/widgets/texts/product_title_text.dart';
 import 'package:decordashapp/features/home/controllers/product/product_controller.dart';
 import 'package:decordashapp/features/product/model/product_model.dart';
 import 'package:decordashapp/features/product/screens/product_details/product_details_screen.dart';
-
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';

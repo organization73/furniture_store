@@ -37,7 +37,7 @@ class BuildRoomsSection extends StatelessWidget {
           } else {
             return SizedBox(
               height: 150,
-              child: ListView.builder(
+              child: ListView.separated(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: controller.roomsCatedories.length,
@@ -52,6 +52,11 @@ class BuildRoomsSection extends StatelessWidget {
                             transition: Transition.rightToLeft,
                           ),
                       category: category);
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    width: TSizes.spaceBtwItems,
+                  );
                 },
               ),
             );

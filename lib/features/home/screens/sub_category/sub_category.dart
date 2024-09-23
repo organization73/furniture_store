@@ -4,6 +4,7 @@ import 'package:decordashapp/features/home/controllers/category_controller.dart'
 import 'package:decordashapp/features/home/model/category_model.dart';
 import 'package:decordashapp/features/home/screens/all_products/all_products_screen.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -80,11 +81,9 @@ class SubCategoryScreen extends StatelessWidget {
                                         transition: Transition.rightToLeft,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: TSizes.spaceBtwItems / 2,
-                                    ),
                                     SizedBox(
-                                      height: 115,
+                                      height:
+                                          TDeviceUtils.getScreenHeight() * 0.14,
                                       child: ListView.separated(
                                         itemCount: products.length,
                                         scrollDirection: Axis.horizontal,

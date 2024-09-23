@@ -2,12 +2,11 @@ import "package:decordashapp/utils/theme/widget_themes/checkbox_theme.dart";
 import "package:decordashapp/utils/theme/widget_themes/elevated_button_theme.dart";
 import "package:decordashapp/utils/theme/widget_themes/outlined_button_theme.dart";
 import "package:decordashapp/utils/theme/widget_themes/text_field_theme.dart";
+import "package:decordashapp/utils/theme/widget_themes/text_theme.dart";
 import "package:flutter/material.dart";
 
 class MaterialTheme {
-  final TextTheme textTheme;
-
-  const MaterialTheme(this.textTheme);
+  const MaterialTheme();
 
   static ColorScheme lightScheme() {
     return const ColorScheme(
@@ -121,12 +120,12 @@ class MaterialTheme {
 
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
         useMaterial3: true,
+        fontFamily: 'Poppins',
         brightness: colorScheme.brightness,
         colorScheme: colorScheme,
-        textTheme: textTheme.apply(
+        textTheme: TTextTheme.lightTextTheme.apply(
           bodyColor: colorScheme.onSurface,
           displayColor: colorScheme.onSurface,
-          fontSizeFactor: 0.85,
         ),
         scaffoldBackgroundColor: colorScheme.surface,
         canvasColor: colorScheme.surface,
