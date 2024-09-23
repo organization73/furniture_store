@@ -24,7 +24,7 @@ class SettingsMenuTile extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
       ),
       title: Text(title, style: Theme.of(context).textTheme.titleSmall),
-      subtitle: Text(subTitle, style: Theme.of(context).textTheme.labelMedium),
+      subtitle: Text(subTitle, style: Theme.of(context).textTheme.labelSmall),
       trailing: trailing,
       onTap: onTap,
     );

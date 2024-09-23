@@ -21,7 +21,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
               right: -250,
               child: CircularContainer(
                 backgroungColor:
-                    Theme.of(context).colorScheme.surface.withOpacity(0.2),
+                    Theme.of(context).colorScheme.surfaceDim.withOpacity(0.4),
               ),
             ),
             Positioned(
@@ -29,7 +29,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
               right: -300,
               child: CircularContainer(
                 backgroungColor:
-                    Theme.of(context).colorScheme.surface.withOpacity(0.2),
+                    Theme.of(context).colorScheme.surfaceDim.withOpacity(0.4),
               ),
             ),
             Positioned(
@@ -37,7 +37,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
               right: 300,
               child: CircularContainer(
                 backgroungColor:
-                    Theme.of(context).colorScheme.surface.withOpacity(0.2),
+                    Theme.of(context).colorScheme.surfaceDim.withOpacity(0.4),
               ),
             ),
             child

@@ -21,11 +21,11 @@ class TTextTheme {
       fontWeight: FontWeight.w600,
     ),
     titleMedium: const TextStyle().copyWith(
-      fontSize: 14.0,
+      fontSize: 15.0,
       fontWeight: FontWeight.w500,
     ),
     titleSmall: const TextStyle().copyWith(
-      fontSize: 12.0,
+      fontSize: 13.0,
       fontWeight: FontWeight.w400,
     ),
     bodyLarge: const TextStyle().copyWith(
@@ -41,9 +41,12 @@ class TTextTheme {
       fontWeight: FontWeight.w500,
     ),
     labelLarge: const TextStyle().copyWith(
-      fontSize: 12.0,
+      fontSize: 13.0,
     ),
     labelMedium: const TextStyle().copyWith(
+      fontSize: 11.0,
+    ),
+    labelSmall: const TextStyle().copyWith(
       fontSize: 10.0,
     ),
   );

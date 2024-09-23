@@ -41,7 +41,7 @@ class SortableProducts extends StatelessWidget {
         Obx(() => GridLayout(
             mainAxisExtent: TDeviceUtils.getScreenOrientation(context) ==
                     Orientation.portrait
-                ? TDeviceUtils.getScreenHeight() * 0.29
+                ? TDeviceUtils.getScreenHeight() * 0.31
                 : TDeviceUtils.getScreenHeight() * 0.4,
             itemCount: controller.products.length,
             itemBuilder: (__, index) =>

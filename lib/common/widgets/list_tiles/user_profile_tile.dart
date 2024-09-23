@@ -1,4 +1,5 @@
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
 import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
@@ -46,6 +47,8 @@ class ProfileTile extends StatelessWidget {
         } else {
           return Text(
             controller.user.value.fullName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleMedium,
           );
         }
@@ -59,12 +62,22 @@ class ProfileTile extends StatelessWidget {
         } else {
           return Text(
             controller.user.value.email,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.labelSmall,
           );
         }
       }),
-      trailing:
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
           IconButton(onPressed: onPress, icon: const Icon(Iconsax.edit_copy)),
+          IconButton(
+              tooltip: 'logout'.tr,
+              onPressed: () => AuthenticatorRepo.instance.logOut(),
+              icon: const Icon(Iconsax.login_copy)),
+        ],
+      ),
     );
   }
 }
