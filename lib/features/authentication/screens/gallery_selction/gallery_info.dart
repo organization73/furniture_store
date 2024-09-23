@@ -1,6 +1,4 @@
 import 'package:decordashapp/features/authentication/widgets/upload_gallery_info.dart';
-import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
-import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -12,14 +10,12 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class GalleryInformationScreen extends StatelessWidget {
-  final controller = Get.put(GalleryInfoController());
-
-  GalleryInformationScreen({super.key});
-
-  final userController = UserController.instance;
+  const GalleryInformationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(GalleryInfoController());
+
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -60,7 +56,7 @@ class GalleryInformationScreen extends StatelessWidget {
                     prefixIcon: Iconsax.location_copy,
                     suffixIcon: IconButton(
                         onPressed: () {
-                          LoggerHelper.warning('loca');
+                          controller.getLocation();
                         },
                         icon: const Icon(
                           Iconsax.map_copy,
@@ -73,15 +69,15 @@ class GalleryInformationScreen extends StatelessWidget {
                   Row(
                     children: [
                       UploadGalleryInfo(
-                        onTap: () => userController.uploadGalleryInfo(
-                            isCertificate: false),
+                        onTap: () => controller.userController
+                            .uploadGalleryInfo(isCertificate: false),
                         title: 'Upload gallery picture',
                         icon: Iconsax.picture_frame,
                       ),
                       const SizedBox(width: TSizes.sm),
                       UploadGalleryInfo(
-                        onTap: () => userController.uploadGalleryInfo(
-                            isCertificate: true),
+                        onTap: () => controller.userController
+                            .uploadGalleryInfo(isCertificate: true),
                         title: 'uploadGalleryID'.tr,
                         icon: Iconsax.card,
                       ),

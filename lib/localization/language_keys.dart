@@ -252,7 +252,7 @@ class Language extends Translations {
           "policyAndTermsDesc":
               "In order to create an account you must accept the privacy policy and terms of use.",
         },
-        'ar_SA': {
+        'ar_EGY': {
           "noCategories": "لا يوجد تصنيفات",
           "language": "العربية",
           "noChats": "لا يوجد محادثات",

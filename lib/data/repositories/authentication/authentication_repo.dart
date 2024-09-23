@@ -1,4 +1,5 @@
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/features/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:decordashapp/features/authentication/screens/sign_in_with_phone/enter_code.dart';
 import 'package:decordashapp/utils/local_storage/storage_utility.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
@@ -38,11 +39,17 @@ class AuthenticatorRepo extends GetxController {
       if (user.emailVerified || user.phoneNumber != null) {
         await TLocalStorage.init(user.uid);
 
-        Get.offAll(
-          () => const NavMenu(),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
+        deviceStorage.read('isGalleryInfoComp') != true
+            ? Get.offAll(
+                () => const GalleryInformationScreen(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              )
+            : Get.offAll(
+                () => const NavMenu(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              );
       } else {
         Get.offAll(
           () => VerifySignUpEmail(
@@ -53,6 +60,7 @@ class AuthenticatorRepo extends GetxController {
         );
       }
     } else {
+      deviceStorage.writeIfNull('isGalleryInfoComp', false);
       deviceStorage.writeIfNull('isFirstTime', true);
       deviceStorage.read('isFirstTime') != true
           ? Get.offAll(

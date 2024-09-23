@@ -3,11 +3,13 @@ import 'package:decordashapp/features/authentication/model/gallery_selection/gal
 import 'package:decordashapp/features/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class GallerySelectionController extends GetxController {
   final GallerySelectionModel model;
 
   GallerySelectionController._(this.model);
+  final storage = GetStorage();
 
   static GallerySelectionController getInstance() {
     return Get.put(GallerySelectionController._(Get.find()));
@@ -19,10 +21,12 @@ class GallerySelectionController extends GetxController {
     userController.updateAccountType(model.selectedOption.value);
 
     if (model.selectedOption.value == 0) {
+      storage.write('isGalleryInfoComp', true);
+
       AuthenticatorRepo.instance.screenRedirect();
     } else {
       Get.to(
-        () => GalleryInformationScreen(),
+        () => const GalleryInformationScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );

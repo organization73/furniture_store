@@ -44,6 +44,8 @@ dependencies:
   googleapis_auth: ^1.6.0
   markdown_widget: ^2.3.2+6
   http: ^1.2.2
+  geolocator: ^13.0.1
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:
