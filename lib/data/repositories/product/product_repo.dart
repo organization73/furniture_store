@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/features/home/model/product_category_model.dart';
 import 'package:decordashapp/features/home/model/vendor_category_model.dart';
-import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
-import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
 import 'package:decordashapp/features/product/model/product_model.dart';
 import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
-import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
 
 class ProductRepo extends GetxController {
@@ -196,50 +193,6 @@ class ProductRepo extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
-    }
-  }
-
-  Future<void> uploadDummyData(List<ProductModel> products) async {
-    try {
-      FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', TImages.processingInfo);
-
-      final storage = Get.put(FirebaseStorageServices());
-
-      for (var product in products) {
-        final mainImageFile =
-            await storage.getImageDatafromAssets(product.productImage);
-
-        final mainImageUrl = await storage.uploadImageData(
-            'Products', mainImageFile, product.productImage);
-        product.productImage = mainImageUrl;
-
-        for (var imagePath in product.productDetails.productListImages) {
-          final imageFile = await storage.getImageDatafromAssets(imagePath);
-          final imageUrl =
-              await storage.uploadImageData('Products', imageFile, imagePath);
-
-          product.productDetails.productListImages = product
-              .productDetails.productListImages
-              .map((path) => path == imagePath ? imageUrl : path)
-              .toList();
-        }
-
-        await _db.collection('Products').doc(product.id).set(product.toJson());
-      }
-
-      FullScreenLoader.stopLoading();
-
-      TLoaders.successSnackBar(
-          title: 'Uploading Completed',
-          message: 'All categories data has been uploaded to firestore');
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      LoggerHelper.error('error', e);
       throw 'Something went wrong, Please try again';
     }
   }

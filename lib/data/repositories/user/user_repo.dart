@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -100,7 +99,7 @@ class UserRepo extends GetxController {
           .collection('VendorCategory')
           .where('vendorId', isEqualTo: userId)
           .get();
-      //TODO  delete user relation with products and catevgories
+      //TODO  delete user relation with products and categories
       // final categoryRelation = await _db
       //     .collection('ProductCategory')
       //     .where('productId', whereIn: userProducts.docs)

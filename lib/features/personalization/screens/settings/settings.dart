@@ -1,8 +1,3 @@
-import 'package:decordashapp/data/dummy_data.dart';
-import 'package:decordashapp/data/repositories/banners/banners_repo.dart';
-import 'package:decordashapp/data/repositories/category/category_repo.dart';
-import 'package:decordashapp/data/repositories/product/product_repo.dart';
-import 'package:decordashapp/data/repositories/vendor/vendor_repo.dart';
 import 'package:decordashapp/features/ai/screens/ai_design_screen.dart';
 import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +119,6 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
-
                   SectionHeading(
                     title: 'appSettings'.tr,
                     showActionButton: false,
@@ -145,43 +139,6 @@ class SettingsScreen extends StatelessWidget {
                           : const MaterialTheme().dark());
                     },
                   ),
-                  // const Divider(),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Categories',
-                  //   subTitle: 'Upload all catedories data to firebase',
-                  //   onTap: () {
-                  //     CategoryRepo.instance.uploadDummyData(
-                  //         DummyData.categories,
-                  //         DummyData.productCategories,
-                  //         DummyData.vendorsCategory);
-                  //   },
-                  // ),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Products',
-                  //   subTitle: 'Upload all products data to firebase',
-                  //   onTap: () {
-                  //     ProductRepo.instance.uploadDummyData(DummyData.products);
-                  //   },
-                  // ),
-                  // const Divider(),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Banners',
-                  //   subTitle: 'Upload all banners data to firebase',
-                  //   onTap: () {
-                  //     BannersRepo.instance.uploadDummyData(DummyData.banners);
-                  //   },
-                  // ),
-                  // SettingsMenuTile(
-                  //   icon: Iconsax.arrow_up_1_copy,
-                  //   title: 'Upload Vendors',
-                  //   subTitle: 'Upload all vendors data to firebase',
-                  //   onTap: () {
-                  //     VendorRepo.instance.uploadDummyData(DummyData.vendors);
-                  //   },
-                  // ),
                 ],
               ),
             )

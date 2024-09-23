@@ -58,17 +58,10 @@ flutter:
     - assets/icons/
     - assets/images/onboarding/
     - assets/images/content/
-    - assets/images/products/beds/
-    - assets/images/products/chairs/
-    - assets/images/products/sofas/
-    - assets/images/products/tables/
-    - assets/images/categories/
     - assets/logos/
-    - assets/banners/
     - assets/animations/
     - assets/markdown/
 
-  #--------------- LOCAL FONTS ------------------#
   fonts:
     - family: Poppins
       fonts:

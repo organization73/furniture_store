@@ -33,7 +33,7 @@ class StoreScreen extends StatelessWidget {
                 SliverAppBar(
                     pinned: true,
                     floating: true,
-                    expandedHeight: TDeviceUtils.getScreenHeight() * 0.4,
+                    expandedHeight: TDeviceUtils.getScreenHeight() * 0.35,
                     flexibleSpace: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
