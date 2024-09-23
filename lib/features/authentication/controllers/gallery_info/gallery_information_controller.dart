@@ -68,6 +68,10 @@ class GalleryInfoController extends GetxController {
       };
       await userRepository.updateSingleField(name);
 
+      userController.user.value.galleryName = galleryNameController.text.trim();
+      userController.user.value.galleryAddress =
+          galleryAddressController.text.trim();
+
       userController.user.refresh();
 
       storage.write('isGalleryInfoComp', true);

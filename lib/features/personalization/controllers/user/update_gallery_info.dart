@@ -8,12 +8,11 @@ import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
 
-class UpdateNameController extends GetxController {
-  static UpdateNameController get instance => Get.find();
+class UpdateGalleryController extends GetxController {
+  static UpdateGalleryController get instance => Get.find();
 
-  final GlobalKey<FormState> updateNameFormKey = GlobalKey<FormState>();
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  final GlobalKey<FormState> updateGalleryFormKey = GlobalKey<FormState>();
+  final TextEditingController galleryNameController = TextEditingController();
 
   final userController = UserController.instance;
   final userRepository = Get.put(UserRepo());
@@ -21,16 +20,14 @@ class UpdateNameController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    initializeNames();
+    initializeValues();
   }
 
-  Future<void> initializeNames() async {
-    firstNameController.text = userController.user.value.firstName;
-    lastNameController.text = userController.user.value.lastName;
+  Future<void> initializeValues() async {
+    galleryNameController.text = userController.user.value.galleryName;
   }
 
-  Future<void> updateUserName() async {
+  Future<void> updateGalleryInfo() async {
     try {
       FullScreenLoader.openLoadingDialog(
           'updatingInfo'.tr, TImages.processingInfo);
@@ -44,20 +41,18 @@ class UpdateNameController extends GetxController {
         return;
       }
 
-      if (!updateNameFormKey.currentState!.validate()) {
+      if (!updateGalleryFormKey.currentState!.validate()) {
         FullScreenLoader.stopLoading();
 
         return;
       }
 
       Map<String, dynamic> name = {
-        'firstName': firstNameController.text.trim(),
-        'lastName': lastNameController.text.trim()
+        'galleryName': galleryNameController.text.trim(),
       };
       await userRepository.updateSingleField(name);
 
-      userController.user.value.firstName = firstNameController.text.trim();
-      userController.user.value.lastName = lastNameController.text.trim();
+      userController.user.value.galleryName = galleryNameController.text.trim();
 
       userController.user.refresh();
 

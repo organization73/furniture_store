@@ -1,3 +1,4 @@
+import 'package:decordashapp/features/personalization/screens/profile/screens/change_gallery_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
@@ -108,13 +109,44 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
+              const SectionHeading(
+                title: 'Gallery Information',
+                showActionButton: false,
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              (controller.user.value.galleryName.isNotEmpty)
+                  ? ProfileMenu(
+                      title: 'Name',
+                      showIcon: true,
+                      value: controller.user.value.galleryName,
+                      onPress: () => Get.off(
+                        () => const ChangeGalleryInfoScreen(),
+                        duration: const Duration(milliseconds: 300),
+                        transition: Transition.downToUp,
+                      ),
+                    )
+                  : const SizedBox(),
+              (controller.user.value.galleryAddress.isNotEmpty)
+                  ? ProfileMenu(
+                      title: 'Address',
+                      value: controller.user.value.galleryAddress,
+                      onPress: () {},
+                    )
+                  : const SizedBox(),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              const Divider(),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
               TextButton(
                   onPressed: () => controller.deleteAccountWarningPopup(),
-                  child: Text(
-                    'Close Account',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
-                  ))
+                  child: Text('Close Account',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.error)))
             ],
           ),
         ),

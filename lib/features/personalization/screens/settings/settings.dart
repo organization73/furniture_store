@@ -1,4 +1,5 @@
 import 'package:decordashapp/features/ai/screens/ai_design_screen.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -90,57 +91,81 @@ class SettingsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.pagePaddingSpace),
-              child: Column(
-                children: [
-                  SectionHeading(
-                    title: 'accountSettings'.tr,
-                    showActionButton: false,
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.designtools_copy,
-                    title: 'manefactureReq'.tr,
-                    subTitle: 'manefactureReqDesc'.tr,
-                    onTap: () => Get.to(
-                      () => const ManufactureRequestsPage(),
-                      duration: const Duration(milliseconds: 300),
-                      transition: Transition.rightToLeft,
+              child: Obx(() {
+                return Column(
+                  children: [
+                    UserController.instance.user.value.accountType ==
+                            AccountType.vendor
+                        ? Column(
+                            children: [
+                              SectionHeading(
+                                title: 'gallaryTitle'.tr,
+                                showActionButton: false,
+                              ),
+                              SettingsMenuTile(
+                                icon: Iconsax.buildings_copy,
+                                title: UserController
+                                    .instance.user.value.galleryName,
+                                subTitle: UserController
+                                    .instance.user.value.galleryAddress,
+                                onTap: () {},
+                              ),
+                              const SizedBox(
+                                height: TSizes.spaceBtwSections,
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
+                    SectionHeading(
+                      title: 'accountSettings'.tr,
+                      showActionButton: false,
                     ),
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.d_cube_scan_copy,
-                    title: 'AI Designs',
-                    subTitle: 'buyPointsDesc'.tr,
-                    onTap: () => Get.to(
-                      () => const AiPage(),
-                      duration: const Duration(milliseconds: 300),
-                      transition: Transition.rightToLeft,
+                    SettingsMenuTile(
+                      icon: Iconsax.designtools_copy,
+                      title: 'manefactureReq'.tr,
+                      subTitle: 'manefactureReqDesc'.tr,
+                      onTap: () => Get.to(
+                        () => const ManufactureRequestsPage(),
+                        duration: const Duration(milliseconds: 300),
+                        transition: Transition.rightToLeft,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-                  SectionHeading(
-                    title: 'appSettings'.tr,
-                    showActionButton: false,
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.language_square_copy,
-                    title: 'language'.tr,
-                    subTitle: 'languageDesc'.tr,
-                    onTap: () => _showLanguageModel(),
-                  ),
-                  SettingsMenuTile(
-                    icon: Iconsax.moon_copy,
-                    title: 'darkMode'.tr,
-                    subTitle: 'darkModeDesc'.tr,
-                    onTap: () {
-                      Get.changeTheme(Get.isDarkMode
-                          ? const MaterialTheme().light()
-                          : const MaterialTheme().dark());
-                    },
-                  ),
-                ],
-              ),
+                    SettingsMenuTile(
+                      icon: Iconsax.d_cube_scan_copy,
+                      title: 'AI Designs',
+                      subTitle: 'buyPointsDesc'.tr,
+                      onTap: () => Get.to(
+                        () => const AiPage(),
+                        duration: const Duration(milliseconds: 300),
+                        transition: Transition.rightToLeft,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: TSizes.spaceBtwSections,
+                    ),
+                    SectionHeading(
+                      title: 'appSettings'.tr,
+                      showActionButton: false,
+                    ),
+                    SettingsMenuTile(
+                      icon: Iconsax.language_square_copy,
+                      title: 'language'.tr,
+                      subTitle: 'languageDesc'.tr,
+                      onTap: () => _showLanguageModel(),
+                    ),
+                    SettingsMenuTile(
+                      icon: Iconsax.moon_copy,
+                      title: 'darkMode'.tr,
+                      subTitle: 'darkModeDesc'.tr,
+                      onTap: () {
+                        Get.changeTheme(Get.isDarkMode
+                            ? const MaterialTheme().light()
+                            : const MaterialTheme().dark());
+                      },
+                    ),
+                  ],
+                );
+              }),
             )
           ],
         ),
