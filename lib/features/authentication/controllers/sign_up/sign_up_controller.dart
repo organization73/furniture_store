@@ -32,7 +32,7 @@ class SignUpController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'processingLoading'.tr, TImages.processingInfo);
 
-      final isConnected = await NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isConnected();
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(

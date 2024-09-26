@@ -15,7 +15,6 @@ class LoginController extends GetxController {
   static LoginController get instance => Get.find();
   final localStorage = GetStorage();
   final hidePassword = true.obs;
-  final rememberMe = false.obs;
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   // TextEditingController for each input field
   final TextEditingController emailController = TextEditingController();
@@ -23,20 +22,12 @@ class LoginController extends GetxController {
   final userController = Get.put(UserController());
   static final notifications = NotificationsService();
 
-  @override
-  void onInit() {
-    emailController.text = localStorage.read('REMEMBER_ME_MAIL') ?? '';
-    passwordController.text = localStorage.read('REMEMBER_ME_PASSWORD') ?? '';
-
-    super.onInit();
-  }
-
   Future<void> emailAndPasswordSignIn() async {
     try {
       FullScreenLoader.openLoadingDialog(
           'loggingInLoadingTitle'.tr, TImages.processingInfo);
 
-      final isConnected = await NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isConnected();
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
@@ -49,12 +40,6 @@ class LoginController extends GetxController {
         FullScreenLoader.stopLoading();
 
         return;
-      }
-
-      if (rememberMe.value) {
-        localStorage.write('REMEMBER_ME_MAIL', emailController.text.trim());
-        localStorage.write(
-            'REMEMBER_ME_PASSWORD', passwordController.text.trim());
       }
 
       await AuthenticatorRepo.instance.loginWithEmailAndPassword(
@@ -70,6 +55,7 @@ class LoginController extends GetxController {
       AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       FullScreenLoader.stopLoading();
+      LoggerHelper.error(e.toString());
 
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
@@ -80,7 +66,7 @@ class LoginController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'loggingInLoadingTitle'.tr, TImages.processingInfo);
 
-      final isConnected = await NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isConnected();
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();

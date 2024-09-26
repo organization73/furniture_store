@@ -144,7 +144,7 @@ class UserController extends GetxController {
   Future<void> reAuthEmailAndPasswordUser() async {
     try {
       FullScreenLoader.openLoadingDialog('Processing', TImages.processingInfo);
-      final isConnected = await NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isConnected();
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
@@ -213,7 +213,7 @@ class UserController extends GetxController {
         FullScreenLoader.openLoadingDialog(
             'Processing', TImages.processingInfo);
 
-        final isConnected = await NetworkManager.instance.isConnected();
+        final isConnected = NetworkManager.instance.isConnected();
         if (!isConnected) {
           FullScreenLoader.stopLoading();
           TLoaders.warningSnackBar(

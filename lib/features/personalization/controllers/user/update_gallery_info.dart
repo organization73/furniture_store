@@ -32,7 +32,7 @@ class UpdateGalleryController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'updatingInfo'.tr, TImages.processingInfo);
 
-      final isConnected = await NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isConnected();
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();

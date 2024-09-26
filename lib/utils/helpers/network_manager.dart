@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:decordashapp/common/widgets/loaders/loaders.dart';
+import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
@@ -7,47 +7,46 @@ import 'package:flutter/services.dart';
 /// Manages the network connectivity status and provides methods to check and handle connectivity changes.
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
-
+  final RxList<ConnectivityResult> _connectionStatus =
+      [ConnectivityResult.none].obs;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
-  /// Initialize the network manager and set up a stream to continually check the connection status.
   @override
   void onInit() {
     super.onInit();
+    initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
-  /// Update the connection status based on changes in connectivity and show a relevant popup for no internet connection.
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    _connectionStatus.value = result;
-    if (_connectionStatus.value == ConnectivityResult.none) {
-      TLoaders.warningSnackBar(
-            title: 'internet'.tr, message: 'noInternet'.tr);
-    }
-  }
-
-  /// Check the internet connection status.
-  /// Returns `true` if connected, `false` otherwise.
-  Future<bool> isConnected() async {
-    try {
-      final result = await _connectivity.checkConnectivity();
-      if (result == ConnectivityResult.none) {
-        return false;
-      } else {
-        return true;
-      }
-    } on PlatformException catch (_) {
-      return false;
-    }
-  }
-
-  /// Dispose or close the active connectivity stream.
   @override
   void onClose() {
-    super.onClose();
     _connectivitySubscription.cancel();
+    super.onClose();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initConnectivity() async {
+    late List<ConnectivityResult> result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      LoggerHelper.error('Couldn\'t check connectivity status', e.toString());
+      return;
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
+    _connectionStatus.value = result;
+  }
+
+  /// Checks if the device is connected to any network.
+  bool isConnected() {
+    return _connectionStatus.isNotEmpty &&
+        _connectionStatus.any((status) => status != ConnectivityResult.none);
   }
 }

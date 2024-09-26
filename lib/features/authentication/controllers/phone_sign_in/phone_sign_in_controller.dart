@@ -19,7 +19,7 @@ class PhoneSingInController extends GetxController {
 
   void loginWithPhone() async {
     try {
-      final isConnected = await NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isConnected();
 
       if (!isConnected) {
         TLoaders.warningSnackBar(
