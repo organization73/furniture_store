@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+import 'package:decordashapp/modules/product/screens/product_details/widgets/overlapping_cicular_avatar.dart';
+import 'package:decordashapp/modules/product/model/product_model.dart';
+
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
+
+class RatingWidget extends StatelessWidget {
+  const RatingWidget({
+    super.key,
+    required this.product,
+  });
+  final ProductModel product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 70,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: const BorderRadius.all(Radius.circular(8))),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Iconsax.star,
+                                color: Colors.amber,
+                                size: TSizes.iconMd,
+                              ),
+                              const SizedBox(
+                                width: TSizes.spaceBtwItems / 2,
+                              ),
+                              Text(product.productRating.toStringAsFixed(1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      '${product.productNumOfRating} reviews',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    )
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: OverlappingCircularAvatar(
+                product: product,
+              ),
+            ),
+          ],
+        ));
+  }
+}

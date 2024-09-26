@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
+import 'package:decordashapp/common/widgets/headings/page_header.dart';
+import 'package:decordashapp/modules/authentication/controllers/log_in/log_in_controller.dart';
+import 'package:decordashapp/modules/authentication/screens/reset_password/send_reset_password.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
+import 'package:decordashapp/utils/validators/validation.dart';
+import 'package:get/get.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
+
+class EmailSignInScreen extends StatelessWidget {
+  const EmailSignInScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = LoginController.instance;
+
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: BuildCTAButton(
+            text: 'signIn'.tr,
+            onPressed: () => controller.emailAndPasswordSignIn()),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
+          child: Form(
+            key: controller.loginFormKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  PageHeader(
+                      title: 'loginTitle'.tr,
+                      subTitle: 'loginSubTitle'.tr,
+                      iconName: Iconsax.grid_3),
+                  RoundedTextField(
+                      prefixIcon: Iconsax.sms_copy,
+                      'email'.tr,
+                      keyboardType: TextInputType.emailAddress,
+                      controller.emailController,
+                      TValidator.validateEmail),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
+                  Obx(() => RoundedTextField(
+                      'password'.tr,
+                      prefixIcon: Iconsax.lock_copy,
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            controller.hidePassword.value =
+                                !controller.hidePassword.value;
+                          },
+                          icon: Icon(
+                            controller.hidePassword.value
+                                ? Iconsax.eye_copy
+                                : Iconsax.eye_slash_copy,
+                            size: TSizes.iconMd,
+                          )),
+                      controller.passwordController,
+                      TValidator.validatePassword,
+                      isPassword: controller.hidePassword.value)),
+                  const SizedBox(height: TSizes.spaceBtwInputFields),
+                  TextButton(
+                    onPressed: () => Get.to(
+                      () => const SentEmailPasswordReset(),
+                      duration: const Duration(milliseconds: 300),
+                      transition: Transition.downToUp,
+                    ),
+                    child: Text('forgetPassword'.tr,
+                        style: Theme.of(context).textTheme.labelMedium),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

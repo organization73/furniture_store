@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:decordashapp/features/home/model/category_model.dart';
+import 'package:decordashapp/modules/home/model/category_model.dart';
 import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get.dart';

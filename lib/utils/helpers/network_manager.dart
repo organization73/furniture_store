@@ -5,7 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 
 /// Manages the network connectivity status and provides methods to check and handle connectivity changes.
-class NetworkManager extends GetxController {
+class NetworkManager extends GetxService {
   static NetworkManager get instance => Get.find();
   final RxList<ConnectivityResult> _connectionStatus =
       [ConnectivityResult.none].obs;

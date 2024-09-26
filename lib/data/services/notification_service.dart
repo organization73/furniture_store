@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordashapp/features/chat/screens/chat_screen.dart';
+import 'package:decordashapp/modules/chat/screens/chat_screen.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

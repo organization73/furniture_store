@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -51,21 +54,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAhjXgGWhwvIidnZtFm1xHTz9QE53VlCrg',
-    appId: '1:401754565844:android:33a3f946132861aae65f41',
+    appId: '1:401754565844:android:006ac30d4164e54ae65f41',
     messagingSenderId: '401754565844',
     projectId: 'decordashapp-2cc20',
     storageBucket: 'decordashapp-2cc20.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDFJMtFgozUTy55miU__QpO38XPVt2_ADI',
-    appId: '1:401754565844:ios:73f8872c04fb1899e65f41',
-    messagingSenderId: '401754565844',
-    projectId: 'decordashapp-2cc20',
-    storageBucket: 'decordashapp-2cc20.appspot.com',
-    androidClientId: '401754565844-o4j4p7nov3phb4f284pvb45n8ut8fo8j.apps.googleusercontent.com',
-    iosClientId: '401754565844-3c7l7h869ehspqa5qrv99jss07mc16sr.apps.googleusercontent.com',
-    iosBundleId: 'com.decordashapp.decordashapp',
   );
 
 }

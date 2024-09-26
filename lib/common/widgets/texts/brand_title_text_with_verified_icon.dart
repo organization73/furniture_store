@@ -1,4 +1,4 @@
-import 'package:decordashapp/features/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/home/model/vendor_model.dart';
 import 'package:decordashapp/common/widgets/texts/brand_title_text.dart';
 
 import 'package:decordashapp/utils/constants/enums.dart';

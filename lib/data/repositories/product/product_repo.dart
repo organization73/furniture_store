@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordashapp/features/home/model/product_category_model.dart';
-import 'package:decordashapp/features/home/model/vendor_category_model.dart';
+import 'package:decordashapp/modules/home/model/product_category_model.dart';
+import 'package:decordashapp/modules/home/model/vendor_category_model.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:decordashapp/features/product/model/product_model.dart';
+import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get.dart';

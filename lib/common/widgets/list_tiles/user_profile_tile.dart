@@ -2,7 +2,7 @@ import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
-import 'package:decordashapp/features/personalization/controllers/user/user_controller.dart';
+import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';

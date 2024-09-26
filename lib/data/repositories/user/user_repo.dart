@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordashapp/features/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
 import 'package:decordashapp/utils/exceptions/format_exceptions.dart';
 import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UserRepo extends GetxController {
+class UserRepo extends GetxService {
   static UserRepo get instance => Get.find();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;

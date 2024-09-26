@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordashapp/features/chat/model/message.dart';
-import 'package:decordashapp/features/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/chat/model/message.dart';
+import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_storage_service.dart';
 
