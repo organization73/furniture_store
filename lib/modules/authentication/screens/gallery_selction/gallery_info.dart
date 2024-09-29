@@ -52,6 +52,7 @@ class GalleryInformationScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                     'galleryAddress'.tr,
+                    showLabel: false,
                     controller.galleryAddressController,
                     prefixIcon: Iconsax.location_copy,
                     suffixIcon: IconButton(
@@ -64,6 +65,7 @@ class GalleryInformationScreen extends StatelessWidget {
                         )),
                     keyboardType: TextInputType.name,
                     TValidator.validateGalleryLoc,
+                    isReadonly: true,
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections),
                   Row(

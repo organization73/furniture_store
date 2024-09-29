@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
-
 import 'package:decordashapp/utils/constants/sizes.dart';
 
 class CircularImage extends StatelessWidget {

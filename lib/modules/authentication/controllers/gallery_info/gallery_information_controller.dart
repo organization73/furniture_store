@@ -27,13 +27,13 @@ class GalleryInfoController extends GetxController {
   Future<void> getLocation() async {
     try {
       FullScreenLoader.openSmallLoadingDialog('updatingInfo'.tr);
+      setLocaleIdentifier(Get.locale!.toLanguageTag());
       Position position = await locationController.determinePosition();
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
-      setLocaleIdentifier(Get.locale!.toLanguageTag());
       Placemark place = placemarks[0];
 
-      galleryAddressController.text = '${place.street}';
+      galleryAddressController.text = '${place.locality},${place.street}';
       FullScreenLoader.stopLoading();
     } catch (e) {
       FullScreenLoader.stopLoading();

@@ -11,6 +11,7 @@ class RoundedTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool showLabel;
   final bool isFilled;
+  final bool isReadonly;
   final Color? fillColor;
 
   const RoundedTextField(
@@ -24,6 +25,7 @@ class RoundedTextField extends StatelessWidget {
     super.key,
     this.showLabel = true,
     this.isFilled = false,
+    this.isReadonly = false,
     this.fillColor,
   });
 
@@ -50,6 +52,7 @@ class RoundedTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
       ),
       validator: validator,
+      readOnly: isReadonly,
     );
   }
 }
