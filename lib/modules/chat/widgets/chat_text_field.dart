@@ -1,13 +1,13 @@
-import 'dart:typed_data';
 import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordashapp/data/services/firebase_firestore_service.dart';
-import 'package:decordashapp/data/services/media_service.dart';
-import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/data/services/chat/notifications/firebase_chat_service.dart';
+import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
+import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatTextField extends StatefulWidget {
   const ChatTextField({super.key, required this.receiverId});
@@ -21,8 +21,7 @@ class ChatTextField extends StatefulWidget {
 class _ChatTextFieldState extends State<ChatTextField> {
   final controller = TextEditingController();
   final notificationsService = NotificationsService();
-
-  Uint8List? file;
+  XFile? file;
 
   @override
   void initState() {
@@ -74,7 +73,14 @@ class _ChatTextFieldState extends State<ChatTextField> {
   }
 
   Future<void> _sendImage() async {
-    final pickedImage = await MediaService.pickImage();
+    // final pickedImage = await MediaService.pickImage();
+    // setState(() => file = pickedImage as XFile?);
+    Get.put(FirebaseStorageServices());
+    final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 70,
+        maxHeight: 512,
+        maxWidth: 512);
     setState(() => file = pickedImage);
     if (file != null) {
       await FirebaseFirestoreService.addImageMessage(

@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/modules/home/model/product_category_model.dart';
 import 'package:decordashapp/modules/home/model/vendor_category_model.dart';
-import 'package:decordashapp/utils/logging/logger.dart';
-import 'package:flutter/services.dart';
+import 'package:decordashapp/utils/exceptions/exception_handler.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
-import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get.dart';
 
 class ProductRepo extends GetxController {
@@ -23,12 +21,9 @@ class ProductRepo extends GetxController {
           .toList();
 
       return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -46,12 +41,9 @@ class ProductRepo extends GetxController {
           .toList();
 
       return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -70,10 +62,9 @@ class ProductRepo extends GetxController {
       return list;
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -89,12 +80,9 @@ class ProductRepo extends GetxController {
           .toList();
 
       return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -105,12 +93,9 @@ class ProductRepo extends GetxController {
           .map((doc) => ProductModel.fromFirebaseDocument(doc))
           .toList();
       return productList;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -125,12 +110,9 @@ class ProductRepo extends GetxController {
           .map((querySnapshot) =>
               ProductModel.fromFirebaseDocument(querySnapshot))
           .toList();
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -152,12 +134,9 @@ class ProductRepo extends GetxController {
           .map((doc) => ProductModel.fromFirebaseDocument(doc))
           .toList();
       return products;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -188,12 +167,9 @@ class ProductRepo extends GetxController {
           .toList();
 
       return products;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -228,12 +204,8 @@ class ProductRepo extends GetxController {
               vendorId: product.productDetails.productSeller.id,
               categoryId: product.categoryId)
           .toJson());
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      LoggerHelper.error('error', e);
+      ExceptionHandler.handleAuthException(e);
       rethrow;
     }
   }

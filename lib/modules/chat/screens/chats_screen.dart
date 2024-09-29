@@ -1,6 +1,6 @@
 import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/screens/search_screen.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:decordashapp/modules/chat/widgets/user_item.dart';

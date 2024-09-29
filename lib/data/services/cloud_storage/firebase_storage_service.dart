@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';

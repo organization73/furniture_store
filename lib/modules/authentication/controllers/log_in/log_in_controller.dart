@@ -1,5 +1,5 @@
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';

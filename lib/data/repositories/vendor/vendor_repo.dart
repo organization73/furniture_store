@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
+import 'package:decordashapp/utils/exceptions/exception_handler.dart';
 import 'package:decordashapp/modules/home/model/vendor_model.dart';
-import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
-import 'package:decordashapp/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get.dart';
 
 class VendorRepo extends GetxController {
@@ -19,12 +17,9 @@ class VendorRepo extends GetxController {
           .toList();
 
       return list;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 
@@ -48,12 +43,9 @@ class VendorRepo extends GetxController {
           .map((doc) => VendorModel.fromFirebaseDocument(doc))
           .toList();
       return vendors;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 }

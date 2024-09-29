@@ -1,3 +1,4 @@
+import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +12,6 @@ import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -184,8 +184,8 @@ class UserController extends GetxController {
       if (image != null) {
         imageLoading.value = true;
 
-        final imageUrl =
-            await userRepository.uploadImage('Users/Images/Profile/', image);
+        final imageUrl = await FirebaseStorageServices.instance
+            .uploadImageFile('Users/Images/Profile/', image);
 
         Map<String, dynamic> json = {"avatar": imageUrl};
         await userRepository.updateSingleField(json);
@@ -221,7 +221,7 @@ class UserController extends GetxController {
           return;
         }
 
-        final imageUrl = await userRepository.uploadImage(
+        final imageUrl = await FirebaseStorageServices.instance.uploadImageFile(
             isCertificate
                 ? 'Users/Images/Gallery/Certificate/'
                 : 'Users/Images/Gallery/Picture/',

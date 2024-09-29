@@ -1,7 +1,7 @@
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/data/services/notification_service.dart';
+import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
 import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:decordashapp/modules/personalization/models/user_model.dart';
