@@ -7,7 +7,7 @@ import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/modules/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class PhoneNumberScreen extends StatelessWidget {
@@ -40,7 +40,7 @@ class PhoneNumberScreen extends StatelessWidget {
                 PageHeader(
                   title: 'continueWithPhoneTitle'.tr,
                   subTitle: 'continueWithPhoneSubTitle'.tr,
-                  iconName: Iconsax.call,
+                  iconName: IconsaxPlusBroken.call,
                 ),
                 Form(
                   key: controller.formKey,
@@ -52,14 +52,14 @@ class PhoneNumberScreen extends StatelessWidget {
                             child: RoundedTextField(
                                 'firstName'.tr,
                                 controller.firstNameController,
-                                prefixIcon: Iconsax.user_copy,
+                                prefixIcon: IconsaxPlusLinear.user,
                                 keyboardType: TextInputType.name,
                                 TValidator.validateUserInput),
                           ),
                           const SizedBox(width: TSizes.sm),
                           Expanded(
                             child: RoundedTextField(
-                                prefixIcon: Iconsax.clipboard_text_copy,
+                                prefixIcon: IconsaxPlusLinear.clipboard_text,
                                 'lastName'.tr,
                                 controller.lastNameController,
                                 keyboardType: TextInputType.name,

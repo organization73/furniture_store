@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:decordashapp/common/widgets/action_confirmation/action_confirmation_page.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:get/get.dart';
@@ -10,11 +8,13 @@ import 'package:get/get.dart';
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
 
+  RxBool isEmailVerified = false.obs;
+
   @override
   void onInit() {
+    super.onInit();
     sendEmailVerification();
     setTimerForAutoRedirect();
-    super.onInit();
   }
 
   sendEmailVerification() async {
@@ -34,21 +34,7 @@ class VerifyEmailController extends GetxController {
       final user = FirebaseAuth.instance.currentUser;
       if (user?.emailVerified ?? false) {
         timer.cancel();
-        Get.off(
-          () => ActionConfirmPage(
-            subTitle: 'yourAccountCreatedSubTitle'.tr,
-            title: 'yourAccountCreatedTitle'.tr,
-            onPressed: () => Get.off(
-              () => GallerySelection(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            ),
-          ),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
-        TLoaders.successSnackBar(
-            title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
+        isEmailVerified.value = true;
       }
     });
   }
@@ -57,18 +43,11 @@ class VerifyEmailController extends GetxController {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
-        () => ActionConfirmPage(
-          subTitle: 'yourAccountCreatedSubTitle'.tr,
-          title: 'yourAccountCreatedTitle'.tr,
-          onPressed: () => Get.off(
-            () => GallerySelection(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          ),
-        ),
+        () => GallerySelection(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
+
       TLoaders.successSnackBar(
           title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
     }

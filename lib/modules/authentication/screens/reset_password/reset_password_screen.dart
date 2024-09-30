@@ -1,4 +1,5 @@
 import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
@@ -33,20 +34,21 @@ class ResetPasswordScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding:
+                const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Lottie.asset(
                     TImages.resetPassword,
-                    width: 150,
+                    width: TDeviceUtils.getScreenWidth() * 0.35,
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   PageHeader(
-                    title: 'Password reset email sent',
+                    title: 'passResetSent'.tr,
                     subTitle: email,
                     alignment: CrossAxisAlignment.center,
                   ),
@@ -54,8 +56,8 @@ class ResetPasswordScreen extends StatelessWidget {
                     height: TSizes.spaceBtwItems,
                   ),
                   Text(
-                    "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely Change Your Password and Keep Your Account Protected.",
-                    style: Theme.of(context).textTheme.labelSmall,
+                    'passResetSub'.tr,
+                    style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
@@ -65,8 +67,8 @@ class ResetPasswordScreen extends StatelessWidget {
                       onPressed: () => ForgetPasswordController.instance
                           .resendPasswordResetEmail(email),
                       child: Text(
-                        'Resend Email',
-                        style: Theme.of(context).textTheme.labelSmall,
+                        'resendMail'.tr,
+                        style: Theme.of(context).textTheme.labelMedium,
                       ))
                 ]),
           ),

@@ -15,7 +15,7 @@ class UpdateGalleryController extends GetxController {
   final TextEditingController galleryNameController = TextEditingController();
 
   final userController = UserController.instance;
-  final userRepository = Get.put(UserRepo());
+  final userRepository = UserRepo.instance;
 
   @override
   void onInit() {

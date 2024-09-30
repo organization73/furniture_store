@@ -249,11 +249,21 @@ class Language extends Translations {
           "featuredGalleries": "Featured Galleries",
           "chats": "Chats",
           "noChats": "No Chats Found",
+          "or": "or",
+          "passResetSent": "Password reset email sent",
+          "passResetSub":
+              "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely Change Your Password.",
           "policyAndTermsDesc":
               "In order to create an account you must accept the privacy policy and terms of use.",
+          "resendMail": "Resend Email",
         },
         'ar_EGY': {
+          "resendMail": "إعادة إرسال البريد الإلكتروني",
+          "or": "او",
+          "passResetSub":
+              "أمان حسابك هو أولويتنا! لقد أرسلنا لك رابطًا آمنًا لتغيير كلمة المرور الخاصة بك بأمان.",
           "noCategories": "لا يوجد تصنيفات",
+          "passResetSent": "تم ارسال بريد الكتروني لاعادة تعيين كلمة المرور",
           "language": "العربية",
           "noChats": "لا يوجد محادثات",
           "featuredGalleries": "المعارض الاعلي تصنيفا",

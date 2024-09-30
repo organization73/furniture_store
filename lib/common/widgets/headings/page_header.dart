@@ -34,10 +34,7 @@ class PageHeader extends StatelessWidget {
         Text(
           title,
           textAlign: align,
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: TDeviceUtils.getScreenHeight() * 0.02),
         Text(

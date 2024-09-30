@@ -6,7 +6,7 @@ import 'package:decordashapp/modules/authentication/controllers/forget_password/
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SentEmailPasswordReset extends StatelessWidget {
   const SentEmailPasswordReset({super.key});
@@ -42,7 +42,7 @@ class SentEmailPasswordReset extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwSections),
                   RoundedTextField(
                       'email'.tr,
-                      prefixIcon: Iconsax.direct_right_copy,
+                      prefixIcon: IconsaxPlusLinear.direct_right,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),

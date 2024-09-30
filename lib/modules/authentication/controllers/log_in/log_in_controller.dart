@@ -1,7 +1,6 @@
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
-import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
@@ -13,13 +12,14 @@ import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
+
   final localStorage = GetStorage();
   final hidePassword = true.obs;
+
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  // TextEditingController for each input field
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final userController = Get.put(UserController());
+
   static final notifications = NotificationsService();
 
   Future<void> emailAndPasswordSignIn() async {
@@ -55,8 +55,6 @@ class LoginController extends GetxController {
       AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       FullScreenLoader.stopLoading();
-      LoggerHelper.error(e.toString());
-
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
@@ -77,7 +75,7 @@ class LoginController extends GetxController {
 
       final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
-      await userController.saveUserRecord(userCred);
+      await UserController.instance.saveUserRecord(userCred);
       await UserRepo.instance.updateSingleField(
         {'lastActive': DateTime.now()},
       );
@@ -89,7 +87,6 @@ class LoginController extends GetxController {
       AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       FullScreenLoader.stopLoading();
-      LoggerHelper.error(e.toString());
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }

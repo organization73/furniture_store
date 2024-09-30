@@ -1,7 +1,7 @@
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
-import 'package:decordashapp/modules/authentication/screens/sign_in_with_phone/enter_code.dart';
+import 'package:decordashapp/modules/authentication/screens/phone_login/enter_code.dart';
 import 'package:decordashapp/modules/authentication/screens/sign_up/verify_sign_up_email.dart';
 import 'package:decordashapp/modules/home/screens/nav_menu.dart';
 import 'package:decordashapp/modules/onboarding/screens/onboarding_screen.dart';

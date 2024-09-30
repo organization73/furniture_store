@@ -16,7 +16,7 @@ class UpdateNameController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
 
   final userController = UserController.instance;
-  final userRepository = Get.put(UserRepo());
+  final userRepository = UserRepo.instance;
 
   @override
   void onInit() {

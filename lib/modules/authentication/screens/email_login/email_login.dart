@@ -7,7 +7,7 @@ import 'package:decordashapp/modules/authentication/screens/reset_password/send_
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class EmailSignInScreen extends StatelessWidget {
   const EmailSignInScreen({super.key});
@@ -40,9 +40,9 @@ class EmailSignInScreen extends StatelessWidget {
                   PageHeader(
                       title: 'loginTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
-                      iconName: Iconsax.grid_3),
+                      iconName: IconsaxPlusBroken.profile_tick),
                   RoundedTextField(
-                      prefixIcon: Iconsax.sms_copy,
+                      prefixIcon: IconsaxPlusLinear.sms,
                       'email'.tr,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
@@ -50,7 +50,7 @@ class EmailSignInScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   Obx(() => RoundedTextField(
                       'password'.tr,
-                      prefixIcon: Iconsax.lock_copy,
+                      prefixIcon: IconsaxPlusLinear.lock,
                       suffixIcon: IconButton(
                           onPressed: () {
                             controller.hidePassword.value =
@@ -58,8 +58,8 @@ class EmailSignInScreen extends StatelessWidget {
                           },
                           icon: Icon(
                             controller.hidePassword.value
-                                ? Iconsax.eye_copy
-                                : Iconsax.eye_slash_copy,
+                                ? IconsaxPlusLinear.eye
+                                : IconsaxPlusLinear.eye_slash,
                             size: TSizes.iconMd,
                           )),
                       controller.passwordController,

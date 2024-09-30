@@ -1,4 +1,5 @@
 import 'package:decordashapp/modules/authentication/widgets/upload_gallery_info.dart';
+import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -71,14 +72,14 @@ class GalleryInformationScreen extends StatelessWidget {
                   Row(
                     children: [
                       UploadGalleryInfo(
-                        onTap: () => controller.userController
+                        onTap: () => UserController.instance
                             .uploadGalleryInfo(isCertificate: false),
                         title: 'Upload gallery picture',
                         icon: Iconsax.picture_frame,
                       ),
                       const SizedBox(width: TSizes.sm),
                       UploadGalleryInfo(
-                        onTap: () => controller.userController
+                        onTap: () => UserController.instance
                             .uploadGalleryInfo(isCertificate: true),
                         title: 'uploadGalleryID'.tr,
                         icon: Iconsax.card,

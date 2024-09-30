@@ -9,7 +9,7 @@ import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 
@@ -45,21 +45,21 @@ class SignUpScreen extends StatelessWidget {
                   PageHeader(
                       title: 'signupTitle'.tr,
                       subTitle: 'loginSubTitle'.tr,
-                      iconName: Iconsax.personalcard),
+                      iconName: IconsaxPlusBroken.profile_2user),
                   Row(
                     children: [
                       Expanded(
                         child: RoundedTextField(
                             'firstName'.tr,
                             controller.firstNameController,
-                            prefixIcon: Iconsax.user_copy,
+                            prefixIcon: IconsaxPlusLinear.user,
                             keyboardType: TextInputType.name,
                             TValidator.validateUserInput),
                       ),
                       const SizedBox(width: TSizes.sm),
                       Expanded(
                         child: RoundedTextField(
-                            prefixIcon: Iconsax.clipboard_text_copy,
+                            prefixIcon: IconsaxPlusLinear.clipboard_text,
                             'lastName'.tr,
                             controller.lastNameController,
                             keyboardType: TextInputType.name,
@@ -70,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                       'email'.tr,
-                      prefixIcon: Iconsax.sms_copy,
+                      prefixIcon: IconsaxPlusLinear.sms,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),
@@ -86,7 +86,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         RoundedTextField(
                             'password'.tr,
-                            prefixIcon: Iconsax.lock_copy,
+                            prefixIcon: IconsaxPlusLinear.lock,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   controller.hidePassword.value =
@@ -94,8 +94,8 @@ class SignUpScreen extends StatelessWidget {
                                 },
                                 icon: Icon(
                                   controller.hidePassword.value
-                                      ? Iconsax.eye_copy
-                                      : Iconsax.eye_slash_copy,
+                                      ? IconsaxPlusLinear.eye
+                                      : IconsaxPlusLinear.eye_slash,
                                   size: TSizes.iconMd,
                                 )),
                             controller.passwordController,

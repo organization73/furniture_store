@@ -1,13 +1,11 @@
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
-import 'package:decordashapp/utils/device/device_utility.dart';
+import 'package:decordashapp/modules/authentication/widgets/check_email_verify_screen.dart';
+import 'package:decordashapp/modules/authentication/widgets/email_verified_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/modules/authentication/controllers/sign_up/verify_email_controller.dart';
-import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 class VerifySignUpEmail extends StatelessWidget {
   final String? email;
@@ -37,37 +35,14 @@ class VerifySignUpEmail extends StatelessWidget {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Lottie.asset(
-                    TImages.emailDelivery,
-                    width: TDeviceUtils.getScreenHeight() * 0.2,
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
-                  PageHeader(
-                    title: 'confirmEmail'.tr,
-                    subTitle: email ?? '',
-                    alignment: CrossAxisAlignment.center,
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
-                  Text(
-                    'confirmEmailSubTitle'.tr,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
-                  TextButton(
-                      onPressed: () => controller.sendEmailVerification(),
-                      child: Text('resendEmail'.tr))
-                ]),
+            child: Obx(() {
+              return (controller.isEmailVerified.value)
+                  ? EmailVerifiedScreen(
+                      title: 'yourAccountCreatedTitle'.tr,
+                      subTitle: 'yourAccountCreatedSubTitle'.tr,
+                    )
+                  : CheckVerifyScreen(email: email, controller: controller);
+            }),
           ),
         ),
       ),

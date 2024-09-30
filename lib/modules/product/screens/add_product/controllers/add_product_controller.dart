@@ -23,8 +23,6 @@ class AddProductController extends GetxController {
   String? wood;
   String? cloth;
 
-  final userController = Get.put(UserController());
-
   final RxMap<String, bool> productStats = {
     'delivery'.tr: false,
     'negotioate'.tr: false,
@@ -91,14 +89,14 @@ class AddProductController extends GetxController {
             modifiable: productStats.values.elementAt(2),
           ),
           productSeller: VendorModel(
-              id: userController.user.value.id,
-              image: userController.user.value.avatar,
+              id: UserController.instance.user.value.id,
+              image: UserController.instance.user.value.avatar,
               location: adressController.text,
-              name: userController.user.value.userName,
-              accountType: userController.user.value.accountType,
-              isFeatured: userController.user.value.isFeatured,
+              name: UserController.instance.user.value.userName,
+              accountType: UserController.instance.user.value.accountType,
+              isFeatured: UserController.instance.user.value.isFeatured,
               productsCount: 2,
-              isVerified: userController.user.value.isVerified),
+              isVerified: UserController.instance.user.value.isVerified),
         ),
       );
 

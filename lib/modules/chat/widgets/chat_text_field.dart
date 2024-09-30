@@ -1,5 +1,5 @@
 import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
-import 'package:decordashapp/data/services/chat/notifications/firebase_chat_service.dart';
+import 'package:decordashapp/data/services/chat/firebase_chat_service.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';

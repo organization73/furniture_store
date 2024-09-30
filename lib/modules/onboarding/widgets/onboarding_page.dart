@@ -38,21 +38,14 @@ class OnBoardingView extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.all(TSizes.pagePaddingSpace),
-                              child: Text(
-                                item.title,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
+                              child: Text(item.title,
+                                  style:
+                                      Theme.of(context).textTheme.titleLarge),
                             ),
                             Container(
                               constraints: BoxConstraints(
                                   maxWidth:
-                                      TDeviceUtils.getScreenWidth() *
-                                          0.75),
+                                      TDeviceUtils.getScreenWidth() * 0.75),
                               child: Text(
                                 item.description,
                                 textAlign: TextAlign.center,

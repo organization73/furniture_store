@@ -18,7 +18,6 @@ class SignUpController extends GetxController {
   final hidePassword = true.obs;
   final privacyPolicy = false.obs;
 
-  // TextEditingController for each input field
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -67,7 +66,7 @@ class SignUpController extends GetxController {
         phoneNumber: phoneNumController.value.trim(),
       );
 
-      final userRepesotory = Get.put(UserRepo());
+      final userRepesotory = UserRepo.instance;
       await userRepesotory.saveuserRecord(newUser);
 
       await notifications.requestPermission();

@@ -20,8 +20,6 @@ class GalleryInfoController extends GetxController {
   final TextEditingController galleryAddressController =
       TextEditingController();
 
-  final userController = Get.put(UserController());
-  final userRepository = Get.put(UserRepo());
   final locationController = Get.put(LoacationServices());
 
   Future<void> getLocation() async {
@@ -48,14 +46,14 @@ class GalleryInfoController extends GetxController {
         return;
       }
 
-      if (userController.user.value.galleryPicture.isEmpty) {
+      if (UserController.instance.user.value.galleryPicture.isEmpty) {
         TLoaders.warningSnackBar(
             title: 'Upload Gallery Picture',
             message: 'Please upload your gallery picture');
         return;
       }
 
-      if (userController.user.value.galleryCertificate.isEmpty) {
+      if (UserController.instance.user.value.galleryCertificate.isEmpty) {
         TLoaders.warningSnackBar(
             title: 'Upload Gallery Certificate',
             message: 'Please upload your gallery certificate or ID');
@@ -66,13 +64,14 @@ class GalleryInfoController extends GetxController {
         'galleryName': galleryNameController.text.trim(),
         'galleryAddress': galleryAddressController.text.trim()
       };
-      await userRepository.updateSingleField(name);
+      await UserRepo.instance.updateSingleField(name);
 
-      userController.user.value.galleryName = galleryNameController.text.trim();
-      userController.user.value.galleryAddress =
+      UserController.instance.user.value.galleryName =
+          galleryNameController.text.trim();
+      UserController.instance.user.value.galleryAddress =
           galleryAddressController.text.trim();
 
-      userController.user.refresh();
+      UserController.instance.user.refresh();
 
       storage.write('isGalleryInfoComp', true);
 

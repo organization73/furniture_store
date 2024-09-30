@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UserController extends GetxController {
+class UserController extends GetxService {
   static UserController get instance => Get.find();
 
   final profileLoading = false.obs;
@@ -27,8 +27,6 @@ class UserController extends GetxController {
   final TextEditingController verifyEmail = TextEditingController();
   final TextEditingController verifyPassword = TextEditingController();
 
-  final userRepository = Get.put(UserRepo());
-
   @override
   onInit() {
     super.onInit();
@@ -38,7 +36,7 @@ class UserController extends GetxController {
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
-      final user = await userRepository.fetchUserData();
+      final user = await UserRepo.instance.fetchUserData();
       this.user(user);
     } catch (e) {
       user(UserModel.empty());
@@ -68,7 +66,7 @@ class UserController extends GetxController {
               phoneNumber: userCred.user!.phoneNumber ?? '',
               avatar: userCred.user!.photoURL ?? '');
 
-          await userRepository.saveuserRecord(user);
+          await UserRepo.instance.saveuserRecord(user);
         }
       }
     } catch (e) {
@@ -188,7 +186,7 @@ class UserController extends GetxController {
             .uploadImageFile('Users/Images/Profile/', image);
 
         Map<String, dynamic> json = {"avatar": imageUrl};
-        await userRepository.updateSingleField(json);
+        await UserRepo.instance.updateSingleField(json);
         user.value.avatar = imageUrl;
         user.refresh();
 
@@ -230,7 +228,7 @@ class UserController extends GetxController {
         Map<String, dynamic> json = {
           isCertificate ? "galleryCertificate" : "galleryPicture": imageUrl
         };
-        await userRepository.updateSingleField(json);
+        await UserRepo.instance.updateSingleField(json);
         if (isCertificate) {
           user.value.galleryCertificate = imageUrl;
         } else {
@@ -261,7 +259,7 @@ class UserController extends GetxController {
     try {
       if (value == 1) {
         Map<String, dynamic> json = {"accountType": 'vendor'};
-        await userRepository.updateSingleField(json);
+        await UserRepo.instance.updateSingleField(json);
         user.value.accountType = AccountType.vendor;
         user.refresh();
       }
