@@ -4,7 +4,7 @@ import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class FadeAppBar extends StatelessWidget {
   final double scrollOffset;
@@ -24,7 +24,7 @@ class FadeAppBar extends StatelessWidget {
                   horizontal: TSizes.pagePaddingSpace),
               child: CustomTextFormField(
                 hint: 'homeSearchBarHint'.tr,
-                prefixIcon: Iconsax.search_normal_copy,
+                prefixIcon: IconsaxPlusLinear.search_normal,
                 readOnly: true,
                 filled: true,
                 onTap: () => Get.to(

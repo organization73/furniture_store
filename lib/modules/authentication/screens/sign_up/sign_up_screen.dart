@@ -80,7 +80,6 @@ class SignUpScreen extends StatelessWidget {
                     onInputValidated: (bool value) {
                       if (value) {
                         controller.formKey.currentState!.save();
-                        TDeviceUtils.hideKeyboard(context);
                       }
                     },
                     textStyle: const TextStyle(fontSize: TSizes.fontSizeSm),

@@ -5,7 +5,7 @@ import 'package:decordashapp/modules/store/screens/store_screen.dart';
 import 'package:decordashapp/modules/personalization/screens/settings/settings.dart';
 import 'package:decordashapp/modules/product/screens/add_product/add_product_screen.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class NavMenu extends StatelessWidget {
   const NavMenu({super.key});
@@ -15,9 +15,6 @@ class NavMenu extends StatelessWidget {
     final controller = Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(() => NavigationBar(
-            elevation: 0,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
             selectedIndex: controller.selectedIndex.value,
             indicatorColor: Colors.transparent,
             onDestinationSelected: (index) =>
@@ -25,42 +22,42 @@ class NavMenu extends StatelessWidget {
             destinations: [
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.home_copy,
+                  IconsaxPlusBold.home_1,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.home_copy),
+                icon: const Icon(IconsaxPlusLinear.home_1),
                 label: 'Home',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.bag_2_copy,
+                  IconsaxPlusBold.shopping_bag,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.bag_2_copy),
+                icon: const Icon(IconsaxPlusLinear.shopping_bag),
                 label: 'Store',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.add_square_copy,
+                  IconsaxPlusBold.add_square,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.add_square_copy),
+                icon: const Icon(IconsaxPlusLinear.add_square),
                 label: 'Add',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.message_copy,
+                  IconsaxPlusBold.message,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.message_copy),
+                icon: const Icon(IconsaxPlusLinear.message),
                 label: 'Chat',
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Iconsax.user_copy,
+                  IconsaxPlusBold.user,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                icon: const Icon(Iconsax.user_copy),
+                icon: const Icon(IconsaxPlusLinear.user),
                 label: 'Profile',
               ),
             ],

@@ -4,7 +4,7 @@ import 'package:decordashapp/modules/product/screens/add_product/controllers/upl
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class BuildProductImageUpload extends StatelessWidget {
   const BuildProductImageUpload({super.key});
@@ -29,7 +29,7 @@ class BuildProductImageUpload extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Iconsax.picture_frame,
+                  IconsaxPlusLinear.picture_frame,
                   size: 50,
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
@@ -49,7 +49,7 @@ class BuildProductImageUpload extends StatelessWidget {
         FilledButton.tonalIcon(
             onPressed: imageUploadController.takePhoto,
             icon: Icon(
-              Iconsax.camera,
+              IconsaxPlusLinear.camera,
               color: Theme.of(context).colorScheme.primary,
             ),
             label: Text(

@@ -83,7 +83,7 @@ class SubCategoryScreen extends StatelessWidget {
                                     ),
                                     SizedBox(
                                       height:
-                                          TDeviceUtils.getScreenHeight() * 0.15,
+                                          TDeviceUtils.getScreenHeight() * 0.17,
                                       child: ListView.separated(
                                         itemCount: products.length,
                                         scrollDirection: Axis.horizontal,

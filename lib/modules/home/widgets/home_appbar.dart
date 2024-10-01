@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/favourits/screens/favourite_screen.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -25,7 +25,7 @@ class HomeAppBar extends StatelessWidget {
                   transition: Transition.downToUp,
                 ),
             icon: const Icon(
-              Iconsax.heart_copy,
+              IconsaxPlusLinear.heart,
             )),
       ],
     );

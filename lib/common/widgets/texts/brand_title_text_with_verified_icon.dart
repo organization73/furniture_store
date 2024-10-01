@@ -1,10 +1,9 @@
 import 'package:decordashapp/modules/home/model/vendor_model.dart';
 import 'package:decordashapp/common/widgets/texts/brand_title_text.dart';
-
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class BrandTitleTextWithVerifiedIcon extends StatelessWidget {
   const BrandTitleTextWithVerifiedIcon(
@@ -43,7 +42,7 @@ class BrandTitleTextWithVerifiedIcon extends StatelessWidget {
         ),
         if (vendor.isVerified ?? false)
           Icon(
-            Iconsax.verify,
+            IconsaxPlusBold.verify,
             color: iconColor,
             size: TSizes.iconSm,
           )

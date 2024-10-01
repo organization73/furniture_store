@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -32,8 +32,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? IconButton(
               onPressed: () => Get.back(),
               icon: Icon(textDirection == TextDirection.ltr
-                  ? Iconsax.arrow_left_copy
-                  : Iconsax.arrow_right_1_copy),
+                  ? IconsaxPlusLinear.arrow_left
+                  : IconsaxPlusLinear.arrow_right_1),
             )
           : leadinIcon != null
               ? IconButton(

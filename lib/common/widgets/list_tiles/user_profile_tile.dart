@@ -5,7 +5,7 @@ import 'package:decordashapp/common/widgets/images/circular_image.dart';
 import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ProfileTile extends StatelessWidget {
   const ProfileTile({
@@ -71,11 +71,12 @@ class ProfileTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(onPressed: onPress, icon: const Icon(Iconsax.edit_copy)),
+          IconButton(
+              onPressed: onPress, icon: const Icon(IconsaxPlusLinear.edit)),
           IconButton(
               tooltip: 'logout'.tr,
               onPressed: () => AuthenticatorRepo.instance.logOut(),
-              icon: const Icon(Iconsax.login_copy)),
+              icon: const Icon(IconsaxPlusLinear.login)),
         ],
       ),
     );

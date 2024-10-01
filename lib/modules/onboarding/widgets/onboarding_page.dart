@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordashapp/modules/onboarding/controllers/onboarding_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class OnBoardingView extends StatelessWidget {
   final OnBoardingController controller;
@@ -115,8 +115,8 @@ class OnBoardingView extends StatelessWidget {
                         icon: Icon(
                             controller.currentPage ==
                                     controller.pages.length - 1
-                                ? Iconsax.tick_circle
-                                : Iconsax.arrow_circle_right,
+                                ? IconsaxPlusLinear.tick_circle
+                                : IconsaxPlusLinear.arrow_circle_right,
                             size: TSizes.iconLg),
                       )),
                 ],

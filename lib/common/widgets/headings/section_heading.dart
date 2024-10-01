@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SectionHeading extends StatelessWidget {
   const SectionHeading({
@@ -78,8 +78,8 @@ class SectionHeading extends StatelessWidget {
                   ),
                   Icon(
                     textDirection == TextDirection.ltr
-                        ? Iconsax.arrow_right_3_copy
-                        : Iconsax.arrow_left_2_copy,
+                        ? IconsaxPlusLinear.arrow_right_3
+                        : IconsaxPlusLinear.arrow_left_2,
                     size: TSizes.iconSm,
                   ),
                 ],

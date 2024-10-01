@@ -4,7 +4,7 @@ import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class UserItem extends StatefulWidget {
   const UserItem({super.key, required this.user});
@@ -36,7 +36,7 @@ class _UserItemState extends State<UserItem> {
           ),
           title: Text(widget.user.userName,
               style: Theme.of(context).textTheme.titleLarge),
-          trailing: const Icon(Iconsax.arrow_circle_right_copy),
+          trailing: const Icon(IconsaxPlusLinear.arrow_circle_right),
         ),
       );
 }

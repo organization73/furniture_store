@@ -20,6 +20,7 @@ class AddProductPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
+            forceMaterialTransparency: true,
             actions: [
               IconButton(
                   onPressed: () => addController.addProduct(),

@@ -11,7 +11,7 @@ import 'package:decordashapp/modules/personalization/controllers/user/user_contr
 import 'package:decordashapp/modules/personalization/screens/profile/profile.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -101,7 +101,7 @@ class SettingsScreen extends StatelessWidget {
                                 showActionButton: false,
                               ),
                               SettingsMenuTile(
-                                icon: Iconsax.buildings_copy,
+                                icon: IconsaxPlusLinear.buildings,
                                 title: UserController
                                     .instance.user.value.galleryName,
                                 subTitle: UserController
@@ -119,7 +119,7 @@ class SettingsScreen extends StatelessWidget {
                       showActionButton: false,
                     ),
                     SettingsMenuTile(
-                      icon: Iconsax.designtools_copy,
+                      icon: IconsaxPlusLinear.designtools,
                       title: 'manefactureReq'.tr,
                       subTitle: 'manefactureReqDesc'.tr,
                       onTap: () => Get.to(
@@ -129,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     SettingsMenuTile(
-                      icon: Iconsax.d_cube_scan_copy,
+                      icon: IconsaxPlusLinear.d_cube_scan,
                       title: 'AI Designs',
                       subTitle: 'buyPointsDesc'.tr,
                       onTap: () => Get.to(
@@ -146,13 +146,13 @@ class SettingsScreen extends StatelessWidget {
                       showActionButton: false,
                     ),
                     SettingsMenuTile(
-                      icon: Iconsax.language_square_copy,
+                      icon: IconsaxPlusLinear.language_square,
                       title: 'language'.tr,
                       subTitle: 'languageDesc'.tr,
                       onTap: () => _showLanguageModel(),
                     ),
                     SettingsMenuTile(
-                      icon: Iconsax.moon_copy,
+                      icon: IconsaxPlusLinear.moon,
                       title: 'darkMode'.tr,
                       subTitle: 'darkModeDesc'.tr,
                       onTap: () {

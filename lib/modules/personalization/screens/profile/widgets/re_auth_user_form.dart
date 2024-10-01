@@ -5,7 +5,7 @@ import 'package:decordashapp/modules/personalization/controllers/user/user_contr
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ReAuthLoginForm extends StatelessWidget {
   const ReAuthLoginForm({super.key});
@@ -34,7 +34,7 @@ class ReAuthLoginForm extends StatelessWidget {
               child: Column(
                 children: [
                   RoundedTextField(
-                      prefixIcon: Iconsax.direct_right_copy,
+                      prefixIcon: IconsaxPlusLinear.direct_right,
                       'email'.tr,
                       keyboardType: TextInputType.emailAddress,
                       controller.verifyEmail,
@@ -42,7 +42,7 @@ class ReAuthLoginForm extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   Obx(() => RoundedTextField(
                       'password'.tr,
-                      prefixIcon: Iconsax.password_check_copy,
+                      prefixIcon: IconsaxPlusLinear.password_check,
                       suffixIcon: IconButton(
                           onPressed: () {
                             controller.hidePassword.value =
@@ -50,8 +50,8 @@ class ReAuthLoginForm extends StatelessWidget {
                           },
                           icon: Icon(
                             controller.hidePassword.value
-                                ? Iconsax.eye_copy
-                                : Iconsax.eye_slash_copy,
+                                ? IconsaxPlusLinear.eye
+                                : IconsaxPlusLinear.eye_slash,
                             size: TSizes.iconSm,
                           )),
                       controller.verifyPassword,

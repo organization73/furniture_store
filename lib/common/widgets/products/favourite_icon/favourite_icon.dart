@@ -3,7 +3,7 @@ import 'package:decordashapp/modules/favourits/controllers/favorite_controller.d
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class FavouriteIcon extends StatelessWidget {
   const FavouriteIcon({super.key, required this.productId});
@@ -17,8 +17,8 @@ class FavouriteIcon extends StatelessWidget {
           width: 35,
           size: TSizes.iconMd - 4,
           icon: controller.isFavourite(productId)
-              ? Iconsax.heart
-              : Iconsax.heart_copy,
+              ? IconsaxPlusBold.heart
+              : IconsaxPlusLinear.heart,
           color: controller.isFavourite(productId)
               ? Theme.of(context).colorScheme.error
               : null,

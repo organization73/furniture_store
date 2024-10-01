@@ -5,7 +5,7 @@ import 'package:decordashapp/modules/personalization/controllers/user/update_nam
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ChangeNameScreen extends StatelessWidget {
   const ChangeNameScreen({super.key});
@@ -37,12 +37,12 @@ class ChangeNameScreen extends StatelessWidget {
                     RoundedTextField(
                         'firstName'.tr,
                         controller.firstNameController,
-                        prefixIcon: Iconsax.user_copy,
+                        prefixIcon: IconsaxPlusLinear.user,
                         keyboardType: TextInputType.name,
                         TValidator.validateUserInput),
                     const SizedBox(height: TSizes.spaceBtwInputFields),
                     RoundedTextField(
-                        prefixIcon: Iconsax.user_copy,
+                        prefixIcon: IconsaxPlusLinear.user,
                         'lastName'.tr,
                         controller.lastNameController,
                         keyboardType: TextInputType.name,

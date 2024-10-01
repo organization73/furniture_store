@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/modules/product/screens/product_reviews/product_review_screen.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class OverlappingCircularAvatar extends StatelessWidget {
   final ProductModel product;
@@ -61,7 +61,7 @@ class OverlappingCircularAvatar extends StatelessWidget {
           ),
           child: const CircleAvatar(
             radius: 15,
-            child: Icon(Iconsax.add_copy),
+            child: Icon(IconsaxPlusLinear.add),
           ),
         )
       ],

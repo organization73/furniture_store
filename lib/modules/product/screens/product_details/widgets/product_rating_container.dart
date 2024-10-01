@@ -4,7 +4,7 @@ import 'package:decordashapp/modules/product/screens/product_details/widgets/ove
 import 'package:decordashapp/modules/product/model/product_model.dart';
 
 import 'package:decordashapp/utils/constants/sizes.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class RatingWidget extends StatelessWidget {
   const RatingWidget({
@@ -35,7 +35,7 @@ class RatingWidget extends StatelessWidget {
                           Row(
                             children: [
                               const Icon(
-                                Iconsax.star,
+                                IconsaxPlusLinear.star,
                                 color: Colors.amber,
                                 size: TSizes.iconMd,
                               ),

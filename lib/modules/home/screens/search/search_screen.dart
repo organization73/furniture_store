@@ -6,9 +6,8 @@ import 'package:decordashapp/modules/home/widgets/sortable_products.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ActionChipData {
   final IconData icon;
@@ -43,10 +42,10 @@ class SearchScreen extends StatelessWidget {
           Expanded(
             child: CustomTextFormField(
               hint: 'homeSearchBarHint'.tr,
-              prefixIcon: Iconsax.search_normal_copy,
+              prefixIcon: IconsaxPlusLinear.search_normal,
               controller: searchPageController.searchController,
               filled: true,
-              suffixIcon: Iconsax.close_circle_copy,
+              suffixIcon: IconsaxPlusLinear.close_circle,
               onTapSuffixIcon: () {
                 searchPageController.searchController.clear();
                 // Reset the state if the search bar is cleared
@@ -130,7 +129,7 @@ class SearchScreen extends StatelessWidget {
                               },
                               titleAlignment:
                                   ListTileTitleAlignment.titleHeight,
-                              leading: const Icon(Iconsax.timer_1_copy),
+                              leading: const Icon(IconsaxPlusLinear.timer_1),
                               title: Text(
                                 recentSearchController.recentSearches[index],
                                 style: Theme.of(context).textTheme.bodyMedium,
@@ -146,7 +145,7 @@ class SearchScreen extends StatelessWidget {
                         children: [
                           Text(
                             "Search Suggestions",
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(height: TSizes.spaceBtwSections),
                           Wrap(

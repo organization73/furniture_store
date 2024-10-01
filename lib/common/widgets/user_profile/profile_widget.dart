@@ -2,7 +2,7 @@ import 'package:decordashapp/common/widgets/icons/circular_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
 
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
@@ -33,7 +33,7 @@ class ProfileWidget extends StatelessWidget {
             bottom: 0,
             right: 2,
             child: CicularIcon(
-              icon: Iconsax.edit_2,
+              icon: IconsaxPlusLinear.edit_2,
               height: 35,
               width: 35,
               onPress: onClicked,

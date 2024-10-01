@@ -5,7 +5,7 @@ import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ChangeGalleryInfoScreen extends StatelessWidget {
   const ChangeGalleryInfoScreen({super.key});
@@ -37,7 +37,7 @@ class ChangeGalleryInfoScreen extends StatelessWidget {
                     RoundedTextField(
                         'galleryName'.tr,
                         controller.galleryNameController,
-                        prefixIcon: Iconsax.user_copy,
+                        prefixIcon: IconsaxPlusLinear.user,
                         keyboardType: TextInputType.name,
                         TValidator.validateGalleryName),
                   ],

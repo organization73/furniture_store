@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                                                 .getScreenOrientation(
                                                     context) ==
                                             Orientation.portrait
-                                        ? TDeviceUtils.getScreenHeight() * 0.31
+                                        ? TDeviceUtils.getScreenHeight() * 0.32
                                         : TDeviceUtils.getScreenHeight() * 0.4,
                                     itemCount: productsController
                                         .featuredProducts.length,

@@ -10,7 +10,7 @@ import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/modules/product/screens/product_details/product_details_screen.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ProductCardHorizontal extends StatelessWidget {
   const ProductCardHorizontal({super.key, required this.product});
@@ -131,7 +131,7 @@ class ProductCardHorizontal extends StatelessWidget {
                         ),
                         const Spacer(),
                         const Icon(
-                          Iconsax.star,
+                          IconsaxPlusLinear.star,
                           color: Colors.amber,
                           size: TSizes.iconSm,
                         ),

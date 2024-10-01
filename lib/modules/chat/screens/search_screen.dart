@@ -5,7 +5,7 @@ import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class UsersSearchScreen extends StatefulWidget {
   const UsersSearchScreen({super.key});
@@ -41,7 +41,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen> {
                   controller: controller,
                   hint: 'Search',
                   onChanged: (val) => chatController.searchUser(val),
-                  prefixIcon: Iconsax.search_normal_copy,
+                  prefixIcon: IconsaxPlusLinear.search_normal,
                 ),
                 Obx(
                   () => ListView.builder(

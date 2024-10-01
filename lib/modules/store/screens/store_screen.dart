@@ -14,7 +14,7 @@ import 'package:decordashapp/modules/home/controllers/vendor/vendor_controller.d
 import 'package:decordashapp/modules/store/widgets/category_tab.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -33,7 +33,7 @@ class StoreScreen extends StatelessWidget {
                 SliverAppBar(
                     pinned: true,
                     floating: true,
-                    expandedHeight: TDeviceUtils.getScreenHeight() * 0.35,
+                    expandedHeight: TDeviceUtils.getScreenHeight() * 0.4,
                     flexibleSpace: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.pagePaddingSpace),
@@ -46,7 +46,7 @@ class StoreScreen extends StatelessWidget {
                           ),
                           CustomTextFormField(
                             hint: 'homeSearchBarHint'.tr,
-                            prefixIcon: Iconsax.search_normal_copy,
+                            prefixIcon: IconsaxPlusLinear.search_normal,
                             readOnly: true,
                             filled: true,
                             onTap: () => Get.to(

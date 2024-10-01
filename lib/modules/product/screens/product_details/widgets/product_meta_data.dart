@@ -14,7 +14,7 @@ import 'package:decordashapp/modules/product/screens/product_reviews/widgets/use
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductMetaData extends StatelessWidget {
@@ -95,7 +95,7 @@ class ProductMetaData extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
-              Iconsax.location,
+              IconsaxPlusLinear.location,
               color: Theme.of(context).textTheme.labelMedium!.color,
               size: TSizes.iconSm,
             ),

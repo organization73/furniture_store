@@ -5,7 +5,7 @@ import 'package:decordashapp/modules/authentication/controllers/gallery_selectio
 import 'package:decordashapp/modules/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class GallerySelection extends StatelessWidget {
   final GallerySelectionModel model = Get.put(GallerySelectionModel());
@@ -40,7 +40,7 @@ class GallerySelection extends StatelessWidget {
                 PageHeader(
                     title: 'gallarySelect'.tr,
                     subTitle: 'gallarySelectDesc'.tr,
-                    iconName: Iconsax.building),
+                    iconName: IconsaxPlusLinear.building),
                 Obx(() => Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),

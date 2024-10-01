@@ -8,7 +8,7 @@ import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/modules/authentication/controllers/gallery_info/gallery_information_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class GalleryInformationScreen extends StatelessWidget {
   const GalleryInformationScreen({super.key});
@@ -42,11 +42,11 @@ class GalleryInformationScreen extends StatelessWidget {
                   PageHeader(
                       title: 'gallaryTitle'.tr,
                       subTitle: 'gallaryTitleDesc'.tr,
-                      iconName: Iconsax.buildings),
+                      iconName: IconsaxPlusLinear.buildings),
                   RoundedTextField(
                     'galleryName'.tr,
                     controller.galleryNameController,
-                    prefixIcon: Iconsax.user_tag_copy,
+                    prefixIcon: IconsaxPlusLinear.user_tag,
                     keyboardType: TextInputType.name,
                     TValidator.validateGalleryName,
                   ),
@@ -55,13 +55,13 @@ class GalleryInformationScreen extends StatelessWidget {
                     'galleryAddress'.tr,
                     showLabel: false,
                     controller.galleryAddressController,
-                    prefixIcon: Iconsax.location_copy,
+                    prefixIcon: IconsaxPlusLinear.location,
                     suffixIcon: IconButton(
                         onPressed: () {
                           controller.getLocation();
                         },
                         icon: const Icon(
-                          Iconsax.map_copy,
+                          IconsaxPlusLinear.map,
                           size: TSizes.iconMd,
                         )),
                     keyboardType: TextInputType.name,
@@ -75,14 +75,14 @@ class GalleryInformationScreen extends StatelessWidget {
                         onTap: () => UserController.instance
                             .uploadGalleryInfo(isCertificate: false),
                         title: 'Upload gallery picture',
-                        icon: Iconsax.picture_frame,
+                        icon: IconsaxPlusLinear.picture_frame,
                       ),
                       const SizedBox(width: TSizes.sm),
                       UploadGalleryInfo(
                         onTap: () => UserController.instance
                             .uploadGalleryInfo(isCertificate: true),
                         title: 'uploadGalleryID'.tr,
-                        icon: Iconsax.card,
+                        icon: IconsaxPlusLinear.card,
                       ),
                     ],
                   ),

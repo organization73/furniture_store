@@ -6,7 +6,7 @@ import 'package:decordashapp/modules/chat/widgets/user_item.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -45,13 +45,13 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
               transition: Transition.rightToLeft,
             ),
             icon: const Icon(
-              Iconsax.search_normal_copy,
+              IconsaxPlusLinear.search_normal,
             ),
           ),
           IconButton(
             onPressed: () => chatController.fetchUserChats(),
             icon: const Icon(
-              Iconsax.refresh_copy,
+              IconsaxPlusLinear.refresh,
             ),
           ),
         ],

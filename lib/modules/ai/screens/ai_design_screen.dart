@@ -7,7 +7,7 @@ import 'package:decordashapp/modules/ai/widgets/generative_image.dart';
 import 'package:decordashapp/modules/ai/model/generative_ai/balance_model.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class AiPage extends StatefulWidget {
   const AiPage({super.key});
@@ -63,7 +63,7 @@ class _AiPageState extends State<AiPage> {
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: const Icon(
-                        Iconsax.buy_crypto_copy,
+                        IconsaxPlusLinear.buy_crypto,
                         color: Colors.white,
                       ),
                     ),
