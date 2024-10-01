@@ -6,7 +6,6 @@ import 'package:decordashapp/modules/authentication/controllers/phone_sign_in/ph
 import 'package:decordashapp/modules/authentication/screens/phone_login/phone_user_info_screen.dart';
 import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
-import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -31,8 +30,6 @@ class OTPController extends GetxController {
           if (isVerified) {
             bool isUserAlreadyRegistered = await UserRepo.instance
                 .isPhoneNumberRegistered(phoneController.number.phoneNumber!);
-
-            LoggerHelper.warning(isUserAlreadyRegistered.toString());
 
             if (isUserAlreadyRegistered) {
               TLoaders.successSnackBar(

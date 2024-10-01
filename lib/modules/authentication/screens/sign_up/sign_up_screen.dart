@@ -1,4 +1,3 @@
-import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';

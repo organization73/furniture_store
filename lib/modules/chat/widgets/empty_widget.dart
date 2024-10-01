@@ -1,10 +1,13 @@
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({super.key, required this.icon, required this.text});
+  const EmptyWidget({
+    super.key,
+    required this.icon,
+  });
 
   final IconData icon;
-  final String text;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -12,10 +15,10 @@ class EmptyWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, size: 150),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.titleMedium,
+            Icon(
+              icon,
+              size: TSizes.iconLg * 4,
+              color: Theme.of(context).colorScheme.surfaceContainerHigh,
             ),
           ],
         ),

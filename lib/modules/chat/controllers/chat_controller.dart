@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/data/repositories/chat/chat_repo.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/data/services/chat/firebase_chat_service.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/model/message.dart';
 import 'package:decordashapp/modules/personalization/models/user_model.dart';
@@ -11,6 +10,7 @@ import 'package:get/get.dart';
 
 class ChatController extends GetxController with WidgetsBindingObserver {
   static ChatController get instance => Get.find();
+
   final chatRepo = Get.put(ChatRepo());
   final userRepo = UserRepo.instance;
   final notificationService = NotificationsService();
@@ -19,7 +19,12 @@ class ChatController extends GetxController with WidgetsBindingObserver {
 
   Rx<UserModel?> user = Rx<UserModel?>(null);
   RxList<Message> messages = <Message>[].obs;
-  RxList<UserModel> search = <UserModel>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    notificationService.firebaseNotification(Get.context);
+  }
 
   Future<List<UserModel>> fetchUserChats() async {
     return await ChatRepo.instance
@@ -56,9 +61,5 @@ class ChatController extends GetxController with WidgetsBindingObserver {
     if (scrollController.hasClients) {
       scrollController.jumpTo(scrollController.position.maxScrollExtent);
     }
-  }
-
-  Future<void> searchUser(String name) async {
-    search.value = await FirebaseFirestoreService.searchUser(name);
   }
 }

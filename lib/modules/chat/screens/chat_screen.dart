@@ -35,9 +35,6 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           children: [
             ChatMessages(receiverId: widget.userId),
-            const SizedBox(
-              height: TSizes.spaceBtwSections / 2,
-            ),
             ChatTextField(receiverId: widget.userId)
           ],
         ),
@@ -57,9 +54,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   Text(
                     chatController.user.value!.userName,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
               )
-            : const SizedBox(),
+            : const SizedBox.shrink(),
       ));
 }

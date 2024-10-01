@@ -2,6 +2,7 @@ import 'package:decordashapp/modules/chat/model/message.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'empty_widget.dart';
 import 'message_bubble.dart';
 
@@ -16,7 +17,7 @@ class ChatMessages extends StatelessWidget {
     return Obx(
       () => chatController.messages.isEmpty
           ? const Expanded(
-              child: EmptyWidget(icon: Icons.waving_hand, text: 'Say Hello!'),
+              child: EmptyWidget(icon: IconsaxPlusBroken.message_text_1),
             )
           : Expanded(
               child: ListView.builder(

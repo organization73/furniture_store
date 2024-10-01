@@ -2,40 +2,28 @@ import 'package:decordashapp/common/widgets/images/circular_image.dart';
 import 'package:decordashapp/modules/chat/screens/chat_screen.dart';
 import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class UserItem extends StatefulWidget {
+class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.user});
 
   final UserModel user;
 
   @override
-  State<UserItem> createState() => _UserItemState();
-}
-
-class _UserItemState extends State<UserItem> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.to(
-          () => ChatScreen(userId: widget.user.id),
+          () => ChatScreen(userId: user.id),
           duration: const Duration(milliseconds: 300),
           transition: Transition.downToUp,
         ),
         child: ListTile(
           leading: CircularImage(
-            imageUrl: widget.user.avatar,
+            imageUrl: user.avatar,
             isNetworkImage: true,
-            height: 100,
           ),
-          title: Text(widget.user.userName,
-              style: Theme.of(context).textTheme.titleLarge),
+          title: Text(user.userName,
+              style: Theme.of(context).textTheme.titleMedium),
           trailing: const Icon(IconsaxPlusLinear.arrow_circle_right),
         ),
       );

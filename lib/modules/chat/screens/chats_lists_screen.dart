@@ -1,5 +1,4 @@
 import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
-import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/screens/search_screen.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:decordashapp/modules/chat/widgets/user_item.dart';
@@ -8,32 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class ChatsScreen extends StatefulWidget {
-  const ChatsScreen({super.key});
-
-  @override
-  State<ChatsScreen> createState() => _ChatsScreenState();
-}
-
-class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
-  final notificationService = NotificationsService();
-  final chatController = Get.put(ChatController());
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    notificationService.firebaseNotification(context);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+class ChatsListScreen extends StatelessWidget {
+  const ChatsListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final chatController = Get.put(ChatController());
+
     return Scaffold(
       appBar: AppBar(
         title: Text('chats'.tr),
@@ -46,12 +26,6 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
             ),
             icon: const Icon(
               IconsaxPlusLinear.search_normal,
-            ),
-          ),
-          IconButton(
-            onPressed: () => chatController.fetchUserChats(),
-            icon: const Icon(
-              IconsaxPlusLinear.refresh,
             ),
           ),
         ],
