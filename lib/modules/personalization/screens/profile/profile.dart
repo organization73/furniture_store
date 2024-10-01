@@ -1,4 +1,5 @@
 import 'package:decordashapp/modules/personalization/screens/profile/screens/change_gallery_info_screen.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
@@ -94,14 +95,14 @@ class ProfileScreen extends StatelessWidget {
                       value: controller.user.value.email,
                       onPress: () {},
                     )
-                  : const SizedBox(),
+                  : const SizedBox.shrink(),
               (controller.user.value.phoneNumber.isNotEmpty)
                   ? ProfileMenu(
                       title: 'Phone Number',
                       value: controller.user.value.phoneNumber,
                       onPress: () {},
                     )
-                  : const SizedBox(),
+                  : const SizedBox.shrink(),
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
@@ -109,39 +110,42 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              const SectionHeading(
-                title: 'Gallery Information',
-                showActionButton: false,
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
-              (controller.user.value.galleryName.isNotEmpty)
-                  ? ProfileMenu(
-                      title: 'Name',
-                      showIcon: true,
-                      value: controller.user.value.galleryName,
-                      onPress: () => Get.off(
-                        () => const ChangeGalleryInfoScreen(),
-                        duration: const Duration(milliseconds: 300),
-                        transition: Transition.downToUp,
-                      ),
+              (controller.user.value.accountType == AccountType.vendor)
+                  ? Column(
+                      children: [
+                        const SectionHeading(
+                          title: 'Gallery Information',
+                          showActionButton: false,
+                        ),
+                        (controller.user.value.galleryName.isNotEmpty)
+                            ? ProfileMenu(
+                                title: 'Name',
+                                showIcon: true,
+                                value: controller.user.value.galleryName,
+                                onPress: () => Get.off(
+                                  () => const ChangeGalleryInfoScreen(),
+                                  duration: const Duration(milliseconds: 300),
+                                  transition: Transition.downToUp,
+                                ),
+                              )
+                            : const SizedBox.shrink(),
+                        (controller.user.value.galleryAddress.isNotEmpty)
+                            ? ProfileMenu(
+                                title: 'Address',
+                                value: controller.user.value.galleryAddress,
+                                onPress: () {},
+                              )
+                            : const SizedBox.shrink(),
+                        const SizedBox(
+                          height: TSizes.spaceBtwItems,
+                        ),
+                        const Divider(),
+                        const SizedBox(
+                          height: TSizes.spaceBtwItems,
+                        ),
+                      ],
                     )
-                  : const SizedBox(),
-              (controller.user.value.galleryAddress.isNotEmpty)
-                  ? ProfileMenu(
-                      title: 'Address',
-                      value: controller.user.value.galleryAddress,
-                      onPress: () {},
-                    )
-                  : const SizedBox(),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
-              const Divider(),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
+                  : const SizedBox.shrink(),
               TextButton(
                   onPressed: () => controller.deleteAccountWarningPopup(),
                   child: Text('Close Account',

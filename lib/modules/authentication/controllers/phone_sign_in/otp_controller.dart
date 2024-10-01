@@ -3,9 +3,10 @@ import 'package:decordashapp/data/repositories/authentication/authentication_rep
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
-import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordashapp/modules/authentication/screens/phone_login/phone_user_info_screen.dart';
 import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
+import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -28,27 +29,32 @@ class OTPController extends GetxController {
 
           final bool isVerified = userCred.user != null ? true : false;
           if (isVerified) {
-            final newUser = UserModel(
-              id: userCred.user!.uid,
-              firstName:
-                  'rgrg', //phoneController.firstNameController.text.trim(),
-              lastName:
-                  'egege', //phoneController.lastNameController.text.trim(),
-              phoneNumber: phoneController.number.phoneNumber!,
-            );
+            bool isUserAlreadyRegistered = await UserRepo.instance
+                .isPhoneNumberRegistered(phoneController.number.phoneNumber!);
 
-            await UserRepo.instance.saveuserRecord(newUser);
+            LoggerHelper.warning(isUserAlreadyRegistered.toString());
 
-            Get.off(
-              () => GallerySelection(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            );
+            if (isUserAlreadyRegistered) {
+              TLoaders.successSnackBar(
+                  title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
+
+              AuthenticatorRepo.instance.screenRedirect();
+            } else {
+              final newUser = UserModel(
+                id: userCred.user!.uid,
+                phoneNumber: phoneController.number.phoneNumber!,
+              );
+
+              await UserRepo.instance.saveuserRecord(newUser);
+
+              Get.off(
+                () => const PhoneUserInfoScreen(),
+                duration: const Duration(milliseconds: 300),
+                transition: Transition.rightToLeft,
+              );
+            }
             await notifications.requestPermission();
             await notifications.getToken();
-
-            TLoaders.successSnackBar(
-                title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
           } else {
             FullScreenLoader.stopLoading();
             TLoaders.errorSnackBar(
