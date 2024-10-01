@@ -1,4 +1,4 @@
-import 'package:decordashapp/modules/authentication/widgets/phone_number_input.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -75,9 +75,37 @@ class SignUpScreen extends StatelessWidget {
                       controller.emailController,
                       TValidator.validateEmail),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
-                  PhoneNumberInput(
-                    onChange: (PhoneNumber number) {
-                      controller.phoneNumController.value = number.phoneNumber!;
+                  InternationalPhoneNumberInput(
+                    onInputChanged: (PhoneNumber number) {},
+                    onInputValidated: (bool value) {
+                      if (value) {
+                        controller.formKey.currentState!.save();
+                        TDeviceUtils.hideKeyboard(context);
+                      }
+                    },
+                    textStyle: const TextStyle(fontSize: TSizes.fontSizeSm),
+                    inputDecoration: InputDecoration(
+                      border: const OutlineInputBorder().copyWith(
+                        borderRadius:
+                            BorderRadius.circular(TSizes.inputFieldRadius),
+                      ),
+                      labelText: 'phoneNo'.tr,
+                    ),
+                    selectorConfig: const SelectorConfig(
+                        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                        useBottomSheetSafeArea: true,
+                        setSelectorButtonAsPrefixIcon: true,
+                        leadingPadding: 15,
+                        useEmoji: true),
+                    initialValue: controller.number,
+                    textFieldController: controller.phoneNumberController,
+                    formatInput: false,
+                    countries: const ["EG"],
+                    keyboardType: const TextInputType.numberWithOptions(
+                        signed: false, decimal: false),
+                    inputBorder: const OutlineInputBorder(),
+                    onSaved: (PhoneNumber number) {
+                      controller.number = number;
                     },
                   ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),

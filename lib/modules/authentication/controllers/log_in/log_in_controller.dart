@@ -1,4 +1,3 @@
-import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +43,6 @@ class LoginController extends GetxController {
 
       await AuthenticatorRepo.instance.loginWithEmailAndPassword(
           emailController.text.trim(), passwordController.text.trim());
-      await UserRepo.instance.updateSingleField(
-        {'lastActive': DateTime.now()},
-      );
 
       await notifications.requestPermission();
       await notifications.getToken();
@@ -76,9 +72,6 @@ class LoginController extends GetxController {
       final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
       await UserController.instance.saveUserRecord(userCred);
-      await UserRepo.instance.updateSingleField(
-        {'lastActive': DateTime.now()},
-      );
 
       await notifications.requestPermission();
       await notifications.getToken();

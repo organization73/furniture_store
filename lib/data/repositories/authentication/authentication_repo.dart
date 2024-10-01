@@ -1,14 +1,10 @@
-import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_info.dart';
 import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
-import 'package:decordashapp/modules/authentication/screens/phone_login/enter_code.dart';
 import 'package:decordashapp/modules/authentication/screens/sign_up/verify_sign_up_email.dart';
 import 'package:decordashapp/modules/home/screens/nav_menu.dart';
 import 'package:decordashapp/modules/onboarding/screens/onboarding_screen.dart';
 import 'package:decordashapp/utils/exceptions/exception_handler.dart';
-import 'package:decordashapp/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:decordashapp/utils/local_storage/storage_utility.dart';
-import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -91,38 +87,19 @@ class AuthenticatorRepo extends GetxController {
         phoneNumber: phoneNum,
         verificationCompleted: (PhoneAuthCredential credential) async {
           await _auth.signInWithCredential(credential);
-          Get.to(
-            () => CodeVerificationScreen(
-              phoneNumber: phoneNum,
-            ),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          );
         },
         verificationFailed: (FirebaseAuthException e) {
-          LoggerHelper.error('Error verifying phone number', e);
-          TLoaders.errorSnackBar(
-              title: 'ohSnap'.tr,
-              message: TFirebaseAuthException(e.code).message);
-
-          throw TFirebaseAuthException(e.code).message;
+          ExceptionHandler.handleAuthException(e);
         },
         codeSent: (String verificationId, int? resendToken) {
           this.verificationId.value = verificationId;
-          Get.to(
-            () => CodeVerificationScreen(
-              phoneNumber: phoneNum,
-            ),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          );
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           this.verificationId.value = verificationId;
         },
       );
     } catch (e) {
-      ExceptionHandler.handleAuthException(e);
+      rethrow;
     }
   }
 

@@ -9,6 +9,7 @@ import 'package:decordashapp/modules/personalization/models/user_model.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -22,9 +23,12 @@ class SignUpController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  RxString phoneNumController = ''.obs;
+  final TextEditingController phoneNumberController = TextEditingController();
 
   static final notifications = NotificationsService();
+  final userRepesotory = UserRepo.instance;
+
+  PhoneNumber number = PhoneNumber(isoCode: 'EG');
 
   void signup() async {
     try {
@@ -63,10 +67,9 @@ class SignUpController extends GetxController {
         firstName: firstNameController.text.trim(),
         lastName: lastNameController.text.trim(),
         email: emailController.text.trim(),
-        phoneNumber: phoneNumController.value.trim(),
+        phoneNumber: number.phoneNumber!,
       );
 
-      final userRepesotory = UserRepo.instance;
       await userRepesotory.saveuserRecord(newUser);
 
       await notifications.requestPermission();

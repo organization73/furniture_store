@@ -1,12 +1,10 @@
 import 'package:decordashapp/modules/authentication/controllers/phone_sign_in/otp_controller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class CodeVerificationScreen extends StatelessWidget {
   final String phoneNumber;
@@ -39,32 +37,34 @@ class CodeVerificationScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
-                  Iconsax.verify,
-                  size: 45,
+                  IconsaxPlusBroken.lock_circle,
+                  size: TSizes.iconLg * 3,
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.spaceBtwSections * 2),
                 Text(
                   'enterCode'.tr,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: TSizes.spaceBtwInputFields * 2),
                 Text(
                   'codeDesc'.tr,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 const SizedBox(height: TSizes.spaceBtwInputFields),
                 Text(
                   phoneNumber,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.spaceBtwSections * 3),
                 OtpTextField(
                   numberOfFields: 6,
-                  borderColor: Theme.of(context).primaryColor,
-                  onCodeChanged: (String code) {
-                    //handle validation or checks here
-                  },
+                  showFieldAsBox: true,
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(10),
+                  disabledBorderColor:
+                      Theme.of(context).colorScheme.surfaceContainerLow,
                   onSubmit: (String verificationCode) {
                     otp = verificationCode;
                     controller.verifyOTP(otp);

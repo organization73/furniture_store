@@ -1,6 +1,3 @@
-import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
-import 'package:decordashapp/modules/authentication/widgets/phone_number_input.dart';
-import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
@@ -46,31 +43,58 @@ class PhoneNumberScreen extends StatelessWidget {
                   key: controller.formKey,
                   child: Column(
                     children: <Widget>[
-                      Row(
-                        children: [
-                          Expanded(
-                            child: RoundedTextField(
-                                'firstName'.tr,
-                                controller.firstNameController,
-                                prefixIcon: IconsaxPlusLinear.user,
-                                keyboardType: TextInputType.name,
-                                TValidator.validateUserInput),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: RoundedTextField(
+                      //           'firstName'.tr,
+                      //           controller.firstNameController,
+                      //           prefixIcon: IconsaxPlusLinear.user,
+                      //           keyboardType: TextInputType.name,
+                      //           TValidator.validateUserInput),
+                      //     ),
+                      //     const SizedBox(width: TSizes.sm),
+                      //     Expanded(
+                      //       child: RoundedTextField(
+                      //           prefixIcon: IconsaxPlusLinear.clipboard_text,
+                      //           'lastName'.tr,
+                      //           controller.lastNameController,
+                      //           keyboardType: TextInputType.name,
+                      //           TValidator.validateUserInput),
+                      //     ),
+                      //   ],
+                      // ),
+
+                      InternationalPhoneNumberInput(
+                        onInputChanged: (PhoneNumber number) {},
+                        onInputValidated: (bool value) {
+                          if (value) {
+                            controller.formKey.currentState!.save();
+                          }
+                        },
+                        textStyle: const TextStyle(fontSize: TSizes.fontSizeSm),
+                        inputDecoration: InputDecoration(
+                          border: const OutlineInputBorder().copyWith(
+                            borderRadius:
+                                BorderRadius.circular(TSizes.inputFieldRadius),
                           ),
-                          const SizedBox(width: TSizes.sm),
-                          Expanded(
-                            child: RoundedTextField(
-                                prefixIcon: IconsaxPlusLinear.clipboard_text,
-                                'lastName'.tr,
-                                controller.lastNameController,
-                                keyboardType: TextInputType.name,
-                                TValidator.validateUserInput),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwInputFields),
-                      PhoneNumberInput(
-                        onChange: (PhoneNumber number) {
-                          controller.phoneNumber.value = number.phoneNumber!;
+                          labelText: 'phoneNo'.tr,
+                        ),
+                        selectorConfig: const SelectorConfig(
+                            selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                            useBottomSheetSafeArea: true,
+                            setSelectorButtonAsPrefixIcon: true,
+                            leadingPadding: 15,
+                            useEmoji: true),
+                        initialValue: controller.number,
+                        textFieldController: controller.phoneNumberController,
+                        formatInput: false,
+                        countries: const ["EG"],
+                        keyboardType: const TextInputType.numberWithOptions(
+                            signed: false, decimal: false),
+                        inputBorder: const OutlineInputBorder(),
+                        onSaved: (PhoneNumber number) {
+                          controller.number = number;
                         },
                       ),
                     ],

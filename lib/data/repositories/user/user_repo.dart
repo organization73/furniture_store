@@ -94,4 +94,13 @@ class UserRepo extends GetxService {
       rethrow;
     }
   }
+
+  Future<bool> isPhoneNumberRegistered(String phoneNumber) async {
+    final querySnapshot = await _db
+        .collection('Users')
+        .where('phoneNumber', isEqualTo: phoneNumber)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
-import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/screens/search_screen.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
@@ -25,27 +24,6 @@ class _ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     notificationService.firebaseNotification(context);
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-
-    switch (state) {
-      case AppLifecycleState.resumed:
-        UserRepo.instance.updateSingleField({
-          'lastActive': DateTime.now(),
-          'isOnline': true,
-        });
-        break;
-
-      case AppLifecycleState.inactive:
-      case AppLifecycleState.paused:
-      case AppLifecycleState.hidden:
-      case AppLifecycleState.detached:
-        UserRepo.instance.updateSingleField({'isOnline': false});
-        break;
-    }
   }
 
   @override

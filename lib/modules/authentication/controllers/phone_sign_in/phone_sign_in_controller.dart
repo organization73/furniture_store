@@ -1,11 +1,10 @@
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
+import 'package:decordashapp/modules/authentication/screens/phone_login/enter_code.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
-import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class PhoneSingInController extends GetxController {
   static PhoneSingInController get instance => Get.find();
@@ -14,8 +13,9 @@ class PhoneSingInController extends GetxController {
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-   RxString phoneNumber = ''.obs;
-  static final notifications = NotificationsService();
+  final TextEditingController phoneNumberController = TextEditingController();
+
+  PhoneNumber number = PhoneNumber(isoCode: 'EG');
 
   void loginWithPhone() async {
     try {
@@ -31,14 +31,14 @@ class PhoneSingInController extends GetxController {
         return;
       }
 
-      await AuthenticatorRepo.instance.loginWithPhone(phoneNumber.value.trim());
-      await UserRepo.instance.updateSingleField(
-        {'lastActive': DateTime.now()},
+      await AuthenticatorRepo.instance.loginWithPhone(number.phoneNumber!);
+
+      Get.to(
+        () => CodeVerificationScreen(phoneNumber: number.phoneNumber!),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
       );
-      await notifications.requestPermission();
-      await notifications.getToken();
     } catch (e) {
-      LoggerHelper.error(e.toString());
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
