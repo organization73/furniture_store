@@ -1,4 +1,4 @@
-import 'package:decordashapp/modules/favourits/controllers/favorite_controller.dart';
+import 'package:decordashapp/modules/favourites/controllers/favorite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/home/controllers/product/product_controller.dart';
 import 'package:get/get.dart';

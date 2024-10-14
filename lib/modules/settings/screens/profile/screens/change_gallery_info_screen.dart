@@ -1,4 +1,4 @@
-import 'package:decordashapp/modules/personalization/controllers/user/update_gallery_info.dart';
+import 'package:decordashapp/modules/profile/controllers/update_gallery_info.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
 import 'package:decordashapp/modules/chat/model/message.dart';
-import 'package:decordashapp/modules/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 

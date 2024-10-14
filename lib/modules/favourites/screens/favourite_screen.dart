@@ -6,7 +6,7 @@ import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
-import 'package:decordashapp/modules/favourits/controllers/favorite_controller.dart';
+import 'package:decordashapp/modules/favourites/controllers/favorite_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 

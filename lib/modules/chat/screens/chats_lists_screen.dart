@@ -2,7 +2,7 @@ import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
 import 'package:decordashapp/modules/chat/screens/search_screen.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:decordashapp/modules/chat/widgets/user_item.dart';
-import 'package:decordashapp/modules/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

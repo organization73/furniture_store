@@ -1,12 +1,12 @@
-import 'package:decordashapp/modules/personalization/screens/profile/screens/change_gallery_info_screen.dart';
+import 'package:decordashapp/modules/profile/screens/change_gallery_info_screen.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
 import 'package:decordashapp/common/widgets/user_profile/profile_widget.dart';
-import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
-import 'package:decordashapp/modules/personalization/screens/profile/widgets/change_name.dart';
-import 'package:decordashapp/modules/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
+import 'package:decordashapp/modules/profile/widgets/change_name.dart';
+import 'package:decordashapp/modules/profile/widgets/profile_menu.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 

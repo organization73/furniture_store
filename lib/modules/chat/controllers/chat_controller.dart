@@ -3,7 +3,7 @@ import 'package:decordashapp/data/repositories/chat/chat_repo.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/chat/model/message.dart';
-import 'package:decordashapp/modules/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

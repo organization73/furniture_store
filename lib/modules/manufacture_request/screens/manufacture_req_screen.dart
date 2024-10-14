@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/manufacture_request/screens/add_new_request/screens/add_new_request.dart';
-import 'package:decordashapp/modules/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 

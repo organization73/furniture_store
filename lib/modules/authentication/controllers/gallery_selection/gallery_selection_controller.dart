@@ -1,7 +1,7 @@
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/modules/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_info.dart';
-import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
+import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

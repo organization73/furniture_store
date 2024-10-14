@@ -1,5 +1,5 @@
 import 'package:decordashapp/data/services/chat/firebase_chat_service.dart';
-import 'package:decordashapp/modules/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

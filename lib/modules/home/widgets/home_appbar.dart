@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordashapp/modules/favourits/screens/favourite_screen.dart';
+import 'package:decordashapp/modules/favourites/screens/favourite_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 

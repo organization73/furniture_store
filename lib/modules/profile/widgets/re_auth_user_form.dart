@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
-import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
+import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,6 @@
 import 'package:decordashapp/modules/ai/screens/ai_design_screen.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
+import 'package:decordashapp/utils/helpers/helper_functions.dart';
 import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -7,61 +8,14 @@ import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:decordashapp/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:decordashapp/modules/manufacture_request/screens/manufacture_req_screen.dart';
-import 'package:decordashapp/modules/personalization/controllers/user/user_controller.dart';
-import 'package:decordashapp/modules/personalization/screens/profile/profile.dart';
+import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
+import 'package:decordashapp/modules/profile/screens/profile.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-
-  void _showLanguageModel() {
-    showModalBottomSheet<void>(
-      context: Get.overlayContext!,
-      showDragHandle: true,
-      builder: (BuildContext context) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'selectLan'.tr,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            ListTile(
-              title: Text(
-                'English',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              leading: const Text(
-                'en',
-                style: TextStyle(fontSize: 25),
-              ),
-              onTap: () {
-                Get.updateLocale(const Locale('en', 'US'));
-                Get.back();
-              },
-            ),
-            ListTile(
-              title: Text(
-                'Arabic',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              leading: const Text(
-                'ar',
-                style: TextStyle(fontSize: 25),
-              ),
-              onTap: () {
-                Get.updateLocale(const Locale('ar', 'SA'));
-                Get.back();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
                       icon: IconsaxPlusLinear.language_square,
                       title: 'language'.tr,
                       subTitle: 'languageDesc'.tr,
-                      onTap: () => _showLanguageModel(),
+                      onTap: () => THelperFunctions.showLanguageModel(),
                     ),
                     SettingsMenuTile(
                       icon: IconsaxPlusLinear.moon,

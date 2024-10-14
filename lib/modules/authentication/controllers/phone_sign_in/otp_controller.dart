@@ -4,7 +4,7 @@ import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
 import 'package:decordashapp/modules/authentication/controllers/phone_sign_in/phone_sign_in_controller.dart';
 import 'package:decordashapp/modules/authentication/screens/phone_login/phone_user_info_screen.dart';
-import 'package:decordashapp/modules/personalization/models/user_model.dart';
+import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
