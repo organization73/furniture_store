@@ -110,7 +110,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              (controller.user.value.accountType == AccountType.vendor)
+              (controller.user.value.accountType == AccountType.gallery)
                   ? Column(
                       children: [
                         const SectionHeading(

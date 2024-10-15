@@ -18,7 +18,7 @@ class VendorModel {
     required this.name,
     this.isFeatured = false,
     this.isVerified = false,
-    this.accountType = AccountType.regular,
+    this.accountType = AccountType.vendor,
     this.productsCount,
   });
 
@@ -30,7 +30,7 @@ class VendorModel {
       isFeatured: false,
       isVerified: false,
       productsCount: 0,
-      accountType: AccountType.regular);
+      accountType: AccountType.vendor);
 
   Map<String, dynamic> toJson() {
     return {
@@ -56,7 +56,7 @@ class VendorModel {
         isFeatured: data['isFeatured'] ?? false,
         isVerified: data['isVerified'] ?? false,
         accountType: AccountType
-            .values[data['accountType'] ?? AccountType.regular.index],
+            .values[data['accountType'] ?? AccountType.vendor.index],
         productsCount: data['productsCount'] ?? 0);
   }
   factory VendorModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
@@ -70,7 +70,7 @@ class VendorModel {
           isFeatured: data['isFeatured'] ?? false,
           isVerified: data['isVerified'] ?? false,
           accountType: AccountType
-              .values[data['accountType'] ?? AccountType.regular.index],
+              .values[data['accountType'] ?? AccountType.vendor.index],
           productsCount: data['productsCount'] ?? 0);
     } else {
       return VendorModel.empty();

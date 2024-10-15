@@ -10,5 +10,4 @@ class EnumUtil {
 
 enum TextSizes { small, medium, large }
 
-enum AccountType { regular, vendor }
-
+enum AccountType { vendor, gallery }

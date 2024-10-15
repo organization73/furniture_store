@@ -47,7 +47,7 @@ class SettingsScreen extends StatelessWidget {
                 return Column(
                   children: [
                     UserController.instance.user.value.accountType ==
-                            AccountType.vendor
+                            AccountType.gallery
                         ? Column(
                             children: [
                               SectionHeading(

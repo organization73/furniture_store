@@ -26,6 +26,8 @@ class UserController extends GetxService {
   final GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
   final TextEditingController verifyEmail = TextEditingController();
   final TextEditingController verifyPassword = TextEditingController();
+  final FocusNode verifyEmailFocus = FocusNode();
+  final FocusNode verifyPasswordFocus = FocusNode();
 
   @override
   onInit() {
@@ -93,8 +95,7 @@ class UserController extends GetxService {
                   color: Theme.of(Get.context!).colorScheme.onError,
                 ))),
         cancel: OutlinedButton(
-            onPressed: () => Navigator.of(Get.overlayContext!).pop(),
-            child: const Text('Cancel')));
+            onPressed: () => Get.back(), child: const Text('Cancel')));
   }
 
   void deleteUserAccount() async {
@@ -108,6 +109,7 @@ class UserController extends GetxService {
       if (provider.isNotEmpty) {
         if (provider == 'google.com') {
           await auth.signInWithGoogle();
+          await UserRepo.instance.removeUserRecord(auth.authUser!.uid);
           await auth.deleteAccount();
           FullScreenLoader.stopLoading();
           Get.offAll(
@@ -123,6 +125,7 @@ class UserController extends GetxService {
             transition: Transition.rightToLeft,
           );
         } else if (provider == 'phone') {
+          await UserRepo.instance.removeUserRecord(auth.authUser!.uid);
           await auth.deleteAccount();
           FullScreenLoader.stopLoading();
           Get.offAll(
@@ -134,7 +137,6 @@ class UserController extends GetxService {
       }
     } catch (e) {
       FullScreenLoader.stopLoading();
-
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }
@@ -157,6 +159,8 @@ class UserController extends GetxService {
       }
       await AuthenticatorRepo.instance.reAuthEmailAndPasswordUser(
           verifyEmail.text.trim(), verifyPassword.text.trim());
+
+      await UserRepo.instance.removeUserRecord(user.value.id);
       await AuthenticatorRepo.instance.deleteAccount();
 
       FullScreenLoader.stopLoading();
@@ -255,12 +259,12 @@ class UserController extends GetxService {
     }
   }
 
-  updateAccountType(int value) async {
+  void updateAccountType(int value) async {
     try {
       if (value == 1) {
-        Map<String, dynamic> json = {"accountType": 'vendor'};
+        Map<String, dynamic> json = {"accountType": 'gallery'};
         await UserRepo.instance.updateSingleField(json);
-        user.value.accountType = AccountType.vendor;
+        user.value.accountType = AccountType.gallery;
         user.refresh();
       }
     } catch (e) {

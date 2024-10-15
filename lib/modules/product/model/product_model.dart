@@ -57,7 +57,7 @@ class ProductModel {
                 image: '',
                 isFeatured: false,
                 productsCount: 0,
-                accountType: AccountType.regular)),
+                accountType: AccountType.vendor)),
         sku: '',
       );
 

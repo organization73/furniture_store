@@ -63,32 +63,6 @@ class UserRepo extends GetxService {
     try {
       // Delete the user's document from the 'Users' collection
       await _db.collection('Users').doc(userId).delete();
-
-      // Query the 'Products' collection for documents where 'userId' matches the user ID being removed
-      final userProducts = await _db
-          .collection('Products')
-          .where('ProductDetails.productSeller.id', isEqualTo: userId)
-          .get();
-      final vendorRelation = await _db
-          .collection('VendorCategory')
-          .where('vendorId', isEqualTo: userId)
-          .get();
-      //TODO  delete user relation with products and categories
-      // final categoryRelation = await _db
-      //     .collection('ProductCategory')
-      //     .where('productId', whereIn: userProducts.docs)
-      //     .get();
-
-      // Delete each product document found in the query
-      for (var doc in userProducts.docs) {
-        await _db.collection('Products').doc(doc.id).delete();
-      }
-      for (var doc in vendorRelation.docs) {
-        await _db.collection('VendorCategory').doc(doc.id).delete();
-      }
-      // for (var doc in categoryRelation.docs) {
-      //   await _db.collection('ProductCategory').doc(doc.id).delete();
-      // }
     } catch (e) {
       ExceptionHandler.handleAuthException(e);
       rethrow;

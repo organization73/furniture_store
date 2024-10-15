@@ -21,7 +21,7 @@ class UserModel {
   String galleryPicture;
 
   UserModel({
-    this.accountType = AccountType.regular,
+    this.accountType = AccountType.vendor,
     this.phoneNumber = '',
     this.avatar = '',
     this.firstName = '',
@@ -140,7 +140,7 @@ class UserModel {
 
   static UserModel empty() {
     return UserModel(
-      accountType: AccountType.regular,
+      accountType: AccountType.vendor,
       phoneNumber: '',
       avatar: '',
       firstName: '',
