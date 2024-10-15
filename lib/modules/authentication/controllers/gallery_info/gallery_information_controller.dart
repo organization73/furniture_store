@@ -73,8 +73,6 @@ class GalleryInfoController extends GetxController {
 
       UserController.instance.user.refresh();
 
-      storage.write('isGalleryInfoComp', true);
-
       AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());

@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/helpers/helper_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
@@ -6,11 +7,9 @@ import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/modules/authentication/controllers/sign_up/sign_up_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:markdown_widget/markdown_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -50,6 +49,9 @@ class SignUpScreen extends StatelessWidget {
                       Expanded(
                         child: RoundedTextField(
                             'firstName'.tr,
+                            focusNode: controller.firstNameFocus,
+                            currentFocus: controller.firstNameFocus,
+                            nextFocus: controller.lastNameFocus,
                             controller.firstNameController,
                             prefixIcon: IconsaxPlusLinear.user,
                             keyboardType: TextInputType.name,
@@ -60,6 +62,9 @@ class SignUpScreen extends StatelessWidget {
                         child: RoundedTextField(
                             prefixIcon: IconsaxPlusLinear.clipboard_text,
                             'lastName'.tr,
+                            focusNode: controller.lastNameFocus,
+                            currentFocus: controller.lastNameFocus,
+                            nextFocus: controller.emailFocus,
                             controller.lastNameController,
                             keyboardType: TextInputType.name,
                             TValidator.validateUserInput),
@@ -69,12 +74,21 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   RoundedTextField(
                       'email'.tr,
+                      focusNode: controller.emailFocus,
+                      currentFocus: controller.emailFocus,
+                      nextFocus: controller.phoneNumberFocus,
                       prefixIcon: IconsaxPlusLinear.sms,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   InternationalPhoneNumberInput(
+                    onFieldSubmitted: (value) {
+                      controller.phoneNumberFocus.unfocus();
+                      FocusScope.of(context)
+                          .requestFocus(controller.passwordFocus);
+                    },
+                    focusNode: controller.phoneNumberFocus,
                     onInputChanged: (PhoneNumber number) {},
                     onInputValidated: (bool value) {
                       if (value) {
@@ -112,6 +126,8 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         RoundedTextField(
                             'password'.tr,
+                            focusNode: controller.passwordFocus,
+                            onFieldSubmitted: () => controller.signup(),
                             prefixIcon: IconsaxPlusLinear.lock,
                             suffixIcon: IconButton(
                                 onPressed: () {
@@ -165,8 +181,10 @@ class SignUpScreen extends StatelessWidget {
                                         Theme.of(context).colorScheme.primary,
                                   ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => _showBottomSheet(context,
-                                    'assets/markdown/privacy_policy.md'),
+                                ..onTap = () =>
+                                    THelperFunctions.showTermsBottomSheet(
+                                        context,
+                                        'assets/markdown/privacy_policy.md'),
                             ),
                             TextSpan(
                               text: ' ${'and'.tr} ',
@@ -185,8 +203,10 @@ class SignUpScreen extends StatelessWidget {
                                         Theme.of(context).colorScheme.primary,
                                   ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => _showBottomSheet(context,
-                                    'assets/markdown/terms_and_conditions.md'),
+                                ..onTap = () =>
+                                    THelperFunctions.showTermsBottomSheet(
+                                        context,
+                                        'assets/markdown/terms_and_conditions.md'),
                             ),
                           ],
                         ),
@@ -199,46 +219,6 @@ class SignUpScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showBottomSheet(BuildContext context, String filePath) {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: FutureBuilder(
-            future: rootBundle.loadString(filePath),
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              if (snapshot.hasData) {
-                return MarkdownWidget(
-                  config: MarkdownConfig(configs: [
-                    const PConfig(textStyle: TextStyle(fontSize: 13)),
-                    H1Config(
-                        style: Theme.of(context).textTheme.headlineMedium!),
-                    H2Config(style: Theme.of(context).textTheme.headlineSmall!),
-                    H3Config(style: Theme.of(context).textTheme.titleMedium!),
-                    H4Config(style: Theme.of(context).textTheme.titleSmall!),
-                    const TableConfig(
-                      columnWidths: {0: FractionColumnWidth(0.25)},
-                    ),
-                    ListConfig(
-                      marker: (isOrdered, depth, index) => const Padding(
-                        padding: EdgeInsets.only(top: 6),
-                        child: Icon(Icons.circle, size: 6),
-                      ),
-                    ),
-                  ]),
-                  data: snapshot.data!,
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          ),
-        );
-      },
     );
   }
 }

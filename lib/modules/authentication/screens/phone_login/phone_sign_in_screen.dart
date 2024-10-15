@@ -43,28 +43,6 @@ class PhoneNumberScreen extends StatelessWidget {
                   key: controller.formKey,
                   child: Column(
                     children: <Widget>[
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       child: RoundedTextField(
-                      //           'firstName'.tr,
-                      //           controller.firstNameController,
-                      //           prefixIcon: IconsaxPlusLinear.user,
-                      //           keyboardType: TextInputType.name,
-                      //           TValidator.validateUserInput),
-                      //     ),
-                      //     const SizedBox(width: TSizes.sm),
-                      //     Expanded(
-                      //       child: RoundedTextField(
-                      //           prefixIcon: IconsaxPlusLinear.clipboard_text,
-                      //           'lastName'.tr,
-                      //           controller.lastNameController,
-                      //           keyboardType: TextInputType.name,
-                      //           TValidator.validateUserInput),
-                      //     ),
-                      //   ],
-                      // ),
-
                       InternationalPhoneNumberInput(
                         onInputChanged: (PhoneNumber number) {},
                         onInputValidated: (bool value) {

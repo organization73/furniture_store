@@ -5,14 +5,13 @@ class RoundedTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final FormFieldValidator<String?> validator;
-  final bool isPassword;
   final TextInputType keyboardType;
   final IconData? prefixIcon;
   final Widget? suffixIcon;
-  final bool showLabel;
-  final bool isFilled;
-  final bool isReadonly;
+  final bool showLabel, isFilled, isReadonly, isPassword;
   final Color? fillColor;
+  final FocusNode? focusNode, currentFocus, nextFocus;
+  final VoidCallback? onFieldSubmitted;
 
   const RoundedTextField(
     this.hintText,
@@ -27,32 +26,47 @@ class RoundedTextField extends StatelessWidget {
     this.isFilled = false,
     this.isReadonly = false,
     this.fillColor,
+    this.currentFocus,
+    this.nextFocus,
+    this.focusNode,
+    this.onFieldSubmitted,
   });
+
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: keyboardType,
-      controller: controller,
-      obscureText: isPassword,
-      style: const TextStyle(
-        fontSize: 12,
-      ),
-      decoration: InputDecoration(
-        hintText: hintText,
-        filled: isFilled,
-        fillColor: fillColor,
-        label: showLabel ? Text(hintText) : null,
-        prefixIcon: prefixIcon != null
-            ? Icon(
-                prefixIcon,
-                size: TSizes.iconMd,
-              )
-            : null,
-        suffixIcon: suffixIcon,
-      ),
-      validator: validator,
-      readOnly: isReadonly,
-    );
+        keyboardType: keyboardType,
+        controller: controller,
+        obscureText: isPassword,
+        focusNode: focusNode,
+        style: const TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+          hintText: hintText,
+          filled: isFilled,
+          fillColor: fillColor,
+          label: showLabel ? Text(hintText) : null,
+          prefixIcon: prefixIcon != null
+              ? Icon(
+                  prefixIcon,
+                  size: TSizes.iconMd,
+                )
+              : null,
+          suffixIcon: suffixIcon,
+        ),
+        validator: validator,
+        readOnly: isReadonly,
+        onFieldSubmitted: (value) => {
+              (nextFocus != null && currentFocus != null)
+                  ? _fieldFocusChange(context, currentFocus!, nextFocus!)
+                  : onFieldSubmitted?.call()
+            });
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 
 class THelperFunctions {
   static void showSnackBar(String message) {
@@ -68,6 +70,46 @@ class THelperFunctions {
               },
             ),
           ],
+        );
+      },
+    );
+  }
+
+  static void showTermsBottomSheet(BuildContext context, String filePath) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: FutureBuilder(
+            future: rootBundle.loadString(filePath),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasData) {
+                return MarkdownWidget(
+                  config: MarkdownConfig(configs: [
+                    const PConfig(textStyle: TextStyle(fontSize: 13)),
+                    H1Config(
+                        style: Theme.of(context).textTheme.headlineMedium!),
+                    H2Config(style: Theme.of(context).textTheme.headlineSmall!),
+                    H3Config(style: Theme.of(context).textTheme.titleMedium!),
+                    H4Config(style: Theme.of(context).textTheme.titleSmall!),
+                    const TableConfig(
+                      columnWidths: {0: FractionColumnWidth(0.25)},
+                    ),
+                    ListConfig(
+                      marker: (isOrdered, depth, index) => const Padding(
+                        padding: EdgeInsets.only(top: 6),
+                        child: Icon(Icons.circle, size: 6),
+                      ),
+                    ),
+                  ]),
+                  data: snapshot.data!,
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
         );
       },
     );

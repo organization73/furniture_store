@@ -44,12 +44,18 @@ class EmailSignInScreen extends StatelessWidget {
                   RoundedTextField(
                       prefixIcon: IconsaxPlusLinear.sms,
                       'email'.tr,
+                      focusNode: controller.emailFocus,
+                      currentFocus: controller.emailFocus,
+                      nextFocus: controller.passwordFocus,
                       keyboardType: TextInputType.emailAddress,
                       controller.emailController,
                       TValidator.validateEmail),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   Obx(() => RoundedTextField(
                       'password'.tr,
+                      focusNode: controller.passwordFocus,
+                      onFieldSubmitted: () =>
+                          controller.emailAndPasswordSignIn(),
                       prefixIcon: IconsaxPlusLinear.lock,
                       suffixIcon: IconButton(
                           onPressed: () {

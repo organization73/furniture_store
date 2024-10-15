@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:decordashapp/modules/onboarding/controllers/onboarding_controller.dart';
 import 'package:decordashapp/modules/onboarding/model/page_model.dart';
 import 'package:decordashapp/modules/onboarding/widgets/onboarding_page.dart';

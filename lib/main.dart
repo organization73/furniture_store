@@ -13,12 +13,19 @@ Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
 
-  await Future.wait([
-    GetStorage.init(),
-    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
-    FirebaseAppCheck.instance.activate(androidProvider: AndroidProvider.debug),
-    FirebaseMessaging.instance.getInitialMessage(),
-  ]).then((value) => Get.put(AuthenticatorRepo()));
+  await GetStorage.init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug,
+  );
+
+  await FirebaseMessaging.instance
+      .getInitialMessage()
+      .then((value) => Get.put(AuthenticatorRepo()));
 
   runApp(const MyApp());
 }

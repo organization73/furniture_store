@@ -21,8 +21,6 @@ class GallerySelectionController extends GetxController {
     userController.updateAccountType(model.selectedOption.value);
 
     if (model.selectedOption.value == 0) {
-      storage.write('isGalleryInfoComp', true);
-
       AuthenticatorRepo.instance.screenRedirect();
     } else {
       Get.to(
