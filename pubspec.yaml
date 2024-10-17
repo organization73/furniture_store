@@ -44,6 +44,7 @@ dependencies:
   geolocator: ^13.0.1
   geocoding: ^3.0.0
   iconsax_plus: ^1.0.0
+  skeletonizer: ^1.4.2
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +62,8 @@ flutter:
     - assets/logos/
     - assets/animations/
     - assets/markdown/
-    - assets/banners/
     - assets/images/categories/
+    - assets/images/banners/
 
   fonts:
     - family: Poppins

@@ -2,6 +2,7 @@ import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/category/category_repo.dart';
 import 'package:decordashapp/data/repositories/product/product_repo.dart';
 import 'package:decordashapp/modules/home/model/category_model.dart';
+import 'package:decordashapp/modules/home/model/rooms_model.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:get/get.dart';
@@ -11,8 +12,7 @@ class CategoryController extends GetxController {
   final isLoading = false.obs;
   final _categoryRepo = Get.put(CategoryRepo());
   RxList<CategoryModel> allCatedories = <CategoryModel>[].obs;
-  RxList<CategoryModel> featuredCatedories = <CategoryModel>[].obs;
-  RxList<CategoryModel> roomsCatedories = <CategoryModel>[].obs;
+  RxList<RoomModel> allRooms = <RoomModel>[].obs;
 
   @override
   void onInit() {
@@ -24,15 +24,10 @@ class CategoryController extends GetxController {
     try {
       isLoading.value = true;
       final categories = await _categoryRepo.getAllCategories();
+      final rooms = await _categoryRepo.getRooms();
 
       allCatedories.assignAll(categories);
-
-      featuredCatedories.assignAll(allCatedories
-          .where((category) => category.isFeatured && category.parentId.isEmpty)
-          .toList());
-      roomsCatedories.assignAll(allCatedories
-          .where((category) => category.isRoom && category.parentId.isEmpty)
-          .toList());
+      allRooms.assignAll(rooms);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     } finally {

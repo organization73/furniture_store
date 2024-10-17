@@ -29,6 +29,8 @@ class UserController extends GetxService {
   final FocusNode verifyEmailFocus = FocusNode();
   final FocusNode verifyPasswordFocus = FocusNode();
 
+  final storageServices = Get.put(FirebaseStorageServices());
+
   @override
   onInit() {
     super.onInit();
@@ -186,8 +188,8 @@ class UserController extends GetxService {
       if (image != null) {
         imageLoading.value = true;
 
-        final imageUrl = await FirebaseStorageServices.instance
-            .uploadImageFile('Users/Images/Profile/', image);
+        final imageUrl = await storageServices.uploadImageFile(
+            'Users/Images/Profile/', image);
 
         Map<String, dynamic> json = {"avatar": imageUrl};
         await UserRepo.instance.updateSingleField(json);
@@ -223,7 +225,7 @@ class UserController extends GetxService {
           return;
         }
 
-        final imageUrl = await FirebaseStorageServices.instance.uploadImageFile(
+        final imageUrl = await storageServices.uploadImageFile(
             isCertificate
                 ? 'Users/Images/Gallery/Certificate/'
                 : 'Users/Images/Gallery/Picture/',

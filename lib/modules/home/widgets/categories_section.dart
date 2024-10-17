@@ -27,19 +27,19 @@ class BuildCategoriesSection extends StatelessWidget {
         Obx(() {
           if (categoryController.isLoading.value) {
             return CategoryShimmer(
-              itemCount: categoryController.featuredCatedories.length,
+              itemCount: categoryController.allCatedories.length,
             );
           }
-          if (categoryController.featuredCatedories.isEmpty) {
+          if (categoryController.allCatedories.isEmpty) {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
               height: 60,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: categoryController.featuredCatedories.length,
+                itemCount: categoryController.allCatedories.length,
                 itemBuilder: (context, index) {
-                  final category = categoryController.featuredCatedories[index];
+                  final category = categoryController.allCatedories[index];
 
                   return HorizontalCategory(
                     onTap: () => Get.to(

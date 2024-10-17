@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CategoryModel {
+class RoomModel {
   final String id;
   final String name;
   String image;
 
-  CategoryModel({
+  RoomModel({
     required this.id,
     required this.name,
     required this.image,
   });
 
-  static CategoryModel empty() => CategoryModel(
+  static RoomModel empty() => RoomModel(
         id: '',
         image: '',
         name: '',
@@ -23,16 +23,16 @@ class CategoryModel {
         'image': image,
       };
 
-  factory CategoryModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
+  factory RoomModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     if (snapshot.data() != null) {
-      return CategoryModel(
+      return RoomModel(
         id: snapshot.id,
         name: data['name'] ?? '',
         image: data['image'] ?? '',
       );
     } else {
-      return CategoryModel.empty();
+      return RoomModel.empty();
     }
   }
 }

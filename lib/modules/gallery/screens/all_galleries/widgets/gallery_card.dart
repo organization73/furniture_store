@@ -42,7 +42,7 @@ class GalleryCard extends StatelessWidget {
                     bottom: -15.0,
                     left: 10.0,
                     child: CircularImage(
-                      imageUrl: vendor.image,
+                      imageUrl: vendor.avatar,
                       isNetworkImage: true,
                     ))
               ],

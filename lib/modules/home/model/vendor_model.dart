@@ -2,29 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
 
 class VendorModel {
-  String id;
-  String name;
-  String location;
-  String image;
-  bool? isFeatured;
-  bool? isVerified;
+  final String id;
+  final String name;
+  final String location;
+  final String avatar;
+  final bool? isFeatured;
+  final bool? isVerified;
   int? productsCount;
-  AccountType? accountType;
+  final AccountType? accountType;
+  String? galleryImage;
 
   VendorModel({
     this.id = '',
-    required this.image,
+    required this.avatar,
     required this.location,
     required this.name,
     this.isFeatured = false,
     this.isVerified = false,
     this.accountType = AccountType.vendor,
     this.productsCount,
+    this.galleryImage,
   });
 
   static VendorModel empty() => VendorModel(
       id: '',
-      image: '',
+      avatar: '',
+      galleryImage: '',
       name: '',
       location: '',
       isFeatured: false,
@@ -36,7 +39,8 @@ class VendorModel {
     return {
       'id': id,
       'name': name,
-      'image': image,
+      'avatar': avatar,
+      'galleryImage': galleryImage,
       'isFeatured': isFeatured,
       'isVerified': isVerified,
       'productsCount': productsCount,
@@ -50,13 +54,14 @@ class VendorModel {
     if (data.isEmpty) return VendorModel.empty();
     return VendorModel(
         id: data['id'] ?? '',
-        image: data['image'] ?? '',
+        avatar: data['avatar'] ?? '',
+        galleryImage: data['galleryImage'] ?? '',
         name: data['name'] ?? '',
         location: data['location'] ?? '',
         isFeatured: data['isFeatured'] ?? false,
         isVerified: data['isVerified'] ?? false,
-        accountType: AccountType
-            .values[data['accountType'] ?? AccountType.vendor.index],
+        accountType:
+            AccountType.values[data['accountType'] ?? AccountType.vendor.index],
         productsCount: data['productsCount'] ?? 0);
   }
   factory VendorModel.fromFirebaseDocument(DocumentSnapshot snapshot) {
@@ -64,7 +69,8 @@ class VendorModel {
     if (snapshot.exists) {
       return VendorModel(
           id: snapshot.id,
-          image: data['image'] ?? '',
+          avatar: data['avatar'] ?? '',
+          galleryImage: data['galleryImage'] ?? '',
           name: data['name'] ?? '',
           location: data['location'] ?? '',
           isFeatured: data['isFeatured'] ?? false,

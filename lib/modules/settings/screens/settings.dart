@@ -1,3 +1,6 @@
+import 'package:decordashapp/data/dummy_data.dart';
+import 'package:decordashapp/data/repositories/banners/banners_repo.dart';
+import 'package:decordashapp/data/repositories/category/category_repo.dart';
 import 'package:decordashapp/modules/ai/screens/ai_design_screen.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/helpers/helper_functions.dart';
@@ -113,6 +116,34 @@ class SettingsScreen extends StatelessWidget {
                         Get.changeTheme(Get.isDarkMode
                             ? const MaterialTheme().light()
                             : const MaterialTheme().dark());
+                      },
+                    ),
+                    const SizedBox(
+                      height: TSizes.spaceBtwSections,
+                    ),
+                    const SectionHeading(
+                      title: 'Testing',
+                      showActionButton: false,
+                    ),
+                    SettingsMenuTile(
+                      icon: IconsaxPlusLinear.arrange_circle,
+                      title: 'Upload Banners',
+                      subTitle: 'Upload all banners data to firebase',
+                      onTap: () {
+                        BannersRepo.instance.uploadDummyData(
+                          DummyData.banners,
+                        );
+                      },
+                    ),
+                    SettingsMenuTile(
+                      icon: IconsaxPlusLinear.arrange_circle,
+                      title: 'Upload Categories And Rooms',
+                      subTitle: 'Upload all catedories data to firebase',
+                      onTap: () {
+                        CategoryRepo.instance.uploadDummyData(
+                          DummyData.categories,
+                          DummyData.rooms,
+                        );
                       },
                     ),
                   ],

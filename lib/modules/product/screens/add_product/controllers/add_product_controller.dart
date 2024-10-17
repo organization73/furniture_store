@@ -90,7 +90,7 @@ class AddProductController extends GetxController {
           ),
           productSeller: VendorModel(
               id: UserController.instance.user.value.id,
-              image: UserController.instance.user.value.avatar,
+              avatar: UserController.instance.user.value.avatar,
               location: adressController.text,
               name: UserController.instance.user.value.userName,
               accountType: UserController.instance.user.value.accountType,

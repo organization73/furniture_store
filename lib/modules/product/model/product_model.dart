@@ -54,7 +54,7 @@ class ProductModel {
                 name: '',
                 location: '',
                 id: '',
-                image: '',
+                avatar: '',
                 isFeatured: false,
                 productsCount: 0,
                 accountType: AccountType.vendor)),

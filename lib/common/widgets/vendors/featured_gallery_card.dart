@@ -32,7 +32,7 @@ class FeaturedGalleryCard extends StatelessWidget {
             Flexible(
               child: CircularImage(
                 isNetworkImage: true,
-                imageUrl: vendor.image,
+                imageUrl: vendor.avatar,
                 backgroundColor: Colors.transparent,
               ),
             ),
