@@ -1,4 +1,5 @@
-import 'package:decordashapp/common/widgets/shimmer/category_shimmer.dart';
+import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
+import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/modules/home/controllers/category_controller.dart';
@@ -26,15 +27,17 @@ class BuildCategoriesSection extends StatelessWidget {
         ),
         Obx(() {
           if (categoryController.isLoading.value) {
-            return CategoryShimmer(
-              itemCount: categoryController.allCatedories.length,
+            return ShimmerLoaderEffect(
+              width: TDeviceUtils.getScreenWidth(),
+              height: TDeviceUtils.getScreenHeight() * 0.07,
+              raduis: TSizes.md,
             );
           }
           if (categoryController.allCatedories.isEmpty) {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
-              height: 60,
+              height: TDeviceUtils.getScreenHeight() * 0.07,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: categoryController.allCatedories.length,

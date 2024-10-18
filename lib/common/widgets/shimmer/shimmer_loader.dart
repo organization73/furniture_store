@@ -6,7 +6,7 @@ class ShimmerLoaderEffect extends StatelessWidget {
       {super.key,
       required this.width,
       required this.height,
-      this.raduis = 15,
+      this.raduis = 10,
       this.color});
   final double width, height, raduis;
   final Color? color;
