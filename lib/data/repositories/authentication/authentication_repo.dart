@@ -1,8 +1,10 @@
 import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
 import 'package:decordashapp/modules/authentication/screens/sign_up/verify_sign_up_email.dart';
+import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
 import 'package:decordashapp/modules/home/screens/nav_menu.dart';
 import 'package:decordashapp/modules/onboarding/screens/onboarding_screen.dart';
 import 'package:decordashapp/utils/exceptions/exception_handler.dart';
+import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -27,6 +29,17 @@ class AuthenticatorRepo extends GetxController {
   }
 
   screenRedirect() async {
+    // Check network connectivity
+    bool isConnected = NetworkManager.instance.isOnline.value;
+    if (!isConnected) {
+      Get.offAll(
+        () => const ErrorScreen(),
+        duration: const Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
+      return;
+    }
+
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified || user.phoneNumber != null) {

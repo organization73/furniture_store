@@ -146,7 +146,7 @@ class UserController extends GetxService {
   Future<void> reAuthEmailAndPasswordUser() async {
     try {
       FullScreenLoader.openLoadingDialog('Processing', TImages.processingInfo);
-      final isConnected = NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isOnline.value;
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
@@ -217,7 +217,7 @@ class UserController extends GetxService {
         FullScreenLoader.openLoadingDialog(
             'Processing', TImages.processingInfo);
 
-        final isConnected = NetworkManager.instance.isConnected();
+        final isConnected = NetworkManager.instance.isOnline.value;
         if (!isConnected) {
           FullScreenLoader.stopLoading();
           TLoaders.warningSnackBar(

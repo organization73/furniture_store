@@ -12,6 +12,8 @@ class NetworkManager extends GetxService {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
+  final RxBool isOnline = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -42,11 +44,13 @@ class NetworkManager extends GetxService {
 
   Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
     _connectionStatus.value = result;
+    isConnected();
   }
 
   /// Checks if the device is connected to any network.
-  bool isConnected() {
-    return _connectionStatus.isNotEmpty &&
+  Future<void> isConnected() async {
+    await initConnectivity();
+    isOnline.value = _connectionStatus.isNotEmpty &&
         _connectionStatus.any((status) => status != ConnectivityResult.none);
   }
 }

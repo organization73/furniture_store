@@ -19,6 +19,7 @@ class LoginSignUpScreen extends StatelessWidget {
     final controller = Get.put(LoginController());
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Stack(
           children: [

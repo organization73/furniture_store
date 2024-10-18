@@ -21,7 +21,7 @@ class LoginController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final FocusNode emailFocus = FocusNode();
   final FocusNode passwordFocus = FocusNode();
-  
+
   static final notifications = NotificationsService();
 
   Future<void> emailAndPasswordSignIn() async {
@@ -29,7 +29,7 @@ class LoginController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'loggingInLoadingTitle'.tr, TImages.processingInfo);
 
-      final isConnected = NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isOnline.value;
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
@@ -63,7 +63,7 @@ class LoginController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'loggingInLoadingTitle'.tr, TImages.processingInfo);
 
-      final isConnected = NetworkManager.instance.isConnected();
+      final isConnected = NetworkManager.instance.isOnline.value;
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
