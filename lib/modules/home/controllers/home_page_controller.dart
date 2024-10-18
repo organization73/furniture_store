@@ -1,25 +1,22 @@
-import 'package:decordashapp/modules/favourites/controllers/favorite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/home/controllers/product/product_controller.dart';
 import 'package:get/get.dart';
 
 class StartPageController extends GetxController {
   final ScrollController scrollController = ScrollController();
-  double _scrollControllerOffset = 0.0;
+  final RxDouble _scrollControllerOffset = 0.0.obs;
 
-  double get scrollControllerOffset => _scrollControllerOffset;
+  RxDouble get scrollControllerOffset => _scrollControllerOffset;
 
   @override
   void onInit() {
     super.onInit();
     scrollController.addListener(_scrollListener);
-    Get.lazyPut(() => FavoriteController());
     Get.put(ProductController());
   }
 
   void _scrollListener() {
-    _scrollControllerOffset = scrollController.offset;
-    update();
+    _scrollControllerOffset.value = scrollController.offset;
   }
 
   @override

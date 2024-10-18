@@ -1,6 +1,8 @@
 import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
+import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
 import 'package:decordashapp/modules/home/screens/search/search_screen.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
+import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/appbar/tabbar.dart';
 import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
@@ -21,94 +23,100 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vendorsController = Get.put(VendorController());
-    final categories = CategoryController.instance.allCatedories;
-
-    return DefaultTabController(
-      length: categories.length,
-      child: Scaffold(
-        body: NestedScrollView(
-            headerSliverBuilder: (_, innerBoxIsScrollable) {
-              return [
-                SliverAppBar(
-                    pinned: true,
-                    floating: true,
-                    expandedHeight: TDeviceUtils.getScreenHeight() * 0.4,
-                    flexibleSpace: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: TSizes.pagePaddingSpace),
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          const SizedBox(
-                            height: TSizes.spaceBtwItems,
-                          ),
-                          CustomTextFormField(
-                            hint: 'homeSearchBarHint'.tr,
-                            prefixIcon: IconsaxPlusLinear.search_normal,
-                            readOnly: true,
-                            filled: true,
-                            onTap: () => Get.to(
-                              () => const SearchScreen(),
-                              duration: const Duration(milliseconds: 300),
-                              transition: Transition.downToUp,
-                            ),
-                          ),
-                          SectionHeading(
-                            title: 'featuredGalleries'.tr,
-                            onPress: () => Get.to(
-                              () => const AllGalleriesPage(),
-                              duration: const Duration(milliseconds: 300),
-                              transition: Transition.rightToLeft,
-                            ),
-                          ),
-                          Obx(() {
-                            if (vendorsController.isLoading.value) {
-                              return const ShimmerLoaderEffect(
-                                width: 80,
-                                height: 80,
-                                raduis: 10,
-                              );
-                            }
-                            if (vendorsController.featuredVendors.isEmpty) {
-                              return Center(child: Text('noData'.tr));
-                            }
-                            return GridLayout(
-                                itemCount:
-                                    vendorsController.featuredVendors.length,
-                                mainAxisExtent: 60,
-                                itemBuilder: (_, index) {
-                                  final vendor =
-                                      vendorsController.featuredVendors[index];
-                                  return FeaturedGalleryCard(
-                                    onTap: () => Get.to(
-                                      () => VendorProductsScreen(
-                                        vendor: vendor,
-                                      ),
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      transition: Transition.rightToLeft,
-                                    ),
-                                    vendor: vendor,
-                                    showBorder: true,
+    return Obx(() {
+      if (!NetworkManager.instance.isOnline.value) {
+        return const ErrorScreen();
+      } else {
+        final vendorsController = Get.put(VendorController());
+        final categories = CategoryController.instance.allCatedories;
+        return DefaultTabController(
+          length: categories.length,
+          child: Scaffold(
+            body: NestedScrollView(
+                headerSliverBuilder: (_, innerBoxIsScrollable) {
+                  return [
+                    SliverAppBar(
+                        pinned: true,
+                        floating: true,
+                        expandedHeight: TDeviceUtils.getScreenHeight() * 0.4,
+                        flexibleSpace: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: TSizes.pagePaddingSpace),
+                          child: ListView(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              const SizedBox(
+                                height: TSizes.spaceBtwItems,
+                              ),
+                              CustomTextFormField(
+                                hint: 'homeSearchBarHint'.tr,
+                                prefixIcon: IconsaxPlusLinear.search_normal,
+                                readOnly: true,
+                                filled: true,
+                                onTap: () => Get.to(
+                                  () => const SearchScreen(),
+                                  duration: const Duration(milliseconds: 300),
+                                  transition: Transition.downToUp,
+                                ),
+                              ),
+                              SectionHeading(
+                                title: 'featuredGalleries'.tr,
+                                onPress: () => Get.to(
+                                  () => const AllGalleriesPage(),
+                                  duration: const Duration(milliseconds: 300),
+                                  transition: Transition.rightToLeft,
+                                ),
+                              ),
+                              Obx(() {
+                                if (vendorsController.isLoading.value) {
+                                  return const ShimmerLoaderEffect(
+                                    width: 80,
+                                    height: 80,
+                                    raduis: 10,
                                   );
-                                });
-                          })
-                        ],
-                      ),
-                    ),
-                    bottom: CustomTabBar(
-                        tabs: categories
-                            .map((category) => Tab(child: Text(category.name)))
-                            .toList()))
-              ];
-            },
-            body: TabBarView(
-                children: categories
-                    .map((category) => CategoryTab(category: category))
-                    .toList())),
-      ),
-    );
+                                }
+                                if (vendorsController.featuredVendors.isEmpty) {
+                                  return Center(child: Text('noData'.tr));
+                                }
+                                return GridLayout(
+                                    itemCount: vendorsController
+                                        .featuredVendors.length,
+                                    mainAxisExtent: 60,
+                                    itemBuilder: (_, index) {
+                                      final vendor = vendorsController
+                                          .featuredVendors[index];
+                                      return FeaturedGalleryCard(
+                                        onTap: () => Get.to(
+                                          () => VendorProductsScreen(
+                                            vendor: vendor,
+                                          ),
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          transition: Transition.rightToLeft,
+                                        ),
+                                        vendor: vendor,
+                                        showBorder: true,
+                                      );
+                                    });
+                              })
+                            ],
+                          ),
+                        ),
+                        bottom: CustomTabBar(
+                            tabs: categories
+                                .map((category) =>
+                                    Tab(child: Text(category.name)))
+                                .toList()))
+                  ];
+                },
+                body: TabBarView(
+                    children: categories
+                        .map((category) => CategoryTab(category: category))
+                        .toList())),
+          ),
+        );
+      }
+    });
   }
 }

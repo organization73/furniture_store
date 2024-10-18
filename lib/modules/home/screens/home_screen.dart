@@ -1,6 +1,9 @@
+import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
+import 'package:decordashapp/modules/favourites/controllers/favorite_controller.dart';
 import 'package:decordashapp/modules/home/widgets/carousel_slider.dart';
 import 'package:decordashapp/modules/home/widgets/fade_appbar.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
+import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
@@ -21,9 +24,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StartPageController>(
-      init: StartPageController(),
-      builder: (controller) {
+    return Obx(() {
+      if (!NetworkManager.instance.isOnline.value) {
+        return const ErrorScreen();
+      } else {
+        Get.put(FavoriteController());
+        final controller = Get.put(StartPageController());
         final productsController = ProductController.instance;
 
         return Scaffold(
@@ -38,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         PrimaryHeaderContainer(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                top: TDeviceUtils.getStatusBarHeight() + 75),
+                                top: TDeviceUtils.getStatusBarHeight() + 50),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -117,11 +123,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              FadeAppBar(scrollOffset: controller.scrollControllerOffset),
+              FadeAppBar(scrollOffset: controller.scrollControllerOffset.value),
             ],
           ),
         );
-      },
-    );
+      }
+    });
   }
 }

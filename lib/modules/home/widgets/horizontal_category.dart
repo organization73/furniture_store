@@ -27,13 +27,13 @@ class HorizontalCategory extends StatelessWidget {
             children: [
               Text(category.name,
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.titleSmall),
+                  style: Theme.of(context).textTheme.labelMedium),
               RoundedImage(
                 imageUrl: category.image,
                 isNetworkImage: true,
                 applyImageRaduis: false,
-                height: 60,
-                width: 60,
+                height: TDeviceUtils.getScreenHeight() * 0.3,
+                width: TDeviceUtils.getScreenWidth() * 0.15,
                 padding: const EdgeInsets.all(5),
               ),
             ],

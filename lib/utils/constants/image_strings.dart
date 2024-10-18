@@ -13,7 +13,7 @@ class TImages {
   static const String emptyFavorites = "assets/animations/no_favorites.json";
   static const String resetPassword = "assets/animations/reset_pass.json";
   static const String noFiles = "assets/animations/empty_file.json";
-  static const String error404Illistration = "assets/animations/404.svg";
+  static const String noInternet = "assets/animations/no_internet.json";
 
   // -- Onboarding
   static const String onBoardingImage1 =

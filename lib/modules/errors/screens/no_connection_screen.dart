@@ -4,11 +4,12 @@ import 'package:decordashapp/modules/errors/widgets/error_info_widget.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({super.key});
+  const ErrorScreen({super.key, this.showActionButton = false});
+  final bool showActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +17,17 @@ class ErrorScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: BuildCTAButton(
-          text: 'Retry',
-          onPressed: () {
-            networkController.retryConnection();
-          },
-        ),
-      ),
+      bottomNavigationBar: showActionButton
+          ? BottomAppBar(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: BuildCTAButton(
+                text: 'Retry',
+                onPressed: () {
+                  networkController.retryConnection();
+                },
+              ),
+            )
+          : null,
       body: SafeArea(
         child: Padding(
           padding:
@@ -35,9 +38,8 @@ class ErrorScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: SvgPicture.asset(
-                    TImages.error404Illistration,
-                    fit: BoxFit.scaleDown,
+                  child: Lottie.asset(
+                    TImages.noInternet,
                   ),
                 ),
               ),

@@ -6,7 +6,7 @@ import 'package:decordashapp/utils/helpers/network_manager.dart';
 class NetworkController extends GetxController {
   static NetworkController get instance => Get.find();
 
-  Future<void> retryConnection() async {
+  void retryConnection() {
     if (NetworkManager.instance.isOnline.value) {
       AuthenticatorRepo.instance.screenRedirect();
     } else {

@@ -33,7 +33,7 @@ class AuthenticatorRepo extends GetxController {
     bool isConnected = NetworkManager.instance.isOnline.value;
     if (!isConnected) {
       Get.offAll(
-        () => const ErrorScreen(),
+        () => const ErrorScreen(showActionButton: true),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
