@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -20,6 +21,11 @@ class NetworkManager extends GetxService {
     initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void onReady() {
+    Get.put(AuthenticatorRepo());
   }
 
   @override

@@ -22,6 +22,7 @@ class AuthenticatorRepo extends GetxController {
   User? get authUser => _auth.currentUser;
   RxString verificationId = ''.obs;
 
+
   @override
   void onReady() {
     FlutterNativeSplash.remove();

@@ -1,5 +1,4 @@
 import 'package:decordashapp/app.dart';
-import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,7 +12,6 @@ import 'firebase_options.dart';
 Future<void> main() async {
   final WidgetsBinding widgetBind = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetBind);
-  Get.put(NetworkManager());
 
   await GetStorage.init();
 
@@ -27,7 +25,7 @@ Future<void> main() async {
 
   await FirebaseMessaging.instance
       .getInitialMessage()
-      .then((value) => Get.put(AuthenticatorRepo()));
+      .then((value) => Get.put(NetworkManager()));
 
   runApp(const MyApp());
 }
