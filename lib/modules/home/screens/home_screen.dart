@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         PrimaryHeaderContainer(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                top: TDeviceUtils.getStatusBarHeight() + 50),
+                                top: TDeviceUtils.getStatusBarHeight() + 65),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
