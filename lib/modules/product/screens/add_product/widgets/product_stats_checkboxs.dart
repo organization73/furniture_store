@@ -18,7 +18,7 @@ class ProductStatsCheckboxes extends StatelessWidget {
                 return CheckboxListTile(
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text(entry.key,
-                      style: Theme.of(context).textTheme.titleMedium),
+                      style: Theme.of(context).textTheme.titleSmall),
                   value: entry.value,
                   onChanged: (newValue) {
                     if (newValue != null) {

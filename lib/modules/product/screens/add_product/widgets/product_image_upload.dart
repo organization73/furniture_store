@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:decordashapp/modules/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:decordashapp/modules/product/screens/add_product/controllers/upload_image_controller.dart';
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -29,13 +30,14 @@ class BuildProductImageUpload extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  IconsaxPlusLinear.picture_frame,
-                  size: 50,
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  IconsaxPlusLinear.document_upload,
+                  size: TSizes.iconLg * 1.5,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
+                const SizedBox(height: TSizes.sm),
                 Text(
                   'fileUpload'.tr,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.labelMedium,
                 )
               ],
             ),
@@ -54,10 +56,7 @@ class BuildProductImageUpload extends StatelessWidget {
             ),
             label: Text(
               'openCam'.tr,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Theme.of(context).colorScheme.primary),
+              style: Theme.of(context).textTheme.labelMedium,
             )),
         const SizedBox(
           height: 10,
