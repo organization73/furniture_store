@@ -1,6 +1,6 @@
 import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
 import 'package:decordashapp/modules/favourites/controllers/favorite_controller.dart';
-import 'package:decordashapp/modules/home/widgets/carousel_slider.dart';
+import 'package:decordashapp/modules/home/widgets/banner_slider_widget.dart';
 import 'package:decordashapp/modules/home/widgets/fade_appbar.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                               horizontal: TSizes.pagePaddingSpace),
                           child: Column(
                             children: [
-                              const CarouselSlider(),
+                              const BannerSlider(),
                               SectionHeading(
                                 title: 'popularProducts'.tr,
                                 onPress: () => Get.to(

@@ -1,5 +1,5 @@
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordashapp/modules/authentication/screens/phone_login/enter_code.dart';
+import 'package:decordashapp/modules/authentication/screens/phone_login/code_verification_screen.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:flutter/material.dart';

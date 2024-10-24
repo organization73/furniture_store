@@ -1,5 +1,6 @@
 import 'package:decordashapp/bindings/general_bindings.dart';
 import 'package:decordashapp/localization/language_keys.dart';
+import 'package:decordashapp/routes/app_routes.dart';
 import 'package:decordashapp/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         locale: Get.deviceLocale,
         fallbackLocale: const Locale('en', 'US'),
         translations: Language(),
+        getPages: AppRoutes.pages,
         themeMode: ThemeMode.system,
         theme: theme.light(),
         darkTheme: theme.dark(),

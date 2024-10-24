@@ -10,8 +10,8 @@ import 'package:decordashapp/modules/favourites/controllers/favorite_controller.
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
-class FavouritsPage extends StatelessWidget {
-  const FavouritsPage({super.key});
+class FavouritesScreen extends StatelessWidget {
+  const FavouritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,6 @@ class FavouritsPage extends StatelessWidget {
         title: Text(
           'favourites'.tr,
         ),
-        forceMaterialTransparency: true,
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -34,7 +33,7 @@ class FavouritsPage extends StatelessWidget {
                 builder: (context, snapshot) {
                   final emptyWidget = AnimationLoaderWidget(
                     text: 'Whoops! Favourite List is Empty...',
-                    animation: TImages.emptyFavorites,
+                    animation: ImageStrings.emptyFavorites,
                     showAction: true,
                     actionText: 'Let\'s add some',
                     onActionpress: () => Get.back(),

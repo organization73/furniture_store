@@ -24,7 +24,7 @@ class CheckVerifyScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Lottie.asset(
-            TImages.emailDelivery,
+            ImageStrings.emailDelivery,
             width: TDeviceUtils.getScreenWidth() * 0.35,
           ),
           const SizedBox(

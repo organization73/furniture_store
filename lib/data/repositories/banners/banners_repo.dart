@@ -32,7 +32,7 @@ class BannersRepo extends GetxController {
   Future<void> uploadDummyData(List<BannersModel> banners) async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', TImages.processingInfo);
+          'Uploading Data...', ImageStrings.processingInfo);
       final storage = Get.put(FirebaseStorageServices());
 
       for (var banner in banners) {

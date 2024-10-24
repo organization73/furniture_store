@@ -25,9 +25,7 @@ class GalleryInformationScreen extends StatelessWidget {
           onPressed: controller.validateAndSubmit,
         ),
       ),
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-      ),
+      appBar: AppBar(),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(

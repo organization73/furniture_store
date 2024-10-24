@@ -1,5 +1,5 @@
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
-import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection_screen.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
@@ -27,7 +27,7 @@ class LoginController extends GetxController {
   Future<void> emailAndPasswordSignIn() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'loggingInLoadingTitle'.tr, TImages.processingInfo);
+          'loggingInLoadingTitle'.tr, ImageStrings.processingInfo);
 
       final isConnected = NetworkManager.instance.isOnline.value;
 
@@ -61,7 +61,7 @@ class LoginController extends GetxController {
   Future<void> googleSignIn() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'loggingInLoadingTitle'.tr, TImages.processingInfo);
+          'loggingInLoadingTitle'.tr, ImageStrings.processingInfo);
 
       final isConnected = NetworkManager.instance.isOnline.value;
 
@@ -81,7 +81,7 @@ class LoginController extends GetxController {
       FullScreenLoader.stopLoading();
 
       Get.to(
-        () => GallerySelection(),
+        () => const GallerySelectionScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );

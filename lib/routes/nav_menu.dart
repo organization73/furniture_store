@@ -2,7 +2,7 @@ import 'package:decordashapp/modules/chat/screens/chats_lists_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/home/screens/home_screen.dart';
 import 'package:decordashapp/modules/store/screens/store_screen.dart';
-import 'package:decordashapp/modules/settings/screens/settings.dart';
+import 'package:decordashapp/modules/settings/screens/settings_screen.dart';
 import 'package:decordashapp/modules/product/screens/add_product/add_product_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';

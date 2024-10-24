@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
-import 'package:decordashapp/modules/profile/screens/profile.dart';
+import 'package:decordashapp/modules/profile/screens/profile_screen.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
@@ -30,7 +30,7 @@ class UpdateGalleryController extends GetxController {
   Future<void> updateGalleryInfo() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'updatingInfo'.tr, TImages.processingInfo);
+          'updatingInfo'.tr, ImageStrings.processingInfo);
 
       final isConnected = NetworkManager.instance.isOnline.value;
 

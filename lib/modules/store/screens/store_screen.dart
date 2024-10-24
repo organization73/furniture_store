@@ -1,5 +1,6 @@
 import 'package:decordashapp/common/widgets/input_fields/custom_text_form_field.dart';
 import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
+import 'package:decordashapp/modules/gallery/screens/all_galleries_screen.dart';
 import 'package:decordashapp/modules/home/screens/search/search_screen.dart';
 import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
@@ -9,8 +10,7 @@ import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordashapp/modules/gallery/screens/all_galleries/all_galleries_screen.dart';
-import 'package:decordashapp/modules/gallery/screens/vendor_products/vendor_products.dart';
+import 'package:decordashapp/modules/vendor/screens/vendor_products_screen.dart';
 import 'package:decordashapp/modules/home/controllers/category_controller.dart';
 import 'package:decordashapp/modules/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordashapp/modules/store/widgets/category_tab.dart';
@@ -63,7 +63,7 @@ class StoreScreen extends StatelessWidget {
                               SectionHeading(
                                 title: 'featuredGalleries'.tr,
                                 onPress: () => Get.to(
-                                  () => const AllGalleriesPage(),
+                                  () => const AllGalleriesScreen(),
                                   duration: const Duration(milliseconds: 300),
                                   transition: Transition.rightToLeft,
                                 ),

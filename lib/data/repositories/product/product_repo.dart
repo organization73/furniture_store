@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordashapp/modules/home/model/product_category_model.dart';
-import 'package:decordashapp/modules/home/model/vendor_category_model.dart';
 import 'package:decordashapp/utils/exceptions/exception_handler.dart';
-import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/utils/exceptions/firebase_exceptions.dart';
 import 'package:get/get.dart';
@@ -174,39 +171,39 @@ class ProductRepo extends GetxController {
   }
 
   Future<void> uploadProductToDatabase(ProductModel product) async {
-    try {
-      final storage = Get.put(FirebaseStorageServices());
-      final mainImageFile =
-          await storage.getImageDatafromAssets(product.productImage);
+    // try {
+    //   final storage = Get.put(FirebaseStorageServices());
+    //   final mainImageFile =
+    //       await storage.getImageDatafromAssets(product.productImage);
 
-      final mainImageUrl = await storage.uploadImageData(
-          'Products', mainImageFile, product.productImage);
-      product.productImage = mainImageUrl;
+    //   final mainImageUrl = await storage.uploadImageData(
+    //       'Products', mainImageFile, product.productImage);
+    //   product.productImage = mainImageUrl;
 
-      for (var imagePath in product.productDetails.productListImages) {
-        final imageFile = await storage.getImageDatafromAssets(imagePath);
-        final imageUrl =
-            await storage.uploadImageData('Products', imageFile, imagePath);
+    //   for (var imagePath in product.productDetails.productListImages) {
+    //     final imageFile = await storage.getImageDatafromAssets(imagePath);
+    //     final imageUrl =
+    //         await storage.uploadImageData('Products', imageFile, imagePath);
 
-        product.productDetails.productListImages = product
-            .productDetails.productListImages
-            .map((path) => path == imagePath ? imageUrl : path)
-            .toList();
-      }
+    //     product.productDetails.productListImages = product
+    //         .productDetails.productListImages
+    //         .map((path) => path == imagePath ? imageUrl : path)
+    //         .toList();
+    //   }
 
-      await _db.collection('Products').doc(product.id).set(product.toJson());
+    //   await _db.collection('Products').doc(product.id).set(product.toJson());
 
-      await _db.collection('ProductCategory').add(ProductCategoryModel(
-              productId: product.id, categoryId: product.categoryId)
-          .toJson());
+    //   await _db.collection('ProductCategory').add(ProductCategoryModel(
+    //           productId: product.id, categoryId: product.categoryId)
+    //       .toJson());
 
-      await _db.collection('VendorCategory').add(VendorCategoryModel(
-              vendorId: product.productDetails.productSeller.id,
-              categoryId: product.categoryId)
-          .toJson());
-    } catch (e) {
-      ExceptionHandler.handleAuthException(e);
-      rethrow;
-    }
+    //   await _db.collection('VendorCategory').add(VendorCategoryModel(
+    //           vendorId: product.productDetails.productSeller.id,
+    //           categoryId: product.categoryId)
+    //       .toJson());
+    // } catch (e) {
+    //   ExceptionHandler.handleAuthException(e);
+    //   rethrow;
+    // }
   }
 }

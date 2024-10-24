@@ -19,7 +19,7 @@ class OTPController extends GetxController {
   void verifyOTP(String otp) async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'loggingInLoadingTitle'.tr, TImages.processingInfo);
+          'loggingInLoadingTitle'.tr, ImageStrings.processingInfo);
 
       if (otp.isNotEmpty) {
         try {

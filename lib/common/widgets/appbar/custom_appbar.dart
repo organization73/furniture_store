@@ -24,7 +24,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final textDirection = Directionality.of(context);
 
     return AppBar(
-      forceMaterialTransparency: true,
       automaticallyImplyLeading: false,
       title: title,
       actions: actions,

@@ -43,7 +43,8 @@ class CollapsingAppbarWithTabsPage extends StatelessWidget {
                   title: Text('Add Product',
                       style: Theme.of(context).textTheme.titleMedium),
                   titlePadding: const EdgeInsets.only(left: 20, bottom: 20),
-                  background: Image.asset(TImages.addBanner, fit: BoxFit.cover),
+                  background:
+                      Image.asset(ImageStrings.addBanner, fit: BoxFit.cover),
                 ),
               ),
               SliverPersistentHeader(

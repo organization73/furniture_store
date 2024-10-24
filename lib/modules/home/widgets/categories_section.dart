@@ -3,7 +3,7 @@ import 'package:decordashapp/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/modules/home/controllers/category_controller.dart';
-import 'package:decordashapp/modules/home/screens/sub_category/sub_category.dart';
+import 'package:decordashapp/modules/home/screens/sub_category/sub_category_screen.dart';
 import 'package:decordashapp/modules/home/widgets/horizontal_category.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';

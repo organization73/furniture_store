@@ -8,16 +8,14 @@ import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class SentEmailPasswordReset extends StatelessWidget {
-  const SentEmailPasswordReset({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ForgetPasswordController());
     return Scaffold(
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-      ),
+      appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
           color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(

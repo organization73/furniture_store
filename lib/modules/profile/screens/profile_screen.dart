@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
               Obx(() {
                 final networkImage = controller.user.value.avatar;
                 final image =
-                    networkImage.isNotEmpty ? networkImage : TImages.user;
+                    networkImage.isNotEmpty ? networkImage : ImageStrings.user;
                 if (controller.imageLoading.value) {
                   return const ShimmerLoaderEffect(
                     width: 100,

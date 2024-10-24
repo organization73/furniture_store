@@ -33,7 +33,7 @@ class GalleryCard extends StatelessWidget {
                     image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        TImages.user,
+                        ImageStrings.user,
                       ),
                     ),
                   ),

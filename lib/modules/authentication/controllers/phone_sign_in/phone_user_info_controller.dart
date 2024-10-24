@@ -1,6 +1,6 @@
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection_screen.dart';
 import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
@@ -49,7 +49,7 @@ class PhoneUserInfoController extends GetxController {
       FullScreenLoader.stopLoading();
 
       Get.to(
-        () => GallerySelection(),
+        () => const GallerySelectionScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );

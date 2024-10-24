@@ -163,7 +163,7 @@ class NotificationsService {
       final Map<String, dynamic> notification = {
         "message": {
           "token": receiverToken,
-          "notification": {"title": "New Message !", "body": body},
+          "notification": {"title": "New ChatMessageModel !", "body": body},
           "data": {
             "click_action": "FLUTTER_NOTIFICATION_CLICK",
             "status": "done",

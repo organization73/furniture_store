@@ -23,7 +23,6 @@ class ManufactureRequestsPage extends StatelessWidget {
       ),
       appBar: AppBar(
         title: const Text('Manufacture Requests'),
-        forceMaterialTransparency: true,
       ),
       body: SafeArea(
         child: Center(
@@ -156,7 +155,7 @@ class _ActionsRow extends StatelessWidget {
           TextButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.mode_comment_outlined),
-            label: const Text('Message'),
+            label: const Text('ChatMessageModel'),
           ),
         ],
       ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
-import 'package:decordashapp/modules/onboarding/model/page_model.dart';
+import 'package:decordashapp/modules/authentication/screens/user_login/user_login_screen.dart';
+import 'package:decordashapp/modules/onboarding/model/onboarding_page_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class OnBoardingController extends GetxController {
   final _currentPage = 0.obs;
-  final storage = GetStorage();
+  final _storage = GetStorage();
 
   final PageController pageController = PageController(initialPage: 0);
   final List<OnboardingPageModel> pages;
@@ -33,9 +33,9 @@ class OnBoardingController extends GetxController {
   }
 
   void onFinish() {
-    storage.write('isFirstTime', false);
+    _storage.write('isFirstTime', false);
     Get.offAll(
-      () => const LoginSignUpScreen(),
+      () => const UserLoginScreen(),
       duration: const Duration(milliseconds: 300),
       transition: Transition.rightToLeft,
     );

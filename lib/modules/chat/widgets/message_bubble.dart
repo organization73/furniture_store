@@ -1,5 +1,5 @@
 import 'package:decordashapp/common/widgets/images/rounded_image.dart';
-import 'package:decordashapp/modules/chat/model/message.dart';
+import 'package:decordashapp/modules/chat/model/chat_message_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -14,7 +14,7 @@ class MessageBubble extends StatelessWidget {
 
   final bool isMe;
   final bool isImage;
-  final Message message;
+  final ChatMessageModel message;
 
   @override
   Widget build(BuildContext context) => Align(

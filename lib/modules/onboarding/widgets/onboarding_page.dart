@@ -100,18 +100,7 @@ class OnBoardingView extends StatelessWidget {
                   Obx(() => IconButton(
                         tooltip: 'tContinue'.tr,
                         color: Theme.of(context).colorScheme.primary,
-                        onPressed: () {
-                          if (controller.currentPage ==
-                              controller.pages.length - 1) {
-                            controller.onFinish();
-                          } else {
-                            controller.pageController.animateToPage(
-                              controller.currentPage + 1,
-                              curve: Curves.easeInOutCubic,
-                              duration: const Duration(milliseconds: 250),
-                            );
-                          }
-                        },
+                        onPressed: () => controller.nextPage(),
                         icon: Icon(
                             controller.currentPage ==
                                     controller.pages.length - 1

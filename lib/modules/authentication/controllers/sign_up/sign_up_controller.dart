@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/modules/authentication/screens/sign_up/verify_sign_up_email.dart';
+import 'package:decordashapp/modules/authentication/screens/signup/verify_signup_email.dart';
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
@@ -38,7 +38,7 @@ class SignUpController extends GetxController {
   void signup() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'processingLoading'.tr, TImages.processingInfo);
+          'processingLoading'.tr, ImageStrings.processingInfo);
 
       final isConnected = NetworkManager.instance.isOnline.value;
       if (!isConnected) {

@@ -3,8 +3,8 @@ import 'package:decordashapp/data/repositories/banners/banners_repo.dart';
 import 'package:decordashapp/modules/home/model/banners_model.dart';
 import 'package:get/get.dart';
 
-class CustomeCarouselSliderController extends GetxController {
-  static CustomeCarouselSliderController get instance => Get.find();
+class BannerController extends GetxController {
+  static BannerController get instance => Get.find();
 
   final isLoading = false.obs;
   final _bannersRepo = Get.put(BannersRepo());
@@ -16,7 +16,7 @@ class CustomeCarouselSliderController extends GetxController {
     super.onInit();
     fetchBanners();
   }
-  
+
   Future<void> fetchBanners() async {
     try {
       isLoading.value = true;

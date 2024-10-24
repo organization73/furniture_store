@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-class PhoneNumberScreen extends StatelessWidget {
-  const PhoneNumberScreen({super.key});
+class PhoneSigninScreen extends StatelessWidget {
+  const PhoneSigninScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +23,7 @@ class PhoneNumberScreen extends StatelessWidget {
                 controller.loginWithPhone();
               })),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding:

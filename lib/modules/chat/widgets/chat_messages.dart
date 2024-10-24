@@ -1,4 +1,4 @@
-import 'package:decordashapp/modules/chat/model/message.dart';
+import 'package:decordashapp/modules/chat/model/chat_message_model.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

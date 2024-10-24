@@ -19,7 +19,7 @@ class EmailVerifiedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Lottie.asset(
-        TImages.confirmation,
+        ImageStrings.confirmation,
         width: TDeviceUtils.getScreenWidth() * 0.35,
       ),
       const SizedBox(

@@ -1,11 +1,10 @@
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
-import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
+import 'package:decordashapp/modules/authentication/screens/user_login/user_login_screen.dart';
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/modules/profile/widgets/re_auth_user_form.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
@@ -102,7 +101,8 @@ class UserController extends GetxService {
 
   void deleteUserAccount() async {
     try {
-      FullScreenLoader.openLoadingDialog('Processing', TImages.processingInfo);
+      FullScreenLoader.openLoadingDialog(
+          'Processing', ImageStrings.processingInfo);
 
       final auth = AuthenticatorRepo.instance;
       final provider =
@@ -115,7 +115,7 @@ class UserController extends GetxService {
           await auth.deleteAccount();
           FullScreenLoader.stopLoading();
           Get.offAll(
-            () => const LoginSignUpScreen(),
+            () => const UserLoginScreen(),
             duration: const Duration(milliseconds: 300),
             transition: Transition.rightToLeft,
           );
@@ -131,7 +131,7 @@ class UserController extends GetxService {
           await auth.deleteAccount();
           FullScreenLoader.stopLoading();
           Get.offAll(
-            () => const LoginSignUpScreen(),
+            () => const UserLoginScreen(),
             duration: const Duration(milliseconds: 300),
             transition: Transition.rightToLeft,
           );
@@ -145,7 +145,8 @@ class UserController extends GetxService {
 
   Future<void> reAuthEmailAndPasswordUser() async {
     try {
-      FullScreenLoader.openLoadingDialog('Processing', TImages.processingInfo);
+      FullScreenLoader.openLoadingDialog(
+          'Processing', ImageStrings.processingInfo);
       final isConnected = NetworkManager.instance.isOnline.value;
       if (!isConnected) {
         FullScreenLoader.stopLoading();
@@ -167,7 +168,7 @@ class UserController extends GetxService {
 
       FullScreenLoader.stopLoading();
       Get.offAll(
-        () => const LoginSignUpScreen(),
+        () => const UserLoginScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
@@ -215,7 +216,7 @@ class UserController extends GetxService {
           maxWidth: 512);
       if (image != null) {
         FullScreenLoader.openLoadingDialog(
-            'Processing', TImages.processingInfo);
+            'Processing', ImageStrings.processingInfo);
 
         final isConnected = NetworkManager.instance.isOnline.value;
         if (!isConnected) {
@@ -257,19 +258,6 @@ class UserController extends GetxService {
     } catch (e) {
       FullScreenLoader.stopLoading();
 
-      TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
-    }
-  }
-
-  void updateAccountType(int value) async {
-    try {
-      if (value == 1) {
-        Map<String, dynamic> json = {"accountType": 'gallery'};
-        await UserRepo.instance.updateSingleField(json);
-        user.value.accountType = AccountType.gallery;
-        user.refresh();
-      }
-    } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }

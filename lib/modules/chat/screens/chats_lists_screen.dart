@@ -1,5 +1,5 @@
 import 'package:decordashapp/common/widgets/loaders/animation_loader.dart';
-import 'package:decordashapp/modules/chat/screens/search_screen.dart';
+import 'package:decordashapp/modules/chat/screens/users_search_screen.dart';
 import 'package:decordashapp/modules/chat/controllers/chat_controller.dart';
 import 'package:decordashapp/modules/chat/widgets/user_item.dart';
 import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';

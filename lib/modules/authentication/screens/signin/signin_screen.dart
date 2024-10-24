@@ -1,16 +1,16 @@
+import 'package:decordashapp/modules/authentication/screens/reset_password/forget_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/modules/authentication/controllers/log_in/log_in_controller.dart';
-import 'package:decordashapp/modules/authentication/screens/reset_password/send_reset_password.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:decordashapp/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class EmailSignInScreen extends StatelessWidget {
-  const EmailSignInScreen({super.key});
+class SigninScreen extends StatelessWidget {
+  const SigninScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class EmailSignInScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   TextButton(
                     onPressed: () => Get.to(
-                      () => const SentEmailPasswordReset(),
+                      () => const ForgetPasswordScreen(),
                       duration: const Duration(milliseconds: 300),
                       transition: Transition.downToUp,
                     ),

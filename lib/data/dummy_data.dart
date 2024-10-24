@@ -56,7 +56,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '1',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Damietta',
   //           name: 'Ali',
   //           accountType: AccountType.regular,
@@ -111,7 +111,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '2',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Cairo',
   //           name: 'Mohamed',
   //           accountType: AccountType.vendor,
@@ -166,7 +166,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '3',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Louxor',
   //           name: 'Khaled',
   //           accountType: AccountType.regular,
@@ -215,7 +215,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '4',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Aswan',
   //           name: 'Samy',
   //           accountType: AccountType.vendor,
@@ -276,7 +276,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '1',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Damietta',
   //           name: 'Ali',
   //           accountType: AccountType.regular,
@@ -331,7 +331,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '2',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Cairo',
   //           name: 'Mohamed',
   //           accountType: AccountType.vendor,
@@ -386,7 +386,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '3',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Louxor',
   //           name: 'Khaled',
   //           accountType: AccountType.regular,
@@ -435,7 +435,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '4',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Aswan',
   //           name: 'Samy',
   //           accountType: AccountType.vendor,
@@ -484,7 +484,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '1',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Damietta',
   //           name: 'Ali',
   //           accountType: AccountType.regular,
@@ -539,7 +539,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '2',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Cairo',
   //           name: 'Mohamed',
   //           accountType: AccountType.vendor,
@@ -594,7 +594,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '3',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Louxor',
   //           name: 'Khaled',
   //           accountType: AccountType.regular,
@@ -643,7 +643,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '4',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Aswan',
   //           name: 'Samy',
   //           accountType: AccountType.vendor,
@@ -698,7 +698,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '1',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Damietta',
   //           name: 'Ali',
   //           accountType: AccountType.regular,
@@ -753,7 +753,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '2',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Cairo',
   //           name: 'Mohamed',
   //           accountType: AccountType.vendor,
@@ -808,7 +808,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '3',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Louxor',
   //           name: 'Khaled',
   //           accountType: AccountType.regular,
@@ -857,7 +857,7 @@ class DummyData {
   //       ),
   //       productSeller: VendorModel(
   //           id: '4',
-  //           image: TImages.user,
+  //           image: ImageStrings.user,
   //           location: 'Aswan',
   //           name: 'Samy',
   //           accountType: AccountType.vendor,
@@ -871,7 +871,7 @@ class DummyData {
   //  static final List<VendorModel> vendors = [
   //   VendorModel(
   //       id = '1',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Damietta',
   //       name = 'Ali',
   //       accountType = AccountType.regular,
@@ -880,7 +880,7 @@ class DummyData {
   //       isVerified = true),
   //   VendorModel(
   //       id = '2',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Cairo',
   //       name = 'Mohamed',
   //       accountType = AccountType.vendor,
@@ -889,7 +889,7 @@ class DummyData {
   //       isVerified = false),
   //   VendorModel(
   //       id = '3',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Louxor',
   //       name = 'Khaled',
   //       accountType = AccountType.regular,
@@ -898,7 +898,7 @@ class DummyData {
   //       isVerified = false),
   //   VendorModel(
   //       id = '4',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Aswan',
   //       name = 'Samy',
   //       accountType = AccountType.vendor,
@@ -907,7 +907,7 @@ class DummyData {
   //       isVerified = true),
   //   VendorModel(
   //       id = '5',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Alexendaria',
   //       name = 'Ahmed',
   //       accountType = AccountType.vendor,
@@ -916,7 +916,7 @@ class DummyData {
   //       isVerified = true),
   //   VendorModel(
   //       id = '6',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Port Said',
   //       name = 'Mena',
   //       accountType = AccountType.vendor,
@@ -925,7 +925,7 @@ class DummyData {
   //       isVerified = false),
   //   VendorModel(
   //       id = '7',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Marsa Matroh',
   //       name = 'Youssef',
   //       accountType = AccountType.vendor,
@@ -934,7 +934,7 @@ class DummyData {
   //       isVerified = true),
   //   VendorModel(
   //       id = '8',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Esmailia',
   //       name = 'Salem',
   //       accountType = AccountType.regular,
@@ -943,7 +943,7 @@ class DummyData {
   //       isVerified = true),
   //   VendorModel(
   //       id = '9',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Menya',
   //       name = 'Ashraf',
   //       accountType = AccountType.regular,
@@ -952,7 +952,7 @@ class DummyData {
   //       isVerified = false),
   //   VendorModel(
   //       id = '10',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Rafh',
   //       name = 'Mossad',
   //       accountType = AccountType.vendor,
@@ -961,7 +961,7 @@ class DummyData {
   //       isVerified = false),
   //   VendorModel(
   //       id = '11',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Kafr El Sheikh',
   //       name = 'Mohey',
   //       accountType = AccountType.vendor,
@@ -970,7 +970,7 @@ class DummyData {
   //       isVerified = false),
   //   VendorModel(
   //       id = '12',
-  //       image = TImages.user,
+  //       image = ImageStrings.user,
   //       location = 'Kafr Said',
   //       name = 'Reda',
   //       accountType = AccountType.vendor,
@@ -1046,19 +1046,39 @@ class DummyData {
   ];
   static final List<RoomModel> rooms = [
     RoomModel(
-        id: '1', image: 'assets/images/categories/bed_room.png', name: 'Beedroom'),
+        id: '1',
+        image: 'assets/images/categories/bed_room.png',
+        name: 'Beedroom'),
     RoomModel(
-        id: '2', image: 'assets/images/categories/desk_room.png', name: 'Deskroom'),
+        id: '2',
+        image: 'assets/images/categories/desk_room.png',
+        name: 'Deskroom'),
     RoomModel(
-        id: '3', image: 'assets/images/categories/living_room.png', name: 'Livingroom'),
-  
+        id: '3',
+        image: 'assets/images/categories/living_room.png',
+        name: 'Livingroom'),
   ];
 
   static final List<BannersModel> banners = [
-    BannersModel(image: 'assets/banners/chairs.jpg', active: true),
-    BannersModel(image: 'assets/banners/chairs2.jpg', active: true),
-    BannersModel(image: 'assets/banners/sofas.jpg', active: true),
-    BannersModel(image: 'assets/banners/sofas2.jpg', active: false),
-    BannersModel(image: 'assets/banners/decor.jpg', active: false),
+    BannersModel(
+        image: 'assets/banners/chairs.jpg',
+        active: true,
+        targetScreen: '/search'),
+    BannersModel(
+        image: 'assets/banners/chairs2.jpg',
+        active: true,
+        targetScreen: '/search'),
+    BannersModel(
+        image: 'assets/banners/sofas.jpg',
+        active: true,
+        targetScreen: '/search'),
+    BannersModel(
+        image: 'assets/banners/sofas2.jpg',
+        active: false,
+        targetScreen: '/search'),
+    BannersModel(
+        image: 'assets/banners/decor.jpg',
+        active: false,
+        targetScreen: '/search'),
   ];
 }

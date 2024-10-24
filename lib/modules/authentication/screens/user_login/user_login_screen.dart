@@ -4,15 +4,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:decordashapp/modules/authentication/controllers/log_in/log_in_controller.dart';
-import 'package:decordashapp/modules/authentication/screens/email_login/email_login.dart';
-import 'package:decordashapp/modules/authentication/screens/phone_login/phone_sign_in_screen.dart';
-import 'package:decordashapp/modules/authentication/screens/sign_up/sign_up_screen.dart';
+import 'package:decordashapp/modules/authentication/screens/signin/signin_screen.dart';
+import 'package:decordashapp/modules/authentication/screens/phone_login/phone_signin_screen.dart';
+import 'package:decordashapp/modules/authentication/screens/signup/signup_screen.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
-class LoginSignUpScreen extends StatelessWidget {
-  const LoginSignUpScreen({super.key});
+class UserLoginScreen extends StatelessWidget {
+  const UserLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class LoginSignUpScreen extends StatelessWidget {
           children: [
             PrimaryHeaderContainer(
                 child: SvgPicture.asset(
-              TImages.logo,
+              ImageStrings.logo,
               fit: BoxFit.cover,
             )),
             SafeArea(
@@ -58,7 +58,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         BuildCTAButton(
                           text: 'continueWithEmail'.tr,
                           onPressed: () => Get.to(
-                            () => const EmailSignInScreen(),
+                            () => const SigninScreen(),
                             duration: const Duration(milliseconds: 300),
                             transition: Transition.rightToLeft,
                           ),
@@ -66,7 +66,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         BuildCTAButton(
                           text: 'continueWithPhone'.tr,
                           onPressed: () => Get.to(
-                            () => const PhoneNumberScreen(),
+                            () => const PhoneSigninScreen(),
                             duration: const Duration(milliseconds: 300),
                             transition: Transition.rightToLeft,
                           ),
@@ -91,7 +91,7 @@ class LoginSignUpScreen extends StatelessWidget {
                         ),
                         IconButton.outlined(
                           onPressed: () => controller.googleSignIn(),
-                          icon: SvgPicture.asset(TImages.google),
+                          icon: SvgPicture.asset(ImageStrings.google),
                           padding: const EdgeInsets.all(15),
                         ),
                         Row(

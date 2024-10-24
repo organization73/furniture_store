@@ -34,7 +34,7 @@ class AddProductController extends GetxController {
   Future<void> addProduct() async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'processingLoading'.tr, TImages.processingInfo);
+          'processingLoading'.tr, ImageStrings.processingInfo);
 
       final isConnected = NetworkManager.instance.isOnline.value;
       if (!isConnected) {
@@ -71,7 +71,7 @@ class AddProductController extends GetxController {
 
       final newProduct = ProductModel(
         productName: nameController.text,
-        categoryId: '1',
+        categoryName: 'chairs',
         productPrice: double.parse(priceController.text),
         productImage: pickedImagePaths[0],
         productDetails: ProductDetails(

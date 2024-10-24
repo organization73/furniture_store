@@ -14,7 +14,7 @@ import 'package:decordashapp/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:decordashapp/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:decordashapp/modules/manufacture_request/screens/manufacture_req_screen.dart';
 import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
-import 'package:decordashapp/modules/profile/screens/profile.dart';
+import 'package:decordashapp/modules/profile/screens/profile_screen.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -96,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
                           title: 'AI Designs',
                           subTitle: 'buyPointsDesc'.tr,
                           onTap: () => Get.to(
-                            () => const AiPage(),
+                            () => const AIDesignsScreen(),
                             duration: const Duration(milliseconds: 300),
                             transition: Transition.rightToLeft,
                           ),

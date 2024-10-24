@@ -21,7 +21,8 @@ class ProfileTile extends StatelessWidget {
     return ListTile(
       leading: Obx(() {
         final networkImage = controller.user.value.avatar;
-        final image = networkImage.isNotEmpty ? networkImage : TImages.user;
+        final image =
+            networkImage.isNotEmpty ? networkImage : ImageStrings.user;
         if (controller.profileLoading.value) {
           return const ShimmerLoaderEffect(
             width: 50,

@@ -1,11 +1,11 @@
-class Message {
+class ChatMessageModel {
   final String senderId;
   final String receiverId;
   final String content;
   final DateTime sentTime;
   final MessageType messageType;
 
-  const Message({
+  const ChatMessageModel({
     required this.senderId,
     required this.receiverId,
     required this.sentTime,
@@ -13,14 +13,13 @@ class Message {
     required this.messageType,
   });
 
-  factory Message.fromJson(Map<String, dynamic> json) =>
-      Message(
+  factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
+      ChatMessageModel(
         receiverId: json['receiverId'],
         senderId: json['senderId'],
         sentTime: json['sentTime'].toDate(),
         content: json['content'],
-        messageType:
-            MessageType.fromJson(json['messageType']),
+        messageType: MessageType.fromJson(json['messageType']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +37,5 @@ enum MessageType {
 
   String toJson() => name;
 
-  factory MessageType.fromJson(String json) =>
-      values.byName(json);
+  factory MessageType.fromJson(String json) => values.byName(json);
 }

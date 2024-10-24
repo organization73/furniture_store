@@ -41,7 +41,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
           Expanded(
             child: CustomTextFormField(
               controller: controller,
-              hint: 'Add Message...',
+              hint: 'Add ChatMessageModel...',
               prefixIcon: IconsaxPlusLinear.message_add,
             ),
           ),

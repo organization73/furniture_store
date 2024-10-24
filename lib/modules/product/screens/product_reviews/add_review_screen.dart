@@ -7,9 +7,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
-class AddReview extends StatelessWidget {
+class AddReviewScreen extends StatelessWidget {
   final ProductModel product;
-  const AddReview({super.key, required this.product});
+  const AddReviewScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

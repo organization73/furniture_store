@@ -39,7 +39,7 @@ class ErrorScreen extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 1,
                   child: Lottie.asset(
-                    TImages.noInternet,
+                    ImageStrings.noInternet,
                   ),
                 ),
               ),

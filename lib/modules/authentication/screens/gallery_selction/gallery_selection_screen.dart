@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/modules/authentication/controllers/gallery_selection/gallery_selection_controller.dart';
-import 'package:decordashapp/modules/authentication/model/gallery_selection/gallery_selection_model.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class GallerySelection extends StatelessWidget {
-  final GallerySelectionModel model = Get.put(GallerySelectionModel());
-  final GallerySelectionController controller =
-      GallerySelectionController.getInstance();
-
-  GallerySelection({super.key});
+class GallerySelectionScreen extends StatelessWidget {
+  const GallerySelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(GallerySelectionController());
+
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -26,14 +23,12 @@ class GallerySelection extends StatelessWidget {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        forceMaterialTransparency: true,
       ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -43,23 +38,24 @@ class GallerySelection extends StatelessWidget {
                     iconName: IconsaxPlusLinear.building),
                 Obx(() => Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius:
+                            BorderRadius.circular(TSizes.buttonRadius),
                         border: Border.all(
-                          color: model.selectedOption.value == 1
+                          color: controller.isGallerySelected.value
                               ? Theme.of(context).colorScheme.primary
                               : Theme.of(context).colorScheme.outlineVariant,
                         ),
                       ),
                       child: InkWell(
-                        onTap: () => controller.model.selectOption(1),
+                        onTap: () => controller.isGallerySelected.value = true,
                         child: ListTile(
                           title: Text('yesMes'.tr,
                               style: Theme.of(context).textTheme.bodyMedium),
                           leading: Radio(
-                            value: 1,
-                            groupValue: model.selectedOption.value,
-                            onChanged: (int? value) =>
-                                controller.model.selectOption(value!),
+                            value: true,
+                            groupValue: controller.isGallerySelected.value,
+                            onChanged: (value) =>
+                                controller.isGallerySelected.value = value!,
                           ),
                         ),
                       ),
@@ -67,23 +63,24 @@ class GallerySelection extends StatelessWidget {
                 const SizedBox(height: TSizes.spaceBtwInputFields),
                 Obx(() => Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius:
+                            BorderRadius.circular(TSizes.buttonRadius),
                         border: Border.all(
-                          color: model.selectedOption.value == 0
+                          color: !controller.isGallerySelected.value
                               ? Theme.of(context).colorScheme.primary
-                              : Colors.grey,
+                              : Theme.of(context).colorScheme.outlineVariant,
                         ),
                       ),
                       child: InkWell(
-                        onTap: () => controller.model.selectOption(0),
+                        onTap: () => controller.isGallerySelected.value = false,
                         child: ListTile(
                           title: Text('noMes'.tr,
                               style: Theme.of(context).textTheme.bodyMedium),
                           leading: Radio(
-                            value: 0,
-                            groupValue: model.selectedOption.value,
-                            onChanged: (int? value) =>
-                                controller.model.selectOption(value!),
+                            value: false,
+                            groupValue: controller.isGallerySelected.value,
+                            onChanged: (value) =>
+                                controller.isGallerySelected.value = value!,
                           ),
                         ),
                       ),

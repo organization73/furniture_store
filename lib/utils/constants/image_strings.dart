@@ -1,7 +1,7 @@
 /* -- App Image Strings -- */
 
 /// This class contains all the App Images in String formats.
-class TImages {
+class ImageStrings {
   // -- Logos
   static const String google = "assets/icons/google.svg";
   static const String logo = 'assets/logos/logo.svg';

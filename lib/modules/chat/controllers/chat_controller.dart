@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/data/repositories/chat/chat_repo.dart';
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
-import 'package:decordashapp/modules/chat/model/message.dart';
+import 'package:decordashapp/modules/chat/model/chat_message_model.dart';
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
   ScrollController scrollController = ScrollController();
 
   Rx<UserModel?> user = Rx<UserModel?>(null);
-  RxList<Message> messages = <Message>[].obs;
+  RxList<ChatMessageModel> messages = <ChatMessageModel>[].obs;
 
   @override
   void onInit() {
@@ -66,8 +66,9 @@ class ChatController extends GetxController with WidgetsBindingObserver {
         .orderBy('sentTime', descending: false)
         .snapshots(includeMetadataChanges: true)
         .listen((messages) {
-      this.messages.value =
-          messages.docs.map((doc) => Message.fromJson(doc.data())).toList();
+      this.messages.value = messages.docs
+          .map((doc) => ChatMessageModel.fromJson(doc.data()))
+          .toList();
       scrollDown();
     });
   }

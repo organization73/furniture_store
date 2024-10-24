@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection.dart';
+import 'package:decordashapp/modules/authentication/screens/gallery_selction/gallery_selection_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
@@ -43,13 +43,10 @@ class VerifyEmailController extends GetxController {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
-        () => GallerySelection(),
+        () => const GallerySelectionScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.rightToLeft,
       );
-
-      TLoaders.successSnackBar(
-          title: 'congrats'.tr, message: 'accountCreationConfirmed'.tr);
     }
   }
 }

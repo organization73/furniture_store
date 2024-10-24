@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:decordashapp/modules/favourites/screens/favourite_screen.dart';
+import 'package:decordashapp/modules/favourites/screens/favourites_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
         ),
         IconButton(
             onPressed: () => Get.to(
-                  () => const FavouritsPage(),
+                  () => const FavouritesScreen(),
                   duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),

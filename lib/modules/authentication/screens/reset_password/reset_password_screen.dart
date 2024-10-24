@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/common/widgets/headings/page_header.dart';
 import 'package:decordashapp/modules/authentication/controllers/forget_password/forget_password_controller.dart';
-import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
+import 'package:decordashapp/modules/authentication/screens/user_login/user_login_screen.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -21,7 +21,7 @@ class ResetPasswordScreen extends StatelessWidget {
           child: BuildCTAButton(
               text: 'tContinue'.tr,
               onPressed: () => Get.offAll(
-                    () => const LoginSignUpScreen(),
+                    () => const UserLoginScreen(),
                     duration: const Duration(milliseconds: 300),
                     transition: Transition.downToUp,
                   ))),
@@ -41,7 +41,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Lottie.asset(
-                    TImages.resetPassword,
+                    ImageStrings.resetPassword,
                     width: TDeviceUtils.getScreenWidth() * 0.35,
                   ),
                   const SizedBox(

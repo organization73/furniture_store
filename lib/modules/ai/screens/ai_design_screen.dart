@@ -9,14 +9,14 @@ import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class AiPage extends StatefulWidget {
-  const AiPage({super.key});
+class AIDesignsScreen extends StatefulWidget {
+  const AIDesignsScreen({super.key});
 
   @override
-  State<AiPage> createState() => _AiPageState();
+  State<AIDesignsScreen> createState() => _AiPageState();
 }
 
-class _AiPageState extends State<AiPage> {
+class _AiPageState extends State<AIDesignsScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController aiDescriptionController;
   final BalanceModel balanceModel = BalanceModel();

@@ -3,7 +3,7 @@ import 'package:decordashapp/modules/product/screens/product_reviews/widgets/use
 import 'package:flutter/material.dart';
 
 import 'package:decordashapp/modules/product/model/product_model.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/add_review.dart';
+import 'package:decordashapp/modules/product/screens/product_reviews/add_review_screen.dart';
 import 'package:decordashapp/modules/product/screens/product_reviews/controllers/product_reviews_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -19,13 +19,12 @@ class ProductReviewsScreen extends StatelessWidget {
         title: const Text(
           "All Reviews",
         ),
-        forceMaterialTransparency: true,
       ),
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
             onPressed: () => Get.to(
-                  () => AddReview(product: product),
+                  () => AddReviewScreen(product: product),
                   duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),

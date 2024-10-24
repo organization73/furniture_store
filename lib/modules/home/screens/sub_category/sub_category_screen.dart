@@ -34,7 +34,7 @@ class SubCategoryScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 const emptyWidget = AnimationLoaderWidget(
                   text: 'Whoops! This category is Empty...',
-                  animation: TImages.noFiles,
+                  animation: ImageStrings.noFiles,
                 );
                 const loader = HorizontalProductShimmer();
                 final widget = TCloudHelperFunctions.checkMultiRecordState(

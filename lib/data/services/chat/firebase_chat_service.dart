@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:decordashapp/modules/chat/model/message.dart';
+import 'package:decordashapp/modules/chat/model/chat_message_model.dart';
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +13,7 @@ class FirebaseFirestoreService {
     required String content,
     required String receiverId,
   }) async {
-    final message = Message(
+    final message = ChatMessageModel(
       content: content,
       sentTime: DateTime.now(),
       receiverId: receiverId,
@@ -31,7 +31,7 @@ class FirebaseFirestoreService {
     final image = await FirebaseStorageServices.instance
         .uploadImageFile('image/chat/${DateTime.now()}', file);
 
-    final message = Message(
+    final message = ChatMessageModel(
       content: image,
       sentTime: DateTime.now(),
       receiverId: receiverId,
@@ -44,7 +44,7 @@ class FirebaseFirestoreService {
 
   static Future<void> _addMessageToChat(
     String receiverId,
-    Message message,
+    ChatMessageModel message,
   ) async {
     await firestore
         .collection('Users')

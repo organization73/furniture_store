@@ -2,26 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/modules/home/model/review_model.dart';
 import 'package:decordashapp/modules/home/model/vendor_model.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
-import 'package:uuid/uuid.dart';
 
 class ProductModel {
-  String id;
-  String sku;
-  String productName;
-  String categoryId;
-  double productPrice;
-  double productSalePrice;
-  String productImage;
-  bool onSale;
-  ProductDetails productDetails;
+  final String id; // Add id field
+  final String productName;
+  final String categoryName;
+  final double productPrice;
+  final double productSalePrice;
+  late final String productImage;
+  final bool onSale;
+  final ProductDetails productDetails;
   List<dynamic> rates = [];
   double productRating = 0;
   int productNumOfRating = 0;
   bool? isFeatured;
 
   ProductModel({
+    this.id='', // Add id to constructor
     required this.productName,
-    required this.categoryId,
+    required this.categoryName,
     this.productPrice = 0,
     this.productSalePrice = 0,
     required this.productImage,
@@ -29,15 +28,14 @@ class ProductModel {
     required this.productDetails,
     this.rates = const [],
     this.isFeatured = false,
-    this.sku = '',
-    String id = '',
-  }) : id = id.isEmpty ? const Uuid().v4() : id {
+  }) {
     updateRates();
   }
+
   static ProductModel empty() => ProductModel(
+        id: '', // Add id to empty constructor
         productName: '',
-        id: '',
-        categoryId: '',
+        categoryName: '',
         productPrice: 0.0,
         productSalePrice: 0.0,
         productImage: '',
@@ -58,7 +56,6 @@ class ProductModel {
                 isFeatured: false,
                 productsCount: 0,
                 accountType: AccountType.vendor)),
-        sku: '',
       );
 
   void updateRates() {
@@ -73,12 +70,11 @@ class ProductModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'id': id, // Add id to toJson method
         'productName': productName,
-        'categoryId': categoryId,
+        'categoryName': categoryName,
         'productPrice': productPrice,
         'productSalePrice': productSalePrice,
-        'sku': sku,
         'productImage': productImage,
         'onSale': onSale,
         'isFeatured': isFeatured,
@@ -93,10 +89,9 @@ class ProductModel {
           .map((rate) => Review.fromJson(rate))
           .toList();
       return ProductModel(
-        id: snapshot.id,
+        id: snapshot.id, // Add id from snapshot id
         productName: data['productName'] ?? '',
-        sku: data['sku'] ?? '',
-        categoryId: data['categoryId'] ?? '',
+        categoryName: data['categoryName'] ?? '',
         productPrice: data['productPrice']?.toDouble() ?? 0.0,
         productSalePrice: data['productSalePrice']?.toDouble() ?? 0.0,
         productImage: data['productImage'] ?? '',

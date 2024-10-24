@@ -1,7 +1,7 @@
-import 'package:decordashapp/modules/authentication/screens/login/login_screen.dart';
-import 'package:decordashapp/modules/authentication/screens/sign_up/verify_sign_up_email.dart';
+import 'package:decordashapp/modules/authentication/screens/user_login/user_login_screen.dart';
+import 'package:decordashapp/modules/authentication/screens/signup/verify_signup_email.dart';
 import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
-import 'package:decordashapp/modules/home/screens/nav_menu.dart';
+import 'package:decordashapp/routes/nav_menu.dart';
 import 'package:decordashapp/modules/onboarding/screens/onboarding_screen.dart';
 import 'package:decordashapp/utils/exceptions/exception_handler.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
@@ -21,7 +21,6 @@ class AuthenticatorRepo extends GetxController {
 
   User? get authUser => _auth.currentUser;
   RxString verificationId = ''.obs;
-
 
   @override
   void onReady() {
@@ -64,7 +63,7 @@ class AuthenticatorRepo extends GetxController {
       deviceStorage.writeIfNull('isFirstTime', true);
       deviceStorage.read('isFirstTime') != true
           ? Get.offAll(
-              () => const LoginSignUpScreen(),
+              () => const UserLoginScreen(),
               duration: const Duration(milliseconds: 300),
               transition: Transition.rightToLeft,
             )
@@ -187,7 +186,7 @@ class AuthenticatorRepo extends GetxController {
       await _googleSignIn.signOut();
       await _auth.signOut();
       Get.offAll(
-        () => const LoginSignUpScreen(),
+        () => const UserLoginScreen(),
         duration: const Duration(milliseconds: 300),
         transition: Transition.upToDown,
       );

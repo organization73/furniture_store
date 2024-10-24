@@ -26,6 +26,7 @@ class CategoryRepo extends GetxController {
       rethrow;
     }
   }
+
   Future<List<RoomModel>> getRooms() async {
     try {
       final snapshot = await _db.collection('Rooms').get();
@@ -65,7 +66,7 @@ class CategoryRepo extends GetxController {
   ) async {
     try {
       FullScreenLoader.openLoadingDialog(
-          'Uploading Data...', TImages.processingInfo);
+          'Uploading Data...', ImageStrings.processingInfo);
       final storage = Get.put(FirebaseStorageServices());
 
       for (var category in categories) {

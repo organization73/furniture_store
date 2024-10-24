@@ -21,9 +21,7 @@ class PhoneUserInfoScreen extends StatelessWidget {
           child: BuildCTAButton(
               text: 'tContinue'.tr, onPressed: () => controller.updateInfo())),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding:

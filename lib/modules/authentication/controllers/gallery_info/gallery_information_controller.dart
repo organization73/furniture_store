@@ -1,6 +1,7 @@
 import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/location/location_services.dart';
 import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
+import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
@@ -62,7 +63,8 @@ class GalleryInfoController extends GetxController {
 
       Map<String, dynamic> name = {
         'galleryName': galleryNameController.text.trim(),
-        'galleryAddress': galleryAddressController.text.trim()
+        'galleryAddress': galleryAddressController.text.trim(),
+        'accountType': 'gallery'
       };
       await UserRepo.instance.updateSingleField(name);
 
@@ -70,6 +72,7 @@ class GalleryInfoController extends GetxController {
           galleryNameController.text.trim();
       UserController.instance.user.value.galleryAddress =
           galleryAddressController.text.trim();
+      UserController.instance.user.value.accountType = AccountType.gallery;
 
       UserController.instance.user.refresh();
 
