@@ -7,7 +7,7 @@ class NetworkController extends GetxController {
   static NetworkController get instance => Get.find();
 
   void retryConnection() {
-    if (NetworkManager.instance.isOnline.value) {
+    if (NetworkManager.instance.isOnline) {
       AuthenticatorRepo.instance.screenRedirect();
     } else {
       TLoaders.warningSnackBar(title: 'internet'.tr, message: 'noInternet'.tr);

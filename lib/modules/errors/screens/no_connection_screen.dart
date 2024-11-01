@@ -21,11 +21,8 @@ class ErrorScreen extends StatelessWidget {
           ? BottomAppBar(
               color: Theme.of(context).scaffoldBackgroundColor,
               child: BuildCTAButton(
-                text: 'Retry',
-                onPressed: () {
-                  networkController.retryConnection();
-                },
-              ),
+                  text: 'Retry',
+                  onPressed: () => networkController.retryConnection()),
             )
           : null,
       body: SafeArea(
@@ -38,9 +35,7 @@ class ErrorScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: Lottie.asset(
-                    ImageStrings.noInternet,
-                  ),
+                  child: Lottie.asset(ImageStrings.noInternet),
                 ),
               ),
               const ErrorInfo(

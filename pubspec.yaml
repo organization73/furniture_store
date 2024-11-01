@@ -29,7 +29,7 @@ dependencies:
   permission_handler: ^11.3.1
   cached_network_image: ^3.4.1
   fast_color_picker: ^0.1.1
-  connectivity_plus: ^6.0.5
+  connectivity_plus: ^6.1.0
   stability_image_generation: ^0.0.4
   readmore: ^3.0.0
   flutter_rating_bar: ^4.0.1

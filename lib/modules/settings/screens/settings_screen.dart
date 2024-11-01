@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (!NetworkManager.instance.isOnline.value) {
+      if (!NetworkManager.instance.isOnline) {
         return const ErrorScreen();
       } else {
         return Scaffold(

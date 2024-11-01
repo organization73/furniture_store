@@ -6,14 +6,14 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 
 /// Manages the network connectivity status and provides methods to check and handle connectivity changes.
-class NetworkManager extends GetxService {
+class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
-  final RxList<ConnectivityResult> _connectionStatus =
-      [ConnectivityResult.none].obs;
+
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  final RxBool _isOnline = false.obs;
 
-  final RxBool isOnline = false.obs;
+  bool get isOnline => _isOnline.value;
 
   @override
   void onInit() {
@@ -30,8 +30,8 @@ class NetworkManager extends GetxService {
 
   @override
   void onClose() {
-    _connectivitySubscription.cancel();
     super.onClose();
+    _connectivitySubscription.cancel();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -49,14 +49,6 @@ class NetworkManager extends GetxService {
   }
 
   Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
-    _connectionStatus.value = result;
-    isConnected();
-  }
-
-  /// Checks if the device is connected to any network.
-  Future<void> isConnected() async {
-    await initConnectivity();
-    isOnline.value = _connectionStatus.isNotEmpty &&
-        _connectionStatus.any((status) => status != ConnectivityResult.none);
+    _isOnline.value = result.any((status) => status != ConnectivityResult.none);
   }
 }

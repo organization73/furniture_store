@@ -36,7 +36,7 @@ class AddProductController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'processingLoading'.tr, ImageStrings.processingInfo);
 
-      final isConnected = NetworkManager.instance.isOnline.value;
+      final isConnected = NetworkManager.instance.isOnline;
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(

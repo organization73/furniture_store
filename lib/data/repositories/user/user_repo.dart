@@ -4,7 +4,7 @@ import 'package:decordashapp/data/repositories/authentication/authentication_rep
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:get/get.dart';
 
-class UserRepo extends GetxService {
+class UserRepo extends GetxController {
   static UserRepo get instance => Get.find();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;

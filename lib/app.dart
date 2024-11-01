@@ -24,9 +24,7 @@ class MyApp extends StatelessWidget {
         theme: theme.light(),
         darkTheme: theme.dark(),
         home: const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
+          body: Center(child: CircularProgressIndicator()),
         ));
   }
 }

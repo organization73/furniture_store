@@ -29,7 +29,7 @@ class LoginController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'loggingInLoadingTitle'.tr, ImageStrings.processingInfo);
 
-      final isConnected = NetworkManager.instance.isOnline.value;
+      final isConnected = NetworkManager.instance.isOnline;
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
@@ -63,7 +63,7 @@ class LoginController extends GetxController {
       FullScreenLoader.openLoadingDialog(
           'loggingInLoadingTitle'.tr, ImageStrings.processingInfo);
 
-      final isConnected = NetworkManager.instance.isOnline.value;
+      final isConnected = NetworkManager.instance.isOnline;
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();

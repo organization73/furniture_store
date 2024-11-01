@@ -19,7 +19,7 @@ class ForgetPasswordController extends GetxController {
     try {
       FullScreenLoader.openLoadingDialog(
           'Processing your request...', ImageStrings.processingInfo);
-      final isConnected = NetworkManager.instance.isOnline.value;
+      final isConnected = NetworkManager.instance.isOnline;
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();
@@ -59,7 +59,7 @@ class ForgetPasswordController extends GetxController {
     try {
       FullScreenLoader.openLoadingDialog(
           'Processing your request...', ImageStrings.processingInfo);
-      final isConnected = NetworkManager.instance.isOnline.value;
+      final isConnected = NetworkManager.instance.isOnline;
 
       if (!isConnected) {
         FullScreenLoader.stopLoading();

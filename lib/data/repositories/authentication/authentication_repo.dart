@@ -18,9 +18,9 @@ class AuthenticatorRepo extends GetxController {
   final deviceStorage = GetStorage();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final RxString _verificationId = ''.obs;
 
   User? get authUser => _auth.currentUser;
-  RxString verificationId = ''.obs;
 
   @override
   void onReady() {
@@ -28,51 +28,79 @@ class AuthenticatorRepo extends GetxController {
     screenRedirect();
   }
 
-  screenRedirect() async {
+  void screenRedirect() async {
     // Check network connectivity
-    bool isConnected = NetworkManager.instance.isOnline.value;
-    if (!isConnected) {
-      Get.offAll(
-        () => const ErrorScreen(showActionButton: true),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
-      );
+    if (!NetworkManager.instance.isOnline) {
+      _navigateToErrorScreen();
       return;
     }
 
     final user = _auth.currentUser;
     if (user != null) {
-      if (user.emailVerified || user.phoneNumber != null) {
-        await TLocalStorage.init(user.uid);
-
-        Get.offAll(
-          () => const NavMenu(),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
-      } else {
-        Get.offAll(
-          () => VerifySignUpEmail(
-            email: _auth.currentUser?.email,
-          ),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
-      }
+      await _handleAuthenticatedUser(user);
     } else {
-      deviceStorage.writeIfNull('isFirstTime', true);
-      deviceStorage.read('isFirstTime') != true
-          ? Get.offAll(
-              () => const UserLoginScreen(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            )
-          : Get.offAll(
-              () => const OnBoardingScreen(),
-              duration: const Duration(milliseconds: 300),
-              transition: Transition.rightToLeft,
-            );
+      _handleUnauthenticatedUser();
     }
+  }
+
+  void _navigateToErrorScreen() {
+    Get.offAll(
+      () => const ErrorScreen(showActionButton: true),
+      duration: const Duration(milliseconds: 300),
+      transition: Transition.rightToLeft,
+    );
+  }
+
+  Future<void> _handleAuthenticatedUser(User user) async {
+    if (user.emailVerified || user.phoneNumber != null) {
+      await TLocalStorage.init(user.uid);
+      _navigateToNavMenu();
+    } else {
+      _navigateToVerifySignUpEmail();
+    }
+  }
+
+  void _navigateToNavMenu() {
+    Get.offAll(
+      () => const NavMenu(),
+      duration: const Duration(milliseconds: 300),
+      transition: Transition.rightToLeft,
+    );
+  }
+
+  void _navigateToVerifySignUpEmail() {
+    Get.offAll(
+      () => VerifySignUpEmail(
+        email: _auth.currentUser?.email,
+      ),
+      duration: const Duration(milliseconds: 300),
+      transition: Transition.rightToLeft,
+    );
+  }
+
+  void _handleUnauthenticatedUser() {
+    deviceStorage.writeIfNull('isFirstTime', true);
+    if (deviceStorage.read('isFirstTime') != true) {
+      _navigateToUserLoginScreen();
+    } else {
+      _navigateToOnBoardingScreen();
+    }
+  }
+
+  void _navigateToUserLoginScreen() {
+    Get.offAll(
+      () => const UserLoginScreen(),
+      duration: const Duration(milliseconds: 300),
+      transition: Transition.rightToLeft,
+    );
+  }
+
+  void _navigateToOnBoardingScreen() {
+    Get.offAll(
+      () => const OnBoardingScreen(),
+      duration: const Duration(milliseconds: 300),
+      transition: Transition.rightToLeft,
+    );
   }
 
   Future<UserCredential> loginWithEmailAndPassword(
@@ -97,10 +125,10 @@ class AuthenticatorRepo extends GetxController {
           ExceptionHandler.handleAuthException(e);
         },
         codeSent: (String verificationId, int? resendToken) {
-          this.verificationId.value = verificationId;
+          _verificationId.value = verificationId;
         },
         codeAutoRetrievalTimeout: (String verificationId) {
-          this.verificationId.value = verificationId;
+          _verificationId.value = verificationId;
         },
       );
     } catch (e) {
@@ -112,7 +140,7 @@ class AuthenticatorRepo extends GetxController {
     try {
       return await _auth.signInWithCredential(
         PhoneAuthProvider.credential(
-            verificationId: verificationId.value, smsCode: otp),
+            verificationId: _verificationId.value, smsCode: otp),
       );
     } catch (e) {
       ExceptionHandler.handleAuthException(e);

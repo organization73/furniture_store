@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UserController extends GetxService {
+class UserController extends GetxController {
   static UserController get instance => Get.find();
 
   final profileLoading = false.obs;
@@ -147,7 +147,7 @@ class UserController extends GetxService {
     try {
       FullScreenLoader.openLoadingDialog(
           'Processing', ImageStrings.processingInfo);
-      final isConnected = NetworkManager.instance.isOnline.value;
+      final isConnected = NetworkManager.instance.isOnline;
       if (!isConnected) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
@@ -218,7 +218,7 @@ class UserController extends GetxService {
         FullScreenLoader.openLoadingDialog(
             'Processing', ImageStrings.processingInfo);
 
-        final isConnected = NetworkManager.instance.isOnline.value;
+        final isConnected = NetworkManager.instance.isOnline;
         if (!isConnected) {
           FullScreenLoader.stopLoading();
           TLoaders.warningSnackBar(
