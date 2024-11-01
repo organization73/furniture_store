@@ -1,5 +1,5 @@
 import 'package:decordashapp/modules/errors/screens/no_connection_screen.dart';
-import 'package:decordashapp/modules/product/screens/add_product/collabsable_appbar.dart';
+import 'package:decordashapp/modules/product/screens/add_product/add_tabs.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,7 @@ class AddProductPage extends StatelessWidget {
       if (!NetworkManager.instance.isOnline) {
         return const ErrorScreen();
       } else {
-        return const CollapsingAppbarWithTabsPage();
+        return const AddProductsTabsPage();
       }
     });
   }

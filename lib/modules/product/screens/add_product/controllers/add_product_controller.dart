@@ -18,6 +18,8 @@ class AddProductController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  String? category;
+  String? subCategory;
   int? condition;
   Color? color;
   String? wood;

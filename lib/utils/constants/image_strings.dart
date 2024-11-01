@@ -25,6 +25,4 @@ class ImageStrings {
 
   //Profile
   static const String user = "assets/images/content/user.png";
-
-  static const String addBanner = "assets/images/content/add_banner.jpg";
 }

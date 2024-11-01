@@ -21,18 +21,17 @@ class BuildProductImageUpload extends StatelessWidget {
             width: double.infinity,
             height: 100,
             decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
                 border: Border.all(
-                  width: 0.5,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(32))),
+                    width: 0.5,
+                    color: Theme.of(context).colorScheme.onTertiaryContainer),
+                borderRadius: const BorderRadius.all(Radius.circular(20))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   IconsaxPlusLinear.document_upload,
-                  size: TSizes.iconLg * 1.5,
-                  color: Theme.of(context).colorScheme.primary,
+                  size: TSizes.iconLg * 1.2,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 const SizedBox(height: TSizes.sm),
                 Text(

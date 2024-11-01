@@ -22,7 +22,9 @@ class RoomCategoryCard extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(room.name,
               textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.labelMedium),
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimaryFixed,
+                  )),
         ),
       ]),
     );

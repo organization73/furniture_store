@@ -1,5 +1,6 @@
 import 'package:decordashapp/common/widgets/drop_down_menu/drop_down_menu.dart';
 import 'package:decordashapp/common/widgets/input_fields/build_user_input_field.dart';
+import 'package:decordashapp/modules/home/controllers/category_controller.dart';
 import 'package:decordashapp/modules/product/screens/add_product/controllers/add_product_controller.dart';
 import 'package:decordashapp/modules/product/screens/add_product/widgets/color_selection.dart';
 import 'package:decordashapp/modules/product/screens/add_product/widgets/product_condition_selection.dart';
@@ -25,27 +26,60 @@ class AddSingleProduct extends StatelessWidget {
             padding: EdgeInsets.all(TSizes.pagePaddingSpace),
             child: BuildProductImageUpload(),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-            child: Text(
-              'productDetails'.tr,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
             child: Form(
               key: addController.formKey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    'Product Category',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwItems,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: BuildDropDown(
+                          items: CategoryController.instance.allCatedories
+                              .map((e) {
+                            return e.name;
+                          }).toList(),
+                          onItemSelected: (selectedItem) {
+                            addController.category = selectedItem;
+                          },
+                          hintText: 'Category',
+                        ),
+                      ),
+                      const SizedBox(width: TSizes.sm),
+                      Expanded(
+                        child: BuildDropDown(
+                          items: CategoryController.instance.allCatedories
+                              .map((e) {
+                            return e.name;
+                          }).toList(),
+                          onItemSelected: (selectedItem) {
+                            addController.category = selectedItem;
+                          },
+                          hintText: 'Sub-Category',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwSections,
+                  ),
+                  Text(
+                    'productDetails'.tr,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwItems,
+                  ),
                   RoundedTextField(
                       'productName'.tr,
                       addController.nameController,

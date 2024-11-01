@@ -1,3 +1,4 @@
+import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class BuildDropDown extends StatefulWidget {
@@ -31,10 +32,10 @@ class _SimpleDropDownState extends State<BuildDropDown> {
           if (widget.title != null) _title(widget.title!),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
               border: Border.all(),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(TSizes.inputFieldRadius),
             ),
             child: Row(
               children: [
@@ -43,20 +44,11 @@ class _SimpleDropDownState extends State<BuildDropDown> {
                     items: widget.items,
                     onItemSelected: widget.onItemSelected,
                     underline: Container(),
-                    style: TextStyle(
-                        fontSize: 13,
-                        color:
-                            Theme.of(context).colorScheme.onSecondaryContainer,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0.05),
+                    style: Theme.of(context).textTheme.bodyMedium,
                     dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                     iconEnabledColor:
                         Theme.of(context).colorScheme.onSecondaryContainer,
-                    hintStyle: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0.05),
+                    hintStyle: Theme.of(context).textTheme.bodyMedium,
                     hintText: widget.hintText,
                   ),
                 ),
