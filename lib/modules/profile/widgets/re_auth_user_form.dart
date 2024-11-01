@@ -16,17 +16,11 @@ class ReAuthLoginForm extends StatelessWidget {
     final controller = UserController.instance;
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Re-Authenticate User'),
-        ),
+        appBar: AppBar(),
         bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
-            text: 'Delete',
-            onPressed: () {
-              controller.reAuthEmailAndPasswordUser();
-            },
-          ),
+              text: 'Delete',
+              onPressed: () => controller.reAuthEmailAndPasswordUser()),
         ),
         body: Padding(
           padding:

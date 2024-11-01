@@ -28,6 +28,7 @@ class SettingsScreen extends StatelessWidget {
       if (!NetworkManager.instance.isOnline) {
         return const ErrorScreen();
       } else {
+        Get.put(UserController());
         return Scaffold(
           body: SingleChildScrollView(
             child: Column(

@@ -1,9 +1,10 @@
+import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/chat/notifications/notification_service.dart';
+import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/authentication/authentication_repo.dart';
-import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/modules/authentication/screens/signup/verify_signup_email.dart';
 import 'package:decordashapp/modules/profile/models/user_model.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
@@ -29,11 +30,10 @@ class SignUpController extends GetxController {
   final FocusNode emailFocus = FocusNode();
   final FocusNode passwordFocus = FocusNode();
   final FocusNode phoneNumberFocus = FocusNode();
+  PhoneNumber number = PhoneNumber(isoCode: 'EG');
 
   static final notifications = NotificationsService();
-  final userRepesotory = UserRepo.instance;
-
-  PhoneNumber number = PhoneNumber(isoCode: 'EG');
+  final userController = Get.put(UserController());
 
   void signup() async {
     try {
@@ -50,13 +50,11 @@ class SignUpController extends GetxController {
 
       if (!formKey.currentState!.validate()) {
         FullScreenLoader.stopLoading();
-
         return;
       }
 
       if (!privacyPolicy.value) {
         FullScreenLoader.stopLoading();
-
         TLoaders.warningSnackBar(
             title: 'policyAndTerms'.tr, message: 'policyAndTermsDesc'.tr);
 
@@ -75,7 +73,7 @@ class SignUpController extends GetxController {
         phoneNumber: number.phoneNumber!,
       );
 
-      await userRepesotory.saveuserRecord(newUser);
+      await UserRepo.instance.saveuserRecord(newUser);
 
       await notifications.requestPermission();
       await notifications.getToken();

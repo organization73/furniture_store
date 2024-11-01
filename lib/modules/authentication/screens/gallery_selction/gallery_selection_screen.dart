@@ -15,7 +15,6 @@ class GallerySelectionScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'cont'.tr,
           onPressed: controller.navigateToNextScreen,

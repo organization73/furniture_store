@@ -18,7 +18,6 @@ class ChangeGalleryInfoScreen extends StatelessWidget {
         title: const Text('Update Gallery Info'),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
             text: 'tContinue'.tr,
             onPressed: () {

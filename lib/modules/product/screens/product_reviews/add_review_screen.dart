@@ -21,6 +21,20 @@ class AddReviewScreen extends StatelessWidget {
           "Write your review",
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: BuildCTAButton(
+            onPressed: () {
+              controller.addReview(Review(
+                reviewerName: "UserClass",
+                rating: controller.selectedRating
+                    .value, // Use the selected rating from the controller
+                comment: controller.reviewController.text,
+                reviewerImage: 'https://via.placeholder.com/150',
+                date: DateTime.now(),
+              ));
+            },
+            text: 'Continue'),
+      ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Form(
         key: controller.formKey,
@@ -64,21 +78,6 @@ class AddReviewScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: BuildCTAButton(
-            onPressed: () {
-              controller.addReview(Review(
-                reviewerName: "UserClass",
-                rating: controller.selectedRating
-                    .value, // Use the selected rating from the controller
-                comment: controller.reviewController.text,
-                reviewerImage: 'https://via.placeholder.com/150',
-                date: DateTime.now(),
-              ));
-            },
-            text: 'Continue'),
       ),
     );
   }

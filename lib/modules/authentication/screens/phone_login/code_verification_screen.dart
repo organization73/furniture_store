@@ -20,7 +20,6 @@ class CodeVerificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           text: 'verify'.tr,
           onPressed: () => controller.verifyOTP(otp),

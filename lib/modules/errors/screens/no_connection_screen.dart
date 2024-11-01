@@ -19,7 +19,6 @@ class ErrorScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: showActionButton
           ? BottomAppBar(
-              color: Theme.of(context).scaffoldBackgroundColor,
               child: BuildCTAButton(
                   text: 'Retry',
                   onPressed: () => networkController.retryConnection()),

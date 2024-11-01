@@ -21,7 +21,6 @@ class ProductReviewsScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
             onPressed: () => Get.to(
                   () => AddReviewScreen(product: product),

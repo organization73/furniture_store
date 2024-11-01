@@ -16,7 +16,6 @@ class VerifySignUpEmail extends StatelessWidget {
     final controller = Get.put(VerifyEmailController());
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
           onPressed: () => controller.checkEmailVerificationStatus(),
           text: 'cont'.tr,

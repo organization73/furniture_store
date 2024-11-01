@@ -18,7 +18,6 @@ class ChangeNameScreen extends StatelessWidget {
         title: const Text('Change Name'),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
             text: 'tContinue'.tr,
             onPressed: () {

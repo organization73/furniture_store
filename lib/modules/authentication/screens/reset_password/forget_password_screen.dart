@@ -17,7 +17,6 @@ class ForgetPasswordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
             text: 'tContinue'.tr,
             onPressed: () => controller.sendPasswordResetEmail(),

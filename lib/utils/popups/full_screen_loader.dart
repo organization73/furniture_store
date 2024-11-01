@@ -7,6 +7,7 @@ class FullScreenLoader {
   static void openLoadingDialog(String text, String animation) {
     showDialog(
         context: Get.overlayContext!,
+        useSafeArea: false,
         barrierDismissible: false,
         builder: (_) => PopScope(
             canPop: false,

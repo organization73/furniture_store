@@ -28,6 +28,7 @@ class UserController extends GetxController {
   final FocusNode verifyEmailFocus = FocusNode();
   final FocusNode verifyPasswordFocus = FocusNode();
 
+  final userRepo = Get.put(UserRepo());
   final storageServices = Get.put(FirebaseStorageServices());
 
   @override
@@ -39,7 +40,7 @@ class UserController extends GetxController {
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
-      final user = await UserRepo.instance.fetchUserData();
+      final user = await userRepo.fetchUserData();
       this.user(user);
     } catch (e) {
       user(UserModel.empty());
@@ -69,7 +70,7 @@ class UserController extends GetxController {
               phoneNumber: userCred.user!.phoneNumber ?? '',
               avatar: userCred.user!.photoURL ?? '');
 
-          await UserRepo.instance.saveuserRecord(user);
+          await userRepo.saveuserRecord(user);
         }
       }
     } catch (e) {
@@ -111,7 +112,7 @@ class UserController extends GetxController {
       if (provider.isNotEmpty) {
         if (provider == 'google.com') {
           await auth.signInWithGoogle();
-          await UserRepo.instance.removeUserRecord(auth.authUser!.uid);
+          await userRepo.removeUserRecord(auth.authUser!.uid);
           await auth.deleteAccount();
           FullScreenLoader.stopLoading();
           Get.offAll(
@@ -127,7 +128,7 @@ class UserController extends GetxController {
             transition: Transition.rightToLeft,
           );
         } else if (provider == 'phone') {
-          await UserRepo.instance.removeUserRecord(auth.authUser!.uid);
+          await userRepo.removeUserRecord(auth.authUser!.uid);
           await auth.deleteAccount();
           FullScreenLoader.stopLoading();
           Get.offAll(
@@ -163,7 +164,7 @@ class UserController extends GetxController {
       await AuthenticatorRepo.instance.reAuthEmailAndPasswordUser(
           verifyEmail.text.trim(), verifyPassword.text.trim());
 
-      await UserRepo.instance.removeUserRecord(user.value.id);
+      await userRepo.removeUserRecord(user.value.id);
       await AuthenticatorRepo.instance.deleteAccount();
 
       FullScreenLoader.stopLoading();
@@ -193,7 +194,7 @@ class UserController extends GetxController {
             'Users/Images/Profile/', image);
 
         Map<String, dynamic> json = {"avatar": imageUrl};
-        await UserRepo.instance.updateSingleField(json);
+        await userRepo.updateSingleField(json);
         user.value.avatar = imageUrl;
         user.refresh();
 
@@ -235,7 +236,7 @@ class UserController extends GetxController {
         Map<String, dynamic> json = {
           isCertificate ? "galleryCertificate" : "galleryPicture": imageUrl
         };
-        await UserRepo.instance.updateSingleField(json);
+        await userRepo.updateSingleField(json);
         if (isCertificate) {
           user.value.galleryCertificate = imageUrl;
         } else {

@@ -17,7 +17,6 @@ class PhoneUserInfoScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
               text: 'tContinue'.tr, onPressed: () => controller.updateInfo())),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

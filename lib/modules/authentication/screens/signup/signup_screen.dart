@@ -19,16 +19,10 @@ class SignUpScreen extends StatelessWidget {
     final controller = Get.put(SignUpController());
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
-          text: 'signUp'.tr,
-          onPressed: () {
-            controller.signup();
-          },
-        ),
+            text: 'signUp'.tr, onPressed: () => controller.signup()),
       ),
       body: SafeArea(
         child: Padding(

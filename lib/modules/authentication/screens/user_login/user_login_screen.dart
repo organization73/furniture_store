@@ -19,117 +19,111 @@ class UserLoginScreen extends StatelessWidget {
     final controller = Get.put(LoginController());
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            PrimaryHeaderContainer(
-                child: SvgPicture.asset(
-              ImageStrings.logo,
-              fit: BoxFit.cover,
-            )),
-            SafeArea(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      )),
-                  height: TDeviceUtils.getScreenOrientation(context) ==
-                          Orientation.portrait
-                      ? TDeviceUtils.getScreenHeight() * 0.57
-                      : TDeviceUtils.getScreenHeight(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text('loginHeader'.tr,
-                            style: Theme.of(context).textTheme.headlineSmall),
-                        Text(
-                          'loginSubHeader'.tr,
-                          style: Theme.of(context).textTheme.labelMedium,
-                          textAlign: TextAlign.center,
+      body: Stack(
+        children: [
+          PrimaryHeaderContainer(
+              child: SvgPicture.asset(ImageStrings.logo, fit: BoxFit.cover)),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    )),
+                height: TDeviceUtils.getScreenOrientation(context) ==
+                        Orientation.portrait
+                    ? TDeviceUtils.getScreenHeight() * 0.57
+                    : TDeviceUtils.getScreenHeight(),
+                child: Padding(
+                  padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('loginHeader'.tr,
+                          style: Theme.of(context).textTheme.headlineSmall),
+                      Text(
+                        'loginSubHeader'.tr,
+                        style: Theme.of(context).textTheme.labelMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwSections / 2),
+                      BuildCTAButton(
+                        text: 'continueWithEmail'.tr,
+                        onPressed: () => Get.to(
+                          () => const SigninScreen(),
+                          duration: const Duration(milliseconds: 300),
+                          transition: Transition.rightToLeft,
                         ),
-                        const SizedBox(height: TSizes.spaceBtwSections / 2),
-                        BuildCTAButton(
-                          text: 'continueWithEmail'.tr,
-                          onPressed: () => Get.to(
-                            () => const SigninScreen(),
-                            duration: const Duration(milliseconds: 300),
-                            transition: Transition.rightToLeft,
+                      ),
+                      BuildCTAButton(
+                        text: 'continueWithPhone'.tr,
+                        onPressed: () => Get.to(
+                          () => const PhoneSigninScreen(),
+                          duration: const Duration(milliseconds: 300),
+                          transition: Transition.rightToLeft,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Flexible(
+                            child: Divider(
+                              indent: 60,
+                              endIndent: 5,
+                            ),
                           ),
-                        ),
-                        BuildCTAButton(
-                          text: 'continueWithPhone'.tr,
-                          onPressed: () => Get.to(
-                            () => const PhoneSigninScreen(),
-                            duration: const Duration(milliseconds: 300),
-                            transition: Transition.rightToLeft,
+                          Text('or'.tr),
+                          const Flexible(
+                            child: Divider(
+                              indent: 5,
+                              endIndent: 60,
+                            ),
+                          )
+                        ],
+                      ),
+                      IconButton.outlined(
+                        onPressed: () => controller.googleSignIn(),
+                        icon: SvgPicture.asset(ImageStrings.google),
+                        padding: const EdgeInsets.all(15),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'newToApp'.tr,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Flexible(
-                              child: Divider(
-                                indent: 60,
-                                endIndent: 5,
-                              ),
+                          TextButton(
+                            onPressed: () {
+                              Get.to(
+                                () => const SignUpScreen(),
+                                duration: const Duration(milliseconds: 300),
+                                transition: Transition.downToUp,
+                              );
+                            },
+                            child: Text(
+                              'createAccount'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                             ),
-                            Text('or'.tr),
-                            const Flexible(
-                              child: Divider(
-                                indent: 5,
-                                endIndent: 60,
-                              ),
-                            )
-                          ],
-                        ),
-                        IconButton.outlined(
-                          onPressed: () => controller.googleSignIn(),
-                          icon: SvgPicture.asset(ImageStrings.google),
-                          padding: const EdgeInsets.all(15),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'newToApp'.tr,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Get.to(
-                                  () => const SignUpScreen(),
-                                  duration: const Duration(milliseconds: 300),
-                                  transition: Transition.downToUp,
-                                );
-                              },
-                              child: Text(
-                                'createAccount'.tr,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

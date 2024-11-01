@@ -16,7 +16,6 @@ class PhoneSigninScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).scaffoldBackgroundColor,
           child: BuildCTAButton(
               text: 'tContinue'.tr,
               onPressed: () {

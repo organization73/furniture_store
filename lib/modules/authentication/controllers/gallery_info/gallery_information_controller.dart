@@ -2,6 +2,7 @@ import 'package:decordashapp/data/repositories/user/user_repo.dart';
 import 'package:decordashapp/data/services/location/location_services.dart';
 import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
+import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/loaders/loaders.dart';
@@ -9,14 +10,11 @@ import 'package:decordashapp/data/repositories/authentication/authentication_rep
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class GalleryInfoController extends GetxController {
   static GalleryInfoController get instance => Get.find();
-  final storage = GetStorage();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final TextEditingController galleryNameController = TextEditingController();
   final TextEditingController galleryAddressController =
       TextEditingController();
@@ -43,11 +41,17 @@ class GalleryInfoController extends GetxController {
 
   Future<void> validateAndSubmit() async {
     try {
+      FullScreenLoader.openLoadingDialog(
+          'processingLoading'.tr, ImageStrings.processingInfo);
       if (!formKey.currentState!.validate()) {
+        FullScreenLoader.stopLoading();
+
         return;
       }
 
       if (UserController.instance.user.value.galleryPicture.isEmpty) {
+        FullScreenLoader.stopLoading();
+
         TLoaders.warningSnackBar(
             title: 'Upload Gallery Picture',
             message: 'Please upload your gallery picture');
@@ -55,6 +59,8 @@ class GalleryInfoController extends GetxController {
       }
 
       if (UserController.instance.user.value.galleryCertificate.isEmpty) {
+        FullScreenLoader.stopLoading();
+
         TLoaders.warningSnackBar(
             title: 'Upload Gallery Certificate',
             message: 'Please upload your gallery certificate or ID');
@@ -75,9 +81,12 @@ class GalleryInfoController extends GetxController {
       UserController.instance.user.value.accountType = AccountType.gallery;
 
       UserController.instance.user.refresh();
+      FullScreenLoader.stopLoading();
 
       AuthenticatorRepo.instance.screenRedirect();
     } catch (e) {
+      FullScreenLoader.stopLoading();
+
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());
     }
   }

@@ -22,7 +22,6 @@ class SigninScreen extends StatelessWidget {
         forceMaterialTransparency: true,
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
         child: BuildCTAButton(
             text: 'signIn'.tr,
             onPressed: () => controller.emailAndPasswordSignIn()),
