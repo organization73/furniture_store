@@ -15,7 +15,7 @@ import 'package:decordashapp/modules/home/controllers/product/product_controller
 import 'package:decordashapp/modules/home/screens/all_products/all_products_screen.dart';
 import 'package:decordashapp/modules/home/widgets/categories_section.dart';
 import 'package:decordashapp/modules/home/widgets/home_appbar.dart';
-import 'package:decordashapp/modules/home/widgets/room_section.dart';
+import 'package:decordashapp/modules/rooms/widgets/room_section.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         PrimaryHeaderContainer(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                top: TDeviceUtils.getStatusBarHeight() + 65),
+                                top: TDeviceUtils.getStatusBarHeight(context) + 65),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -94,12 +94,16 @@ class HomeScreen extends StatelessWidget {
                                   return Center(child: Text('noProducts'.tr));
                                 }
                                 return GridLayout(
-                                    mainAxisExtent: TDeviceUtils
-                                                .getScreenOrientation(
+                                    mainAxisExtent:
+                                        TDeviceUtils.getScreenOrientation(
                                                     context) ==
-                                            Orientation.portrait
-                                        ? TDeviceUtils.getScreenHeight() * 0.32
-                                        : TDeviceUtils.getScreenHeight() * 0.4,
+                                                Orientation.portrait
+                                            ? TDeviceUtils.getScreenHeight(
+                                                    context) *
+                                                0.32
+                                            : TDeviceUtils.getScreenHeight(
+                                                    context) *
+                                                0.4,
                                     itemCount: productsController
                                         .featuredProducts.length,
                                     itemBuilder: (_, index) =>

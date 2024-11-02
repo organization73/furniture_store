@@ -16,7 +16,7 @@ class HorizontalCategory extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: RoundedContainer(
-          width: TDeviceUtils.getScreenWidth() * 0.31,
+          width: TDeviceUtils.getScreenWidth(context) * 0.31,
           margin: const EdgeInsets.only(right: TSizes.spaceBtwItems),
           backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
           raduis: 8,
@@ -32,8 +32,8 @@ class HorizontalCategory extends StatelessWidget {
                 imageUrl: category.image,
                 isNetworkImage: true,
                 applyImageRaduis: false,
-                height: TDeviceUtils.getScreenHeight() * 0.3,
-                width: TDeviceUtils.getScreenWidth() * 0.15,
+                height: TDeviceUtils.getScreenHeight(context) * 0.3,
+                width: TDeviceUtils.getScreenWidth(context) * 0.15,
                 padding: const EdgeInsets.all(5),
               ),
             ],

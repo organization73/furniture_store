@@ -36,7 +36,7 @@ class PageHeader extends StatelessWidget {
           textAlign: align,
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        SizedBox(height: TDeviceUtils.getScreenHeight() * 0.02),
+        SizedBox(height: TDeviceUtils.getScreenHeight(context) * 0.02),
         Text(
           subTitle,
           style: Theme.of(context).textTheme.labelMedium,

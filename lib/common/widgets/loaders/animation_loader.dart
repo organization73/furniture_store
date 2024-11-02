@@ -26,8 +26,8 @@ class AnimationLoaderWidget extends StatelessWidget {
       children: [
         Lottie.asset(
           animation,
-          width: TDeviceUtils.getScreenHeight() * 0.8,
-          height: TDeviceUtils.getScreenHeight() * 0.4,
+          width: TDeviceUtils.getScreenHeight(context) * 0.8,
+          height: TDeviceUtils.getScreenHeight(context) * 0.4,
         ),
         Text(
           text,

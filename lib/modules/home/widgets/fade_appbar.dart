@@ -13,7 +13,7 @@ class FadeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: TDeviceUtils.getStatusBarHeight() + 65,
+      height: TDeviceUtils.getStatusBarHeight(context) + 65,
       color: Theme.of(context)
           .scaffoldBackgroundColor
           .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),

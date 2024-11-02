@@ -34,8 +34,8 @@ class UserLoginScreen extends StatelessWidget {
                     )),
                 height: TDeviceUtils.getScreenOrientation(context) ==
                         Orientation.portrait
-                    ? TDeviceUtils.getScreenHeight() * 0.57
-                    : TDeviceUtils.getScreenHeight(),
+                    ? TDeviceUtils.getScreenHeight(context) * 0.57
+                    : TDeviceUtils.getScreenHeight(context),
                 child: Padding(
                   padding: const EdgeInsets.all(TSizes.pagePaddingSpace),
                   child: Column(

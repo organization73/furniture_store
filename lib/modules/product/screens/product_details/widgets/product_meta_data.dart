@@ -6,10 +6,10 @@ import 'package:decordashapp/common/widgets/texts/product_price_text.dart';
 import 'package:decordashapp/common/widgets/texts/product_title_text.dart';
 import 'package:decordashapp/modules/home/controllers/product/product_controller.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/product_review_screen.dart';
+import 'package:decordashapp/modules/reviews/screens/product_review_screen.dart';
 import 'package:decordashapp/modules/product/screens/product_details/widgets/product_specs.dart';
 import 'package:decordashapp/modules/product/screens/product_details/widgets/product_status_checkboxes.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/widgets/user_review_card.dart';
+import 'package:decordashapp/modules/reviews/widgets/user_review_card.dart';
 
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';

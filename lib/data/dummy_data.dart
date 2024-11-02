@@ -1,6 +1,6 @@
 import 'package:decordashapp/modules/home/model/banners_model.dart';
 import 'package:decordashapp/modules/home/model/category_model.dart';
-import 'package:decordashapp/modules/home/model/rooms_model.dart';
+import 'package:decordashapp/modules/rooms/models/rooms_model.dart';
 
 class DummyData {
   //  static final List<ProductModel> products = [

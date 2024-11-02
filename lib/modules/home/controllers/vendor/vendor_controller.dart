@@ -2,7 +2,7 @@ import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/product/product_repo.dart';
 import 'package:decordashapp/data/repositories/vendor/vendor_repo.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
-import 'package:decordashapp/modules/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/vendors/models/vendor_model.dart';
 import 'package:get/get.dart';
 
 class VendorController extends GetxController {

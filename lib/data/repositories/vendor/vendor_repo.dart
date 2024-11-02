@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/utils/exceptions/exception_handler.dart';
-import 'package:decordashapp/modules/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/vendors/models/vendor_model.dart';
 import 'package:get/get.dart';
 
 class VendorRepo extends GetxController {

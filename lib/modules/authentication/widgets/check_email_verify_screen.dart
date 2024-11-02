@@ -25,7 +25,7 @@ class CheckVerifyScreen extends StatelessWidget {
         children: [
           Lottie.asset(
             ImageStrings.emailDelivery,
-            width: TDeviceUtils.getScreenWidth() * 0.35,
+            width: TDeviceUtils.getScreenWidth(context) * 0.35,
           ),
           const SizedBox(
             height: TSizes.spaceBtwItems,

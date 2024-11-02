@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decordashapp/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:decordashapp/modules/home/model/rooms_model.dart';
+import 'package:decordashapp/modules/rooms/models/rooms_model.dart';
 import 'package:decordashapp/utils/constants/image_strings.dart';
 import 'package:decordashapp/utils/exceptions/exception_handler.dart';
 import 'package:decordashapp/modules/home/model/category_model.dart';

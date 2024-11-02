@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordashapp/modules/vendor/screens/vendor_products_screen.dart';
+import 'package:decordashapp/modules/vendors/screens/vendor_products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
-import 'package:decordashapp/modules/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/vendors/models/vendor_model.dart';
 
 import 'package:decordashapp/utils/constants/sizes.dart';
 

@@ -10,7 +10,7 @@ import 'package:decordashapp/common/widgets/vendors/featured_gallery_card.dart';
 import 'package:decordashapp/common/widgets/headings/section_heading.dart';
 import 'package:decordashapp/common/widgets/layouts/grid_layout.dart';
 import 'package:decordashapp/common/widgets/shimmer/shimmer_loader.dart';
-import 'package:decordashapp/modules/vendor/screens/vendor_products_screen.dart';
+import 'package:decordashapp/modules/vendors/screens/vendor_products_screen.dart';
 import 'package:decordashapp/modules/home/controllers/category_controller.dart';
 import 'package:decordashapp/modules/home/controllers/vendor/vendor_controller.dart';
 import 'package:decordashapp/modules/store/widgets/category_tab.dart';
@@ -38,7 +38,8 @@ class StoreScreen extends StatelessWidget {
                     SliverAppBar(
                         pinned: true,
                         floating: true,
-                        expandedHeight: TDeviceUtils.getScreenHeight() * 0.4,
+                        expandedHeight:
+                            TDeviceUtils.getScreenHeight(context) * 0.4,
                         flexibleSpace: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: TSizes.pagePaddingSpace),

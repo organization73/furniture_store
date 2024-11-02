@@ -41,7 +41,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 children: [
                   Lottie.asset(
                     ImageStrings.resetPassword,
-                    width: TDeviceUtils.getScreenWidth() * 0.35,
+                    width: TDeviceUtils.getScreenWidth(context) * 0.35,
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,

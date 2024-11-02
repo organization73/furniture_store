@@ -2,7 +2,7 @@ import 'package:decordashapp/common/widgets/loaders/loaders.dart';
 import 'package:decordashapp/data/repositories/category/category_repo.dart';
 import 'package:decordashapp/data/repositories/product/product_repo.dart';
 import 'package:decordashapp/modules/home/model/category_model.dart';
-import 'package:decordashapp/modules/home/model/rooms_model.dart';
+import 'package:decordashapp/modules/rooms/models/rooms_model.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:decordashapp/utils/logging/logger.dart';
 import 'package:get/get.dart';

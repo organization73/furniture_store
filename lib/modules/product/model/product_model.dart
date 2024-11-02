@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:decordashapp/modules/home/model/review_model.dart';
-import 'package:decordashapp/modules/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/reviews/models/review_model.dart';
+import 'package:decordashapp/modules/vendors/models/vendor_model.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
 
 class ProductModel {

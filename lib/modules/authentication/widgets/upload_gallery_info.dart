@@ -21,7 +21,7 @@ class UploadGalleryInfo extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: double.infinity,
-          height: TDeviceUtils.getScreenHeight() * 0.12,
+          height: TDeviceUtils.getScreenHeight(context) * 0.12,
           decoration: BoxDecoration(
               color: Theme.of(context).scaffoldBackgroundColor,
               border: Border.all(

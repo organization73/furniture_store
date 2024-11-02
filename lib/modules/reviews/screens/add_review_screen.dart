@@ -1,7 +1,7 @@
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
-import 'package:decordashapp/modules/home/model/review_model.dart';
+import 'package:decordashapp/modules/reviews/models/review_model.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/controllers/product_reviews_controller.dart';
+import 'package:decordashapp/modules/reviews/controllers/product_reviews_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';

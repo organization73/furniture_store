@@ -1,4 +1,4 @@
-import 'package:decordashapp/modules/home/model/review_model.dart';
+import 'package:decordashapp/modules/reviews/models/review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/modules/product/model/product_model.dart';
 import 'package:get/get.dart';

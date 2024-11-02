@@ -2,7 +2,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
 import 'package:decordashapp/modules/ai/controllers/generative_ai/generative_ai_controller.dart';
-import 'package:decordashapp/utils/constants/api_constants.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:stability_image_generation/stability_image_generation.dart';
@@ -20,7 +19,7 @@ class ImageGenerator extends StatefulWidget {
 
 class ImageGeneratorState extends State<ImageGenerator> {
   final StabilityAI _ai = StabilityAI();
-  final String apiKey = aiAPIKey;
+  final String apiKey = 'aiAPIKey';
   final ImageAIStyle imageAIStyle = ImageAIStyle.christmas;
   bool run = false;
 

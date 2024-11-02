@@ -19,10 +19,8 @@ class AddProductsTabsPage extends StatelessWidget {
                 onPressed: () {
                   if (tabController.index == 0) {
                     // Action for the first tab
-                    print("Action for Furniture tab");
                   } else if (tabController.index == 1) {
                     // Action for the second tab
-                    print("Action for Room tab");
                   }
                 },
                 child: const Icon(Icons.add),
@@ -35,7 +33,7 @@ class AddProductsTabsPage extends StatelessWidget {
                 SliverAppBar(
                     pinned: true,
                     floating: true,
-                    expandedHeight: TDeviceUtils.getScreenHeight() * 0.1,
+                    expandedHeight: TDeviceUtils.getScreenHeight(context) * 0.1,
                     flexibleSpace: const TabBackground(),
                     bottom: TabBar(
                       dividerHeight: 0,

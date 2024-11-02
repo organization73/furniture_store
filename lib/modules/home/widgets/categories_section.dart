@@ -28,8 +28,8 @@ class BuildCategoriesSection extends StatelessWidget {
         Obx(() {
           if (categoryController.isLoading.value) {
             return ShimmerLoaderEffect(
-              width: TDeviceUtils.getScreenWidth(),
-              height: TDeviceUtils.getScreenHeight() * 0.07,
+              width: TDeviceUtils.getScreenWidth(context),
+              height: TDeviceUtils.getScreenHeight(context) * 0.07,
               raduis: TSizes.md,
             );
           }
@@ -37,7 +37,7 @@ class BuildCategoriesSection extends StatelessWidget {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
-              height: TDeviceUtils.getScreenHeight() * 0.07,
+              height: TDeviceUtils.getScreenHeight(context) * 0.07,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: categoryController.allCatedories.length,

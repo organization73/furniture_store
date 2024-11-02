@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:decordashapp/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
 import 'package:decordashapp/common/widgets/texts/brand_title_text_with_verified_icon.dart';
-import 'package:decordashapp/modules/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/vendors/models/vendor_model.dart';
 import 'package:decordashapp/utils/constants/enums.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 

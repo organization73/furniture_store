@@ -51,8 +51,8 @@ class FavouritesScreen extends StatelessWidget {
                       mainAxisExtent:
                           TDeviceUtils.getScreenOrientation(context) ==
                                   Orientation.portrait
-                              ? TDeviceUtils.getScreenHeight() * 0.32
-                              : TDeviceUtils.getScreenHeight() * 0.4,
+                              ? TDeviceUtils.getScreenHeight(context) * 0.32
+                              : TDeviceUtils.getScreenHeight(context) * 0.4,
                       itemCount: products.length,
                       itemBuilder: (_, index) {
                         return ProductCardVerical(

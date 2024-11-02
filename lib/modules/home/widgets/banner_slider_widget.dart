@@ -13,13 +13,13 @@ class BannerSlider extends StatelessWidget {
     final controller = Get.put(BannerController());
 
     return ConstrainedBox(
-      constraints:
-          BoxConstraints(maxHeight: TDeviceUtils.getScreenHeight() * 0.13),
+      constraints: BoxConstraints(
+          maxHeight: TDeviceUtils.getScreenHeight(context) * 0.13),
       child: Obx(() {
         if (controller.isLoading.value) {
           return ShimmerLoaderEffect(
               width: double.infinity,
-              height: TDeviceUtils.getScreenHeight() * 0.13);
+              height: TDeviceUtils.getScreenHeight(context) * 0.13);
         }
         if (controller.banners.isEmpty) {
           return Center(child: Text('noData'.tr));
@@ -28,7 +28,7 @@ class BannerSlider extends StatelessWidget {
           onTap: (value) {
             Get.toNamed(controller.banners[value].targetScreen);
           },
-          itemExtent: TDeviceUtils.getScreenWidth(),
+          itemExtent: TDeviceUtils.getScreenWidth(context),
           itemSnapping: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

@@ -42,7 +42,7 @@ class ProductCardVerical extends StatelessWidget {
         child: Column(
           children: [
             RoundedContainer(
-              hight: TDeviceUtils.getScreenHeight() * 0.16,
+              hight: TDeviceUtils.getScreenHeight(context) * 0.16,
               width: double.infinity,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: Theme.of(context).colorScheme.surface,

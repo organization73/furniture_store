@@ -29,8 +29,8 @@ class BuildRoomsSection extends StatelessWidget {
         Obx(() {
           if (controller.isLoading.value) {
             return ShimmerLoaderEffect(
-              width: TDeviceUtils.getScreenWidth(),
-              height: TDeviceUtils.getScreenHeight() * 0.18,
+              width: TDeviceUtils.getScreenWidth(context),
+              height: TDeviceUtils.getScreenHeight(context) * 0.18,
               raduis: TSizes.md,
             );
           }
@@ -38,9 +38,9 @@ class BuildRoomsSection extends StatelessWidget {
             return Center(child: Text('noCategories'.tr));
           } else {
             return SizedBox(
-              height: TDeviceUtils.getScreenHeight() * 0.18,
+              height: TDeviceUtils.getScreenHeight(context) * 0.18,
               child: ListView.builder(
-                itemExtent: TDeviceUtils.getScreenWidth() * 0.27,
+                itemExtent: TDeviceUtils.getScreenWidth(context) * 0.27,
                 scrollDirection: Axis.horizontal,
                 itemCount: controller.allRooms.length,
                 itemBuilder: (context, index) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:decordashapp/common/styles/shadows.dart';
 import 'package:decordashapp/common/widgets/images/circular_image.dart';
-import 'package:decordashapp/modules/home/model/vendor_model.dart';
+import 'package:decordashapp/modules/vendors/models/vendor_model.dart';
 
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';

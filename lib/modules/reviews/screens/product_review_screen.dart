@@ -1,10 +1,10 @@
 import 'package:decordashapp/common/widgets/buttons/cta_button.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/widgets/user_review_card.dart';
+import 'package:decordashapp/modules/reviews/widgets/user_review_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:decordashapp/modules/product/model/product_model.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/add_review_screen.dart';
-import 'package:decordashapp/modules/product/screens/product_reviews/controllers/product_reviews_controller.dart';
+import 'package:decordashapp/modules/reviews/screens/add_review_screen.dart';
+import 'package:decordashapp/modules/reviews/controllers/product_reviews_controller.dart';
 import 'package:decordashapp/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
