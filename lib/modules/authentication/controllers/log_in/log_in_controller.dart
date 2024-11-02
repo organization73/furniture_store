@@ -8,14 +8,11 @@ import 'package:decordashapp/modules/profile/controllers/user_controller.dart';
 import 'package:decordashapp/utils/helpers/network_manager.dart';
 import 'package:decordashapp/utils/popups/full_screen_loader.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
 
-  final localStorage = GetStorage();
   final hidePassword = true.obs;
-
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -23,6 +20,7 @@ class LoginController extends GetxController {
   final FocusNode passwordFocus = FocusNode();
 
   static final notifications = NotificationsService();
+  final userController = Get.put(UserController());
 
   Future<void> emailAndPasswordSignIn() async {
     try {
@@ -74,7 +72,7 @@ class LoginController extends GetxController {
 
       final userCred = await AuthenticatorRepo.instance.signInWithGoogle();
 
-      await UserController.instance.saveUserRecord(userCred);
+      await userController.saveUserRecord(userCred);
 
       await notifications.requestPermission();
       await notifications.getToken();

@@ -33,7 +33,6 @@ class SignUpController extends GetxController {
   PhoneNumber number = PhoneNumber(isoCode: 'EG');
 
   static final notifications = NotificationsService();
-  final userController = Get.put(UserController());
 
   void signup() async {
     try {
