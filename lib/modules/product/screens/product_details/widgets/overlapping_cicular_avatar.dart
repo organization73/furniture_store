@@ -56,8 +56,6 @@ class OverlappingCircularAvatar extends StatelessWidget {
             () => ProductReviewsScreen(
               product: product,
             ),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
           ),
           child: const CircleAvatar(
             radius: 15,

@@ -66,7 +66,6 @@ class ProfileScreen extends StatelessWidget {
                 value: controller.user.value.fullName,
                 onPress: () => Get.off(
                   () => const ChangeNameScreen(),
-                  duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),
               ),
@@ -124,7 +123,6 @@ class ProfileScreen extends StatelessWidget {
                                 value: controller.user.value.galleryName,
                                 onPress: () => Get.off(
                                   () => const ChangeGalleryInfoScreen(),
-                                  duration: const Duration(milliseconds: 300),
                                   transition: Transition.downToUp,
                                 ),
                               )

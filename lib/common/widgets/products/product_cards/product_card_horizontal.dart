@@ -26,8 +26,6 @@ class ProductCardHorizontal extends StatelessWidget {
         () => ProductDetailsScreen(
           product: product,
         ),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       ),
       child: Container(
         width: 310,

@@ -55,8 +55,6 @@ class CategoryTab extends StatelessWidget {
                               futureMethod: controller.getCategoryProducts(
                                   categoryId: category.id, limit: -1),
                             ),
-                            duration: const Duration(milliseconds: 300),
-                            transition: Transition.rightToLeft,
                           ),
                         ),
                         GridLayout(

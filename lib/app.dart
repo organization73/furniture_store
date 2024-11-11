@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: theme.light(),
         darkTheme: theme.dark(),
+        defaultTransition: Transition.rightToLeft,
         home: const Scaffold(
           body: Center(child: CircularProgressIndicator()),
         ));

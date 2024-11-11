@@ -46,8 +46,6 @@ class OTPController extends GetxController {
 
               Get.off(
                 () => const PhoneUserInfoScreen(),
-                duration: const Duration(milliseconds: 300),
-                transition: Transition.rightToLeft,
               );
             }
             await notifications.requestPermission();

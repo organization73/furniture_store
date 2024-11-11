@@ -13,8 +13,6 @@ class GallerySelectionController extends GetxController {
     } else {
       Get.to(
         () => const GalleryInformationScreen(),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     }
   }

@@ -44,7 +44,8 @@ class HomeScreen extends StatelessWidget {
                         PrimaryHeaderContainer(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                top: TDeviceUtils.getStatusBarHeight(context) + 65),
+                                top: TDeviceUtils.getStatusBarHeight(context) +
+                                    65),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: TSizes.pagePaddingSpace),
@@ -78,8 +79,6 @@ class HomeScreen extends StatelessWidget {
                                     futureMethod: productsController
                                         .fetchAllFeaturedProducts(),
                                   ),
-                                  duration: const Duration(milliseconds: 300),
-                                  transition: Transition.rightToLeft,
                                 ),
                               ),
                               const SizedBox(

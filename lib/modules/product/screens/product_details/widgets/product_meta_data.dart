@@ -172,8 +172,6 @@ class ProductMetaData extends StatelessWidget {
           title: 'Reviews',
           onPress: () => Get.to(
             () => ProductReviewsScreen(product: product),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
           ),
         ),
         if (product.rates.isNotEmpty)

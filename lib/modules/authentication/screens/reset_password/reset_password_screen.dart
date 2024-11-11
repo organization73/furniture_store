@@ -21,7 +21,6 @@ class ResetPasswordScreen extends StatelessWidget {
               text: 'tContinue'.tr,
               onPressed: () => Get.offAll(
                     () => const UserLoginScreen(),
-                    duration: const Duration(milliseconds: 300),
                     transition: Transition.downToUp,
                   ))),
       appBar: AppBar(

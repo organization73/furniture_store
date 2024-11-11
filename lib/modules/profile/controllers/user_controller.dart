@@ -117,15 +117,11 @@ class UserController extends GetxController {
           FullScreenLoader.stopLoading();
           Get.offAll(
             () => const UserLoginScreen(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
           );
         } else if (provider == 'password') {
           FullScreenLoader.stopLoading();
           Get.to(
             () => const ReAuthLoginForm(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
           );
         } else if (provider == 'phone') {
           await userRepo.removeUserRecord(auth.authUser!.uid);
@@ -133,8 +129,6 @@ class UserController extends GetxController {
           FullScreenLoader.stopLoading();
           Get.offAll(
             () => const UserLoginScreen(),
-            duration: const Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
           );
         }
       }
@@ -170,8 +164,6 @@ class UserController extends GetxController {
       FullScreenLoader.stopLoading();
       Get.offAll(
         () => const UserLoginScreen(),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     } catch (e) {
       FullScreenLoader.stopLoading();

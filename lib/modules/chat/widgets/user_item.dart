@@ -14,7 +14,6 @@ class UserItem extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.to(
           () => ChatScreen(userId: user.id),
-          duration: const Duration(milliseconds: 300),
           transition: Transition.downToUp,
         ),
         child: ListTile(

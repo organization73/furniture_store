@@ -36,8 +36,6 @@ class OnBoardingController extends GetxController {
     _storage.write('isFirstTime', false);
     Get.offAll(
       () => const UserLoginScreen(),
-      duration: const Duration(milliseconds: 300),
-      transition: Transition.rightToLeft,
     );
   }
 

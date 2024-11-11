@@ -35,8 +35,6 @@ class PhoneSingInController extends GetxController {
 
       Get.to(
         () => CodeVerificationScreen(phoneNumber: number.phoneNumber!),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     } catch (e) {
       TLoaders.errorSnackBar(title: 'ohSnap'.tr, message: e.toString());

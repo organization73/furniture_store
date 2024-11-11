@@ -55,8 +55,6 @@ class UserLoginScreen extends StatelessWidget {
                         isfilled: false,
                         onPressed: () => Get.to(
                           () => const SigninScreen(),
-                          duration: const Duration(milliseconds: 300),
-                          transition: Transition.rightToLeft,
                         ),
                       ),
                       BuildCTAButton(
@@ -64,8 +62,6 @@ class UserLoginScreen extends StatelessWidget {
                         isfilled: false,
                         onPressed: () => Get.to(
                           () => const PhoneSigninScreen(),
-                          duration: const Duration(milliseconds: 300),
-                          transition: Transition.rightToLeft,
                         ),
                       ),
                       Row(
@@ -102,7 +98,6 @@ class UserLoginScreen extends StatelessWidget {
                             onPressed: () {
                               Get.to(
                                 () => const SignUpScreen(),
-                                duration: const Duration(milliseconds: 300),
                                 transition: Transition.downToUp,
                               );
                             },

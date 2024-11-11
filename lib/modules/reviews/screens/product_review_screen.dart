@@ -24,7 +24,6 @@ class ProductReviewsScreen extends StatelessWidget {
         child: BuildCTAButton(
             onPressed: () => Get.to(
                   () => AddReviewScreen(product: product),
-                  duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),
             text: 'Write your review'),

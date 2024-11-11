@@ -49,8 +49,6 @@ class BuildCategoriesSection extends StatelessWidget {
                       () => SubCategoryScreen(
                         category: category,
                       ),
-                      duration: const Duration(milliseconds: 300),
-                      transition: Transition.rightToLeft,
                     ),
                     category: category,
                   );

@@ -29,7 +29,6 @@ class FadeAppBar extends StatelessWidget {
                 filled: true,
                 onTap: () => Get.to(
                   () => const SearchScreen(),
-                  duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),
               )),

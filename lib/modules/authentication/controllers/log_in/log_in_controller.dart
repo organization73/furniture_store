@@ -80,8 +80,6 @@ class LoginController extends GetxController {
 
       Get.to(
         () => const GallerySelectionScreen(),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     } catch (e) {
       FullScreenLoader.stopLoading();

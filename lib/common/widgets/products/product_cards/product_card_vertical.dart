@@ -29,8 +29,6 @@ class ProductCardVerical extends StatelessWidget {
         () => ProductDetailsScreen(
           product: product,
         ),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       ),
       child: Container(
         padding: const EdgeInsets.all(1),

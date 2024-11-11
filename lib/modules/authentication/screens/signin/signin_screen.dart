@@ -74,7 +74,6 @@ class SigninScreen extends StatelessWidget {
                   TextButton(
                     onPressed: () => Get.to(
                       () => const ForgetPasswordScreen(),
-                      duration: const Duration(milliseconds: 300),
                       transition: Transition.downToUp,
                     ),
                     child: Text('forgetPassword'.tr,

@@ -78,7 +78,6 @@ class SubCategoryScreen extends StatelessWidget {
                                         ),
                                         duration:
                                             const Duration(milliseconds: 300),
-                                        transition: Transition.rightToLeft,
                                       ),
                                     ),
                                     SizedBox(

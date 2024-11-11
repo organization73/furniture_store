@@ -44,8 +44,6 @@ class VerifyEmailController extends GetxController {
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
         () => const GallerySelectionScreen(),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     }
   }

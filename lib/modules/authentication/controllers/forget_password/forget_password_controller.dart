@@ -46,7 +46,6 @@ class ForgetPasswordController extends GetxController {
         () => ResetPasswordScreen(
           email: emailController.text.trim(),
         ),
-        duration: const Duration(milliseconds: 300),
         transition: Transition.downToUp,
       );
     } catch (e) {

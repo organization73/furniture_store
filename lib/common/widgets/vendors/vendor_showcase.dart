@@ -25,8 +25,6 @@ class VendorShowCase extends StatelessWidget {
         () => VendorProductsScreen(
           vendor: vendor,
         ),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       ),
       child: RoundedContainer(
         padding: const EdgeInsets.all(TSizes.sm),

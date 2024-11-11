@@ -15,8 +15,6 @@ class ManufactureRequestsPage extends StatelessWidget {
         tooltip: 'Add a request',
         onPressed: () => Get.to(
           () => const AddManRequestPage(),
-          duration: const Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
         ),
         heroTag: 'addFAB',
         child: const Icon(Icons.add),

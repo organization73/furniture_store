@@ -21,7 +21,6 @@ class HomeAppBar extends StatelessWidget {
         IconButton(
             onPressed: () => Get.to(
                   () => const FavouritesScreen(),
-                  duration: const Duration(milliseconds: 300),
                   transition: Transition.downToUp,
                 ),
             icon: const Icon(

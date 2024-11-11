@@ -40,7 +40,6 @@ class SettingsScreen extends StatelessWidget {
                       ProfileTile(
                         onPress: () => Get.to(
                           () => const ProfileScreen(),
-                          duration: const Duration(milliseconds: 300),
                           transition: Transition.downToUp,
                         ),
                       ),
@@ -88,8 +87,6 @@ class SettingsScreen extends StatelessWidget {
                           subTitle: 'manefactureReqDesc'.tr,
                           onTap: () => Get.to(
                             () => const ManufactureRequestsPage(),
-                            duration: const Duration(milliseconds: 300),
-                            transition: Transition.rightToLeft,
                           ),
                         ),
                         SettingsMenuTile(
@@ -98,8 +95,6 @@ class SettingsScreen extends StatelessWidget {
                           subTitle: 'buyPointsDesc'.tr,
                           onTap: () => Get.to(
                             () => const AIDesignsScreen(),
-                            duration: const Duration(milliseconds: 300),
-                            transition: Transition.rightToLeft,
                           ),
                         ),
                         const SizedBox(

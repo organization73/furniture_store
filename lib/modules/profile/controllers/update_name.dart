@@ -68,7 +68,6 @@ class UpdateNameController extends GetxController {
 
       Get.off(
         () => const ProfileScreen(),
-        duration: const Duration(milliseconds: 300),
         transition: Transition.downToUp,
       );
     } catch (e) {

@@ -46,8 +46,6 @@ class AuthenticatorRepo extends GetxController {
   void _navigateToErrorScreen() {
     Get.offAll(
       () => const ErrorScreen(showActionButton: true),
-      duration: const Duration(milliseconds: 300),
-      transition: Transition.rightToLeft,
     );
   }
 
@@ -63,8 +61,6 @@ class AuthenticatorRepo extends GetxController {
   void _navigateToNavMenu() {
     Get.offAll(
       () => const NavMenu(),
-      duration: const Duration(milliseconds: 300),
-      transition: Transition.rightToLeft,
     );
   }
 
@@ -73,8 +69,6 @@ class AuthenticatorRepo extends GetxController {
       () => VerifySignUpEmail(
         email: _auth.currentUser?.email,
       ),
-      duration: const Duration(milliseconds: 300),
-      transition: Transition.rightToLeft,
     );
   }
 
@@ -90,16 +84,12 @@ class AuthenticatorRepo extends GetxController {
   void _navigateToUserLoginScreen() {
     Get.offAll(
       () => const UserLoginScreen(),
-      duration: const Duration(milliseconds: 300),
-      transition: Transition.rightToLeft,
     );
   }
 
   void _navigateToOnBoardingScreen() {
     Get.offAll(
       () => const OnBoardingScreen(),
-      duration: const Duration(milliseconds: 300),
-      transition: Transition.rightToLeft,
     );
   }
 
@@ -215,7 +205,6 @@ class AuthenticatorRepo extends GetxController {
       await _auth.signOut();
       Get.offAll(
         () => const UserLoginScreen(),
-        duration: const Duration(milliseconds: 300),
         transition: Transition.upToDown,
       );
     } catch (e) {

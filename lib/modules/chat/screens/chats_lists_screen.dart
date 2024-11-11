@@ -28,8 +28,6 @@ class ChatsListScreen extends StatelessWidget {
               IconButton(
                 onPressed: () => Get.to(
                   () => const UsersSearchScreen(),
-                  duration: const Duration(milliseconds: 300),
-                  transition: Transition.rightToLeft,
                 ),
                 icon: const Icon(
                   IconsaxPlusLinear.search_normal,

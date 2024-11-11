@@ -57,7 +57,6 @@ class StoreScreen extends StatelessWidget {
                                 filled: true,
                                 onTap: () => Get.to(
                                   () => const SearchScreen(),
-                                  duration: const Duration(milliseconds: 300),
                                   transition: Transition.downToUp,
                                 ),
                               ),
@@ -65,8 +64,6 @@ class StoreScreen extends StatelessWidget {
                                 title: 'featuredGalleries'.tr,
                                 onPress: () => Get.to(
                                   () => const AllGalleriesScreen(),
-                                  duration: const Duration(milliseconds: 300),
-                                  transition: Transition.rightToLeft,
                                 ),
                               ),
                               Obx(() {
@@ -94,7 +91,6 @@ class StoreScreen extends StatelessWidget {
                                           ),
                                           duration:
                                               const Duration(milliseconds: 300),
-                                          transition: Transition.rightToLeft,
                                         ),
                                         vendor: vendor,
                                         showBorder: true,

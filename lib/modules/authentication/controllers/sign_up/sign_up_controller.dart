@@ -80,8 +80,6 @@ class SignUpController extends GetxController {
 
       Get.to(
         () => VerifySignUpEmail(email: emailController.text.trim()),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     } catch (e) {
       FullScreenLoader.stopLoading();

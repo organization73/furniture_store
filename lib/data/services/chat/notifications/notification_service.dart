@@ -117,8 +117,6 @@ class NotificationsService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       Get.to(
         () => ChatScreen(userId: message.data['senderId']),
-        duration: const Duration(milliseconds: 300),
-        transition: Transition.rightToLeft,
       );
     });
 
