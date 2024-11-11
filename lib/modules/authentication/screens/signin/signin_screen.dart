@@ -17,10 +17,7 @@ class SigninScreen extends StatelessWidget {
     final controller = LoginController.instance;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-      ),
+      appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
         child: BuildCTAButton(
             text: 'signIn'.tr,
