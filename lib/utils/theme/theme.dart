@@ -1,6 +1,5 @@
+import "package:decordashapp/utils/theme/widget_themes/buttons_theme.dart";
 import "package:decordashapp/utils/theme/widget_themes/checkbox_theme.dart";
-import "package:decordashapp/utils/theme/widget_themes/elevated_button_theme.dart";
-import "package:decordashapp/utils/theme/widget_themes/outlined_button_theme.dart";
 import "package:decordashapp/utils/theme/widget_themes/text_field_theme.dart";
 import "package:decordashapp/utils/theme/widget_themes/text_theme.dart";
 import "package:flutter/material.dart";
@@ -130,8 +129,9 @@ class MaterialTheme {
         scaffoldBackgroundColor: colorScheme.surface,
         canvasColor: colorScheme.surface,
         checkboxTheme: TCheckboxTheme.lightCheckboxTheme,
-        elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
-        outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
+        elevatedButtonTheme: ButtonsTheme.elevatedButtonTheme,
+        outlinedButtonTheme: ButtonsTheme.outlinedButtonTheme,
+        filledButtonTheme: ButtonsTheme.filledButtonTheme,
         inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
       );
 }

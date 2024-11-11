@@ -52,6 +52,7 @@ class UserLoginScreen extends StatelessWidget {
                       const SizedBox(height: TSizes.spaceBtwSections / 2),
                       BuildCTAButton(
                         text: 'continueWithEmail'.tr,
+                        isfilled: false,
                         onPressed: () => Get.to(
                           () => const SigninScreen(),
                           duration: const Duration(milliseconds: 300),
@@ -60,6 +61,7 @@ class UserLoginScreen extends StatelessWidget {
                       ),
                       BuildCTAButton(
                         text: 'continueWithPhone'.tr,
+                        isfilled: false,
                         onPressed: () => Get.to(
                           () => const PhoneSigninScreen(),
                           duration: const Duration(milliseconds: 300),
