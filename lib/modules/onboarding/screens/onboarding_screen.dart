@@ -1,35 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:decordashapp/modules/onboarding/controllers/onboarding_controller.dart';
-import 'package:decordashapp/modules/onboarding/model/onboarding_page_model.dart';
 import 'package:decordashapp/modules/onboarding/widgets/onboarding_page.dart';
-import 'package:decordashapp/utils/constants/image_strings.dart';
-import 'package:get/get.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnBoardingController(
-      pages: [
-        OnboardingPageModel(
-          title: 'onBoardingTitle1'.tr,
-          description: 'onBoardingSubTitle1'.tr,
-          imageUrl: ImageStrings.onBoardingImage1,
-        ),
-        OnboardingPageModel(
-          title: 'onBoardingTitle2'.tr,
-          description: 'onBoardingSubTitle2'.tr,
-          imageUrl: ImageStrings.onBoardingImage2,
-        ),
-        OnboardingPageModel(
-          title: 'onBoardingTitle3'.tr,
-          description: 'onBoardingSubTitle3'.tr,
-          imageUrl: ImageStrings.onBoardingImage3,
-        ),
-      ],
-    ));
-
-    return OnBoardingView(controller: controller);
+    return const OnBoardingView();
   }
 }
