@@ -16,8 +16,8 @@ class SignUpController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final hidePassword = true.obs;
-  final privacyPolicy = false.obs;
+  bool hidePassword = true;
+  bool privacyPolicy = false;
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -32,6 +32,16 @@ class SignUpController extends GetxController {
   PhoneNumber number = PhoneNumber(isoCode: 'EG');
 
   static final notifications = NotificationsService();
+
+  void hidePass() {
+    hidePassword = !hidePassword;
+    update();
+  }
+
+  void policyCheck() {
+    privacyPolicy = !privacyPolicy;
+    update();
+  }
 
   void signup() async {
     try {
@@ -51,7 +61,7 @@ class SignUpController extends GetxController {
         return;
       }
 
-      if (!privacyPolicy.value) {
+      if (!privacyPolicy) {
         FullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
             title: 'policyAndTerms'.tr, message: 'policyAndTermsDesc'.tr);

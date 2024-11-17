@@ -47,26 +47,24 @@ class SigninScreen extends StatelessWidget {
                       controller.emailController,
                       TValidator.validateEmail),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
-                  Obx(() => RoundedTextField(
-                      'password'.tr,
-                      focusNode: controller.passwordFocus,
-                      onFieldSubmitted: () =>
-                          controller.emailAndPasswordSignIn(),
-                      prefixIcon: IconsaxPlusLinear.lock,
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            controller.hidePassword.value =
-                                !controller.hidePassword.value;
-                          },
-                          icon: Icon(
-                            controller.hidePassword.value
-                                ? IconsaxPlusLinear.eye
-                                : IconsaxPlusLinear.eye_slash,
-                            size: TSizes.iconMd,
-                          )),
-                      controller.passwordController,
-                      TValidator.validatePassword,
-                      isPassword: controller.hidePassword.value)),
+                  GetBuilder<LoginController>(
+                      builder: (controller) => RoundedTextField(
+                          'password'.tr,
+                          focusNode: controller.passwordFocus,
+                          onFieldSubmitted: () =>
+                              controller.emailAndPasswordSignIn(),
+                          prefixIcon: IconsaxPlusLinear.lock,
+                          suffixIcon: IconButton(
+                              onPressed: controller.hidePass,
+                              icon: Icon(
+                                controller.hidePassword
+                                    ? IconsaxPlusLinear.eye
+                                    : IconsaxPlusLinear.eye_slash,
+                                size: TSizes.iconMd,
+                              )),
+                          controller.passwordController,
+                          TValidator.validatePassword,
+                          isPassword: controller.hidePassword)),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   TextButton(
                     onPressed: () => Get.to(

@@ -115,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
-                  GetX<SignUpController>(
+                  GetBuilder<SignUpController>(
                     builder: (controller) => Column(
                       children: [
                         RoundedTextField(
@@ -124,19 +124,16 @@ class SignUpScreen extends StatelessWidget {
                             onFieldSubmitted: () => controller.signup(),
                             prefixIcon: IconsaxPlusLinear.lock,
                             suffixIcon: IconButton(
-                                onPressed: () {
-                                  controller.hidePassword.value =
-                                      !controller.hidePassword.value;
-                                },
+                                onPressed: controller.hidePass,
                                 icon: Icon(
-                                  controller.hidePassword.value
+                                  controller.hidePassword
                                       ? IconsaxPlusLinear.eye
                                       : IconsaxPlusLinear.eye_slash,
                                   size: TSizes.iconMd,
                                 )),
                             controller.passwordController,
                             TValidator.validatePassword,
-                            isPassword: controller.hidePassword.value),
+                            isPassword: controller.hidePassword),
                       ],
                     ),
                   ),
@@ -145,12 +142,11 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 25,
-                        child: Obx(() => Checkbox(
-                            value: controller.privacyPolicy.value,
-                            onChanged: (value) {
-                              controller.privacyPolicy.value =
-                                  !controller.privacyPolicy.value;
-                            })),
+                        child: GetBuilder<SignUpController>(
+                            builder: (controller) => Checkbox(
+                                value: controller.privacyPolicy,
+                                onChanged: (value) =>
+                                    controller.policyCheck())),
                       ),
                       const SizedBox(
                         width: TSizes.spaceBtwItems,

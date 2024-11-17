@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
 
-  final hidePassword = true.obs;
+  bool hidePassword = true;
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -21,6 +21,11 @@ class LoginController extends GetxController {
 
   static final notifications = NotificationsService();
   final userController = Get.put(UserController());
+
+  void hidePass() {
+    hidePassword = !hidePassword;
+    update();
+  }
 
   Future<void> emailAndPasswordSignIn() async {
     try {
