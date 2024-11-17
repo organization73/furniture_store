@@ -12,63 +12,65 @@ class NavMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NavigationController());
     return Scaffold(
-      bottomNavigationBar: Obx(() => NavigationBar(
-            selectedIndex: controller.selectedIndex.value,
-            indicatorColor: Colors.transparent,
-            onDestinationSelected: (index) =>
-                controller.selectedIndex.value = index,
-            destinations: [
-              NavigationDestination(
-                selectedIcon: Icon(
-                  IconsaxPlusBold.home_1,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                icon: const Icon(IconsaxPlusLinear.home_1),
-                label: 'Home',
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(
-                  IconsaxPlusBold.shopping_bag,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                icon: const Icon(IconsaxPlusLinear.shopping_bag),
-                label: 'Store',
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(
-                  IconsaxPlusBold.add_square,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                icon: const Icon(IconsaxPlusLinear.add_square),
-                label: 'Add',
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(
-                  IconsaxPlusBold.message,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                icon: const Icon(IconsaxPlusLinear.message),
-                label: 'Chat',
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(
-                  IconsaxPlusBold.user,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                icon: const Icon(IconsaxPlusLinear.user),
-                label: 'Profile',
-              ),
-            ],
-          )),
-      body: Obx(() => controller.screens[controller.selectedIndex.value]),
+      bottomNavigationBar: GetBuilder<NavigationController>(
+          builder: (controller) => NavigationBar(
+                selectedIndex: controller.selectedIndex,
+                indicatorColor: Colors.transparent,
+                onDestinationSelected: (index) => controller.setIndex(index),
+                destinations: [
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      IconsaxPlusBold.home_1,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    icon: const Icon(IconsaxPlusLinear.home_1),
+                    label: 'Home',
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      IconsaxPlusBold.shopping_bag,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    icon: const Icon(IconsaxPlusLinear.shopping_bag),
+                    label: 'Store',
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      IconsaxPlusBold.add_square,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    icon: const Icon(IconsaxPlusLinear.add_square),
+                    label: 'Add',
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      IconsaxPlusBold.message,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    icon: const Icon(IconsaxPlusLinear.message),
+                    label: 'Chat',
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      IconsaxPlusBold.user,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    icon: const Icon(IconsaxPlusLinear.user),
+                    label: 'Profile',
+                  ),
+                ],
+              )),
+      body: GetBuilder<NavigationController>(
+          init: NavigationController(),
+          builder: (controller) =>
+              controller.screens[controller.selectedIndex]),
     );
   }
 }
 
 class NavigationController extends GetxController {
-  final RxInt selectedIndex = 0.obs;
+  int selectedIndex = 0;
   final screens = [
     const HomeScreen(),
     const StoreScreen(),
@@ -76,4 +78,8 @@ class NavigationController extends GetxController {
     const ChatsListScreen(),
     const SettingsScreen(),
   ];
+  void setIndex(int index) {
+    selectedIndex = index;
+    update();
+  }
 }
