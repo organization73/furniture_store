@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
 
-  RxBool isEmailVerified = false.obs;
+  bool isEmailVerified = false;
 
   @override
   void onInit() {
@@ -34,7 +34,8 @@ class VerifyEmailController extends GetxController {
       final user = FirebaseAuth.instance.currentUser;
       if (user?.emailVerified ?? false) {
         timer.cancel();
-        isEmailVerified.value = true;
+        isEmailVerified = true;
+        update();
       }
     });
   }

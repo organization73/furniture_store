@@ -32,59 +32,58 @@ class GallerySelectionScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 PageHeader(
-                    title: 'gallarySelect'.tr,
-                    subTitle: 'gallarySelectDesc'.tr,
-                    iconName: IconsaxPlusLinear.building),
-                Obx(() => Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(TSizes.buttonRadius),
-                        border: Border.all(
-                          color: controller.isGallerySelected.value
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.outlineVariant,
-                        ),
-                      ),
-                      child: InkWell(
-                        onTap: () => controller.isGallerySelected.value = true,
-                        child: ListTile(
-                          title: Text('yesMes'.tr,
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          leading: Radio(
-                            value: true,
-                            groupValue: controller.isGallerySelected.value,
-                            onChanged: (value) =>
-                                controller.isGallerySelected.value = value!,
-                          ),
-                        ),
-                      ),
-                    )),
+                  title: 'gallarySelect'.tr,
+                  subTitle: 'gallarySelectDesc'.tr,
+                  iconName: IconsaxPlusLinear.building,
+                ),
+                _buildSelectionOption(
+                  context,
+                  controller,
+                  isSelected: true,
+                  title: 'yesMes'.tr,
+                ),
                 const SizedBox(height: TSizes.spaceBtwInputFields),
-                Obx(() => Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(TSizes.buttonRadius),
-                        border: Border.all(
-                          color: !controller.isGallerySelected.value
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.outlineVariant,
-                        ),
-                      ),
-                      child: InkWell(
-                        onTap: () => controller.isGallerySelected.value = false,
-                        child: ListTile(
-                          title: Text('noMes'.tr,
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          leading: Radio(
-                            value: false,
-                            groupValue: controller.isGallerySelected.value,
-                            onChanged: (value) =>
-                                controller.isGallerySelected.value = value!,
-                          ),
-                        ),
-                      ),
-                    )),
+                _buildSelectionOption(
+                  context,
+                  controller,
+                  isSelected: false,
+                  title: 'noMes'.tr,
+                ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSelectionOption(
+    BuildContext context,
+    GallerySelectionController controller, {
+    required bool isSelected,
+    required String title,
+  }) {
+    return GetBuilder<GallerySelectionController>(
+      builder: (controller) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(TSizes.buttonRadius),
+          border: Border.all(
+            color: controller.isGallerySelected == isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.outlineVariant,
+          ),
+        ),
+        child: InkWell(
+          onTap: () => controller.setGallerySelected(isSelected),
+          child: ListTile(
+            title: Text(
+              title,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            leading: Radio(
+              value: isSelected,
+              groupValue: controller.isGallerySelected,
+              onChanged: (value) => controller.setGallerySelected(value!),
             ),
           ),
         ),

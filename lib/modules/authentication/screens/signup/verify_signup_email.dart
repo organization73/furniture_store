@@ -34,8 +34,8 @@ class VerifySignUpEmail extends StatelessWidget {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.pagePaddingSpace),
-            child: Obx(() {
-              return (controller.isEmailVerified.value)
+            child: GetBuilder<VerifyEmailController>(builder: (controller) {
+              return (controller.isEmailVerified)
                   ? EmailVerifiedScreen(
                       title: 'yourAccountCreatedTitle'.tr,
                       subTitle: 'yourAccountCreatedSubTitle'.tr,

@@ -5,10 +5,15 @@ import 'package:get/get.dart';
 class GallerySelectionController extends GetxController {
   static GallerySelectionController get instance => Get.find();
 
-  final isGallerySelected = false.obs;
+  bool isGallerySelected = false;
+
+  void setGallerySelected(bool value) {
+    isGallerySelected = value;
+    update();
+  }
 
   void navigateToNextScreen() {
-    if (!isGallerySelected.value) {
+    if (!isGallerySelected) {
       AuthenticatorRepo.instance.screenRedirect();
     } else {
       Get.to(
