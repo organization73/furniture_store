@@ -1,40 +1,30 @@
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Notifications {
   String? title;
   String? subtitle;
+  final Timestamp timestamp;
 
-  Notifications({this.title, this.subtitle});
+  Notifications({this.title, this.subtitle, required this.timestamp});
 
   factory Notifications.fromMap(Map<String, dynamic> data) => Notifications(
         title: data['title'] as String?,
         subtitle: data['subtitle'] as String?,
+        timestamp: data['timestamp'] as Timestamp,
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'title': title,
         'subtitle': subtitle,
+        'timestamp': timestamp,
       };
 
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Notifications].
-  factory Notifications.fromJson(String data) {
-    return Notifications.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [Notifications] to a JSON string.
-  String toJson() => json.encode(toMap());
-
-  Notifications copyWith({
-    String? title,
-    String? subtitle,
-  }) {
+  factory Notifications.fromFirebaseDocument(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
     return Notifications(
-      title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
+      title: data['title'] as String?,
+      subtitle: data['subtitle'] as String?,
+      timestamp: data['timestamp'] as Timestamp,
     );
   }
 }
