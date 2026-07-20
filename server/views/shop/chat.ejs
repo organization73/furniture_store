@@ -1,0 +1,175 @@
+<%- include('../includes/head.ejs') %>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  #contact-list {
+    width: 200px;
+    height: 100vh;
+    float: left;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #contact-list h2 {
+    margin: 0;
+    padding: 5px;
+    background-color: #eee;
+  }
+
+  #contact-list input[type="text"] {
+    margin: 10px;
+    padding: 5px;
+  }
+
+  #contact-list button {
+    margin: 10px;
+    padding: 5px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+
+  #contact-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    flex: 1;
+  }
+
+  #contact-list li {
+    padding: 1px;
+    margin: 1px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+
+  #contact-list li.selected {
+    background-color: #ddd;
+  }
+
+  #contact-list p {
+    margin: 5%;
+  }
+
+  #contact-list h6{
+    margin: 5%;
+  }
+
+  #chat-room {
+    margin-left: 200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #chat-room h2 {
+    margin: 0;
+    padding: 10px;
+    background-color: #eee;
+  }
+
+  #messages {
+    height: 79dvh;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #message-input {
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 5px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+
+  #contact-dropdown {
+    height: 30px;
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  /* xv */
+  #contact-suggestions {
+  background-color: #f1f1f1;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 10;
+  display: none;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#contact-suggestions p {
+  padding: 3px 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  #contact-suggestions p:hover {
+    background-color: #f0f0f0;
+  }
+  h6 {
+  opacity: 0.8;
+  color: rgb(77, 75, 75);
+}
+</style>
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <div id="contact-list">
+    <h2>Contact List</h2>
+    <input type="text" id="contact-input" placeholder="search by email or username">
+    <div id="contact-suggestions"></div>
+    <!-- <select id="contact-dropdown">
+      <option value="1">user id</option>
+      <option value="2">use name</option>
+      <option value="3">phone number</option>
+      <option value="4">eamil</option>
+    </select> -->
+    <button id="open-contact">Add</button>
+    <ul id="contact-list-items"></ul>
+  </div>
+
+  <div id="chat-room">
+    <h2>Chat Room</h2>
+    <div id="messages">
+      <ul id="messages-list"></ul>
+    </div>
+    <input type="text" id="message-input" placeholder="Enter message" disabled/>
+    <button id="send-message-btn">Send</button>
+  </div>
+  <script>
+    
+  </script>
+
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+  <script >
+    const currentUser = JSON.parse('<%- JSON.stringify(currentUser) %>');
+  // console.log(currentUser);
+  </script>
+  <script defer src="/js/chat-room.js"></script>
+
+  <%- include('../includes/end.ejs') %>
+</body>
